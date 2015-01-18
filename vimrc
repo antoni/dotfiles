@@ -1,15 +1,16 @@
-"  vim:set foldmethod=marker foldlevel=0 cursorcolumn cursorline:
+" vim:set foldmethod=marker foldlevel=0 cursorcolumn cursorline:
 " 0.  General settings {{{
 " visual shifting (does not exit Visual mode)
 vnoremap < <gv
 vnoremap > >gv 
 let mapleader=","
 set nocompatible              " be iMproved, required
-filetype off                  " required
 " Replace the current selection with buffer"{{{
 "}}}
 " Turn off vim recording for good
 map q <Nop>
+" Disable Ex mode
+map Q <Nop>
 set ignorecase                " Ignore case when searching
 syntax on                     " Syntax colouring
 set pastetoggle=<F12>         " pastetoggle (sane indentation on pastes)
@@ -18,12 +19,25 @@ set virtualedit=onemore
 set textwidth=80
 set formatoptions+=w          " gggqG - format to break after 80 characters
 set wrapmargin=2
-set expandtab
-set tabstop=4
-set shiftwidth=4
-
+set autoread " Set to auto read when a file is  changed from the outside
+" UTF-8 encoding
+set enc=utf-8
+set fileencoding=utf-8
+set fileencodings=ucs-bom,utf8,prc
+" For regular expressions turn magic on
+set magic
+" Alias unnamed register to the + register, which is the X Window clipboard
+" Use +p to paste from the X clipboard (or Ctrl-r-+/* in Insert mode)
+set clipboard=unnamedplus
+" Don't redraw while executing macros (good performance config)
+set lazyredraw
+" Clear terminal before executing the command
+set shell=/bin/bash
+" set shell=~/.vim/shell-wrapper.sh
 " Configure backspace so it acts as it should act
 set backspace=eol,start,indent
+" make menu selections visible
+highlight PmenuSel ctermfg=black ctermbg=magenta
 
 " Disable swap file creation"{{{
 set noswapfile 
@@ -80,28 +94,95 @@ snoremap <C-A>  <C-C>gggH<C-O>G
 xnoremap <C-A>  <C-C>ggVG
 
 " Control+S saves the current file (if it's been changed).
-noremap  <C-S>  :update<CR>
-vnoremap <C-S>  <C-C>:update<CR>
-inoremap <C-S>  <C-O>:update<CR>
+" noremap  <C-S>  :update<CR>
+" vnoremap <C-S>  <C-C>:update<CR>
+" inoremap <C-S>  <C-O>:update<CR>
+noremap  <C-S>  :w<CR>
+vnoremap <C-S>  <C-C>:w<CR>
+inoremap <C-S>  <C-O>:w<CR>
 
 " Control+W closes the current file
-noremap  <C-W>  :wq<CR>
+" noremap  <C-W>  :wq<CR>
 
 " Control+Z is Undo, in Normal and Insert mode.
 noremap  <C-Z>  u
 inoremap <C-Z>  <C-O>u
 
-" F2 inserts the date and time at the cursor.
-inoremap <F2>   <C-R>=strftime("%c")<CR>
-nmap     <F2>   a<F2><Esc>
+" Common typos
+command WQ wq
+command Wq wq
+command W w
+command Q q
 
+" F2 inserts the date and time at the cursor.
+" inoremap <F2>   <C-R>=strftime("%c")<CR>
+" nmap     <F2>   a<F2><Esc>
+
+" Scroll between open windows
+map <F6> <C-W>w
+" nnoremap <tab> :wincmd w<cr>
+" inoremap <tab> <c-o>:wincmd w<cr>
 " Execute current line in bash 
 nmap <F9> :exec '!'.getline('.')<CR>
 
-" Toggle small/normal tabs
-noremap <F8> :call <SID>ToggleTabs()<CR>
-"
+" Refactoring variable names "{{{
+" Source: http://stackoverflow.com/a/597932/963881
+function! Refactor()
+    call inputsave()
+    let @z=input("What do you want to rename '" . @z . "' to? ")
+    call inputrestore()
+endfunction
 
+" Locally (local to block) rename a variable
+nmap <Leader>rf "zyiw:call Refactor()<cr>mx:silent! norm gd<cr>[{V%:s/<C-R>//<c-r>z/g<cr>`x
+"}}}
+" Open .vimrc in a tab, on a 'Key mappings' section
+command! Vr :tabe ~/.vimrc | execute "normal /Key mappings \<CR><Space>" | nohlsearch
+" Alias for PluginInstall
+command! I :PluginInstall
+" Compile LaTeX and open corresponding LaTeX
+" TODO: Add VimLatexCompile
+" Use LaTeX rather than plain TeX.
+let g:tex_flavor = "latex"
+command! Lt :!xdg-open %:r.pdf
+" Toggle small/normal tabs
+" Double-click to copy word 
+nnoremap <silent> <2-LeftMouse> byw
+noremap <F8> :call <SID>ToggleTabs()<CR>
+" Go related mappings and commands "{{{
+au FileType go nmap <Leader>i <Plug>(go-info)
+au FileType go nmap <Leader>gd <Plug>(go-doc)
+au FileType go nmap <Leader>r <Plug>(go-run)
+au FileType go nmap <Leader>b <Plug>(go-build)
+au FileType go nmap <Leader>t <Plug>(go-test)
+au FileType go nmap gd <Plug>(go-def-tab)
+
+au Filetype go set makeprg=go\ build\ ./...
+
+" TODO: Configure ctags for Go
+" au BufWritePost *.go silent! !ctags -R &
+
+function! s:GoVet()
+    cexpr system("go vet " . shellescape(expand('%')))
+    copen
+endfunction
+command! GoVet :call s:GoVet()
+
+
+function! s:GoLint()
+    cexpr system("golint " . shellescape(expand('%')))
+    copen
+endfunction
+command! GoLint :call s:GoLint()
+
+" vim-go settings
+" let g:go_disable_autoinstall = 0  
+" format with goimports instead of gofmt
+let g:go_fmt_command = "goimports"
+" disable fmt on save
+let g:go_fmt_autosave = 1
+
+"}}}
 " Change behavior of <Space> when there is '"' under the cursor"{{{
 " http://stackoverflow.com/a/27669139/963881
 " Currently doesn't go along with mapping <Space> to toggle folds
@@ -120,12 +201,26 @@ noremap <F8> :call <SID>ToggleTabs()<CR>
 "imap <left> <nop>
 "imap <right> <nop>
 " }}}
-
-" Avoid 'Press ENTER to continue' in Vim when entering man pages (using K)
+" Avoid 'Press ENTER to continue' in Vim when entering man pages (using K) "{{{
 nnoremap K K<CR>
 vnoremap K K<CR>
+"}}}
 
-set autoread " Set to auto read when a file is changed from the outside
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:ycm_autoclose_preview_window_after_completion=1 " https://blog.dbrgn.ch/2013/5/27/using-jedi-with-ymc/
+" let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_collect_identifiers_from_tags_files = 1
+" let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+let g:SuperTabDefaultCompletionType = "context"
+" let g:SuperTabDefaultCompletionType = '<C-n>'
+let g:SuperTabCrMapping = 0
+
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 " Space to toggle folding
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
@@ -140,84 +235,88 @@ augroup END
 " In your case you want:
 " "inoremap <Nul> <C-n>
 " }}} 
-" TEST: http://nerd-hacking.blogspot.com/2006/05/vim-folding-tips.html
-" nmap <F6> /}<CR>zf%<ESC>:nohlsearch<CR>
 " Leader key bindings"{{{
 " Move back to current position after doing gg=G (code reformat)
 map <Leader>f mzgg=G`z<CR>
-" Open ranger
-nnoremap <leader>r :<C-U>RangerChooser<CR>
+" TODO Open ranger
+" nnoremap <leader>r :<C-U>RangerChooser<CR>
 " Substitute all occurrences of the word under the cursor
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
-"Astyle config {{{
-" Use Astyle (http://astyle.sourceforge.net/) to format C code (Linux Kernel style)
+"Astyle (http://astyle.sourceforge.net/) config {{{
+" Format C code (Linux Kernel style)
 map <leader>fl :! astyle --style=linux %<CR>
-
-" Use Astyle (http://astyle.sourceforge.net/) to format C++ code (Google style)
+" Format C++ code (Google style)
 map <leader>fg :! astyle --style=google %<CR>
 " }}}
 " }}}
 " }}}
 " 2.  Vundle config & plugins {{{
+filetype off                  " required by Vundle
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#begin() 
-
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'wincent/command-t'
-" Plugin 'spolu/dwm.vim'
+Plugin 'scrooloose/nerdtree'
+" Plugin 'wincent/command-t'
 " Plugin 'Lokaltog/vim-easymotion'
 " Plugin 'tpope/vim-vinegar'
 " Plugin 'wikitopian/hardmode'
 "Plugin 'Yggdroot/indentLine'
 Plugin 'nathanaelkane/vim-indent-guides'
 " A Git wrapper so awesome, it should be illegal
+Plugin 'tpope/vim-repeat'
 Bundle 'tpope/vim-fugitive'
-Plugin 'vim-scripts/gtags.vim'
+" Plugin 'vim-scripts/gtags.vim'
 Plugin 'vim-scripts/netrw.vim'
 Plugin 'nelstrom/vim-markdown-folding'
+" Emacs - like kill ring
+Bundle 'maxbrunsfeld/vim-yankstack'
 " Color themes
 Bundle 'sjl/badwolf'
 Bundle 'altercation/vim-colors-solarized'
-Bundle 'vim-scripts/gnuplot.vim'
-Plugin 'stefandtw/quickfix-reflector.vim'
-"Plugin 'Valloric/YouCompleteMe'
-Plugin 'vim-scripts/OmniCppComplete'
+Bundle 'Lokaltog/vim-distinguished'
+Bundle 'jnurmine/Zenburn'
+Bundle 'vim-scripts/Wombat'
+Bundle 'tpope/vim-vividchalk'
+
+" Bundle 'vim-scripts/gnuplot.vim'
+" Plugin 'stefandtw/quickfix-reflector.vim'
+Plugin 'Valloric/YouCompleteMe'
+" Plugin 'vim-scripts/OmniCppComplete'
 Plugin 'scrooloose/syntastic'
 Plugin 'majutsushi/tagbar'
+" Plugin 'Townk/vim-autoclose'
 " Plugin 'vim-scripts/linuxsty.vim'
-" Plugin 'jpalardy/vim-slime'
-" Plugin 'bling/vim-airline'
+Plugin 'jpalardy/vim-slime'
+Plugin 'bling/vim-airline'
+Plugin 'dgryski/vim-godef'
 Plugin 'fatih/vim-go'
-Plugin 'jmcantrell/vim-virtualenv'
+" Plugin 'Shougo/neocomplete.vim'
+" Plugin 'jmcantrell/vim-virtualenv'
 Plugin 'chrisbra/csv.vim'
 Plugin 'kana/vim-operator-user' " Recommended by clang-format
 Plugin 'vim-scripts/vim-auto-save'
-Bundle 'christoomey/vim-tmux-navigator'
-" Bundle "MarcWeber/vim-addon-mw-utils"
+Plugin 'kien/ctrlp.vim'         " For tag creation
+" Bundle 'christoomey/vim-tmux-navigator'
 " Bundle 'L9'
 " Bundle 'FuzzyFinder'
+" Latex
+Bundle 'lervag/vim-latex' 
 " Plugin 'jamis/fuzzy_file_finder'
 " Plugin 'jamis/fuzzyfinder_textmate'
-" Bundle "tomtom/tlib_vim"
 " Snippets {{{
-" Plugin 'SirVer/ultisnips'
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
-Bundle "garbas/vim-snipmate"
-Bundle "honza/vim-snippets"
+Bundle 'ervandew/supertab'
+Plugin 'SirVer/ultisnips'
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'tomtom/tlib_vim'
+" Bundle 'garbas/vim-snipmate'
+Bundle 'honza/vim-snippets'
 " }}}
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
-" Brief help {{{
-" :PluginList          - list configured plugins
-" :PluginInstall(!)    - install (update) plugins
-" :PluginSearch(!) foo - search (or refresh cache first) for foo
-" :PluginClean(!)      - confirm (or auto-approve) removal of unused plugins
-" }}}
 " }}}
 " 3.  UI {{{
 " Search"{{{
@@ -239,10 +338,18 @@ if has('statusline')
 endif
 " }}}
 " Solarized theme configuration {{{
-set t_Co=256
+" set t_Co=256
+" let g:solarized_termcolors=256
 set background=dark
-" colorscheme solarized
-colorscheme badwolf
+" set background=light
+try
+    colorscheme solarized
+    " colorscheme vividchalk
+    " colorscheme badwolf
+    " colorscheme distinguished
+catch /^Vim\%((\a\+)\)\=:E185/
+    " Don't load a color scheme.
+endtry
 " g:solarized_termcolors=16
 "}}}
 " Cursorline {{{
@@ -265,7 +372,7 @@ hi CursorLine ctermbg=236
 "au BufRead,BufNewFile * IndentGuidesEnable
 "augroup END
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=black
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=darkgrey
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=darkgrey
 "}}}
 "}}}
 " Highlight text that goes over 80 characters"{{{
@@ -273,56 +380,69 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=darkgrey
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%81v.\+/"}}}
 " Fold colors"{{{
-hi Folded term=standout ctermfg=White ctermbg=233 guifg=241 guibg=233
+" hi Folded term=standout ctermfg=White ctermbg=233 guifg=241 guibg=233
+" hi Folded term=NONE cterm=NONE gui=NONE ctermbg=None 
+" TODO: Not working on solarized-light
+" hi Folded term=standout ctermfg=White cterm=NONE
+" set foldtext=""
+" Get rid of the dashes
+set fillchars="fold: "
 hi FoldColumn guibg=darkgrey guifg=white
 ""}}}
 "}}}
 " 5.  Tags "{{{
 " Tag dirs "{{{
 "http://stackoverflow.com/a/741486/963881
+" set tags=~/.ctags
 set tags=./tags;/
-set tags+=/Users/antoni/.vim/tags/cpp
+set tags+=~/.vim/tags/cpp
 "}}}
 " build tags of your own project with Ctrl-F12"{{{
 map <C-F12> :!ctags -R --sort=yes --c++-kinds=+pl --fields=+iaS --extra=+q .<CR>
 "}}}
 " OmniCppComplete configuration{{{
-let OmniCpp_NamespaceSearch = 1
-let OmniCpp_GlobalScopeSearch = 1
-let OmniCpp_ShowAccess = 1
-let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
-let OmniCpp_MayCompleteDot = 1 " autocomplete after .
-let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
-let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
-let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
+" let OmniCpp_NamespaceSearch = 1
+" let OmniCpp_GlobalScopeSearch = 1
+" let OmniCpp_ShowAccess = 1
+" let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
+" let OmniCpp_MayCompleteDot = 1 " autocomplete after .
+" let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
+" let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
+" let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 " automatically open and close the popup menu / preview window
-au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-set completeopt=menuone,menu,longest,preview
+" au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+" set completeopt=menuone,menu,longest,preview
 " }}}
 " OCaml support {{{
 " au BufRead,BufNewFile *.ml,*.mli compiler ocaml
 set sb
 map <F5> :split /tmp/ocaml \| %d \|setlocal ft=omlet \| setlocal autowrite \| r!ocaml < # <CR>
-map <F6> :dr /tmp/ocaml \| %d \|setlocal ft=omlet \|setlocal autowrite \| r!ocaml < # <CR>
+" map <F6> :dr /tmp/ocaml \| %d \|setlocal ft=omlet \|setlocal autowrite \| r!ocaml < # <CR>
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute "set rtp+=" . g:opamshare . "/merlin/vim"
 let no_ocaml_comments = 1
-set makeprg=ocamlbuild\ ${BUILDFLAGS}\ -use-ocamlfind\ all.otarget
-set makeprg=omake\ -j\ 8
+" TODO: Add autcmd for OCaml files
+" set makeprg=ocamlbuild\ ${BUILDFLAGS}\ -use-ocamlfind\ all.otarget
+" set makeprg=omake\ -j\ 8
 " }}}
 "}}}
 " 6.  Autocommands {{{
 if has("autocmd")
+    " .md files as Markdown"{{{
+    au BufRead,BufNewFile *.md set filetype=markdown
+    "}}}
+    " C 
+    au FileType c set makeprg=gcc\ %\ &&\ ./a.out
     " Turn on C++ autocompletion"{{{
     au BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
     "}}}
     " Open all files in tabs after entering Vim (though power users prefer buffers)"{{{
     autocmd VimEnter * tab all
     "}}}
-    " Compiler settings for C/C++ files {{{
-    "au BufEnter *.cc compiler g++
-    "au BufEnter *.cpp compiler g++
-    "au BufEnter *.c compiler gcc
+    " TODO Compiler settings for C/C++ files {{{
+    " au BufEnter *.cc compiler g++
+    " au BufEnter *.cpp compiler g++
+    " au BufEnter *.c compiler gcc
     " }}}
 endif
 " }}}
@@ -478,7 +598,7 @@ function! Tab_Or_Complete()
         return "\<Tab>"
     endif
 endfunction
-":inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
+"inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
 "}}}
 " Automatic insertion of C/C++ header gates/guards "{{{
 " Creates guards when header file is created
@@ -555,10 +675,29 @@ map <C-_> <Plug>NERDCommenterToggle<CR>
 imap <C-_> <Esc><Plug>NERDCommenterToggle<CR>
 "}}}
 " }}}
+" NERDTree "{{{
+" Open a NERDTree automatically when vim starts up if no files were specified
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" Key mappings
+silent! nmap <C-p> :NERDTreeToggle<CR>
+silent! map <F2> :NERDTreeFind<CR>
+
+let g:NERDTreeMapActivateNode="<F2>"
+let g:NERDTreeMapPreview="<F3>"
+
+autocmd FileType nerdtree nmap <buffer> <left> u
+autocmd FileType nerdtree nmap <buffer> <right> u
+
+" Set the working directory to the current file's directory
+autocmd BufEnter * lcd %:p:h
+
+map <leader>ff :NERDTreeFind<cr>
+"}}}
 " clang-format to format C++ according to Google Styleguide "{{{ 
 " need to have .clang-format file in ~ directory
-map <C-I> :pyf ~/.vim/clang-format.py<CR>
-imap <C-I> <ESC>:pyf ~/.vim/clang-format.py<CR>i
+" map <C-I> :pyf ~/.vim/clang-format.py<CR>
+" imap <C-I> <ESC>:pyf ~/.vim/clang-format.py<CR>i
 "}}}
 "}}}
 " 11. Vim/GUI Vim "{{{
@@ -572,4 +711,41 @@ else " no gui
         " I have no idea of the name of Ctrl-Space elsewhere
     endif
 endif
+"}}}
+" 12. Competitive programming "{{{
+" Runs the code by taking input from the 'in' text file"{{{
+" map <F6> :w<CR>:!g++ % -g && (ulimit -c unlimited; ./a.out < in) <CR>
+""}}}
+" TODO: Configure "{{{
+" Plugin 'chazmcgarvey/vimcoder'
+"}}}
+"}}}
+" 13. Tagbar "{{{
+let g:tagbar_type_go = {
+            \ 'ctagstype' : 'go',
+            \ 'kinds'     : [
+            \ 'p:package',
+            \ 'i:imports:1',
+            \ 'c:constants',
+            \ 'v:variables',
+            \ 't:types',
+            \ 'n:interfaces',
+            \ 'w:fields',
+            \ 'e:embedded',
+            \ 'm:methods',
+            \ 'r:constructor',
+            \ 'f:functions'
+            \ ],
+            \ 'sro' : '.',
+            \ 'kind2scope' : {
+            \ 't' : 'ctype',
+            \ 'n' : 'ntype'
+            \ },
+            \ 'scope2kind' : {
+            \ 'ctype' : 't',
+            \ 'ntype' : 'n'
+            \ },
+            \ 'ctagsbin'  : 'gotags',
+            \ 'ctagsargs' : '-sort -silent'
+            \ }
 "}}}
