@@ -1,0 +1,205 @@
+# vim:set ft=sh:
+
+# Aliases and custom functions
+platform='unknown'
+unamestr=`uname`
+if [[ "$unamestr" == 'Darwin' ]]; then
+    # platform='macosx'
+    # Mac OS X-specific
+    bind '"\es": "students\r"'
+    # Execute 'g++' command with last argument of previous command
+    bind '"\ee": "g++ !$\r"'
+    bind '"\er": "g++ !$\r ./a.out\r"'
+    alias setmiddlevolume='sudo osascript -e "set Volume 5"'
+    # alias mvim="/Applications/MacVim.app/contents/MacOS/MacVim"
+    alias mvim='/Users/antoni/Developer/mvim'
+    alias ctags="`brew --prefix`/bin/ctags"
+    alias eclipseclean='/Applications/eclipse/Eclipse.app/Contents/MacOS/eclipse -clean'
+    alias topcoder='javaws ~/Developer/Topcoder/ContestAppletProd.jnlp'
+elif [[ "$unamestr" == 'Linux' ]]; then
+    # platform='linux'
+    # Linux specific
+    alias i='sudo apt-get install -y'
+    # Install through apt-get and add installed software to list of used commands
+    addcmd() { sudo apt-get install -y $* && echo $* >> ~/install_apt-get.txt; }
+
+    alias sound='alsamixer'
+    alias open='xdg-open'
+    alias screenshot1='import'
+    alias screenshot2='scrot -b -d 5 '"'"'%Y:%m:%d:%H:%M:%S.png'"'"' -e '"'"'mv $f ~/Desktop/'"'"
+    alias catquestions='cat ~/Documents/Q.txt'
+    alias mountrw='mount -o remount,rw /'
+fi
+
+alias desk='cd ~/Desktop'
+alias students='ssh ar267209@students.mimuw.edu.pl'
+alias mountstudents='sudo sshfs -o allow_other ar267209@students.mimuw.edu.pl:/home/students/bioinf/a/ar267209 ~/mount/students/'
+alias vimb='vim ~/.bashrc'
+alias vimr='vim ~/.remember'
+alias vimexecdwm='sudo vim /usr/local/bin/dwm-personalized'
+alias vimv='vim ~/.vimrc'
+alias vimq='vim ~/Documents/Q.txt'
+alias vimdwmconfig='vim ~/dwm-6.0/config.h'
+alias m='man';
+# Print primitive data types sizes
+alias typesizes='perl -V | grep size='
+# Get processor interrupts
+alias interrupts1='cat /proc/interrupts'
+alias v='vim'
+alias disktest='sudo smartctl -a /dev/sda | less'
+alias grep='grep -i'
+alias dmesgerrors="dmesg | egrep 'error|fail|bug|rtl8|r8|wlan'"
+alias sudolastcmd='!!' # remember
+
+alias mn='man'
+alias l='ls'
+alias o='rlwrap ocaml'
+alias ioccc='cd ~/Developer/ioccc/'
+
+# Current projects
+alias wspace='cd ~/workspace/'
+# alias luceos='cd ~/Documents/workspace/luceos.smart/'
+
+alias gjnp='g++ -Wall -O2 -std=c++11 '
+
+alias wgetdir='wget -r --no-parent '
+alias euler='cd ~/Developer/ProjectEuler/'
+
+alias c99='gcc -std=c99'
+alias g++='g++ -g -Wall -O3'
+alias mountstudents='sshfs ar267209@students.mimuw.edu.pl: /Users/antoni/students'
+alias students='ssh students.mimuw.edu.pl -l ar267209'
+alias ls='ls --color -lFG'
+alias icm='ssh antoni@hpc.icm.edu.pl' 
+alias icmgw='ssh antoni@gw.icm.edu.pl' 
+alias vimbashrc='vim ~/.bashrc && source $_'
+alias vimbashprofile='vim ~/.bash_profile && source $_'
+#alias wget='curl -0'
+alias xcode="open *.xcodeproj"
+# It's worth mentioning what the options -czf after tar are for: c indicates that you want to create a tar archive, z applies gzip on the intermediate tar archive, and f is for the subsequent final file name folder_name.tar.gz. – fideli Jul 9 '10 at 19:11
+# alias zipfolder='tar -czf folder_name.tar.gz folder_name/'
+alias zipfolder='tar -czf'
+alias sendstud='~/Developer/sendstud.sh'
+alias sendicm='~/Developer/sendicm.sh'
+# OITimeTool --- Time Measurement Tool for the Polish Olympiad in Informatics
+alias oitime='/Users/antoni/Developer/oitimetool/oitimetool'
+alias gitp='git push origin'
+alias gitpu='git pull'
+alias gitpua='git push --all -u'
+alias gits='git status'
+alias gitc='git commit -am'
+alias gitca='git commit --amend -m'
+alias gitch='git checkout'
+alias gitd='git diff'
+alias gitm='git merge'
+alias gitb='git branch'
+alias gitundocommit='git reset --soft HEAD~1'
+
+alias m='make'
+
+alias adbreset='adb kill-server;adb start-server'
+# Use lolcat instead of cat
+# cat='lolcat'
+# Set `indent` parameters according to Linux kernel Coding Style
+#alias indent='indent -kr -i8'
+alias indent='indent -i8 -nbad -bap -nbc -br -brs -c33 -cd33 -ncdb -ce -ci4 -cli0 -d0 -di1 -nfc1 -i4 -ip0 -l75 -lp -npcs -npsl -nsc -nsob'
+# Connect to students@mimuw
+# Kill all jobs
+alias kj='kill -9 $(jobs -p)'
+alias gits='git status'
+
+# Android development
+alias adbd='adb devices'
+
+# topcoder
+alias tc='topcoder'
+alias json='pjson'
+
+# tmux
+alias tm='tmux'
+alias tma='tmux attach'
+alias tmxa='tmux attach'
+alias tmxl='tmux list-window'
+
+# To be organized
+alias brc='vim ~/.bashrc'
+alias sbrc='source ~/.bashrc'
+
+# cd directory up
+alias ..="cd .."
+alias ....="cd ../.."
+alias ......="cd ../../.."
+
+
+# Helper functions
+gg() { pwd > /tmp/last_path; }
+hh() { cd $(cat /tmp/last_path); }
+
+alias g='g++ -std=c++11'
+# alias vim='vim -p'
+# alias vimp='vim -p *.{h.cc.cpp}'
+alias webserver='python -m SimpleHTTPServer 8080'
+alias gprer='grep -R'
+
+alias hgrep='history | grep -i'
+
+# tmux source-file ~/.tmux.conf > /dev/null
+# Go
+alias gopath="export GOPATH=\$(pwd)"
+
+alias lssshcons="sudo lsof -i -n | egrep '\<ssh\>'"
+alias luceosbin='cd ~/workspace/luceos.smart/LuceosSmart/bin'
+alias xxb='xxd -b'
+alias untar='tar xvzf'
+alias vima='vim ~/.aliases'
+alias gopath="export GOPATH=\$(pwd)"
+alias dbgui='/usr/share/dbeaver/dbeaver'
+alias singlemonitor='xrandr --output LVDS1'
+alias dualmonitor='xrandr --output VGA1 --mode 1680x1050 --right-of LVDS1'
+alias fixaudio='pulseaudio -k'
+
+# ls after cd
+function cd { builtin cd "$@" && ls -F }
+
+# Colourised cat
+# function cat {}
+alias cat='pygmentize -g'
+
+alias gogo='cd ~/go/'
+alias ss='source'
+
+csview() {
+    local file="$1"
+    cat "$file" | sed -e 's/,,/, ,/g' | column -s, -t | less -#5 -N -S
+} 
+# Custom cat: colourised and tabulated for CSV files
+ccat() { 
+    filename=`basename $1`
+    fileext=${filename##*.}
+    if [ "$fileext" = "csv" ]; then
+        csview $1
+    else 
+        pygmentize -g $1 
+    fi
+}
+
+# Google search
+s() {
+    args=$@
+    searchterm=${args// /%20}
+    google-chrome "http://www.google.com/search?q=$searchterm"
+}
+
+# Launch Vim solarized theme depending on the time of the day
+vv() {
+    echo $1
+    hour=$(date +%H)
+    theme=dark
+    if [[ $hour -ge 6 && $hour -le 17 ]]; then
+        theme=light
+    fi
+    terminator -l vim-solarized-$theme -c "vim -c 'set gb=$theme'"
+}
+
+# Display 20 most frequently used commands in Bash
+alias mostfrequent='history | cut -d " " -f 4 | tr -c "[:alnum:]" "[\n*]" | sort | uniq -c | sort -nr | head  -20'
