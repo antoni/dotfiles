@@ -1,32 +1,20 @@
 [global_config]
-  window_state = maximise
-  enabled_plugins = CustomCommandsMenu, InactivityWatch, TestPlugin, ActivityWatch, TerminalShot, LaunchpadCodeURLHandler, APTURLHandler, MavenPluginURLHandler, LaunchpadBugURLHandler, LayoutManager
-  borderless = True
-  geometry_hinting = False
-  title_transmit_bg_color = "#832527"
-  inactive_color_offset = -0.2
+  title_transmit_bg_color = "#d30102"
+  focus = system
 [keybindings]
 [profiles]
   [[default]]
-    scrollback_lines = 4000
-    copy_on_selection = True
     background_image = None
+    copy_on_selection = True
     show_titlebar = False
   [[solarized-dark]]
-    palette = "#002b36:#d30102:#859900:#b58900:#268bd2:#d33682:#2aa198:#586e75:#143e49:#cb4b16:#859900:#b58900:#6c71c4:#d33682:#2aa198:#93a1a1"
-    font = Inconsolata Medium 12
+    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
     background_image = None
-    use_system_font = False
-    cursor_color = "#93a1a1"
-    foreground_color = "#93a1a1"
+    cursor_color = "#eee8d5"
+    foreground_color = "#eee8d5"
     show_titlebar = False
     copy_on_selection = True
     background_color = "#002b36"
-  [[Green]]
-    background_image = None
-    copy_on_selection = True
-    show_titlebar = False
-    foreground_color = "#00ff00"
   [[solarized-light]]
     palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
     background_image = None
@@ -36,14 +24,6 @@
     copy_on_selection = True
     background_color = "#eee8d5"
 [layouts]
-  [[mc]]
-    [[[child1]]]
-      type = Terminal
-      parent = window0
-      profile = default
-    [[[window0]]]
-      type = Window
-      parent = ""
   [[default]]
     [[[child1]]]
       type = Terminal
@@ -52,65 +32,4 @@
     [[[window0]]]
       type = Window
       parent = ""
-  [[vim-solarized-light]]
-    [[[child0]]]
-      position = 887:20
-      type = Window
-      order = 0
-      parent = ""
-      size = 477, 104
-    [[[terminal1]]]
-      profile = solarized-light
-      command = 'vim -c "set bg=light"'
-      type = Terminal
-      order = 0
-      parent = child0
-  [[vim-solarized-dark]]
-    [[[child0]]]
-      position = 887:20
-      type = Window
-      order = 0
-      parent = ""
-      size = 477, 104
-    [[[terminal1]]]
-      profile = solarized-dark
-      command = 'vim -c "set bg=dark"'
-      type = Terminal
-      order = 0
-      parent = child0
-  [[3term]]
-    [[[child0]]]
-      position = 1440:0
-      type = Window
-      order = 0
-      parent = ""
-      size = 1920, 1200
-    [[[child1]]]
-      position = 600
-      type = VPaned
-      order = 0
-      parent = child0
-    [[[child2]]]
-      position = 960
-      type = HPaned
-      order = 0
-      parent = child1
-    [[[terminal3]]]
-      profile = default
-      type = Terminal
-      order = 0
-      parent = child2
-      command = (cd /some/dir/1; bash)
-    [[[terminal5]]]
-      profile = default
-      type = Terminal
-      order = 1
-      parent = child1
-      command = (cd /some/dir/2; bash)
-    [[[terminal4]]]
-      profile = default
-      type = Terminal
-      order = 1
-      parent = child2
-      command = (cd /some/dir/3; bash)
 [plugins]

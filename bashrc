@@ -5,7 +5,7 @@
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
-*) return;;
+    *) return;;
 esac
 
 # don't put duplicate lines or lines starting with space in the history.
@@ -93,15 +93,6 @@ alias l='ls -CF'
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -114,16 +105,13 @@ if ! shopt -oq posix; then
 fi
 
 # Personalized settings
-export COMMAND_NOT_FOUND_INSTALL_PROMPT=1
-source /etc/bash_completion.d/password-store
+# export COMMAND_NOT_FOUND_INSTALL_PROMPT=1
+# source /etc/bash_completion.d/password-store
 
-PATH=$PATH:~/opt/yasara
-PATH=$PATH:~/Downloads/android-studio/bin
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-source ~/.aliases
-source ~/.paths
+# [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+# export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+# source ~/.aliases
+# source ~/.paths
 
 # Disable Ctrl+S in a terminal (to use it inside Vim)
 # http://askubuntu.com/a/359338/342465
@@ -135,4 +123,13 @@ stty stop undef
 
 # xmodmap .speedswapper   
 
+# ls after cd
+# function cd { builtin cd "$@" && ls -F }
+
+source ~/.aliases
+source ~/.paths
 source ~/.common_profile.sh
+
+# Ignore case when 'ls'
+shopt -s nocaseglob
+

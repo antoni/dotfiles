@@ -1,5 +1,5 @@
 " vim:set foldmethod=marker foldlevel=0 cursorcolumn cursorline:
-" 0.  General settings {{{
+" 1.  General settings {{{
 " visual shifting (does not exit Visual mode)
 vnoremap < <gv
 vnoremap > >gv 
@@ -8,7 +8,7 @@ set nocompatible              " be iMproved, required
 " Replace the current selection with buffer"{{{
 "}}}
 " Turn off vim recording for good
-map q <Nop>
+" map q <Nop>
 " Disable Ex mode
 map Q <Nop>
 set ignorecase                " Ignore case when searching
@@ -16,7 +16,7 @@ syntax on                     " Syntax colouring
 set pastetoggle=<F12>         " pastetoggle (sane indentation on pastes)
 set ruler                     " Show ruler on the bottom
 set virtualedit=onemore
-set textwidth=80
+" set textwidth=80
 set formatoptions+=w          " gggqG - format to break after 80 characters
 set wrapmargin=2
 set autoread " Set to auto read when a file is  changed from the outside
@@ -24,6 +24,7 @@ set autoread " Set to auto read when a file is  changed from the outside
 set enc=utf-8
 set fileencoding=utf-8
 set fileencodings=ucs-bom,utf8,prc
+set title
 " For regular expressions turn magic on
 set magic
 " Alias unnamed register to the + register, which is the X Window clipboard
@@ -32,13 +33,13 @@ set clipboard=unnamedplus
 " Don't redraw while executing macros (good performance config)
 set lazyredraw
 " Clear terminal before executing the command
+" Adding -i significantly slows down Vim's startup 
+" (it's needed to run aliases though)
+" set shell=/bin/bash\ -i
 set shell=/bin/bash
 " set shell=~/.vim/shell-wrapper.sh
 " Configure backspace so it acts as it should act
 set backspace=eol,start,indent
-" make menu selections visible
-highlight PmenuSel ctermfg=black ctermbg=magenta
-
 " Disable swap file creation"{{{
 set noswapfile 
 "}}}
@@ -84,7 +85,10 @@ set mouse=a
 "  (http://vim.wikia.com/wiki/Map_caps_lock_to_escape_in_XWindows)
 ""}}}
 " }}}
-" 1.  Key mappings {{{
+" 2.  Key mappings {{{
+" Temporary mappings "{{{
+map <F5> :wa \| !g++ -std=c++11 ex.cc -o test && ./test : <CR>
+"}}}
 " Control+A is Select All.
 noremap  <C-A>  gggH<C-O>G
 inoremap <C-A>  <C-O>gg<C-O>gH<C-O>G
@@ -113,6 +117,11 @@ command WQ wq
 command Wq wq
 command W w
 command Q q
+
+" Tab switching/adding
+map <C-Right> <ESC>:tabnext<CR>
+map <C-Left> <ESC>:tabprev<CR>
+map <C-t> <ESC>:tabnew<CR>
 
 " F2 inserts the date and time at the cursor.
 " inoremap <F2>   <C-R>=strftime("%c")<CR>
@@ -146,9 +155,9 @@ command! I :PluginInstall
 let g:tex_flavor = "latex"
 command! Lt :!xdg-open %:r.pdf
 " Toggle small/normal tabs
+" noremap <F8> :call <SID>ToggleTabs()<CR>
 " Double-click to copy word 
 nnoremap <silent> <2-LeftMouse> byw
-noremap <F8> :call <SID>ToggleTabs()<CR>
 " Go related mappings and commands "{{{
 au FileType go nmap <Leader>i <Plug>(go-info)
 au FileType go nmap <Leader>gd <Plug>(go-doc)
@@ -207,21 +216,23 @@ vnoremap K K<CR>
 "}}}
 
 " make YCM compatible with UltiSnips (using supertab)
+" let g:ycm_key_list_select_completion = ['<C-n>', '<Down>', '<C-Space>']
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:ycm_autoclose_preview_window_after_completion=1 " https://blog.dbrgn.ch/2013/5/27/using-jedi-with-ymc/
-" let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
-let g:ycm_collect_identifiers_from_tags_files = 1
-" let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
-let g:SuperTabDefaultCompletionType = "context"
-" let g:SuperTabDefaultCompletionType = '<C-n>'
-let g:SuperTabCrMapping = 0
+let g:SuperTabDefaultCompletionType = '<C-n>'
 
 " better key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
+" let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf3.py"
+let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
+" let g:ycm_server_keep_logfiles = 1
+
+" let g:ycm_server_use_vim_stdout = 1
+" let g:ycm_server_log_level = 'debug'
+" let g:ycm_path_to_python_interpreter = '/usr/bin/python'
 " Space to toggle folding
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf
@@ -231,9 +242,9 @@ augroup vim
     autocmd FileType vim setlocal keywordprg=:help
 augroup END
 " Remap code completion to Ctrl+Space {{{
-"inoremap <Nul> <C-x><C-o> 
+" inoremap <Nul> <C-x><C-o> 
 " In your case you want:
-" "inoremap <Nul> <C-n>
+" inoremap <Nul> <C-n>
 " }}} 
 " Leader key bindings"{{{
 " Move back to current position after doing gg=G (code reformat)
@@ -250,7 +261,7 @@ map <leader>fg :! astyle --style=google %<CR>
 " }}}
 " }}}
 " }}}
-" 2.  Vundle config & plugins {{{
+" 3.  Vundle config & plugins {{{
 filetype off                  " required by Vundle
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim/
@@ -264,44 +275,93 @@ Plugin 'scrooloose/nerdtree'
 " Plugin 'tpope/vim-vinegar'
 " Plugin 'wikitopian/hardmode'
 "Plugin 'Yggdroot/indentLine'
-Plugin 'nathanaelkane/vim-indent-guides'
+" Plugin 'nathanaelkane/vim-indent-guides'
 " A Git wrapper so awesome, it should be illegal
 Plugin 'tpope/vim-repeat'
-Bundle 'tpope/vim-fugitive'
+" Bundle 'naseer/logcat'
+" Bundle 'tpope/vim-fugitive'
 " Plugin 'vim-scripts/gtags.vim'
+Plugin 'thinca/vim-quickrun'
 Plugin 'vim-scripts/netrw.vim'
 Plugin 'nelstrom/vim-markdown-folding'
 " Emacs - like kill ring
-Bundle 'maxbrunsfeld/vim-yankstack'
+" Bundle 'maxbrunsfeld/vim-yankstack'
+" Learn HOW TO USE those (https://www.youtube.com/watch?v=aHm36-na4-4)
+" Bundle 'jondkinney/dragvisuals.vim'
+" Bundle 'nixon/vim-vmath' 
+" Bundle 'taku-o/vim-vis'
+" Bundle 'rking/ag.vim'
+
+" C++ IDE-related
+Bundle 'vim-scripts/a.vim'
+Bundle 'wincent/Command-T'
+" Bundle 'DoxygenToolkit.vim'
+" Bundle 'godlygeek/tabular'
+" Bundle 'tpope/vim-sensible'
+" Bundle 'tpope/vim-unimpaired'
+" Bundle 'tpope/vim-endwise'
+" Bundle 'tpope/vim-fugitive'
+" Bundle 'Lokaltog/vim-easymotion'
+" Bundle 'rstacruz/sparkup'
+" Bundle 'Mizuchi/STL-Syntax'
+
 " Color themes
 Bundle 'sjl/badwolf'
 Bundle 'altercation/vim-colors-solarized'
-Bundle 'Lokaltog/vim-distinguished'
-Bundle 'jnurmine/Zenburn'
-Bundle 'vim-scripts/Wombat'
+" Bundle 'Lokaltog/vim-distinguished'
+" Bundle 'jnurmine/Zenburn'
+" Bundle 'vim-scripts/Wombat'
 Bundle 'tpope/vim-vividchalk'
+Bundle 'croaker/mustang-vim'
+" Haskell (http://haskelllive.com/environment.html)
+" Bundle 'lukerandall/haskellmode-vim'
+" Bundle 'eagletmt/neco-ghc'
+" Bundle 'eagletmt/ghcmod-vim'
+" Bundle 'bitc/lushtags'
+
+" Syntax 
+" Smalltalk
+Bundle 'vim-scripts/st.vim' 
+" Prolog
+Bundle 'adimit/prolog.vim'  
+
+" CPP
+" Bundle 'osyo-manga/vim-marching'
+" Bundle 'Shougo/neocomplete.vim'
+" Bundle 'Shougo/neosnippet.vim'
+
+Plugin 'google/vim-maktaba'
+Plugin 'google/vim-codefmtlib'
+Plugin 'google/vim-codefmt'
 
 " Bundle 'vim-scripts/gnuplot.vim'
 " Plugin 'stefandtw/quickfix-reflector.vim'
 Plugin 'Valloric/YouCompleteMe'
-" Plugin 'vim-scripts/OmniCppComplete'
 Plugin 'scrooloose/syntastic'
 Plugin 'majutsushi/tagbar'
+" TODO: 
+" https://github.com/Valloric/YouCompleteMe#nasty-bugs-happen-if-i-have-the-vim-autoclose-plugin-installed
 " Plugin 'Townk/vim-autoclose'
 " Plugin 'vim-scripts/linuxsty.vim'
 Plugin 'jpalardy/vim-slime'
+" Bundle 'epeli/slimux'
 Plugin 'bling/vim-airline'
-Plugin 'dgryski/vim-godef'
-Plugin 'fatih/vim-go'
+" Plugin 'dgryski/vim-godef'
+" Plugin 'fatih/vim-go'
+
+" Julia support
+" Plugin 'JuliaLang/julia-vim'
 " Plugin 'Shougo/neocomplete.vim'
 " Plugin 'jmcantrell/vim-virtualenv'
-Plugin 'chrisbra/csv.vim'
+" Plugin 'chrisbra/csv.vim'
 Plugin 'kana/vim-operator-user' " Recommended by clang-format
 Plugin 'vim-scripts/vim-auto-save'
 Plugin 'kien/ctrlp.vim'         " For tag creation
 " Bundle 'christoomey/vim-tmux-navigator'
-" Bundle 'L9'
-" Bundle 'FuzzyFinder'
+
+" Bundle 'https://bitbucket.org/ns9tks/vim-l9' " Bundle throws: repo not found
+" Bundle 'https://bitbucket.org/ns9tks/vim-fuzzyfinder' " Bundle throws: repo not found
+
 " Latex
 Bundle 'lervag/vim-latex' 
 " Plugin 'jamis/fuzzy_file_finder'
@@ -310,15 +370,15 @@ Bundle 'lervag/vim-latex'
 Bundle 'ervandew/supertab'
 Plugin 'SirVer/ultisnips'
 Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'tomtom/tlib_vim'
-" Bundle 'garbas/vim-snipmate'
+" Bundle 'tomtom/tlib_vim'
+Bundle 'garbas/vim-snipmate'
 Bundle 'honza/vim-snippets'
 " }}}
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 " }}}
-" 3.  UI {{{
+" 4.  UI {{{
 " Search"{{{
 hi Search ctermfg=Yellow ctermbg=NONE cterm=bold,underline
 "}}}
@@ -340,13 +400,14 @@ endif
 " Solarized theme configuration {{{
 " set t_Co=256
 " let g:solarized_termcolors=256
-set background=dark
-" set background=light
 try
-    colorscheme solarized
-    " colorscheme vividchalk
+    " colorscheme solarized
+    colorscheme vividchalk
+    " colorscheme mustang
     " colorscheme badwolf
     " colorscheme distinguished
+    set background=dark
+    " set background=light
 catch /^Vim\%((\a\+)\)\=:E185/
     " Don't load a color scheme.
 endtry
@@ -362,9 +423,9 @@ hi CursorLine ctermbg=236
 "set ts=4 sw=4 et
 "let g:indent_guides_start_level=2
 "let g:indent_guides_start_size=1
-"autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=black
-"let g:indent_guides_auto_colors = 0
-"autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=darkgrey
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=black
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=darkgrey
 " Vim Indent Guides ""{{{
 "let g:indent_guides_auto_colors = 1
 "augroup indent_guides
@@ -379,18 +440,32 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=black
 " http://stackoverflow.com/a/235970/963881
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%81v.\+/"}}}
+" CtrlP"{{{
+hi CtrlPMatch ctermbg=235 ctermfg=250 guibg=#262626 guifg=#bcbcbc cterm=NONE gui=NONE
+"}}}
+" Popup menu"{{{
+highlight Pmenu ctermfg=3 ctermbg=0 guifg=#ffffff guibg=#0000ff
+" make menu selections visible
+highlight PmenuSel ctermfg=black ctermbg=gray
+"}}}
 " Fold colors"{{{
 " hi Folded term=standout ctermfg=White ctermbg=233 guifg=241 guibg=233
 " hi Folded term=NONE cterm=NONE gui=NONE ctermbg=None 
+hi Folded term=NONE cterm=bold gui=NONE ctermbg=NONE ctermfg=red
+hi LineNr ctermfg=white ctermbg=none
 " TODO: Not working on solarized-light
-" hi Folded term=standout ctermfg=White cterm=NONE
+" hi Folded term=standout ctermfg=White cterm=None
 " set foldtext=""
 " Get rid of the dashes
 set fillchars="fold: "
 hi FoldColumn guibg=darkgrey guifg=white
 ""}}}
+" Function and identifiers colors"{{{
+hi Function guifg=red
+hi Identifier guifg=red
+""}}}
 "}}}
-" 5.  Tags "{{{
+" 6.  Tags "{{{
 " Tag dirs "{{{
 "http://stackoverflow.com/a/741486/963881
 " set tags=~/.ctags
@@ -411,12 +486,12 @@ map <C-F12> :!ctags -R --sort=yes --c++-kinds=+pl --fields=+iaS --extra=+q .<CR>
 " let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 " automatically open and close the popup menu / preview window
 " au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-" set completeopt=menuone,menu,longest,preview
+set completeopt=menuone,menu,longest,preview
 " }}}
 " OCaml support {{{
 " au BufRead,BufNewFile *.ml,*.mli compiler ocaml
 set sb
-map <F5> :split /tmp/ocaml \| %d \|setlocal ft=omlet \| setlocal autowrite \| r!ocaml < # <CR>
+" map <F5> :split /tmp/ocaml \| %d \|setlocal ft=omlet \| setlocal autowrite \| r!ocaml < # <CR>
 " map <F6> :dr /tmp/ocaml \| %d \|setlocal ft=omlet \|setlocal autowrite \| r!ocaml < # <CR>
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute "set rtp+=" . g:opamshare . "/merlin/vim"
@@ -426,15 +501,23 @@ let no_ocaml_comments = 1
 " set makeprg=omake\ -j\ 8
 " }}}
 "}}}
-" 6.  Autocommands {{{
+" 7.  Autocommands {{{
+" Specific files"{{{
+" autocmd BufRead ~/Documents/Q.txt normal Goi
+autocmd BufRead ~/Documents/Q.txt execute "normal Go"|startinsert!
+autocmd BufRead ~/.remember execute "normal Go"|startinsert!
+"}}}
 if has("autocmd")
+    " Haskell"{{{
+    autocmd BufWritePost *.hs GhcModCheckAndLintAsync
+    "}}}
     " .md files as Markdown"{{{
     au BufRead,BufNewFile *.md set filetype=markdown
     "}}}
     " C 
     au FileType c set makeprg=gcc\ %\ &&\ ./a.out
     " Turn on C++ autocompletion"{{{
-    au BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
+    " au BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
     "}}}
     " Open all files in tabs after entering Vim (though power users prefer buffers)"{{{
     autocmd VimEnter * tab all
@@ -446,7 +529,7 @@ if has("autocmd")
     " }}}
 endif
 " }}}
-" 7.  Folds {{{
+" 8.  Folds {{{
 " set foldmethod=indent   " Fold based on indent
 set foldmethod=syntax     " Fold based on syntax
 set foldnestmax=3         " Deepest fold is 3 levels
@@ -460,7 +543,7 @@ let sh_fold_enabled=1         " sh
 let vimsyn_folding='af'       " Vim script
 let xml_syntax_folding=1      " XML
 "}}}
-" 8.  Helper functions "{{{
+" 9.  Helper functions "{{{
 " Get info for specific key mapping (show grep output in a dialog) "{{{
 function! MappingInfo(mapping)
     execute "silent !grep -iB 1 " . a:mapping . " ~/.vimrc > minfo.tmp && dialog --textbox minfo.tmp 22 70 && rm minfo.tmp && clear"
@@ -556,7 +639,7 @@ function! Indent()
 endfunction
 
 " Indent on save hook
-autocmd BufWritePre <buffer> call Indent()
+" autocmd BufWritePre <buffer> call Indent()
 "}}}
 "Toggles tab size between the default width and 1 character width"{{{
 "b: buffer-local variables
@@ -591,13 +674,13 @@ endfunction
 "Never type the same word twice and maybe learn a new spellings!
 "Use the Linux dictionary when spelling is in doubt.
 "Window users can copy the file to their machine.
-function! Tab_Or_Complete()
-    if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
-        return "\<C-N>"
-    else
-        return "\<Tab>"
-    endif
-endfunction
+" function! Tab_Or_Complete()
+" if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
+" return "\<C-N>"
+" else
+" return "\<Tab>"
+" endif
+" endfunction
 "inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
 "}}}
 " Automatic insertion of C/C++ header gates/guards "{{{
@@ -633,7 +716,7 @@ map <leader>s :call OnlineDoc()<CR>
 map <LocalLeader>k :call OnlineDoc()<CR>
 "}}}
 "}}}
-" 9.  Filetypes "{{{
+" 10.  Filetypes "{{{
 autocmd filetype python nnoremap <F4> :w <bar> exec '!python '.shellescape('%')<CR>
 autocmd filetype c nnoremap <F4> :w <bar> exec '!gcc '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
 autocmd filetype cpp nnoremap <F4> :w <bar> exec '!g++ '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
@@ -641,24 +724,29 @@ autocmd filetype cpp nnoremap <F4> :w <bar> exec '!g++ '.shellescape('%').' -o '
 au BufNewFile,BufRead *.cu set filetype=cuda
 au BufNewFile,BufRead *.cuh set filetype=cuda
 "}}}
-" 10. Plugin-specific configuration "{{{
+" 11. Plugin-specific configuration "{{{
 " Tagbar toggle "{{{
 nmap <F7> :TagbarToggle<CR>
 "}}}
 " Autosave plugin"{{{
-" set autosave=5            " currently not implemented in Vim
 let g:auto_save = 1         " enable AutoSave on Vim startup
 let g:auto_save_silent = 1  " do not display the auto-save notification
 "}}}
 " Syntastic"{{{
 " let g:syntastic_ocaml_use_ocamlc = 1
+let g:syntastic_cpp_compiler = 'clang++'
+let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
+
 let g:syntastic_ocaml_use_ocamlbuild = 1
 let g:syntastic_ocaml_checkers = ['merlin']
 "}}}
 " Vim slime {{{
 let g:slime_target = "tmux"
 let g:slime_paste_file = "$HOME/.slime_paste"
-let g:slime_python_ipython = 1
+" let g:slime_python_ipython = 1
+let g:slime_default_config = {"socket_name": "default", "target_pane": "1"}
+" Send whole buffer to Slime
+map <F5> :% SlimeSend<CR>
 " tmux target pane
 ":" means current window, current pane (a reasonable default)
 "":i" means the ith window, current pane
@@ -700,19 +788,19 @@ map <leader>ff :NERDTreeFind<cr>
 " imap <C-I> <ESC>:pyf ~/.vim/clang-format.py<CR>i
 "}}}
 "}}}
-" 11. Vim/GUI Vim "{{{
+" 12. Vim/GUI Vim "{{{
 if has("gui_running")
     " C-Space seems to work under gVim on both Linux and win32
-    inoremap <C-Space> <C-n>
+    " inoremap <C-Space> <C-n>
 else " no gui
     if has("unix")
-        inoremap <Nul> <C-n>
+        " inoremap <Nul> <C-n>
     else
         " I have no idea of the name of Ctrl-Space elsewhere
     endif
 endif
 "}}}
-" 12. Competitive programming "{{{
+" 13. Competitive programming "{{{
 " Runs the code by taking input from the 'in' text file"{{{
 " map <F6> :w<CR>:!g++ % -g && (ulimit -c unlimited; ./a.out < in) <CR>
 ""}}}
@@ -720,7 +808,7 @@ endif
 " Plugin 'chazmcgarvey/vimcoder'
 "}}}
 "}}}
-" 13. Tagbar "{{{
+" 14. Tagbar "{{{
 let g:tagbar_type_go = {
             \ 'ctagstype' : 'go',
             \ 'kinds'     : [
