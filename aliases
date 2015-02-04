@@ -1,5 +1,5 @@
 # vim:set ft=sh:
-
+# TODO FIX FOLDING: fdm=marker fmr=#,\n\n:
 # Aliases and custom functions
 platform='unknown'
 unamestr=`uname`
@@ -31,59 +31,57 @@ elif [[ "$unamestr" == 'Linux' ]]; then
     alias mountrw='mount -o remount,rw /'
 fi
 
-alias desk='cd ~/Desktop'
-alias students='ssh ar267209@students.mimuw.edu.pl'
-alias mountstudents='sudo sshfs -o allow_other ar267209@students.mimuw.edu.pl:/home/students/bioinf/a/ar267209 ~/mount/students/'
-alias vimb='vim ~/.bashrc'
+# General purpose
+alias vimb='vim ~/.bashrc && source ~/.bashrc'
 alias vimr='vim ~/.remember'
 alias vimexecdwm='sudo vim /usr/local/bin/dwm-personalized'
 alias vimv='vim ~/.vimrc'
 alias vimq='vim ~/Documents/Q.txt'
-alias vimdwmconfig='vim ~/dwm-6.0/config.h'
-alias m='man';
-# Print primitive data types sizes
-alias typesizes='perl -V | grep size='
-# Get processor interrupts
-alias interrupts1='cat /proc/interrupts'
-alias v='vim'
-alias disktest='sudo smartctl -a /dev/sda | less'
-alias grep='grep -i'
-alias dmesgerrors="dmesg | egrep 'error|fail|bug|rtl8|r8|wlan'"
-alias sudolastcmd='!!' # remember
+alias vimdwmconfig='vim ~/dwm/config.h'
 
-alias mn='man'
+# Vim with particular file
+alias cx='chmod +x'
+alias m='man' ; alias mn='man'
+alias mm='man !!:0' # TODO: man last command
 alias l='ls'
+alias r='rm'
+alias v='vim'
+alias grep='grep -i'
+alias sudolastcmd='!!' # remember
+alias ls='ls --color -lFG'
+
 alias o='rlwrap ocaml'
 alias ioccc='cd ~/Developer/ioccc/'
 
 # Current projects
 alias wspace='cd ~/workspace/'
-# alias luceos='cd ~/Documents/workspace/luceos.smart/'
-
 alias gjnp='g++ -Wall -O2 -std=c++11 '
-
 alias wgetdir='wget -r --no-parent '
-alias euler='cd ~/Developer/ProjectEuler/'
+alias zipfolder='tar -czf'
 
+# Programming etc.
+alias g='g++ -std=c++11'
+alias m='make'
 alias c99='gcc -std=c99'
 alias g++='g++ -g -Wall -O3'
 alias mountstudents='sshfs ar267209@students.mimuw.edu.pl: /Users/antoni/students'
 alias students='ssh students.mimuw.edu.pl -l ar267209'
-alias ls='ls --color -lFG'
 alias icm='ssh antoni@hpc.icm.edu.pl' 
 alias icmgw='ssh antoni@gw.icm.edu.pl' 
-alias vimbashrc='vim ~/.bashrc && source $_'
-alias vimbashprofile='vim ~/.bash_profile && source $_'
 #alias wget='curl -0'
 alias xcode="open *.xcodeproj"
 # It's worth mentioning what the options -czf after tar are for: c indicates that you want to create a tar archive, z applies gzip on the intermediate tar archive, and f is for the subsequent final file name folder_name.tar.gz. – fideli Jul 9 '10 at 19:11
 # alias zipfolder='tar -czf folder_name.tar.gz folder_name/'
-alias zipfolder='tar -czf'
+
+# SSH
 alias sendstud='~/Developer/sendstud.sh'
 alias sendicm='~/Developer/sendicm.sh'
-# OITimeTool --- Time Measurement Tool for the Polish Olympiad in Informatics
-alias oitime='/Users/antoni/Developer/oitimetool/oitimetool'
-alias gitp='git push origin'
+
+# Android development
+alias adbd='adb devices'
+alias adbreset='adb kill-server;adb start-server'
+
+# Git
 alias gitpu='git pull'
 alias gitpua='git push --all -u'
 alias gits='git status'
@@ -93,23 +91,15 @@ alias gitch='git checkout'
 alias gitd='git diff'
 alias gitm='git merge'
 alias gitb='git branch'
+alias gitk='gitk --all'
 alias gitundocommit='git reset --soft HEAD~1'
 
-alias m='make'
-
-alias adbreset='adb kill-server;adb start-server'
-# Use lolcat instead of cat
-# cat='lolcat'
 # Set `indent` parameters according to Linux kernel Coding Style
 #alias indent='indent -kr -i8'
 alias indent='indent -i8 -nbad -bap -nbc -br -brs -c33 -cd33 -ncdb -ce -ci4 -cli0 -d0 -di1 -nfc1 -i4 -ip0 -l75 -lp -npcs -npsl -nsc -nsob'
-# Connect to students@mimuw
 # Kill all jobs
 alias kj='kill -9 $(jobs -p)'
-alias gits='git status'
 
-# Android development
-alias adbd='adb devices'
 
 # topcoder
 alias tc='topcoder'
@@ -121,21 +111,15 @@ alias tma='tmux attach'
 alias tmxa='tmux attach'
 alias tmxl='tmux list-window'
 
-# To be organized
-alias brc='vim ~/.bashrc'
-alias sbrc='source ~/.bashrc'
-
 # cd directory up
 alias ..="cd .."
 alias ....="cd ../.."
 alias ......="cd ../../.."
 
-
 # Helper functions
 gg() { pwd > /tmp/last_path; }
 hh() { cd $(cat /tmp/last_path); }
 
-alias g='g++ -std=c++11'
 # alias vim='vim -p'
 # alias vimp='vim -p *.{h.cc.cpp}'
 alias webserver='python -m SimpleHTTPServer 8080'
@@ -150,30 +134,40 @@ alias gopath="export GOPATH=\$(pwd)"
 alias lssshcons="sudo lsof -i -n | egrep '\<ssh\>'"
 alias luceosbin='cd ~/workspace/luceos.smart/LuceosSmart/bin'
 alias xxb='xxd -b'
+alias egrep='egrep --color'
 alias untar='tar xvzf'
-alias vima='vim ~/.aliases'
+alias vima='vim ~/.aliases && source ~/.aliases'
 alias gopath="export GOPATH=\$(pwd)"
 alias dbgui='/usr/share/dbeaver/dbeaver'
+
 alias singlemonitor='xrandr --output LVDS1'
 alias dualmonitor='xrandr --output VGA1 --mode 1680x1050 --right-of LVDS1'
-alias fixaudio='pulseaudio -k'
 
-# ls after cd
-function cd { builtin cd "$@" && ls -F }
+alias fixaudio='pulseaudio -k' ; alias fixaudio2='pavucontrol'
+alias fixpowerctl='for i in /sys/bus/usb/devices/*/power/control; do echo on > $i; done'
+alias explorer='nautilus --no-desktop'
 
-# Colourised cat
-# function cat {}
-alias cat='pygmentize -g'
+# Markdown to PDF
+md2pdf() {
+    pandoc $1 -o $1.pdf
+    open $1.pdf
+}
+# Launches github-flavoured Markdown file on localhost:5000
+alias md2html='grip'
+
+# LaTeX
+alias latexed1='texmaker'
+alias latexed2='gummi'
 
 alias gogo='cd ~/go/'
 alias ss='source'
-
+alias l='ls'
 csview() {
     local file="$1"
     cat "$file" | sed -e 's/,,/, ,/g' | column -s, -t | less -#5 -N -S
 } 
-# Custom cat: colourised and tabulated for CSV files
-ccat() { 
+# Custom cat: colourised and tabulated for CSV files alias cat='pygmentize -g'
+xcat() { 
     filename=`basename $1`
     fileext=${filename##*.}
     if [ "$fileext" = "csv" ]; then
@@ -182,14 +176,12 @@ ccat() {
         pygmentize -g $1 
     fi
 }
-
 # Google search
 s() {
     args=$@
     searchterm=${args// /%20}
-    google-chrome "http://www.google.com/search?q=$searchterm"
+    google-chrome-stable "http://www.google.com/search?q=$searchterm"
 }
-
 # Launch Vim solarized theme depending on the time of the day
 vv() {
     echo $1
@@ -200,6 +192,109 @@ vv() {
     fi
     terminator -l vim-solarized-$theme -c "vim -c 'set gb=$theme'"
 }
-
 # Display 20 most frequently used commands in Bash
 alias mostfrequent='history | cut -d " " -f 4 | tr -c "[:alnum:]" "[\n*]" | sort | uniq -c | sort -nr | head  -20'
+# 20 Command Line Tools to Monitor Linux Performance
+perf_commands=(top vmstat tload stress lsof tcpdump netstat htop atop iotop iostat iptraf nethogs iftop monitorix monit arpwatch vnstat 
+nmon collectl dig mpstat, pkill)
+# Networking
+networking_commands=(netstat ethtool ping ifconfig arping traceroute iwconfig ifconfig tshark nmap nbtscan iptables 
+tcpdump iproute2 chargen netcat tc insmod fping nslookup host)
+# TODO:
+# ps -ef
+# tshark -i [interface] -V
+# nmap -A <host>
+# nbtscan 0.0.0.0/24  This gives IP numbers, NetBios names, Mac addresses from Local Network
+# Is that tcp port listening?  nc (netcat) or telnet.
+# Is that IP address already used? arping.
+# What the %*! is going on? tcpdump.
+# What is listening on what ports on this box? netstat.
+# ping -f because of the obvious reasons.
+# tc is great e.g. for rate limiting / dropping packets on purpose
+# insmod dummy for creating dummy network interfaces
+
+whichport() {
+    netstat -tulpn | grep $@
+}
+
+# ip a s #List addresses for interfaces
+# ip link show#List network interfaces
+# ip route show #List routing table
+# ip neigh Same#Show neighbors
+# ip r add default via $ip0#Set default gateway to $ip
+# ethtool eth0#Show status of ethernet interface eth0
+# ip link set dev eth0 up/down#Bring interface eth0 up (or down)
+
+# iwlist scan#List wireless networks in range
+
+# fping is handy, sends lots of pings without waiting for responses, so you can rapidly ping a whole address range
+# ping6 is to ping IPV6 address.
+
+# Same for networking_commands
+# random number (array len) to choose random command
+alias ftp='filezilla'
+
+# Python modules
+alias pi='sudo pip install'
+alias piu='sudo pip-review --interactive'
+alias pil='pip list'
+
+# Execute nth line of a file
+nth() {
+    eval `sed $1'q;d' $2`
+}
+
+# Countdown, usage: countdown 60, countdown $((2*60*60))
+function countdown() {
+date1=$((`date +%s` + $1)); 
+while [ "$date1" -ne `date +%s` ]; do 
+    echo -ne "$(date -u --date @$(($date1 - `date +%s`)) +%H:%M:%S)\r";
+    sleep 0.1
+done
+}
+# Stopwach
+function stopwatch(){
+date1=`date +%s`; 
+while true; do 
+    echo -ne "$(date -u --date @$((`date +%s` - $date1)) +%H:%M:%S)\r"; 
+    sleep 0.1
+done
+}
+
+# Utils
+# Print primitive data types sizes
+alias typesizes='perl -V | grep size='
+alias interrupts1='cat /proc/interrupts' # Get processor interrupts
+alias disktest='sudo smartctl -a /dev/sda | less'
+alias dmesgerrors="dmesg | egrep 'error|fail|bug|rtl8|r8|wlan'"
+
+
+# TOOD: Check if Debian/Ubuntu
+listkernels() {
+    dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d'
+}
+
+# TODO: PUT THOSE SOMEWHERE
+alias pdfmerge='pdfunite'
+alias ycm='cd ~/.vim/bundle/YouCompleteMe/'
+alias desk='cd ~/Desktop'
+alias students='ssh ar267209@students.mimuw.edu.pl'
+alias mountstudents='sudo sshfs -o allow_other ar267209@students.mimuw.edu.pl:/home/students/bioinf/a/ar267209 ~/mount/students/'
+alias euler='cd ~/Developer/ProjectEuler/'
+alias gdebi='sudo gdebi'
+alias wallpaperchange='gsettings set org.gnome.desktop.background picture-uri "file:///home/antoni/Documents/wallpaper.jpg"'
+alias showtunnels="sudo lsof -i -n | egrep '\<ssh\>'"
+alias j='julia'
+alias yaourt='yaourt --noconfirm'
+alias y='yaourt'
+alias inettest='ping google.com -c 4'
+h() {                                                                                                                                               
+    head -n $@
+}
+# TMP
+alias svn='/home/antoni/Downloads/subversion-1.8.11/subversion/svn/svn'
+alias run='g++ -std=c++11 fun_tree_example.cc -o test && ./test'
+alias rrun='g++ -fdiagnostics-color -std=c++11 ex.cc -o test && ./test'
+alias ex='vim fun_tree_example.cc'
+alias rex='vim ex.cc'
+alias sourcea='source ~/.aliases'

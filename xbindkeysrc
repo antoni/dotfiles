@@ -1,0 +1,15 @@
+"sleep 0.1 && bash ~/dont_press_caps_lock.sh"
+m:0x2 + c:66
+
+
+/* Source: https://bbs.archlinux.org/viewtopic.php?pid=1042589#p1042589 */
+"/usr/bin/amixer -q sset Master 2+ && ~/notifyvolume"
+Control+Shift + Up
+"/usr/bin/amixer -q sset Master 2- && ~/notifyvolume"
+Control+Shift + Down
+/* Mute */
+"/usr/bin/amixer -D pulse set Master Playback Switch toggle && ~/notifyvolume"
+Control+Shift + 0
+/* Lock screen */
+"slock"
+Control+Shift+l

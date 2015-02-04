@@ -93,4 +93,9 @@ unsetopt nomatch
 
 # xmodmap .speedswapper   
 
+# Execute ls after cd
+chpwd() ls
 source ~/.common_profile.sh
+
+# Ignore case when 'ls'
+unsetopt CASE_GLOB
