@@ -5,14 +5,14 @@ shell_patterns=1
 auto_save_setup=1
 preallocate_space=0
 auto_menu=0
-use_internal_view=1
+use_internal_view=0
 use_internal_edit=0
 clear_before_exec=1
 confirm_delete=1
 confirm_overwrite=1
 confirm_execute=0
 confirm_history_cleanup=1
-confirm_exit=1
+confirm_exit=0
 confirm_directory_hotlist_delete=1
 safe_delete=0
 mouse_repeat_rate=100
@@ -90,13 +90,13 @@ keybar_visible=1
 xterm_title=1
 output_lines=0
 command_prompt=1
-menubar_visible=1
-free_space=1
+menubar_visible=0
+free_space=0
 horizontal_split=0
-vertical_equal=1
-left_panel_size=92
-horizontal_equal=1
-top_panel_size=1
+vertical_equal=0
+left_panel_size=66
+horizontal_equal=0
+top_panel_size=13
 
 [Misc]
 timeformat_recent=%b %e %H:%M
@@ -114,6 +114,8 @@ clipboard_paste=
 base_color=
 xterm=
 color_terminals=
+
+rxvt-unicode=
 
 [Panels]
 show_mini_info=true
@@ -137,6 +139,21 @@ quick_search_mode=2
 simple_swap=false
 
 select_flags=6
+
+[FindFile]
+file_case_sens=true
+file_shell_pattern=true
+file_find_recurs=true
+file_skip_hidden=false
+file_all_charsets=false
+content_use=true
+content_case_sens=true
+content_regexp=false
+content_first_hit=false
+content_whole_words=false
+content_all_charsets=false
+ignore_dirs_enable=true
+ignore_dirs=
 
 [Panelize]
 Find *.orig after patching=find . -name \\*.orig -print

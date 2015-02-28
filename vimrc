@@ -133,7 +133,11 @@ map <F6> <C-W>w
 " inoremap <tab> <c-o>:wincmd w<cr>
 " Execute current line in bash 
 nmap <F9> :exec '!'.getline('.')<CR>
-
+" Delete currently opened file"{{{
+" TODO
+command! DD :!rm % <CR> 
+" | q!
+"}}}
 " Refactoring variable names "{{{
 " Source: http://stackoverflow.com/a/597932/963881
 function! Refactor()
@@ -149,6 +153,13 @@ nmap <Leader>rf "zyiw:call Refactor()<cr>mx:silent! norm gd<cr>[{V%:s/<C-R>//<c-
 command! Vr :tabe ~/.vimrc | execute "normal /Key mappings \<CR><Space>" | nohlsearch
 " Alias for PluginInstall
 command! I :PluginInstall
+" Replace commands "{{{
+command! SpacesToNewline :%s/ /\r/g
+command! UnderscoreToNewline :%s/_/\r/g
+command! DashesToNewline :%s/-/\r/g
+command! ColonToNewline :%s/:/\r/g
+command! SemicolonToNewline :%s/;/\r/g
+""}}}
 " Compile LaTeX and open corresponding LaTeX
 " TODO: Add VimLatexCompile
 " Use LaTeX rather than plain TeX.
@@ -237,9 +248,9 @@ let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf
 augroup vim
-    autocmd!
+    au!
     " Help for word under the cursor (.vimrc only)
-    autocmd FileType vim setlocal keywordprg=:help
+    au FileType vim setlocal keywordprg=:help
 augroup END
 " Remap code completion to Ctrl+Space {{{
 " inoremap <Nul> <C-x><C-o> 
@@ -268,9 +279,13 @@ set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#begin() 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
+" Must-haves "{{{
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
-" Plugin 'wincent/command-t'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'scrooloose/syntastic'
+Plugin 'majutsushi/tagbar'
+"}}}
 " Plugin 'Lokaltog/vim-easymotion'
 " Plugin 'tpope/vim-vinegar'
 " Plugin 'wikitopian/hardmode'
@@ -278,6 +293,7 @@ Plugin 'scrooloose/nerdtree'
 " Plugin 'nathanaelkane/vim-indent-guides'
 " A Git wrapper so awesome, it should be illegal
 Plugin 'tpope/vim-repeat'
+" Plugin 'tpope/vim-unimpaired' " For jumping to errors shortcuts
 " Bundle 'naseer/logcat'
 " Bundle 'tpope/vim-fugitive'
 " Plugin 'vim-scripts/gtags.vim'
@@ -291,10 +307,12 @@ Plugin 'nelstrom/vim-markdown-folding'
 " Bundle 'nixon/vim-vmath' 
 " Bundle 'taku-o/vim-vis'
 " Bundle 'rking/ag.vim'
+Bundle 'Raimondi/delimitMate'
+" *LEARN*
+Bundle 'rking/ag.vim'
 
 " C++ IDE-related
 Bundle 'vim-scripts/a.vim'
-Bundle 'wincent/Command-T'
 " Bundle 'DoxygenToolkit.vim'
 " Bundle 'godlygeek/tabular'
 " Bundle 'tpope/vim-sensible'
@@ -305,7 +323,7 @@ Bundle 'wincent/Command-T'
 " Bundle 'rstacruz/sparkup'
 " Bundle 'Mizuchi/STL-Syntax'
 
-" Color themes
+" Color themes "{{{
 Bundle 'sjl/badwolf'
 Bundle 'altercation/vim-colors-solarized'
 " Bundle 'Lokaltog/vim-distinguished'
@@ -313,11 +331,13 @@ Bundle 'altercation/vim-colors-solarized'
 " Bundle 'vim-scripts/Wombat'
 Bundle 'tpope/vim-vividchalk'
 Bundle 'croaker/mustang-vim'
+" "}}}
 " Haskell (http://haskelllive.com/environment.html)
 " Bundle 'lukerandall/haskellmode-vim'
 " Bundle 'eagletmt/neco-ghc'
 " Bundle 'eagletmt/ghcmod-vim'
 " Bundle 'bitc/lushtags'
+Bundle 'raichoo/haskell-vim'
 
 " Syntax 
 " Smalltalk
@@ -325,7 +345,7 @@ Bundle 'vim-scripts/st.vim'
 " Prolog
 Bundle 'adimit/prolog.vim'  
 
-" CPP
+" CPP, alternative to YCM
 " Bundle 'osyo-manga/vim-marching'
 " Bundle 'Shougo/neocomplete.vim'
 " Bundle 'Shougo/neosnippet.vim'
@@ -334,11 +354,8 @@ Plugin 'google/vim-maktaba'
 Plugin 'google/vim-codefmtlib'
 Plugin 'google/vim-codefmt'
 
-" Bundle 'vim-scripts/gnuplot.vim'
+Bundle 'vim-scripts/gnuplot.vim'
 " Plugin 'stefandtw/quickfix-reflector.vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'scrooloose/syntastic'
-Plugin 'majutsushi/tagbar'
 " TODO: 
 " https://github.com/Valloric/YouCompleteMe#nasty-bugs-happen-if-i-have-the-vim-autoclose-plugin-installed
 " Plugin 'Townk/vim-autoclose'
@@ -347,23 +364,25 @@ Plugin 'jpalardy/vim-slime'
 " Bundle 'epeli/slimux'
 Plugin 'bling/vim-airline'
 " Plugin 'dgryski/vim-godef'
-" Plugin 'fatih/vim-go'
+Plugin 'fatih/vim-go'
 
 " Julia support
-" Plugin 'JuliaLang/julia-vim'
+Plugin 'JuliaLang/julia-vim'
 " Plugin 'Shougo/neocomplete.vim'
 " Plugin 'jmcantrell/vim-virtualenv'
 " Plugin 'chrisbra/csv.vim'
-Plugin 'kana/vim-operator-user' " Recommended by clang-format
+Plugin 'kana/vim-operator-user'     " Recommended by clang-format
 Plugin 'vim-scripts/vim-auto-save'
-Plugin 'kien/ctrlp.vim'         " For tag creation
+Plugin 'kien/ctrlp.vim'             " For tag creation
+Plugin 'tacahiroy/ctrlp-funky'
 " Bundle 'christoomey/vim-tmux-navigator'
 
 " Bundle 'https://bitbucket.org/ns9tks/vim-l9' " Bundle throws: repo not found
 " Bundle 'https://bitbucket.org/ns9tks/vim-fuzzyfinder' " Bundle throws: repo not found
 
 " Latex
-Bundle 'lervag/vim-latex' 
+Bundle 'gerw/vim-latex-suite'
+Bundle 'lervag/vim-latex'
 " Plugin 'jamis/fuzzy_file_finder'
 " Plugin 'jamis/fuzzyfinder_textmate'
 " Snippets {{{
@@ -402,9 +421,9 @@ endif
 " let g:solarized_termcolors=256
 try
     " colorscheme solarized
-    colorscheme vividchalk
+    " colorscheme vividchalk
     " colorscheme mustang
-    " colorscheme badwolf
+    colorscheme badwolf
     " colorscheme distinguished
     set background=dark
     " set background=light
@@ -416,24 +435,24 @@ endtry
 " Cursorline {{{
 set cursorline
 hi CursorLine ctermbg=236
-"hi CursorLine term=bold cterm=bold ctermbg=LightCyan guibg=LightCyan
+" hi CursorLine term=bold cterm=bold ctermbg=LightCyan guibg=LightCyan
 "}}}
 " Vim indent guides setup to work with solarized theme"{{{
 " let g:indent_guides_enable_on_vim_startup=1
 "set ts=4 sw=4 et
 "let g:indent_guides_start_level=2
 "let g:indent_guides_start_size=1
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=black
+au VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=black
 let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=darkgrey
+au VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=darkgrey
 " Vim Indent Guides ""{{{
 "let g:indent_guides_auto_colors = 1
 "augroup indent_guides
-"autocmd!
+"au!
 "au BufRead,BufNewFile * IndentGuidesEnable
 "augroup END
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=black
-" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=darkgrey
+au VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=black
+" au VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=darkgrey
 "}}}
 "}}}
 " Highlight text that goes over 80 characters"{{{
@@ -502,14 +521,17 @@ let no_ocaml_comments = 1
 " }}}
 "}}}
 " 7.  Autocommands {{{
+" Tab by default "{{{
+au VimEnter * set tabpagemax=9999|sil tab ball|set tabpagemax&vim
+""}}}
 " Specific files"{{{
-" autocmd BufRead ~/Documents/Q.txt normal Goi
-autocmd BufRead ~/Documents/Q.txt execute "normal Go"|startinsert!
-autocmd BufRead ~/.remember execute "normal Go"|startinsert!
+" au BufRead ~/Documents/Q.txt normal Goi
+au BufRead ~/Documents/Q.txt execute "normal Go"|startinsert!
+au BufRead ~/.remember execute "normal Go"|startinsert!
 "}}}
-if has("autocmd")
+if has("au")
     " Haskell"{{{
-    autocmd BufWritePost *.hs GhcModCheckAndLintAsync
+    au BufWritePost *.hs GhcModCheckAndLintAsync
     "}}}
     " .md files as Markdown"{{{
     au BufRead,BufNewFile *.md set filetype=markdown
@@ -520,7 +542,7 @@ if has("autocmd")
     " au BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
     "}}}
     " Open all files in tabs after entering Vim (though power users prefer buffers)"{{{
-    autocmd VimEnter * tab all
+    au VimEnter * tab all
     "}}}
     " TODO Compiler settings for C/C++ files {{{
     " au BufEnter *.cc compiler g++
@@ -599,8 +621,8 @@ endfunc
 
 au FocusLost * :set number
 au FocusGained * :set relativenumber
-autocmd InsertEnter * :set number
-autocmd InsertLeave * :set relativenumber
+au InsertEnter * :set number
+au InsertLeave * :set relativenumber
 
 " Toogle line number display
 nnoremap <F10> :call NumberToggle()<cr>
@@ -639,7 +661,7 @@ function! Indent()
 endfunction
 
 " Indent on save hook
-" autocmd BufWritePre <buffer> call Indent()
+" au BufWritePre <buffer> call Indent()
 "}}}
 "Toggles tab size between the default width and 1 character width"{{{
 "b: buffer-local variables
@@ -692,7 +714,7 @@ function! s:insert_gates()
     execute "normal! Go#endif /* " . gatename . " */"
     normal! kk
 endfunction
-autocmd BufNewFile *.{h,hpp} call <SID>insert_gates()
+au BufNewFile *.{h,hpp} call <SID>insert_gates()
 "}}}
 " Show online docummentation for word under cursor "{{{
 function! OnlineDoc()
@@ -715,16 +737,41 @@ map <silent> <M-d> :call OnlineDoc()<CR>
 map <leader>s :call OnlineDoc()<CR>
 map <LocalLeader>k :call OnlineDoc()<CR>
 "}}}
-"}}}
-" 10.  Filetypes "{{{
-autocmd filetype python nnoremap <F4> :w <bar> exec '!python '.shellescape('%')<CR>
-autocmd filetype c nnoremap <F4> :w <bar> exec '!gcc '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
-autocmd filetype cpp nnoremap <F4> :w <bar> exec '!g++ '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
+" Jumping through Syntastic error list "{{{
+function! <SID>LocationPrevious()                       
+  try                                                   
+    lprev                                               
+  catch /^Vim\%((\a\+)\)\=:E553/                        
+    llast                                               
+  endtry                                                
+endfunction                                             
+
+function! <SID>LocationNext()                           
+  try                                                   
+    lnext                                               
+  catch /^Vim\%((\a\+)\)\=:E553/                        
+    lfirst                                              
+  endtry                                                
+endfunction                                             
+
+nnoremap <silent> <Plug>LocationPrevious    :<C-u>exe 'call <SID>LocationPrevious()'<CR>                                        
+nnoremap <silent> <Plug>LocationNext        :<C-u>exe 'call <SID>LocationNext()'<CR>
+nmap <silent> ,,    <Plug>LocationPrevious              
+nmap <silent> ..    <Plug>LocationNext
+"}}}"}}}
+" 10. Filetypes "{{{
+au filetype python nnoremap <F4> :w <bar> exec '!python '.shellescape('%')<CR>
+au filetype c      nnoremap <F4> :w <bar> exec '!gcc '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
+au filetype cpp    nnoremap <F4> :w <bar> exec '!g++ '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
 " CUDA
 au BufNewFile,BufRead *.cu set filetype=cuda
 au BufNewFile,BufRead *.cuh set filetype=cuda
 "}}}
 " 11. Plugin-specific configuration "{{{
+" Syntastic "{{{
+let g:syntastic_quiet_messages = {'level': 'warnings'}
+let g:syntastic_always_populate_loc_list = 1
+" "}}}
 " Tagbar toggle "{{{
 nmap <F7> :TagbarToggle<CR>
 "}}}
@@ -765,8 +812,8 @@ imap <C-_> <Esc><Plug>NERDCommenterToggle<CR>
 " }}}
 " NERDTree "{{{
 " Open a NERDTree automatically when vim starts up if no files were specified
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+au StdinReadPre * let s:std_in=1
+au VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " Key mappings
 silent! nmap <C-p> :NERDTreeToggle<CR>
 silent! map <F2> :NERDTreeFind<CR>
@@ -774,13 +821,18 @@ silent! map <F2> :NERDTreeFind<CR>
 let g:NERDTreeMapActivateNode="<F2>"
 let g:NERDTreeMapPreview="<F3>"
 
-autocmd FileType nerdtree nmap <buffer> <left> u
-autocmd FileType nerdtree nmap <buffer> <right> u
+au FileType nerdtree nmap <buffer> <left> u
+au FileType nerdtree nmap <buffer> <right> u
 
 " Set the working directory to the current file's directory
-autocmd BufEnter * lcd %:p:h
+au BufEnter * lcd %:p:h
 
 map <leader>ff :NERDTreeFind<cr>
+"}}}
+" ctrlp-funky "{{{
+let g:ctrlp_funky_matchtype = 'path'
+nnoremap <C-O> :CtrlPFunky<Cr>
+let g:ctrlp_funky_syntax_highlight = 1
 "}}}
 " clang-format to format C++ according to Google Styleguide "{{{ 
 " need to have .clang-format file in ~ directory
@@ -791,10 +843,10 @@ map <leader>ff :NERDTreeFind<cr>
 " 12. Vim/GUI Vim "{{{
 if has("gui_running")
     " C-Space seems to work under gVim on both Linux and win32
-    " inoremap <C-Space> <C-n>
+    inoremap <C-Space> <C-n>
 else " no gui
     if has("unix")
-        " inoremap <Nul> <C-n>
+        inoremap <Nul> <C-n>
     else
         " I have no idea of the name of Ctrl-Space elsewhere
     endif

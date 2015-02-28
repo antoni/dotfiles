@@ -32,11 +32,13 @@ elif [[ "$unamestr" == 'Linux' ]]; then
 fi
 
 # General purpose
-alias vimb='vim ~/.bashrc && source ~/.bashrc'
+alias vimb='vim ~/.bashrc'
+alias vima='vim ~/.aliases'
 alias vimr='vim ~/.remember'
 alias vimexecdwm='sudo vim /usr/local/bin/dwm-personalized'
 alias vimv='vim ~/.vimrc'
 alias vimq='vim ~/Documents/Q.txt'
+alias gq='gedit ~/Documents/Q.txt'
 alias vimdwmconfig='vim ~/dwm/config.h'
 
 # Vim with particular file
@@ -49,9 +51,14 @@ alias v='vim'
 alias grep='grep -i'
 alias sudolastcmd='!!' # remember
 alias ls='ls --color -lFG'
+alias rmf='rm -rf'
 
 alias o='rlwrap ocaml'
 alias ioccc='cd ~/Developer/ioccc/'
+
+
+# System commands
+alias free='free -h'
 
 # Current projects
 alias wspace='cd ~/workspace/'
@@ -74,8 +81,8 @@ alias xcode="open *.xcodeproj"
 # alias zipfolder='tar -czf folder_name.tar.gz folder_name/'
 
 # SSH
-alias sendstud='~/Developer/sendstud.sh'
-alias sendicm='~/Developer/sendicm.sh'
+alias sendstud='~/scripts/sendstud.sh'
+alias sendicm='~/scripts/sendicm.sh'
 
 # Android development
 alias adbd='adb devices'
@@ -127,16 +134,7 @@ alias gprer='grep -R'
 
 alias hgrep='history | grep -i'
 
-# tmux source-file ~/.tmux.conf > /dev/null
-# Go
-alias gopath="export GOPATH=\$(pwd)"
-
-alias lssshcons="sudo lsof -i -n | egrep '\<ssh\>'"
-alias luceosbin='cd ~/workspace/luceos.smart/LuceosSmart/bin'
-alias xxb='xxd -b'
-alias egrep='egrep --color'
-alias untar='tar xvzf'
-alias vima='vim ~/.aliases && source ~/.aliases'
+# tmux  && source ~/.paths'
 alias gopath="export GOPATH=\$(pwd)"
 alias dbgui='/usr/share/dbeaver/dbeaver'
 
@@ -195,11 +193,11 @@ vv() {
 # Display 20 most frequently used commands in Bash
 alias mostfrequent='history | cut -d " " -f 4 | tr -c "[:alnum:]" "[\n*]" | sort | uniq -c | sort -nr | head  -20'
 # 20 Command Line Tools to Monitor Linux Performance
-perf_commands=(top vmstat tload stress lsof tcpdump netstat htop atop iotop iostat iptraf nethogs iftop monitorix monit arpwatch vnstat 
-nmon collectl dig mpstat, pkill)
+perf_commands=(top vmstat tload stress lsof tcpdump netstat htop atop iotop iostat iptraf iftop monitorix monit arpwatch vnstat 
+nmon collectl dig mpstat, pkill powertop pidstat)
 # Networking
-networking_commands=(netstat ethtool ping ifconfig arping traceroute iwconfig ifconfig tshark nmap nbtscan iptables 
-tcpdump iproute2 chargen netcat tc insmod fping nslookup host)
+networking_commands=(netstat ethtool ping ifconfig arping traceroute iwconfig ifconfig tshark nethogs nmap nbtscan iptables 
+tcpdump iproute2 chargen netcat tc insmod fping nslookup host p0f mtr ipcalc sipcalc)
 # TODO:
 # ps -ef
 # tshark -i [interface] -V
@@ -265,36 +263,53 @@ done
 # Print primitive data types sizes
 alias typesizes='perl -V | grep size='
 alias interrupts1='cat /proc/interrupts' # Get processor interrupts
+alias memory1='cat /proc/meminfo'
 alias disktest='sudo smartctl -a /dev/sda | less'
 alias dmesgerrors="dmesg | egrep 'error|fail|bug|rtl8|r8|wlan'"
 
+# Fix file permissions in home directory
+alias fixperm1='find /home/user -type d -print0 | xargs -0 chmod 0775'
+alias fixperm2='find /home/user -type f -print0 | xargs -0 chmod 0664'
 
 # TOOD: Check if Debian/Ubuntu
 listkernels() {
     dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d'
 }
+alias gdebi='sudo gdebi'
 
 # TODO: PUT THOSE SOMEWHERE
+# alias dmesg='dmesg --ctime'
 alias pdfmerge='pdfunite'
-alias ycm='cd ~/.vim/bundle/YouCompleteMe/'
 alias desk='cd ~/Desktop'
 alias students='ssh ar267209@students.mimuw.edu.pl'
 alias mountstudents='sudo sshfs -o allow_other ar267209@students.mimuw.edu.pl:/home/students/bioinf/a/ar267209 ~/mount/students/'
 alias euler='cd ~/Developer/ProjectEuler/'
-alias gdebi='sudo gdebi'
 alias wallpaperchange='gsettings set org.gnome.desktop.background picture-uri "file:///home/antoni/Documents/wallpaper.jpg"'
-alias showtunnels="sudo lsof -i -n | egrep '\<ssh\>'"
+alias showtunnels="sudo lsof -i -n | egrep '\<ssh\>'" # Show all open SSH tunnels
 alias j='julia'
-alias yaourt='yaourt --noconfirm'
+# alias yaourt='yaourt --noconfirm --pager'
 alias y='yaourt'
+alias rsync='rsync --progress'
+alias wificonn='sudo wifi-menu wlp2s0'
 alias inettest='ping google.com -c 4'
-h() {                                                                                                                                               
+h() {                                                                                                                                              
     head -n $@
 }
 # TMP
-alias svn='/home/antoni/Downloads/subversion-1.8.11/subversion/svn/svn'
-alias run='g++ -std=c++11 fun_tree_example.cc -o test && ./test'
-alias rrun='g++ -fdiagnostics-color -std=c++11 ex.cc -o test && ./test'
 alias ex='vim fun_tree_example.cc'
 alias rex='vim ex.cc'
 alias sourcea='source ~/.aliases'
+alias ycm='cd ~/.vim/bundle/YouCompleteMe/'
+alias vimt='vim ~/todo_offline.txt'
+
+rr() {
+    echo "Executing test" $1;
+    # /usr/bin/g++-4.8 -fdiagnostics-color -std=c++11 fun_tree_test.cc -o test -DTEST_NUM=$1
+    /usr/bin/g++-4.8 -std=c++11 fun_tree_test.cc -o test -DTEST_NUM=$1
+    ./test;
+}
+
+alias copypubkey='xsel --clipboard < id_rsa.pub'
+alias cal='gcalcli'
+alias dhcp0='sudo dhcpcd -n eth0'
+alias plan='feh ~/Desktop/plan.gif'

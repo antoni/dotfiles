@@ -1,8 +1,8 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-//static const char font[]            = "Inconsolata 14";
-static const char font[]            = "-*-terminus-medium-r-*-*-22-*-*-*-*-*-*-*";
+static const char font[]            = "Inconsolata 14";
+// static const char font[]            = "-*-terminus-medium-r-*-*-22-*-*-*-*-*-*-*";
 // static const char font[]            = "-*-terminus-medium-r-normal-*-22-*-*-*-*-*-*-*";
 // static const char font[]            ="-artwiz-snap-normal-*-*-20-*-*-*-*-*-*-*-*";
 static const char normbordercolor[] = "#073642";
@@ -27,7 +27,7 @@ static const Bool showbar           = True;     /* False means no bar */
 static const Bool topbar            = True;     /* False means bottom bar */
 
 /* tagging */
-static const char *tags[] = { "1:web", "2:term", "3:IDE", "4:REPL", "5:junk", "6:notes", "7:cfg", "8", "9" };
+static const char *tags[] = { "1:web", "2:term", "3:Haskell", "4:REPL", "5:junk", "6:notes", "7:cfg", "8", "9" };
 
 static const Rule rules[] = {
     /* class             instance     title      tags mask        isfloating   monitor */
@@ -66,7 +66,10 @@ static const char *chromecmd[] = {"google-chrome",NULL};
 static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char   *mccmd[] = { "terminator", "-l","mc","-e","mc",NULL };
 // static const char   *mccmd[] = { "terminator", "-l","mc", "--command='","mc", "'",NULL };
-static const char *termcmd[]  = { "terminator", NULL };
+// static const char *termcmd[]  = { "terminator", NULL };
+static const char *gvimcmd[]  = { "gvim", NULL };
+static const char *termcmd[]  = { "urxvt", NULL };
+static const char *terminatorcmd[]  = { "terminator", NULL };
 static const char   *vimcmd[] = { "terminator", "-e", "vv", NULL };
 
 static Key keys[] = {  
@@ -74,6 +77,8 @@ static Key keys[] = {
     { MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
     { MODKEY|ShiftMask,             XK_v, spawn,          {.v = vimcmd} },
     { MODKEY|ShiftMask,             XK_o, spawn,          {.v = mccmd} },
+    { MODKEY|ShiftMask,             XK_t, spawn,          {.v = terminatorcmd} },
+    { MODKEY|ShiftMask,             XK_v, spawn,          {.v = gvimcmd} },
     { MODKEY|ShiftMask,             XK_b, spawn,          {.v = chromecmd} },
     { MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
     { MODKEY,                       XK_b,      togglebar,      {0} },
