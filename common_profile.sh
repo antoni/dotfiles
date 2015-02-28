@@ -1,3 +1,12 @@
+# Make the colors work under Terminator
+# export TERM=xterm-256color
+
+# See: https://bugs.launchpad.net/ubuntu/+source/at-spi2-core/+bug/1193236
+export NO_AT_BRIDGE=1
+
+# Get distribution name
+OS=$(lsb_release -si)
+
 # Files with commands to be loaded by both Bash and ZSH
 wmname LG3D
 
@@ -32,10 +41,13 @@ export LD_LIBRARY_PATH=${CUDA_HOME}/lib64
 export PATH=$PATH:/home/antoni/clion/bin
 
 # Background image
-feh --bg-scale ~/Documents/wallpaper.jpg
+feh --bg-scale ~/Documents/wallpaper3.jpg
 
 # PL keyboard layout
 setxkbmap pl
 
 export EDITOR="vim"
 
+# Fix .Xresources 
+# (https://bugs.launchpad.net/ubuntu/+source/unity/+bug/1163129)
+xrdb ~/.Xresources

@@ -1,14 +1,21 @@
 #!/bin/bash
 
+SLEEP_TIME=2
+
 xmodmap .xbindkeysrc &
 dropbox start &>/dev/null &
+unclutter &
 # redshift -l 12.9667:77.5667 -t 3700:3700 &>/dev/null &
 # Lock in 10 minutes of inactivity, or whenever you place the mouse cursor
 # in the bottom right corner for 3 seconds.
 #xautolock -time 10 -locker slock -nowlocker slock -detectsleep -corners 000+ -cornerdelay 3 &
 trayer --margin 0 --edge bottom --align left --height 18 --widthtype request --width 15 --transparent true --SetDockType false --SetPartialStrut false &
 #nm-applet --sm-disable &
-
+# (sleep $SLEEP_TIME && google-chrome-stable && terminator && urxvt) &
+(sleep $SLEEP_TIME && google-chrome-stable) &
+# (conky | while read LINE; do xsetroot -name "$LINE"; done) &
+terminator &
+urxvt &
 while true; do 
     DATE=$(date +"%Y-%m-%d %H:%M")
     BAT=$(acpi -b | awk '{ print $4 }' | tr -d ',')
