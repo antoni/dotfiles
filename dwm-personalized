@@ -15,7 +15,8 @@ trayer --margin 0 --edge bottom --align left --height 18 --widthtype request --w
 (sleep $SLEEP_TIME && google-chrome-stable) &
 # (conky | while read LINE; do xsetroot -name "$LINE"; done) &
 terminator &
-urxvt &
+wicd-gtk &
+# urxvt &
 while true; do 
     DATE=$(date +"%Y-%m-%d %H:%M")
     BAT=$(acpi -b | awk '{ print $4 }' | tr -d ',')

@@ -69,6 +69,7 @@ static const char   *mccmd[] = { "terminator", "-l","mc","-e","mc",NULL };
 // static const char *termcmd[]  = { "terminator", NULL };
 static const char *gvimcmd[]  = { "gvim", NULL };
 static const char *termcmd[]  = { "urxvt", NULL };
+static const char *screenshotcmd[]  = { "gnome-screenshot","-a", NULL };
 static const char *terminatorcmd[]  = { "terminator", NULL };
 static const char   *vimcmd[] = { "terminator", "-e", "vv", NULL };
 
@@ -77,6 +78,7 @@ static Key keys[] = {
     { MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
     { MODKEY|ShiftMask,             XK_v, spawn,          {.v = vimcmd} },
     { MODKEY|ShiftMask,             XK_o, spawn,          {.v = mccmd} },
+    // { MODKEY|ShiftMask,             XK_i, spawn,          {.v = screenshotcmd} }, // TODO: FIX this
     { MODKEY|ShiftMask,             XK_t, spawn,          {.v = terminatorcmd} },
     { MODKEY|ShiftMask,             XK_v, spawn,          {.v = gvimcmd} },
     { MODKEY|ShiftMask,             XK_b, spawn,          {.v = chromecmd} },
