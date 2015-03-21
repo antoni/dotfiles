@@ -63,6 +63,14 @@ set ttyfast
 set ttymouse=xterm2
 set mouse=a
 
+" Tell vim to remember certain things when we exit
+"  '10  :  marks will be remembered for up to 10 previously edited files
+"  "100 :  will save up to 100 lines for each register
+"  :20  :  up to 20 lines of command-line history will be remembered
+"  %    :  saves and restores the buffer list
+"  n... :  where to save the viminfo files
+set viminfo='10,\"100,:20,%,n~/.viminfo
+
 " Enable filetype plugins
 filetype plugin on
 filetype indent on
@@ -164,7 +172,8 @@ command! SemicolonToNewline :%s/;/\r/g
 " TODO: Add VimLatexCompile
 " Use LaTeX rather than plain TeX.
 let g:tex_flavor = "latex"
-command! Lt :!xdg-open %:r.pdf
+" command! Lt :!latexmk -pvc -silent -pdf %; xdg-open %:r.pdf
+command! Lt :!pdflatex % && xpdf %:r.pdf <CR>
 " Toggle small/normal tabs
 " noremap <F8> :call <SID>ToggleTabs()<CR>
 " Double-click to copy word 
@@ -337,7 +346,7 @@ Bundle 'croaker/mustang-vim'
 " Bundle 'eagletmt/neco-ghc'
 " Bundle 'eagletmt/ghcmod-vim'
 " Bundle 'bitc/lushtags'
-Bundle 'raichoo/haskell-vim'
+" Bundle 'raichoo/haskell-vim'
 
 " Syntax 
 " Smalltalk
@@ -367,7 +376,7 @@ Plugin 'bling/vim-airline'
 Plugin 'fatih/vim-go'
 
 " Julia support
-Plugin 'JuliaLang/julia-vim'
+" Plugin 'JuliaLang/julia-vim'
 " Plugin 'Shougo/neocomplete.vim'
 " Plugin 'jmcantrell/vim-virtualenv'
 " Plugin 'chrisbra/csv.vim'
@@ -521,6 +530,16 @@ let no_ocaml_comments = 1
 " }}}
 "}}}
 " 7.  Autocommands {{{
+" Git commits "{{{
+" Cut commit messsages
+autocmd Filetype gitcommit setlocal spell textwidth=72
+""}}}
+" Haskell "{{{
+" au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
+" au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
+" au FileType haskell nnoremap <buffer> <silent> <F3> :HdevtoolsInfo<CR>
+" autocmd BufEnter *.hs set formatprg=pointfree
+"}}}
 " Tab by default "{{{
 au VimEnter * set tabpagemax=9999|sil tab ball|set tabpagemax&vim
 ""}}}
@@ -531,10 +550,10 @@ au BufRead ~/.remember execute "normal Go"|startinsert!
 "}}}
 if has("au")
     " Haskell"{{{
-    au BufWritePost *.hs GhcModCheckAndLintAsync
+    " au BufWritePost *.hs GhcModCheckAndLintAsync
     "}}}
     " .md files as Markdown"{{{
-    au BufRead,BufNewFile *.md set filetype=markdown
+    au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
     "}}}
     " C 
     au FileType c set makeprg=gcc\ %\ &&\ ./a.out
@@ -769,6 +788,11 @@ au BufNewFile,BufRead *.cuh set filetype=cuda
 "}}}
 " 11. Plugin-specific configuration "{{{
 " Syntastic "{{{
+map <silent> <Leader>e :Errors<CR>
+map <Leader>s :SyntasticToggleMode<CR>
+
+" To always show the errors list when editing we can set the following flag:
+let g:syntastic_auto_loc_list=1
 let g:syntastic_quiet_messages = {'level': 'warnings'}
 let g:syntastic_always_populate_loc_list = 1
 " "}}}

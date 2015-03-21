@@ -197,7 +197,7 @@ perf_commands=(top vmstat tload stress lsof tcpdump netstat htop atop iotop iost
 nmon collectl dig mpstat, pkill powertop pidstat)
 # Networking
 networking_commands=(netstat ethtool ping ifconfig arping traceroute iwconfig ifconfig tshark nethogs nmap nbtscan iptables 
-tcpdump iproute2 chargen netcat tc insmod fping nslookup host p0f mtr ipcalc sipcalc)
+tcpdump iproute2 chargen netcat tc insmod fping nslookup host p0f mtr ipcalc sipcalc iperf)
 # TODO:
 # ps -ef
 # tshark -i [interface] -V
@@ -279,6 +279,8 @@ alias gdebi='sudo gdebi'
 
 # TODO: PUT THOSE SOMEWHERE
 # alias dmesg='dmesg --ctime'
+alias idrsa='cat ~/.ssh/id_rsa.pub'
+alias iphone='~/scripts/setup_iphone.sh'
 alias pdfmerge='pdfunite'
 alias desk='cd ~/Desktop'
 alias students='ssh ar267209@students.mimuw.edu.pl'
@@ -309,7 +311,44 @@ rr() {
     ./test;
 }
 
+pat() {
+    if hash csearch 2>/dev/null; then
+        csearch -i $1
+    else
+        [ ! -z "$2" ] && search_dir="$2" || search_dir="."
+        grep -rnw $search_dir -e $1
+    fi
+}
+
 alias copypubkey='xsel --clipboard < id_rsa.pub'
 alias cal='gcalcli'
 alias dhcp0='sudo dhcpcd -n eth0'
 alias plan='feh ~/Desktop/plan.gif'
+alias top10size="find . -type f -printf '%s %p\n'| sort -nr | head -10﻿"
+
+dl_website() {
+    wget \
+        --recursive \
+        --no-clobber \
+        --page-requisites \
+        --html-extension \
+        --convert-links \
+        --restrict-file-names=windows \
+        --no-parent \
+        $1
+}
+alias bl='vim ~/backlog.md'
+alias btc-qt='./bitcoin-qt -datadir=/media/antoni/Seagate\ Backup\ Plus\ Drive/.bitcoin'
+
+# cd ../../../
+function up() {
+  i=$1 
+  while [ $i -gt 0 ] 
+  do 
+     cd .. 
+     i=$(($i - 1))
+  done 
+}
+
+# Current projects
+alias its='cd ~/workspace/itstracker/ITSTracker'
