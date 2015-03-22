@@ -1,0 +1,6 @@
+<keymap version="1" name="Default for XWin copy" parent="Default for XWin">
+  <action id="Macro.Formatted save">
+    <keyboard-shortcut first-keystroke="control S" />
+  </action>
+  <action id="SaveAll" />
+</keymap>

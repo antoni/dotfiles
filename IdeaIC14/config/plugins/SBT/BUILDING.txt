@@ -1,0 +1,7 @@
+
+You will need to tell Maven that into which directory you have 
+installed IDEA. Copy profiles.xml.TEMPLATE to profiles.xml and
+add the path to your IDEA installation.
+
+And to build the project within IDEA, you will need to add idea.jar 
+into the IDEA Plugin SDK.
