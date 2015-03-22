@@ -1,0 +1,3 @@
+<application>
+  <component name="MavenVersion" version="3.x" vmOptions="-Xmx512m" embedderJdk="#JAVA_INTERNAL" />
+</application>
