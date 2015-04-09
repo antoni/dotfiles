@@ -11,7 +11,9 @@ OS=$(lsb_release -si)
 wmname LG3D
 
 # Keyboard
-xbindkeys -f ~/.xbindkeysrc 
+if command_exists xbindkeys; then
+    xbindkeys -f ~/.xbindkeysrc 
+fi
 
 # Mouse
 # TODO (FIX): Disable touchpad click (use 'xinput list' for more info)
@@ -29,14 +31,16 @@ if [ -e WALLPAPER ]; then
 fi
 
 # PL keyboard layout
+if command_exists setxkbmap; then
 setxkbmap pl
+fi
 
 export EDITOR="vim"
 
 # Fix .Xresources 
 # (https://bugs.launchpad.net/ubuntu/+source/unity/+bug/1163129)
 if [ -e ~/.Xresources ]; then
-xrdb ~/.Xresources
+    xrdb ~/.Xresources
 fi
 
 source ~/.paths
