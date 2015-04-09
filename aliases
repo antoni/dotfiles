@@ -19,7 +19,7 @@ if [[ "$unamestr" == 'Darwin' ]]; then
 elif [[ "$unamestr" == 'Linux' ]]; then
     # platform='linux'
     # Linux specific
-    alias i='sudo apt-get install -y'
+    # alias i='sudo apt-get install -y'
     # Install through apt-get and add installed software to list of used commands
     addcmd() { sudo apt-get install -y $* && echo $* >> ~/install_apt-get.txt; }
 
@@ -190,11 +190,22 @@ vv() {
     fi
     terminator -l vim-solarized-$theme -c "vim -c 'set gb=$theme'"
 }
+# Use less +F instead of tail -f
+function tail() {
+    if [ "$1" == '-f' ]; then
+        shift
+        less +F "$@"
+     else
+         command tail "$@"
+     fi
+}
 # Display 20 most frequently used commands in Bash
 alias mostfrequent='history | cut -d " " -f 4 | tr -c "[:alnum:]" "[\n*]" | sort | uniq -c | sort -nr | head  -20'
 # 20 Command Line Tools to Monitor Linux Performance
+debug_commands=(ddd kdbg idaq cgdb)
 perf_commands=(top vmstat tload stress lsof tcpdump netstat htop atop iotop iostat iptraf iftop monitorix monit arpwatch vnstat 
-nmon collectl dig mpstat, pkill powertop pidstat)
+nmon collectl dig mpstat, pkill powertop pidstat intel_gpu_top glances)
+hex_editors=(jeex okteta hte bless wxHexEditor dhex)
 other_commands=(ruptime rwho)
 # Networking
 networking_commands=(netstat ethtool ping ifconfig arping traceroute iwconfig ifconfig tshark nethogs nmap nbtscan iptables 
@@ -280,8 +291,11 @@ alias gdebi='sudo gdebi'
 
 # TODO: PUT THOSE SOMEWHERE
 # alias dmesg='dmesg --ctime'
+alias resetsound='pulseaudio -k && sudo alsa force-reload'
+alias ns='nvidia-smi'
 alias idrsa='cat ~/.ssh/id_rsa.pub'
 alias iphone='~/scripts/setup_iphone.sh'
+alias i='iphone'
 alias pdfmerge='pdfunite'
 alias desk='cd ~/Desktop'
 alias students='ssh ar267209@students.mimuw.edu.pl'
@@ -343,13 +357,24 @@ alias btc-qt='./bitcoin-qt -datadir=/media/antoni/Seagate\ Backup\ Plus\ Drive/.
 
 # cd ../../../
 function up() {
-  i=$1 
-  while [ $i -gt 0 ] 
-  do 
-     cd .. 
-     i=$(($i - 1))
-  done 
+i=$1 
+while [ $i -gt 0 ] 
+do 
+    cd .. 
+    i=$(($i - 1))
+done 
 }
 
 # Current projects
 alias its='cd ~/workspace/itstracker/ITSTracker'
+
+# JSON pretty print
+alias jsonpp='python -m json.tool'
+
+# Git
+function gc() {
+  git commit -am "$*"
+}
+
+
+alias find='sudo find'

@@ -13,7 +13,7 @@
     <property name="project.wizard.group" value="Scala" />
     <property name="default.storage.format" value=".idea (directory based)" />
     <property name="project.wizard.template" value="Scala" />
-    <property name="file.chooser.recent.files" value="/usr/lib/jvm/java-7-openjdk-amd64" />
+    <property name="file.chooser.recent.files" value="$USER_HOME$/mimuw/io/bitstats/BitcoinTest&#10;/usr/lib/jvm/java-7-openjdk-amd64" />
     <property name="jdk.selected.JAVA_MODULE" value="1.7" />
     <property name="toolwindow.stripes.buttons.info.shown" value="true" />
     <property name="file.colors.enable.non.project" value="Yellow" />
@@ -23,7 +23,7 @@
     <property name="ProjectStructure.TopLevelElements" value="0.15" />
     <property name="LayoutCode.optimizeImports" value="false" />
     <property name="FindSplitterProportion" value="0.25" />
-    <property name="PLUGIN_FILTER" value="scala" />
+    <property name="PLUGIN_FILTER" value="vim&#10;c++&#10;adv&#10;scala" />
     <property name="java.module.default.source.root" value="src" />
     <property name="ChangesViewManager.DETAILS_SPLITTER_PROPORTION" value="0.5" />
     <property name="FileTemplates.CurrentTab" value="Templates" />
@@ -34,5 +34,6 @@
     <property name="com.intellij.openapi.roots.ui.configuration.TabbedModuleEditor.selectedEditor" value="Sources" />
     <property name="null.splitter" value="0.3" />
     <property name="KEYMAP" value="import&#10;formatt" />
+    <property name="com.intellij.openapi.editor.actions.MultiplePasteAction$1.splitter" value="0.3" />
   </component>
 </application>

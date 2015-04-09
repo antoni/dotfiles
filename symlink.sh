@@ -10,6 +10,7 @@ for file in $(ls -p -I symlink.sh | grep -v /); do
     ln -s ~/dotfiles/$file ~/.$file > /dev/null
 done
 
+# TODO: Terminator
 # TODO: Symlink .gitignore
 ln -s $DOTFILES_DIR+gitignore ~/.gitignore
 # TODO: Symlink .gitconfig
