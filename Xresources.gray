@@ -1,0 +1,38 @@
+Xcursor.theme: Neutral
+
+urxvt.font: xft:Terminus-8
+urxvt.perl-ext-common: default,tabbed
+urxvt.urgentOnBell: true
+urxvt*scrollBar: false
+urxvt*saveLines: 8192
+urxvt*urllauncher: firefox
+urxvt*termName: xterm
+
+urxvt.background: #222c2e
+urxvt.foreground: #dee2e3
+urxvt*cursorColor: #545f65
+
+# black 
+urxvt*color0:      #222c2e
+urxvt*color8:      #666666
+# red
+urxvt*color1:      #545f65
+urxvt*color9:      #dae3e8
+# green
+urxvt*color2:      #6d787c
+urxvt*color10:     #99a2a7
+# yellow
+urxvt*color3:      #dee2e3
+urxvt*color11:     #9ea8aa
+# blue
+urxvt*color4:      #9ea8aa
+urxvt*color12:     #dee2e3
+# magenta
+urxvt*color5:      #97a1a3
+urxvt*color13:     #c2c7ca
+# cyan
+urxvt*color6:      #97a1a3
+urxvt*color14:     #c2c7ca
+# white
+urxvt*color7:      #dee2e3
+urxvt*color15:     #efefef
