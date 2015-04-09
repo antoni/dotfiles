@@ -1,9 +1,10 @@
 <application>
   <component name="CommunityFileTypes" version="11">
-    <ignoreFiles list="CVS;SCCS;RCS;rcs;.DS_Store;.svn;.pyc;.pyo;*.pyc;*.pyo;.git;*.hprof;_svn;.hg;*.lib;*~;__pycache__;.bundle;*.rbc;" />
+    <ignoreFiles list="CVS;SCCS;RCS;rcs;.DS_Store;.svn;.pyc;.pyo;*.pyc;*.pyo;.git;*.hprof;_svn;.hg;*.lib;*~;__pycache__;.bundle;*.rbc;*.o;*.obj;" />
     <extensionMap>
-      <mapping ext="jspx" type="XML" />
       <mapping ext="tagx" type="XML" />
+      <mapping ext="jspx" type="XML" />
     </extensionMap>
+    <setting name="fileTypeChangedCounter" value="7" />
   </component>
 </application>

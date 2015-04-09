@@ -10,13 +10,6 @@ OS=$(lsb_release -si)
 # Files with commands to be loaded by both Bash and ZSH
 wmname LG3D
 
-# export GOROOT=$HOME/go 
-# export PATH=$PATH:$GOROOT/bin
-
-export GOROOT=/usr/lib/go
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-
 # Keyboard
 xbindkeys -f ~/.xbindkeysrc 
 
@@ -29,19 +22,11 @@ xbindkeys -f ~/.xbindkeysrc
 
 export QTDIR=$HOME/Qt/5.4/gcc_64/
 
-# CUDA
-export PATH=$PATH:/usr/local/cuda/bin
-# Android
-export PATH=$PATH:~/android-sdks/tools/:~/android-sdks/platform-tools/
-
-export CUDA_HOME=/usr/local/cuda
-export LD_LIBRARY_PATH=${CUDA_HOME}/lib64 
-
-# CLion
-export PATH=$PATH:/home/antoni/clion/bin
-
 # Background image
-feh --bg-scale ~/Documents/wallpaper3.jpg
+WALLPAPER=~/Documents/wallpaper3.jpg
+if [ -e WALLPAPER ]; then
+    feh --bg-scale WALLPAPER
+fi
 
 # PL keyboard layout
 setxkbmap pl
@@ -50,4 +35,8 @@ export EDITOR="vim"
 
 # Fix .Xresources 
 # (https://bugs.launchpad.net/ubuntu/+source/unity/+bug/1163129)
+if [ -e ~/.Xresources ]; then
 xrdb ~/.Xresources
+fi
+
+source ~/.paths

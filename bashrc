@@ -108,8 +108,6 @@ fi
 # export COMMAND_NOT_FOUND_INSTALL_PROMPT=1
 # source /etc/bash_completion.d/password-store
 
-# [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-# export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 # source ~/.aliases
 # source ~/.paths
 
@@ -127,7 +125,6 @@ stty stop undef
 # function cd { builtin cd "$@" && ls -F }
 
 source ~/.aliases
-source ~/.paths
 source ~/.common_profile.sh
 
 # Ignore case when 'ls'

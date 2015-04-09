@@ -407,6 +407,9 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 " }}}
 " 4.  UI {{{
+" GVim "{{{
+set guioptions=a
+""}}}
 " Search"{{{
 hi Search ctermfg=Yellow ctermbg=NONE cterm=bold,underline
 "}}}
@@ -493,7 +496,7 @@ hi Function guifg=red
 hi Identifier guifg=red
 ""}}}
 "}}}
-" 6.  Tags "{{{
+" 6.  Tags {{{
 " Tag dirs "{{{
 "http://stackoverflow.com/a/741486/963881
 " set tags=~/.ctags
@@ -530,6 +533,18 @@ let no_ocaml_comments = 1
 " }}}
 "}}}
 " 7.  Autocommands {{{
+" Binary files "{{{
+augroup Binary
+    au!
+    au BufReadPre *.bin,*.evm let &bin=1
+    au BufReadPost *.bin,*.evm if &bin | %!xxd
+    au BufReadPost *.bin,*.evm set ft=xxd | endif
+    au BufWritePre *.bin,*.evm if &bin | %!xxd -r
+    au BufWritePre *.bin,*.evm endif
+    au BufWritePost *.bin,*.evm if &bin | %!xxd
+    au BufWritePost *.bin,*.evm set nomod | endif
+augroup END
+""}}}
 " Git commits "{{{
 " Cut commit messsages
 autocmd Filetype gitcommit setlocal spell textwidth=72
@@ -584,15 +599,15 @@ let sh_fold_enabled=1         " sh
 let vimsyn_folding='af'       " Vim script
 let xml_syntax_folding=1      " XML
 "}}}
-" 9.  Helper functions "{{{
-" Get info for specific key mapping (show grep output in a dialog) "{{{
+" 9.  Helper functions {{{
+" Get info for specific key mapping (show grep output in a dialog) {{{
 function! MappingInfo(mapping)
     execute "silent !grep -iB 1 " . a:mapping . " ~/.vimrc > minfo.tmp && dialog --textbox minfo.tmp 22 70 && rm minfo.tmp && clear"
     redraw!
 endfunction
 command! -nargs=1 Minfo call MappingInfo(<f-args>)
 " "}}}
-" Add ranger as a file chooser in vim"{{{
+" Add ranger as a file chooser in vim {{{
 " If you add this code to the .vimrc, ranger can be started using the command
 " ":RagerChooser" or the keybinding "<leader>r".  Once you select one or more
 " files, press enter and ranger will quit again and vim will open the selected
@@ -646,8 +661,7 @@ au InsertLeave * :set relativenumber
 " Toogle line number display
 nnoremap <F10> :call NumberToggle()<cr>
 "}}}
-" Restore cursor position, window position, and last search after running a"{{{
-" command.
+" Restore cursor position, window pos., and last search after running a cmd {{{
 function! Preserve(command)
     " Save the last search.
     let search = @/
@@ -674,7 +688,7 @@ function! Preserve(command)
     call setpos('.', cursor_position)
 endfunction
 "}}}
-" Re-indent the whole buffer."{{{
+" Re-indent the whole buffer {{{
 function! Indent()
     call Preserve('normal gg=G')
 endfunction
@@ -682,7 +696,7 @@ endfunction
 " Indent on save hook
 " au BufWritePre <buffer> call Indent()
 "}}}
-"Toggles tab size between the default width and 1 character width"{{{
+" Toggles tab size between the default width and 1 character width {{{
 "b: buffer-local variables
 "&l: buffer-local options
 "see :help internal-variables
@@ -707,7 +721,7 @@ function! s:ToggleTabs  ()
     endif
 endfunction
 "}}}
-"Use TAB to complete when typing words, else inserts TABs as usual."{{{
+" Use TAB to complete when typing words, else inserts TABs as usual {{{
 "Uses dictionary and source files to find matching words to complete.
 
 "See help completion for source,
@@ -724,7 +738,7 @@ endfunction
 " endfunction
 "inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
 "}}}
-" Automatic insertion of C/C++ header gates/guards "{{{
+" Automatic insertion of C/C++ header gates/guards {{{
 " Creates guards when header file is created
 function! s:insert_gates()
     let gatename = substitute(toupper(expand("%:t")), "\\.", "_", "g")
@@ -735,7 +749,7 @@ function! s:insert_gates()
 endfunction
 au BufNewFile *.{h,hpp} call <SID>insert_gates()
 "}}}
-" Show online docummentation for word under cursor "{{{
+" Show online docummentation for word under cursor {{{
 function! OnlineDoc()
     let s:browser = "firefox"
     let s:wordUnderCursor = expand("<cword>")
@@ -756,21 +770,21 @@ map <silent> <M-d> :call OnlineDoc()<CR>
 map <leader>s :call OnlineDoc()<CR>
 map <LocalLeader>k :call OnlineDoc()<CR>
 "}}}
-" Jumping through Syntastic error list "{{{
+" Jumping through Syntastic error list {{{
 function! <SID>LocationPrevious()                       
-  try                                                   
-    lprev                                               
-  catch /^Vim\%((\a\+)\)\=:E553/                        
-    llast                                               
-  endtry                                                
+    try                                                   
+        lprev                                               
+    catch /^Vim\%((\a\+)\)\=:E553/                        
+        llast                                               
+    endtry                                                
 endfunction                                             
 
 function! <SID>LocationNext()                           
-  try                                                   
-    lnext                                               
-  catch /^Vim\%((\a\+)\)\=:E553/                        
-    lfirst                                              
-  endtry                                                
+    try                                                   
+        lnext                                               
+    catch /^Vim\%((\a\+)\)\=:E553/                        
+        lfirst                                              
+    endtry                                                
 endfunction                                             
 
 nnoremap <silent> <Plug>LocationPrevious    :<C-u>exe 'call <SID>LocationPrevious()'<CR>                                        
@@ -778,7 +792,7 @@ nnoremap <silent> <Plug>LocationNext        :<C-u>exe 'call <SID>LocationNext()'
 nmap <silent> ,,    <Plug>LocationPrevious              
 nmap <silent> ..    <Plug>LocationNext
 "}}}"}}}
-" 10. Filetypes "{{{
+" 10. Filetypes {{{
 au filetype python nnoremap <F4> :w <bar> exec '!python '.shellescape('%')<CR>
 au filetype c      nnoremap <F4> :w <bar> exec '!gcc '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
 au filetype cpp    nnoremap <F4> :w <bar> exec '!g++ '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
@@ -786,7 +800,7 @@ au filetype cpp    nnoremap <F4> :w <bar> exec '!g++ '.shellescape('%').' -o '.s
 au BufNewFile,BufRead *.cu set filetype=cuda
 au BufNewFile,BufRead *.cuh set filetype=cuda
 "}}}
-" 11. Plugin-specific configuration "{{{
+" 11. Plugin-specific configuration {{{
 " Syntastic "{{{
 map <silent> <Leader>e :Errors<CR>
 map <Leader>s :SyntasticToggleMode<CR>
@@ -839,7 +853,7 @@ imap <C-_> <Esc><Plug>NERDCommenterToggle<CR>
 au StdinReadPre * let s:std_in=1
 au VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " Key mappings
-silent! nmap <C-p> :NERDTreeToggle<CR>
+silent! nmap <C-i> :NERDTreeToggle<CR>
 silent! map <F2> :NERDTreeFind<CR>
 
 let g:NERDTreeMapActivateNode="<F2>"
@@ -864,7 +878,7 @@ let g:ctrlp_funky_syntax_highlight = 1
 " imap <C-I> <ESC>:pyf ~/.vim/clang-format.py<CR>i
 "}}}
 "}}}
-" 12. Vim/GUI Vim "{{{
+" 12. Vim/GUI Vim {{{
 if has("gui_running")
     " C-Space seems to work under gVim on both Linux and win32
     inoremap <C-Space> <C-n>
@@ -876,7 +890,7 @@ else " no gui
     endif
 endif
 "}}}
-" 13. Competitive programming "{{{
+" 13. Competitive programming {{{
 " Runs the code by taking input from the 'in' text file"{{{
 " map <F6> :w<CR>:!g++ % -g && (ulimit -c unlimited; ./a.out < in) <CR>
 ""}}}
@@ -884,7 +898,7 @@ endif
 " Plugin 'chazmcgarvey/vimcoder'
 "}}}
 "}}}
-" 14. Tagbar "{{{
+" 14. Tagbar {{{
 let g:tagbar_type_go = {
             \ 'ctagstype' : 'go',
             \ 'kinds'     : [

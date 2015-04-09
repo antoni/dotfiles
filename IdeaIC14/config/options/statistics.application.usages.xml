@@ -16,11 +16,11 @@
       <project id="BitcoinTest" values="Application" />
     </group>
     <group name="Scala">
-      <project id="SparkTest" values="Library  Akka for Scala,Scala  2.10.4" />
+      <project id="SparkTest" values="Scala  2.10.4,Library  Akka for Scala" />
     </group>
     <group name="file-type">
-      <project id="SparkTest" values="PLAIN_TEXT,UNKNOWN,Scala,XML,IDEA_MODULE" />
-      <project id="BitcoinTest" values="JAVA,HTML,XML,UNKNOWN,IDEA_MODULE" />
+      <project id="SparkTest" values="XML,UNKNOWN,IDEA_MODULE,Scala,PLAIN_TEXT" />
+      <project id="BitcoinTest" values="JAVA,XML,UNKNOWN,HTML,IDEA_MODULE" />
     </group>
     <group name="module type">
       <project id="SparkTest" values="JAVA_MODULE" />
@@ -33,8 +33,9 @@
       <entry feature="execute.Application.Run" count="56" />
       <entry feature="ide.settings.Auto_Import" count="1" />
       <entry feature="ide.settings.Keymap" count="2" />
-      <entry feature="ideaapp.started" count="8" />
-      <entry feature="scala.file.with.type.aware.annotated" count="72" />
+      <entry feature="ide.settings.Plugins" count="1" />
+      <entry feature="ideaapp.started" count="16" />
+      <entry feature="scala.file.with.type.aware.annotated" count="78" />
       <entry feature="welcome.screen.WelcomeScreen.CreateNewProject" count="1" />
     </counts>
   </component>

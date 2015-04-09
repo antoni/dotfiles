@@ -1,3 +1,29 @@
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
+export PATH=/home/antoni/torch/install/bin:$PATH  # Added automatically by torch-dist
+export LD_LIBRARY_PATH=/home/antoni/torch/install/lib:$LD_LIBRARY_PATH  # Added automatically by torch-dist
+export DYLD_LIBRARY_PATH=/home/antoni/torch/install/lib:$DYLD_LIBRARY_PATH  # Added automatically by torch-dist
 export GOPATH=$HOME/go
+export GOROOT=$HOME/Developer/gorepo/go
+# export PATH=$PATH:$GOROOT/bin
+
+# export GOROOT=/usr/lib/go
+# export GOPATH=$HOME/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
+# CUDA
+export PATH=$PATH:/usr/local/cuda/bin
+# Android
+export PATH=$PATH:~/android-sdks/tools/:~/android-sdks/platform-tools/
+
+export CUDA_HOME=/usr/local/cuda
+export LD_LIBRARY_PATH=${CUDA_HOME}/lib64 
+
+# CLion
+export PATH=$PATH:/home/antoni/clion/bin
+
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:/home/antoni/yasara
