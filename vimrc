@@ -303,7 +303,6 @@ Plugin 'majutsushi/tagbar'
 " A Git wrapper so awesome, it should be illegal
 Plugin 'tpope/vim-repeat'
 " Plugin 'tpope/vim-unimpaired' " For jumping to errors shortcuts
-" Bundle 'naseer/logcat'
 " Bundle 'tpope/vim-fugitive'
 " Plugin 'vim-scripts/gtags.vim'
 Plugin 'thinca/vim-quickrun'
@@ -321,7 +320,7 @@ Bundle 'Raimondi/delimitMate'
 Bundle 'rking/ag.vim'
 
 " C++ IDE-related
-Bundle 'vim-scripts/a.vim'
+" Bundle 'vim-scripts/a.vim'
 " Bundle 'DoxygenToolkit.vim'
 " Bundle 'godlygeek/tabular'
 " Bundle 'tpope/vim-sensible'
@@ -350,26 +349,26 @@ Bundle 'croaker/mustang-vim'
 
 " Syntax 
 " Smalltalk
-Bundle 'vim-scripts/st.vim' 
+" Bundle 'vim-scripts/st.vim' 
 " Prolog
-Bundle 'adimit/prolog.vim'  
+" Bundle 'adimit/prolog.vim'  
 
 " CPP, alternative to YCM
 " Bundle 'osyo-manga/vim-marching'
 " Bundle 'Shougo/neocomplete.vim'
 " Bundle 'Shougo/neosnippet.vim'
 
-Plugin 'google/vim-maktaba'
-Plugin 'google/vim-codefmtlib'
-Plugin 'google/vim-codefmt'
+" Plugin 'google/vim-maktaba'
+" Plugin 'google/vim-codefmtlib'
+" Plugin 'google/vim-codefmt'
 
-Bundle 'vim-scripts/gnuplot.vim'
+" Bundle 'vim-scripts/gnuplot.vim'
 " Plugin 'stefandtw/quickfix-reflector.vim'
 " TODO: 
 " https://github.com/Valloric/YouCompleteMe#nasty-bugs-happen-if-i-have-the-vim-autoclose-plugin-installed
 " Plugin 'Townk/vim-autoclose'
 " Plugin 'vim-scripts/linuxsty.vim'
-Plugin 'jpalardy/vim-slime'
+" Plugin 'jpalardy/vim-slime'
 " Bundle 'epeli/slimux'
 Plugin 'bling/vim-airline'
 " Plugin 'dgryski/vim-godef'
@@ -390,8 +389,8 @@ Plugin 'tacahiroy/ctrlp-funky'
 " Bundle 'https://bitbucket.org/ns9tks/vim-fuzzyfinder' " Bundle throws: repo not found
 
 " Latex
-Bundle 'gerw/vim-latex-suite'
-Bundle 'lervag/vim-latex'
+" Bundle 'gerw/vim-latex-suite'
+" Bundle 'lervag/vim-latex'
 " Plugin 'jamis/fuzzy_file_finder'
 " Plugin 'jamis/fuzzyfinder_textmate'
 " Snippets {{{
