@@ -376,5 +376,8 @@ function gc() {
   git commit -am "$*"
 }
 
+function command_exists () {
+    type "$1" &> /dev/null ;
+}
 
 alias find='sudo find'
