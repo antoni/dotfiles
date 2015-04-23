@@ -5,6 +5,6 @@
       <mapping ext="tagx" type="XML" />
       <mapping ext="jspx" type="XML" />
     </extensionMap>
-    <setting name="fileTypeChangedCounter" value="7" />
+    <setting name="fileTypeChangedCounter" value="14" />
   </component>
 </application>

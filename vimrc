@@ -105,6 +105,10 @@ onoremap <C-A>  <C-C>gggH<C-O>G
 snoremap <C-A>  <C-C>gggH<C-O>G
 xnoremap <C-A>  <C-C>ggVG
 
+" Ctrl-{X,C,V} under gvim
+source $VIMRUNTIME/mswin.vim
+behave mswin
+
 " Control+S saves the current file (if it's been changed).
 " noremap  <C-S>  :update<CR>
 " vnoremap <C-S>  <C-C>:update<CR>
@@ -301,12 +305,12 @@ Plugin 'majutsushi/tagbar'
 "Plugin 'Yggdroot/indentLine'
 " Plugin 'nathanaelkane/vim-indent-guides'
 " A Git wrapper so awesome, it should be illegal
-Plugin 'tpope/vim-repeat'
+" Plugin 'tpope/vim-repeat'
 " Plugin 'tpope/vim-unimpaired' " For jumping to errors shortcuts
 " Bundle 'tpope/vim-fugitive'
 " Plugin 'vim-scripts/gtags.vim'
-Plugin 'thinca/vim-quickrun'
-Plugin 'vim-scripts/netrw.vim'
+" Plugin 'thinca/vim-quickrun'
+" Plugin 'vim-scripts/netrw.vim'
 Plugin 'nelstrom/vim-markdown-folding'
 " Emacs - like kill ring
 " Bundle 'maxbrunsfeld/vim-yankstack'
@@ -380,7 +384,7 @@ Plugin 'fatih/vim-go'
 " Plugin 'jmcantrell/vim-virtualenv'
 " Plugin 'chrisbra/csv.vim'
 Plugin 'kana/vim-operator-user'     " Recommended by clang-format
-Plugin 'vim-scripts/vim-auto-save'
+" Plugin 'vim-scripts/vim-auto-save'
 Plugin 'kien/ctrlp.vim'             " For tag creation
 Plugin 'tacahiroy/ctrlp-funky'
 " Bundle 'christoomey/vim-tmux-navigator'
@@ -693,7 +697,7 @@ function! Indent()
 endfunction
 
 " Indent on save hook
-" au BufWritePre <buffer> call Indent()
+au BufWritePre <buffer> call Indent()
 "}}}
 " Toggles tab size between the default width and 1 character width {{{
 "b: buffer-local variables
@@ -808,6 +812,8 @@ map <Leader>s :SyntasticToggleMode<CR>
 let g:syntastic_auto_loc_list=1
 let g:syntastic_quiet_messages = {'level': 'warnings'}
 let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_cpp_compiler = 'clang++'
+let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 " "}}}
 " Tagbar toggle "{{{
 nmap <F7> :TagbarToggle<CR>
@@ -843,6 +849,8 @@ map <F5> :% SlimeSend<CR>
 let NERDSpaceDelims = 1
 " }}}
 " Map Ctrl+/ to toggle comments "{{{
+map <C-\> <Plug>NERDCommenterToggle<CR>
+imap <C-\> <Esc><Plug>NERDCommenterToggle<CR>
 map <C-_> <Plug>NERDCommenterToggle<CR>
 imap <C-_> <Esc><Plug>NERDCommenterToggle<CR>
 "}}}

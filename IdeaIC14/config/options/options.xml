@@ -35,5 +35,6 @@
     <property name="null.splitter" value="0.3" />
     <property name="KEYMAP" value="import&#10;formatt" />
     <property name="com.intellij.openapi.editor.actions.MultiplePasteAction$1.splitter" value="0.3" />
+    <property name="com.intellij.diagnostic.IdeErrorsDialogactiveTab" value="0" />
   </component>
 </application>
