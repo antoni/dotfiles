@@ -204,7 +204,7 @@ alias mostfrequent='history | cut -d " " -f 4 | tr -c "[:alnum:]" "[\n*]" | sort
 # 20 Command Line Tools to Monitor Linux Performance
 debug_commands=(ddd kdbg idaq cgdb)
 perf_commands=(top vmstat tload stress lsof tcpdump netstat htop atop iotop iostat iptraf iftop monitorix monit arpwatch vnstat 
-nmon collectl dig mpstat, pkill powertop pidstat intel_gpu_top glances)
+nmon collectl dig mpstat, pkill powertop pidstat intel_gpu_top glances pstree)
 hex_editors=(jeex okteta hte bless wxHexEditor dhex)
 other_commands=(ruptime rwho)
 # Networking
@@ -277,6 +277,7 @@ alias typesizes='perl -V | grep size='
 alias interrupts1='cat /proc/interrupts' # Get processor interrupts
 alias memory1='cat /proc/meminfo'
 alias disktest='sudo smartctl -a /dev/sda | less'
+alias dmesg='dmesg -T'
 alias dmesgerrors="dmesg | egrep 'error|fail|bug|rtl8|r8|wlan'"
 
 # Fix file permissions in home directory
@@ -290,7 +291,6 @@ listkernels() {
 alias gdebi='sudo gdebi'
 
 # TODO: PUT THOSE SOMEWHERE
-# alias dmesg='dmesg --ctime'
 alias resetsound='pulseaudio -k && sudo alsa force-reload'
 alias ns='nvidia-smi'
 alias idrsa='cat ~/.ssh/id_rsa.pub'
@@ -381,3 +381,5 @@ function command_exists () {
 }
 
 alias find='sudo find'
+alias svim='sudo vim'
+alias gv='gvim'

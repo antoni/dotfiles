@@ -44,3 +44,5 @@ if [ -e ~/.Xresources ]; then
 fi
 
 source ~/.paths
+# Disable touchpad while typing (reactive 1 second after typing finished) 
+syndaemon -i 1 -d 

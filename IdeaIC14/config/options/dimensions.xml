@@ -2,8 +2,8 @@
   <component name="DimensionService">
     <location key="FileChooserDialogImpl.0.0.1366.768" x="471" y="124" />
     <location key="new project wizard.0.0.1366.768" x="316" y="0" />
-    <location key="WELCOME_SCREEN.0.0.1366.768" x="682" y="230" />
-    <location key="com.intellij.ide.util.TipDialog.0.0.1366.768" x="0" y="226" />
+    <location key="WELCOME_SCREEN.0.0.1366.768" x="683" y="230" />
+    <location key="com.intellij.ide.util.TipDialog.0.0.1366.768" x="0" y="227" />
     <location key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog.0.0.1366.768" x="416" y="100" />
     <location key="#com.intellij.ide.util.MemberChooser.0.0.1366.768" x="495" y="111" />
     <location key="OptionsEditor.0.0.1366.768" x="166" y="0" />
@@ -17,11 +17,12 @@
     <location key="#Browse_JetBrains_Plugins_.0.0.1366.768" x="354" y="52" />
     <location key="#Vim_Emulation.0.0.1366.768" x="437" y="130" />
     <location key="com.intellij.openapi.editor.actions.MultiplePasteAction$1.0.0.1366.768" x="520" y="16" />
+    <location key="IdeErrosDialog.0.0.1366.768" x="288" y="220" />
     <size key="javadoc.popup.0.0.1366.768" width="602" height="420" />
-    <size key="GridCell.Tab.0.left.0.0.1366.768" width="1364" height="151" />
-    <size key="GridCell.Tab.0.center.0.0.1366.768" width="1364" height="151" />
-    <size key="GridCell.Tab.0.right.0.0.1366.768" width="1364" height="151" />
-    <size key="GridCell.Tab.0.bottom.0.0.1366.768" width="1364" height="151" />
+    <size key="GridCell.Tab.0.left.0.0.1366.768" width="1366" height="321" />
+    <size key="GridCell.Tab.0.center.0.0.1366.768" width="1366" height="321" />
+    <size key="GridCell.Tab.0.right.0.0.1366.768" width="1366" height="321" />
+    <size key="GridCell.Tab.0.bottom.0.0.1366.768" width="1366" height="321" />
     <size key="#com.intellij.ide.fileTemplates.ui.ConfigureTemplatesDialog.0.0.1366.768" width="700" height="500" />
     <size key="GridCell.Tab.0.left.0.0.0.0" width="1364" height="151" />
     <size key="GridCell.Tab.0.center.0.0.0.0" width="1364" height="151" />

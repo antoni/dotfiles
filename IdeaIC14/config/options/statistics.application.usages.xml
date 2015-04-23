@@ -16,11 +16,11 @@
       <project id="BitcoinTest" values="Application" />
     </group>
     <group name="Scala">
-      <project id="SparkTest" values="Scala  2.10.4,Library  Akka for Scala" />
+      <project id="SparkTest" values="Library  Akka for Scala,Scala  2.10.4" />
     </group>
     <group name="file-type">
-      <project id="SparkTest" values="XML,UNKNOWN,IDEA_MODULE,Scala,PLAIN_TEXT" />
-      <project id="BitcoinTest" values="JAVA,XML,UNKNOWN,HTML,IDEA_MODULE" />
+      <project id="SparkTest" values="UNKNOWN,PLAIN_TEXT,XML,IDEA_MODULE,Scala" />
+      <project id="BitcoinTest" values="IDEA_MODULE,JAVA,HTML,UNKNOWN,XML" />
     </group>
     <group name="module type">
       <project id="SparkTest" values="JAVA_MODULE" />
@@ -30,12 +30,14 @@
   <component name="UsageTrigger">
     <counts>
       <entry feature="CreateFile.CreateFileAction" count="2" />
-      <entry feature="execute.Application.Run" count="56" />
+      <entry feature="execute.Application.Run" count="72" />
       <entry feature="ide.settings.Auto_Import" count="1" />
       <entry feature="ide.settings.Keymap" count="2" />
       <entry feature="ide.settings.Plugins" count="1" />
-      <entry feature="ideaapp.started" count="16" />
-      <entry feature="scala.file.with.type.aware.annotated" count="78" />
+      <entry feature="ide.settings.Updates" count="1" />
+      <entry feature="ideaapp.started" count="23" />
+      <entry feature="scala.file.with.type.aware.annotated" count="98" />
+      <entry feature="tips.of.the.day.next" count="3" />
       <entry feature="welcome.screen.WelcomeScreen.CreateNewProject" count="1" />
     </counts>
   </component>

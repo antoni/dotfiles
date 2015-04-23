@@ -22,3 +22,8 @@ ln -s /home/antoni/dotfiles/eclipse.ini eclipse.ini
 # .ghci file
 # TODO: Symlink
 chmod g-w ~/.ghci
+
+# TODO: .gvimrc
+
+# /usr/bin symlinks
+sudo ln -s /usr/bin/google-chrome-stable /usr/bin/g
