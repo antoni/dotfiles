@@ -1,0 +1,32 @@
+# example config (see "hg help config" for more info)
+
+[ui]
+username = Antoni Rościszewski <antoni.rosciszewski@gmail.com>
+editor = gvim
+
+[extensions]
+color=
+# enable hg glog
+graphlog=
+pager=
+progress=
+rebase=
+record=
+# enable hg strip
+mq=
+
+[color]
+# vim colors (bg=dark theme)
+diff.diffline = green bold
+diff.file_a = green bold
+diff.file_b = green bold
+diff.hunk = yellow bold
+diff.deleted = red bold
+diff.inserted = cyan bold
+
+[pager]
+# less -F: quit if one screen
+# less -S: chop long lines
+# less -R: raw (keep colors)
+# less -X: no init (don't see termcap init sequences)
+pager = LESS='FSRX' less))
