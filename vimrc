@@ -697,7 +697,7 @@ function! Indent()
 endfunction
 
 " Indent on save hook
-au BufWritePre <buffer> call Indent()
+" au BufWritePre <buffer> call Indent()
 "}}}
 " Toggles tab size between the default width and 1 character width {{{
 "b: buffer-local variables
