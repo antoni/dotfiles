@@ -9,8 +9,8 @@ URxvt*scrollBar:        false
 URxvt*loginShell:       true
 Urxvt*secondaryScroll:  true    # Enable Shift-PageUp/Down in screen
 URxvt*saveLines:        5000
-URxvt*termName: rxvt
-! URxvt*termName: rxvt-unicode
+! URxvt*termName: rxvt
+URxvt*termName: rxvt-unicode
 ! URxvt*termName: xterm
 
 URxvt.perl-ext-common:  default,clipboard
