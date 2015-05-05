@@ -130,6 +130,12 @@ command Wq wq
 command W w
 command Q q
 
+" Window resize via Alt + Shift + arrows
+map <A-S-Left> <C-W>>
+map <A-S-Right> <C-W><
+map <A-S-Up> <C-W>+
+map <A-S-Down> <C-W>-
+
 " Tab switching/adding
 map <C-Right> <ESC>:tabnext<CR>
 map <C-Left> <ESC>:tabprev<CR>
@@ -344,6 +350,9 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'tpope/vim-vividchalk'
 Bundle 'croaker/mustang-vim'
 " "}}}
+" Language-specific
+" Python
+Bundle 'klen/python-mode'
 " Haskell (http://haskelllive.com/environment.html)
 " Bundle 'lukerandall/haskellmode-vim'
 " Bundle 'eagletmt/neco-ghc'
@@ -494,6 +503,10 @@ hi LineNr ctermfg=white ctermbg=none
 set fillchars="fold: "
 hi FoldColumn guibg=darkgrey guifg=white
 ""}}}
+" TODO: Error underline color "{{{
+" hi SpellBad ctermfg=234
+" hi SpellCap ctermfg=234
+" }}}
 " Function and identifiers colors"{{{
 hi Function guifg=red
 hi Identifier guifg=red
@@ -592,7 +605,7 @@ endif
 " set foldmethod=indent   " Fold based on indent
 set foldmethod=syntax     " Fold based on syntax
 set foldnestmax=3         " Deepest fold is 3 levels
-set foldlevelstart=0      " Fold everyting by default
+set foldlevelstart=2      
 let javaScript_fold=1         " JavaScript
 let perl_fold=1               " Perl
 let php_folding=1             " PHP

@@ -72,7 +72,7 @@ alias m='make'
 alias c99='gcc -std=c99'
 alias g++='g++ -g -Wall -O3'
 alias mountstudents='sshfs ar267209@students.mimuw.edu.pl: /Users/antoni/students'
-alias students='ssh students.mimuw.edu.pl -l ar267209'
+alias students='export TERM=vt100 ; ssh students.mimuw.edu.pl -l ar267209 -t tmux a'
 alias icm='ssh antoni@hpc.icm.edu.pl' 
 alias icmgw='ssh antoni@gw.icm.edu.pl' 
 #alias wget='curl -0'
@@ -192,12 +192,12 @@ vv() {
 }
 # Use less +F instead of tail -f
 function tail() {
-    if [ "$1" == '-f' ]; then
-        shift
-        less +F "$@"
-     else
-         command tail "$@"
-     fi
+if [ "$1" == '-f' ]; then
+    shift
+    less +F "$@"
+else
+    command tail "$@"
+fi
 }
 # Display 20 most frequently used commands in Bash
 alias mostfrequent='history | cut -d " " -f 4 | tr -c "[:alnum:]" "[\n*]" | sort | uniq -c | sort -nr | head  -20'
@@ -298,7 +298,6 @@ alias iphone='~/scripts/setup_iphone.sh'
 alias i='iphone'
 alias pdfmerge='pdfunite'
 alias desk='cd ~/Desktop'
-alias students='ssh ar267209@students.mimuw.edu.pl'
 alias mountstudents='sudo sshfs -o allow_other ar267209@students.mimuw.edu.pl:/home/students/bioinf/a/ar267209 ~/mount/students/'
 alias euler='cd ~/Developer/ProjectEuler/'
 alias wallpaperchange='gsettings set org.gnome.desktop.background picture-uri "file:///home/antoni/Documents/wallpaper.jpg"'
@@ -373,13 +372,21 @@ alias jsonpp='python -m json.tool'
 
 # Git
 function gc() {
-  git commit -am "$*"
+git commit -am "$*"
 }
 
 function command_exists () {
-    type "$1" &> /dev/null ;
+type "$1" &> /dev/null ;
 }
 
 alias find='sudo find'
 alias svim='sudo vim'
 alias gv='gvim'
+
+# endiannes:
+# echo -n I | od -to2 | head -n1 | cut -f2 -d" " | cut -c6 
+
+# Show errno errors
+alias showerrors="cpp -dM /usr/include/errno.h | grep 'define E' | sort -n -k 3"
+
+alias sourcetmux='tmux source-file ~/.tmux.conf'
