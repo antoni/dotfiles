@@ -4,12 +4,17 @@ m:0x2 + c:66
 
 /* Source: https://bbs.archlinux.org/viewtopic.php?pid=1042589#p1042589 */
 "/usr/bin/amixer -q sset Master 2+ && ~/notifyvolume"
-Control+Shift + Up
+Control+Shift + Right
 "/usr/bin/amixer -q sset Master 2- && ~/notifyvolume"
-Control+Shift + Down
+Control+Shift + Left
 /* Mute */
 "/usr/bin/amixer -D pulse set Master Playback Switch toggle && ~/notifyvolume"
 Control+Shift + 0
 /* Lock screen */
 "slock"
 Control+Shift+l
+
+"xdotool click 4 --repeat 2"
+Control+Shift+Up
+"xdotool click 5 --repeat 2"
+Control+Shift+Down

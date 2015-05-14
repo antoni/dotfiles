@@ -6,6 +6,7 @@
       <find>hash</find>
       <find>transa</find>
       <find>block</find>
+      <find>java_o</find>
     </findStrings>
   </component>
 </application>
