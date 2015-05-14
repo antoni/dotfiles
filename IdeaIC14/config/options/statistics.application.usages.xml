@@ -6,6 +6,7 @@
     <group name="language-level">
       <project id="SparkTest" values="JDK_1_6" />
       <project id="BitcoinTest" values="JDK_1_7" />
+      <project id="CharacterClusterer" values="JDK_1_7" />
     </group>
     <group name="run-configuration-type-temp">
       <project id="SparkTest" values="Application" />
@@ -19,26 +20,29 @@
       <project id="SparkTest" values="Library  Akka for Scala,Scala  2.10.4" />
     </group>
     <group name="file-type">
-      <project id="SparkTest" values="UNKNOWN,PLAIN_TEXT,XML,IDEA_MODULE,Scala" />
-      <project id="BitcoinTest" values="IDEA_MODULE,JAVA,HTML,UNKNOWN,XML" />
+      <project id="SparkTest" values="IDEA_MODULE,UNKNOWN,XML,PLAIN_TEXT,Scala" />
+      <project id="BitcoinTest" values="HTML,IDEA_MODULE,UNKNOWN,JAVA,XML" />
+      <project id="CharacterClusterer" values="IDEA_MODULE,UNKNOWN,PLAIN_TEXT,JAVA,XML" />
     </group>
     <group name="module type">
       <project id="SparkTest" values="JAVA_MODULE" />
       <project id="BitcoinTest" values="JAVA_MODULE" />
+      <project id="CharacterClusterer" values="JAVA_MODULE" />
     </group>
   </component>
   <component name="UsageTrigger">
     <counts>
       <entry feature="CreateFile.CreateFileAction" count="2" />
-      <entry feature="execute.Application.Run" count="72" />
+      <entry feature="execute.Application.Run" count="77" />
       <entry feature="ide.settings.Auto_Import" count="1" />
       <entry feature="ide.settings.Keymap" count="2" />
       <entry feature="ide.settings.Plugins" count="1" />
       <entry feature="ide.settings.Updates" count="1" />
-      <entry feature="ideaapp.started" count="23" />
+      <entry feature="ideaapp.started" count="26" />
       <entry feature="scala.file.with.type.aware.annotated" count="98" />
       <entry feature="tips.of.the.day.next" count="3" />
       <entry feature="welcome.screen.WelcomeScreen.CreateNewProject" count="1" />
+      <entry feature="welcome.screen.WelcomeScreen.ImportProject" count="1" />
     </counts>
   </component>
 </application>

@@ -141,8 +141,11 @@ alias dbgui='/usr/share/dbeaver/dbeaver'
 alias singlemonitor='xrandr --output LVDS1'
 alias dualmonitor='xrandr --output VGA1 --mode 1680x1050 --right-of LVDS1'
 
+# Fixing various things on Ubuntu
 alias fixaudio='pulseaudio -k' ; alias fixaudio2='pavucontrol'
 alias fixpowerctl='for i in /sys/bus/usb/devices/*/power/control; do echo on > $i; done'
+alias fixtouchpad='sudo rmmod psmouse && sudo modprobe psmouse'
+
 alias explorer='nautilus --no-desktop'
 
 # Markdown to PDF
@@ -150,6 +153,7 @@ md2pdf() {
     pandoc $1 -o $1.pdf
     open $1.pdf
 }
+
 # Launches github-flavoured Markdown file on localhost:5000
 alias md2html='grip'
 
@@ -174,12 +178,14 @@ xcat() {
         pygmentize -g $1 
     fi
 }
+
 # Google search
 s() {
     args=$@
     searchterm=${args// /%20}
     google-chrome-stable "http://www.google.com/search?q=$searchterm"
 }
+
 # Launch Vim solarized theme depending on the time of the day
 vv() {
     echo $1
@@ -390,3 +396,5 @@ alias gv='gvim'
 alias showerrors="cpp -dM /usr/include/errno.h | grep 'define E' | sort -n -k 3"
 
 alias sourcetmux='tmux source-file ~/.tmux.conf'
+alias p='python'
+
