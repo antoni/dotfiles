@@ -13,7 +13,7 @@
     <property name="project.wizard.group" value="Scala" />
     <property name="default.storage.format" value=".idea (directory based)" />
     <property name="project.wizard.template" value="Scala" />
-    <property name="file.chooser.recent.files" value="$USER_HOME$/mimuw/io/bitstats/BitcoinTest&#10;/usr/lib/jvm/java-7-openjdk-amd64" />
+    <property name="file.chooser.recent.files" value="/usr/lib/jvm/java-8-oracle&#10;/home/antoni/mimuw/sus/project2/inne/CharacterClusterer&#10;/home/antoni/mimuw/io/bitstats/BitcoinTest&#10;/usr/lib/jvm/java-7-openjdk-amd64" />
     <property name="jdk.selected.JAVA_MODULE" value="1.7" />
     <property name="toolwindow.stripes.buttons.info.shown" value="true" />
     <property name="file.colors.enable.non.project" value="Yellow" />
@@ -36,5 +36,10 @@
     <property name="KEYMAP" value="import&#10;formatt" />
     <property name="com.intellij.openapi.editor.actions.MultiplePasteAction$1.splitter" value="0.3" />
     <property name="com.intellij.diagnostic.IdeErrorsDialogactiveTab" value="0" />
+    <property name="last.imported.location" value="$USER_HOME$/mimuw/sus/project2/inne/CharacterClusterer" />
+    <property name="create.project.preferred.importer" value="Existing Sources" />
+    <property name="project.jdk.splitter" value="0.2" />
+    <property name="decompiler.legal.notice.accepted" value="true" />
+    <property name="FileStructurePopup.narrowDown" value="true" />
   </component>
 </application>
