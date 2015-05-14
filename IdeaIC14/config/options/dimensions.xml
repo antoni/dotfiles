@@ -18,15 +18,19 @@
     <location key="#Vim_Emulation.0.0.1366.768" x="437" y="130" />
     <location key="com.intellij.openapi.editor.actions.MultiplePasteAction$1.0.0.1366.768" x="520" y="16" />
     <location key="IdeErrosDialog.0.0.1366.768" x="288" y="220" />
+    <location key="NewModule_or_Project.wizard.0.0.1366.768" x="296" y="9" />
+    <location key="StructurePopup.0.0.1366.768" x="449" y="196" />
+    <location key="#Clusterer.0.0.1366.768" x="425" y="81" />
     <size key="javadoc.popup.0.0.1366.768" width="602" height="420" />
-    <size key="GridCell.Tab.0.left.0.0.1366.768" width="1366" height="321" />
-    <size key="GridCell.Tab.0.center.0.0.1366.768" width="1366" height="321" />
-    <size key="GridCell.Tab.0.right.0.0.1366.768" width="1366" height="321" />
-    <size key="GridCell.Tab.0.bottom.0.0.1366.768" width="1366" height="321" />
+    <size key="GridCell.Tab.0.left.0.0.1366.768" width="1324" height="186" />
+    <size key="GridCell.Tab.0.center.0.0.1366.768" width="1324" height="186" />
+    <size key="GridCell.Tab.0.right.0.0.1366.768" width="1324" height="186" />
+    <size key="GridCell.Tab.0.bottom.0.0.1366.768" width="1324" height="186" />
     <size key="#com.intellij.ide.fileTemplates.ui.ConfigureTemplatesDialog.0.0.1366.768" width="700" height="500" />
     <size key="GridCell.Tab.0.left.0.0.0.0" width="1364" height="151" />
     <size key="GridCell.Tab.0.center.0.0.0.0" width="1364" height="151" />
     <size key="GridCell.Tab.0.right.0.0.0.0" width="1364" height="151" />
     <size key="GridCell.Tab.0.bottom.0.0.0.0" width="1364" height="151" />
+    <size key="StructurePopup.0.0.1366.768" width="468" height="390" />
   </component>
 </application>

@@ -32,7 +32,7 @@ fi
 
 # PL keyboard layout
 if command_exists setxkbmap; then
-setxkbmap pl
+    setxkbmap pl
 fi
 
 export EDITOR="vim"
@@ -45,4 +45,7 @@ fi
 
 source ~/.paths
 # Disable touchpad while typing (reactive 1 second after typing finished) 
-syndaemon -i 1 -d 
+if command_exists xinput && ((xinput list | grep synaptics > /dev/null) || (xinput list | grep ALPS > /dev/null)); then
+    # echo "syndaemon configured"
+    syndaemon -i 1 -d 
+fi

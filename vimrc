@@ -352,7 +352,7 @@ Bundle 'croaker/mustang-vim'
 " "}}}
 " Language-specific
 " Python
-Bundle 'klen/python-mode'
+" Bundle 'klen/python-mode'
 " Haskell (http://haskelllive.com/environment.html)
 " Bundle 'lukerandall/haskellmode-vim'
 " Bundle 'eagletmt/neco-ghc'
@@ -605,7 +605,7 @@ endif
 " set foldmethod=indent   " Fold based on indent
 set foldmethod=syntax     " Fold based on syntax
 set foldnestmax=3         " Deepest fold is 3 levels
-set foldlevelstart=2      
+set foldlevelstart=5
 let javaScript_fold=1         " JavaScript
 let perl_fold=1               " Perl
 let php_folding=1             " PHP
