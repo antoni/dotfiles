@@ -11,9 +11,9 @@ OS=$(lsb_release -si)
 wmname LG3D
 
 # Keyboard
-# if command_exists xbindkeys; then
-    # xbindkeys -f ~/.xbindkeysrc 
-# fi
+if command_exists xbindkeys; then
+    xbindkeys -f ~/.xbindkeysrc 
+fi
 
 # Mouse
 # TODO (FIX): Disable touchpad click (use 'xinput list' for more info)
@@ -31,9 +31,9 @@ if [ -e WALLPAPER ]; then
 fi
 
 # PL keyboard layout
-# if command_exists setxkbmap; then
-    # setxkbmap pl
-# fi
+if command_exists setxkbmap; then
+    setxkbmap pl
+fi
 
 export EDITOR="vim"
 
@@ -49,11 +49,6 @@ if command_exists xinput && ((xinput list | grep synaptics > /dev/null) || (xinp
     # echo "syndaemon configured"
     syndaemon -i 1 -d 
 fi
-
-# Make the Windows key a useable mod key:
-# xmodmap -e "remove mod4 = F13"
-# xmodmap -e "keycode 115 = Super_L"
-# xmodmap -e "add mod4 = Super_L"
 
 # Base16 Shell
 # BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
