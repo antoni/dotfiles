@@ -3,6 +3,10 @@
 " visual shifting (does not exit Visual mode)
 vnoremap < <gv
 vnoremap > >gv 
+
+" Fix: http://stackoverflow.com/a/12487439/963881
+" argdo set eventignore-=Syntax | tabedit
+
 let mapleader=","
 set nocompatible              " be iMproved, required
 " Replace the current selection with buffer"{{{
@@ -16,7 +20,7 @@ syntax on                     " Syntax colouring
 set pastetoggle=<F12>         " pastetoggle (sane indentation on pastes)
 set ruler                     " Show ruler on the bottom
 set virtualedit=onemore
-" set textwidth=80
+set textwidth=80
 set formatoptions+=w          " gggqG - format to break after 80 characters
 set wrapmargin=2
 set autoread " Set to auto read when a file is  changed from the outside
@@ -29,7 +33,7 @@ set title
 set magic
 " Alias unnamed register to the + register, which is the X Window clipboard
 " Use +p to paste from the X clipboard (or Ctrl-r-+/* in Insert mode)
-set clipboard=unnamedplus
+set clipboard^=unnamed,unnamedplus
 " Don't redraw while executing macros (good performance config)
 set lazyredraw
 " Clear terminal before executing the command
@@ -113,9 +117,12 @@ behave mswin
 " noremap  <C-S>  :update<CR>
 " vnoremap <C-S>  <C-C>:update<CR>
 " inoremap <C-S>  <C-O>:update<CR>
-noremap  <C-S>  :w<CR>
+noremap  <C-S>  :wa<CR>
 vnoremap <C-S>  <C-C>:w<CR>
 inoremap <C-S>  <C-O>:w<CR>
+
+" Vertical split with leader-w
+nnoremap <leader>w <C-w>v<C-w>l  
 
 " Control+W closes the current file
 " noremap  <C-W>  :wq<CR>
@@ -144,7 +151,18 @@ map <C-t> <ESC>:tabnew<CR>
 " F2 inserts the date and time at the cursor.
 " inoremap <F2>   <C-R>=strftime("%c")<CR>
 " nmap     <F2>   a<F2><Esc>
-
+" Window splits (TODO: Learn) {{{
+" window
+nmap <leader>sw<left>  :topleft  vnew<CR>
+nmap <leader>sw<right> :botright vnew<CR>
+nmap <leader>sw<up>    :topleft  new<CR>
+nmap <leader>sw<down>  :botright new<CR>
+" buffer
+nmap <leader>s<left>   :leftabove  vnew<CR>
+nmap <leader>s<right>  :rightbelow vnew<CR>
+nmap <leader>s<up>     :leftabove  new<CR>
+nmap <leader>s<down>   :rightbelow new<CR>
+" }}}
 " Scroll between open windows
 map <F6> <C-W>w
 " nnoremap <tab> :wincmd w<cr>
@@ -302,7 +320,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'scrooloose/syntastic'
+" Plugin 'scrooloose/syntastic'
 Plugin 'majutsushi/tagbar'
 "}}}
 " Plugin 'Lokaltog/vim-easymotion'
@@ -317,6 +335,7 @@ Plugin 'majutsushi/tagbar'
 " Plugin 'vim-scripts/gtags.vim'
 " Plugin 'thinca/vim-quickrun'
 " Plugin 'vim-scripts/netrw.vim'
+Plugin 'oplatek/Conque-Shell'
 Plugin 'nelstrom/vim-markdown-folding'
 " Emacs - like kill ring
 " Bundle 'maxbrunsfeld/vim-yankstack'
@@ -327,10 +346,11 @@ Plugin 'nelstrom/vim-markdown-folding'
 " Bundle 'rking/ag.vim'
 Bundle 'Raimondi/delimitMate'
 " *LEARN*
+Bundle 'terryma/vim-multiple-cursors'
 Bundle 'rking/ag.vim'
 
 " C++ IDE-related
-" Bundle 'vim-scripts/a.vim'
+Bundle 'vim-scripts/a.vim'
 " Bundle 'DoxygenToolkit.vim'
 " Bundle 'godlygeek/tabular'
 " Bundle 'tpope/vim-sensible'
@@ -449,8 +469,13 @@ try
     " colorscheme mustang
     colorscheme badwolf
     " colorscheme distinguished
-    set background=dark
+    " TODO: Check those
+    " vim-scripts/summerfruit256.vim
+    " jonathanfilip/lucius
+    " vim-scripts/256-jungle
     " set background=light
+    set background=dark
+    execute "set background=" . $BACKGROUND
 catch /^Vim\%((\a\+)\)\=:E185/
     " Don't load a color scheme.
 endtry
@@ -710,7 +735,7 @@ function! Indent()
 endfunction
 
 " Indent on save hook
-" au BufWritePre <buffer> call Indent()
+au BufWritePre <buffer> call Indent()
 "}}}
 " Toggles tab size between the default width and 1 character width {{{
 "b: buffer-local variables
@@ -887,6 +912,23 @@ au BufEnter * lcd %:p:h
 
 map <leader>ff :NERDTreeFind<cr>
 "}}}
+" Man pages using ConqueTerm {{{
+let g:ConqueTerm_StartMessages = 0
+function! ConqueMan()
+    let cmd = &keywordprg . ' '
+    if cmd ==# 'man ' || cmd ==# 'man -s '
+        if v:count > 0
+            let cmd .= v:count . ' '
+        else
+            let cmd = 'man '
+        endif
+    endif
+    let cmd .= expand('<cword>')
+    execute 'ConqueTermSplit' cmd
+endfunction
+map K :<C-U>call ConqueMan()<CR>
+ounmap K
+" }}}
 " ctrlp-funky "{{{
 let g:ctrlp_funky_matchtype = 'path'
 nnoremap <C-O> :CtrlPFunky<Cr>

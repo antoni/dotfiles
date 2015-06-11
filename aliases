@@ -398,3 +398,11 @@ alias showerrors="cpp -dM /usr/include/errno.h | grep 'define E' | sort -n -k 3"
 alias sourcetmux='tmux source-file ~/.tmux.conf'
 alias p='python'
 
+alias fixandroidstudio='IBUS_ENABLE_SYNC_MODE=1 ibus-daemon -xrd'
+
+function diffcount() {
+diff -U 0 $1 $2 | grep -c ^@
+}
+
+dark()  { export BACKGROUND=dark && source ~/.common_profile.sh;  }
+light() { export BACKGROUND=light && source ~/.common_profile.sh; }
