@@ -1,16 +1,17 @@
-"sleep 0.1 && bash ~/dont_press_caps_lock.sh"
-m:0x2 + c:66
+# -*- shell-script -*-
+# Load the file by executing:
+# killall xbindkeys && xbindkeys -f ~/.xbindkeysrc
 
-
-/* Source: https://bbs.archlinux.org/viewtopic.php?pid=1042589#p1042589 */
-"/usr/bin/amixer -q sset Master 2+ && ~/notifyvolume"
+# Source: https:bbs.archlinux.orgviewtopic.php?pid=1042589#p1042589 *
+# Volume up/down
+"usrbinamixer -q sset Master 2+ && ~notifyvolume"
 Control+Shift + Right
-"/usr/bin/amixer -q sset Master 2- && ~/notifyvolume"
+"usrbinamixer -q sset Master 2- && ~notifyvolume"
 Control+Shift + Left
-/* Mute */
-"/usr/bin/amixer -D pulse set Master Playback Switch toggle && ~/notifyvolume"
+# Mute
+"usrbinamixer -D pulse set Master Playback Switch toggle && ~notifyvolume"
 Control+Shift + 0
-/* Lock screen */
+# Lock screen
 "slock"
 Control+Shift+l
 
@@ -18,3 +19,7 @@ Control+Shift+l
 Control+Shift+Up
 "xdotool click 5 --repeat 2"
 Control+Shift+Down
+
+# "x-terminal-emulator"
+"urxvt"
+Super_L
