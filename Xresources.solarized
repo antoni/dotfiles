@@ -17,6 +17,9 @@ URxvt.perl-ext-common:  default,clipboard
 URxvt.urlLauncher:      firefox
 ! URxvt.matcher.button: 1
 
+URxvt.clipboard.copycmd:  xsel --input  --clipboard
+URxvt.clipboard.pastecmd: xsel --output --clipboard
+
 ! Copy & paste using Ctrl+Shift C/V
 URxvt.iso14755:         false
 URxvt.keysym.C-C:       perl:clipboard:copy
