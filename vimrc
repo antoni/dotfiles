@@ -3,6 +3,8 @@
 " visual shifting (does not exit Visual mode)
 vnoremap < <gv
 vnoremap > >gv 
+set complete+=k
+set complete-=i
 
 " Fix: http://stackoverflow.com/a/12487439/963881
 " argdo set eventignore-=Syntax | tabedit
@@ -99,7 +101,7 @@ set mouse=a
 " }}}
 " 2.  Key mappings {{{
 " Temporary mappings "{{{
-map <F5> :wa \| !g++ -std=c++11 ex.cc -o test && ./test : <CR>
+map <F5> :wa \| !g++ -std=c++11 % -o test && ./test : <CR>
 "}}}
 " Control+A is Select All.
 noremap  <C-A>  gggH<C-O>G
@@ -108,6 +110,8 @@ cnoremap <C-A>  <C-C>gggH<C-O>G
 onoremap <C-A>  <C-C>gggH<C-O>G
 snoremap <C-A>  <C-C>gggH<C-O>G
 xnoremap <C-A>  <C-C>ggVG
+
+nnoremap <F3> :vertical wincmd f<CR>
 
 " Ctrl-{X,C,V} under gvim
 source $VIMRUNTIME/mswin.vim
@@ -874,7 +878,7 @@ let g:slime_paste_file = "$HOME/.slime_paste"
 " let g:slime_python_ipython = 1
 let g:slime_default_config = {"socket_name": "default", "target_pane": "1"}
 " Send whole buffer to Slime
-map <F5> :% SlimeSend<CR>
+" map <F5> :% SlimeSend<CR>
 " tmux target pane
 ":" means current window, current pane (a reasonable default)
 "":i" means the ith window, current pane
