@@ -1,5 +1,6 @@
+# -*- shell-script -*-
 # vim:set ft=sh:
-# TODO FIX FOLDING: fdm=marker fmr=#,\n\n:
+
 # Aliases and custom functions
 platform='unknown'
 unamestr=`uname`
@@ -46,7 +47,6 @@ alias cx='chmod +x'
 alias m='man' ; alias mn='man'
 alias mm='man !!:0' # TODO: man last command
 alias l='ls'
-alias r='rm'
 alias v='vim'
 alias grep='grep -i'
 alias sudolastcmd='!!' # remember
@@ -143,6 +143,7 @@ alias dualmonitor='xrandr --output VGA1 --mode 1680x1050 --right-of LVDS1'
 
 # Fixing various things on Ubuntu
 alias fixaudio='pulseaudio -k' ; alias fixaudio2='pavucontrol'
+alias fixaudio3='rm -r ~/.config/pulse; pulseaudio -k'
 alias fixpowerctl='for i in /sys/bus/usb/devices/*/power/control; do echo on > $i; done'
 alias fixtouchpad='sudo rmmod psmouse && sudo modprobe psmouse'
 
@@ -210,7 +211,8 @@ alias mostfrequent='history | cut -d " " -f 4 | tr -c "[:alnum:]" "[\n*]" | sort
 # 20 Command Line Tools to Monitor Linux Performance
 debug_commands=(ddd kdbg idaq cgdb)
 perf_commands=(top vmstat tload stress lsof tcpdump netstat htop atop iotop iostat iptraf iftop monitorix monit arpwatch vnstat 
-nmon collectl dig mpstat, pkill powertop pidstat intel_gpu_top glances pstree)
+nmon collectl dig mpstat, pkill powertop pidstat intel_gpu_top glances pstree 
+sysdig)
 hex_editors=(jeex okteta hte bless wxHexEditor dhex)
 other_commands=(ruptime rwho)
 # Networking
