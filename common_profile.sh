@@ -39,10 +39,10 @@ fi
 
 source ~/.paths
 # Disable touchpad while typing (reactive 1 second after typing finished) 
-if command_exists xinput && ((xinput list | grep synaptics > /dev/null) || (xinput list | grep ALPS > /dev/null)); then
-    # echo "syndaemon configured"
-    syndaemon -i 1 -d 
-fi
+# if command_exists xinput && ((xinput list | grep synaptics > /dev/null) || (xinput list | grep ALPS > /dev/null)); then
+# echo "syndaemon configured"
+# syndaemon -i 1 -d 
+# fi
 
 # Base16 Shell
 # BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
