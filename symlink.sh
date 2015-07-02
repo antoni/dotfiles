@@ -28,3 +28,9 @@ chmod g-w ~/.ghci
 
 # /usr/bin symlinks
 sudo ln -s /usr/bin/google-chrome-stable /usr/bin/g
+
+
+# CUDA snippets for Vim
+wget 
+https://gist.githubusercontent.com/antoni/d8ac9973b2f28765b329/raw/811fa82e6ff738e06c11453bfa93d846d76d2386/cuda.snippets 
+&& mv cuda.snippets ~/.vim/bundle/vim-snippets/snippets/
