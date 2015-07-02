@@ -1,5 +1,5 @@
 # Make the colors work under Terminator
-# export TERM=xterm-256color
+export TERM=xterm-256color
 
 # See: https://bugs.launchpad.net/ubuntu/+source/at-spi2-core/+bug/1193236
 export NO_AT_BRIDGE=1
@@ -15,13 +15,7 @@ if command_exists xbindkeys; then
     xbindkeys -f ~/.xbindkeysrc 
 fi
 
-# Mouse
-# TODO (FIX): Disable touchpad click (use 'xinput list' for more info)
-# touchpad=$(xinput list | grep TouchPad | sed 's/.*id=\([0-9]*\).*/\1/') 
-# echo $touchpad
-# xinput set-prop $touchpad 279 0, 0, 0, 0, 0, 0, 0
-# xinput set-prop 11 279 2, 3, 0, 0, 1, 3, 2
-
+# Qt
 export QTDIR=$HOME/Qt/5.4/gcc_64/
 
 # Background image
