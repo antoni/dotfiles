@@ -4,6 +4,9 @@
 vnoremap < <gv
 vnoremap > >gv 
 
+" Allow opening C++'s includes using 'gf'
+set path+=/usr/include/c++/*
+
 " Fix: http://stackoverflow.com/a/12487439/963881
 " argdo set eventignore-=Syntax | tabedit
 
@@ -36,6 +39,9 @@ set magic
 set clipboard^=unnamed,unnamedplus
 " Don't redraw while executing macros (good performance config)
 set lazyredraw
+
+set complete+=k
+set complete-=i
 " Clear terminal before executing the command
 " Adding -i significantly slows down Vim's startup 
 " (it's needed to run aliases though)
@@ -99,7 +105,10 @@ set mouse=a
 " }}}
 " 2.  Key mappings {{{
 " Temporary mappings "{{{
-map <F5> :wa \| !g++ -std=c++11 ex.cc -o test && ./test : <CR>
+" C++ quick compilation
+map <F5> :wa \| !clang++ -g -std=c++11 % -o test && ./test : <CR>
+" Open file under cursor in vertical window
+nnoremap <F3> :vertical wincmd f<CR>
 "}}}
 " Control+A is Select All.
 noremap  <C-A>  gggH<C-O>G
@@ -412,6 +421,7 @@ Plugin 'fatih/vim-go'
 " Plugin 'Shougo/neocomplete.vim'
 " Plugin 'jmcantrell/vim-virtualenv'
 " Plugin 'chrisbra/csv.vim'
+Plugin 'rhysd/vim-clang-format'
 Plugin 'kana/vim-operator-user'     " Recommended by clang-format
 " Plugin 'vim-scripts/vim-auto-save'
 Plugin 'kien/ctrlp.vim'             " For tag creation
@@ -735,7 +745,7 @@ function! Indent()
 endfunction
 
 " Indent on save hook
-au BufWritePre <buffer> call Indent()
+" au BufWritePre <buffer> call Indent()
 "}}}
 " Toggles tab size between the default width and 1 character width {{{
 "b: buffer-local variables
@@ -874,7 +884,7 @@ let g:slime_paste_file = "$HOME/.slime_paste"
 " let g:slime_python_ipython = 1
 let g:slime_default_config = {"socket_name": "default", "target_pane": "1"}
 " Send whole buffer to Slime
-map <F5> :% SlimeSend<CR>
+" map <F5> :% SlimeSend<CR>
 " tmux target pane
 ":" means current window, current pane (a reasonable default)
 "":i" means the ith window, current pane
@@ -928,6 +938,14 @@ function! ConqueMan()
 endfunction
 map K :<C-U>call ConqueMan()<CR>
 ounmap K
+" }}}
+" Clang-format {{{
+let g:clang_format#command='/usr/bin/clang-format'
+" }}}
+" CtrlP {{{
+map <leader>gh :CtrlP ~<CR>
+map <leader>gv :CtrlPMRU<CR>
+map <leader>gb :CtrlPBuffer<CR>
 " }}}
 " ctrlp-funky "{{{
 let g:ctrlp_funky_matchtype = 'path'
