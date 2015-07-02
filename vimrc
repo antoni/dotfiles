@@ -3,6 +3,8 @@
 " visual shifting (does not exit Visual mode)
 vnoremap < <gv
 vnoremap > >gv 
+set complete+=k
+set complete-=i
 
 " Allow opening C++'s includes using 'gf'
 set path+=/usr/include/c++/*
@@ -117,6 +119,8 @@ cnoremap <C-A>  <C-C>gggH<C-O>G
 onoremap <C-A>  <C-C>gggH<C-O>G
 snoremap <C-A>  <C-C>gggH<C-O>G
 xnoremap <C-A>  <C-C>ggVG
+
+nnoremap <F3> :vertical wincmd f<CR>
 
 " Ctrl-{X,C,V} under gvim
 source $VIMRUNTIME/mswin.vim
