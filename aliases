@@ -299,6 +299,7 @@ listkernels() {
 alias gdebi='sudo gdebi'
 
 # TODO: PUT THOSE SOMEWHERE
+alias showdirsizes='du -Pshx * 2>/dev/null'
 alias resetsound='pulseaudio -k && sudo alsa force-reload'
 alias ns='nvidia-smi'
 alias idrsa='cat ~/.ssh/id_rsa.pub'
