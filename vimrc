@@ -130,7 +130,8 @@ behave mswin
 " noremap  <C-S>  :update<CR>
 " vnoremap <C-S>  <C-C>:update<CR>
 " inoremap <C-S>  <C-O>:update<CR>
-noremap  <C-S>  :wa<CR>
+" Make BufWritePre autocommands work for all buffers (:wa wouldn't)
+noremap  <C-S>  :bufdo w<CR> 
 vnoremap <C-S>  <C-C>:w<CR>
 inoremap <C-S>  <C-O>:w<CR>
 
@@ -331,7 +332,6 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Valloric/YouCompleteMe'
-" Plugin 'scrooloose/syntastic'
 Plugin 'majutsushi/tagbar'
 "}}}
 " Plugin 'Lokaltog/vim-easymotion'
@@ -826,7 +826,7 @@ map <silent> <M-d> :call OnlineDoc()<CR>
 map <leader>s :call OnlineDoc()<CR>
 map <LocalLeader>k :call OnlineDoc()<CR>
 "}}}
-" Jumping through Syntastic error list {{{
+" Jumping through error list {{{
 function! <SID>LocationPrevious()                       
     try                                                   
         lprev                                               
@@ -857,31 +857,12 @@ au BufNewFile,BufRead *.cu set filetype=cuda
 au BufNewFile,BufRead *.cuh set filetype=cuda
 "}}}
 " 11. Plugin-specific configuration {{{
-" Syntastic "{{{
-map <silent> <Leader>e :Errors<CR>
-map <Leader>s :SyntasticToggleMode<CR>
-
-" To always show the errors list when editing we can set the following flag:
-let g:syntastic_auto_loc_list=1
-let g:syntastic_quiet_messages = {'level': 'warnings'}
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_cpp_compiler = 'clang++'
-let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
-" "}}}
 " Tagbar toggle "{{{
 nmap <F7> :TagbarToggle<CR>
 "}}}
 " Autosave plugin"{{{
 let g:auto_save = 1         " enable AutoSave on Vim startup
 let g:auto_save_silent = 1  " do not display the auto-save notification
-"}}}
-" Syntastic"{{{
-" let g:syntastic_ocaml_use_ocamlc = 1
-let g:syntastic_cpp_compiler = 'clang++'
-let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
-
-let g:syntastic_ocaml_use_ocamlbuild = 1
-let g:syntastic_ocaml_checkers = ['merlin']
 "}}}
 " Vim slime {{{
 let g:slime_target = "tmux"
