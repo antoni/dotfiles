@@ -287,9 +287,7 @@ let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
-" let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf3.py"
-let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
-" let g:ycm_server_keep_logfiles = 1
+let g:ycm_global_ycm_extra_conf = "~/dotfiles/ycm_extra_conf.py" 
 
 " let g:ycm_server_use_vim_stdout = 1
 " let g:ycm_server_log_level = 'debug'
@@ -489,7 +487,7 @@ try
     " vim-scripts/256-jungle
     " set background=light
     set background=dark
-    execute "set background=" . $BACKGROUND
+    " execute "set background=" . $BACKGROUND
 catch /^Vim\%((\a\+)\)\=:E185/
     " Don't load a color scheme.
 endtry
@@ -750,6 +748,9 @@ endfunction
 
 " Indent on save hook
 " au BufWritePre <buffer> call Indent()
+" ClangFormat on save hook
+autocmd BufWritePre *.h  :ClangFormat
+autocmd BufWritePre *.c* :ClangFormat
 "}}}
 " Toggles tab size between the default width and 1 character width {{{
 "b: buffer-local variables
