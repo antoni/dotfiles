@@ -126,12 +126,9 @@ nnoremap <F3> :vertical wincmd f<CR>
 source $VIMRUNTIME/mswin.vim
 behave mswin
 
-" Control+S saves the current file (if it's been changed).
-" noremap  <C-S>  :update<CR>
-" vnoremap <C-S>  <C-C>:update<CR>
-" inoremap <C-S>  <C-O>:update<CR>
-" Make BufWritePre autocommands work for all buffers (:wa wouldn't)
-noremap  <C-S>  :bufdo w<CR> 
+" Reformat current file (:w) & save all (:wa; can't reformat all because of
+" the way BufWritePre works
+noremap  <C-S>  :w<CR> :wa<CR> 
 vnoremap <C-S>  <C-C>:w<CR>
 inoremap <C-S>  <C-O>:w<CR>
 
