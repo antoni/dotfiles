@@ -1,16 +1,17 @@
 #!/bin/bash
 
 DOTFILES_DIR='~/dotfiles/'
+CLANG_FORMAT_VERSION=3.5
+DOTFILES=(vimrc tmux.conf gitconfig gitignore)
 
-# Symlinks all the files in the current directory with corresponding dotfiles in
+# Symlink the files in the current directory with corresponding dotfiles in
 # the home directory
+for f in "${DOTFILES[@]}"
+do
+    rm -f ~/.$f
+    ln -s ~/dotfiles/$f ~/.$f > /dev/null
+done;
 
-for file in $(ls -p -I symlink.sh | grep -v /); do 
-    rm ~/.$file
-    ln -s ~/dotfiles/$file ~/.$file > /dev/null
-done
-
-# TODO: Tmux
 # TODO: Terminator
 # TODO: Symlink .gitignore
 ln -s $DOTFILES_DIR+gitignore ~/.gitignore
@@ -29,6 +30,8 @@ chmod g-w ~/.ghci
 # /usr/bin symlinks
 sudo ln -s /usr/bin/google-chrome-stable /usr/bin/g
 
+# clang-format
+sudo ln -r -s /usr/bin/clang-format-$CLANG_FORMAT_VERSION /usr/bin/clang-format
 
 # CUDA snippets for Vim
 wget 
