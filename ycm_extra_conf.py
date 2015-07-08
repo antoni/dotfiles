@@ -42,8 +42,10 @@ flags = [
 '-Wno-long-long',
 '-Wno-unused-parameter',
 '-Wno-variadic-macros',
+'-fsanitize=address',
 '-fexceptions',
-'-DNDEBUG',
+'-g',
+# '-DNDEBUG',
 # You 100% do NOT need -DUSE_CLANG_COMPLETER in your flags; only the YCM
 # source code needs it.
 '-DUSE_CLANG_COMPLETER',
