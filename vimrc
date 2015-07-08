@@ -108,7 +108,8 @@ set mouse=a
 " 2.  Key mappings {{{
 " Temporary mappings "{{{
 " C++ quick compilation
-map <F5> :wa \| !clang++ -g -std=c++11 % -o test && ./test : <CR>
+noremap <F5> :wa \| !clang++ -g -std=c++11 % -o test && ./test : <CR>
+imap <F5> <C-o><F5>
 " Open file under cursor in vertical window
 nnoremap <F3> :vertical wincmd f<CR>
 "}}}
@@ -924,6 +925,7 @@ ounmap K
 " }}}
 " Clang-format {{{
 let g:clang_format#command='/usr/bin/clang-format'
+let g:clang_format#code_style='google'
 " }}}
 " CtrlP {{{
 map <leader>gh :CtrlP ~<CR>
