@@ -1,14 +1,17 @@
 #!/bin/bash
 
 DOTFILES_DIR=~/dotfiles
-# DOTFILES_DIR='/home/antoni/dotfiles'
 
-# Version of clang-format, should be taken from /usr/bin/clang-format-X.Y
+# Version of clang-format, should be taken from /usr/bin/clang-format-X.Y,
+# same for clang-modernize
+CLANG_VERSION=3.5
 CLANG_FORMAT_VERSION=3.5
+CLANG_MODERNIZE_VERSION=3.5
+
 DOTFILES=(vimrc tmux.conf gitconfig gitignore ghci gvimrc hgrc)
 
 # Xrdb merge
-xrdb $DOTFILES_DIR/Xresources.solarized
+xrdb ${DOTFILES_DIR}/Xresources.solarized
 
 # Symlink the files in the current directory with corresponding dotfiles in
 # the home directory
@@ -19,13 +22,13 @@ do
 done;
 
 # Terminator
-ln -fs $DOTFILES_DIR/terminator/config ~/.config/terminator/config
+ln -fs ${DOTFILES_DIR}/terminator/config ~/.config/terminator/config
 
 # SSH config
-ln -fs $DOTFILES_DIR/sshconfig ~/.ssh/config
+ln -fs ${DOTFILES_DIR}/sshconfig ~/.ssh/config
 
 # ~/scripts directory
-ln -fs $DOTFILES_DIR/scripts ~/scripts
+ln -fs ${DOTFILES_DIR}/scripts ~/scripts
 
 # .ghci access
 chmod g-w ~/.ghci
@@ -33,8 +36,18 @@ chmod g-w ~/.ghci
 # /usr/bin symlinks
 # Chrome
 sudo ln -fs /usr/bin/google-chrome-stable /usr/bin/g
+# clang
+sudo ln -fs /usr/bin/clang++-$CLANG_VERSION /usr/bin/clang++
 # clang-format
 sudo ln -fs /usr/bin/clang-format-$CLANG_FORMAT_VERSION /usr/bin/clang-format
+# clang-modernize
+sudo ln -fs /usr/bin/clang-modernize-$CLANG_MODERNIZE_VERSION /usr/bin/clang-modernize
+
+# Clone Vundle reposiroty (Vim)
+VUNDLEDIR=~/.vim/bundle/Vundle.vim
+if [ ! "$(ls -A ${VUNDLEDIR})" ]; then
+    git clone https://github.com/gmarik/Vundle.vim.git ${VUNDLEDIR}
+fi
 
 # CUDA snippets for Vim
 # wget 
