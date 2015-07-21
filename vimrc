@@ -1,5 +1,7 @@
 " vim:set foldmethod=marker foldlevel=0 cursorcolumn cursorline:
 " 1.  General settings {{{
+let os = substitute(system('uname'), "\n", "", "")
+
 " visual shifting (does not exit Visual mode)
 vnoremap < <gv
 vnoremap > >gv 
@@ -279,6 +281,7 @@ vnoremap K K<CR>
 " let g:ycm_key_list_select_completion = ['<C-n>', '<Down>', '<C-Space>']
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:ycm_min_num_of_chars_for_completion = 1
 let g:SuperTabDefaultCompletionType = '<C-n>'
 
 " better key bindings for UltiSnipsExpandTrigger
@@ -313,7 +316,7 @@ map <Leader>f mzgg=G`z<CR>
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 "Astyle (http://astyle.sourceforge.net/) config {{{
 " Format C code (Linux Kernel style)
-map <leader>fl :! astyle --style=linux %<CR>
+map <leader>fl :! astyle --style=linux %<CR> :redraw!<CR>
 " Format C++ code (Google style)
 map <leader>fg :! astyle --style=google %<CR>
 " }}}
@@ -450,6 +453,9 @@ filetype plugin indent on    " required
 " }}}
 " 4.  UI {{{
 " GVim "{{{
+if os == "Darwin"
+set guifont=Monaco:h18
+endif
 set guioptions=a
 ""}}}
 " Search"{{{
@@ -747,9 +753,15 @@ endfunction
 " Indent on save hook
 " au BufWritePre <buffer> call Indent()
 " ClangFormat on save hook
-autocmd BufWritePre *.h  :ClangFormat
-autocmd BufWritePre *.c* :ClangFormat
+" autocmd BufWritePre *.h  :ClangFormat
+" autocmd BufWritePre *.c* :ClangFormat
 "}}}
+" Modernize C++ code {{{
+function! ClangModernize()
+    :!clang-modernize -style=Google -format -loop-convert -pass-by-value -replace-auto_ptr -use-nullptr -use-auto -add-override -override-macros %
+endfunction
+command ClangModernize :call ClangModernize()
+" }}}
 " Toggles tab size between the default width and 1 character width {{{
 "b: buffer-local variables
 "&l: buffer-local options
@@ -924,7 +936,7 @@ map K :<C-U>call ConqueMan()<CR>
 ounmap K
 " }}}
 " Clang-format {{{
-let g:clang_format#command='/usr/bin/clang-format'
+let g:clang_format#command= os == "Darwin" ? '/usr/local/bin/clang-format' : '/usr/bin/clang-format'
 let g:clang_format#code_style='google'
 " }}}
 " CtrlP {{{
