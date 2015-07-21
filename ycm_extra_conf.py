@@ -40,6 +40,7 @@ flags = [
 '-Werror',
 # '-Wc++98-compat',
 '-Wno-long-long',
+'-Wno-unused',
 '-Wno-unused-parameter',
 '-Wno-variadic-macros',
 '-fsanitize=address',
