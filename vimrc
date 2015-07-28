@@ -16,6 +16,9 @@ set path+=/usr/include/c++/*
 
 let mapleader=","
 set nocompatible              " be iMproved, required
+set noesckeys
+set timeoutlen=1000 ttimeoutlen=0
+
 " Replace the current selection with buffer"{{{
 "}}}
 " Turn off vim recording for good
@@ -111,6 +114,8 @@ set mouse=a
 " Temporary mappings "{{{
 " C++ quick compilation
 noremap <F5> :wa \| !clang++ -g -std=c++11 % -o test && ./test : <CR>
+" different F5 keymap for CUDA development
+au BufEnter,BufNew *.cu noremap <F5> :wa \| !nvcc -std=c++11 -g % -o test && ./test : <CR>
 imap <F5> <C-o><F5>
 " Open file under cursor in vertical window
 nnoremap <F3> :vertical wincmd f<CR>
@@ -439,6 +444,8 @@ Plugin 'tacahiroy/ctrlp-funky'
 " Bundle 'lervag/vim-latex'
 " Plugin 'jamis/fuzzy_file_finder'
 " Plugin 'jamis/fuzzyfinder_textmate'
+" TODO: Make it work
+Bundle 'wesQ3/vim-windowswap'
 " Snippets {{{
 Bundle 'ervandew/supertab'
 Plugin 'SirVer/ultisnips'
@@ -555,27 +562,17 @@ hi Identifier guifg=red
 "}}}
 " 6.  Tags {{{
 " Tag dirs "{{{
-"http://stackoverflow.com/a/741486/963881
-" set tags=~/.ctags
+" This will look in the current directory for "tags", and work up the tree towards 
+" root until one is found. IOW, you can be anywhere in your source tree instead of 
+" just the root of it.
 set tags=./tags;/
-set tags+=~/.vim/tags/cpp
+
+" Going up to root is excessive. I suggest only going up to home instead:
+" tags+=tags;$HOME 
 "}}}
 " build tags of your own project with Ctrl-F12"{{{
-map <C-F12> :!ctags -R --sort=yes --c++-kinds=+pl --fields=+iaS --extra=+q .<CR>
+map <C-F12> :!ctags -R --sort=yes --langmap=C++:+.cu --c++-kinds=+pl --fields=+iaS --extra=+q .<CR>
 "}}}
-" OmniCppComplete configuration{{{
-" let OmniCpp_NamespaceSearch = 1
-" let OmniCpp_GlobalScopeSearch = 1
-" let OmniCpp_ShowAccess = 1
-" let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
-" let OmniCpp_MayCompleteDot = 1 " autocomplete after .
-" let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
-" let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
-" let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
-" automatically open and close the popup menu / preview window
-" au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-set completeopt=menuone,menu,longest,preview
-" }}}
 " OCaml support {{{
 " au BufRead,BufNewFile *.ml,*.mli compiler ocaml
 set sb
@@ -867,14 +864,15 @@ au BufNewFile,BufRead *.cu set filetype=cuda
 au BufNewFile,BufRead *.cuh set filetype=cuda
 "}}}
 " 11. Plugin-specific configuration {{{
-" Tagbar toggle "{{{
-nmap <F7> :TagbarToggle<CR>
-"}}}
 " Autosave plugin"{{{
 let g:auto_save = 1         " enable AutoSave on Vim startup
 let g:auto_save_silent = 1  " do not display the auto-save notification
-"}}}
-" Vim slime {{{
+"}}}" WindowSwap {{{
+let g:windowswap_map_keys = 0 "prevent default bindings
+nnoremap <silent> <leader>yw :call WindowSwap#MarkWindowSwap()<CR>
+nnoremap <silent> <leader>pw :call WindowSwap#DoWindowSwap()<CR>
+nnoremap <silent> <leader>ww :call WindowSwap#EasyWindowSwap()<CR>
+" }}}" Vim slime {{{
 let g:slime_target = "tmux"
 let g:slime_paste_file = "$HOME/.slime_paste"
 " let g:slime_python_ipython = 1
@@ -888,35 +886,19 @@ let g:slime_default_config = {"socket_name": "default", "target_pane": "1"}
 ""h:i.j" means the tmux session where h is the session identifier (either 
 " session name or number), the ith window and the jth pane
 " }}}
-" NERDCommenter {{{
-" Pad comment delimeters with spaces {{{
-let NERDSpaceDelims = 1
+" Clang-format {{{
+let g:clang_format#command= os == "Darwin" ? '/usr/local/bin/clang-format' : '/usr/bin/clang-format'
+let g:clang_format#code_style='google'
 " }}}
-" Map Ctrl+/ to toggle comments "{{{
-map <C-\> <Plug>NERDCommenterToggle<CR>
-imap <C-\> <Esc><Plug>NERDCommenterToggle<CR>
-map <C-_> <Plug>NERDCommenterToggle<CR>
-imap <C-_> <Esc><Plug>NERDCommenterToggle<CR>
-"}}}
+" CtrlP {{{
+map <leader>gh :CtrlP ~<CR>
+map <leader>gv :CtrlPMRU<CR>
+map <leader>gb :CtrlPBuffer<CR>
 " }}}
-" NERDTree "{{{
-" Open a NERDTree automatically when vim starts up if no files were specified
-au StdinReadPre * let s:std_in=1
-au VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-" Key mappings
-silent! nmap <C-i> :NERDTreeToggle<CR>
-silent! map <F2> :NERDTreeFind<CR>
-
-let g:NERDTreeMapActivateNode="<F2>"
-let g:NERDTreeMapPreview="<F3>"
-
-au FileType nerdtree nmap <buffer> <left> u
-au FileType nerdtree nmap <buffer> <right> u
-
-" Set the working directory to the current file's directory
-au BufEnter * lcd %:p:h
-
-map <leader>ff :NERDTreeFind<cr>
+" ctrlp-funky "{{{
+let g:ctrlp_funky_matchtype = 'path'
+nnoremap <C-O> :CtrlPFunky<Cr>
+let g:ctrlp_funky_syntax_highlight = 1
 "}}}
 " Man pages using ConqueTerm {{{
 let g:ConqueTerm_StartMessages = 0
@@ -935,24 +917,38 @@ endfunction
 map K :<C-U>call ConqueMan()<CR>
 ounmap K
 " }}}
-" Clang-format {{{
-let g:clang_format#command= os == "Darwin" ? '/usr/local/bin/clang-format' : '/usr/bin/clang-format'
-let g:clang_format#code_style='google'
+" NERDCommenter {{{
+" Pad comment delimeters with spaces {{{
+let NERDSpaceDelims = 1
 " }}}
-" CtrlP {{{
-map <leader>gh :CtrlP ~<CR>
-map <leader>gv :CtrlPMRU<CR>
-map <leader>gb :CtrlPBuffer<CR>
-" }}}
-" ctrlp-funky "{{{
-let g:ctrlp_funky_matchtype = 'path'
-nnoremap <C-O> :CtrlPFunky<Cr>
-let g:ctrlp_funky_syntax_highlight = 1
+" Map Ctrl+/ to toggle comments "{{{
+map <C-\> <Plug>NERDCommenterToggle<CR>
+imap <C-\> <Esc><Plug>NERDCommenterToggle<CR>
+map <C-_> <Plug>NERDCommenterToggle<CR>
+imap <C-_> <Esc><Plug>NERDCommenterToggle<CR>
 "}}}
-" clang-format to format C++ according to Google Styleguide "{{{ 
-" need to have .clang-format file in ~ directory
-" map <C-I> :pyf ~/.vim/clang-format.py<CR>
-" imap <C-I> <ESC>:pyf ~/.vim/clang-format.py<CR>i
+" }}}
+" NERDTree "{{{
+" Open a NERDTree automatically when vim starts up if no files were specified
+" au StdinReadPre * let s:std_in=1
+" au VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" Key mappings
+silent! nmap <C-i> :NERDTreeToggle<CR>
+silent! map <F2> :NERDTreeFind<CR>
+
+let g:NERDTreeMapActivateNode="<F2>"
+let g:NERDTreeMapPreview="<F3>"
+
+au FileType nerdtree nmap <buffer> <left> u
+au FileType nerdtree nmap <buffer> <right> u
+
+" Set the working directory to the current file's directory
+au BufEnter * lcd %:p:h
+
+map <leader>ff :NERDTreeFind<cr>
+"}}}
+" Tagbar toggle "{{{
+nmap <F7> :TagbarToggle<CR>
 "}}}
 "}}}
 " 12. Vim/GUI Vim {{{
@@ -1003,4 +999,4 @@ let g:tagbar_type_go = {
             \ 'ctagsbin'  : 'gotags',
             \ 'ctagsargs' : '-sort -silent'
             \ }
-"}}}
+ "}}}
