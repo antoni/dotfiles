@@ -23,6 +23,9 @@ done;
 
 # Terminator
 ln -fs ${DOTFILES_DIR}/terminator/config ~/.config/terminator/config
+# i3-wm
+ln -fs ${DOTFILES_DIR}/i3.config ~/.config/i3/config
+
 
 # SSH config
 ln -fs ${DOTFILES_DIR}/sshconfig ~/.ssh/config
