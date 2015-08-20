@@ -2,6 +2,10 @@
 " 1.  General settings {{{
 let os = substitute(system('uname'), "\n", "", "")
 
+" Suppress 'No write since lasst change'
+set hidden
+set confirm
+
 " visual shifting (does not exit Visual mode)
 vnoremap < <gv
 vnoremap > >gv 
@@ -16,7 +20,7 @@ set path+=/usr/include/c++/*
 
 let mapleader=","
 set nocompatible              " be iMproved, required
-set noesckeys
+" set noesckeys
 set timeoutlen=1000 ttimeoutlen=0
 
 " Replace the current selection with buffer"{{{
@@ -113,7 +117,7 @@ set mouse=a
 " 2.  Key mappings {{{
 " Temporary mappings "{{{
 " C++ quick compilation
-noremap <F5> :wa \| !clang++ -g -std=c++11 % -o test && ./test : <CR>
+noremap <F5> :wa \| !clang++ -g -pthread -std=c++11 % -o test && ./test : <CR>
 " different F5 keymap for CUDA development
 au BufEnter,BufNew *.cu noremap <F5> :wa \| !nvcc -std=c++11 -g % -o test && ./test : <CR>
 imap <F5> <C-o><F5>
@@ -366,6 +370,11 @@ Bundle 'Raimondi/delimitMate'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'rking/ag.vim'
 
+" JavaScript (temporary - for Node.js)
+Bundle 'lukaszb/vim-web-indent'
+Bundle 'digitaltoad/vim-jade'
+Bundle 'Chiel92/vim-autoformat'
+
 " C++ IDE-related
 Bundle 'vim-scripts/a.vim'
 " Bundle 'DoxygenToolkit.vim'
@@ -374,6 +383,7 @@ Bundle 'vim-scripts/a.vim'
 " Bundle 'tpope/vim-unimpaired'
 " Bundle 'tpope/vim-endwise'
 " Bundle 'tpope/vim-fugitive'
+Bundle 'airblade/vim-gitgutter'
 " Bundle 'Lokaltog/vim-easymotion'
 " Bundle 'rstacruz/sparkup'
 " Bundle 'Mizuchi/STL-Syntax'
@@ -1000,3 +1010,6 @@ let g:tagbar_type_go = {
             \ 'ctagsargs' : '-sort -silent'
             \ }
  "}}}
+" 15. Temporary {{{
+autocmd FileType javascript setlocal equalprg=js-beautify\ --stdin
+" }}}
