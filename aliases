@@ -1,5 +1,5 @@
 # -*- shell-script -*-
-# vim:set ft=sh:
+# vim:set ft=sh textwidth=0 wrapmargin=0:
 
 # Aliases and custom functions
 platform='unknown'
@@ -48,7 +48,7 @@ alias m='man' ; alias mn='man'
 alias mm='man !!:0' # TODO: man last command
 alias l='ls'
 alias v='vim'
-alias grep='grep -i'
+alias grep='grep -ni'
 alias sudolastcmd='!!' # remember
 alias ls='ls --color -lFG'
 alias rmf='rm -rf'
@@ -140,6 +140,7 @@ alias dbgui='/usr/share/dbeaver/dbeaver'
 
 alias singlemonitor='xrandr --output LVDS1'
 alias dualmonitor='xrandr --output VGA1 --mode 1680x1050 --right-of LVDS1'
+alias dualmonitor_left='xrandr --output VGA1 --mode 1920x1200 --left-of LVDS1'
 
 # Fixing various things on Ubuntu
 alias fixaudio='pulseaudio -k' ; alias fixaudio2='pavucontrol'
@@ -318,6 +319,8 @@ alias y='yaourt'
 alias rsync='rsync --progress'
 alias wificonn='sudo wifi-menu wlp2s0'
 alias inettest='ping google.com -c 4'
+alias instsall_ycm='~/.vim/bundle/YouCompleteMe/install.sh --clang-completer'
+
 h() {                                                                                                                                              
     head -n $@
 }
@@ -404,7 +407,7 @@ alias p='python'
 alias fixandroidstudio='IBUS_ENABLE_SYNC_MODE=1 ibus-daemon -xrd'
 
 diffcount() {
-diff -U 0 $1 $2 | grep -c ^@
+    diff -U 0 $1 $2 | grep -c ^@
 }
 
 dark()  { export BACKGROUND=dark && source ~/.common_profile.sh;  }
