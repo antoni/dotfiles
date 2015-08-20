@@ -6,12 +6,11 @@ fi
 export PATH=/home/antoni/torch/install/bin:$PATH  # Added automatically by torch-dist
 export LD_LIBRARY_PATH=/home/antoni/torch/install/lib:$LD_LIBRARY_PATH  # Added automatically by torch-dist
 export DYLD_LIBRARY_PATH=/home/antoni/torch/install/lib:$DYLD_LIBRARY_PATH  # Added automatically by torch-dist
-export GOPATH=$HOME/go
-export GOROOT=$HOME/Developer/gorepo/go
-# export PATH=$PATH:$GOROOT/bin
 
-# export GOROOT=/usr/lib/go
-# export GOPATH=$HOME/go
+# GOPATH environment variable is used to specify directories outside of $GOROOT 
+# that contain the source for Go projects and their binaries.
+export GOPATH=$HOME/go
+
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 # CUDA
