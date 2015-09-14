@@ -108,3 +108,4 @@ export DYLD_LIBRARY_PATH=/home/antoni/torch/install/lib:$DYLD_LIBRARY_PATH  # Ad
 # See: http://www.johnhawthorn.com/2012/09/vi-escape-delays/
 KEYTIMEOUT=1
 
+cd ~/Downloads > /dev/null
