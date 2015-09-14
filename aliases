@@ -48,7 +48,7 @@ alias m='man' ; alias mn='man'
 alias mm='man !!:0' # TODO: man last command
 alias l='ls'
 alias v='vim'
-alias grep='grep -ni'
+alias grep='grep --color -ni'
 alias sudolastcmd='!!' # remember
 alias ls='ls --color -lFG'
 alias rmf='rm -rf'
@@ -412,3 +412,10 @@ diffcount() {
 
 dark()  { export BACKGROUND=dark && source ~/.common_profile.sh;  }
 light() { export BACKGROUND=light && source ~/.common_profile.sh; }
+
+# alias gsa="gnome-screenshot -a"
+alias rmcmd='sudo apt-get remove'
+
+alias mergepdf='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=merged.pdf ' # here go the PDF to be merged
+
+alias autoremove='sudo apt-get autoremove'
