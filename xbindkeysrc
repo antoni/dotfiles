@@ -23,3 +23,12 @@ Control+Shift+Down
 # "x-terminal-emulator"
 # "urxvt"
 # Super_L
+
+# Screenshots
+# TODO: FIXME
+# "gnome-screenshot -a"
+# Control+Shift+D
+
+"gnome-screenshot"
+Control+Shift+S
+

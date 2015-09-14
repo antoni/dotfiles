@@ -2,7 +2,7 @@
 " 1.  General settings {{{
 let os = substitute(system('uname'), "\n", "", "")
 
-" Suppress 'No write since lasst change'
+" Suppress 'No write since last change'
 set hidden
 set confirm
 
@@ -116,10 +116,16 @@ set mouse=a
 " }}}
 " 2.  Key mappings {{{
 " Temporary mappings "{{{
+au BufEnter,BufNew *.java noremap <F5> :wa \| !javac % && java %:r : <CR>
 " C++ quick compilation
 noremap <F5> :wa \| !clang++ -g -pthread -std=c++11 % -o test && ./test : <CR>
+noremap <F6> :wa \| !clang++ -g -include /usr/include/x86_64-linux-gnu/c++/4.8/bits/stdc++.h -pthread -std=c++11 % -o test && ./test : <CR>
+" au BufEnter,BufNew *.c noremap <F5> :wa \| !clang -std=c99 -g % -o test && ./test : <CR>
+au BufEnter,BufNew *.c noremap <F5> :wa \| !gcc -std=c99 -lcmocka -g % -o test && ./test : <CR>
 " different F5 keymap for CUDA development
 au BufEnter,BufNew *.cu noremap <F5> :wa \| !nvcc -std=c++11 -g % -o test && ./test : <CR>
+" Python
+au BufEnter,BufNew *.py noremap <F5> :wa \| !python % : <CR>
 imap <F5> <C-o><F5>
 " Open file under cursor in vertical window
 nnoremap <F3> :vertical wincmd f<CR>
@@ -192,11 +198,6 @@ map <F6> <C-W>w
 " inoremap <tab> <c-o>:wincmd w<cr>
 " Execute current line in bash 
 nmap <F9> :exec '!'.getline('.')<CR>
-" Delete currently opened file"{{{
-" TODO
-command! DD :!rm % <CR> 
-" | q!
-"}}}
 " Refactoring variable names "{{{
 " Source: http://stackoverflow.com/a/597932/963881
 function! Refactor()
@@ -220,7 +221,6 @@ command! ColonToNewline :%s/:/\r/g
 command! SemicolonToNewline :%s/;/\r/g
 ""}}}
 " Compile LaTeX and open corresponding LaTeX
-" TODO: Add VimLatexCompile
 " Use LaTeX rather than plain TeX.
 let g:tex_flavor = "latex"
 " command! Lt :!latexmk -pvc -silent -pdf %; xdg-open %:r.pdf
@@ -229,7 +229,7 @@ command! Lt :!pdflatex % && xpdf %:r.pdf <CR>
 " noremap <F8> :call <SID>ToggleTabs()<CR>
 " Double-click to copy word 
 nnoremap <silent> <2-LeftMouse> byw
-" Go related mappings and commands "{{{
+" Go-related "{{{
 au FileType go nmap <Leader>i <Plug>(go-info)
 au FileType go nmap <Leader>gd <Plug>(go-doc)
 au FileType go nmap <Leader>r <Plug>(go-run)
@@ -238,9 +238,6 @@ au FileType go nmap <Leader>t <Plug>(go-test)
 au FileType go nmap gd <Plug>(go-def-tab)
 
 au Filetype go set makeprg=go\ build\ ./...
-
-" TODO: Configure ctags for Go
-" au BufWritePost *.go silent! !ctags -R &
 
 function! s:GoVet()
     cexpr system("go vet " . shellescape(expand('%')))
@@ -370,23 +367,11 @@ Bundle 'Raimondi/delimitMate'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'rking/ag.vim'
 
-" JavaScript (temporary - for Node.js)
+" JavaScript (temporary - for Node.js) {{{
 Bundle 'lukaszb/vim-web-indent'
 Bundle 'digitaltoad/vim-jade'
 Bundle 'Chiel92/vim-autoformat'
-
-" C++ IDE-related
-Bundle 'vim-scripts/a.vim'
-" Bundle 'DoxygenToolkit.vim'
-" Bundle 'godlygeek/tabular'
-" Bundle 'tpope/vim-sensible'
-" Bundle 'tpope/vim-unimpaired'
-" Bundle 'tpope/vim-endwise'
-" Bundle 'tpope/vim-fugitive'
-Bundle 'airblade/vim-gitgutter'
-" Bundle 'Lokaltog/vim-easymotion'
-" Bundle 'rstacruz/sparkup'
-" Bundle 'Mizuchi/STL-Syntax'
+" }}}
 
 " Color themes "{{{
 Bundle 'sjl/badwolf'
@@ -398,48 +383,48 @@ Bundle 'tpope/vim-vividchalk'
 Bundle 'croaker/mustang-vim'
 " "}}}
 " Language-specific
-" Python
+" C++ {{{
+Plugin 'rhysd/vim-clang-format'
+Bundle 'Mizuchi/STL-Syntax'
+" C++ IDE-related {{{
+Bundle 'vim-scripts/a.vim'
+" Bundle 'DoxygenToolkit.vim'
+" Bundle 'godlygeek/tabular'
+" Bundle 'tpope/vim-sensible'
+" Bundle 'tpope/vim-unimpaired'
+" Bundle 'tpope/vim-endwise'
+" Bundle 'tpope/vim-fugitive'
+Bundle 'airblade/vim-gitgutter'
+" Bundle 'Lokaltog/vim-easymotion'
+" Bundle 'rstacruz/sparkup'
+" }}}
+" }}}
+" Python {{{
 " Bundle 'klen/python-mode'
-" Haskell (http://haskelllive.com/environment.html)
+" }}}
+" Haskell (http://haskelllive.com/environment.html) {{{
 " Bundle 'lukerandall/haskellmode-vim'
-" Bundle 'eagletmt/neco-ghc'
 " Bundle 'eagletmt/ghcmod-vim'
 " Bundle 'bitc/lushtags'
 " Bundle 'raichoo/haskell-vim'
-
-" Syntax 
-" Smalltalk
+Bundle 'eagletmt/neco-ghc'
+" }}}
+" Smalltalk {{{
 " Bundle 'vim-scripts/st.vim' 
-" Prolog
+" }}}
+" Prolog {{{
 " Bundle 'adimit/prolog.vim'  
-
-" CPP, alternative to YCM
-" Bundle 'osyo-manga/vim-marching'
-" Bundle 'Shougo/neocomplete.vim'
-" Bundle 'Shougo/neosnippet.vim'
-
+" }}}
+" Go {{{
+Plugin 'fatih/vim-go'
+" }}}
 " Plugin 'google/vim-maktaba'
 " Plugin 'google/vim-codefmtlib'
 " Plugin 'google/vim-codefmt'
 
-" Bundle 'vim-scripts/gnuplot.vim'
 " Plugin 'stefandtw/quickfix-reflector.vim'
-" TODO: 
-" https://github.com/Valloric/YouCompleteMe#nasty-bugs-happen-if-i-have-the-vim-autoclose-plugin-installed
-" Plugin 'Townk/vim-autoclose'
 " Plugin 'vim-scripts/linuxsty.vim'
-" Plugin 'jpalardy/vim-slime'
-" Bundle 'epeli/slimux'
 Plugin 'bling/vim-airline'
-" Plugin 'dgryski/vim-godef'
-Plugin 'fatih/vim-go'
-
-" Julia support
-" Plugin 'JuliaLang/julia-vim'
-" Plugin 'Shougo/neocomplete.vim'
-" Plugin 'jmcantrell/vim-virtualenv'
-" Plugin 'chrisbra/csv.vim'
-Plugin 'rhysd/vim-clang-format'
 Plugin 'kana/vim-operator-user'     " Recommended by clang-format
 " Plugin 'vim-scripts/vim-auto-save'
 Plugin 'kien/ctrlp.vim'             " For tag creation
@@ -454,8 +439,6 @@ Plugin 'tacahiroy/ctrlp-funky'
 " Bundle 'lervag/vim-latex'
 " Plugin 'jamis/fuzzy_file_finder'
 " Plugin 'jamis/fuzzyfinder_textmate'
-" TODO: Make it work
-Bundle 'wesQ3/vim-windowswap'
 " Snippets {{{
 Bundle 'ervandew/supertab'
 Plugin 'SirVer/ultisnips'
@@ -494,20 +477,28 @@ if has('statusline')
 endif
 " }}}
 " Solarized theme configuration {{{
-" set t_Co=256
-" let g:solarized_termcolors=256
+set t_Co=256
+let g:solarized_termcolors=256
+" let    g:solarized_termtrans =   1
+let  g:solarized_degrade   =   1
+" let    g:solarized_bold      =   1
+" let g:solarized_underline =   1       |   0
+" let g:solarized_italic    =   1       |   0
+let    g:solarized_contrast  =   "high"
+let  g:solarized_visibility=     "high"
+
 try
-    " colorscheme solarized
+    colorscheme solarized
     " colorscheme vividchalk
     " colorscheme mustang
-    colorscheme badwolf
+    " colorscheme badwolf
     " colorscheme distinguished
     " TODO: Check those
     " vim-scripts/summerfruit256.vim
     " jonathanfilip/lucius
     " vim-scripts/256-jungle
-    " set background=light
-    set background=dark
+    set background=light
+    " set background=dark
     " execute "set background=" . $BACKGROUND
 catch /^Vim\%((\a\+)\)\=:E185/
     " Don't load a color scheme.
@@ -515,8 +506,8 @@ endtry
 " g:solarized_termcolors=16
 "}}}
 " Cursorline {{{
-set cursorline
-hi CursorLine ctermbg=236
+" set cursorline
+" hi CursorLine ctermbg=236
 " hi CursorLine term=bold cterm=bold ctermbg=LightCyan guibg=LightCyan
 "}}}
 " Vim indent guides setup to work with solarized theme"{{{
@@ -553,18 +544,12 @@ highlight PmenuSel ctermfg=black ctermbg=gray
 " hi Folded term=standout ctermfg=White ctermbg=233 guifg=241 guibg=233
 " hi Folded term=NONE cterm=NONE gui=NONE ctermbg=None 
 hi Folded term=NONE cterm=bold gui=NONE ctermbg=NONE ctermfg=red
-hi LineNr ctermfg=white ctermbg=none
-" TODO: Not working on solarized-light
-" hi Folded term=standout ctermfg=White cterm=None
+" hi LineNr ctermfg=white ctermbg=none
 " set foldtext=""
 " Get rid of the dashes
 set fillchars="fold: "
 hi FoldColumn guibg=darkgrey guifg=white
 ""}}}
-" TODO: Error underline color "{{{
-" hi SpellBad ctermfg=234
-" hi SpellCap ctermfg=234
-" }}}
 " Function and identifiers colors"{{{
 hi Function guifg=red
 hi Identifier guifg=red
@@ -591,10 +576,6 @@ set sb
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute "set rtp+=" . g:opamshare . "/merlin/vim"
 let no_ocaml_comments = 1
-" TODO: Add autcmd for OCaml files
-" set makeprg=ocamlbuild\ ${BUILDFLAGS}\ -use-ocamlfind\ all.otarget
-" set makeprg=omake\ -j\ 8
-" }}}
 "}}}
 " 7.  Autocommands {{{
 " Binary files "{{{
@@ -642,10 +623,6 @@ if has("au")
     " Open all files in tabs after entering Vim (though power users prefer buffers)"{{{
     au VimEnter * tab all
     "}}}
-    " TODO Compiler settings for C/C++ files {{{
-    " au BufEnter *.cc compiler g++
-    " au BufEnter *.cpp compiler g++
-    " au BufEnter *.c compiler gcc
     " }}}
 endif
 " }}}
@@ -957,6 +934,13 @@ au BufEnter * lcd %:p:h
 
 map <leader>ff :NERDTreeFind<cr>
 "}}}
+" neco-ghc {{{
+" Disable haskell-vim omnifunc
+let g:haskellmode_completion_ghc = 0
+autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+let g:necoghc_enable_detailed_browse = 1
+let g:ycm_semantic_triggers = {'haskell' : ['.']}
+" }}}
 " Tagbar toggle "{{{
 nmap <F7> :TagbarToggle<CR>
 "}}}
@@ -977,9 +961,6 @@ endif
 " Runs the code by taking input from the 'in' text file"{{{
 " map <F6> :w<CR>:!g++ % -g && (ulimit -c unlimited; ./a.out < in) <CR>
 ""}}}
-" TODO: Configure "{{{
-" Plugin 'chazmcgarvey/vimcoder'
-"}}}
 "}}}
 " 14. Tagbar {{{
 let g:tagbar_type_go = {
