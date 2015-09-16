@@ -8,7 +8,9 @@ export NO_AT_BRIDGE=1
 OS=$(lsb_release -si)
 
 # Files with commands to be loaded by both Bash and ZSH
-wmname LG3D
+if command_exists wmname; then
+    wmname LG3D
+fi
 
 # Keyboard
 if command_exists xbindkeys; then
@@ -37,7 +39,6 @@ if [ -e ~/.Xresources ]; then
     xrdb ~/.Xresources
 fi
 
-source ~/.paths
 # Disable touchpad while typing (reactive 1 second after typing finished) 
 # if command_exists xinput && ((xinput list | grep synaptics > /dev/null) || (xinput list | grep ALPS > /dev/null)); then
 # echo "syndaemon configured"

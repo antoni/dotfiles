@@ -10,7 +10,7 @@ echo "Clang version symlinked:" $CLANG_VERSION
 CLANG_FORMAT_VERSION=$CLANG_VERSION
 CLANG_MODERNIZE_VERSION=$CLANG_VERSION
 
-DOTFILES=(vimrc tmux.conf gitconfig gitignore ghci gvimrc hgrc)
+DOTFILES=(bashrc zshrc vimrc paths aliases common_profile.sh tmux.conf gitconfig gitignore ghci gvimrc hgrc)
 
 # Xrdb merge
 xrdb ${DOTFILES_DIR}/Xresources.solarized
