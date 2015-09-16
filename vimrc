@@ -126,6 +126,8 @@ au BufEnter,BufNew *.c noremap <F5> :wa \| !gcc -std=c99 -lcmocka -g % -o test &
 au BufEnter,BufNew *.cu noremap <F5> :wa \| !nvcc -std=c++11 -g % -o test && ./test : <CR>
 " Python
 au BufEnter,BufNew *.py noremap <F5> :wa \| !python % : <CR>
+" Go
+au BufEnter,BufNew *.go noremap <F5> :wa \| :GoRun <CR>
 imap <F5> <C-o><F5>
 " Open file under cursor in vertical window
 nnoremap <F3> :vertical wincmd f<CR>
