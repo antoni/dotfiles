@@ -108,9 +108,6 @@ fi
 # export COMMAND_NOT_FOUND_INSTALL_PROMPT=1
 # source /etc/bash_completion.d/password-store
 
-# source ~/.aliases
-# source ~/.paths
-
 # Disable Ctrl+S in a terminal (to use it inside Vim)
 # http://askubuntu.com/a/359338/342465
 stty stop undef
@@ -119,14 +116,15 @@ stty stop undef
 # Ctrl+T - swap letters
 # Ctrl+XE - edit long commands
 
-# xmodmap .speedswapper   
-
 # ls after cd
 # function cd { builtin cd "$@" && ls -F }
 
 source ~/.aliases
 source ~/.common_profile.sh
+source ~/.paths
+if [ -f ~/.optional.sh ]; then
+    source ~/.optional.sh
+fi
 
 # Ignore case when 'ls'
 shopt -s nocaseglob
-
