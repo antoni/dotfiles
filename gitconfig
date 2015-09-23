@@ -25,6 +25,10 @@
     ct = commit
     br = branch
     co = checkout
+    rb = rebase
+    br = branch
+    pl = pull
+    pu = push
     di = diff
     cp = cherry-pick
     lo = log -p --pretty=oneline
