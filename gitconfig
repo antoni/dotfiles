@@ -22,12 +22,11 @@
 	excludesfile = ~/.gitignore
 [alias]
     st = status
-    ci = commit
+    co = commit
     br = branch
     co = checkout
-    df = diff
-    c-p = cherry-pick
-    lg = log -p
-    log1 = log --pretty=oneline
+    di = diff
+    cp = cherry-pick
+    lo = log -p --pretty=oneline
 [push]
 	default = matching
