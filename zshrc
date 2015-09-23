@@ -72,18 +72,6 @@ source $ZSH/oh-my-zsh.sh
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-#
-source ~/.aliases
-source ~/.paths
-
 # Disable Ctrl+S in a terminal (to use it inside Vim)
 # http://askubuntu.com/a/359338/342465
 stty stop undef
@@ -95,11 +83,13 @@ unsetopt nomatch
 
 # Execute ls after cd
 chpwd() ls
+
+source ~/.aliases
+source ~/.paths
 source ~/.common_profile.sh
 
 # Ignore case when 'ls'
 unsetopt CASE_GLOB
-
 
 export PATH=/home/antoni/torch/install/bin:$PATH  # Added automatically by torch-dist
 export LD_LIBRARY_PATH=/home/antoni/torch/install/lib:$LD_LIBRARY_PATH  # Added automatically by torch-dist
