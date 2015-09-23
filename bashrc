@@ -120,11 +120,8 @@ stty stop undef
 # function cd { builtin cd "$@" && ls -F }
 
 source ~/.aliases
-source ~/.common_profile.sh
 source ~/.paths
-if [ -f ~/.optional.sh ]; then
-    source ~/.optional.sh
-fi
+source ~/.common_profile.sh
 
 # Ignore case when 'ls'
 shopt -s nocaseglob

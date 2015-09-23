@@ -490,17 +490,17 @@ let    g:solarized_contrast  =   "high"
 let  g:solarized_visibility=     "high"
 
 try
-    colorscheme solarized
+    " colorscheme solarized
     " colorscheme vividchalk
     " colorscheme mustang
-    " colorscheme badwolf
+    colorscheme badwolf
     " colorscheme distinguished
     " TODO: Check those
     " vim-scripts/summerfruit256.vim
     " jonathanfilip/lucius
     " vim-scripts/256-jungle
-    set background=light
-    " set background=dark
+    " set background=light
+    set background=dark
     " execute "set background=" . $BACKGROUND
 catch /^Vim\%((\a\+)\)\=:E185/
     " Don't load a color scheme.
