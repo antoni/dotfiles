@@ -22,7 +22,7 @@
 	excludesfile = ~/.gitignore
 [alias]
     st = status
-    co = commit
+    ct = commit
     br = branch
     co = checkout
     di = diff
