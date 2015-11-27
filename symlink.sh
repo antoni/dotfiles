@@ -6,11 +6,14 @@ DOTFILES_DIR=~/dotfiles
 # same for clang-modernize
 # CLANG_VERSION=`\ls /usr/bin/clang-?.? -1 | cut -d'-' -f2 | sort -gr | head -1`
 CLANG_VERSION=3.5
-echo "Clang version symlinked:" $CLANG_VERSION
+echo "Clang version symlinked: " $CLANG_VERSION
 CLANG_FORMAT_VERSION=$CLANG_VERSION
 CLANG_MODERNIZE_VERSION=$CLANG_VERSION
+LLDB_VERSION=3.6
+echo "LLDB version symlinked:  " $LLDB_VERSION
 
-DOTFILES=(bashrc zshrc vimrc paths aliases common_profile.sh tmux.conf gitconfig gitignore ghci gvimrc hgrc)
+DOTFILES=(bashrc zshrc vimrc paths aliases common_profile.sh tmux.conf gitconfig 
+gitignore ghci gvimrc hgrc lldbinit)
 
 # Xrdb merge
 xrdb ${DOTFILES_DIR}/Xresources.solarized
@@ -49,6 +52,8 @@ sudo ln -fs /usr/bin/clang++-$CLANG_VERSION /usr/bin/clang++
 sudo ln -fs /usr/bin/clang-format-$CLANG_FORMAT_VERSION /usr/bin/clang-format
 # clang-modernize
 sudo ln -fs /usr/bin/clang-modernize-$CLANG_MODERNIZE_VERSION /usr/bin/clang-modernize
+# lldb
+sudo ln -fs /usr/bin/lldb-$LLDB_VERSION /usr/bin/lldb
 
 # Clone Vundle reposiroty (Vim)
 VUNDLEDIR=~/.vim/bundle/Vundle.vim
