@@ -118,14 +118,16 @@ set mouse=a
 " Temporary mappings "{{{
 au BufEnter,BufNew *.java noremap <F5> :wa \| !javac % && java %:r : <CR>
 " C++ quick compilation
-noremap <F5> :wa \| !clang++ -g -pthread -std=c++11 % -o test && ./test : <CR>
-noremap <F6> :wa \| !clang++ -g -include /usr/include/x86_64-linux-gnu/c++/4.8/bits/stdc++.h -pthread -std=c++11 % -o test && ./test : <CR>
+noremap <F5> :wa \| !clang++ -g -Wall -pthread -lboost_regex -std=c++11 % -o test && ./test : <CR>
+noremap <F6> :wa \| !clang++ -g -Wall -include /usr/include/x86_64-linux-gnu/c++/4.8/bits/stdc++.h -pthread -std=c++11 % -o test && ./test : <CR>
 " au BufEnter,BufNew *.c noremap <F5> :wa \| !clang -std=c99 -g % -o test && ./test : <CR>
-au BufEnter,BufNew *.c noremap <F5> :wa \| !gcc -std=c99 -lcmocka -g % -o test && ./test : <CR>
+au BufEnter,BufNew *.c noremap <F5> :wa \| !clang -Wall -std=c99 -lcmocka -g % -o test && ./test : <CR>
 " different F5 keymap for CUDA development
 au BufEnter,BufNew *.cu noremap <F5> :wa \| !nvcc -std=c++11 -g % -o test && ./test : <CR>
 " Python
 au BufEnter,BufNew *.py noremap <F5> :wa \| !python % : <CR>
+" LaTeX
+au BufEnter,BufNew *.tex noremap <F5> :wa \| Lt <CR>
 " Go
 au BufEnter,BufNew *.go noremap <F5> :wa \| :GoRun <CR>
 imap <F5> <C-o><F5>
@@ -597,6 +599,7 @@ augroup END
 autocmd Filetype gitcommit setlocal spell textwidth=72
 ""}}}
 " Haskell "{{{
+autocmd BufEnter *.hs set formatprg=pointfree
 " au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
 " au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
 " au FileType haskell nnoremap <buffer> <silent> <F3> :HdevtoolsInfo<CR>
@@ -877,7 +880,14 @@ let g:slime_default_config = {"socket_name": "default", "target_pane": "1"}
 " }}}
 " Clang-format {{{
 let g:clang_format#command= os == "Darwin" ? '/usr/local/bin/clang-format' : '/usr/bin/clang-format'
-let g:clang_format#code_style='google'
+" let g:clang_format#code_style='google'
+let g:clang_format#style_options = {
+            \ "BasedOnStyle": "LLVM",
+            \"IndentWidth": 8,
+            \"UseTab": "Always",
+            \"BreakBeforeBraces": "Linux",
+            \"AllowShortIfStatementsOnASingleLine": "false",
+            \"IndentCaseLabels": "false"}
 " }}}
 " CtrlP {{{
 map <leader>gh :CtrlP ~<CR>
