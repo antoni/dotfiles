@@ -45,8 +45,8 @@ alias vimdwmconfig='vim ~/dwm/config.h'
 
 # Vim with particular file
 alias cx='chmod +x'
-alias m='man' ; alias mn='man'
-alias mm='man !!:0' # TODO: man last command
+alias m='man' ; 
+alias mm='man $(fc -ln -1 | cut -d" " -f 1)'
 alias l='ls'
 alias v='vim'
 alias grep='grep --color -ni'
@@ -418,3 +418,35 @@ alias rmcmd='sudo apt-get remove'
 alias mergepdf='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=merged.pdf ' # here go the PDF to be merged
 
 alias autoremove='sudo apt-get autoremove'
+
+alias redisgui='redis-desktop-manager'
+
+# Temporary
+alias serwer='cd ~prozomat/prozoserwer'
+
+g++gtest() {
+g++ -std=c++11 $1 -lgtest -lpthread && ./a.out
+}
+
+# Links all .o files to make elf_i386 executable
+link() {
+    # Default value = test
+    BIN=${1:-test};
+    ld -m elf_i386 -s -o $BIN *.o 
+}
+# GCC flags:
+# -fverbose-asm -S
+
+compile() {
+    nasm -f elf $1
+}
+
+alias burn_iso='wodim'
+
+# Recursive chmod
+chmod_rec() {
+    # find . -type d -exec chmod +rx {} \;
+    find . -type d -exec chmod $1 {} \;
+}
+
+alias make='make -j'

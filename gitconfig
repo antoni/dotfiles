@@ -31,6 +31,8 @@
     pu = push
     di = diff
     cp = cherry-pick
-    lo = log -p --pretty=oneline
+    ad = add
+    mt = mergetool
+    lg = log --graph --name-status --pretty=oneline
 [push]
 	default = matching
