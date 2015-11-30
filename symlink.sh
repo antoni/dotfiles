@@ -5,11 +5,11 @@ DOTFILES_DIR=~/dotfiles
 # Version of clang-format, should be taken from /usr/bin/clang-format-X.Y,
 # same for clang-modernize
 # CLANG_VERSION=`\ls /usr/bin/clang-?.? -1 | cut -d'-' -f2 | sort -gr | head -1`
-CLANG_VERSION=3.5
+CLANG_VERSION=3.7
 echo "Clang version symlinked: " $CLANG_VERSION
 CLANG_FORMAT_VERSION=$CLANG_VERSION
 CLANG_MODERNIZE_VERSION=$CLANG_VERSION
-LLDB_VERSION=3.6
+LLDB_VERSION=3.7
 echo "LLDB version symlinked:  " $LLDB_VERSION
 
 DOTFILES=(bashrc zshrc vimrc paths aliases common_profile.sh tmux.conf gitconfig 
