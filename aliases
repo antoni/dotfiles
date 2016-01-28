@@ -63,7 +63,6 @@ alias free='free -h'
 
 # Current projects
 alias wspace='cd ~/workspace/'
-alias gjnp='g++ -Wall -O2 -std=c++11 '
 alias wgetdir='wget -r --no-parent '
 alias zipfolder='tar -czf'
 
@@ -213,7 +212,7 @@ fi
 alias mostfrequent='history | cut -d " " -f 4 | tr -c "[:alnum:]" "[\n*]" | sort | uniq -c | sort -nr | head  -20'
 # 20 Command Line Tools to Monitor Linux Performance
 debug_commands=(ddd kdbg idaq cgdb)
-perf_commands=(top vmstat tload stress lsof tcpdump netstat htop atop iotop iostat iptraf iftop monitorix monit arpwatch vnstat 
+perf_commands=(top vmstat tload stress lsof tcpdump netstat htop atop iotop iostat iptraf iftop monitorix monit arpwatch vnstat dstat
 nmon collectl dig mpstat, pkill powertop pidstat intel_gpu_top glances pstree 
 sysdig)
 hex_editors=(jeex okteta hte bless wxHexEditor dhex)
@@ -450,3 +449,7 @@ chmod_rec() {
 }
 
 alias make='make -j'
+alias jnp='cd ~/jnp15/grupa8 && svn up'
+
+alias gitresettoremote= 'git fetch origin ; git reset --hard origin/master'
+alias rmp='rm ~/Pictures/Screenshot*'
