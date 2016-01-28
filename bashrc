@@ -131,4 +131,3 @@ shopt -s nocaseglob
 
 # Check if port is open:
 netstat -ano|grep 443|grep LISTEN
-
