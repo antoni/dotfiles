@@ -97,3 +97,7 @@ export DYLD_LIBRARY_PATH=/home/antoni/torch/install/lib:$DYLD_LIBRARY_PATH  # Ad
 
 # See: http://www.johnhawthorn.com/2012/09/vi-escape-delays/
 KEYTIMEOUT=1
+
+export DERBY_INSTALL=/opt/Apache/db-derby-10.12.1.1-bin
+export CLASSPATH=$DERBY_INSTALL/lib/derby.jar:$DERBY_INSTALL/lib/derbytools.jar:.
+

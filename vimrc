@@ -118,7 +118,8 @@ set mouse=a
 " Temporary mappings "{{{
 au BufEnter,BufNew *.java noremap <F5> :wa \| !javac % && java %:r : <CR>
 " C++ quick compilation
-noremap <F5> :wa \| !clang++ -g -Wall -pthread -lboost_regex -std=c++11 % -o test && ./test : <CR>
+" noremap <F5> :wa \| !clang++ -g -Wall -pthread -std=c++11 % -o test && ./test : <CR>
+noremap <F5> :wa \| !clang++ -g -Wall -Wno-missing-braces -pthread -std=c++1z % -o test && ./test : <CR>
 noremap <F6> :wa \| !clang++ -g -Wall -include /usr/include/x86_64-linux-gnu/c++/4.8/bits/stdc++.h -pthread -std=c++11 % -o test && ./test : <CR>
 " au BufEnter,BufNew *.c noremap <F5> :wa \| !clang -std=c99 -g % -o test && ./test : <CR>
 au BufEnter,BufNew *.c noremap <F5> :wa \| !clang -Wall -std=c99 -lcmocka -g % -o test && ./test : <CR>
@@ -153,6 +154,11 @@ behave mswin
 noremap  <C-S>  :w<CR> :wa<CR> 
 vnoremap <C-S>  <C-C>:w<CR>
 inoremap <C-S>  <C-O>:w<CR>
+
+" Fix deleting without yanking
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+vnoremap <leader>p "_dP
 
 " Vertical split with leader-w
 nnoremap <leader>w <C-w>v<C-w>l  
@@ -370,6 +376,8 @@ Bundle 'Raimondi/delimitMate'
 " *LEARN*
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'rking/ag.vim'
+" Assembly
+Bundle 'vim-scripts/asmx86'
 
 " JavaScript (temporary - for Node.js) {{{
 Bundle 'lukaszb/vim-web-indent'
@@ -851,6 +859,7 @@ nmap <silent> ..    <Plug>LocationNext
 au filetype python nnoremap <F4> :w <bar> exec '!python '.shellescape('%')<CR>
 au filetype c      nnoremap <F4> :w <bar> exec '!gcc '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
 au filetype cpp    nnoremap <F4> :w <bar> exec '!g++ '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
+au BufRead,BufNewFile *.asm set filetype=nasm
 " CUDA
 au BufNewFile,BufRead *.cu set filetype=cuda
 au BufNewFile,BufRead *.cuh set filetype=cuda
@@ -880,14 +889,14 @@ let g:slime_default_config = {"socket_name": "default", "target_pane": "1"}
 " }}}
 " Clang-format {{{
 let g:clang_format#command= os == "Darwin" ? '/usr/local/bin/clang-format' : '/usr/bin/clang-format'
-" let g:clang_format#code_style='google'
-let g:clang_format#style_options = {
-            \ "BasedOnStyle": "LLVM",
-            \"IndentWidth": 8,
-            \"UseTab": "Always",
-            \"BreakBeforeBraces": "Linux",
-            \"AllowShortIfStatementsOnASingleLine": "false",
-            \"IndentCaseLabels": "false"}
+let g:clang_format#code_style='google'
+" let g:clang_format#style_options = {
+            " \ "BasedOnStyle": "LLVM",
+            " \"IndentWidth": 8,
+            " \"UseTab": "Always",
+            " \"BreakBeforeBraces": "Linux",
+            " \"AllowShortIfStatementsOnASingleLine": "false",
+            " \"IndentCaseLabels": "false"}
 " }}}
 " CtrlP {{{
 map <leader>gh :CtrlP ~<CR>
