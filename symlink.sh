@@ -10,7 +10,7 @@ echo "Clang version symlinked:   " $CLANG_VERSION
 CLANG_FORMAT_VERSION=$CLANG_VERSION
 CLANG_MODERNIZE_VERSION=$CLANG_VERSION
 LLDB_VERSION=3.7
-echo "LLDB  version symlinked:    " $LLDB_VERSION
+echo "LLDB  version symlinked:   " $LLDB_VERSION
 CLION_VERSION=1.2.4
 echo "CLion version symlinked:   " $CLION_VERSION
 
@@ -57,7 +57,7 @@ sudo ln -fs /usr/bin/clang-modernize-$CLANG_MODERNIZE_VERSION /usr/bin/clang-mod
 # lldb
 sudo ln -fs /usr/bin/lldb-$LLDB_VERSION /usr/bin/lldb
 # Clion
-sudo ln -fs /usr/bin/clion ~/clion-$CLION_VERSION/bin/clion.sh
+sudo ln -fs /home/antoni/clion-$CLION_VERSION/bin/clion.sh /usr/bin/clion
 
 # Clone Vundle reposiroty (Vim)
 VUNDLEDIR=~/.vim/bundle/Vundle.vim
