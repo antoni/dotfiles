@@ -453,3 +453,4 @@ alias jnp='cd ~/jnp15/grupa8 && svn up'
 
 alias gitresettoremote= 'git fetch origin ; git reset --hard origin/master'
 alias rmp='rm ~/Pictures/Screenshot*'
+alias i3wmreset='i3-msg "reload"'
