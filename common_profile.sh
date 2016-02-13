@@ -55,3 +55,5 @@ if [ -f ~/.optional.sh ]; then
     source ~/.optional.sh
 fi
 
+# Disable iBUS (IntelliJ, etc.)
+export IBUS_ENABLE_SYNC_MODE=1

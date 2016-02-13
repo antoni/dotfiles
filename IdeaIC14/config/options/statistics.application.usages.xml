@@ -6,7 +6,7 @@
     <group name="language-level">
       <project id="SparkTest" values="JDK_1_6" />
       <project id="BitcoinTest" values="JDK_1_7" />
-      <project id="CharacterClusterer" values="JDK_1_7" />
+      <project id="CharacterClusterer" values="JDK_1_8" />
     </group>
     <group name="run-configuration-type-temp">
       <project id="SparkTest" values="Application" />
@@ -15,14 +15,18 @@
     <group name="run-configuration-type">
       <project id="SparkTest" values="Application" />
       <project id="BitcoinTest" values="Application" />
+      <project id="CharacterClusterer" values="Application" />
+    </group>
+    <group name="vcs">
+      <project id="CharacterClusterer" values="Git" />
     </group>
     <group name="Scala">
       <project id="SparkTest" values="Library  Akka for Scala,Scala  2.10.4" />
     </group>
     <group name="file-type">
-      <project id="SparkTest" values="IDEA_MODULE,UNKNOWN,XML,PLAIN_TEXT,Scala" />
-      <project id="BitcoinTest" values="HTML,IDEA_MODULE,UNKNOWN,JAVA,XML" />
-      <project id="CharacterClusterer" values="IDEA_MODULE,UNKNOWN,PLAIN_TEXT,JAVA,XML" />
+      <project id="SparkTest" values="Scala,XML,PLAIN_TEXT,UNKNOWN,IDEA_MODULE" />
+      <project id="BitcoinTest" values="UNKNOWN,JAVA,IDEA_MODULE,HTML,XML" />
+      <project id="CharacterClusterer" values="IDEA_MODULE,PLAIN_TEXT,UNKNOWN,JAVA,XML" />
     </group>
     <group name="module type">
       <project id="SparkTest" values="JAVA_MODULE" />
@@ -38,7 +42,7 @@
       <entry feature="ide.settings.Keymap" count="2" />
       <entry feature="ide.settings.Plugins" count="1" />
       <entry feature="ide.settings.Updates" count="1" />
-      <entry feature="ideaapp.started" count="26" />
+      <entry feature="ideaapp.started" count="27" />
       <entry feature="scala.file.with.type.aware.annotated" count="98" />
       <entry feature="tips.of.the.day.next" count="3" />
       <entry feature="welcome.screen.WelcomeScreen.CreateNewProject" count="1" />

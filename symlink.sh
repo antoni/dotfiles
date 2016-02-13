@@ -6,13 +6,15 @@ DOTFILES_DIR=~/dotfiles
 # same for clang-modernize
 # CLANG_VERSION=`\ls /usr/bin/clang-?.? -1 | cut -d'-' -f2 | sort -gr | head -1`
 CLANG_VERSION=3.7
-echo "Clang version symlinked:   " $CLANG_VERSION
+echo "Clang    version symlinked:   " $CLANG_VERSION
 CLANG_FORMAT_VERSION=$CLANG_VERSION
 CLANG_MODERNIZE_VERSION=$CLANG_VERSION
 LLDB_VERSION=3.7
-echo "LLDB  version symlinked:   " $LLDB_VERSION
+echo "LLDB     version symlinked:   " $LLDB_VERSION
+IDEA_VERSION=IC-143.1821.5
+echo "IntelliJ version symlinked:   " $IDEA_VERSION
 CLION_VERSION=1.2.4
-echo "CLion version symlinked:   " $CLION_VERSION
+echo "CLion    version symlinked:   " $CLION_VERSION
 
 DOTFILES=(bashrc zshrc vimrc paths aliases common_profile.sh tmux.conf gitconfig 
 gitignore ghci gvimrc hgrc lldbinit)
@@ -56,6 +58,8 @@ sudo ln -fs /usr/bin/clang-format-$CLANG_FORMAT_VERSION /usr/bin/clang-format
 sudo ln -fs /usr/bin/clang-modernize-$CLANG_MODERNIZE_VERSION /usr/bin/clang-modernize
 # lldb
 sudo ln -fs /usr/bin/lldb-$LLDB_VERSION /usr/bin/lldb
+# IDEA
+sudo ln -fs /home/antoni/idea-$IDEA_VERSION/bin/idea.sh /usr/bin/idea
 # Clion
 sudo ln -fs /home/antoni/clion-$CLION_VERSION/bin/clion.sh /usr/bin/clion
 
