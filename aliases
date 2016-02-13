@@ -234,7 +234,7 @@ tcpdump iproute2 chargen netcat tc insmod fping nslookup host p0f mtr ipcalc sip
 # insmod dummy for creating dummy network interfaces
 
 whichport() {
-    netstat -tulpn | grep $@
+netstat -tulpn | grep $@
 }
 
 # ip a s #List addresses for interfaces
@@ -261,23 +261,23 @@ alias pil='pip list'
 
 # Execute nth line of a file
 nth() {
-    eval `sed $1'q;d' $2`
+eval `sed $1'q;d' $2`
 }
 
 # Countdown, usage: countdown 60, countdown $((2*60*60))
 function countdown() {
 date1=$((`date +%s` + $1)); 
 while [ "$date1" -ne `date +%s` ]; do 
-    echo -ne "$(date -u --date @$(($date1 - `date +%s`)) +%H:%M:%S)\r";
-    sleep 0.1
+echo -ne "$(date -u --date @$(($date1 - `date +%s`)) +%H:%M:%S)\r";
+sleep 0.1
 done
 }
 # Stopwach
 function stopwatch(){
 date1=`date +%s`; 
 while true; do 
-    echo -ne "$(date -u --date @$((`date +%s` - $date1)) +%H:%M:%S)\r"; 
-    sleep 0.1
+echo -ne "$(date -u --date @$((`date +%s` - $date1)) +%H:%M:%S)\r"; 
+sleep 0.1
 done
 }
 
@@ -296,7 +296,7 @@ alias fixperm2='find /home/user -type f -print0 | xargs -0 chmod 0664'
 
 # TOOD: Check if Debian/Ubuntu
 listkernels() {
-    dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d'
+dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d'
 }
 alias gdebi='sudo gdebi'
 
@@ -323,7 +323,7 @@ alias inettest='ping google.com -c 4'
 alias instsall_ycm='~/.vim/bundle/YouCompleteMe/install.sh --clang-completer'
 
 h() {                                                                                                                                              
-    head -n $@
+head -n $@
 }
 # TMP
 alias ex='vim fun_tree_example.cc'
@@ -333,19 +333,19 @@ alias ycm='cd ~/.vim/bundle/YouCompleteMe/'
 alias vimt='vim ~/todo_offline.txt'
 
 rr() {
-    echo "Executing test" $1;
-    # /usr/bin/g++-4.8 -fdiagnostics-color -std=c++11 fun_tree_test.cc -o test -DTEST_NUM=$1
-    /usr/bin/g++-4.8 -std=c++11 fun_tree_test.cc -o test -DTEST_NUM=$1
-    ./test;
+echo "Executing test" $1;
+# /usr/bin/g++-4.8 -fdiagnostics-color -std=c++11 fun_tree_test.cc -o test -DTEST_NUM=$1
+/usr/bin/g++-4.8 -std=c++11 fun_tree_test.cc -o test -DTEST_NUM=$1
+./test;
 }
 
 pat() {
-    if hash csearch 2>/dev/null; then
-        csearch -i $1
-    else
-        [ ! -z "$2" ] && search_dir="$2" || search_dir="."
-        grep -rnw $search_dir -e $1
-    fi
+if hash csearch 2>/dev/null; then
+    csearch -i $1
+else
+    [ ! -z "$2" ] && search_dir="$2" || search_dir="."
+    grep -rnw $search_dir -e $1
+fi
 }
 
 alias cal='gcalcli'
@@ -353,15 +353,15 @@ alias dhcp0='sudo dhcpcd -n eth0'
 alias top10size="find . -type f -printf '%s %p\n'| sort -nr | head -10﻿"
 
 dl_website() {
-    wget \
-        --recursive \
-        --no-clobber \
-        --page-requisites \
-        --html-extension \
-        --convert-links \
-        --restrict-file-names=windows \
-        --no-parent \
-        $1
+wget \
+    --recursive \
+    --no-clobber \
+    --page-requisites \
+    --html-extension \
+    --convert-links \
+    --restrict-file-names=windows \
+    --no-parent \
+    $1
 }
 alias bl='vim ~/backlog.md'
 alias btc-qt='./bitcoin-qt -datadir=/media/antoni/Seagate\ Backup\ Plus\ Drive/.bitcoin'
@@ -371,8 +371,8 @@ function up() {
 i=$1 
 while [ $i -gt 0 ] 
 do 
-    cd .. 
-    i=$(($i - 1))
+cd .. 
+i=$(($i - 1))
 done 
 }
 
@@ -405,7 +405,7 @@ alias p='python'
 alias fixandroidstudio='IBUS_ENABLE_SYNC_MODE=1 ibus-daemon -xrd'
 
 diffcount() {
-    diff -U 0 $1 $2 | grep -c ^@
+diff -U 0 $1 $2 | grep -c ^@
 }
 
 dark()  { export BACKGROUND=dark && source ~/.common_profile.sh;  }
@@ -429,23 +429,23 @@ g++ -std=c++11 $1 -lgtest -lpthread && ./a.out
 
 # Links all .o files to make elf_i386 executable
 link() {
-    # Default value = test
-    BIN=${1:-test};
-    ld -m elf_i386 -s -o $BIN *.o 
+# Default value = test
+BIN=${1:-test};
+ld -m elf_i386 -s -o $BIN *.o 
 }
 # GCC flags:
 # -fverbose-asm -S
 
 compile() {
-    nasm -f elf $1
+nasm -f elf $1
 }
 
 alias burn_iso='wodim'
 
 # Recursive chmod
 chmod_rec() {
-    # find . -type d -exec chmod +rx {} \;
-    find . -type d -exec chmod $1 {} \;
+# find . -type d -exec chmod +rx {} \;
+find . -type d -exec chmod $1 {} \;
 }
 
 alias make='make -j'
@@ -454,3 +454,22 @@ alias jnp='cd ~/jnp15/grupa8 && svn up'
 alias gitresettoremote= 'git fetch origin ; git reset --hard origin/master'
 alias rmp='rm ~/Pictures/Screenshot*'
 alias i3wmreset='i3-msg "reload"'
+
+# Check if port is open:
+alias checkopenports='netstat -ano|grep 443|grep LISTEN'
+
+updateall() {
+echo "Updating packages"
+sudo apt-get update &> /dev/null
+echo "Upgrading packages"
+sudo apt-get upgrade -y &> /dev/null
+echo "Autoremoving packages"
+sudo apt-get autoremove &> /dev/null
+echo "Updating Vim plugins"
+vim +BundleUpdate +qall
+exit
+}
+
+pythontools=(2to3 pylint pyflakes autopep8)
+
+alias classdiagram='staruml'

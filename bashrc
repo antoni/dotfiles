@@ -129,5 +129,3 @@ source ~/.common_profile.sh
 # Ignore case when 'ls'
 shopt -s nocaseglob
 
-# Check if port is open:
-netstat -ano|grep 443|grep LISTEN

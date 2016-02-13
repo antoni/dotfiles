@@ -116,7 +116,7 @@ set mouse=a
 " }}}
 " 2.  Key mappings {{{
 " Temporary mappings "{{{
-au BufEnter,BufNew *.java noremap <F5> :wa \| !javac % && java %:r : <CR>
+au BufEnter,BufNew *.java noremap <F5> :wa \| !javac -verbose % && java %:r : <CR>
 " C++ quick compilation
 " noremap <F5> :wa \| !clang++ -g -Wall -pthread -std=c++11 % -o test && ./test : <CR>
 noremap <F5> :wa \| !clang++ -g -Wall -Wno-missing-braces -pthread -std=c++1z % -o test && ./test : <CR>
@@ -363,10 +363,6 @@ Plugin 'majutsushi/tagbar'
 " Plugin 'vim-scripts/gtags.vim'
 " Plugin 'thinca/vim-quickrun'
 " Plugin 'vim-scripts/netrw.vim'
-Plugin 'oplatek/Conque-Shell'
-Plugin 'nelstrom/vim-markdown-folding'
-" Emacs - like kill ring
-" Bundle 'maxbrunsfeld/vim-yankstack'
 " Learn HOW TO USE those (https://www.youtube.com/watch?v=aHm36-na4-4)
 " Bundle 'jondkinney/dragvisuals.vim'
 " Bundle 'nixon/vim-vmath' 
@@ -374,11 +370,10 @@ Plugin 'nelstrom/vim-markdown-folding'
 " Bundle 'rking/ag.vim'
 Bundle 'Raimondi/delimitMate'
 " *LEARN*
-Bundle 'terryma/vim-multiple-cursors'
-Bundle 'rking/ag.vim'
+" Bundle 'terryma/vim-multiple-cursors'
+" Bundle 'rking/ag.vim'
 " Assembly
-Bundle 'vim-scripts/asmx86'
-
+" Bundle 'vim-scripts/asmx86'
 " JavaScript (temporary - for Node.js) {{{
 Bundle 'lukaszb/vim-web-indent'
 Bundle 'digitaltoad/vim-jade'
@@ -412,6 +407,7 @@ Bundle 'airblade/vim-gitgutter'
 " }}}
 " }}}
 " Python {{{
+" Bundle 'nvie/vim-flake8'
 " Bundle 'klen/python-mode'
 " }}}
 " Haskell (http://haskelllive.com/environment.html) {{{
@@ -419,7 +415,7 @@ Bundle 'airblade/vim-gitgutter'
 " Bundle 'eagletmt/ghcmod-vim'
 " Bundle 'bitc/lushtags'
 " Bundle 'raichoo/haskell-vim'
-Bundle 'eagletmt/neco-ghc'
+" Bundle 'eagletmt/neco-ghc'
 " }}}
 " Smalltalk {{{
 " Bundle 'vim-scripts/st.vim' 
@@ -430,10 +426,6 @@ Bundle 'eagletmt/neco-ghc'
 " Go {{{
 Plugin 'fatih/vim-go'
 " }}}
-" Plugin 'google/vim-maktaba'
-" Plugin 'google/vim-codefmtlib'
-" Plugin 'google/vim-codefmt'
-
 " Plugin 'stefandtw/quickfix-reflector.vim'
 " Plugin 'vim-scripts/linuxsty.vim'
 Plugin 'bling/vim-airline'
@@ -542,8 +534,8 @@ au VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=black
 "}}}
 " Highlight text that goes over 80 characters"{{{
 " http://stackoverflow.com/a/235970/963881
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/"}}}
+" highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+" match OverLength /\%81v.\+/"}}}
 " CtrlP"{{{
 hi CtrlPMatch ctermbg=235 ctermfg=250 guibg=#262626 guifg=#bcbcbc cterm=NONE gui=NONE
 "}}}
@@ -645,12 +637,7 @@ set foldmethod=syntax     " Fold based on syntax
 set foldnestmax=3         " Deepest fold is 3 levels
 set foldlevelstart=5
 let javaScript_fold=1         " JavaScript
-let perl_fold=1               " Perl
-let php_folding=1             " PHP
-let r_syntax_folding=1        " R
-let ruby_fold=1               " Ruby
 let sh_fold_enabled=1         " sh
-let vimsyn_folding='af'       " Vim script
 let xml_syntax_folding=1      " XML
 "}}}
 " 9.  Helper functions {{{
@@ -812,27 +799,6 @@ function! s:insert_gates()
 endfunction
 au BufNewFile *.{h,hpp} call <SID>insert_gates()
 "}}}
-" Show online docummentation for word under cursor {{{
-function! OnlineDoc()
-    let s:browser = "firefox"
-    let s:wordUnderCursor = expand("<cword>")
-
-    if &ft == "cpp" || &ft == "c" || &ft == "ruby" || &ft == "php" || &ft == "python"
-        let s:url = "http://www.google.com/codesearch?q=".s:wordUnderCursor."+lang:".&ft elseif &ft == "vim"
-        let s:url = "http://www.google.com/codesearch?q=".s:wordUnderCursor
-    else
-        return
-    endif
-
-    let s:cmd = "silent !" . s:browser . " " . s:url
-    execute  s:cmd
-    redraw!
-endfunction
-" Online doc search.
-map <silent> <M-d> :call OnlineDoc()<CR>
-map <leader>s :call OnlineDoc()<CR>
-map <LocalLeader>k :call OnlineDoc()<CR>
-"}}}
 " Jumping through error list {{{
 function! <SID>LocationPrevious()                       
     try                                                   
@@ -865,28 +831,6 @@ au BufNewFile,BufRead *.cu set filetype=cuda
 au BufNewFile,BufRead *.cuh set filetype=cuda
 "}}}
 " 11. Plugin-specific configuration {{{
-" Autosave plugin"{{{
-let g:auto_save = 1         " enable AutoSave on Vim startup
-let g:auto_save_silent = 1  " do not display the auto-save notification
-"}}}" WindowSwap {{{
-let g:windowswap_map_keys = 0 "prevent default bindings
-nnoremap <silent> <leader>yw :call WindowSwap#MarkWindowSwap()<CR>
-nnoremap <silent> <leader>pw :call WindowSwap#DoWindowSwap()<CR>
-nnoremap <silent> <leader>ww :call WindowSwap#EasyWindowSwap()<CR>
-" }}}" Vim slime {{{
-let g:slime_target = "tmux"
-let g:slime_paste_file = "$HOME/.slime_paste"
-" let g:slime_python_ipython = 1
-let g:slime_default_config = {"socket_name": "default", "target_pane": "1"}
-" Send whole buffer to Slime
-" map <F5> :% SlimeSend<CR>
-" tmux target pane
-":" means current window, current pane (a reasonable default)
-"":i" means the ith window, current pane
-":i.j" means the ith window, jth pane
-""h:i.j" means the tmux session where h is the session identifier (either 
-" session name or number), the ith window and the jth pane
-" }}}
 " Clang-format {{{
 let g:clang_format#command= os == "Darwin" ? '/usr/local/bin/clang-format' : '/usr/bin/clang-format'
 let g:clang_format#code_style='google'
@@ -1012,6 +956,3 @@ let g:tagbar_type_go = {
             \ 'ctagsargs' : '-sort -silent'
             \ }
  "}}}
-" 15. Temporary {{{
-autocmd FileType javascript setlocal equalprg=js-beautify\ --stdin
-" }}}
