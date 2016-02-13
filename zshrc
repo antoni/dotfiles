@@ -100,4 +100,3 @@ KEYTIMEOUT=1
 
 export DERBY_INSTALL=/opt/Apache/db-derby-10.12.1.1-bin
 export CLASSPATH=$DERBY_INSTALL/lib/derby.jar:$DERBY_INSTALL/lib/derbytools.jar:.
-
