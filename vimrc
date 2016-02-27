@@ -393,6 +393,7 @@ Bundle 'croaker/mustang-vim'
 " C++ {{{
 Plugin 'rhysd/vim-clang-format'
 Bundle 'Mizuchi/STL-Syntax'
+Bundle 'rmartinho/vim-cpp11'
 " C++ IDE-related {{{
 Bundle 'vim-scripts/a.vim'
 " Bundle 'DoxygenToolkit.vim'
