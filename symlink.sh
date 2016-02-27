@@ -17,7 +17,7 @@ CLION_VERSION=1.2.4
 echo "CLion    version symlinked:   " $CLION_VERSION
 
 DOTFILES=(bashrc zshrc vimrc paths aliases common_profile.sh tmux.conf gitconfig 
-gitignore ghci gvimrc hgrc lldbinit)
+gitignore ghci gvimrc hgrc lldbinit gdbinit)
 
 # Xrdb merge
 xrdb ${DOTFILES_DIR}/Xresources.solarized
@@ -73,3 +73,5 @@ fi
 # wget 
 # https://gist.githubusercontent.com/antoni/d8ac9973b2f28765b329/raw/811fa82e6ff738e06c11453bfa93d846d76d2386/cuda.snippets 
 # && mv cuda.snippets ~/.vim/bundle/vim-snippets/snippets/
+
+ln -s /home/antoni/dotfiles/st.sh /bin/st
