@@ -27,8 +27,7 @@ elif [[ "$unamestr" == 'Linux' ]]; then
 
     alias sound='alsamixer'
     alias open='xdg-open'
-    alias screenshot1='import'
-    alias screenshot2='scrot -b -d 5 '"'"'%Y:%m:%d:%H:%M:%S.png'"'"' -e '"'"'mv $f ~/Desktop/'"'"
+    alias st='scrot -ub '"'"'%Y:%m:%d:%H:%M:%S.png'"'"' -e '"'"'mv $f ~/Downloads/'"'"
     alias catquestions='cat ~/Documents/Q.txt'
     alias mountrw='mount -o remount,rw /'
 fi
@@ -165,7 +164,6 @@ alias latexed1='texmaker'
 alias latexed2='gummi'
 
 alias gogo='cd ~/go/'
-alias ss='source'
 alias l='ls'
 csview() {
     local file="$1"
@@ -473,3 +471,4 @@ exit
 pythontools=(2to3 pylint pyflakes autopep8)
 
 alias classdiagram='staruml'
+alias weather='curl http://wttr.in/Warsaw'
