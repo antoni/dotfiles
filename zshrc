@@ -13,7 +13,7 @@ ZSH_THEME="af-magic"
 # CASE_SENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
@@ -90,10 +90,6 @@ source ~/.common_profile.sh
 
 # Ignore case when 'ls'
 unsetopt CASE_GLOB
-
-export PATH=/home/antoni/torch/install/bin:$PATH  # Added automatically by torch-dist
-export LD_LIBRARY_PATH=/home/antoni/torch/install/lib:$LD_LIBRARY_PATH  # Added automatically by torch-dist
-export DYLD_LIBRARY_PATH=/home/antoni/torch/install/lib:$DYLD_LIBRARY_PATH  # Added automatically by torch-dist
 
 # See: http://www.johnhawthorn.com/2012/09/vi-escape-delays/
 KEYTIMEOUT=1
