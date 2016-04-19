@@ -34,8 +34,8 @@ syntax on                     " Syntax colouring
 set pastetoggle=<F12>         " pastetoggle (sane indentation on pastes)
 set ruler                     " Show ruler on the bottom
 set virtualedit=onemore
-set textwidth=80
-set formatoptions+=w          " gggqG - format to break after 80 characters
+" set textwidth=80
+" set formatoptions+=w          " gggqG - format to break after 80 characters
 set wrapmargin=2
 set autoread " Set to auto read when a file is  changed from the outside
 " UTF-8 encoding
@@ -122,7 +122,7 @@ au BufEnter,BufNew *.java noremap <F5> :wa \| !javac -verbose % && java %:r : <C
 noremap <F5> :wa \| !clang++ -g -Wall -Wno-missing-braces -pthread -std=c++1z % -o test && ./test : <CR>
 noremap <F6> :wa \| !clang++ -g -Wall -include /usr/include/x86_64-linux-gnu/c++/4.8/bits/stdc++.h -pthread -std=c++11 % -o test && ./test : <CR>
 " au BufEnter,BufNew *.c noremap <F5> :wa \| !clang -std=c99 -g % -o test && ./test : <CR>
-au BufEnter,BufNew *.c noremap <F5> :wa \| !clang -Wall -std=c99 -lcmocka -g % -o test && ./test : <CR>
+au BufEnter,BufNew *.c noremap <F5> :wa \| !clang -Wall -g % -o test && ./test : <CR>
 " different F5 keymap for CUDA development
 au BufEnter,BufNew *.cu noremap <F5> :wa \| !nvcc -std=c++11 -g % -o test && ./test : <CR>
 " Python
@@ -359,7 +359,7 @@ Plugin 'majutsushi/tagbar'
 " A Git wrapper so awesome, it should be illegal
 " Plugin 'tpope/vim-repeat'
 " Plugin 'tpope/vim-unimpaired' " For jumping to errors shortcuts
-" Bundle 'tpope/vim-fugitive'
+" undle 'tpope/vim-fugitive'
 " Plugin 'vim-scripts/gtags.vim'
 " Plugin 'thinca/vim-quickrun'
 " Plugin 'vim-scripts/netrw.vim'
@@ -381,8 +381,10 @@ Bundle 'Chiel92/vim-autoformat'
 " }}}
 
 " Color themes "{{{
+Bundle 'changyuheng/color-scheme-holokai-for-vim'
 Bundle 'sjl/badwolf'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'vim-scripts/orangeocean256'
 " Bundle 'Lokaltog/vim-distinguished'
 " Bundle 'jnurmine/Zenburn'
 " Bundle 'vim-scripts/Wombat'
@@ -497,13 +499,14 @@ try
     " colorscheme vividchalk
     " colorscheme mustang
     colorscheme badwolf
+    " colorscheme orangeocean256
     " colorscheme distinguished
     " TODO: Check those
     " vim-scripts/summerfruit256.vim
     " jonathanfilip/lucius
     " vim-scripts/256-jungle
-    " set background=light
-    set background=dark
+    set background=light
+    " set background=dark
     " execute "set background=" . $BACKGROUND
 catch /^Vim\%((\a\+)\)\=:E185/
     " Don't load a color scheme.
@@ -834,14 +837,14 @@ au BufNewFile,BufRead *.cuh set filetype=cuda
 " 11. Plugin-specific configuration {{{
 " Clang-format {{{
 let g:clang_format#command= os == "Darwin" ? '/usr/local/bin/clang-format' : '/usr/bin/clang-format'
-let g:clang_format#code_style='google'
-" let g:clang_format#style_options = {
-            " \ "BasedOnStyle": "LLVM",
-            " \"IndentWidth": 8,
-            " \"UseTab": "Always",
-            " \"BreakBeforeBraces": "Linux",
-            " \"AllowShortIfStatementsOnASingleLine": "false",
-            " \"IndentCaseLabels": "false"}
+" let g:clang_format#code_style='google'
+let g:clang_format#style_options = {
+            \ "BasedOnStyle": "LLVM",
+            \"IndentWidth": 8,
+            \"UseTab": "Always",
+            \"BreakBeforeBraces": "Linux",
+            \"AllowShortIfStatementsOnASingleLine": "false",
+            \"IndentCaseLabels": "false"}
 " }}}
 " CtrlP {{{
 map <leader>gh :CtrlP ~<CR>
