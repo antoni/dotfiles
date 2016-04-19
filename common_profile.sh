@@ -23,9 +23,9 @@ fi
 export QTDIR=$HOME/Qt/5.4/gcc_64/
 
 # Background image
-WALLPAPER=~/Documents/wallpaper3.jpg
-if [ -e WALLPAPER ]; then
-    feh --bg-scale WALLPAPER
+WALLPAPER=~/Documents/wallpaper4.jpg
+if [ -e $WALLPAPER ]; then
+    feh --bg-scale $WALLPAPER
 fi
 
 # PL keyboard layout
@@ -57,3 +57,6 @@ fi
 
 # Disable iBUS (IntelliJ, etc.)
 # export IBUS_ENABLE_SYNC_MODE=1
+
+# Go
+export PATH=$PATH:/usr/local/go/bin
