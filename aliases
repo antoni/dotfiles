@@ -42,11 +42,11 @@ alias vimq='vim ~/Documents/Q.txt'
 alias gq='gedit ~/Documents/Q.txt'
 alias vimdwmconfig='vim ~/dwm/config.h'
 
-# Vim with particular file
 alias cx='chmod +x'
 alias m='man' ; 
 alias mm='man $(fc -ln -1 | cut -d" " -f 1)'
 alias l='ls'
+alias vim='vim -o'
 alias v='vim'
 alias grep='grep --color -ni'
 alias sudolastcmd='!!' # remember
@@ -310,7 +310,7 @@ alias pdfmerge='pdfunite'
 alias desk='cd ~/Desktop'
 alias mountstudents='sudo sshfs -o allow_other ar267209@students.mimuw.edu.pl:/home/students/bioinf/a/ar267209 ~/mount/students/'
 alias euler='cd ~/Developer/ProjectEuler/'
-alias wallpaperchange='gsettings set org.gnome.desktop.background picture-uri "file:///home/antoni/Documents/wallpaper.jpg"'
+alias wallpaperchange='gsettings set org.gnome.desktop.background picture-uri "file:///home/antoni/Documents/wallpaper4.jpg"'
 alias showtunnels="sudo lsof -i -n | egrep '\<ssh\>'" # Show all open SSH tunnels
 alias j='julia'
 # alias yaourt='yaourt --noconfirm --pager'
@@ -472,3 +472,9 @@ pythontools=(2to3 pylint pyflakes autopep8)
 
 alias classdiagram='staruml'
 alias weather='curl http://wttr.in/Warsaw'
+
+alias uwb='ssh a.rosciszewski@login.uco.uwb.edu.pl -p 9022'
+
+alias tmuxhelp='cat ~/dotfiles/tmux.cheat | less'
+
+alias sshprozacopy='ssh prozomat@213.135.59.214'
