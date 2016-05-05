@@ -7,7 +7,10 @@ export TERM=xterm-256color
 export NO_AT_BRIDGE=1
 
 # Get distribution name
+OS="CentOS"
+if command_exists lsb_release; then
 OS=$(lsb_release -si)
+fi
 
 # Files with commands to be loaded by both Bash and ZSH
 if command_exists wmname; then
