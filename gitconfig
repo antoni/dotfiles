@@ -36,3 +36,5 @@
     lg = log --graph --name-status --pretty=oneline
 [push]
 	default = matching
+[pull]
+    rebase = true

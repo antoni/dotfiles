@@ -387,6 +387,7 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'vim-scripts/orangeocean256'
 " Bundle 'Lokaltog/vim-distinguished'
 " Bundle 'jnurmine/Zenburn'
+Bundle 'vim-scripts/torte.vim'
 " Bundle 'vim-scripts/Wombat'
 Bundle 'tpope/vim-vividchalk'
 Bundle 'croaker/mustang-vim'
@@ -499,6 +500,7 @@ try
     " colorscheme vividchalk
     " colorscheme mustang
     colorscheme badwolf
+    " colorscheme desert
     " colorscheme orangeocean256
     " colorscheme distinguished
     " TODO: Check those
