@@ -139,7 +139,8 @@ alias gopath="export GOPATH=\$(pwd)"
 alias dbgui='/usr/share/dbeaver/dbeaver'
 
 alias singlemonitor='xrandr --output LVDS1'
-alias dualmonitor='xrandr --output VGA1 --mode 1680x1050 --right-of LVDS1'
+alias dualmonitor='xrandr --output VGA1 --mode 1920x1200 --right-of LVDS1'
+alias dualmonitor2='xrandr --output VGA1 --mode 1680x1050 --right-of LVDS1'
 alias dualmonitor_left='xrandr --output VGA1 --mode 1920x1200 --left-of LVDS1'
 
 # Fixing various things on Ubuntu
@@ -211,7 +212,7 @@ alias mostfrequent='history | cut -d " " -f 4 | tr -c "[:alnum:]" "[\n*]" | sort
 # 20 Command Line Tools to Monitor Linux Performance
 debug_commands=(ddd kdbg idaq cgdb)
 perf_commands=(top vmstat tload stress lsof tcpdump netstat htop atop iotop iostat iptraf iftop monitorix monit arpwatch vnstat dstat
-nmon collectl dig mpstat, pkill powertop pidstat intel_gpu_top glances pstree 
+nmon collectl dig mpstat, pkill powertop pidstat intel_gpu_top glances pstree nload
 sysdig)
 hex_editors=(jeex okteta hte bless wxHexEditor dhex)
 other_commands=(ruptime rwho)
@@ -478,3 +479,8 @@ alias uwb='ssh a.rosciszewski@login.uco.uwb.edu.pl -p 9022'
 alias tmuxhelp='cat ~/dotfiles/tmux.cheat | less'
 
 alias sshprozacopy='ssh prozomat@213.135.59.214'
+
+alias entropy='cat /proc/sys/kernel/random/entropy_avail'
+
+alias dns_list_all='dig +nocmd yourdomain.com any +multiline +noall +answer'
+alias install_ycm='~/.vim/bundle/YouCompleteMe/install.py --clang-completer  --gocode-completer'
