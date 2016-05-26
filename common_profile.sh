@@ -2,6 +2,7 @@
 
 # Make the colors work under Terminator
 export TERM=xterm-256color
+#export TERM=gnome-terminal
 
 # See: https://bugs.launchpad.net/ubuntu/+source/at-spi2-core/+bug/1193236
 export NO_AT_BRIDGE=1
