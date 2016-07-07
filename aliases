@@ -486,3 +486,4 @@ alias entropy='cat /proc/sys/kernel/random/entropy_avail'
 
 alias dns_list_all='dig +nocmd yourdomain.com any +multiline +noall +answer'
 alias install_ycm='~/.vim/bundle/YouCompleteMe/install.py --clang-completer  --gocode-completer'
+alias switchm="xrandr --output VGA1 --left-of DP2" # switches monitors (left-right)
