@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Clone this repo file into ~ to make it work
 DOTFILES_DIR=~/dotfiles
 
 # Version of clang-format, should be taken from /usr/bin/clang-format-X.Y,
