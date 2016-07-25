@@ -77,3 +77,7 @@ fi
 # && mv cuda.snippets ~/.vim/bundle/vim-snippets/snippets/
 
 sudo ln -fs /home/antoni/dotfiles/st.sh /bin/st
+
+# Optional: go get
+GO_PACKAGES=(github.com/derekparker/delve/cmd/dlv github.com/Sirupsen/logrus)
+go get -u $GO_PACKAGES

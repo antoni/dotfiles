@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # Install required packages
-PACKAGES=(slock xbindkeys haskell clang)
+PACKAGES=(slock xbindkeys haskell clang vim vim-X11 rdesktop tigervnc make xpdf sysstat vim-enhanced vim-X11 make cmake gitk)
+OPTIONAL_PACKAGES=(qt-devel)
 
 if [ -f /etc/debian_version ]; then
     echo "Installing required packages on Debian"
