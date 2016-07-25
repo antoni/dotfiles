@@ -23,7 +23,8 @@ elif [[ "$unamestr" == 'Linux' ]]; then
     # Linux specific
     # alias i='sudo apt-get install -y'
     # Install through apt-get and add installed software to list of used commands
-    addcmd() { sudo apt-get install -y $* && echo $* >> ~/install_apt-get.txt; }
+    # addcmd() { sudo apt-get install -y $* && echo $* >> ~/install_apt-get.txt; }
+    addcmd() { sudo dnf install -y $* && echo $* >> ~/install_apt-get.txt; }
 
     alias sound='alsamixer'
     alias open='xdg-open'
@@ -319,7 +320,7 @@ alias y='yaourt'
 alias rsync='rsync --progress'
 alias wificonn='sudo wifi-menu wlp2s0'
 alias inettest='ping google.com -c 4'
-alias instsall_ycm='~/.vim/bundle/YouCompleteMe/install.sh --clang-completer'
+alias install_ycm='~/.vim/bundle/YouCompleteMe/install.sh --clang-completer'
 
 h() {                                                                                                                                              
     head -n $@
@@ -487,3 +488,26 @@ alias entropy='cat /proc/sys/kernel/random/entropy_avail'
 alias dns_list_all='dig +nocmd yourdomain.com any +multiline +noall +answer'
 alias install_ycm='~/.vim/bundle/YouCompleteMe/install.py --clang-completer  --gocode-completer'
 alias switchm="xrandr --output VGA1 --left-of DP2" # switches monitors (left-right)
+
+alias di='sudo dnf install -y'
+alias ds='dnf search'
+
+# function ppgrep() { pgrep "$@" | xargs --no-run-if-empty ps fp; }
+function ppgrep() { \pgrep "$@" -a | egrep --color "[0-9]"; }
+
+function rdp() { rdesktop "$@" -rsound:remote -5 -K -r clipboard:CLIPBOARD; }
+
+function swap()         
+{
+    local TMPFILE=tmp.$$
+    mv "$1" $TMPFILE
+    mv "$2" "$1"
+    mv $TMPFILE "$2"
+}
+
+# Copies SSH RSA key to X clipboard
+alias copykey='cat ~/.ssh/id_rsa.pub | xsel -i -b'
+
+if command_exists vimx; then
+    alias vim='vimx'
+fi
