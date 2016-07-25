@@ -65,7 +65,14 @@ fi
 # Go
 export PATH=$PATH:/usr/local/go/bin
 
+# export GOROOT=$HOME/go
+export PATH=$PATH:$GOROOT/bin
+
 # CUDA
 export PATH=$PATH:/usr/local/cuda/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/cuda/lib
 
+source ~/ipmi/config.sh
+
+export SSLKEYLOGFILE=~/tmp/sslkeylog.log
+export NTLMUSER=aroscisz

@@ -1,5 +1,6 @@
 [user]
-	email = antoni.rosciszewski@gmail.com
+	; email = antoni.rosciszewski@gmail.com
+	email = antoni.rosciszewski@intel.com
 	name = Antoni Rościszewski
 [branch]
     autosetupmerge = true

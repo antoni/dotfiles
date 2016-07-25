@@ -411,6 +411,7 @@ Bundle 'airblade/vim-gitgutter'
 " }}}
 " }}}
 " Python {{{
+Plugin 'tmhedberg/SimpylFold'
 " Bundle 'nvie/vim-flake8'
 " Bundle 'klen/python-mode'
 " }}}
