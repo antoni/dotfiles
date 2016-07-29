@@ -36,8 +36,11 @@ mkdir -p ~/.config/terminator
 ln -fs ${DOTFILES_DIR}/terminator/config ~/.config/terminator/config
 # i3-wm
 I3WM_DIR=~/.config/i3/
-if ! [[ -f $I3WM_DIR ]]; then mkdir -p $I3WM_DIR; fi;
+if ! [[ -f $I3WM_DIR ]]; then
+    mkdir -p $I3WM_DIR;
+fi;
 ln -fs ${DOTFILES_DIR}/i3.config ~/.config/i3/config
+ln -fs ${DOTFILES_DIR}/config/mimeapps.list ~/.config/mimeapps.list
 
 # SSH config
 ln -fs ${DOTFILES_DIR}/sshconfig ~/.ssh/config
