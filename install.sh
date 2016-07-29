@@ -2,7 +2,8 @@
 #!/bin/bash
 
 # Install required packages
-PACKAGES=(slock xbindkeys haskell clang vim vim-X11 rdesktop tigervnc make xpdf sysstat vim-enhanced vim-X11 make cmake gitk vlc)
+PACKAGES=(slock xbindkeys haskell clang vim vim-X11 rdesktop tigervnc make xpdf sysstat
+vim-enhanced vim-X11 make cmake gitk vlc st)
 OPTIONAL_PACKAGES=(qt-devel)
 
 NET_TOOLS=(nmap-ncat)

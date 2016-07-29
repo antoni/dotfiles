@@ -65,7 +65,7 @@ fi
 # Go
 export PATH=$PATH:/usr/local/go/bin
 
-# export GOROOT=$HOME/go
+export GOROOT=$HOME/go1.6
 export PATH=$PATH:$GOROOT/bin
 
 # CUDA
