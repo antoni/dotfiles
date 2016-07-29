@@ -1,8 +1,14 @@
+
 #!/bin/bash
 
 # Install required packages
-PACKAGES=(slock xbindkeys haskell clang vim vim-X11 rdesktop tigervnc make xpdf sysstat vim-enhanced vim-X11 make cmake gitk)
+PACKAGES=(slock xbindkeys haskell clang vim vim-X11 rdesktop tigervnc make xpdf sysstat vim-enhanced vim-X11 make cmake gitk vlc)
 OPTIONAL_PACKAGES=(qt-devel)
+
+NET_TOOLS=(nmap-ncat)
+
+FEDORA=(gnome-icon-theme system-config-printer)
+DEBIAN=(gnome-icon-theme-full)
 
 if [ -f /etc/debian_version ]; then
     echo "Installing required packages on Debian"
@@ -14,3 +20,12 @@ elif [ -f /etc/redhat-release ]; then
 else
     echo "TODO: Mac OS X install"
 fi
+
+
+# Video and audio codes (Fedora)
+
+su -c 'dnf install --nogpgcheck http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm'
+
+sudo dnf update
+
+sudo dnf install -y gstreamer-plugins-bad gstreamer-plugins-bad-free-extras gstreamer-plugins-bad-nonfree gstreamer-plugins-ugly gstreamer-ffmpeg gstreamer1-libav gstreamer1-plugins-bad-free-extras gstreamer1-plugins-bad-freeworld gstreamer1-plugins-base-tools gstreamer1-plugins-good-extras gstreamer1-plugins-ugly gstreamer1-plugins-bad-free gstreamer1-plugins-good gstreamer1-plugins-base gstreamer1 x264 vlc  smplayer
