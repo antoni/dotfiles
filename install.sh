@@ -1,15 +1,21 @@
-
 #!/bin/bash
 
 # Install required packages
 PACKAGES=(slock xbindkeys haskell clang vim vim-X11 rdesktop tigervnc make xpdf sysstat
-vim-enhanced vim-X11 make cmake gitk vlc st)
-OPTIONAL_PACKAGES=(qt-devel)
+vim-enhanced vim-X11 make cmake gitk vlc st okular xdotool xbindkeys xautomation mosh
+libreoffice cscope ctags perf pavucontrol)
+OPTIONAL_PACKAGES=(qt-devel transmission-remote-* transmission-daemon)
 
 NET_TOOLS=(nmap-ncat)
 
-FEDORA=(gnome-icon-theme system-config-printer)
-DEBIAN=(gnome-icon-theme-full)
+HASKELL=(ghc ghc-Cabal cabal-install)
+
+LATEX=(texlive-listing texlive-pgfopts)
+
+FEDORA=(gnome-icon-theme system-config-printer libreoffice-langpack-pl boost-devel squashfs-tools glibc-devel ghc-ShellCheck pykickstart)
+RXVT=(rxvt-unicode rxvt-unicode-ml rxvt-unicode-256color rxvt-unicode-256color-ml)
+
+DEBIAN=(gnome-icon-theme-full boost-dev)
 
 if [ -f /etc/debian_version ]; then
     echo "Installing required packages on Debian"
