@@ -1,41 +1,41 @@
 [global_config]
-  title_transmit_bg_color = "#d30102"
-  focus = system
   borderless = True
-  scrollbar_position = disabled
+  focus = system
+  title_transmit_bg_color = "#d30102"
 [keybindings]
-[profiles]
-  [[default]]
-    copy_on_selection = True
-    use_system_font = False
-    font = Monospace 11
-    background_image = None
-    show_titlebar = False
-  [[solarized-dark]]
-    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
-    background_image = None
-    cursor_color = "#eee8d5"
-    foreground_color = "#eee8d5"
-    show_titlebar = False
-    copy_on_selection = True
-    background_color = "#002b36"
-  [[solarized-light]]
-    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
-    background_image = None
-    cursor_color = "#002b36"
-    foreground_color = "#002b36"
-    show_titlebar = False
-    copy_on_selection = True
-    background_color = "#eee8d5"
+  group_tab_toggle = <Super>t
 [layouts]
   [[default]]
     [[[child1]]]
-      type = Terminal
       parent = window0
+      type = Terminal
     # profile = default
     # profile = solarized-dark
     # profile = solarized-light
     [[[window0]]]
-      type = Window
       parent = ""
+      type = Window
 [plugins]
+[profiles]
+  [[default]]
+    background_image = None
+    copy_on_selection = True
+    font = Monospace 11
+    show_titlebar = False
+    use_system_font = False
+  [[solarized-dark]]
+    background_color = "#002b36"
+    background_image = None
+    copy_on_selection = True
+    cursor_color = "#eee8d5"
+    foreground_color = "#eee8d5"
+    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
+    show_titlebar = False
+  [[solarized-light]]
+    background_color = "#eee8d5"
+    background_image = None
+    copy_on_selection = True
+    cursor_color = "#002b36"
+    foreground_color = "#002b36"
+    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
+    show_titlebar = False

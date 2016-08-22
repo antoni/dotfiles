@@ -11,6 +11,7 @@ Control+Shift+Left
 # Mute
 "/usr/bin/amixer -D pulse set Master Playback Switch toggle && ~notifyvolume"
 Control+Shift+0
+
 # Lock screen
 "slock"
 Control+Shift+l
@@ -20,15 +21,11 @@ Control+Shift+Up
 "xdotool click 5 --repeat 2"
 Control+Shift+Down
 
-# "x-terminal-emulator"
-# "urxvt"
-# Super_L
+# "bash -c 'sleep 1 && xdotool type date --delay 15 && xdotool key Return'"
+"sleep .1 && xdotool type --clearmodifiers --delay 25 'curl wp.pl' && sleep .1 &&  xdotool key --clearmodifiers Return"
+Alt+Left
 
 # Screenshots
-# TODO: FIXME
-# "gnome-screenshot -a"
-# Control+Shift+D
-
 "gnome-screenshot"
 Control+Shift+S
 
