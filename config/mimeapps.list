@@ -5,15 +5,12 @@ x-scheme-handler/https=google-chrome.desktop
 x-scheme-handler/about=google-chrome.desktop
 x-scheme-handler/unknown=google-chrome.desktop
 x-scheme-handler/mailto=google-chrome.desktop
+x-scheme-handler/trash=google-chrome.desktop
 application/pdf=google-chrome.desktop
 image/jpeg=mirage.desktop
 image/gif=mirage.desktop
 image/png=mirage.desktop
 inode/directory=explorer.desktop
-x-scheme-handler/trash=google-chrome.desktop
-x-scheme-handler/http=google-chrome.desktop
-x-scheme-handler/https=google-chrome.desktop
-text/html=google-chrome.desktop
 application/vnd.oasis.opendocument.text=libreoffice-writer.desktop
  
 [Added Associations]

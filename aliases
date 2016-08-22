@@ -509,3 +509,6 @@ alias copykey='cat ~/.ssh/id_rsa.pub | xsel -i -b'
 if command_exists vimx; then
     alias vim='vimx'
 fi
+
+# Gitignore.io support
+function gitignore() { curl -L -s https://www.gitignore.io/api/$@ ;}
