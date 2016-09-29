@@ -449,7 +449,6 @@ chmod_rec() {
     find . -type d -exec chmod $1 {} \;
 }
 
-alias make='make -j'
 alias gitresettoremote='git fetch origin ; git reset --hard origin/master'
 alias rmp='rm ~/Pictures/Screenshot*'
 alias i3wmreset='i3-msg "reload"'
@@ -488,6 +487,7 @@ alias switchm="xrandr --output VGA1 --left-of DP2" # switches monitors (left-rig
 
 alias di='sudo dnf install -y'
 alias ds='dnf search'
+alias dr='sudo dnf remove'
 
 # function ppgrep() { pgrep "$@" | xargs --no-run-if-empty ps fp; }
 function ppgrep() { \pgrep "$@" -a | egrep --color "[0-9]"; }
@@ -511,3 +511,30 @@ fi
 
 # Gitignore.io support
 function gitignore() { curl -L -s https://www.gitignore.io/api/$@ ;}
+
+function dnfs() {
+    arg_count = "$#"
+    if [ arg_count -eq 2 ]; then
+        dnf search $1 | grep $2
+    elif [ arg_count -eq 1 ]; then
+        dnf search $1
+    fi
+}
+
+alias cups='lpstat' # -p -d
+
+function fix_zsh_history() {
+    cd $HOME > /dev/null
+    mv .zsh_history .zsh_history_bad 
+    strings .zsh_history_bad > .zsh_history
+    fc -R .zsh_history
+}
+
+function fix_perms() {
+    find . -type d -exec chmod 775 {} \;
+    find . -type f -exec chmod 664 {} \;
+}
+
+function get_ip() {
+    host $1 | awk '/has address/ { print $4 }' | head -n 1
+}
