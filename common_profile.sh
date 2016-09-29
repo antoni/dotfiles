@@ -65,14 +65,16 @@ fi
 # Go
 export PATH=$PATH:/usr/local/go/bin
 
-export GOROOT=$HOME/go1.6
+# export GOROOT=$HOME/go
 export PATH=$PATH:$GOROOT/bin
 
 # CUDA
 export PATH=$PATH:/usr/local/cuda/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/cuda/lib
 
-source ~/ipmi/config.sh
+# source ~/ipmi/config.sh
 
 export SSLKEYLOGFILE=~/tmp/sslkeylog.log
 export NTLMUSER=aroscisz
+
+export rkt_path=/home/antoni/Downloads/rkt/build-rkt-1.13.0+git/target/bin

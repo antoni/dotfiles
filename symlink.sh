@@ -18,10 +18,12 @@ CLION_VERSION=1.2.4
 echo "CLion    version symlinked:   " $CLION_VERSION
 
 DOTFILES=(bashrc zshrc vimrc paths aliases common_profile.sh tmux.conf gitconfig 
-gitignore ghci gvimrc hgrc lldbinit gdbinit xbindkeysrc)
+gitignore ghci gvimrc hgrc lldbinit gdbinit xbindkeysrc optional.sh)
 
 # Xrdb merge
-xrdb ${DOTFILES_DIR}/Xresources.solarized
+XRES_FILE=Xresources.solarized
+xrdb ${DOTFILES_DIR}/${XRES_FILE}
+ln -sf ${DOTFILES_DIR}/${XRES_FILE} ~/.Xresources
 
 # Symlink the files in the current directory with corresponding dotfiles in
 # the home directory
@@ -54,6 +56,8 @@ chmod g-w ~/.ghci
 # /usr/bin symlinks
 # Chrome
 sudo ln -fs /usr/bin/google-chrome-stable /usr/bin/g
+# Eclipse
+sudo ln -fs ~/eclipse/eclipse /usr/bin/eclipse
 # clang
 sudo ln -fs /usr/bin/clang-$CLANG_VERSION /usr/bin/clang
 sudo ln -fs /usr/bin/clang++-$CLANG_VERSION /usr/bin/clang++

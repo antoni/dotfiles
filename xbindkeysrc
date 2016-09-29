@@ -4,9 +4,9 @@
 
 # Source: https:bbs.archlinux.orgviewtopic.php?pid=1042589#p1042589 *
 # Volume up/down
-"/usr/bin/amixer -q sset Master 2+ && ~notifyvolume"
+"/usr/bin/amixer -q sset Master 10%+ && ~notifyvolume"
 Control+Shift+Right
-"/usr/bin/amixer -q sset Master 2- && ~notifyvolume"
+"/usr/bin/amixer -q sset Master 10%- && ~notifyvolume"
 Control+Shift+Left
 # Mute
 "/usr/bin/amixer -D pulse set Master Playback Switch toggle && ~notifyvolume"

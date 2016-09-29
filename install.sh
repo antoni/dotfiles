@@ -2,6 +2,7 @@
 
 # Install required packages
 PACKAGES=(slock xbindkeys haskell clang vim vim-X11 rdesktop tigervnc make xpdf sysstat
+<<<<<<< 13fe9f389d856e5e6c9758eb33b8cfea57ed7069
 vim-enhanced vim-X11 make cmake gitk vlc st okular xdotool xbindkeys xautomation mosh
 libreoffice cscope ctags perf pavucontrol)
 OPTIONAL_PACKAGES=(qt-devel transmission-remote-* transmission-daemon)
