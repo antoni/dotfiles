@@ -126,7 +126,7 @@ au BufEnter,BufNew *.c noremap <F5> :wa \| !clang -Wall -g % -o test && ./test :
 " different F5 keymap for CUDA development
 au BufEnter,BufNew *.cu noremap <F5> :wa \| !nvcc -std=c++11 -g % -o test && ./test : <CR>
 " Python
-au BufEnter,BufNew *.py noremap <F5> :wa \| !python % : <CR>
+au BufEnter,BufNew *.py noremap <F5> :wa \| !python3 % : <CR>
 " LaTeX
 au BufEnter,BufNew *.tex noremap <F5> :wa \| Lt <CR>
 " Go
@@ -221,6 +221,8 @@ nmap <Leader>rf "zyiw:call Refactor()<cr>mx:silent! norm gd<cr>[{V%:s/<C-R>//<c-
 "}}}
 " Open .vimrc in a tab, on a 'Key mappings' section
 command! Vr :tabe ~/.vimrc | execute "normal /Key mappings \<CR><Space>" | nohlsearch
+" Remove blank lines
+command! RemoveBlankLines :g/^$/d 
 " Alias for PluginInstall
 command! I :PluginInstall
 " Replace commands "{{{
@@ -380,7 +382,8 @@ Bundle 'digitaltoad/vim-jade'
 Bundle 'Chiel92/vim-autoformat'
 " }}}
 
-" Color themes "{{{
+" Color schemes "{{{
+Plugin 'morhetz/gruvbox'
 Bundle 'changyuheng/color-scheme-holokai-for-vim'
 Bundle 'sjl/badwolf'
 Bundle 'altercation/vim-colors-solarized'
@@ -500,7 +503,8 @@ try
     " colorscheme solarized
     " colorscheme vividchalk
     " colorscheme mustang
-    colorscheme badwolf
+    " colorscheme badwolf
+    colorscheme gruvbox
     " colorscheme desert
     " colorscheme orangeocean256
     " colorscheme distinguished
@@ -508,7 +512,7 @@ try
     " vim-scripts/summerfruit256.vim
     " jonathanfilip/lucius
     " vim-scripts/256-jungle
-    set background=light
+    set background=dark
     " set background=dark
     " execute "set background=" . $BACKGROUND
 catch /^Vim\%((\a\+)\)\=:E185/
@@ -840,14 +844,14 @@ au BufNewFile,BufRead *.cuh set filetype=cuda
 " 11. Plugin-specific configuration {{{
 " Clang-format {{{
 let g:clang_format#command= os == "Darwin" ? '/usr/local/bin/clang-format' : '/usr/bin/clang-format'
-" let g:clang_format#code_style='google'
-let g:clang_format#style_options = {
-            \ "BasedOnStyle": "LLVM",
-            \"IndentWidth": 8,
-            \"UseTab": "Always",
-            \"BreakBeforeBraces": "Linux",
-            \"AllowShortIfStatementsOnASingleLine": "false",
-            \"IndentCaseLabels": "false"}
+let g:clang_format#code_style='google'
+" let g:clang_format#style_options = {
+            " \ "BasedOnStyle": "LLVM",
+            " \"IndentWidth": 8,
+            " \"UseTab": "Always",
+            " \"BreakBeforeBraces": "Linux",
+            " \"AllowShortIfStatementsOnASingleLine": "false",
+            " \"IndentCaseLabels": "false"}
 " }}}
 " CtrlP {{{
 map <leader>gh :CtrlP ~<CR>
