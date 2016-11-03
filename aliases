@@ -7,10 +7,10 @@ unamestr=`uname`
 if [[ "$unamestr" == 'Darwin' ]]; then
     # platform='macosx'
     # Mac OS X-specific
-    bind '"\es": "students\r"'
+    # bind '"\es": "students\r"'
     # Execute 'g++' command with last argument of previous command
-    bind '"\ee": "g++ !$\r"'
-    bind '"\er": "g++ !$\r ./a.out\r"'
+    # bind '"\ee": "g++ !$\r"'
+    # bind '"\er": "g++ !$\r ./a.out\r"'
     alias setmiddlevolume='sudo osascript -e "set Volume 5"'
     # alias mvim="/Applications/MacVim.app/contents/MacOS/MacVim"
     alias mvim='/Users/antoni/Developer/mvim'
@@ -18,6 +18,7 @@ if [[ "$unamestr" == 'Darwin' ]]; then
     alias eclipseclean='/Applications/eclipse/Eclipse.app/Contents/MacOS/eclipse -clean'
     alias topcoder='javaws ~/Developer/Topcoder/ContestAppletProd.jnlp'
     alias copypubkey='xsel --clipboard < id_rsa.pub'
+    alias vim='mvim -v'
 elif [[ "$unamestr" == 'Linux' ]]; then
     # platform='linux'
     # Linux specific
@@ -31,6 +32,7 @@ elif [[ "$unamestr" == 'Linux' ]]; then
     alias st='scrot -ub '"'"'%Y:%m:%d:%H:%M:%S.png'"'"' -e '"'"'mv $f ~/Downloads/'"'"
     alias catquestions='cat ~/Documents/Q.txt'
     alias mountrw='mount -o remount,rw /'
+    alias vim='vim -o'
 fi
 
 # General purpose
@@ -47,7 +49,6 @@ alias cx='chmod +x'
 alias m='man' ; 
 alias mm='man $(fc -ln -1 | cut -d" " -f 1)'
 alias l='ls'
-alias vim='vim -o'
 alias v='vim'
 alias grep='grep --color -ni'
 alias sudolastcmd='!!' # remember
@@ -128,8 +129,6 @@ alias ......="cd ../../.."
 gg() { pwd > /tmp/last_path; }
 hh() { cd $(cat /tmp/last_path); }
 
-# alias vim='vim -p'
-# alias vimp='vim -p *.{h.cc.cpp}'
 alias webserver='python -m SimpleHTTPServer 8080'
 alias gprer='grep -R'
 
@@ -200,14 +199,14 @@ vv() {
     terminator -l vim-solarized-$theme -c "vim -c 'set gb=$theme'"
 }
 # Use less +F instead of tail -f
-function tail() {
-    if [ "$1" == '-f' ]; then
-        shift
-        less +F "$@"
-    else
-        command tail "$@"
-    fi
-}
+# function tail() {
+    # if [ "$1" == '-f' ]; then
+        # shift
+        # less +F "$@"
+    # else
+        # command tail "$@"
+    # fi
+# }
 # Display 20 most frequently used commands in Bash
 alias mostfrequent='history | cut -d " " -f 4 | tr -c "[:alnum:]" "[\n*]" | sort | uniq -c | sort -nr | head  -20'
 # 20 Command Line Tools to Monitor Linux Performance
