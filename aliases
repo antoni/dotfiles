@@ -5,7 +5,6 @@
 platform='unknown'
 unamestr=`uname`
 if [[ "$unamestr" == 'Darwin' ]]; then
-    # platform='macosx'
     # Mac OS X-specific
     # bind '"\es": "students\r"'
     # Execute 'g++' command with last argument of previous command
@@ -19,8 +18,8 @@ if [[ "$unamestr" == 'Darwin' ]]; then
     alias topcoder='javaws ~/Developer/Topcoder/ContestAppletProd.jnlp'
     alias copypubkey='xsel --clipboard < id_rsa.pub'
     alias vim='mvim -v'
+    alias ls='ls -h -lFG'
 elif [[ "$unamestr" == 'Linux' ]]; then
-    # platform='linux'
     # Linux specific
     # alias i='sudo apt-get install -y'
     # Install through apt-get and add installed software to list of used commands
@@ -33,6 +32,7 @@ elif [[ "$unamestr" == 'Linux' ]]; then
     alias catquestions='cat ~/Documents/Q.txt'
     alias mountrw='mount -o remount,rw /'
     alias vim='vim -o'
+    alias ls='ls -h --color -lFG'
 fi
 
 # General purpose
@@ -52,7 +52,6 @@ alias l='ls'
 alias v='vim'
 alias grep='grep --color -ni'
 alias sudolastcmd='!!' # remember
-alias ls='ls -h --color -lFG'
 alias rmf='rm -rf'
 
 alias o='rlwrap ocaml'
