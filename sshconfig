@@ -1,0 +1,9 @@
+Host localhost
+	KexAlgorithms +diffie-hellman-group1-sha1
+
+Host students
+    Hostname students.mimuw.edu.pl
+    User ar267209
+
+Host *
+    User antoni

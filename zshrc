@@ -110,3 +110,15 @@ unsetopt correct_all
 # setopt AUTO_PUSHD HIST_IGNORE_DUPS PUSHD_IGNORE_DUPS
 # zstyle ':completion::complete:n-kill::bits' matcher 'r:|=** l:|=*'
 ### END ###
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f /home/antoni/google-cloud-sdk/path.zsh.inc ]; then
+  source '/home/antoni/google-cloud-sdk/path.zsh.inc'
+fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f /home/antoni/google-cloud-sdk/completion.zsh.inc ]; then
+  source '/home/antoni/google-cloud-sdk/completion.zsh.inc'
+fi
+
+source $HOME/.cargo/env
