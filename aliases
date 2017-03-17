@@ -74,6 +74,7 @@ alias mountstudents='sshfs ar267209@students.mimuw.edu.pl: /Users/antoni/student
 alias students='export TERM=vt100 ; ssh students.mimuw.edu.pl -l ar267209 -t tmux a'
 alias icm='ssh antoni@hpc.icm.edu.pl' 
 alias icmgw='ssh antoni@gw.icm.edu.pl' 
+alias bioex='ssh arosciszewski@bioexploratorium.pl'
 #alias wget='curl -0'
 alias xcode="open *.xcodeproj"
 # It's worth mentioning what the options -czf after tar are for: c indicates that you want to create a tar archive, z applies gzip on the intermediate tar archive, and f is for the subsequent final file name folder_name.tar.gz. – fideli Jul 9 '10 at 19:11
@@ -288,10 +289,6 @@ alias disktest='sudo smartctl -a /dev/sda | less'
 alias dmesg='dmesg -T'
 alias dmesgerrors="dmesg | egrep 'error|fail|bug|rtl8|r8|wlan'"
 
-# Fix file permissions in home directory
-alias fixperm1='find /home/user -type d -print0 | xargs -0 chmod 0775'
-alias fixperm2='find /home/user -type f -print0 | xargs -0 chmod 0664'
-
 # TOOD: Check if Debian/Ubuntu
 listkernels() {
     dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d'
@@ -448,6 +445,7 @@ chmod_rec() {
     find . -type d -exec chmod $1 {} \;
 }
 
+alias make='make -j 4'
 alias gitresettoremote='git fetch origin ; git reset --hard origin/master'
 alias rmp='rm ~/Pictures/Screenshot*'
 alias i3wmreset='i3-msg "reload"'
@@ -485,7 +483,7 @@ alias install_ycm='~/.vim/bundle/YouCompleteMe/install.py --clang-completer  --g
 alias switchm="xrandr --output VGA1 --left-of DP2" # switches monitors (left-right)
 
 alias di='sudo dnf install -y'
-alias ds='dnf search'
+alias ds='dnf search -C'
 alias dr='sudo dnf remove'
 
 # function ppgrep() { pgrep "$@" | xargs --no-run-if-empty ps fp; }
@@ -537,3 +535,12 @@ function fix_perms() {
 function get_ip() {
     host $1 | awk '/has address/ { print $4 }' | head -n 1
 }
+
+# Query Linux man page for certain flag
+# Example: manf iptables -t
+function manf () { man $1 | less -p "^ +\-$2" }
+
+alias rs='xfreerdp /kbd:0x415 /multimon +fonts /d:ger +clipboard +aero /home-drive /audio-mode:1 /v:GKSRDS007 /monitors:2'
+
+alias dmidecode='sudo dmidecode'
+alias ipconfig='ifconfig'

@@ -4,7 +4,7 @@
 PACKAGES=(slock xbindkeys haskell clang vim vim-X11 rdesktop tigervnc make xpdf sysstat
 <<<<<<< 13fe9f389d856e5e6c9758eb33b8cfea57ed7069
 vim-enhanced vim-X11 make cmake gitk vlc st okular xdotool xbindkeys xautomation mosh
-libreoffice cscope ctags perf pavucontrol)
+libreoffice cscope ctags perf pavucontrol jq dmidecode xsel)
 OPTIONAL_PACKAGES=(qt-devel transmission-remote-* transmission-daemon)
 
 NET_TOOLS=(nmap-ncat)
@@ -13,10 +13,12 @@ HASKELL=(ghc ghc-Cabal cabal-install)
 
 LATEX=(texlive-listing texlive-pgfopts)
 
-FEDORA=(gnome-icon-theme system-config-printer libreoffice-langpack-pl boost-devel squashfs-tools glibc-devel ghc-ShellCheck pykickstart)
+FEDORA=(gnome-icon-theme system-config-printer libreoffice-langpack-pl boost-devel squashfs-tools glibc-devel ghc-ShellCheck pykickstart ImageMagick-devel)
 RXVT=(rxvt-unicode rxvt-unicode-ml rxvt-unicode-256color rxvt-unicode-256color-ml)
 
-DEBIAN=(gnome-icon-theme-full boost-dev)
+DEBIAN=(gnome-icon-theme-full boost-dev imagemagick)
+
+KERNEL_DEV=(cscope exuberant-ctags)
 
 if [ -f /etc/debian_version ]; then
     echo "Installing required packages on Debian"
