@@ -119,8 +119,9 @@ set mouse=a
 au BufEnter,BufNew *.java noremap <F5> :wa \| !javac -verbose % && java %:r : <CR>
 " C++ quick compilation
 " noremap <F5> :wa \| !clang++ -g -Wall -pthread -std=c++11 % -o test && ./test : <CR>
-noremap <F5> :wa \| !clang++ -g -Wall -Wno-missing-braces -pthread -std=c++1z % -o test && ./test : <CR>
-noremap <F6> :wa \| !clang++ -g -Wall -include /usr/include/x86_64-linux-gnu/c++/4.8/bits/stdc++.h -pthread -std=c++11 % -o test && ./test : <CR>
+" noremap <F5> :wa \| !clang++ -g -Wall -Wno-missing-braces -pthread -std=c++1z % -o test && ./test : <CR>
+noremap <F5> :wa \| !clang++ -g -Wall -Wno-missing-braces -Wno-unused -std=c++1z % -o test && ./test < ~/test0.in <CR>
+" noremap <F6> :wa \| !clang++ -g -Wall -include /usr/include/x86_64-linux-gnu/c++/4.8/bits/stdc++.h -pthread -std=c++11 % -o test && ./test : <CR>
 " au BufEnter,BufNew *.c noremap <F5> :wa \| !clang -std=c99 -g % -o test && ./test : <CR>
 au BufEnter,BufNew *.c noremap <F5> :wa \| !clang -Wall -g % -o test && ./test : <CR>
 " different F5 keymap for CUDA development
@@ -431,13 +432,16 @@ Plugin 'tmhedberg/SimpylFold'
 " Prolog {{{
 " Bundle 'adimit/prolog.vim'  
 " }}}
+" Promela {{{
+Plugin 'vim-scripts/promela.vim'
+" }}}
 " Go {{{
 Plugin 'fatih/vim-go'
 " }}}
 " Plugin 'stefandtw/quickfix-reflector.vim'
 " Plugin 'vim-scripts/linuxsty.vim'
-Plugin 'bling/vim-airline'
-Plugin 'kana/vim-operator-user'     " Recommended by clang-format
+"Plugin 'bling/vim-airline'
+"Plugin 'kana/vim-operator-user'     " Recommended by clang-format
 " Plugin 'vim-scripts/vim-auto-save'
 Plugin 'kien/ctrlp.vim'             " For tag creation
 Plugin 'tacahiroy/ctrlp-funky'

@@ -35,6 +35,7 @@
     ad = add
     mt = mergetool
     lg = log --graph --name-status --pretty=oneline
+    change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch -f --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f "
 [push]
 	default = matching
 [pull]
