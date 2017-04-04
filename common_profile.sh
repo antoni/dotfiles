@@ -33,7 +33,7 @@ if [ -e $WALLPAPER ]; then
 fi
 
 # PL keyboard layout
-if command_exists setxkbmap; then
+if command_exists setxkbmap && [[ "$unamestr" != 'Darwin' ]] ; then
     setxkbmap pl
 fi
 
