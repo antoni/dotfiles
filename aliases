@@ -3,7 +3,7 @@
 
 # Aliases and custom functions
 platform='unknown'
-unamestr=`uname`
+export unamestr=`uname`
 if [[ "$unamestr" == 'Darwin' ]]; then
     # Mac OS X-specific
     # bind '"\es": "students\r"'
@@ -109,11 +109,6 @@ alias indent='indent -i8 -nbad -bap -nbc -br -brs -c33 -cd33 -ncdb -ce -ci4 -cli
 # Kill all jobs
 alias kj='kill -9 $(jobs -p)'
 
-
-# topcoder
-alias tc='topcoder'
-alias json='pjson'
-
 # tmux
 alias tm='tmux'
 alias tma='tmux attach'
@@ -126,8 +121,8 @@ alias ....="cd ../.."
 alias ......="cd ../../.."
 
 # Helper functions
-gg() { pwd > /tmp/last_path; }
-hh() { cd $(cat /tmp/last_path); }
+function gg() { pwd > /tmp/last_path; }
+function hh() { cd $(cat /tmp/last_path); }
 
 alias webserver='python -m SimpleHTTPServer 8080'
 alias gprer='grep -R'
