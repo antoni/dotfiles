@@ -143,6 +143,7 @@ alias fixaudio='pulseaudio -k' ; alias fixaudio2='pavucontrol'
 alias fixaudio3='rm -r ~/.config/pulse; pulseaudio -k'
 alias fixpowerctl='for i in /sys/bus/usb/devices/*/power/control; do echo on > $i; done'
 alias fixtouchpad='sudo rmmod psmouse && sudo modprobe psmouse'
+alias ubuntu_fix_apt='sudo apt-get install --fix-broken && sudo apt-get autoremove && sudo apt-get update'
 
 alias explorer='nautilus --no-desktop'
 
