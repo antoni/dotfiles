@@ -27,7 +27,7 @@ fi
 export QTDIR=$HOME/Qt/5.4/gcc_64/
 
 # Background image
-WALLPAPER=~/Documents/wallpaper4.jpg
+WALLPAPER=~/Documents/wallpaper5.jpg
 if [ -e $WALLPAPER ]; then
     feh --bg-scale $WALLPAPER
 fi
@@ -72,13 +72,6 @@ export PATH=$PATH:$GOROOT/bin
 export PATH=$PATH:/usr/local/cuda/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/cuda/lib
 
-export SSLKEYLOGFILE=~/tmp/sslkeylog.log
-export NTLMUSER=aroscisz
-
-# bridge aliases
-alias rktcoreos='sudo $RKT_BUILD_DIR/rkt run --net=bridge-nat --insecure-options=image --stage1-path=$RKT_BUILD_DIR/stage1-kvm.aci --interactive kinvolk.io/aci/busybox:latest'
-alias rktkvm='sudo $RKT_BUILD_DIR/rkt run --net=bridge-nat --insecure-options=image --stage1-path=$RKT_BUILD_DIR/stage1-coreos.aci --interactive kinvolk.io/aci/busybox:latest'
-
-export rkt_path='/home/antoni/intel/rkt/build-rkt-1.13.0+git/target/bin'
-
-export PATH=${PATH}:/home/antoni/kubernetes/third_party/etcd
+# MPI
+export PATH=$PATH:/usr/lib64/openmpi/bin
+>>>>>>> Aliases, vimrc changes
