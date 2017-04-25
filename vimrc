@@ -848,14 +848,14 @@ au BufNewFile,BufRead *.cuh set filetype=cuda
 " 11. Plugin-specific configuration {{{
 " Clang-format {{{
 let g:clang_format#command= os == "Darwin" ? '/usr/local/bin/clang-format' : '/usr/bin/clang-format'
-let g:clang_format#code_style='google'
-" let g:clang_format#style_options = {
-            " \ "BasedOnStyle": "LLVM",
-            " \"IndentWidth": 8,
-            " \"UseTab": "Always",
-            " \"BreakBeforeBraces": "Linux",
-            " \"AllowShortIfStatementsOnASingleLine": "false",
-            " \"IndentCaseLabels": "false"}
+" let g:clang_format#code_style='google'
+let g:clang_format#style_options = {
+            \ "BasedOnStyle": "LLVM",
+            \"IndentWidth": 8,
+            \"UseTab": "Always",
+            \"BreakBeforeBraces": "Linux",
+            \"AllowShortIfStatementsOnASingleLine": "false",
+            \"IndentCaseLabels": "false"}
 " }}}
 " CtrlP {{{
 map <leader>gh :CtrlP ~<CR>

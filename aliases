@@ -276,6 +276,8 @@ function stopwatch(){
     done
 }
 
+function mvd() { mv $1 ~/Downloads/; }
+
 # Utils
 # Print primitive data types sizes
 alias typesizes='perl -V | grep size='
