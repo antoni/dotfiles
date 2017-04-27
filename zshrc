@@ -120,5 +120,3 @@ fi
 if [ -f /home/antoni/google-cloud-sdk/completion.zsh.inc ]; then
   source '/home/antoni/google-cloud-sdk/completion.zsh.inc'
 fi
-
-source $HOME/.cargo/env
