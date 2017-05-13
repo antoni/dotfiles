@@ -18,7 +18,6 @@
 [plugins]
 [profiles]
   [[default]]
-    background_image = None
     copy_on_selection = True
     font = Monospace 11
     scrollback_infinite = True
@@ -26,7 +25,6 @@
     use_system_font = False
   [[solarized-dark]]
     background_color = "#002b36"
-    background_image = None
     copy_on_selection = True
     cursor_color = "#eee8d5"
     foreground_color = "#eee8d5"
@@ -34,7 +32,6 @@
     show_titlebar = False
   [[solarized-light]]
     background_color = "#eee8d5"
-    background_image = None
     copy_on_selection = True
     cursor_color = "#002b36"
     foreground_color = "#002b36"
