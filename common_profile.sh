@@ -1,6 +1,8 @@
 # Common profile file for bash and zsh
 
-export TERM=screen-256color
+# Overcome the madness: http://www.economyofeffort.com/2014/07/04/zsh/
+export TERM=xterm-256color
+[ -n "$TMUX" ] && export TERM=screen-256color
 
 # See: https://bugs.launchpad.net/ubuntu/+source/at-spi2-core/+bug/1193236
 export NO_AT_BRIDGE=1
