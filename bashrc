@@ -129,3 +129,7 @@ source ~/.common_profile.sh
 # Ignore case when 'ls'
 shopt -s nocaseglob
 
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/antoni/.sdkman"
+[[ -s "/home/antoni/.sdkman/bin/sdkman-init.sh" ]] && source "/home/antoni/.sdkman/bin/sdkman-init.sh"
