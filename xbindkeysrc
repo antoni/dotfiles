@@ -29,3 +29,17 @@ Alt+Left
 "gnome-screenshot"
 Control+Shift+S
 
+# Typing 
+
+# Account number
+"~/scripts/typetext/wrappers/account_number.sh k"
+Alt + k
+
+# Offical email (PL)
+"~/scripts/typetext/wrappers/official_email_pl.sh o"
+Alt + o
+
+# Regards (PL)
+"~/scripts/typetext/wrappers/regards.sh p"
+Alt + p
+

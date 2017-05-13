@@ -542,3 +542,8 @@ alias rs='xfreerdp /kbd:0x415 /multimon +fonts /d:ger +clipboard +aero /home-dri
 
 alias dmidecode='sudo dmidecode'
 alias ipconfig='ifconfig'
+
+# Delete all containers & all images
+function dockerrmall() {
+    docker rm $(docker ps -a -q) && docker rmi $(docker images -q)
+}
