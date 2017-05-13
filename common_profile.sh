@@ -1,8 +1,6 @@
 # Common profile file for bash and zsh
 
-# Make the colors work under Terminator
-export TERM=xterm-256color
-#export TERM=gnome-terminal
+export TERM=screen-256color
 
 # See: https://bugs.launchpad.net/ubuntu/+source/at-spi2-core/+bug/1193236
 export NO_AT_BRIDGE=1
@@ -63,10 +61,11 @@ fi
 # export IBUS_ENABLE_SYNC_MODE=1
 
 # Go
+# export GOROOT=$HOME/go
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/go/
 export PATH=$PATH:/usr/local/go/bin
-
-export GOROOT=$HOME/go1.7
-export PATH=$PATH:$GOROOT/bin
+# export PATH=$PATH:$GOROOT/bin
 
 # CUDA
 export PATH=$PATH:/usr/local/cuda/bin
