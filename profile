@@ -16,4 +16,3 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
-source .paths
