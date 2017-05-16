@@ -84,9 +84,9 @@ unsetopt nomatch
 # Execute ls after cd
 chpwd() ls
 
-source ~/.aliases
-source ~/.paths
-source ~/.common_profile.sh
+source $HOME/.paths
+source $HOME/.aliases
+source $HOME/.common_profile.sh
 
 # Ignore case when 'ls'
 unsetopt CASE_GLOB
