@@ -380,6 +380,11 @@ function gc() {
     git commit -am "$*"
 }
 
+function gcp() {
+    gc "$*";
+    git push;
+}
+
 function command_exists () {
     type "$1" &> /dev/null ;
 }
