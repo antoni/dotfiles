@@ -1,3 +1,6 @@
+# TODO: check displays
+xrandr --output VGA1 --mode 1680x1050 --right-of LVDS1
+
 # Common profile file for bash and zsh
 
 # Overcome the madness: http://www.economyofeffort.com/2014/07/04/zsh/

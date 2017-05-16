@@ -122,13 +122,12 @@ stty stop undef
 # ls after cd
 # function cd { builtin cd "$@" && ls -F }
 
-source ~/.aliases
-source ~/.paths
-source ~/.common_profile.sh
-
 # Ignore case when 'ls'
 shopt -s nocaseglob
 
+source $HOME/.paths
+source $HOME/.aliases
+source $HOME/.common_profile.sh
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/home/antoni/.sdkman"
