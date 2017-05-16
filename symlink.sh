@@ -5,20 +5,18 @@ DOTFILES_DIR=~/dotfiles
 
 # Version of clang-format, should be taken from /usr/bin/clang-format-X.Y,
 # same for clang-modernize
-# CLANG_VERSION=`\ls /usr/bin/clang-?.? -1 | cut -d'-' -f2 | sort -gr | head -1`
 CLANG_VERSION=3.7
 echo "Clang    version symlinked:   " $CLANG_VERSION
 CLANG_FORMAT_VERSION=$CLANG_VERSION
 CLANG_MODERNIZE_VERSION=$CLANG_VERSION
 LLDB_VERSION=3.7
 echo "LLDB     version symlinked:   " $LLDB_VERSION
-IDEA_VERSION=IC-143.1821.5
+IDEA_VERSION=`echo $HOME/idea-* | awk -F'-' '{print $3}'`
 echo "IntelliJ version symlinked:   " $IDEA_VERSION
 CLION_VERSION=1.2.4
 echo "CLion    version symlinked:   " $CLION_VERSION
 
-DOTFILES=(bashrc zshrc vimrc paths aliases common_profile.sh tmux.conf gitconfig 
-gitignore ghci gvimrc hgrc lldbinit gdbinit xbindkeysrc optional.sh)
+DOTFILES=(profile bashrc zshrc vimrc paths aliases common_profile.sh tmux.conf gitconfig gitignore ghci gvimrc hgrc lldbinit gdbinit xbindkeysrc optional.sh)
 
 # Xrdb merge
 XRES_FILE=Xresources.solarized
@@ -53,6 +51,8 @@ ln -fs ${DOTFILES_DIR}/scripts ~/scripts
 # .ghci access
 chmod g-w ~/.ghci
 
+set -x # echo executed commands
+
 # /usr/bin symlinks
 # Chrome
 sudo ln -fs /usr/bin/google-chrome-stable /usr/bin/g
@@ -68,9 +68,13 @@ sudo ln -fs /usr/bin/clang-modernize-$CLANG_MODERNIZE_VERSION /usr/bin/clang-mod
 # lldb
 sudo ln -fs /usr/bin/lldb-$LLDB_VERSION /usr/bin/lldb
 # IDEA
-sudo ln -fs /home/antoni/idea-$IDEA_VERSION/bin/idea.sh /usr/bin/idea
+sudo ln -fs /home/antoni/idea-IC-$IDEA_VERSION/bin/idea.sh /usr/bin/idea
 # Clion
 sudo ln -fs /home/antoni/clion-$CLION_VERSION/bin/clion.sh /usr/bin/clion
+# Screenshots
+sudo ln -fs $HOME/scripts/st.sh /bin/st
+
+set +x
 
 # Clone Vundle reposiroty (Vim)
 VUNDLEDIR=~/.vim/bundle/Vundle.vim
@@ -83,8 +87,7 @@ fi
 # https://gist.githubusercontent.com/antoni/d8ac9973b2f28765b329/raw/811fa82e6ff738e06c11453bfa93d846d76d2386/cuda.snippets 
 # && mv cuda.snippets ~/.vim/bundle/vim-snippets/snippets/
 
-sudo ln -fs /home/antoni/dotfiles/st.sh /bin/st
-
 # Optional: go get
-GO_PACKAGES=(github.com/derekparker/delve/cmd/dlv github.com/Sirupsen/logrus)
-go get -u $GO_PACKAGES
+# GO_PACKAGES=(github.com/derekparker/delve/cmd/dlv github.com/Sirupsen/logrus)
+# go get -u $GO_PACKAGES
+

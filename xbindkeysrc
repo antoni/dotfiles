@@ -2,6 +2,9 @@
 # Load the file by executing:
 # killall xbindkeys && xbindkeys -f ~/.xbindkeysrc
 
+# Use xbindkeys -k
+# to recognize key sequence
+
 # Source: https:bbs.archlinux.orgviewtopic.php?pid=1042589#p1042589 *
 # Volume up/down
 "/usr/bin/amixer -q sset Master 10%+ && ~notifyvolume"
@@ -42,4 +45,19 @@ Alt + o
 # Regards (PL)
 "~/scripts/typetext/wrappers/regards.sh p"
 Alt + p
+
+# Polish ID number
+"~/scripts/typetext/wrappers/id_number.sh i"
+Alt + i
+
+# Polish ID number
+"~/scripts/typetext/wrappers/car_licence_number.sh l"
+Alt + l
+
+# E-mail
+"~/scripts/typetext/wrappers/email.sh e"
+Alt + e
+
+"gedit"
+Shift+Mod4 + Shift_R
 
