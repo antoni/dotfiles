@@ -523,6 +523,8 @@ function dnfs() {
 
 alias cups='lpstat' # -p -d
 
+alias zsh_debug='zsh -i -x -c exit'
+
 function fix_zsh_history() {
     cd $HOME > /dev/null
     mv .zsh_history .zsh_history_bad 
@@ -553,4 +555,6 @@ function dockerrmall() {
     docker rm $(docker ps -a -q) && docker rmi $(docker images -q)
 }
 
-alias zsh_debug='zsh -i -x -c exit'
+function list_installed() {
+    dnf list installed | awk -F. -v ORS="\0" '{print $1" "}' | sort -zu && echo ""
+}
