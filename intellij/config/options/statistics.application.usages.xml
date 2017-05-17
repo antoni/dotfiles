@@ -1,0 +1,44 @@
+<application>
+  <component name="StatisticsApplicationUsages">
+    <group name="Git">
+      <project id="TApp" values="config.warn.about.crlf.enabled,config.save.policy.STASH,config.repo.sync.NOT_DECIDED,config.force.push.enabled,config.push.autoupdate.disabled,config.warn.about.detached.enabled,config.push.update.all.roots.enabled,config.ssh.enabled,config.update.type.BRANCH_DEFAULT,config.cherry-pick.autocommit.disabled" collectionTime="1478880000901" />
+      <project id="golang-concurrency-presentation" values="config.cherry-pick.autocommit.disabled,config.ssh.enabled,config.repo.sync.NOT_DECIDED,config.push.autoupdate.disabled,config.warn.about.detached.enabled,config.save.policy.STASH,config.force.push.enabled,config.push.update.all.roots.enabled,config.update.type.BRANCH_DEFAULT,config.warn.about.crlf.enabled" collectionTime="1470187848585" />
+    </group>
+    <group name="language-level">
+      <project id="TApp" values="JDK_1_8" collectionTime="1478880000900" />
+      <project id="golang-concurrency-presentation" values="JDK_1_8" collectionTime="1470187848583" />
+    </group>
+    <group name="run-configuration-type-temp">
+      <project id="TApp" values="Application" collectionTime="1478880000757" />
+      <project id="golang-concurrency-presentation" values="GoApplicationRunConfiguration,GoRunFileConfiguration" collectionTime="1470187848567" />
+    </group>
+    <group name="images.ide.background">
+      <project id="TApp" values="frame 0,editor 0" collectionTime="1478880000899" />
+      <project id="golang-concurrency-presentation" values="editor 0,frame 0" collectionTime="1470187848582" />
+    </group>
+    <group name="file-type">
+      <project id="TApp" values="IDEA_MODULE,JAVA" collectionTime="1478880000899" />
+    </group>
+    <group name="module type">
+      <project id="TApp" values="JAVA_MODULE" collectionTime="1478880000757" />
+    </group>
+  </component>
+  <component name="UsageTrigger">
+    <counts>
+      <entry feature="CreateFile.CreateFileAction" count="2" />
+      <entry feature="execute.Application.Run" count="174" />
+      <entry feature="execute.GoApplicationRunConfiguration.Run" count="2" />
+      <entry feature="execute.GoRunFileConfiguration.Run" count="7" />
+      <entry feature="ide.help.ideaInterface.editor" count="1" />
+      <entry feature="ide.settings.Auto_Import" count="1" />
+      <entry feature="ide.settings.Go_Libraries" count="1" />
+      <entry feature="ide.settings.Plugins" count="3" />
+      <entry feature="ide.settings.Save_Actions" count="1" />
+      <entry feature="ideaapp.started" count="22" />
+      <entry feature="welcome.screen.WelcomeScreen.Configure" count="1" />
+      <entry feature="welcome.screen.WelcomeScreen.CreateNewProject" count="1" />
+      <entry feature="welcome.screen.WelcomeScreen.OpenProject" count="1" />
+      <entry feature="welcome.screen.WelcomeScreen.Settings" count="1" />
+    </counts>
+  </component>
+</application>
