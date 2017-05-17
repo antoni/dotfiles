@@ -1,0 +1,91 @@
+<application>
+  <component name="RecentProjectsManager">
+    <option name="recentPaths">
+      <list>
+        <option value="$USER_HOME$/IdeaProjects/Java8Chat" />
+        <option value="$USER_HOME$/IdeaProjects/GoogleCodingSample" />
+        <option value="$USER_HOME$/IdeaProjects/TApp" />
+        <option value="$USER_HOME$/Downloads/__wspace/UTP5_SP_S2834" />
+        <option value="$USER_HOME$/Downloads/__wspace/UTP5_WP_S12828" />
+        <option value="$USER_HOME$/Downloads/golang-concurrency-presentation" />
+      </list>
+    </option>
+    <option name="openPaths">
+      <list>
+        <option value="$USER_HOME$/IdeaProjects/Java8Chat" />
+      </list>
+    </option>
+    <option name="lastPath" value="$USER_HOME$/IdeaProjects/Java8Chat" />
+    <option name="additionalInfo">
+      <map>
+        <entry key="$USER_HOME$/Downloads/__wspace/UTP5_SP_S2834">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IC-162.2228.15" />
+              <option name="productionCode" value="IC" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1480196929654" />
+              <option name="buildTimestamp" value="1476396000000" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/Downloads/__wspace/UTP5_WP_S12828">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IC-162.2228.15" />
+              <option name="productionCode" value="IC" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1480196767800" />
+              <option name="buildTimestamp" value="1476396000000" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/Downloads/golang-concurrency-presentation">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IC-162.1121.32" />
+              <option name="productionCode" value="IC" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1470187117734" />
+              <option name="buildTimestamp" value="1468015200000" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/IdeaProjects/GoogleCodingSample">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IC-162.2228.15" />
+              <option name="productionCode" value="IC" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1491292884521" />
+              <option name="buildTimestamp" value="1476396000000" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/IdeaProjects/Java8Chat">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IC-171.4424.56" />
+              <option name="productionCode" value="IC" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1495048807540" />
+              <option name="buildTimestamp" value="1494608755925" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/IdeaProjects/TApp">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IC-162.2228.15" />
+              <option name="productionCode" value="IC" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1480657282195" />
+              <option name="buildTimestamp" value="1476396000000" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="lastProjectLocation" value="$USER_HOME$/IdeaProjects" />
+  </component>
+</application>
