@@ -1,0 +1,16 @@
+<application>
+  <component name="FindRecents">
+    <findStrings>
+      <find>main</find>
+      <find>2</find>
+      <find>outner</find>
+      <find>chooseu</find>
+      <find>start</find>
+      <find>setVisible</find>
+      <find>new client(</find>
+      <find>system.out.print</find>
+      <find>messageBroadcaster</find>
+      <find>chatBox</find>
+    </findStrings>
+  </component>
+</application>
