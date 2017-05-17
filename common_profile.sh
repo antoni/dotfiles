@@ -1,6 +1,3 @@
-# TODO: check displays
-xrandr --output VGA1 --mode 1680x1050 --right-of LVDS1
-
 # Common profile file for bash and zsh
 
 # Overcome the madness: http://www.economyofeffort.com/2014/07/04/zsh/
@@ -13,7 +10,7 @@ export NO_AT_BRIDGE=1
 # Get distribution name
 OS="CentOS"
 if command_exists lsb_release; then
-OS=$(lsb_release -si)
+    OS=$(lsb_release -si)
 fi
 
 # Files with commands to be loaded by both Bash and ZSH
@@ -35,10 +32,17 @@ if [ -e $WALLPAPER ]; then
     feh --bg-scale $WALLPAPER
 fi
 
-# PL keyboard layout
-if command_exists setxkbmap && [[ "$unamestr" != 'Darwin' ]] ; then
-    setxkbmap pl
-fi
+# Executed when in X mode (e.g. DISPLAY is set)
+if [ -z ${DISPLAY} ]; then  
+    # DISPLAY unset
+else
+    xrandr --output VGA1 --mode 1680x1050 --right-of LVDS1
+
+    # PL keyboard layout
+    if command_exists setxkbmap && [[ "$unamestr" != 'Darwin' ]] ; then
+        setxkbmap pl
+    fi
+fi # end DISPLAY setup
 
 export EDITOR="vim"
 
