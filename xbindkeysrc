@@ -61,3 +61,5 @@ Alt + e
 "gedit"
 Shift+Mod4 + Shift_R
 
+"dmenu_run"
+Mod2 + Menu
