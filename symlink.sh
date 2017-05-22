@@ -5,15 +5,15 @@ DOTFILES_DIR=~/dotfiles
 
 # Version of clang-format, should be taken from /usr/bin/clang-format-X.Y,
 # same for clang-modernize
-CLANG_VERSION=3.7
-echo "Clang    version symlinked:   " $CLANG_VERSION
-CLANG_FORMAT_VERSION=$CLANG_VERSION
-CLANG_MODERNIZE_VERSION=$CLANG_VERSION
+# CLANG_VERSION=3.9
+# echo "Clang    version symlinked:   " $CLANG_VERSION
+# CLANG_FORMAT_VERSION=$CLANG_VERSION
+# CLANG_MODERNIZE_VERSION=$CLANG_VERSION
 LLDB_VERSION=3.7
 echo "LLDB     version symlinked:   " $LLDB_VERSION
 IDEA_VERSION=`echo $HOME/idea-* | awk -F'-' '{print $3}'`
 echo "IntelliJ version symlinked:   " $IDEA_VERSION
-CLION_VERSION=1.2.4
+CLION_VERSION=2017.1.1
 echo "CLion    version symlinked:   " $CLION_VERSION
 
 DOTFILES=(profile bashrc zshrc vimrc paths aliases common_profile.sh tmux.conf gitconfig gitignore ghci gvimrc hgrc lldbinit gdbinit xbindkeysrc optional.sh)
@@ -39,7 +39,10 @@ I3WM_DIR=~/.config/i3/
 if ! [[ -f $I3WM_DIR ]]; then
     mkdir -p $I3WM_DIR;
 fi;
-ln -fs ${DOTFILES_DIR}/i3.config ~/.config/i3/config
+
+ln -fs ${DOTFILES_DIR}/i3/config ~/.config/i3/config
+ln -fs ${DOTFILES_DIR}/i3/status.config ~/.config/i3/i3status.config
+
 ln -fs ${DOTFILES_DIR}/config/mimeapps.list ~/.config/mimeapps.list
 
 # SSH config
@@ -59,12 +62,12 @@ sudo ln -fs /usr/bin/google-chrome-stable /usr/bin/g
 # Eclipse
 sudo ln -fs ~/eclipse/eclipse /usr/bin/eclipse
 # clang
-sudo ln -fs /usr/bin/clang-$CLANG_VERSION /usr/bin/clang
-sudo ln -fs /usr/bin/clang++-$CLANG_VERSION /usr/bin/clang++
+# sudo ln -fs /usr/bin/clang-$CLANG_VERSION /usr/bin/clang
+# sudo ln -fs /usr/bin/clang++-$CLANG_VERSION /usr/bin/clang++
 # clang-format
-sudo ln -fs /usr/bin/clang-format-$CLANG_FORMAT_VERSION /usr/bin/clang-format
+# sudo ln -fs /usr/bin/clang-format-$CLANG_FORMAT_VERSION /usr/bin/clang-format
 # clang-modernize
-sudo ln -fs /usr/bin/clang-modernize-$CLANG_MODERNIZE_VERSION /usr/bin/clang-modernize
+# sudo ln -fs /usr/bin/clang-modernize-$CLANG_MODERNIZE_VERSION /usr/bin/clang-modernize
 # lldb
 sudo ln -fs /usr/bin/lldb-$LLDB_VERSION /usr/bin/lldb
 # IDEA

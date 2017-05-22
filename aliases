@@ -46,6 +46,7 @@ alias gq='gedit ~/Documents/Q.txt'
 alias vimdwmconfig='vim ~/dwm/config.h'
 
 alias cx='chmod +x'
+alias dc='cd'
 alias m='man' ; 
 alias mm='man $(fc -ln -1 | cut -d" " -f 1)'
 alias l='ls'
@@ -207,14 +208,11 @@ vv() {
 alias mostfrequent='history | cut -d " " -f 4 | tr -c "[:alnum:]" "[\n*]" | sort | uniq -c | sort -nr | head  -20'
 # 20 Command Line Tools to Monitor Linux Performance
 debug_commands=(ddd kdbg idaq cgdb)
-perf_commands=(top vmstat tload stress lsof tcpdump netstat htop atop iotop iostat iptraf iftop monitorix monit arpwatch vnstat dstat
-nmon collectl dig mpstat, pkill powertop pidstat intel_gpu_top glances pstree nload
-sysdig)
+perf_commands=(top vmstat tload stress lsof tcpdump netstat htop atop iotop iostat iptraf iftop monitorix monit arpwatch vnstat dstat nmon collectl dig mpstat, pkill powertop pidstat intel_gpu_top glances pstree nload sysstat sysdig)
 hex_editors=(jeex okteta hte bless wxHexEditor dhex)
 other_commands=(ruptime rwho)
 # Networking
-networking_commands=(netstat ethtool ping ifconfig arping traceroute iwconfig ifconfig tshark nethogs nmap nbtscan iptables 
-tcpdump iproute2 chargen netcat tc insmod fping nslookup host p0f mtr ipcalc sipcalc iperf)
+networking_commands=(netstat ethtool ping ifconfig arping traceroute iwconfig ifconfig tshark nethogs nmap nbtscan iptables  tcpdump iproute2 chargen netcat tc insmod fping nslookup host p0f mtr ipcalc sipcalc iperf)
 # TODO:
 # ps -ef
 # tshark -i [interface] -V
