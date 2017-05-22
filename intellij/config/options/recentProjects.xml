@@ -2,6 +2,8 @@
   <component name="RecentProjectsManager">
     <option name="recentPaths">
       <list>
+        <option value="$USER_HOME$/IdeaProjects/Codility" />
+        <option value="$USER_HOME$/IdeaProjects/ScalaFunctional" />
         <option value="$USER_HOME$/IdeaProjects/Java8Chat" />
         <option value="$USER_HOME$/IdeaProjects/GoogleCodingSample" />
         <option value="$USER_HOME$/IdeaProjects/TApp" />
@@ -12,10 +14,10 @@
     </option>
     <option name="openPaths">
       <list>
-        <option value="$USER_HOME$/IdeaProjects/Java8Chat" />
+        <option value="$USER_HOME$/IdeaProjects/Codility" />
       </list>
     </option>
-    <option name="lastPath" value="$USER_HOME$/IdeaProjects/Java8Chat" />
+    <option name="lastPath" value="$USER_HOME$/IdeaProjects/Codility" />
     <option name="additionalInfo">
       <map>
         <entry key="$USER_HOME$/Downloads/__wspace/UTP5_SP_S2834">
@@ -51,6 +53,17 @@
             </RecentProjectMetaInfo>
           </value>
         </entry>
+        <entry key="$USER_HOME$/IdeaProjects/Codility">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IC-171.4424.56" />
+              <option name="productionCode" value="IC" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1495436061726" />
+              <option name="buildTimestamp" value="1494608710851" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
         <entry key="$USER_HOME$/IdeaProjects/GoogleCodingSample">
           <value>
             <RecentProjectMetaInfo>
@@ -68,8 +81,19 @@
               <option name="build" value="IC-171.4424.56" />
               <option name="productionCode" value="IC" />
               <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
-              <option name="projectOpenTimestamp" value="1495048807540" />
-              <option name="buildTimestamp" value="1494608755925" />
+              <option name="projectOpenTimestamp" value="1495096472240" />
+              <option name="buildTimestamp" value="1494608721762" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/IdeaProjects/ScalaFunctional">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IC-171.4424.56" />
+              <option name="productionCode" value="IC" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1495382348097" />
+              <option name="buildTimestamp" value="1494608756610" />
             </RecentProjectMetaInfo>
           </value>
         </entry>

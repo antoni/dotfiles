@@ -119,8 +119,8 @@ set mouse=a
 au BufEnter,BufNew *.java noremap <F5> :wa \| !javac -verbose % && java %:r : <CR>
 " C++ quick compilation
 " noremap <F5> :wa \| !clang++ -g -Wall -pthread -std=c++11 % -o test && ./test : <CR>
-" noremap <F5> :wa \| !clang++ -g -Wall -Wno-missing-braces -pthread -std=c++1z % -o test && ./test : <CR>
-noremap <F5> :wa \| !clang++ -g -Wall -Wno-missing-braces -Wno-unused -std=c++1z % -o test && ./test < ~/test0.in <CR>
+noremap <F5> :wa \| !clang++ -g -Wall -Wno-missing-braces -pthread -std=c++1z % -o test && ./test : <CR>
+" noremap <F5> :wa \| !clang++ -g -Wall -Wno-missing-braces -Wno-unused -std=c++1z % -o test && ./test < ~/test0.in <CR>
 " noremap <F6> :wa \| !clang++ -g -Wall -include /usr/include/x86_64-linux-gnu/c++/4.8/bits/stdc++.h -pthread -std=c++11 % -o test && ./test : <CR>
 " au BufEnter,BufNew *.c noremap <F5> :wa \| !clang -std=c99 -g % -o test && ./test : <CR>
 au BufEnter,BufNew *.c noremap <F5> :wa \| !clang -Wall -g % -o test && ./test : <CR>
