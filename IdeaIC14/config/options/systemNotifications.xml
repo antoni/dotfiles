@@ -1,9 +1,0 @@
-<application>
-  <component name="SystemNotifications">
-    <option name="NOTIFICATIONS">
-      <set>
-        <option value="Compiler (success)" />
-      </set>
-    </option>
-  </component>
-</application>
