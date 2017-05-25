@@ -123,7 +123,7 @@ noremap <F5> :wa \| !clang++ -g -Wall -Wno-missing-braces -pthread -std=c++1z % 
 " noremap <F5> :wa \| !clang++ -g -Wall -Wno-missing-braces -Wno-unused -std=c++1z % -o test && ./test < ~/test0.in <CR>
 " noremap <F6> :wa \| !clang++ -g -Wall -include /usr/include/x86_64-linux-gnu/c++/4.8/bits/stdc++.h -pthread -std=c++11 % -o test && ./test : <CR>
 " au BufEnter,BufNew *.c noremap <F5> :wa \| !clang -std=c99 -g % -o test && ./test : <CR>
-au BufEnter,BufNew *.c noremap <F5> :wa \| !clang -Wall -g % -o test && ./test : <CR>
+au BufEnter,BufNew *.c noremap <F5> :wa \| !clang -Wall -g % -lpthread -o test && ./test : <CR>
 " different F5 keymap for CUDA development
 au BufEnter,BufNew *.cu noremap <F5> :wa \| !nvcc -std=c++11 -g % -o test && ./test : <CR>
 " Python

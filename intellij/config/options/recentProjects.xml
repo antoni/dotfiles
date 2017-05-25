@@ -3,6 +3,8 @@
     <option name="recentPaths">
       <list>
         <option value="$USER_HOME$/IdeaProjects/Codility" />
+        <option value="$USER_HOME$/IdeaProjects/dbserver" />
+        <option value="$USER_HOME$/Downloads/PhoneDirectory" />
         <option value="$USER_HOME$/IdeaProjects/ScalaFunctional" />
         <option value="$USER_HOME$/IdeaProjects/Java8Chat" />
         <option value="$USER_HOME$/IdeaProjects/GoogleCodingSample" />
@@ -20,6 +22,17 @@
     <option name="lastPath" value="$USER_HOME$/IdeaProjects/Codility" />
     <option name="additionalInfo">
       <map>
+        <entry key="$USER_HOME$/Downloads/PhoneDirectory">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IC-171.4424.56" />
+              <option name="productionCode" value="IC" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1495533410232" />
+              <option name="buildTimestamp" value="1494608725174" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
         <entry key="$USER_HOME$/Downloads/__wspace/UTP5_SP_S2834">
           <value>
             <RecentProjectMetaInfo>
@@ -59,8 +72,8 @@
               <option name="build" value="IC-171.4424.56" />
               <option name="productionCode" value="IC" />
               <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
-              <option name="projectOpenTimestamp" value="1495436061726" />
-              <option name="buildTimestamp" value="1494608710851" />
+              <option name="projectOpenTimestamp" value="1495735276324" />
+              <option name="buildTimestamp" value="1494608710491" />
             </RecentProjectMetaInfo>
           </value>
         </entry>
@@ -108,8 +121,19 @@
             </RecentProjectMetaInfo>
           </value>
         </entry>
+        <entry key="$USER_HOME$/IdeaProjects/dbserver">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IC-171.4424.56" />
+              <option name="productionCode" value="IC" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1495702652924" />
+              <option name="buildTimestamp" value="1494608728452" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
       </map>
     </option>
-    <option name="lastProjectLocation" value="$USER_HOME$/IdeaProjects" />
+    <option name="lastProjectLocation" value="$USER_HOME$/Downloads" />
   </component>
 </application>
