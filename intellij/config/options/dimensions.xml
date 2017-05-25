@@ -15,18 +15,22 @@
     <location key="FileChooserDialogImpl.0.0.1680.1050" x="229" y="180" />
     <location key="NewModule_or_Project.wizard.0.0.1680.1050" x="1680" y="38" />
     <location key="findTextDialog.0.0.1680.1050" x="597" y="250" />
-    <location key="FileChooserDialogImpl.1366.0.1680.1050" x="1984" y="203" />
+    <location key="FileChooserDialogImpl.1366.0.1680.1050" x="1984" y="149" />
     <location key="new project wizard.1366.0.1680.1050" x="1413" y="160" />
     <location key="#com.intellij.fileTypes.FileTypeChooser.1366.0.1680.1050" x="1923" y="257" />
     <location key="#com.intellij.execution.impl.EditConfigurationsDialog.1366.0.1680.1050" x="1664" y="141" />
-    <location key="SettingsEditor.1366.0.1680.1050" x="1994" y="206" />
+    <location key="SettingsEditor.1366.0.1680.1050" x="1994" y="188" />
     <location key="findTextDialog.1366.0.1680.1050" x="1963" y="187" />
     <location key="#Browse_Repositories.1366.0.1680.1050" x="1517" y="131" />
-    <location key="#com.intellij.ide.util.MemberChooser.1366.0.1680.1050" x="2014" y="107" />
+    <location key="#com.intellij.ide.util.MemberChooser.1366.0.1680.1050" x="2014" y="89" />
     <location key="#com.intellij.refactoring.rename.AutomaticRenamingDialog.1366.0.1680.1050" x="1862" y="-18" />
     <location key="StructurePopup.1366.0.1680.1050" x="1961" y="310" />
     <location key="#com.intellij.framework.addSupport.AddSupportForSingleFrameworkDialog.1366.0.1680.1050" x="1982" y="418" />
     <location key="ProcessPopupWindow.1366.0.1680.1050" x="2604" y="759" />
+    <location key="WELCOME_SCREEN.1366.0.1680.1050" x="2204" y="239" />
+    <location key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog.1366.0.1680.1050" x="2026" y="374" />
+    <location key="#Notifications.1366.0.1680.1050" x="1958" y="201" />
+    <location key="find.popup.1366.0.1680.1050" x="1874" y="150" />
     <size key="#Browse_Repositories.0.0.1366.768" width="824" height="683" />
     <size key="SettingsEditor.0.0.1366.768" width="1052" height="681" />
     <size key="FileChooserDialogImpl.0.0.1366.768" width="424" height="483" />
@@ -50,10 +54,10 @@
     <size key="FileChooserDialogImpl.1366.0.1680.1050" width="424" height="511" />
     <size key="new project wizard.1366.0.1680.1050" width="824" height="781" />
     <size key="#com.intellij.fileTypes.FileTypeChooser.1366.0.1680.1050" width="547" height="403" />
-    <size key="GridCell.Tab.0.left.1366.0.1680.1050" width="1680" height="208" />
-    <size key="GridCell.Tab.0.center.1366.0.1680.1050" width="1680" height="208" />
-    <size key="GridCell.Tab.0.right.1366.0.1680.1050" width="1680" height="208" />
-    <size key="GridCell.Tab.0.bottom.1366.0.1680.1050" width="1680" height="208" />
+    <size key="GridCell.Tab.0.left.1366.0.1680.1050" width="1680" height="185" />
+    <size key="GridCell.Tab.0.center.1366.0.1680.1050" width="1680" height="185" />
+    <size key="GridCell.Tab.0.right.1366.0.1680.1050" width="1680" height="185" />
+    <size key="GridCell.Tab.0.bottom.1366.0.1680.1050" width="1680" height="185" />
     <size key="SettingsEditor.1366.0.1680.1050" width="1052" height="681" />
     <size key="findTextDialog.1366.0.1680.1050" width="475" height="554" />
     <size key="#Browse_Repositories.1366.0.1680.1050" width="824" height="683" />
@@ -62,5 +66,8 @@
     <size key="StructurePopup.1366.0.1680.1050" width="484" height="368" />
     <size key="#com.intellij.framework.addSupport.AddSupportForSingleFrameworkDialog.1366.0.1680.1050" width="437" height="170" />
     <size key="ProcessPopupWindow.1366.0.1680.1050" width="438" height="276" />
+    <size key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog.1366.0.1680.1050" width="349" height="253" />
+    <size key="#Notifications.1366.0.1680.1050" width="486" height="563" />
+    <size key="find.popup.1366.0.1680.1050" width="901" height="648" />
   </component>
 </application>

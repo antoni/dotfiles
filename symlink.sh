@@ -40,8 +40,8 @@ if ! [[ -f $I3WM_DIR ]]; then
     mkdir -p $I3WM_DIR;
 fi;
 
-ln -fs ${DOTFILES_DIR}/i3/config ~/.config/i3/config
-ln -fs ${DOTFILES_DIR}/i3/status.config ~/.config/i3/i3status.config
+ln -fs ${DOTFILES_DIR}/i3/i3.config ~/.config/i3/config
+ln -fs ${DOTFILES_DIR}/i3/i3status.config ~/.config/i3/i3status.config
 
 ln -fs ${DOTFILES_DIR}/config/mimeapps.list ~/.config/mimeapps.list
 
