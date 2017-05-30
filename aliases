@@ -1,5 +1,6 @@
 # -*- shell-script -*-
 # vim:set ft=sh textwidth=0 wrapmargin=0:
+set +x
 
 # Aliases and custom functions
 platform='unknown'
@@ -197,12 +198,12 @@ vv() {
 }
 # Use less +F instead of tail -f
 # function tail() {
-    # if [ "$1" == '-f' ]; then
-        # shift
-        # less +F "$@"
-    # else
-        # command tail "$@"
-    # fi
+# if [ "$1" == '-f' ]; then
+# shift
+# less +F "$@"
+# else
+# command tail "$@"
+# fi
 # }
 # Display 20 most frequently used commands in Bash
 alias mostfrequent='history | cut -d " " -f 4 | tr -c "[:alnum:]" "[\n*]" | sort | uniq -c | sort -nr | head  -20'
@@ -541,7 +542,10 @@ function get_ip() {
 
 # Query Linux man page for certain flag
 # Example: manf iptables -t
-function manf () { man $1 | less -p "^ +\-$2" }
+# TODO: Fix for bash
+function manf() {
+    man $1 | less -p "^ +\-${2}"
+}
 
 alias rs='xfreerdp /kbd:0x415 /multimon +fonts /d:ger +clipboard +aero /home-drive /audio-mode:1 /v:GKSRDS007 /monitors:2'
 
@@ -555,4 +559,15 @@ function dockerrmall() {
 
 function list_installed() {
     dnf list installed | awk -F. -v ORS="\0" '{print $1" "}' | sort -zu && echo ""
+}
+
+# $1 - name of the folder to zip
+function zip_and_move() {
+    zip -r ~/Downloads/$1.zip $1/* $1/.*
+}
+
+# Download .gitignore
+# Usage: gi language
+function gi() { 
+    curl -L -s https://www.gitignore.io/api/$@ | head -n -2 | tail -n +5 | tee .gitignore;
 }

@@ -3,7 +3,7 @@
     <jdk version="2">
       <name value="Go 1.6.2" />
       <type value="Go SDK" />
-      <version value="1.6.2" />
+      <version value="1.7.3" />
       <homePath value="/usr/local/go" />
       <roots>
         <annotationsPath>
@@ -69,6 +69,27 @@
             <root type="simple" url="jar:///usr/java/jdk1.8.0_91/src.zip!/" />
             <root type="simple" url="jar:///usr/java/jdk1.8.0_91/javafx-src.zip!/" />
           </root>
+        </sourcePath>
+      </roots>
+      <additional />
+    </jdk>
+    <jdk version="2">
+      <name value="GHC 7.10.3" />
+      <type value="GHC" />
+      <version value="7.10.3" />
+      <homePath value="/usr/lib64/ghc-7.10.3" />
+      <roots>
+        <annotationsPath>
+          <root type="composite" />
+        </annotationsPath>
+        <classPath>
+          <root type="composite" />
+        </classPath>
+        <javadocPath>
+          <root type="composite" />
+        </javadocPath>
+        <sourcePath>
+          <root type="composite" />
         </sourcePath>
       </roots>
       <additional />
