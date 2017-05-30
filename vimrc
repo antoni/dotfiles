@@ -124,6 +124,8 @@ noremap <F5> :wa \| !clang++ -g -Wall -Wno-missing-braces -pthread -std=c++1z % 
 " noremap <F6> :wa \| !clang++ -g -Wall -include /usr/include/x86_64-linux-gnu/c++/4.8/bits/stdc++.h -pthread -std=c++11 % -o test && ./test : <CR>
 " au BufEnter,BufNew *.c noremap <F5> :wa \| !clang -std=c99 -g % -o test && ./test : <CR>
 au BufEnter,BufNew *.c noremap <F5> :wa \| !clang -Wall -g % -lpthread -o test && ./test : <CR>
+" au BufEnter,BufNew *.hs noremap <F5> :wa \| !ghci % <CR>
+au BufEnter,BufNew *.hs noremap <F5> :wa \| !runhaskell % <CR>
 " different F5 keymap for CUDA development
 au BufEnter,BufNew *.cu noremap <F5> :wa \| !nvcc -std=c++11 -g % -o test && ./test : <CR>
 " Python
@@ -399,8 +401,8 @@ Bundle 'croaker/mustang-vim'
 " Language-specific
 " C++ {{{
 Plugin 'rhysd/vim-clang-format'
-Bundle 'Mizuchi/STL-Syntax'
-Bundle 'rmartinho/vim-cpp11'
+" Bundle 'Mizuchi/STL-Syntax'
+" Bundle 'rmartinho/vim-cpp11'
 " C++ IDE-related {{{
 Bundle 'vim-scripts/a.vim'
 " Bundle 'DoxygenToolkit.vim'
@@ -422,15 +424,15 @@ Plugin 'tmhedberg/SimpylFold'
 " Haskell (http://haskelllive.com/environment.html) {{{
 " Bundle 'lukerandall/haskellmode-vim'
 " Bundle 'eagletmt/ghcmod-vim'
-" Bundle 'bitc/lushtags'
-" Bundle 'raichoo/haskell-vim'
-" Bundle 'eagletmt/neco-ghc'
+Bundle 'bitc/lushtags'
+Bundle 'raichoo/haskell-vim'
+Bundle 'eagletmt/neco-ghc'
 " }}}
 " Smalltalk {{{
 " Bundle 'vim-scripts/st.vim' 
 " }}}
 " Prolog {{{
-" Bundle 'adimit/prolog.vim'  
+Bundle 'adimit/prolog.vim'  
 " }}}
 " Promela {{{
 Plugin 'vim-scripts/promela.vim'

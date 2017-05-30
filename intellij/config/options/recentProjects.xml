@@ -3,6 +3,12 @@
     <option name="recentPaths">
       <list>
         <option value="$USER_HOME$/IdeaProjects/Codility" />
+        <option value="$USER_HOME$/IdeaProjects/KotlinTryouts" />
+        <option value="$USER_HOME$/IdeaProjects/Auto" />
+        <option value="$USER_HOME$/Downloads/UTP6_WA_S11837" />
+        <option value="$USER_HOME$/Downloads/PPJ_II_Rejestr" />
+        <option value="$USER_HOME$/Downloads/untitled" />
+        <option value="$USER_HOME$/Downloads/GUI4_MK_S15879" />
         <option value="$USER_HOME$/IdeaProjects/dbserver" />
         <option value="$USER_HOME$/Downloads/PhoneDirectory" />
         <option value="$USER_HOME$/IdeaProjects/ScalaFunctional" />
@@ -16,12 +22,34 @@
     </option>
     <option name="openPaths">
       <list>
-        <option value="$USER_HOME$/IdeaProjects/Codility" />
+        <option value="$USER_HOME$/IdeaProjects/KotlinTryouts" />
       </list>
     </option>
     <option name="lastPath" value="$USER_HOME$/IdeaProjects/Codility" />
     <option name="additionalInfo">
       <map>
+        <entry key="$USER_HOME$/Downloads/GUI4_MK_S15879">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IC-171.4424.56" />
+              <option name="productionCode" value="IC" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1495786520076" />
+              <option name="buildTimestamp" value="1494608759784" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/Downloads/PPJ_II_Rejestr">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IC-171.4424.56" />
+              <option name="productionCode" value="IC" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1495874440879" />
+              <option name="buildTimestamp" value="1494608729906" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
         <entry key="$USER_HOME$/Downloads/PhoneDirectory">
           <value>
             <RecentProjectMetaInfo>
@@ -30,6 +58,17 @@
               <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
               <option name="projectOpenTimestamp" value="1495533410232" />
               <option name="buildTimestamp" value="1494608725174" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/Downloads/UTP6_WA_S11837">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IC-171.4424.56" />
+              <option name="productionCode" value="IC" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1495999211673" />
+              <option name="buildTimestamp" value="1494608706811" />
             </RecentProjectMetaInfo>
           </value>
         </entry>
@@ -66,14 +105,36 @@
             </RecentProjectMetaInfo>
           </value>
         </entry>
+        <entry key="$USER_HOME$/Downloads/untitled">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IC-171.4424.56" />
+              <option name="productionCode" value="IC" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1495874424606" />
+              <option name="buildTimestamp" value="1494608729906" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/IdeaProjects/Auto">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IC-171.4424.56" />
+              <option name="productionCode" value="IC" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1496007748029" />
+              <option name="buildTimestamp" value="1494608713046" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
         <entry key="$USER_HOME$/IdeaProjects/Codility">
           <value>
             <RecentProjectMetaInfo>
               <option name="build" value="IC-171.4424.56" />
               <option name="productionCode" value="IC" />
               <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
-              <option name="projectOpenTimestamp" value="1495735276324" />
-              <option name="buildTimestamp" value="1494608710491" />
+              <option name="projectOpenTimestamp" value="1496142866897" />
+              <option name="buildTimestamp" value="1494608707883" />
             </RecentProjectMetaInfo>
           </value>
         </entry>
@@ -96,6 +157,17 @@
               <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
               <option name="projectOpenTimestamp" value="1495096472240" />
               <option name="buildTimestamp" value="1494608721762" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/IdeaProjects/KotlinTryouts">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IC-171.4424.56" />
+              <option name="productionCode" value="IC" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1496142852842" />
+              <option name="buildTimestamp" value="1494608707883" />
             </RecentProjectMetaInfo>
           </value>
         </entry>
@@ -134,6 +206,6 @@
         </entry>
       </map>
     </option>
-    <option name="lastProjectLocation" value="$USER_HOME$/Downloads" />
+    <option name="lastProjectLocation" value="$USER_HOME$/IdeaProjects" />
   </component>
 </application>
