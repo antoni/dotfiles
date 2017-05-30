@@ -23,6 +23,7 @@ fi
 
 # Keyboard
 if command_exists xbindkeys; then
+    killall xbindkeys 2> /dev/null
     xbindkeys -f ~/.xbindkeysrc 
 fi
 
@@ -35,8 +36,10 @@ if [ -e $WALLPAPER ]; then
 fi
 
 # Executed when in X mode (e.g. DISPLAY is set)
-if [ -z ${DISPLAY} ]; then  
+xrandr_display_count=`xrandr --query | grep " connected" | wc -l`
+if [ -z ${DISPLAY} ] || [ $xrandr_display_count -eq 1 ] ; then
     # DISPLAY unset
+    :
 else
     xrandr --output VGA1 --mode 1680x1050 --right-of LVDS1
 

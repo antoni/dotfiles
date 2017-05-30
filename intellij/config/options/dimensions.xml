@@ -8,21 +8,21 @@
     <location key="#com.intellij.openapi.projectRoots.ui.ProjectJdksEditor.0.0.1366.768" x="261" y="-6" />
     <location key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog.0.0.1366.768" x="506" y="253" />
     <location key="#Go_Libraries.0.0.1366.768" x="478" y="3" />
-    <location key="new project wizard.0.0.1366.768" x="266" y="-18" />
+    <location key="new project wizard.0.0.1366.768" x="271" y="-6" />
     <location key="#com.intellij.ide.util.MemberChooser.0.0.1366.768" x="491" y="35" />
     <location key="#com.intellij.execution.impl.EditConfigurationsDialog.0.0.1366.768" x="141" y="0" />
     <location key="StructurePopup.0.0.1366.768" x="440" y="171" />
     <location key="FileChooserDialogImpl.0.0.1680.1050" x="229" y="180" />
     <location key="NewModule_or_Project.wizard.0.0.1680.1050" x="1680" y="38" />
     <location key="findTextDialog.0.0.1680.1050" x="597" y="250" />
-    <location key="FileChooserDialogImpl.1366.0.1680.1050" x="1984" y="149" />
-    <location key="new project wizard.1366.0.1680.1050" x="1413" y="160" />
+    <location key="FileChooserDialogImpl.1366.0.1680.1050" x="1984" y="5" />
+    <location key="new project wizard.1366.0.1680.1050" x="1413" y="70" />
     <location key="#com.intellij.fileTypes.FileTypeChooser.1366.0.1680.1050" x="1923" y="257" />
-    <location key="#com.intellij.execution.impl.EditConfigurationsDialog.1366.0.1680.1050" x="1664" y="141" />
-    <location key="SettingsEditor.1366.0.1680.1050" x="1994" y="188" />
+    <location key="#com.intellij.execution.impl.EditConfigurationsDialog.1366.0.1680.1050" x="1664" y="33" />
+    <location key="SettingsEditor.1366.0.1680.1050" x="1680" y="112" />
     <location key="findTextDialog.1366.0.1680.1050" x="1963" y="187" />
-    <location key="#Browse_Repositories.1366.0.1680.1050" x="1517" y="131" />
-    <location key="#com.intellij.ide.util.MemberChooser.1366.0.1680.1050" x="2014" y="89" />
+    <location key="#Browse_Repositories.1366.0.1680.1050" x="2030" y="234" />
+    <location key="#com.intellij.ide.util.MemberChooser.1366.0.1680.1050" x="1930" y="194" />
     <location key="#com.intellij.refactoring.rename.AutomaticRenamingDialog.1366.0.1680.1050" x="1862" y="-18" />
     <location key="StructurePopup.1366.0.1680.1050" x="1961" y="310" />
     <location key="#com.intellij.framework.addSupport.AddSupportForSingleFrameworkDialog.1366.0.1680.1050" x="1982" y="418" />
@@ -31,16 +31,23 @@
     <location key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog.1366.0.1680.1050" x="2026" y="374" />
     <location key="#Notifications.1366.0.1680.1050" x="1958" y="201" />
     <location key="find.popup.1366.0.1680.1050" x="1874" y="150" />
+    <location key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog.1366.0.1680.1050" x="1934" y="226" />
+    <location key="#Project_Structure.1366.0.1680.1050" x="1694" y="48" />
+    <location key="#Plugins.1366.0.1680.1050" x="1801" y="162" />
+    <location key="EditParametersPopupWindow.1366.0.1680.1050" x="1988" y="301" />
+    <location key="#com.intellij.ide.util.TreeClassChooserDialog.1366.0.1680.1050" x="1938" y="185" />
+    <location key="com.intellij.openapi.editor.actions.MultiplePasteAction$1.0.0.1366.768" x="420" y="-18" />
+    <location key="#Project_Structure.0.0.1366.768" x="166" y="-18" />
     <size key="#Browse_Repositories.0.0.1366.768" width="824" height="683" />
     <size key="SettingsEditor.0.0.1366.768" width="1052" height="681" />
     <size key="FileChooserDialogImpl.0.0.1366.768" width="424" height="483" />
     <size key="#com.intellij.openapi.projectRoots.ui.ProjectJdksEditor.0.0.1366.768" width="824" height="683" />
     <size key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog.0.0.1366.768" width="343" height="213" />
     <size key="#Go_Libraries.0.0.1366.768" width="400" height="676" />
-    <size key="GridCell.Tab.0.left.0.0.1366.768" width="1366" height="189" />
-    <size key="GridCell.Tab.0.center.0.0.1366.768" width="1366" height="189" />
-    <size key="GridCell.Tab.0.right.0.0.1366.768" width="1366" height="189" />
-    <size key="GridCell.Tab.0.bottom.0.0.1366.768" width="1366" height="189" />
+    <size key="GridCell.Tab.0.left.0.0.1366.768" width="1366" height="121" />
+    <size key="GridCell.Tab.0.center.0.0.1366.768" width="1366" height="121" />
+    <size key="GridCell.Tab.0.right.0.0.1366.768" width="1366" height="121" />
+    <size key="GridCell.Tab.0.bottom.0.0.1366.768" width="1366" height="121" />
     <size key="new project wizard.0.0.1366.768" width="824" height="737" />
     <size key="#com.intellij.ide.util.MemberChooser.0.0.1366.768" width="374" height="576" />
     <size key="StructurePopup.0.0.1366.768" width="484" height="368" />
@@ -51,17 +58,17 @@
     <size key="FileChooserDialogImpl.0.0.1680.1050" width="424" height="562" />
     <size key="NewModule_or_Project.wizard.0.0.1680.1050" width="774" height="682" />
     <size key="findTextDialog.0.0.1680.1050" width="475" height="554" />
-    <size key="FileChooserDialogImpl.1366.0.1680.1050" width="424" height="511" />
+    <size key="FileChooserDialogImpl.1366.0.1680.1050" width="484" height="511" />
     <size key="new project wizard.1366.0.1680.1050" width="824" height="781" />
     <size key="#com.intellij.fileTypes.FileTypeChooser.1366.0.1680.1050" width="547" height="403" />
-    <size key="GridCell.Tab.0.left.1366.0.1680.1050" width="1680" height="185" />
-    <size key="GridCell.Tab.0.center.1366.0.1680.1050" width="1680" height="185" />
-    <size key="GridCell.Tab.0.right.1366.0.1680.1050" width="1680" height="185" />
-    <size key="GridCell.Tab.0.bottom.1366.0.1680.1050" width="1680" height="185" />
+    <size key="GridCell.Tab.0.left.1366.0.1680.1050" width="1680" height="282" />
+    <size key="GridCell.Tab.0.center.1366.0.1680.1050" width="1680" height="282" />
+    <size key="GridCell.Tab.0.right.1366.0.1680.1050" width="1680" height="282" />
+    <size key="GridCell.Tab.0.bottom.1366.0.1680.1050" width="1680" height="282" />
     <size key="SettingsEditor.1366.0.1680.1050" width="1052" height="681" />
     <size key="findTextDialog.1366.0.1680.1050" width="475" height="554" />
     <size key="#Browse_Repositories.1366.0.1680.1050" width="824" height="683" />
-    <size key="#com.intellij.ide.util.MemberChooser.1366.0.1680.1050" width="383" height="589" />
+    <size key="#com.intellij.ide.util.MemberChooser.1366.0.1680.1050" width="551" height="589" />
     <size key="#com.intellij.refactoring.rename.AutomaticRenamingDialog.1366.0.1680.1050" width="687" height="1019" />
     <size key="StructurePopup.1366.0.1680.1050" width="484" height="368" />
     <size key="#com.intellij.framework.addSupport.AddSupportForSingleFrameworkDialog.1366.0.1680.1050" width="437" height="170" />
@@ -69,5 +76,20 @@
     <size key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog.1366.0.1680.1050" width="349" height="253" />
     <size key="#Notifications.1366.0.1680.1050" width="486" height="563" />
     <size key="find.popup.1366.0.1680.1050" width="901" height="648" />
+    <size key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog.1366.0.1680.1050" width="524" height="500" />
+    <size key="GridCell.Tab.1.left.1366.0.1680.1050" width="1680" height="348" />
+    <size key="GridCell.Tab.1.center.1366.0.1680.1050" width="1680" height="348" />
+    <size key="GridCell.Tab.1.right.1366.0.1680.1050" width="1680" height="348" />
+    <size key="GridCell.Tab.1.bottom.1366.0.1680.1050" width="1680" height="348" />
+    <size key="#Project_Structure.1366.0.1680.1050" width="1024" height="844" />
+    <size key="#Plugins.1366.0.1680.1050" width="800" height="676" />
+    <size key="EditParametersPopupWindow.1366.0.1680.1050" width="426" height="255" />
+    <size key="#com.intellij.ide.util.TreeClassChooserDialog.1366.0.1680.1050" width="525" height="414" />
+    <size key="com.intellij.openapi.editor.actions.MultiplePasteAction$1.0.0.1366.768" width="516" height="756" />
+    <size key="GridCell.Tab.1.left.0.0.1366.768" width="1366" height="221" />
+    <size key="GridCell.Tab.1.center.0.0.1366.768" width="1366" height="221" />
+    <size key="GridCell.Tab.1.right.0.0.1366.768" width="1366" height="221" />
+    <size key="GridCell.Tab.1.bottom.0.0.1366.768" width="1366" height="221" />
+    <size key="#Project_Structure.0.0.1366.768" width="1024" height="737" />
   </component>
 </application>
