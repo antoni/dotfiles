@@ -1,10 +1,12 @@
 import qualified Language.Haskell.HsColour as HsColour
 import qualified Language.Haskell.HsColour.Colourise as HsColour
 import qualified Language.Haskell.HsColour.Output as HsColour
+
+:set -package funnyprint
  
 let myColourPrefs = HsColour.defaultColourPrefs { HsColour.conid = [HsColour.Foreground HsColour.Yellow, HsColour.Bold], HsColour.conop = [HsColour.Foreground HsColour.Yellow], HsColour.string = [HsColour.Foreground HsColour.Green], HsColour.char = [HsColour.Foreground HsColour.Cyan], HsColour.number = [HsColour.Foreground HsColour.Red, HsColour.Bold], HsColour.layout = [HsColour.Foreground HsColour.White], HsColour.keyglyph = [HsColour.Foreground HsColour.White] }
  
-:set prompt "\ESC[33mλ > \ESC[m"
+-- :set prompt "\ESC[33mλ > \ESC[m"
 
 -- Automatically import modules
 import Control.Applicative
@@ -13,4 +15,21 @@ import Data.List
 
 -- Debug
 -- :set +s 
+
+-- Enable multi-line expressions with :{ and :}
+:set +m
+
+-- Show the types of evaluated expressions
+:set +t
+
+-- ghci-ng support
+-- :set +c
+
+-- Make the prompt a little more colorful.
+-- And pretty-printing values
+
+:def color (\_ -> return (":set -interactive-print=FunnyPrint.funnyPrint\n:set prompt \"" ++ FunnyPrint.prompt "λ " "%s" " ¬\\nλ > " ++ "\"" ++ "\n:set prompt2 \"" ++ FunnyPrint.prompt2 "λ" "" " | " ++ "\""))
+:def nocolor (\_ -> return ":set -interactive-print=print\n:set prompt \"%s> \"\n:set prompt2 \"%s| \"")
+
+:color
 
