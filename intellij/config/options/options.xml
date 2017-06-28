@@ -1,16 +1,16 @@
 <application>
   <component name="PropertiesComponent">
     <property name="installed.kotlin.plugin.version" value="1.1.2-release-IJ2017.1-1" />
-    <property name="android-component-compatibility-check" value="1495661417545" />
+    <property name="android-component-compatibility-check" value="1497628864996" />
     <property name="PLUGIN_FILTER" value="hask&#10;haske&#10;haskell&#10;sbt&#10;scala" />
     <property name="go.tutorial.project.notification.shown" value="true" />
-    <property name="file.chooser.recent.files" value="/usr/lib64/ghc-7.10.3&#10;/home/antoni/Downloads/UTP6_WA_S11837&#10;/home/antoni/Downloads/GUI4_MK_S15879&#10;/home/antoni/IdeaProjects/dbserver&#10;/home/antoni/Downloads/PhoneDirectory&#10;/home/antoni/IdeaProjects/Codility&#10;/home/antoni/IdeaProjects&#10;/home/antoni/Downloads/__wspace/UTP5_SP_S2834&#10;/home/antoni/Downloads/__wspace/UTP5_WP_S12828&#10;/usr/java/jdk1.8.0_91&#10;/home/antoni/Downloads/golang-concurrency-presentation&#10;/home/antoni/go&#10;/usr/local/go" />
+    <property name="file.chooser.recent.files" value="$USER_HOME$/pj/TPO&#10;/home/antoni/Downloads/JavaClassValidator&#10;/home/antoni/IdeaProjects/UTP5_BM_S11789&#10;/home/antoni/Downloads/URLChangeObserver/out&#10;/home/antoni/Downloads/URLChangeObserver/lib&#10;/home/antoni/Downloads/URLChangeObserver&#10;/home/antoni/Downloads/TPO/openjms-0.7.7-beta-1&#10;/home/antoni/Downloads/UTP6_WA_S11837&#10;/home/antoni/Downloads/UTP6_BM_S11789&#10;/home/antoni/Downloads/GUI6_KP_S16307&#10;/home/antoni/workspace/itstracker/ITSTracker/app&#10;/home/antoni/workspace/itstracker/ITSTracker&#10;/usr/lib64/ghc-7.10.3&#10;/home/antoni/Downloads/GUI4_MK_S15879&#10;/home/antoni/IdeaProjects/dbserver&#10;/home/antoni/Downloads/PhoneDirectory&#10;/home/antoni/IdeaProjects/Codility&#10;/home/antoni/IdeaProjects&#10;/home/antoni/Downloads/__wspace/UTP5_SP_S2834&#10;/home/antoni/Downloads/__wspace/UTP5_WP_S12828&#10;/usr/java/jdk1.8.0_91&#10;/home/antoni/Downloads/golang-concurrency-presentation&#10;/home/antoni/go&#10;/usr/local/go" />
     <property name="toolwindow.stripes.buttons.info.shown" value="true" />
     <property name="lastTip" value="1" />
     <property name="go.last.update.timestamp" value="1495661454547" />
-    <property name="project.wizard.group" value="Kotlin" />
+    <property name="project.wizard.group" value="JAVA_MODULE" />
     <property name="jdk.selected.JAVA_MODULE" value="1.8" />
-    <property name="project.wizard.template" value="Kotlin (JVM)" />
+    <property name="project.wizard.template" value="Java" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="ExpandBeforeRunStepsPanel" value="true" />
@@ -18,14 +18,16 @@
     <property name="create.project.preferred.importer" value="Eclipse" />
     <property name="eclipse.project.dir" value="$USER_HOME$/Downloads/__wspace/UTP5_SP_S2834" />
     <property name="fileTypeChangedCounter" value="1" />
-    <property name="file.gist.reindex.count" value="23" />
+    <property name="file.gist.reindex.count" value="216" />
     <property name="selected.color.option.type" value="SOFT_WRAP_SIGN_COLOR" />
     <property name="scala.last.updated" value="1495377114767" />
     <property name="go.libraries.notification.had.been.shown" value="true" />
-    <property name="com.intellij.openapi.roots.ui.configuration.TabbedModuleEditor.selectedEditor" value="Sources" />
+    <property name="com.intellij.openapi.roots.ui.configuration.TabbedModuleEditor.selectedEditor" value="Paths" />
     <property name="ignore.ide.sigint.ignored.message" value="true" />
     <property name="java.module.default.source.root" value="src" />
     <property name="kotlin.lastUpdateCheck" value="1496103624411" />
     <property name="JUnitSupport.hidePassedTests" value="false" />
+    <property name="Copy.OpenInEditor" value="true" />
+    <property name="decompiler.legal.notice.accepted" value="true" />
   </component>
 </application>
