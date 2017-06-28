@@ -193,7 +193,7 @@ map <C-t> <ESC>:tabnew<CR>
 " F2 inserts the date and time at the cursor.
 " inoremap <F2>   <C-R>=strftime("%c")<CR>
 " nmap     <F2>   a<F2><Esc>
-" Window splits (TODO: Learn) {{{
+" Window splits {{{
 " window
 nmap <leader>sw<left>  :topleft  vnew<CR>
 nmap <leader>sw<right> :botright vnew<CR>
@@ -331,8 +331,6 @@ augroup END
 " Leader key bindings"{{{
 " Move back to current position after doing gg=G (code reformat)
 map <Leader>f mzgg=G`z<CR>
-" TODO Open ranger
-" nnoremap <leader>r :<C-U>RangerChooser<CR>
 " Substitute all occurrences of the word under the cursor
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 "Astyle (http://astyle.sourceforge.net/) config {{{
@@ -514,10 +512,6 @@ try
     " colorscheme desert
     " colorscheme orangeocean256
     " colorscheme distinguished
-    " TODO: Check those
-    " vim-scripts/summerfruit256.vim
-    " jonathanfilip/lucius
-    " vim-scripts/256-jungle
     set background=dark
     " set background=dark
     " execute "set background=" . $BACKGROUND
