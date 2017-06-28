@@ -2,10 +2,20 @@
   <component name="RecentProjectsManager">
     <option name="recentPaths">
       <list>
+        <option value="$USER_HOME$/Downloads/JavaClassValidator" />
+        <option value="$USER_HOME$/Downloads/GUI2" />
+        <option value="$USER_HOME$/pj/TPO" />
+        <option value="$USER_HOME$/Downloads/TPO" />
+        <option value="$USER_HOME$/Downloads/PPJ3" />
+        <option value="$USER_HOME$/IdeaProjects/UTP5_BM_S11789" />
+        <option value="$USER_HOME$/Downloads/URLChangeObserver" />
+        <option value="$USER_HOME$/Downloads/UTP6_WA_S11837" />
+        <option value="$USER_HOME$/Downloads/GUI6_KP_S16307" />
         <option value="$USER_HOME$/IdeaProjects/Codility" />
+        <option value="$USER_HOME$/Downloads/UTP6_BM_S11789" />
+        <option value="$USER_HOME$/workspace/itstracker/ITSTracker" />
         <option value="$USER_HOME$/IdeaProjects/KotlinTryouts" />
         <option value="$USER_HOME$/IdeaProjects/Auto" />
-        <option value="$USER_HOME$/Downloads/UTP6_WA_S11837" />
         <option value="$USER_HOME$/Downloads/PPJ_II_Rejestr" />
         <option value="$USER_HOME$/Downloads/untitled" />
         <option value="$USER_HOME$/Downloads/GUI4_MK_S15879" />
@@ -22,12 +32,23 @@
     </option>
     <option name="openPaths">
       <list>
-        <option value="$USER_HOME$/IdeaProjects/KotlinTryouts" />
+        <option value="$USER_HOME$/Downloads/JavaClassValidator" />
       </list>
     </option>
-    <option name="lastPath" value="$USER_HOME$/IdeaProjects/Codility" />
+    <option name="lastPath" value="$USER_HOME$/Downloads/JavaClassValidator" />
     <option name="additionalInfo">
       <map>
+        <entry key="$USER_HOME$/Downloads/GUI2">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IC-171.4694.23" />
+              <option name="productionCode" value="IC" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1498160092523" />
+              <option name="buildTimestamp" value="1496753445902" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
         <entry key="$USER_HOME$/Downloads/GUI4_MK_S15879">
           <value>
             <RecentProjectMetaInfo>
@@ -36,6 +57,39 @@
               <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
               <option name="projectOpenTimestamp" value="1495786520076" />
               <option name="buildTimestamp" value="1494608759784" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/Downloads/GUI6_KP_S16307">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IC-171.4694.23" />
+              <option name="productionCode" value="IC" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1497040832756" />
+              <option name="buildTimestamp" value="1496753428122" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/Downloads/JavaClassValidator">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IC-171.4694.23" />
+              <option name="productionCode" value="IC" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1498165263389" />
+              <option name="buildTimestamp" value="1496753457193" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/Downloads/PPJ3">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IC-171.4694.23" />
+              <option name="productionCode" value="IC" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1497806243412" />
+              <option name="buildTimestamp" value="1496753453326" />
             </RecentProjectMetaInfo>
           </value>
         </entry>
@@ -61,14 +115,47 @@
             </RecentProjectMetaInfo>
           </value>
         </entry>
-        <entry key="$USER_HOME$/Downloads/UTP6_WA_S11837">
+        <entry key="$USER_HOME$/Downloads/TPO">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IC-171.4694.23" />
+              <option name="productionCode" value="IC" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1497977439951" />
+              <option name="buildTimestamp" value="1496753456726" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/Downloads/URLChangeObserver">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IC-171.4694.23" />
+              <option name="productionCode" value="IC" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1497628869895" />
+              <option name="buildTimestamp" value="1496753403133" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/Downloads/UTP6_BM_S11789">
           <value>
             <RecentProjectMetaInfo>
               <option name="build" value="IC-171.4424.56" />
               <option name="productionCode" value="IC" />
               <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
-              <option name="projectOpenTimestamp" value="1495999211673" />
-              <option name="buildTimestamp" value="1494608706811" />
+              <option name="projectOpenTimestamp" value="1496654890445" />
+              <option name="buildTimestamp" value="1494608705414" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/Downloads/UTP6_WA_S11837">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IC-171.4694.23" />
+              <option name="productionCode" value="IC" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1497166931046" />
+              <option name="buildTimestamp" value="1496753406098" />
             </RecentProjectMetaInfo>
           </value>
         </entry>
@@ -133,8 +220,8 @@
               <option name="build" value="IC-171.4424.56" />
               <option name="productionCode" value="IC" />
               <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
-              <option name="projectOpenTimestamp" value="1496142866897" />
-              <option name="buildTimestamp" value="1494608707883" />
+              <option name="projectOpenTimestamp" value="1496857816372" />
+              <option name="buildTimestamp" value="1494608711461" />
             </RecentProjectMetaInfo>
           </value>
         </entry>
@@ -193,6 +280,17 @@
             </RecentProjectMetaInfo>
           </value>
         </entry>
+        <entry key="$USER_HOME$/IdeaProjects/UTP5_BM_S11789">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IC-171.4694.23" />
+              <option name="productionCode" value="IC" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1497683642933" />
+              <option name="buildTimestamp" value="1496753433943" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
         <entry key="$USER_HOME$/IdeaProjects/dbserver">
           <value>
             <RecentProjectMetaInfo>
@@ -204,8 +302,30 @@
             </RecentProjectMetaInfo>
           </value>
         </entry>
+        <entry key="$USER_HOME$/pj/TPO">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IC-171.4694.23" />
+              <option name="productionCode" value="IC" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1498063042958" />
+              <option name="buildTimestamp" value="1496753406584" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/workspace/itstracker/ITSTracker">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IC-171.4424.56" />
+              <option name="productionCode" value="IC" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1496162181236" />
+              <option name="buildTimestamp" value="1494608757585" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
       </map>
     </option>
-    <option name="lastProjectLocation" value="$USER_HOME$/IdeaProjects" />
+    <option name="lastProjectLocation" value="$USER_HOME$/Downloads" />
   </component>
 </application>

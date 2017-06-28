@@ -128,7 +128,3 @@ shopt -s nocaseglob
 source $HOME/.paths
 source $HOME/.aliases
 source $HOME/.common_profile.sh
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/antoni/.sdkman"
-[[ -s "/home/antoni/.sdkman/bin/sdkman-init.sh" ]] && source "/home/antoni/.sdkman/bin/sdkman-init.sh"

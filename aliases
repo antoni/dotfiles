@@ -2,15 +2,13 @@
 # vim:set ft=sh textwidth=0 wrapmargin=0:
 set +x
 
+function command_exists () { type "$1" &> /dev/null ; }
+
 # Aliases and custom functions
 platform='unknown'
 export unamestr=`uname`
 if [[ "$unamestr" == 'Darwin' ]]; then
     # Mac OS X-specific
-    # bind '"\es": "students\r"'
-    # Execute 'g++' command with last argument of previous command
-    # bind '"\ee": "g++ !$\r"'
-    # bind '"\er": "g++ !$\r ./a.out\r"'
     alias setmiddlevolume='sudo osascript -e "set Volume 5"'
     # alias mvim="/Applications/MacVim.app/contents/MacOS/MacVim"
     alias mvim='/Users/antoni/Developer/mvim'
@@ -21,11 +19,17 @@ if [[ "$unamestr" == 'Darwin' ]]; then
     alias vim='mvim -v'
     alias ls='ls -h -lFG'
 elif [[ "$unamestr" == 'Linux' ]]; then
+    # Debian/Ubuntu
+    function listkernels() {
+        dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d'
+    }
+    alias gdebi='sudo gdebi'
+
     # Linux specific
     # alias i='sudo apt-get install -y'
     # Install through apt-get and add installed software to list of used commands
     # addcmd() { sudo apt-get install -y $* && echo $* >> ~/install_apt-get.txt; }
-    addcmd() { sudo dnf install -y $* && echo $* >> ~/install_apt-get.txt; }
+    function addcmd() { sudo dnf install -y $* && echo $* >> ~/install_apt-get.txt; }
 
     alias sound='alsamixer'
     alias open='xdg-open'
@@ -34,6 +38,10 @@ elif [[ "$unamestr" == 'Linux' ]]; then
     alias mountrw='mount -o remount,rw /'
     alias vim='vim -o'
     alias ls='ls -h --color -lFG'
+
+    if command_exists vimx; then
+        alias vim='vimx'
+    fi
 fi
 
 # General purpose
@@ -53,18 +61,12 @@ alias mm='man $(fc -ln -1 | cut -d" " -f 1)'
 alias l='ls'
 alias v='vim'
 alias grep='grep --color -ni'
-alias sudolastcmd='!!' # remember
 alias rmf='rm -rf'
-
 alias o='rlwrap ocaml'
-alias ioccc='cd ~/Developer/ioccc/'
-
 
 # System commands
 alias free='free -h'
 
-# Current projects
-alias wspace='cd ~/workspace/'
 alias wgetdir='wget -r --no-parent '
 alias zipfolder='tar -czf'
 
@@ -94,11 +96,12 @@ alias adbreset='adb kill-server;adb start-server'
 alias g='git'
 alias gitpu='git pull'
 alias gitpua='git push --all -u'
-alias gits='git status'
+alias gits='git status --short'
 alias gitc='git commit -am'
 alias gitca='git commit --amend -m'
 alias gitch='git checkout'
 alias gitd='git diff'
+alias gd='git diff'
 alias gitm='git merge'
 alias gitb='git branch'
 alias gitk='gitk --all'
@@ -150,7 +153,7 @@ alias ubuntu_fix_apt='sudo apt-get install --fix-broken && sudo apt-get autoremo
 alias explorer='nautilus --no-desktop'
 
 # Markdown to PDF
-md2pdf() {
+function md2pdf() {
     pandoc $1 -o $1.pdf
     open $1.pdf
 }
@@ -214,20 +217,8 @@ hex_editors=(jeex okteta hte bless wxHexEditor dhex)
 other_commands=(ruptime rwho)
 # Networking
 networking_commands=(netstat ethtool ping ifconfig arping traceroute iwconfig ifconfig tshark nethogs nmap nbtscan iptables  tcpdump iproute2 chargen netcat tc insmod fping nslookup host p0f mtr ipcalc sipcalc iperf)
-# TODO:
-# ps -ef
-# tshark -i [interface] -V
-# nmap -A <host>
-# nbtscan 0.0.0.0/24  This gives IP numbers, NetBios names, Mac addresses from Local Network
-# Is that tcp port listening?  nc (netcat) or telnet.
-# Is that IP address already used? arping.
-# What the %*! is going on? tcpdump.
-# What is listening on what ports on this box? netstat.
-# ping -f because of the obvious reasons.
-# tc is great e.g. for rate limiting / dropping packets on purpose
-# insmod dummy for creating dummy network interfaces
 
-whichport() {
+function whichport() {
     netstat -tulpn | grep $@
 }
 
@@ -286,13 +277,6 @@ alias disktest='sudo smartctl -a /dev/sda | less'
 alias dmesg='dmesg -T'
 alias dmesgerrors="dmesg | egrep 'error|fail|bug|rtl8|r8|wlan'"
 
-# TOOD: Check if Debian/Ubuntu
-listkernels() {
-    dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d'
-}
-alias gdebi='sudo gdebi'
-
-# TODO: PUT THOSE SOMEWHERE
 alias irc='hexchat'
 alias showdirsizes='du -Pshx * 2>/dev/null'
 alias resetsound='pulseaudio -k && sudo alsa force-reload'
@@ -306,29 +290,12 @@ alias mountstudents='sudo sshfs -o allow_other ar267209@students.mimuw.edu.pl:/h
 alias euler='cd ~/Developer/ProjectEuler/'
 alias wallpaperchange='gsettings set org.gnome.desktop.background picture-uri "file:///home/antoni/Documents/wallpaper4.jpg"'
 alias showtunnels="sudo lsof -i -n | egrep '\<ssh\>'" # Show all open SSH tunnels
-alias j='julia'
-# alias yaourt='yaourt --noconfirm --pager'
-alias y='yaourt'
 alias rsync='rsync --progress'
 alias wificonn='sudo wifi-menu wlp2s0'
-alias inettest='ping google.com -c 4'
 alias install_ycm='~/.vim/bundle/YouCompleteMe/install.sh --clang-completer'
 
 h() {                                                                                                                                              
     head -n $@
-}
-# TMP
-alias ex='vim fun_tree_example.cc'
-alias rex='vim ex.cc'
-alias sourcea='source ~/.aliases'
-alias ycm='cd ~/.vim/bundle/YouCompleteMe/'
-alias vimt='vim ~/todo_offline.txt'
-
-rr() {
-    echo "Executing test" $1;
-    # /usr/bin/g++-4.8 -fdiagnostics-color -std=c++11 fun_tree_test.cc -o test -DTEST_NUM=$1
-    /usr/bin/g++-4.8 -std=c++11 fun_tree_test.cc -o test -DTEST_NUM=$1
-    ./test;
 }
 
 pat() {
@@ -355,8 +322,6 @@ dl_website() {
         --no-parent \
         $1
 }
-alias bl='vim ~/backlog.md'
-alias btc-qt='./bitcoin-qt -datadir=/media/antoni/Seagate\ Backup\ Plus\ Drive/.bitcoin'
 
 # cd ../../../
 function up() {
@@ -367,9 +332,6 @@ function up() {
         i=$(($i - 1))
     done 
 }
-
-# Current projects
-alias its='cd ~/workspace/itstracker/ITSTracker'
 
 # JSON pretty print
 alias jsonpp='python -m json.tool'
@@ -382,10 +344,6 @@ function gc() {
 function gcp() {
     gc "$*";
     git push;
-}
-
-function command_exists () {
-    type "$1" &> /dev/null ;
 }
 
 alias find='sudo find'
@@ -419,15 +377,12 @@ alias autoremove='sudo apt-get autoremove'
 
 alias redisgui='redis-desktop-manager'
 
-# Temporary
-alias serwer='cd ~prozomat/prozoserwer'
-
-g++gtest() {
-g++ -std=c++11 $1 -lgtest -lpthread && ./a.out
+function g++gtest() {
+    g++ -std=c++11 $1 -lgtest -lpthread && ./a.out
 }
 
 # Links all .o files to make elf_i386 executable
-link() {
+function link() {
     # Default value = test
     BIN=${1:-test};
     ld -m elf_i386 -s -o $BIN *.o 
@@ -435,7 +390,7 @@ link() {
 # GCC flags:
 # -fverbose-asm -S
 
-compile() {
+function compile() {
     nasm -f elf $1
 }
 
@@ -504,13 +459,6 @@ function swap()
 # Copies SSH RSA key to X clipboard
 alias copykey='cat ~/.ssh/id_rsa.pub | xsel -i -b'
 
-if command_exists vimx; then
-    alias vim='vimx'
-fi
-
-# Gitignore.io support
-function gitignore() { curl -L -s https://www.gitignore.io/api/$@ ;}
-
 function dnfs() {
     arg_count = "$#"
     if [ arg_count -eq 2 ]; then
@@ -542,7 +490,6 @@ function get_ip() {
 
 # Query Linux man page for certain flag
 # Example: manf iptables -t
-# TODO: Fix for bash
 function manf() {
     man $1 | less -p "^ +\-${2}"
 }
@@ -571,3 +518,8 @@ function zip_and_move() {
 function gi() { 
     curl -L -s https://www.gitignore.io/api/$@ | head -n -2 | tail -n +5 | tee .gitignore;
 }
+
+# Temporary
+alias serwer='cd ~prozomat/prozoserwer'
+
+
