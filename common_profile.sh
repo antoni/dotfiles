@@ -1,7 +1,7 @@
 # Common profile file for bash and zsh
 
 # Wallpaper
-WALLPAPER=~/Documents/wallpaper7.png
+WALLPAPER=~/Documents/wallpaper8.jpg
 
 # Overcome the madness: http://www.economyofeffort.com/2014/07/04/zsh/
 export TERM=xterm-256color

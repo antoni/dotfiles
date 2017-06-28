@@ -68,6 +68,11 @@ sudo ln -fs ~/eclipse/eclipse /usr/bin/eclipse
 # sudo ln -fs /usr/bin/clang-format-$CLANG_FORMAT_VERSION /usr/bin/clang-format
 # clang-modernize
 # sudo ln -fs /usr/bin/clang-modernize-$CLANG_MODERNIZE_VERSION /usr/bin/clang-modernize
+
+# IDEA
+sudo ln -fs ${DOTFILES_DIR}/idea_sysctl.conf /etc/sysctl.d/idea_sysctl.conf
+sudo sysctl -p --system
+
 # lldb
 sudo ln -fs /usr/bin/lldb-$LLDB_VERSION /usr/bin/lldb
 # IDEA

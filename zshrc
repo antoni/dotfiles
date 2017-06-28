@@ -120,7 +120,3 @@ fi
 if [ -f /home/antoni/google-cloud-sdk/completion.zsh.inc ]; then
   source '/home/antoni/google-cloud-sdk/completion.zsh.inc'
 fi
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-# export SDKMAN_DIR="/home/antoni/.sdkman"
-# [[ -s "/home/antoni/.sdkman/bin/sdkman-init.sh" ]] && source "/home/antoni/.sdkman/bin/sdkman-init.sh"
