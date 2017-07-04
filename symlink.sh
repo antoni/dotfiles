@@ -72,7 +72,7 @@ sudo ln -fs ~/eclipse/eclipse /usr/bin/eclipse
 # IDEA
 
 sudo mkdir -p /etc/sysctl.d
-sudo ln -fs ${DOTFILES_DIR}/idea_sysctl.conf /etc/sysctl.d/idea_sysctl.conf
+sudo ln -fs ${DOTFILES_DIR}/intellij/idea_sysctl.conf /etc/sysctl.d/idea_sysctl.conf
 sudo sysctl -p --system
 
 # lldb
