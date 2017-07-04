@@ -63,6 +63,7 @@ alias v='vim'
 alias grep='grep --color -ni'
 alias rmf='rm -rf'
 alias o='rlwrap ocaml'
+alias rpm='sudo rpm'
 
 # System commands
 alias free='free -h'
