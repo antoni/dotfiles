@@ -5,7 +5,8 @@ source chrome_install.sh
 # Install required packages
 PACKAGES=(slock xbindkeys haskell clang vim vim-X11 rdesktop tigervnc make xpdf sysstat
 vim-enhanced vim-X11 make cmake gitk vlc st okular xdotool xbindkeys xautomation mosh
-libreoffice cscope ctags perf pavucontrol jq dmidecode xselxi i3wm zsh  libappindicator lsb ntp thunar acpi)
+libreoffice cscope ctags perf pavucontrol jq dmidecode xselxi i3wm zsh  libappindicator lsb ntp
+thunar acpi tmux)
 
 OPTIONAL_PACKAGES=(qt-devel transmission-remote-* transmission-daemon)
 
@@ -15,12 +16,15 @@ HASKELL=(ghc ghc-Cabal cabal-install)
 
 LATEX=(texlive-listing texlive-pgfopts)
 
-FEDORA=(gnome-icon-theme system-config-printer libreoffice-langpack-pl boost-devel squashfs-tools glibc-devel ghc-ShellCheck pykickstart ImageMagick-devel NetworkManager-tui)
+FEDORA=(gnome-icon-theme system-config-printer libreoffice-langpack-pl boost-devel squashfs-tools glibc-devel ghc-ShellCheck pykickstart ImageMagick-devel NetworkManager-tui system-config-keyboard
+seahorse)
 RXVT=(rxvt-unicode rxvt-unicode-ml rxvt-unicode-256color rxvt-unicode-256color-ml)
 
 DEBIAN=(gnome-icon-theme-full boost-dev imagemagick)
 
 KERNEL_DEV=(cscope exuberant-ctags)
+
+POSTGRES=(postgresql-server postgresql-contrib)
 
 function install_fedora_sound() {
     echo "Installing Video and audio codecs on Fedora"
