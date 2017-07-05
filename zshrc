@@ -51,7 +51,7 @@ ENABLE_CORRECTION="true"
 
 # User configuration
 
-export PATH="/home/antoni/.rvm/gems/ruby-2.1.5/bin:/home/antoni/.rvm/gems/ruby-2.1.5@global/bin:/home/antoni/.rvm/rubies/ruby-2.1.5/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:~/yasara:/home/antoni/.rvm/bin:/home/antoni/opt/yasara:/home/antoni/.rvm/bin"
+export PATH="$HOME/.rvm/gems/ruby-2.1.5/bin:$HOME/.rvm/gems/ruby-2.1.5@global/bin:$HOME/.rvm/rubies/ruby-2.1.5/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:~/yasara:$HOME/.rvm/bin:$HOME/opt/yasara:$HOME/.rvm/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -94,7 +94,7 @@ unsetopt CASE_GLOB
 # See: http://www.johnhawthorn.com/2012/09/vi-escape-delays/
 KEYTIMEOUT=1
 
-PLAN9=/home/antoni/plan9port export PLAN9
+PLAN9=$HOME/plan9port export PLAN9
 PATH=$PATH:$PLAN9/bin export PATH
 
 unsetopt correct_all
@@ -112,11 +112,11 @@ unsetopt correct_all
 ### END ###
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f /home/antoni/google-cloud-sdk/path.zsh.inc ]; then
-  source '/home/antoni/google-cloud-sdk/path.zsh.inc'
+if [ -f $HOME/google-cloud-sdk/path.zsh.inc ]; then
+  source '$HOME/google-cloud-sdk/path.zsh.inc'
 fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f /home/antoni/google-cloud-sdk/completion.zsh.inc ]; then
-  source '/home/antoni/google-cloud-sdk/completion.zsh.inc'
+if [ -f $HOME/google-cloud-sdk/completion.zsh.inc ]; then
+  source '$HOME/google-cloud-sdk/completion.zsh.inc'
 fi

@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Clone this repo file into ~ to make it work
+HOME_DIR=$HOME
 DOTFILES_DIR=~/dotfiles
 
 # Version of clang-format, should be taken from /usr/bin/clang-format-X.Y,
@@ -10,11 +11,13 @@ DOTFILES_DIR=~/dotfiles
 # CLANG_FORMAT_VERSION=$CLANG_VERSION
 # CLANG_MODERNIZE_VERSION=$CLANG_VERSION
 LLDB_VERSION=3.7
-echo "LLDB     version symlinked:   " $LLDB_VERSION
+echo "LLDB               version symlinked:   " $LLDB_VERSION
 IDEA_VERSION=`echo $HOME/idea-* | awk -F'-' '{print $3}'`
-echo "IntelliJ version symlinked:   " $IDEA_VERSION
+echo "IntelliJ           version symlinked:   " $IDEA_VERSION
+GOGLAND_VERSION=`echo $HOME/Gogland-* | awk -F'-' '{print $2}'`
+echo "Gogland            version symlinked:   " $GOGLAND_VERSION
 CLION_VERSION=2017.1.1
-echo "CLion    version symlinked:   " $CLION_VERSION
+echo "CLion              version symlinked:   " $CLION_VERSION
 
 DOTFILES=(profile bashrc zshrc vimrc paths aliases common_profile.sh tmux.conf gitconfig gitignore ghci gvimrc hgrc lldbinit gdbinit xbindkeysrc optional.sh)
 
@@ -78,9 +81,11 @@ sudo sysctl -p --system
 # lldb
 sudo ln -fs /usr/bin/lldb-$LLDB_VERSION /usr/bin/lldb
 # IDEA
-sudo ln -fs /home/antoni/idea-IC-$IDEA_VERSION/bin/idea.sh /usr/bin/idea
+sudo ln -fs $HOME_DIR/idea-IC-$IDEA_VERSION/bin/idea.sh /usr/bin/idea
 # Clion
-sudo ln -fs /home/antoni/clion-$CLION_VERSION/bin/clion.sh /usr/bin/clion
+sudo ln -fs $HOME_DIR/clion-$CLION_VERSION/bin/clion.sh /usr/bin/clion
+# IDEA
+sudo ln -fs $HOME_DIR/Gogland-$GOGLAND_VERSION/bin/gogland.sh /usr/bin/gogland
 # Screenshots
 sudo ln -fs $HOME/scripts/st.sh /bin/st
 
