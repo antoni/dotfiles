@@ -1,0 +1,5 @@
+BIRed='\033[1;91m'        # Bold high intensity red
+
+service() {
+	echo "$BIRed"Do not use service command
+}
