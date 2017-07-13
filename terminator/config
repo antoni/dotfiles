@@ -19,6 +19,7 @@
 [profiles]
   [[default]]
     copy_on_selection = True
+    cursor_color = "#aaaaaa"
     font = Monospace 11
     scrollback_infinite = True
     show_titlebar = False
