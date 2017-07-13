@@ -1,2 +1,5 @@
 IdeaIC14/config/tasks/*
 *.pyc
+
+install/google-chrome*
+install/linux_signing_key*
