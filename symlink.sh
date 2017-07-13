@@ -1,15 +1,24 @@
 #!/bin/bash
 
-# Clone this repo file into ~ to make it work
 HOME_DIR=$HOME
-DOTFILES_DIR=~/dotfiles
+DOTFILES_DIR=$HOME_DIR/dotfiles
+
+source $DOTFILES_DIR/colors.sh
+
+echo -e "${colors[BGreen]}Enter sudo password:${colors[White]}"
+read -s SUDO_PASS
+
+function sudo_exec() {
+    sudo -S <<< $SUDO_PASS $@
+}
 
 # Version of clang-format, should be taken from /usr/bin/clang-format-X.Y,
 # same for clang-modernize
-# CLANG_VERSION=3.9
-# echo "Clang    version symlinked:   " $CLANG_VERSION
-# CLANG_FORMAT_VERSION=$CLANG_VERSION
-# CLANG_MODERNIZE_VERSION=$CLANG_VERSION
+CLANG_VERSION=3.9
+echo "Clang    version symlinked:   " $CLANG_VERSION
+CLANG_FORMAT_VERSION=$CLANG_VERSION
+CLANG_MODERNIZE_VERSION=$CLANG_VERSION
+echo -e "${colors[Green]}"
 LLDB_VERSION=3.7
 echo "LLDB               version symlinked:   " $LLDB_VERSION
 IDEA_VERSION=`echo $HOME/idea-* | awk -F'-' '{print $3}'`
@@ -18,6 +27,7 @@ GOGLAND_VERSION=`echo $HOME/Gogland-* | awk -F'-' '{print $2}'`
 echo "Gogland            version symlinked:   " $GOGLAND_VERSION
 CLION_VERSION=2017.1.1
 echo "CLion              version symlinked:   " $CLION_VERSION
+echo -e "${colors[White]}"
 
 DOTFILES=(profile bashrc zshrc vimrc paths aliases common_profile.sh tmux.conf gitconfig gitignore ghci gvimrc hgrc lldbinit gdbinit xbindkeysrc optional.sh)
 
@@ -61,36 +71,42 @@ set -x # echo executed commands
 
 # /usr/bin symlinks
 # Chrome
-sudo ln -fs /usr/bin/google-chrome-stable /usr/bin/g
+sudo_exec ln -fs /usr/bin/google-chrome-stable /usr/bin/g
 # Eclipse
-sudo ln -fs ~/eclipse/eclipse /usr/bin/eclipse
+sudo_exec ln -fs ~$HOME_DIR/eclipse/eclipse /usr/bin/eclipse
 # clang
-# sudo ln -fs /usr/bin/clang-$CLANG_VERSION /usr/bin/clang
-# sudo ln -fs /usr/bin/clang++-$CLANG_VERSION /usr/bin/clang++
+sudo_exec ln -fs /usr/bin/clang-$CLANG_VERSION /usr/bin/clang
+sudo_exec ln -fs /usr/bin/clang++-$CLANG_VERSION /usr/bin/clang++
 # clang-format
-# sudo ln -fs /usr/bin/clang-format-$CLANG_FORMAT_VERSION /usr/bin/clang-format
+# sudo_exec ln -fs /usr/bin/clang-format-$CLANG_FORMAT_VERSION /usr/bin/clang-format
 # clang-modernize
-# sudo ln -fs /usr/bin/clang-modernize-$CLANG_MODERNIZE_VERSION /usr/bin/clang-modernize
+# sudo_exec ln -fs /usr/bin/clang-modernize-$CLANG_MODERNIZE_VERSION /usr/bin/clang-modernize
+
+# adb 
+sudo_exec ln -fs $HOME_DIR/Android/Sdk/platform-tools/adb /usr/bin/adb
 
 # IDEA
+sudo_exec mkdir -p /etc/sysctl.d
+sudo_exec ln -fs ${DOTFILES_DIR}/intellij/idea_sysctl.conf /etc/sysctl.d/idea_sysctl.conf
+sudo_exec sysctl -p --system
 
-sudo mkdir -p /etc/sysctl.d
-sudo ln -fs ${DOTFILES_DIR}/intellij/idea_sysctl.conf /etc/sysctl.d/idea_sysctl.conf
-sudo sysctl -p --system
+# Global aliases
+sudo_exec mkdir -p /etc/profile.d
+sudo_exec ln -fs ${DOTFILES_DIR}/global_aliases /etc/profile.d/global_aliases.sh
 
 # lldb
-sudo ln -fs /usr/bin/lldb-$LLDB_VERSION /usr/bin/lldb
+sudo_exec ln -fs /usr/bin/lldb-$LLDB_VERSION /usr/bin/lldb
 # IDEA
-sudo ln -fs $HOME_DIR/idea-IC-$IDEA_VERSION/bin/idea.sh /usr/bin/idea
+sudo_exec ln -fs $HOME_DIR/idea-IC-$IDEA_VERSION/bin/idea.sh /usr/bin/idea
 # Clion
-sudo ln -fs $HOME_DIR/clion-$CLION_VERSION/bin/clion.sh /usr/bin/clion
+sudo_exec ln -fs $HOME_DIR/clion-$CLION_VERSION/bin/clion.sh /usr/bin/clion
 # IDEA
-sudo ln -fs $HOME_DIR/Gogland-$GOGLAND_VERSION/bin/gogland.sh /usr/bin/gogland
+sudo_exec ln -fs $HOME_DIR/Gogland-$GOGLAND_VERSION/bin/gogland.sh /usr/bin/gogland
 # Screenshots
-sudo ln -fs $HOME/scripts/st.sh /bin/st
+sudo_exec ln -fs $HOME/scripts/st.sh /bin/st
 
 if [ -e $HOME/android-studio ]; then
-    sudo ln -fs $HOME/android-studio/bin/studio.sh /bin/astudio
+    sudo_exec ln -fs $HOME/android-studio/bin/studio.sh /bin/astudio
 fi;
 
 set +x
@@ -110,3 +126,15 @@ fi
 # GO_PACKAGES=(github.com/derekparker/delve/cmd/dlv github.com/Sirupsen/logrus)
 # go get -u $GO_PACKAGES
 
+echo -e "${colors[BYellow]}Configuring X11...${colors[White]}"
+sudo Xorg :1 -configure
+sudo cp /root/xorg.conf.new /etc/X11/xorg.conf
+
+# Create temp directory
+mkdir -p $HOME_DIR/tmp
+
+echo -e "${colors[BYellow]}Things to be (possibly) done manually:\n\n\
+\t* /sys/class/backlight/\t\tto make xbacklight work"
+
+sudo cp brightness.sh /root/
+sudo sh -c 'echo "$USER $(hostname) = NOPASSWD: /root/brightness.sh" >> /etc/sudoers'

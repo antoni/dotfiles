@@ -2,6 +2,8 @@
 # vim:set ft=sh textwidth=0 wrapmargin=0:
 set +x
 
+source $HOME/dotfiles/colors.sh
+
 function command_exists () { type "$1" &> /dev/null ; }
 
 # Aliases and custom functions
@@ -143,6 +145,7 @@ alias singlemonitor='xrandr --output LVDS1'
 alias dualmonitor='xrandr --output VGA1 --mode 1920x1200 --right-of LVDS1'
 alias dualmonitor2='xrandr --output VGA1 --mode 1680x1050 --right-of LVDS1'
 alias dualmonitor_left='xrandr --output VGA1 --mode 1920x1200 --left-of LVDS1'
+alias dualmonitor_ktech='xrandr --output HDMI-1 --mode 1920x1080i'
 
 # Fixing various things on Ubuntu
 alias fixaudio='pulseaudio -k' ; alias fixaudio2='pavucontrol'
@@ -520,7 +523,10 @@ function gi() {
     curl -L -s https://www.gitignore.io/api/$@ | head -n -2 | tail -n +5 | tee .gitignore;
 }
 
-# Temporary
-alias serwer='cd ~prozomat/prozoserwer'
-
-
+# $1 - dir to be watched for CREATE or MOVED_TO events
+function watch_dir() {
+    inotifywait -m $1 -e create -e moved_to |
+    while read path action file; do
+        printf "[${colors[Green]}%s${colors[White]}]\t${colors[Red]}%s${colors[White]}\tin\t%s\n" $action $file $path
+    done
+}

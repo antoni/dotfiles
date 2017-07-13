@@ -132,8 +132,10 @@ au BufEnter,BufNew *.cu noremap <F5> :wa \| !nvcc -std=c++11 -g % -o test && ./t
 au BufEnter,BufNew *.py noremap <F5> :wa \| !python3 % : <CR>
 " LaTeX
 au BufEnter,BufNew *.tex noremap <F5> :wa \| Lt <CR>
+" Shell
+au BufEnter,BufNew *.sh noremap <F5> :wa \| !bash % <CR>
 " Go
-au BufEnter,BufNew *.go noremap <F5> :wa \| :GoRun <CR>
+au BufEnter,BufNew *.go noremap <F5> :wa \| !go run % <CR>
 imap <F5> <C-o><F5>
 " Open file under cursor in vertical window
 nnoremap <F3> :vertical wincmd f<CR>

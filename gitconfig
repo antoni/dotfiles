@@ -36,7 +36,8 @@
     lg = log --graph --name-status --pretty=oneline
     change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch -f --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f "
     squash = "!f(){ git reset --soft HEAD~${1} && git commit --edit -m\"$(git log --format=%B --reverse HEAD..HEAD@{1})\"; };f"
+    prevision = "!f() { git checkout `git log --oneline $2 |  awk -v commit="$1" 'FNR == -commit+1 {print $1}'` $2;} ;f"
 [push]
 	default = matching
-[pull]
-    rebase = true
+; [pull]
+    ; rebase = true
