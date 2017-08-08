@@ -1,5 +1,11 @@
 IdeaIC14/config/tasks/*
 *.pyc
+wget-log
 
 install/google-chrome*
 install/linux_signing_key*
+
+node_modules
+npm-debug.log
+
+package.json

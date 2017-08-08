@@ -41,7 +41,7 @@ if [ -z ${DISPLAY} ] || [ $xrandr_display_count -eq 1 ] ; then
     # DISPLAY unset
     :
 else
-    xrandr --output VGA1 --mode 1680x1050 --right-of LVDS1
+    # xrandr --output VGA1 --mode 1680x1050 --right-of LVDS1
 
     # PL keyboard layout
     if command_exists setxkbmap && [[ "$unamestr" != 'Darwin' ]] ; then

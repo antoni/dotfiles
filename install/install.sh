@@ -4,9 +4,11 @@ source chrome_install.sh
 
 # Install required packages
 PACKAGES=(slock xbindkeys haskell clang vim vim-X11 rdesktop tigervnc make xpdf sysstat
-vim-enhanced vim-X11 make cmake gitk vlc st okular xdotool xbindkeys xautomation mosh
-libreoffice cscope ctags perf pavucontrol jq dmidecode xselxi i3wm zsh  libappindicator lsb ntp feh help2man
-thunar acpi tmux gitg nomacs docker vpnc vpnc-script NetworkManager-vpnc NetworkManager-vpnc-gnome eom eog inotify-tools xbacklight arandr)
+vim-enhanced vim-X11 make cmake gitk vlc st okular xdotool xbindkeys xautomation mosh mc
+libreoffice cscope ctags perf pavucontrol jq dmidecode xselxi i3wm zsh  libappindicator lsb ntp feh help2man rpl
+thunar acpi tmux gitg nomacs docker vpnc vpnc-script NetworkManager-vpnc
+NetworkManager-vpnc-gnome eom eog inotify-tools xbacklight arandr pulseaudio gnome-bluetooth
+tidy pandoc)
 
 OPTIONAL_PACKAGES=(qt-devel transmission-remote-* transmission-daemon)
 
@@ -17,7 +19,7 @@ HASKELL=(ghc ghc-Cabal cabal-install)
 LATEX=(texlive-listing texlive-pgfopts)
 
 FEDORA=(gnome-icon-theme system-config-printer libreoffice-langpack-pl boost-devel squashfs-tools glibc-devel ghc-ShellCheck pykickstart ImageMagick-devel NetworkManager-tui system-config-keyboard
-seahorse python-devel libxml2-devel libxslt-devel ShellCheck)
+seahorse python-devel libxml2-devel libxslt-devel ShellCheck java-1.8.0-openjdk redhat-rpm-config)
 RXVT=(rxvt-unicode rxvt-unicode-ml rxvt-unicode-256color rxvt-unicode-256color-ml)
 
 DEBIAN=(gnome-icon-theme-full boost-dev imagemagick python-dev libxml2-dev libxslt-dev)
@@ -25,6 +27,8 @@ DEBIAN=(gnome-icon-theme-full boost-dev imagemagick python-dev libxml2-dev libxs
 KERNEL_DEV=(cscope exuberant-ctags)
 
 POSTGRES=(postgresql-server postgresql-contrib)
+
+JAVA=(java-1.8.0-openjdk-src java-1.8.0-openjdk)
 
 function install_fedora_sound() {
     echo "Installing Video and audio codecs on Fedora"
@@ -53,12 +57,23 @@ if [ ! -e ~/.ssh/id_rsa ]; then
     ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
 fi
 
-# oh-my-zsh
-sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
-chsh -s /bin/zsh
+
+function install_oh_my_zsh() {
+    sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+    chsh -s /bin/zsh
+}
 
 # Add current user to docker group
 sudo groupadd -f docker
 sudo usermod -aG docker $USER
 newgrp docker
 sudo chown $USER /var/run/docker.sock
+
+
+function install_fzf() {
+    # install fzf to oh-my-zsh custom plugins directory
+    git clone https://github.com/junegunn/fzf.git ${ZSH}/custom/plugins/fzf
+    ${ZSH}/custom/plugins/fzf/install --bin
+    # install fzf-zsh to oh-my-zsh custom plugins directory
+    git clone https://github.com/Treri/fzf-zsh.git ${ZSH}/custom/plugins/fzf-zsh
+}
