@@ -47,7 +47,7 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-# plugins=(git)
+plugins=(fzf-zsh)
 
 # User configuration
 
@@ -87,6 +87,7 @@ chpwd() ls
 source $HOME/.paths
 source $HOME/.aliases
 source $HOME/.common_profile.sh
+source $HOME/.fzf.sh
 
 # Ignore case when 'ls'
 unsetopt CASE_GLOB

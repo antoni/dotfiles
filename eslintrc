@@ -1,0 +1,17 @@
+{
+    "extends": "standard",
+        "rules": {
+            "consistent-return": 2,
+            "indent"           : 2,
+            "no-else-return"   : 1,
+            "space-infix-ops": 1,
+            "semi": ["error", "always"],
+            "space-unary-ops"  : 2
+        },
+        "globals": {
+            "document": true,
+            "chrome": true,
+            "navigator": true,
+            "window": true
+        }
+}

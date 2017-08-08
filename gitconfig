@@ -34,9 +34,26 @@
     ad = add
     mt = mergetool
     lg = log --graph --name-status --pretty=oneline
+    # Rewrite previous commit usernames and emails
+    # git change-commits GIT_AUTHOR_NAME "old name" "new name"
+    #
+    # For the last 10 commits:
+    # git change-commits GIT_AUTHOR_EMAIL "old@email.com" "new@email.com" HEAD~10..HEAD
     change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch -f --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f "
+    # Usage git squash [n], n - number of last commits to be squashed
     squash = "!f(){ git reset --soft HEAD~${1} && git commit --edit -m\"$(git log --format=%B --reverse HEAD..HEAD@{1})\"; };f"
+    # Usage:
+        # $ git prevision <N> <filename>
+        # will checkout the <N>th revision (counting backwards from HEAD) into the history of the file <filename>.
+        #
+        # For example to checkout the immediate previous version of a file x/y/z.c use
+        # $ git prevision -1 x/y/z.c
+    # Commit, then squash current changes with previous commmit
+    s2 = "export MSG=`git log -1 --pretty=%B | cat` ; git add . ; git reset --soft 'HEAD^' ; git commit -m $MSG"
     prevision = "!f() { git checkout `git log --oneline $2 |  awk -v commit="$1" 'FNR == -commit+1 {print $1}'` $2;} ;f"
+    # Reset single file to HEAD
+    reset-file = "git checkout HEAD -- "
+
 [push]
 	default = matching
 ; [pull]
