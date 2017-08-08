@@ -63,3 +63,7 @@ Shift+Mod4 + Shift_R
 
 "dmenu_run"
 Mod2 + Menu
+
+# Use FZF to choose a git branch
+# "b"
+# Control+b
