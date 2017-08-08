@@ -5,7 +5,7 @@ DOTFILES_DIR=$HOME_DIR/dotfiles
 
 source $DOTFILES_DIR/colors.sh
 
-echo -e "${colors[BGreen]}Enter sudo password:${colors[White]}"
+echo -en "${colors[BGreen]}Enter sudo password:${colors[White]} "
 read -s SUDO_PASS
 
 function sudo_exec() {
@@ -29,7 +29,8 @@ CLION_VERSION=2017.1.1
 echo "CLion              version symlinked:   " $CLION_VERSION
 echo -e "${colors[White]}"
 
-DOTFILES=(profile bashrc zshrc vimrc paths aliases common_profile.sh tmux.conf gitconfig gitignore ghci gvimrc hgrc lldbinit gdbinit xbindkeysrc optional.sh)
+DOTFILES=(profile bashrc zshrc vimrc paths aliases common_profile.sh tmux.conf gitconfig
+gitignore ghci gvimrc hgrc lldbinit gdbinit xbindkeysrc optional.sh eslintrc fzf.sh)
 
 # Xrdb merge
 XRES_FILE=Xresources.solarized
@@ -97,7 +98,7 @@ sudo_exec ln -fs ${DOTFILES_DIR}/global_aliases /etc/profile.d/global_aliases.sh
 # lldb
 sudo_exec ln -fs /usr/bin/lldb-$LLDB_VERSION /usr/bin/lldb
 # IDEA
-sudo_exec ln -fs $HOME_DIR/idea-IC-$IDEA_VERSION/bin/idea.sh /usr/bin/idea
+sudo_exec ln -fs $HOME_DIR/idea-I?-$IDEA_VERSION/bin/idea.sh /usr/bin/idea
 # Clion
 sudo_exec ln -fs $HOME_DIR/clion-$CLION_VERSION/bin/clion.sh /usr/bin/clion
 # IDEA
@@ -126,15 +127,44 @@ fi
 # GO_PACKAGES=(github.com/derekparker/delve/cmd/dlv github.com/Sirupsen/logrus)
 # go get -u $GO_PACKAGES
 
-echo -e "${colors[BYellow]}Configuring X11...${colors[White]}"
-sudo Xorg :1 -configure
-sudo cp /root/xorg.conf.new /etc/X11/xorg.conf
-
 # Create temp directory
 mkdir -p $HOME_DIR/tmp
 
 echo -e "${colors[BYellow]}Things to be (possibly) done manually:\n\n\
-\t* /sys/class/backlight/\t\tto make xbacklight work"
+    \t* /sys/class/backlight/\t\tto make xbacklight work"${colors[BWhite]}
 
 sudo cp brightness.sh /root/
 sudo sh -c 'echo "$USER $(hostname) = NOPASSWD: /root/brightness.sh" >> /etc/sudoers'
+
+function setup_hostname() {
+    hostname_default="miramar"
+    echo -en "${colors[BGreen]}Enter hostname for the current machine [$hostname_default]:${colors[White]} "
+    read hostname
+    hostname=${name:-$hostname_default}
+    hostnamectl set-hostname $hostname
+    echo -e "${colors[BGreen]}Hostname changed to:${colors[BBlue]} $hostname ${colors[White]}"
+}
+
+setup_hostname
+
+# Midnight Commander
+ln -fs $DOTFILES_DIR/mc ~/.config
+
+
+# JS-related tools
+NPM_DIR=$HOME/.npm
+mkdir -p $NPM_DIR
+sudo_exec chown -R $(whoami) $NPM_DIR
+
+function install_npm_packages() {
+    sudo_exec npm install -g eslint lodash
+}
+
+# TODO: Fix this to install globally
+function install_airbnb_eslint() {
+    export PKG="eslint-config-airbnb";
+    npm info "$PKG@latest" peerDependencies --json | command sed 's/[\{\},]//g ; s/: /@/g' | xargs npm install --save-dev "$PKG@latest";
+}
+
+# install_npm_packages
+# install_airbnb_eslint

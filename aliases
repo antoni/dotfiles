@@ -109,7 +109,10 @@ alias gitm='git merge'
 alias gitb='git branch'
 alias gitk='gitk --all'
 alias gitundocommit='git reset --soft HEAD~1'
+alias grb='git rebase master'
 alias gd='git diff'
+alias gcw='git commit -m "WIP"'
+alias gcm='git checkout master'
 
 # Set `indent` parameters according to Linux kernel Coding Style
 #alias indent='indent -kr -i8'
@@ -145,7 +148,8 @@ alias singlemonitor='xrandr --output LVDS1'
 alias dualmonitor='xrandr --output VGA1 --mode 1920x1200 --right-of LVDS1'
 alias dualmonitor2='xrandr --output VGA1 --mode 1680x1050 --right-of LVDS1'
 alias dualmonitor_left='xrandr --output VGA1 --mode 1920x1200 --left-of LVDS1'
-alias dualmonitor_ktech='xrandr --output HDMI-1 --mode 1920x1080i'
+alias dualmonitor_ktech='xrandr --output HDMI-1 --mode 2560x1440 --left-of eDP-1'
+alias dualmonitor_ktech_pres='xrandr --output HDMI-1 --mode 1920x1080i'
 
 # Fixing various things on Ubuntu
 alias fixaudio='pulseaudio -k' ; alias fixaudio2='pavucontrol'
@@ -530,3 +534,37 @@ function watch_dir() {
         printf "[${colors[Green]}%s${colors[White]}]\t${colors[Red]}%s${colors[White]}\tin\t%s\n" $action $file $path
     done
 }
+
+alias gb='ginkgo bootstrap'
+
+HTML_TIDY_TMP_FILE="/tmp/tidy_log.txt"
+
+# Reformats JS/JSON/HTML code
+# Usage:
+#   ./reformat filename
+function reformat() {
+    tmpf=/tmp/in_place_change_tmp
+    filename=$(basename "$1")
+    ext="${filename##*.}"
+
+    echo "File extension: "$ext;
+
+    case $ext in
+        "md" )
+            # Reformat against Github's Markdown styleguide
+            pandoc -f markdown -t markdown_github "$1" > "$tmpf"
+            ;;
+        "js" )
+            eslint --fix $1 > "$tmpf";
+            ;;
+        "json" )
+            jq -M '.' > "$tmpf" < "$1";
+            ;;
+        "html" )
+            tidy -indent -wrap 80 -utf8 -clean -file $HTML_TIDY_TMP_FILE $1 > "$tmpf";
+            ;;
+    esac
+    mv -f "$tmpf" "$1";
+}
+
+alias a='cd ~/adnetwork'
