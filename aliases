@@ -144,7 +144,7 @@ alias hgrep='history | grep -i'
 alias gopath="export GOPATH=\$(pwd)"
 alias dbgui='/usr/share/dbeaver/dbeaver'
 
-alias singlemonitor='xrandr --output LVDS1'
+alias singlemonitor='xrandr --output eDP-1'
 alias dualmonitor='xrandr --output VGA1 --mode 1920x1200 --right-of LVDS1'
 alias dualmonitor2='xrandr --output VGA1 --mode 1680x1050 --right-of LVDS1'
 alias dualmonitor_left='xrandr --output VGA1 --mode 1920x1200 --left-of LVDS1'
@@ -535,8 +535,6 @@ function watch_dir() {
     done
 }
 
-alias gb='ginkgo bootstrap'
-
 HTML_TIDY_TMP_FILE="/tmp/tidy_log.txt"
 
 # Reformats JS/JSON/HTML code
@@ -568,3 +566,16 @@ function reformat() {
 }
 
 alias a='cd ~/adnetwork'
+
+# Toggles VPN connection
+function vpn() {
+    vpn_conn="VPN"
+    vpn_cmd="up"
+    if [[ $(nmcli connection show --active | \grep VPN) ]]; then
+        vpn_cmd="down";
+    fi;
+
+    nmcli connection $vpn_cmd id $vpn_conn | tr ' ' '\n' | \grep --color activated
+}
+
+alias redshift_warsaw='redshift-gtk -v -l 52.23:21.012'

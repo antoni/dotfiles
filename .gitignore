@@ -2,10 +2,15 @@ IdeaIC14/config/tasks/*
 *.pyc
 wget-log
 
-install/google-chrome*
+*install/google-chrome-stable*
+
 install/linux_signing_key*
 
 node_modules
 npm-debug.log
 
 package.json
+
+*/tmp
+
+*/*google-chrome-stable_current*
