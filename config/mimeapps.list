@@ -9,7 +9,8 @@ x-scheme-handler/trash=google-chrome.desktop
 application/pdf=google-chrome.desktop
 image/jpeg=mirage.desktop
 image/gif=mirage.desktop
-image/png=mirage.desktop
+#image/png=mirage.desktop
+image/png=nomacs.desktop
 inode/directory=explorer.desktop
 application/vnd.oasis.opendocument.text=libreoffice-writer.desktop
  
