@@ -2,6 +2,9 @@
 # vim:set ft=sh textwidth=0 wrapmargin=0:
 set +x
 
+DEFAULT_CITY="Warsaw";
+DEFAULT_COORDS="52.23:21.012'";
+
 source $HOME/dotfiles/colors.sh
 
 function command_exists () { type "$1" &> /dev/null ; }
@@ -110,6 +113,7 @@ alias gitb='git branch'
 alias gitk='gitk --all'
 alias gitundocommit='git reset --soft HEAD~1'
 alias grb='git rebase master'
+alias gri='git rebase integration'
 alias gd='git diff'
 alias gcw='git commit -m "WIP"'
 alias gcm='git checkout master'
@@ -433,7 +437,6 @@ updateall() {
 pythontools=(2to3 pylint pyflakes autopep8)
 
 alias classdiagram='staruml'
-alias weather='curl http://wttr.in/Warsaw'
 
 alias uwb='ssh a.rosciszewski@login.uco.uwb.edu.pl -p 9022'
 
@@ -527,12 +530,16 @@ function gi() {
     curl -L -s https://www.gitignore.io/api/$@ | head -n -2 | tail -n +5 | tee .gitignore;
 }
 
-# $1 - dir to be watched for CREATE or MOVED_TO events
-function watch_dir() {
-    inotifywait -m $1 -e create -e moved_to |
+# Helper for watch_dir
+function watch_dir_action() {
     while read path action file; do
         printf "[${colors[Green]}%s${colors[White]}]\t${colors[Red]}%s${colors[White]}\tin\t%s\n" $action $file $path
-    done
+    done;
+}
+
+# $1 - dir to be watched for CREATE or MOVED_TO events
+function watch_dir() {
+    inotifywait -m $1 -e create -e moved_to | watch_dir_action;
 }
 
 HTML_TIDY_TMP_FILE="/tmp/tidy_log.txt"
@@ -578,4 +585,10 @@ function vpn() {
     nmcli connection $vpn_cmd id $vpn_conn | tr ' ' '\n' | \grep --color activated
 }
 
-alias redshift_warsaw='redshift-gtk -v -l 52.23:21.012'
+function redshift_loc() {
+    redshift-gtk -v -l $DEFAULT_COORDS;
+}
+
+function weather() {
+    curl wttr.in/"${1:-$DEFAULT_CITY}" | head -n -3;
+}

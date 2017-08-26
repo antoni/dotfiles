@@ -134,6 +134,8 @@ au BufEnter,BufNew *.py noremap <F5> :wa \| !python3 % : <CR>
 au BufEnter,BufNew *.tex noremap <F5> :wa \| Lt <CR>
 " Shell
 au BufEnter,BufNew *.sh noremap <F5> :wa \| !bash % <CR>
+" JS
+au BufEnter,BufNew *.js noremap <F5> :wa \| !node % <CR>
 " Go
 au BufEnter,BufNew *.go noremap <F5> :wa \| !go run % <CR>
 imap <F5> <C-o><F5>
@@ -153,6 +155,7 @@ nnoremap <F3> :vertical wincmd f<CR>
 " Ctrl-{X,C,V} under gvim
 source $VIMRUNTIME/mswin.vim
 behave mswin
+unmap <C-F>
 
 " Reformat current file (:w) & save all (:wa; can't reformat all because of
 " the way BufWritePre works
