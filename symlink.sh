@@ -73,8 +73,8 @@ ln -fs ${DOTFILES_DIR}/i3/i3status.config ~/.config/i3/i3status.config
 
 # Redshift
 if [[ ! -a ~/.config/redshift.conf ]]; then
-  mkdir -p ~/.config
-  ln -s ${DOTFILES_DIR}/redshift.conf ~/.config/redshift.conf
+    mkdir -p ~/.config
+    ln -s ${DOTFILES_DIR}/redshift.conf ~/.config/redshift.conf
 fi
 
 # MIME types
@@ -173,26 +173,32 @@ setup_hostname
 # Midnight Commander
 ln -fs $DOTFILES_DIR/mc ~/.config
 
-# JS-related tools
-NPM_DIR=$HOME/.npm
-mkdir -p $NPM_DIR
-sudo_exec chown -R $(whoami) $NPM_DIR
-
-function install_npm_packages() {
-    sudo_exec npm install -g eslint lodash
-}
-
-# TODO: Fix this to install globally
-function install_airbnb_eslint() {
-    export PKG="eslint-config-airbnb";
-    npm info "$PKG@latest" peerDependencies --json | command sed 's/[\{\},]//g ; s/: /@/g' | xargs npm install --save-dev "$PKG@latest";
-}
-
-# install_npm_packages
-# install_airbnb_eslint
-
+# Fedora upgrade
 function fedora_system_upgrade() {
     sudo dnf install python3-dnf-plugin-system-upgrade
     sudo dnf system-upgrade download --refresh --releasever=26
     sudo dnf system-upgrade reboot
 }
+
+# JS-related tools
+
+# Make global packages install locally (without sudo)
+function install_npm() {
+    NPM_DIR=$HOME/.npm-global;
+    mkdir -p $NPM_DIR;
+    npm config set prefix "$NPM_DIR";
+}
+
+function install_npm_packages() {
+    npm install -g eslint lodash
+}
+
+function install_airbnb_eslint() {
+      export PKG=eslint-config-airbnb;
+  npm info "$PKG@latest" peerDependencies --json | command sed 's/[\{\},]//g ; s/:
+  /@/g' | xargs npm install -g "$PKG@latest"
+}
+
+# install_npm_packages
+# install_airbnb_eslint
+
