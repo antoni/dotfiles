@@ -8,9 +8,10 @@ source chrome_install.sh
 PACKAGES=(slock xbindkeys haskell clang vim vim-X11 rdesktop tigervnc make xpdf sysstat
 vim-enhanced vim-X11 make cmake gitk vlc st okular xdotool xbindkeys xautomation mosh mc
 libreoffice cscope ctags perf pavucontrol jq dmidecode xselxi i3wm zsh  libappindicator lsb ntp feh help2man rpl
-thunar acpi tmux gitg nomacs docker vpnc vpnc-script NetworkManager-vpnc hexchat
+thunar acpi tmux gitg nomacs docker vpnc vpnc-script NetworkManager-vpnc
+hexchat rlwrap
 NetworkManager-vpnc-gnome eom eog inotify-tools xbacklight arandr pulseaudio gnome-bluetooth
-tidy pandoc tig ncdu redshift)
+tidy pandoc tig ncdu redshift grub-customizer)
 
 RUST_PACKAGES=(rust cargo)  
 
