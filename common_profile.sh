@@ -83,9 +83,12 @@ function execute_on_login_only() {
         feh --bg-scale $WALLPAPER
     fi
 
-    # Keyboard
-    if command_exists xbindkeys; then
-        killall xbindkeys 2> /dev/null
-        xbindkeys -f ~/.xbindkeysrc 
-    fi
 }
+
+# Keyboard
+if command_exists xbindkeys; then
+    killall xbindkeys 2> /dev/null
+    xbindkeys -f ~/.xbindkeysrc 
+fi
+
+export PATH=~/.npm-global/bin:$PATH:~/wkhtmltox/bin
