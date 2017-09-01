@@ -206,3 +206,9 @@ function install_airbnb_eslint() {
 # install_npm_packages
 # install_airbnb_eslint
 
+# Atom
+
+for atom in `\ls atom`; do
+    rm -f ~/.atom/$atom;
+    ln -fs ~/dotfiles/atom/$atom $HOME/.atom/$atom;
+done
