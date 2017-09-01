@@ -30,6 +30,8 @@ GOGLAND_VERSION=`echo $HOME/Gogland-* | awk -F'-' '{print $2}'`
 echo "Gogland            version symlinked:   " $GOGLAND_VERSION
 CLION_VERSION=2017.1.1
 echo "CLion              version symlinked:   " $CLION_VERSION
+JMETER_VERSION=`echo $HOME/apache-jmeter-* | awk -F'-' '{print $3}'`
+echo "JMeter             version symlinked:   " $JMETER_VERSION
 SWEET_HOME_VERSION=`echo $HOME/SweetHome3D-* | awk -F'-' '{print $2}'`
 echo "SweetHome3D        version symlinked:   " $SWEET_HOME_VERSION
 echo -e "${colors[White]}"
@@ -129,6 +131,8 @@ sudo_exec ln -fs $HOME_DIR/idea-I?-$IDEA_VERSION/bin/idea.sh /usr/bin/idea
 sudo_exec ln -fs $HOME_DIR/clion-$CLION_VERSION/bin/clion.sh /usr/bin/clion
 # Gogland
 sudo_exec ln -fs $HOME_DIR/Gogland-$GOGLAND_VERSION/bin/gogland.sh /usr/bin/gogland
+# JMeter
+sudo_exec ln -fs $HOME_DIR/apache-jmeter-$JMETER_VERSION/bin/jmeter /usr/bin/jmeter
 # SweetHome3D
 sudo_exec ln -fs $HOME_DIR/SweetHome3D-$SWEET_HOME_VERSION/SweetHome3D /usr/bin/sweethome
 # Screenshots

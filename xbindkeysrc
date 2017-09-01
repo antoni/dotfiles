@@ -28,6 +28,14 @@ Control+Shift+Down
 "gnome-screenshot"
 Control+Shift+S
 
+# Text editor 
+"gedit"
+Control+Shift+G
+
+# Slack
+"slack"
+Control+Shift+K
+
 # Automatic typing 
 
 # Account number

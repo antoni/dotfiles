@@ -57,6 +57,7 @@
     fp = "!git push -f origin \"$(git rev-parse --abbrev-ref HEAD)\""
     # Show changes from a particular commit
     changes = "!git diff $1^ $1"
+    dontcommit = "!git checkout ."
 [push]
 	default = matching
 ; [pull]

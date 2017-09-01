@@ -26,7 +26,7 @@ LATEX=(texlive-listing texlive-pgfopts)
 FEDORA=(gnome-icon-theme system-config-printer libreoffice-langpack-pl boost-devel squashfs-tools glibc-devel ghc-ShellCheck pykickstart ImageMagick-devel NetworkManager-tui
 system-config-keyboard seahorse python-devel libxml2-devel libxslt-devel ShellCheck java-1.8.0-openjdk
 redhat-rpm-config python3-dnf-plugin-system-upgrade cmake freetype-devel fontconfig-devel
-xclip redshift-gtk)
+xclip redshift-gtk texlive-latex-bin-bin)
 
 RXVT=(rxvt-unicode rxvt-unicode-ml rxvt-unicode-256color rxvt-unicode-256color-ml)
 
@@ -150,4 +150,9 @@ function configure_postgres() {
 function install_go_packages() {
     GO_PACKAGES=(github.com/derekparker/delve/cmd/dlv github.com/Sirupsen/logrus)
     go get -u $GO_PACKAGES
+}
+
+function install_nvidia_driver() {
+    sudo dnf config-manager --add-repo=http://negativo17.org/repos/fedora-nvidia.repo
+    sudo dnf -y install nvidia-driver nvidia-settings kernel-devel
 }
