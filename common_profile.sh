@@ -92,3 +92,6 @@ if command_exists xbindkeys; then
 fi
 
 export PATH=~/.npm-global/bin:$PATH:~/wkhtmltox/bin
+
+#HappyPack threads count
+export HAPPY_PACK_THREADS=8
