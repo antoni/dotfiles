@@ -155,7 +155,7 @@ nnoremap <F3> :vertical wincmd f<CR>
 " Ctrl-{X,C,V} under gvim
 source $VIMRUNTIME/mswin.vim
 behave mswin
-unmap <C-F>
+silent! unmap <C-F>
 
 " Reformat current file (:w) & save all (:wa; can't reformat all because of
 " the way BufWritePre works
