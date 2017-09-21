@@ -60,6 +60,10 @@ ln -fs ${DOTFILES_DIR}/terminator/config ~/.config/terminator/config
 mkdir -p ~/.config/alacritty
 ln -fs ${DOTFILES_DIR}/alacritty.yml ~/.config/alacritty/alacritty.yml
 
+# dunst (notifications)
+mkdir -p ~/.config/dunst
+ln -fs ${DOTFILES_DIR}/dunstrc ~/.config/dunst/dunstrc
+
 # pgcli
 mkdir -p ~/.config/pgcli
 ln -fs ${DOTFILES_DIR}/pgcli ~/.config/pgcli/config
@@ -101,6 +105,8 @@ set -x # echo executed commands
 
 # Chrome
 sudo_exec ln -fs /usr/bin/google-chrome-stable /usr/bin/g
+# Firefox
+sudo_exec ln -fs /usr/bin/firefox /usr/bin/f
 # Eclipse
 sudo_exec ln -fs ~$HOME_DIR/eclipse/eclipse /usr/bin/eclipse
 # clang
@@ -137,6 +143,10 @@ sudo_exec ln -fs $HOME_DIR/apache-jmeter-$JMETER_VERSION/bin/jmeter /usr/bin/jme
 sudo_exec ln -fs $HOME_DIR/SweetHome3D-$SWEET_HOME_VERSION/SweetHome3D /usr/bin/sweethome
 # Screenshots
 sudo_exec ln -fs $HOME/scripts/st.sh /bin/st
+# Sublime 3
+if [ -e $HOME/sublime_text_3 ]; then
+    sudo_exec ln -fs $HOME/sublime_text_3/sublime_text /usr/bin/sublime
+fi
 
 if [ -e $HOME/android-studio ]; then
     sudo_exec ln -fs $HOME/android-studio/bin/studio.sh /bin/astudio
@@ -194,8 +204,13 @@ function install_npm() {
 }
 
 function install_npm_packages() {
-    npm install -g eslint lodash
+    npm install -g eslint lodash jshint typescript prettier
 }
+
+function install_yarn_packages() {
+    yarn global add tslint typescript
+}
+
 
 function install_airbnb_eslint() {
       export PKG=eslint-config-airbnb;
@@ -208,7 +223,11 @@ function install_airbnb_eslint() {
 
 # Atom
 
+mkdir -p $HOME/.atom
+
 for atom in `\ls atom`; do
-    rm -f ~/.atom/$atom;
+    rm -f $HOME/.atom/$atom;
     ln -fs ~/dotfiles/atom/$atom $HOME/.atom/$atom;
 done
+
+echo -e '\033[1;29;42m DONE \033[0m \033[1;32mSuccessfully symlinked all the files\033[0m'

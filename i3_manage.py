@@ -8,7 +8,7 @@ import sys
 import time
 
 # Sleep time between i3.command() calls [s]
-SLEEP_TIME = 0.2
+SLEEP_TIME = 0.1
 
 
 def sleep_for(secs):
@@ -27,6 +27,15 @@ def i3cmd(i3conn, cmd_string):
     Executes i3 command with a SLEEP_TIME sleep after the call
     """
     i3conn.command(cmd_string)
+
+
+def get_current_output(i3, focused):
+    """
+    Get current output (monitor)
+    """
+    outputs = [o.name for o in filter(
+        lambda o: o.current_workspace == focused.name, i3.get_outputs())]
+    return outputs[0]
 
 
 def switch_output_workspaces(i3, focused):
@@ -49,13 +58,15 @@ def switch_output_workspaces(i3, focused):
         i3cmd(i3, 'workspace "' + focused.name + '"')
 
 
-def move_all_to_output(i3, output):
+def move_all_to_output(i3, output, focused):
     """
     Moves all workspaces to a given output (monitor)
     """
     for t in i3.get_workspaces():
         i3cmd(i3, 'workspace' + t.name)
         i3cmd(i3, 'move workspace to output' + output)
+
+    i3cmd(i3, 'workspace' + focused.name)
 
 
 def move_all_to_primary(i3, focused, primary=True):
@@ -65,35 +76,35 @@ def move_all_to_primary(i3, focused, primary=True):
     # Get outputs
     outputs = i3.get_outputs()
 
-    for output in filter(lambda o: o.active and o.primary == primary, outputs):
-        move_all_to_output(i3, output.name)
-        i3cmd(i3, 'workspace' + focused.name)
-        break
+    output = filter(lambda o: o.active and o.primary == primary, outputs)[0]
+    move_all_to_output(i3, output.name, focused)
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
-    description='Move workspaces across different monitors')
-
-    subparsers = parser.add_subparsers(dest='sub_command')
-
-    parser_branch = subparsers.add_parser('primary',
-            description='Moves all workspaces to the primary output (monitor)')
-    parser_branch = subparsers.add_parser('secondary',
-            description='Moves all workspaces to the secondary output (monitor)')
-    parser_branch = subparsers.add_parser('switch',
-            description='Switches workspaces between outputs (monitors)')
-
-    if len(sys.argv) < 2:
-        parser.print_help()
-        exit(0)
-
-    args = parser.parse_args()
-
     # Create the Connection object
     i3 = i3ipc.Connection()
 
     # Find focuces workspace
     focused = i3.get_tree().find_focused().workspace()
+
+    parser = argparse.ArgumentParser(
+        description='Move workspaces across different monitors')
+
+    subparsers = parser.add_subparsers(dest='sub_command')
+
+    subparsers.add_parser(
+        'primary', description='Moves all workspaces to the primary output (monitor)')
+    subparsers.add_parser(
+        'secondary', description='Moves all workspaces to the secondary output (monitor)')
+    subparsers.add_parser(
+        'switch', description='Switches workspaces between outputs (monitors)')
+    subparsers.add_parser(
+        'active', description='Move all to active output (monitor) [default option]')
+
+    if len(sys.argv) < 2:
+        move_all_to_output(i3, get_current_output(i3, focused), focused)
+        exit(0)
+
+    args = parser.parse_args()
 
     if args.sub_command == 'primary':
         move_all_to_primary(i3, focused, True)
@@ -101,3 +112,5 @@ if __name__ == "__main__":
         move_all_to_primary(i3, focused, False)
     elif args.sub_command == 'switch':
         switch_output_workspaces(i3, focused)
+    elif args.sub_command == 'active':
+        move_all_to_output(i3, get_current_output(i3, focused), focused)

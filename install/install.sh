@@ -11,7 +11,7 @@ libreoffice cscope ctags perf pavucontrol jq dmidecode xselxi i3wm zsh  libappin
 thunar acpi tmux gitg nomacs docker vpnc vpnc-script NetworkManager-vpnc
 hexchat rlwrap
 NetworkManager-vpnc-gnome eom eog inotify-tools xbacklight arandr pulseaudio gnome-bluetooth
-tidy pandoc tig ncdu redshift grub-customizer)
+tidy pandoc tig ncdu redshift grub-customizer libnotfiy dunst)
 
 RUST_PACKAGES=(rust cargo)  
 
@@ -26,7 +26,7 @@ LATEX=(texlive-listing texlive-pgfopts)
 FEDORA=(gnome-icon-theme system-config-printer libreoffice-langpack-pl boost-devel squashfs-tools glibc-devel ghc-ShellCheck pykickstart ImageMagick-devel NetworkManager-tui
 system-config-keyboard seahorse python-devel libxml2-devel libxslt-devel ShellCheck java-1.8.0-openjdk
 redhat-rpm-config python3-dnf-plugin-system-upgrade cmake freetype-devel fontconfig-devel
-xclip redshift-gtk texlive-latex-bin-bin)
+xclip redshift-gtk texlive-latex-bin-bin ghc-compiler cabal-install)
 
 RXVT=(rxvt-unicode rxvt-unicode-ml rxvt-unicode-256color rxvt-unicode-256color-ml)
 
@@ -65,7 +65,6 @@ if [ ! -e ~/.ssh/id_rsa ]; then
     ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
 fi
 
-
 function install_oh_my_zsh() {
     sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
     chsh -s /bin/zsh
@@ -78,12 +77,13 @@ function install_zsh_plugins() {
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
 }
 
-# Add current user to docker group
-sudo groupadd -f docker
-sudo usermod -aG docker $USER
-newgrp docker
-sudo chown $USER /var/run/docker.sock
-
+function setup_docker() {
+    # Add current user to docker group
+    sudo groupadd -f docker
+    sudo usermod -aG docker $USER
+    newgrp docker
+    sudo chown $USER /var/run/docker.sock
+}
 
 function install_fzf() {
     # install fzf to oh-my-zsh custom plugins directory
@@ -145,6 +145,12 @@ function install_alacritty() {
 function configure_postgres() {
     # TODO: sudo_exec
     sudo -u postgres createuser -s $(whoami); createdb $(whoami)
+}
+
+function install_haskell_packages() {
+    HASKELL_PACKAGES=(happy hscolour funnyprint)
+    cabal update
+    cabal install $HASKELL_PACKAGES
 }
 
 function install_go_packages() {
