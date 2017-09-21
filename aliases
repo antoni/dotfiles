@@ -562,14 +562,20 @@ function reformat() {
         "js" )
             eslint --fix $1 > "$tmpf";
             ;;
+        "jsx" )
+            prettier --write $1
+            ;;
         "json" )
             jq -M '.' > "$tmpf" < "$1";
+            ;;
+        "py" )
+            autopep8 --in-place  $1;
             ;;
         "html" )
             tidy -indent -wrap 80 -utf8 -clean -file $HTML_TIDY_TMP_FILE $1 > "$tmpf";
             ;;
     esac
-    mv -f "$tmpf" "$1";
+    mv -f "$tmpf" "$1" 2> /dev/null
 }
 
 alias a='cd ~/adnetwork'
@@ -591,4 +597,15 @@ function redshift_loc() {
 
 function weather() {
     curl wttr.in/"${1:-$DEFAULT_CITY}" | head -n -3;
+}
+
+# Prints aggregated %MEM for a process ($1)
+function total_mem() {
+    top -b -n1 | \grep $1 | awk '{ SUM += $10} END { print SUM }'
+}
+
+# Edit last gnome-screenshot taken
+function nomacslast() {
+    files=(~/Pictures/*);
+    nomacs "${files[-1]}";
 }
