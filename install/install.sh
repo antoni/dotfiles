@@ -11,7 +11,8 @@ libreoffice cscope ctags perf pavucontrol jq dmidecode xselxi i3wm zsh  libappin
 thunar acpi tmux gitg nomacs docker vpnc vpnc-script NetworkManager-vpnc
 hexchat rlwrap
 NetworkManager-vpnc-gnome eom eog inotify-tools xbacklight arandr pulseaudio gnome-bluetooth
-tidy pandoc tig ncdu redshift grub-customizer libnotfiy dunst)
+tidy pandoc tig ncdu redshift grub-customizer
+libnotfiy dunst httpie udev autofs gnome-do) 
 
 RUST_PACKAGES=(rust cargo)  
 
@@ -26,7 +27,7 @@ LATEX=(texlive-listing texlive-pgfopts)
 FEDORA=(gnome-icon-theme system-config-printer libreoffice-langpack-pl boost-devel squashfs-tools glibc-devel ghc-ShellCheck pykickstart ImageMagick-devel NetworkManager-tui
 system-config-keyboard seahorse python-devel libxml2-devel libxslt-devel ShellCheck java-1.8.0-openjdk
 redhat-rpm-config python3-dnf-plugin-system-upgrade cmake freetype-devel fontconfig-devel
-xclip redshift-gtk texlive-latex-bin-bin ghc-compiler cabal-install)
+xclip redshift-gtk texlive-latex-bin-bin ghc-compiler cabal-install R-devel)
 
 RXVT=(rxvt-unicode rxvt-unicode-ml rxvt-unicode-256color rxvt-unicode-256color-ml)
 
@@ -161,4 +162,9 @@ function install_go_packages() {
 function install_nvidia_driver() {
     sudo dnf config-manager --add-repo=http://negativo17.org/repos/fedora-nvidia.repo
     sudo dnf -y install nvidia-driver nvidia-settings kernel-devel
+}
+
+function install_r_studio() {
+    sudo dnf install $(curl -s https://www.rstudio.com/products/rstudio/download/ |
+        \grep -o "\"[^ \"]*x86_64.rpm\"" | sed "s/\"//g");
 }

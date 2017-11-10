@@ -82,8 +82,9 @@ function execute_on_login_only() {
     if [ -e $WALLPAPER ]; then
         feh --bg-scale $WALLPAPER
     fi
-
 }
+
+execute_on_login_only
 
 # Keyboard
 if command_exists xbindkeys; then
