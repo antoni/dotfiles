@@ -24,15 +24,15 @@ CLANG_MODERNIZE_VERSION=$CLANG_VERSION
 echo -e "${colors[Green]}"
 LLDB_VERSION=3.7
 echo "LLDB               version symlinked:   " $LLDB_VERSION
-IDEA_VERSION=`echo $HOME/idea-* | awk -F'-' '{print $3}'`
+IDEA_VERSION=`echo $HOME/idea-*               | awk -F'-' '{print $3}'`
 echo "IntelliJ           version symlinked:   " $IDEA_VERSION
-GOGLAND_VERSION=`echo $HOME/Gogland-* | awk -F'-' '{print $2}'`
+GOGLAND_VERSION=`echo $HOME/Gogland-*         | awk -F'-' '{print $2}'`
 echo "Gogland            version symlinked:   " $GOGLAND_VERSION
 CLION_VERSION=2017.1.1
 echo "CLion              version symlinked:   " $CLION_VERSION
-JMETER_VERSION=`echo $HOME/apache-jmeter-* | awk -F'-' '{print $3}'`
+JMETER_VERSION=`echo $HOME/apache-jmeter-*    | awk -F'-' '{print $3}'`
 echo "JMeter             version symlinked:   " $JMETER_VERSION
-SWEET_HOME_VERSION=`echo $HOME/SweetHome3D-* | awk -F'-' '{print $2}'`
+SWEET_HOME_VERSION=`echo $HOME/SweetHome3D-*  | awk -F'-' '{print $2}'`
 echo "SweetHome3D        version symlinked:   " $SWEET_HOME_VERSION
 echo -e "${colors[White]}"
 
@@ -94,7 +94,17 @@ ln -fs ${DOTFILES_DIR}/config/mimeapps.list $MIME_FILE
 ln -fs ${DOTFILES_DIR}/sshconfig ~/.ssh/config
 
 # ~/scripts directory
-ln -fs ${DOTFILES_DIR}/scripts ~/scripts
+function setup_scripts() {
+    if [ -d "scripts" ]; then
+        git clone git@github.com:antoni/scripts.git;
+    fi 
+    ln -fs ${DOTFILES_DIR}/scripts ~/scripts
+
+    # Screenshots
+    sudo_exec ln -fs $HOME/scripts/st.sh /bin/st
+}
+
+# setup_scripts
 
 # .ghci access
 chmod g-w ~/.ghci
@@ -139,10 +149,10 @@ sudo_exec ln -fs $HOME_DIR/clion-$CLION_VERSION/bin/clion.sh /usr/bin/clion
 sudo_exec ln -fs $HOME_DIR/Gogland-$GOGLAND_VERSION/bin/gogland.sh /usr/bin/gogland
 # JMeter
 sudo_exec ln -fs $HOME_DIR/apache-jmeter-$JMETER_VERSION/bin/jmeter /usr/bin/jmeter
+# Robo 3T
+sudo_exec ln -fs $HOME_DIR/robo3t-*/bin/robo3t /usr/bin/robo3t
 # SweetHome3D
 sudo_exec ln -fs $HOME_DIR/SweetHome3D-$SWEET_HOME_VERSION/SweetHome3D /usr/bin/sweethome
-# Screenshots
-sudo_exec ln -fs $HOME/scripts/st.sh /bin/st
 # Sublime 3
 if [ -e $HOME/sublime_text_3 ]; then
     sudo_exec ln -fs $HOME/sublime_text_3/sublime_text /usr/bin/sublime
@@ -156,7 +166,7 @@ set +x # disable echo executed commands
 
 # Vim
 
-# Clone Vundle reposiroty
+# Clone Vundle repository
 VUNDLEDIR=~/.vim/bundle/Vundle.vim
 if [ ! "$(ls -A ${VUNDLEDIR})" ]; then
     git clone https://github.com/gmarik/Vundle.vim.git ${VUNDLEDIR}
@@ -187,6 +197,12 @@ setup_hostname
 # Midnight Commander
 ln -fs $DOTFILES_DIR/mc ~/.config
 
+# Fedora regular updates
+function fedora_regular_updates() {
+    sudo dnf install dnf-automatic
+    sudo systemctl enable dnf-automatic.timer && systemctl start dnf-automatic.timer
+}
+
 # Fedora upgrade
 function fedora_system_upgrade() {
     sudo dnf install python3-dnf-plugin-system-upgrade
@@ -204,7 +220,7 @@ function install_npm() {
 }
 
 function install_npm_packages() {
-    npm install -g eslint lodash jshint typescript prettier
+    npm install -g eslint lodash jshint typescript prettier http-server
 }
 
 function install_yarn_packages() {
@@ -213,9 +229,9 @@ function install_yarn_packages() {
 
 
 function install_airbnb_eslint() {
-      export PKG=eslint-config-airbnb;
-  npm info "$PKG@latest" peerDependencies --json | command sed 's/[\{\},]//g ; s/:
-  /@/g' | xargs npm install -g "$PKG@latest"
+    export PKG=eslint-config-airbnb;
+    npm info "$PKG@latest" peerDependencies --json | command sed 's/[\{\},]//g ; s/:
+    /@/g' | xargs npm install -g "$PKG@latest"
 }
 
 # install_npm_packages
@@ -231,3 +247,4 @@ for atom in `\ls atom`; do
 done
 
 echo -e '\033[1;29;42m DONE \033[0m \033[1;32mSuccessfully symlinked all the files\033[0m'
+
