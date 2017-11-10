@@ -74,7 +74,6 @@ alias rpm='sudo rpm'
 alias free='free -h'
 
 alias wgetdir='wget -r --no-parent '
-alias zipfolder='tar -czf'
 
 # Programming etc.
 alias m='make'
@@ -87,8 +86,9 @@ alias icmgw='ssh antoni@gw.icm.edu.pl'
 alias bioex='ssh arosciszewski@bioexploratorium.pl'
 #alias wget='curl -0'
 alias xcode="open *.xcodeproj"
-# It's worth mentioning what the options -czf after tar are for: c indicates that you want to create a tar archive, z applies gzip on the intermediate tar archive, and f is for the subsequent final file name folder_name.tar.gz. – fideli Jul 9 '10 at 19:11
-# alias zipfolder='tar -czf folder_name.tar.gz folder_name/'
+
+function tarfolder() { tar -czf "$1".tar.gz "$1"/*; }
+function zipfolder() { zip -r "$1".zip "$1"/*; }
 
 # SSH
 alias sendstud='~/scripts/sendstud.sh'
@@ -148,11 +148,21 @@ alias hgrep='history | grep -i'
 alias gopath="export GOPATH=\$(pwd)"
 alias dbgui='/usr/share/dbeaver/dbeaver'
 
-alias singlemonitor='xrandr --output eDP-1'
-alias dualmonitor='xrandr --output VGA1 --mode 1920x1200 --right-of LVDS1'
+function singlemonitor() {
+    primary=`xrandr | \grep "connected primary" | cut -d' ' -f1`;
+    secondary=`xrandr | \grep " connected" | \grep -v "primary" | cut -d' ' -f1`;
+    if [[ $secondary ]] then
+        xrandr --output "$secondary" --off --output "$primary" --auto;
+    else 
+        xrandr --output "$primary" --off; xrandr --output "$primary" --auto;
+    fi
+}
+
+# alias dualmonitor='xrandr --output VGA1 --mode 1920x1200 --right-of LVDS1'
+alias dualmonitor='xrandr --output HDMI-1 --mode 1680x1050 --right-of eDP-1'
 alias dualmonitor2='xrandr --output VGA1 --mode 1680x1050 --right-of LVDS1'
 alias dualmonitor_left='xrandr --output VGA1 --mode 1920x1200 --left-of LVDS1'
-alias dualmonitor_ktech='xrandr --output HDMI-1 --mode 2560x1440 --left-of eDP-1'
+alias dualmonitor_ktech='xrandr --output HDMI-1 --mode 2560x1440 --right-of eDP-1'
 alias dualmonitor_ktech_pres='xrandr --output HDMI-1 --mode 1920x1080i'
 
 # Fixing various things on Ubuntu
@@ -608,4 +618,23 @@ function total_mem() {
 function nomacslast() {
     files=(~/Pictures/*);
     nomacs "${files[-1]}";
+}
+
+# encrypt (filename -> filename.enc)
+# $1 - input file
+# $2 - password
+function encrypt() {
+    openssl enc -aes-256-cbc -in $1 -out $1.enc -k $2
+}
+
+# decrypt (filename.enc -> filename)
+# $1 - input file
+# $2 - password
+function decrypt() {
+    openssl enc -aes-256-cbc -d -in $1.enc -out $1 -k $2
+}
+
+# SSH and attach to tmux
+function sshtmux() {
+    ssh $1 -t tmux a
 }

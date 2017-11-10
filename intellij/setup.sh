@@ -1,7 +1,6 @@
 #!/bin/bash
 
-declare -a names=("IdeaIC2017.1"
-)
+declare -a names=("idea-IU-172.3544.35/" "idea-IU-172.4343.14")
 
 for name in "${names[@]}"
 do

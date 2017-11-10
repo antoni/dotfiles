@@ -1,6 +1,6 @@
 [user]
 	email = antoni.rosciszewski@gmail.com
-	name = Antoni Rościszewski
+	name = Antoni Rosciszewski
 [branch]
     autosetupmerge = true
 [color]
@@ -50,7 +50,7 @@
         # $ git prevision -1 x/y/z.c
     # Commit, then squash current changes with previous commmit
     s2 = "!export MSG=`git log -1 --pretty=%B | cat` ; git add . ; git reset --soft 'HEAD^' ; git commit -m $MSG"
-    prevision = "!f() { git checkout `git log --oneline $2 |  awk -v commit="$1" 'FNR == -commit+1 {print $1}'` $2;} ;f"
+    prevision = "!f() { git checkout `git log --oneline $2 |  awk -v commit="$1" 'FNR == -commit+1 {print $1}'` $2;};f"
     # Reset single file to HEAD
     reset-file = "git checkout HEAD -- "
     # Force push current branch
@@ -58,6 +58,8 @@
     # Show changes from a particular commit
     changes = "!git diff $1^ $1"
     dontcommit = "!git checkout ."
+    diffclear = "!f() { git diff $1 --color | sed -r 's/^([^-+ ]*)[-+ ]/\\1/' | less -r;};f"
+    diffclear2 = "!git diff --color-words"
 [push]
 	default = matching
 ; [pull]

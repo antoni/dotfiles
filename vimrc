@@ -134,6 +134,8 @@ au BufEnter,BufNew *.py noremap <F5> :wa \| !python3 % : <CR>
 au BufEnter,BufNew *.tex noremap <F5> :wa \| Lt <CR>
 " Shell
 au BufEnter,BufNew *.sh noremap <F5> :wa \| !bash % <CR>
+" Typescript
+au BufEnter,BufNew *.ts noremap <F5> :wa \| !node % <CR>
 " JS
 au BufEnter,BufNew *.js noremap <F5> :wa \| !node % <CR>
 " Go
@@ -244,7 +246,8 @@ command! SemicolonToNewline :%s/;/\r/g
 " Use LaTeX rather than plain TeX.
 let g:tex_flavor = "latex"
 " command! Lt :!latexmk -pvc -silent -pdf %; xdg-open %:r.pdf
-command! Lt :!pdflatex % && xpdf %:r.pdf <CR>
+" command! Lt :!pdflatex % && xpdf %:r.pdf <CR>
+command! Lt :!pdflatex % && evince %:r.pdf
 " Toggle small/normal tabs
 " noremap <F8> :call <SID>ToggleTabs()<CR>
 " Double-click to copy word 
@@ -377,6 +380,7 @@ Plugin 'majutsushi/tagbar'
 " Bundle 'taku-o/vim-vis'
 " Bundle 'rking/ag.vim'
 Bundle 'Raimondi/delimitMate'
+Bundle 'digitalrounin/vim-yaml-folds'
 " *LEARN*
 " Bundle 'terryma/vim-multiple-cursors'
 " Bundle 'rking/ag.vim'

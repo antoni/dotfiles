@@ -7,3 +7,5 @@ Host students
 
 Host *
     User antoni
+
+Include caracas.sshconfig
