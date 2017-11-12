@@ -28,12 +28,20 @@ Control+Shift+Down
 "gnome-screenshot"
 Control+Shift+S
 
+# VPN connection toggle
+"vpn"
+Control+Shift+I
+
 # Text editor 
 "gedit"
 Control+Shift+G
 
+# File explorer
+"thunar ~/Downloads"
+Control+Shift+T
+
 # Slack
-"~/dotfiles/slack_toggle.sh"
+"~/scripts/slack_toggle.sh"
 Control+Shift+K
 
 # Slack
@@ -69,8 +77,8 @@ Alt + e
 "gedit"
 Shift+Mod4 + Shift_R
 
-"dmenu_run"
-Mod2 + Menu
+# "dmenu_run"
+# Mod2 + Menu
 
 # Use FZF to choose a git branch
 # "b"
