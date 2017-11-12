@@ -1,6 +1,7 @@
 [global_config]
   borderless = True
   focus = system
+  suppress_multiple_term_dialog = True
   title_transmit_bg_color = "#d30102"
 [keybindings]
   group_tab_toggle = <Super>t
