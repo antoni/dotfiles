@@ -51,7 +51,7 @@ plugins=(fzf-zsh zsh-autosuggestions zsh-syntax-highlighting)
 
 # User configuration
 
-export PATH="$HOME/.rvm/gems/ruby-2.1.5/bin:$HOME/.rvm/gems/ruby-2.1.5@global/bin:$HOME/.rvm/rubies/ruby-2.1.5/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:~/yasara:$HOME/.rvm/bin:$HOME/opt/yasara:$HOME/.rvm/bin"
+# export PATH="$HOME/.rvm/gems/ruby-2.1.5/bin:$HOME/.rvm/gems/ruby-2.1.5@global/bin:$HOME/.rvm/rubies/ruby-2.1.5/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:~/yasara:$HOME/.rvm/bin:$HOME/opt/yasara:$HOME/.rvm/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -68,9 +68,6 @@ source $ZSH/oh-my-zsh.sh
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 # Disable Ctrl+S in a terminal (to use it inside Vim)
 # http://askubuntu.com/a/359338/342465

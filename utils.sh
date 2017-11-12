@@ -6,3 +6,8 @@ function escape_chars() {
     # printf -v $var_name $@ "%q\n" "hello\world"
     printf -v $var_name "%q\n" $@
 }
+
+# Executes command with sudo. Assumes SUDO_PASS is set
+function sudo_exec() {
+    sudo -S <<< $SUDO_PASS $@
+}
