@@ -36,9 +36,6 @@ function fix_ubuntu() {
 # fi
 
 
-# Qt
-# export QTDIR=$HOME/Qt/5.4/gcc_64/
-
 # Executed when in X mode (e.g. DISPLAY is set)
 # xrandr_display_count=`xrandr --query | grep " connected" | wc -l`
 # if [ -z ${DISPLAY} ] || [ $xrandr_display_count -eq 1 ] ; then
@@ -62,17 +59,18 @@ fi
 
 # Go
 export GOROOT=$HOME/gosrc
-# export GOROOT=/usr/local/go
 export GOPATH=$HOME/go
-# export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$GOROOT/bin
 
+# Qt
+# export QTDIR=$HOME/Qt/5.4/gcc_64/
+
 # CUDA
-export PATH=$PATH:/usr/local/cuda/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/cuda/lib
+# export PATH=$PATH:/usr/local/cuda/bin
+# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/cuda/lib
 
 # MPI
-export PATH=$PATH:/usr/lib64/openmpi/bin
+# export PATH=$PATH:/usr/lib64/openmpi/bin
 
 # Rust
 source $HOME/.cargo/env
@@ -80,11 +78,12 @@ source $HOME/.cargo/env
 function execute_on_login_only() {
     # Wallpaper
     if [ -e $WALLPAPER ]; then
-        feh --bg-scale $WALLPAPER
+    feh --bg-scale $WALLPAPER
     fi
 }
+    # This takes too much time
+# execute_on_login_only
 
-execute_on_login_only
 
 # Keyboard
 if command_exists xbindkeys; then
@@ -92,7 +91,5 @@ if command_exists xbindkeys; then
     xbindkeys -f ~/.xbindkeysrc 
 fi
 
-export PATH=~/.npm-global/bin:$PATH:~/wkhtmltox/bin
-
-#HappyPack threads count
-export HAPPY_PACK_THREADS=8
+# HappyPack threads count
+# export HAPPY_PACK_THREADS=8

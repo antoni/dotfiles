@@ -8,9 +8,7 @@ source $DOTFILES_DIR/colors.sh
 echo -en "${colors[BGreen]}Enter sudo password:${colors[White]} "
 read -s SUDO_PASS
 
-function sudo_exec() {
-    sudo -S <<< $SUDO_PASS $@
-}
+source $DOTFILES_DIR/utils.sh
 
 # Create temp directory
 mkdir -p $HOME_DIR/tmp

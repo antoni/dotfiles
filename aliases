@@ -151,7 +151,7 @@ alias dbgui='/usr/share/dbeaver/dbeaver'
 function singlemonitor() {
     primary=`xrandr | \grep "connected primary" | cut -d' ' -f1`;
     secondary=`xrandr | \grep " connected" | \grep -v "primary" | cut -d' ' -f1`;
-    if [[ $secondary ]] then
+    if [[ $secondary ]]; then
         xrandr --output "$secondary" --off --output "$primary" --auto;
     else 
         xrandr --output "$primary" --off; xrandr --output "$primary" --auto;
@@ -637,4 +637,14 @@ function decrypt() {
 # SSH and attach to tmux
 function sshtmux() {
     ssh $1 -t tmux a
+}
+
+function pip_list() {
+    pip3 list --format=columns | awk '!/Package|---/{ print $1}' 
+    pip list --format=columns | awk '!/Package|---/{ print $1}' 
+}
+
+function update_all() {
+    sudo dnf update
+    vim +BundleUpdate +qall
 }
