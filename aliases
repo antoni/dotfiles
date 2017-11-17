@@ -163,7 +163,7 @@ alias dualmonitor='xrandr --output HDMI-1 --mode 1680x1050 --right-of eDP-1'
 alias dualmonitor2='xrandr --output VGA1 --mode 1680x1050 --right-of LVDS1'
 alias dualmonitor_left='xrandr --output VGA1 --mode 1920x1200 --left-of LVDS1'
 alias dualmonitor_ktech='xrandr --output HDMI-1 --mode 2560x1440 --right-of eDP-1'
-alias dualmonitor_ktech_pres='xrandr --output HDMI-1 --mode 1920x1080i'
+alias dualmonitor_ktech_pres='xrandr --output HDMI-1 --mode 1920x1080i --right-of eDP-1'
 
 # Fixing various things on Ubuntu
 alias fixaudio='pulseaudio -k' ; alias fixaudio2='pavucontrol'
@@ -432,18 +432,6 @@ alias i3wmreset='i3-msg "reload"'
 # Check if port is open:
 alias checkopenports='netstat -ano|grep 443|grep LISTEN'
 
-updateall() {
-    echo "Updating packages"
-    sudo apt-get update &> /dev/null
-    echo "Upgrading packages"
-    sudo apt-get upgrade -y &> /dev/null
-    echo "Autoremoving packages"
-    sudo apt-get autoremove &> /dev/null
-    echo "Updating Vim plugins"
-    vim +BundleUpdate +qall
-    exit
-}
-
 pythontools=(2to3 pylint pyflakes autopep8)
 
 alias classdiagram='staruml'
@@ -644,7 +632,22 @@ function pip_list() {
     pip list --format=columns | awk '!/Package|---/{ print $1}' 
 }
 
+function update_packages_fedora() {
+    sudo dnf -y update
+    sudo dnf -y autoremove
+}
+
+function update_packages_ubuntu() {
+    echo "Updating packages"
+    sudo apt-get update &> /dev/null
+    echo "Upgrading packages"
+    sudo apt-get upgrade -y &> /dev/null
+    echo "Autoremoving packages"
+    sudo apt-get autoremove &> /dev/null
+}
+
 function update_all() {
-    sudo dnf update
+    update_packages_fedora;
+    echo "Updating Vim plugins"
     vim +BundleUpdate +qall
 }
