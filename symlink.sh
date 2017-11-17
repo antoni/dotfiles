@@ -114,7 +114,8 @@ set -x # echo executed commands
 # Chrome
 sudo_exec ln -fs /usr/bin/google-chrome-stable /usr/bin/g
 # Firefox
-sudo_exec ln -fs /usr/bin/firefox /usr/bin/f
+# sudo_exec ln -fs /usr/bin/firefox /usr/bin/f
+sudo_exec ln -fs $HOME/firefox/firefox /usr/bin/f
 # Eclipse
 sudo_exec ln -fs ~$HOME_DIR/eclipse/eclipse /usr/bin/eclipse
 # clang
