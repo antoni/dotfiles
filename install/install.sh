@@ -170,3 +170,7 @@ function install_r_studio() {
     sudo_exec dnf install $(curl -s https://www.rstudio.com/products/rstudio/download/ |
         \grep -o "\"[^ \"]*x86_64.rpm\"" | sed "s/\"//g");
 }
+
+function start_services() {
+    systemctl --user enable redshift.service
+}
