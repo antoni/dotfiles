@@ -14,7 +14,7 @@ PACKAGES=(slock xbindkeys clang vim vim-X11 rdesktop tigervnc make xpdf sysstat
 vim-enhanced vim-X11 make cmake gitk vlc st okular xdotool xbindkeys xautomation mosh mc
 libreoffice cscope ctags perf pavucontrol jq dmidecode xsel i3 zsh  libappindicator lsb ntp feh help2man rpl
 thunar acpi tmux gitg nomacs docker vpnc vpnc-script NetworkManager-vpnc
-hexchat rlwrap xautolock
+hexchat rlwrap xautolock yamllint p7zip-gui
 NetworkManager-vpnc-gnome eom eog inotify-tools xbacklight arandr pulseaudio gnome-bluetooth
 tidy pandoc tig ncdu redshift grub-customizer
 libnotify dunst httpie udev autofs gnome-do pinta) 
