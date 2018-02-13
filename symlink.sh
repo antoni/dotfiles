@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 HOME_DIR=$HOME
 DOTFILES_DIR=$HOME_DIR/dotfiles
@@ -34,8 +34,17 @@ SWEET_HOME_VERSION=`echo $HOME/SweetHome3D-*  | awk -F'-' '{print $2}'`
 echo "SweetHome3D        version symlinked:   " $SWEET_HOME_VERSION
 echo -e "${colors[White]}"
 
-DOTFILES=(profile bashrc zshrc vimrc paths aliases common_profile.sh tmux.conf gitconfig
-gitignore ghci gvimrc hgrc lldbinit gdbinit xbindkeysrc optional.sh eslintrc fzf.sh psqlrc)
+DOTFILES=(profile bashrc zshrc vimrc paths aliases common_profile.sh tmux.conf gitconfig gitignore ghci gvimrc hgrc lldbinit gdbinit xbindkeysrc optional.sh eslintrc fzf.sh psqlrc)
+
+function mac_change_hostname() {
+    # This is your fully qualified hostname, for example myMac.domain.com
+    sudo scutil --set HostName $1
+    # This is the name usable on the local network, for example myMac.local.
+    sudo scutil --set LocalHostName $1
+    # This is the user-friendly computer name you see in Finder, for example myMac.
+    sudo scutil --set ComputerName $1
+}
+
 
 # Xrdb merge
 XRES_FILE=Xresources.solarized
@@ -65,6 +74,10 @@ ln -fs ${DOTFILES_DIR}/dunstrc ~/.config/dunst/dunstrc
 # pgcli
 mkdir -p ~/.config/pgcli
 ln -fs ${DOTFILES_DIR}/pgcli ~/.config/pgcli/config
+
+# htop
+mkdir -p ~/.config/htop
+ln -fs ${DOTFILES_DIR}/htoprc ~/.config/htop/
 
 # i3-wm
 I3WM_DIR=~/.config/i3/
@@ -161,6 +174,17 @@ if [ -e $HOME/android-studio ]; then
     sudo_exec ln -fs $HOME/android-studio/bin/studio.sh /bin/astudio
 fi
 
+case "$(uname -s)" in
+   Darwin)
+     ln -fs ${DOTFILES_DIR}/dotfiles/vscode.json $HOME/Library/Application\ Support/Code/User/settings.json
+     ;;
+   Linux)
+     ln -fs ${DOTFILES_DIR}/dotfiles/vscode.json $HOME/.config/Code/User/settings.json
+     ;;
+   CYGWIN*|MINGW32*|MSYS*) # MS Windows
+     ;;
+esac
+
 set +x # disable echo executed commands
 
 # Vim
@@ -183,11 +207,15 @@ sudo cp brightness.sh /root/
 sudo sh -c 'echo "$USER $(hostname) = NOPASSWD: /root/brightness.sh" >> /etc/sudoers'
 
 function setup_hostname() {
-    hostname_default="miramar"
+    hostname_default="automatown"
     echo -en "${colors[BGreen]}Enter hostname for the current machine [$hostname_default]:${colors[White]} "
     read hostname
     hostname=${hostname:-$hostname_default}
-    hostnamectl set-hostname $hostname
+    # TODO: OS check
+    # hostnamectl set-hostname $hostname
+
+    mac_change_hostname $hostname
+
     echo -e "${colors[BGreen]}Hostname changed to:${colors[BBlue]} $hostname ${colors[White]}"
 }
 
@@ -219,7 +247,7 @@ function install_npm() {
 }
 
 function install_npm_packages() {
-    npm install -g eslint lodash jshint typescript prettier http-server
+    npm install -g eslint lodash jshint typescript prettier http-server depcheck npm-check-updates prettier sort-package-json
 }
 
 function install_yarn_packages() {
