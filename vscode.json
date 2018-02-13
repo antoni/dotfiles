@@ -1,0 +1,37 @@
+{
+    "editor.fontLigatures": true,
+    "editor.fontFamily": "Fira Code",
+    "editor.fontSize": 11,
+    "editor.rulers": [ 80 ],
+    "editor.tabSize": 2,
+    "files.trimTrailingWhitespace": true,
+    "files.autoSave": "onFocuesChange",
+    "editor.renderWhitespace": true,
+    "align.leftSeparators": [],
+    "align.rightSeparators": [
+      ":",
+      "=",
+      "+=",
+      "-=",
+      "*=",
+      "/=",
+      "?=",
+      "|=",
+      "%=",
+      ".=",
+      "=>"
+    ],
+    "align.spaceSeparators": [
+      ":",
+      "=",
+      "+=",
+      "-=",
+      "*=",
+      "/=",
+      "?=",
+      "|=",
+      "%=",
+      ".=",
+      "=>"
+    ]
+  }
