@@ -93,3 +93,5 @@ unsetopt CASE_GLOB
 KEYTIMEOUT=1
 
 unsetopt correct_all
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
