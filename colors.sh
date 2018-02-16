@@ -1,5 +1,3 @@
-#!/usr/bin/bash
-
 declare -A colors
 
 # Reset

@@ -36,7 +36,8 @@ set ruler                     " Show ruler on the bottom
 set virtualedit=onemore
 " set textwidth=80
 " set formatoptions+=w          " gggqG - format to break after 80 characters
-set wrapmargin=2
+" set wrapmargin=2
+set wrap " don't wrap lines in Insert mode (visual wrapping only)
 set autoread " Set to auto read when a file is  changed from the outside
 " UTF-8 encoding
 set enc=utf-8
@@ -616,7 +617,7 @@ augroup END
 ""}}}
 " Git commits "{{{
 " Cut commit messsages
-autocmd Filetype gitcommit setlocal spell textwidth=72
+" autocmd Filetype gitcommit setlocal spell textwidth=72
 ""}}}
 " Haskell "{{{
 autocmd BufEnter *.hs set formatprg=pointfree
