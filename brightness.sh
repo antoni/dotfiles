@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Credit: https://www.reddit.com/r/linux/comments/268wcy/managing_brightness_on_i3wm/
 function change_brightness() {
     local file_brightness='/sys/class/backlight/intel_backlight/brightness'

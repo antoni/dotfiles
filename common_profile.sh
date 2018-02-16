@@ -58,9 +58,9 @@ fi
 # export IBUS_ENABLE_SYNC_MODE=1
 
 # Go
-export GOROOT=$HOME/gosrc
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOROOT/bin
+# export GOROOT=$HOME/gosrc
+# export GOPATH=$HOME/go
+# export PATH=$PATH:$GOROOT/bin
 
 # Qt
 # export QTDIR=$HOME/Qt/5.4/gcc_64/
@@ -73,7 +73,7 @@ export PATH=$PATH:$GOROOT/bin
 # export PATH=$PATH:/usr/lib64/openmpi/bin
 
 # Rust
-source $HOME/.cargo/env
+# source $HOME/.cargo/env
 
 function execute_on_login_only() {
     # Wallpaper

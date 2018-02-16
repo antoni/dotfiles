@@ -6,6 +6,8 @@ Host students
     User ar267209
 
 Host *
+    StrictHostKeyChecking no
+    UserKnownHostsFile=/dev/null
     User antoni
 
 Include caracas.sshconfig
