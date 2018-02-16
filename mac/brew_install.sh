@@ -85,6 +85,7 @@ mc
 BREW_CASK_PACKAGES=(texshop
 caffeine
 dropbox
+bettertouchtool
 evernote
 the-unarchiver
 firefox
