@@ -16,13 +16,14 @@ if [[ "$unamestr" == 'Darwin' ]]; then
     # Mac OS X-specific
     alias setmiddlevolume='sudo osascript -e "set Volume 5"'
     # alias mvim="/Applications/MacVim.app/contents/MacOS/MacVim"
-    alias mvim='/Users/antoni/Developer/mvim'
+    #alias mvim='/Users/antoni/Developer/mvim'
     alias ctags="`brew --prefix`/bin/ctags"
     alias eclipseclean='/Applications/eclipse/Eclipse.app/Contents/MacOS/eclipse -clean'
     alias topcoder='javaws ~/Developer/Topcoder/ContestAppletProd.jnlp'
     alias copypubkey='xsel --clipboard < id_rsa.pub'
     alias vim='mvim -v'
     alias ls='ls -h -lFG'
+    alias brew='HOMEBREW_NO_AUTO_UPDATE=1 brew'
 elif [[ "$unamestr" == 'Linux' ]]; then
     # Debian/Ubuntu
     function listkernels() {
@@ -455,7 +456,7 @@ alias di='sudo dnf install -y'
 alias ds='dnf search -C'
 alias dr='sudo dnf remove'
 
-alias mvn='~/scripts/mvncolor.sh'
+# alias mvn='~/scripts/mvncolor.sh'
 
 # function ppgrep() { pgrep "$@" | xargs --no-run-if-empty ps fp; }
 function ppgrep() { \pgrep "$@" -a | egrep --color "[0-9]"; }
@@ -637,6 +638,12 @@ function pip_list() {
     pip list --format=columns | awk '!/Package|---/{ print $1}' 
 }
 
+function update_packages_mac() {
+    brew update
+    brew upgrade
+    brew cask upgrade
+}
+
 function update_packages_fedora() {
     sudo dnf -y update
     sudo dnf -y autoremove
@@ -652,7 +659,7 @@ function update_packages_ubuntu() {
 }
 
 function update_all() {
-    update_packages_fedora;
+    update_packages_mac;
     echo "Updating Vim plugins"
     vim +BundleUpdate +qall
 }

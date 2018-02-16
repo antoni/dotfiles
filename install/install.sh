@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 mkdir -p tmp
 
@@ -53,23 +53,35 @@ function install_fedora_sound() {
     sudo_exec dnf install -y gstreamer-plugins-bad gstreamer-plugins-bad-free-extras gstreamer-plugins-bad-nonfree gstreamer-plugins-ugly gstreamer-ffmpeg gstreamer1-libav gstreamer1-plugins-bad-free-extras gstreamer1-plugins-bad-freeworld gstreamer1-plugins-base-tools gstreamer1-plugins-good-extras gstreamer1-plugins-ugly gstreamer1-plugins-bad-free gstreamer1-plugins-good gstreamer1-plugins-base gstreamer1 x264 vlc  smplayer
 }
 
-if [ -f /etc/debian_version ]; then
-    echo "Installing required packages on Debian"
-    apt-get install -y ${PACKAGES[*]} ${DEBIAN[*]}
-    install_debian_chrome
-elif [ -f /etc/redhat-release ]; then
-    echo "Installing required packages on Fedora"
-    sudo_exec dnf install -y ${PACKAGES[*]} ${PACKAGES[*]}
-    # install_fedora_sound
-    install_fedora_chrome
-else
-    echo "Mac OS X install not supported"
-fi
+function main() {
+    if [ -f /etc/debian_version ]; then
+        echo "Installing required packages on Debian"
+        apt-get install -y ${PACKAGES[*]} ${DEBIAN[*]}
+        install_debian_chrome
+    elif [ -f /etc/redhat-release ]; then
+        echo "Installing required packages on Fedora"
+        sudo_exec dnf install -y ${PACKAGES[*]}
+        ${FEDORA[*]}
+        # install_fedora_sound
+        install_fedora_chrome
+    else
+        source ../mac/brew_install.sh
 
-# Generate SSH key
-if [ ! -e ~/.ssh/id_rsa ]; then 
-    ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
-fi
+        # Remove "Last login" message in new Terminal window open
+        touch ~/.hushlogin
+
+        mac_install_misc
+        brew install ${BREW_PACKAGES[*]}
+        brew cask install ${BREW_CASK_PACKAGES[*]}
+        echo "Mac OS X installation not supported"
+        exit 0;
+    fi
+
+    # Generate SSH key
+    if [ ! -e ~/.ssh/id_rsa ]; then 
+        ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
+    fi
+}
 
 function install_oh_my_zsh() {
     sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
@@ -79,6 +91,8 @@ function install_oh_my_zsh() {
 }
 
 function install_zsh_plugins() {
+    # ZSH_CUSTOM=$HOME/zsh_customizations
+    # mkdir -p $ZSH_CUSTOM;
     git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
 }
@@ -99,17 +113,21 @@ function install_fzf() {
     git clone https://github.com/Treri/fzf-zsh.git ${ZSH}/custom/plugins/fzf-zsh
 }
 
-# PIP packages
-PIP_PACKAGES=(pgcli mycli)
-pip install --user $PIP_PACKAGES
+function install_pip_packages() {
+    # PIP packages
+    PIP_PACKAGES=(pgcli mycli pyyaml)
+    pip install --user $PIP_PACKAGES
+}
 
-# Git kraken
-GITKRAKEN_TAR=gitkraken-amd64.tar.gz
-wget https://release.gitkraken.com/linux/$GITKRAKEN_TAR -P tmp
-tar xvf tmp/$GITKRAKEN_TAR tmp/
-mv tmp/gitkraken ~
+# Git kraken (Linux)
+function install_gitkraken() {
+    GITKRAKEN_TAR=gitkraken-amd64.tar.gz
+    wget https://release.gitkraken.com/linux/$GITKRAKEN_TAR -P tmp
+    tar xvf tmp/$GITKRAKEN_TAR tmp/
+    mv tmp/gitkraken ~
 
-sudo_exec ln -s ~/gitkraken/gitkraken /usr/bin/gitkraken
+    sudo_exec ln -s ~/gitkraken/gitkraken /usr/bin/gitkraken
+}
 
 function install_intellij_toolbox() {
     wget -q --show-progress https://download.jetbrains.com/toolbox/jetbrains-toolbox-1.4.2492.tar.gz -P tmp
@@ -173,4 +191,8 @@ function install_r_studio() {
 
 function start_services() {
     systemctl --user enable redshift.service
+}
+
+function install_tmux_plugin_manager() {
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 }

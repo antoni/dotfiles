@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Fedora
 
 function install_fedora_chrome() {
