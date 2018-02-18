@@ -76,6 +76,7 @@ wget
 ffmpeg
 cmake
 mysql
+gradle
 maven
 rabbitmq
 erlang
@@ -85,6 +86,7 @@ mc
 BREW_CASK_PACKAGES=(texshop
 caffeine
 dropbox
+shortcat
 bettertouchtool
 evernote
 the-unarchiver
