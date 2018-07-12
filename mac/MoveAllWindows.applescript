@@ -3,7 +3,7 @@
 -- set Y to 0
 
 -- External display
-set X to 1250
+set X to 1300
 set Y to 41
 
 -- Moves all windows of application "ApplicationName" to position (PositionX, PositionY)
@@ -32,7 +32,7 @@ tell application "System Events"
 end tell
 
 set filteredList to {}
-set itemsToDelete to {"idea", "BlueJeans", "Electron", "soffice", "studio"}
+set itemsToDelete to {"idea", "BlueJeans", "Electron", "soffice", "studio", "firefox"}
 
 repeat with i from 1 to count listOfProcesses
 	--display dialog {listOfProcesses's item i}
@@ -50,5 +50,5 @@ MoveAllWindows("Android Studio", X, Y)
 
 MoveAllWindows("LibreOffice", X, Y)
 MoveAllWindows("Firefox Developer Edition", X, Y)
-MoveAllWindows("Firefox", X, Y)
+-- MoveAllWindows("Firefox", X, Y)
 MoveAllWindows("Code", X, Y) -- Visual Studio Code
