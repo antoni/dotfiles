@@ -247,7 +247,7 @@ function install_npm() {
 }
 
 function install_npm_packages() {
-    npm install -g eslint lodash jshint typescript prettier http-server depcheck npm-check-updates prettier sort-package-json
+    npm install -g eslint lodash jshint typescript prettier http-server depcheck npm-check-updates prettier sort-package-json babel-cli pm2@latest
 }
 
 function install_yarn_packages() {
