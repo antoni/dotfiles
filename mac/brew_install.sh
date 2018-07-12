@@ -1,15 +1,19 @@
 BREW_PACKAGES=(mongodb
 dockutil
 gpg
+pwgen
 nginx
 jq
 bash-completion
 awscli
+R
 bash-completion
 calc
+groovy
 ccrypt
 dos2unix
 geoip
+ffmpeg
 git-flow
 iproute2mac
 lnav
@@ -63,6 +67,7 @@ graphicsmagick
 python
 python3
 watch
+watchman
 automake
 autoconf
 htop
@@ -81,12 +86,18 @@ maven
 rabbitmq
 erlang
 mc
+optipng
+jpeg
+jpegoptim
 )
 
 BREW_CASK_PACKAGES=(texshop
 caffeine
+rstudio
+mounty
 dropbox
-shortcat
+sequel-pro
+torbrowser
 bettertouchtool
 evernote
 the-unarchiver
@@ -95,6 +106,7 @@ google-chrome
 google-chrome-canary
 google-drive-file-stream
 macdown
+postman
 flux
 iterm2
 gimp
@@ -105,6 +117,7 @@ slack
 wkhtmltopdf
 spectacle
 spotify
+mysqlworkbench
 sublime
 the-unarchiver
 virtualbox
@@ -176,6 +189,10 @@ function install_cargo() {
 function install_docker() {
     # Get Docker for Mac from here first: https://www.docker.com/docker-mac
     brew cask install docker-toolbox;
+}
+
+function install_dmidecode() {
+    brew install cavaliercoder/dmidecode/dmidecode
 }
 
 function install_fuse() {

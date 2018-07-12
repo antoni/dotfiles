@@ -64,5 +64,5 @@
 	default = matching
 ; [pull]
     ; rebase = true
-[merge]
-	ff = only
+; [merge]
+	; ff = only

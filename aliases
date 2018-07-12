@@ -44,10 +44,6 @@ elif [[ "$unamestr" == 'Linux' ]]; then
     alias mountrw='mount -o remount,rw /'
     alias vim='vim -o'
     alias ls='ls -h --color -lFG'
-
-    if command_exists vimx; then
-        alias vim='vimx'
-    fi
 fi
 
 # General purpose
@@ -600,7 +596,7 @@ function redshift_loc() {
 }
 
 function weather() {
-    curl wttr.in/"${1:-$DEFAULT_CITY}" | head -n -3;
+    curl --silent wttr.in/"${1:-$DEFAULT_CITY}" | head -n 7;
 }
 
 # Prints aggregated %MEM for a process ($1)
@@ -662,8 +658,13 @@ function update_all() {
     update_packages_mac;
     echo "Updating Vim plugins"
     vim +BundleUpdate +qall
+    npm update -g
+    npm i npm
+    pip3 install --upgrade pip
 }
 
 function merge_and_push_branch() {
     $HOME/scripts/merge_and_push_branch.sh $1;
 }
+
+alias yt='youtube-dl --extract-audio --audio-format mp3'
