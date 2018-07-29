@@ -1,6 +1,7 @@
 BREW_PACKAGES=(mongodb
 dockutil
 gpg
+coreutils
 pwgen
 nginx
 jq
