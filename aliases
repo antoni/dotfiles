@@ -667,4 +667,9 @@ function merge_and_push_branch() {
     $HOME/scripts/merge_and_push_branch.sh $1;
 }
 
+function response_time() {
+  FORMAT_PATH=`realpath ~/scripts/curl-format.txt`;
+  curl -w "@"$FORMAT_PATH -o /dev/null -s $1;
+}
+
 alias yt='youtube-dl --extract-audio --audio-format mp3'
