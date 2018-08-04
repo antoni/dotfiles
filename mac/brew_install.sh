@@ -95,6 +95,7 @@ jpegoptim
 BREW_CASK_PACKAGES=(texshop
 caffeine
 rstudio
+tunnelblick
 mounty
 dropbox
 sequel-pro
