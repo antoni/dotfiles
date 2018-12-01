@@ -169,7 +169,7 @@ function configure_postgres() {
 }
 
 function install_haskell_packages() {
-    HASKELL_PACKAGES=(happy hscolour funnyprint)
+    HASKELL_PACKAGES=(happy hscolour funnyprint alex parsec hoogle quickcheck mtl)
     cabal update
     cabal install $HASKELL_PACKAGES
 }
@@ -196,3 +196,5 @@ function start_services() {
 function install_tmux_plugin_manager() {
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 }
+
+crontab ../cron.jobs
