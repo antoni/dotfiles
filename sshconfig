@@ -12,5 +12,6 @@ Host *
     StrictHostKeyChecking no
     UserKnownHostsFile=/dev/null
     User antoni
+    LogLevel ERROR
 
 Include caracas.sshconfig
