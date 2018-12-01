@@ -66,35 +66,35 @@
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>132 210 918 452 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1982 -348 1509 826 1280 -640 2560 1417 </string>
+	<string>118 150 969 622 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>1300 222 865 537 1280 -640 2560 1417 </string>
+	<string>0 240 850 537 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 10</key>
-	<string>594 118 585 452 0 0 1280 777 </string>
+	<string>135 0 1039 777 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 11</key>
-	<string>683 69 585 452 0 0 1280 777 </string>
+	<string>1300 -16 1292 775 1280 -640 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 12</key>
-	<string>488 54 585 452 0 0 1280 777 </string>
+	<string>430 0 850 537 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 13</key>
-	<string>194 31 900 690 0 0 1280 777 </string>
+	<string>194 184 850 537 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 14</key>
-	<string>530 8 585 452 0 0 1280 777 </string>
+	<string>430 0 850 537 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>1540 -75 865 537 1280 -640 2560 1417 </string>
+	<string>65 24 850 537 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
-	<string>297 240 850 537 0 0 1280 777 </string>
+	<string>249 211 850 537 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 4</key>
-	<string>0 235 850 537 0 0 1280 777 </string>
+	<string>117 127 850 537 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 5</key>
-	<string>119 49 850 537 0 0 1280 777 </string>
+	<string>1782 -17 865 537 1280 -640 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 6</key>
-	<string>380 240 850 537 0 0 1280 777 </string>
+	<string>2975 -570 865 537 1280 -640 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 7</key>
-	<string>164 193 570 452 0 0 1280 777 </string>
+	<string>0 240 865 537 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 8</key>
-	<string>571 -187 585 452 0 0 1280 777 </string>
+	<string>25 240 865 537 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 9</key>
-	<string>695 73 585 452 0 0 1280 777 </string>
+	<string>348 79 865 537 0 0 1280 777 </string>
 	<key>NeverWarnAboutOverrides</key>
 	<true/>
 	<key>NeverWarnAboutOverrides_selection</key>
@@ -770,6 +770,12 @@
 	<string>/Users/antoni/dotfiles/mac</string>
 	<key>Print In Black And White</key>
 	<true/>
+	<key>QuickPasteBytesPerCall</key>
+	<integer>2048</integer>
+	<key>QuickPasteDelayBetweenCalls</key>
+	<real>0.0</real>
+	<key>SUAutomaticallyUpdate</key>
+	<true/>
 	<key>SUEnableAutomaticChecks</key>
 	<true/>
 	<key>SUFeedAlternateAppNameKey</key>
@@ -779,9 +785,15 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-06-13T20:53:56Z</date>
+	<date>2018-10-31T12:35:50Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
+	<key>ShowFullScreenTabBar</key>
+	<false/>
+	<key>SlowPasteBytesPerCall</key>
+	<integer>16</integer>
+	<key>SlowPasteDelayBetweenCalls</key>
+	<real>0.0</real>
 	<key>ToolbeltTools</key>
 	<array>
 		<string>Profiles</string>
@@ -789,6 +801,6 @@
 	<key>findMode_iTerm</key>
 	<integer>0</integer>
 	<key>iTerm Version</key>
-	<string>3.1.6</string>
+	<string>3.2.3</string>
 </dict>
 </plist>
