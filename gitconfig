@@ -40,7 +40,7 @@
     # For the last 10 commits:
     # git change-commits GIT_AUTHOR_EMAIL "old@email.com" "new@email.com" HEAD~10..HEAD
     change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch -f --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f "
-    # Usage git squash [n], n - number of last commits to be squashed
+    # Usage: git squash [n], n - number of last commits to be squashed
     squash = "!f(){ git reset --soft HEAD~${1} && git commit --edit -m\"$(git log --format=%B --reverse HEAD..HEAD@{1})\"; };f"
     # Usage:
         # $ git prevision <N> <filename>
@@ -64,5 +64,9 @@
 	default = matching
 ; [pull]
     ; rebase = true
-; [merge]
-	; ff = only
+[merge]
+    ff = only
+[http]
+    proxy = 
+[https]
+    proxy = 
