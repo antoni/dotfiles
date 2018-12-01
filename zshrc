@@ -95,3 +95,7 @@ KEYTIMEOUT=1
 unsetopt correct_all
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Fix: https://github.com/zsh-users/zsh-autosuggestions/issues/141#issuecomment-210615799
+zstyle ':bracketed-paste-magic' active-widgets '.self-*'
+

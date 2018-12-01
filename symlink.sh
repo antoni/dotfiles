@@ -247,13 +247,12 @@ function install_npm() {
 }
 
 function install_npm_packages() {
-    npm install -g eslint lodash jshint typescript prettier http-server depcheck npm-check-updates prettier sort-package-json babel-cli pm2@latest
+    npm install -g eslint lodash jshint ts-node tslint typescript prettier http-server depcheck npm-check-updates prettier sort-package-json babel-cli pm2@latest alfred-vpn
 }
 
 function install_yarn_packages() {
     yarn global add tslint typescript
 }
-
 
 function install_airbnb_eslint() {
     export PKG=eslint-config-airbnb;

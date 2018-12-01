@@ -311,7 +311,7 @@ alias desk='cd ~/Desktop'
 alias mountstudents='sudo sshfs -o allow_other ar267209@students.mimuw.edu.pl:/home/students/bioinf/a/ar267209 ~/mount/students/'
 alias euler='cd ~/Developer/ProjectEuler/'
 alias wallpaperchange='gsettings set org.gnome.desktop.background picture-uri "file:///home/antoni/Documents/wallpaper4.jpg"'
-alias showtunnels="sudo lsof -i -n | egrep '\<ssh\>'" # Show all open SSH tunnels
+alias showtunnels="sudo lsof -i -n | egrep '\\<ssh\\>'" # Show all open SSH tunnels
 alias rsync='rsync --progress'
 alias wificonn='sudo wifi-menu wlp2s0'
 alias install_ycm='~/.vim/bundle/YouCompleteMe/install.sh --clang-completer'
@@ -527,7 +527,7 @@ function zip_and_move() {
 # Download .gitignore
 # Usage: gi language
 function gi() { 
-    curl -L -s https://www.gitignore.io/api/$@ | head -n -2 | tail -n +5 | tee .gitignore;
+    curl -L -s https://www.gitignore.io/api/$@ | awk 'NR>2 {print last} {last=$0}' | tee .gitignore;
 }
 
 # Helper for watch_dir
@@ -635,9 +635,11 @@ function pip_list() {
 }
 
 function update_packages_mac() {
+    echo "Updating Homebrew packages..."
     brew update
     brew upgrade
-    brew cask upgrade
+    brew cask reinstall `brew cask outdated`
+    brew link --overwrite node
 }
 
 function update_packages_fedora() {
@@ -646,21 +648,29 @@ function update_packages_fedora() {
 }
 
 function update_packages_ubuntu() {
-    echo "Updating packages"
+    echo "Updating apt packages..."
     sudo apt-get update &> /dev/null
-    echo "Upgrading packages"
+    echo "Upgrading apt packages..."
     sudo apt-get upgrade -y &> /dev/null
-    echo "Autoremoving packages"
+    echo "Autoremoving apt packages..."
     sudo apt-get autoremove &> /dev/null
 }
 
 function update_all() {
+    pushd ~ # to correctly update global NPM packages
+    upgrade_oh_my_zsh;
     update_packages_mac;
-    echo "Updating Vim plugins"
-    vim +BundleUpdate +qall
-    npm update -g
-    npm i npm
-    pip3 install --upgrade pip
+    echo "Updating Vim plugins..."
+    vim +BundleUpdate +qall;
+    echo "Updating npm packages..."
+    npm update -g;
+    npm i npm;
+    echo "Updating PIP packages..."
+    pip3 install --upgrade pip;
+    mas upgrade;
+    popd;
+
+    printf "Updated all applications at %s\n" "`date`" >> ~/update_log.txt 
 }
 
 function merge_and_push_branch() {
@@ -673,3 +683,9 @@ function response_time() {
 }
 
 alias yt='youtube-dl --extract-audio --audio-format mp3'
+
+alias vault=~/scripts/vault
+
+# Example
+# how_in bash get length of array
+function how_in() { where="$1"; shift;IFS=+ curl "https://cht.sh/$where/ $*"; }
