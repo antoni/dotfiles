@@ -12,8 +12,10 @@ if command_exists duti; then
     duti -s `app_id "PYM Player"` .avi all;
     duti -s `app_id "PYM Player"` .mkv all;
     duti -s `app_id "PYM Player"` .mp4 all;
-    duti -s `app_id "TextMate"`   .html all;
+    duti -s `app_id "TextMate"`   .htm all;
     duti -s `app_id "TextMate"`   .txt all;
+    duti -s `app_id "TeXShop"`    .tex all;
+    duti -s `app_id "MacDown"`    .md all;
 else
     printf "You have to install 'duti' first"
 fi
@@ -22,6 +24,5 @@ fi
 sudo ln -fs /Applications/TextMate.app/Contents/Resources/mate /usr/local/bin/mate
 
 # Clear the Dock
-dockutil --remove all
-
+# dockutil --remove all
 

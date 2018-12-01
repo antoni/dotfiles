@@ -103,3 +103,8 @@ function optional_defaults() {
     # launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null
 }
 
+# iTerm copy-paste settings
+defaults write com.googlecode.iterm2 QuickPasteBytesPerCall -int 1024
+defaults write com.googlecode.iterm2 QuickPasteDelayBetweenCalls -float 0.01
+defaults write com.googlecode.iterm2 SlowPasteBytesPerCall -int 32
+defaults write com.googlecode.iterm2 SlowPasteDelayBetweenCalls -float 0.01

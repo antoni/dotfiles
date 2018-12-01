@@ -1,20 +1,37 @@
 BREW_PACKAGES=(mongodb
+mas
 dockutil
 gpg
 coreutils
+osquery
+httpie
 pwgen
 nginx
+qemu
+ranger
 jq
 bash-completion
 awscli
+clang-format
+jasmin
+llvm
+protobuf
+flex
+jflex
+bison
 R
+boot2docker
 bash-completion
+nmap
+nvm
 calc
 groovy
 ccrypt
 dos2unix
 geoip
+gpg
 ffmpeg
+sox
 git-flow
 iproute2mac
 lnav
@@ -28,6 +45,7 @@ jq
 lftp
 links
 lynx
+jhipster
 ncdu
 nmap
 tig
@@ -90,14 +108,26 @@ mc
 optipng
 jpeg
 jpegoptim
+vitorgalvao/tiny-scripts/cask-repair
 )
 
 BREW_CASK_PACKAGES=(texshop
 caffeine
 rstudio
+elmedia-player
+clion
+whatsapp
+visual-studio-code
+jetbrains-toolbox
+leksah
+atom
+soda-player
 tunnelblick
+skitch
 mounty
 dropbox
+pym-player
+nordvpn
 sequel-pro
 torbrowser
 bettertouchtool
@@ -109,10 +139,15 @@ google-chrome-canary
 google-drive-file-stream
 macdown
 postman
+keybase
+spotifree
+macs-fan-control
+cleanmymac
 flux
-iterm2
+iterm2-nightly
 gimp
 kindle
+google-earth-pro
 omnigraffle
 skype
 slack
@@ -134,7 +169,6 @@ libreoffice
 quip
 karabiner-elements
 spectacle)
-
 
 function sdk_man_install() {
     # SDKman
@@ -180,6 +214,14 @@ function mac_install_misc() {
 
     sdk_man_install
     vim_you_complete_me_install
+
+    brew install jmeter --with-plugins
+
+    # Install Quick Look plugins https://github.com/sindresorhus/quick-look-plugins
+    brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv qlimagesize webpquicklook qlvideo
+
+    # Fonts
+    brew cask install font-menlo-for-powerline font-inconsolata font-source-code-pro font-hasklig font-monoid font-pragmata-pro
 }
 
 function install_cargo() {
