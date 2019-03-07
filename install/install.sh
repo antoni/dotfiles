@@ -115,7 +115,8 @@ function install_fzf() {
 
 function install_pip_packages() {
     # PIP packages
-    PIP_PACKAGES=(pgcli mycli pyyaml)
+    PIP_PACKAGES=(pgcli mycli pyyaml awscli speedtest-cli pika autopep8 pep8 \
+                  jupyter)
     pip install --user $PIP_PACKAGES
 }
 
