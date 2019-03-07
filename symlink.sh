@@ -34,17 +34,19 @@ SWEET_HOME_VERSION=`echo $HOME/SweetHome3D-*  | awk -F'-' '{print $2}'`
 echo "SweetHome3D        version symlinked:   " $SWEET_HOME_VERSION
 echo -e "${colors[White]}"
 
-DOTFILES=(profile bashrc zshrc vimrc paths aliases common_profile.sh tmux.conf gitconfig gitignore ghci gvimrc hgrc lldbinit gdbinit xbindkeysrc optional.sh eslintrc fzf.sh psqlrc)
+DOTFILES=(profile bashrc zshrc vimrc paths aliases common_profile.sh tmux.conf \
+    gitconfig gitignore ghci gvimrc hgrc lldbinit gdbinit xbindkeysrc \
+    optional.sh eslintrc fzf.sh psqlrc colordiffrc \
+    jupyter) # Directories
 
 function mac_change_hostname() {
-    # This is your fully qualified hostname, for example myMac.domain.com
+    # Fully qualified hostname, for example myMac.domain.com
     sudo scutil --set HostName $1
-    # This is the name usable on the local network, for example myMac.local.
+    # Name usable on the local network, for example myMac.local.
     sudo scutil --set LocalHostName $1
-    # This is the user-friendly computer name you see in Finder, for example myMac.
+    # User-friendly computer name you see in Finder, for example myMac.
     sudo scutil --set ComputerName $1
 }
-
 
 # Xrdb merge
 XRES_FILE=Xresources.solarized
@@ -175,14 +177,14 @@ if [ -e $HOME/android-studio ]; then
 fi
 
 case "$(uname -s)" in
-   Darwin)
-     ln -fs ${DOTFILES_DIR}/dotfiles/vscode.json $HOME/Library/Application\ Support/Code/User/settings.json
-     ;;
-   Linux)
-     ln -fs ${DOTFILES_DIR}/dotfiles/vscode.json $HOME/.config/Code/User/settings.json
-     ;;
-   CYGWIN*|MINGW32*|MSYS*) # MS Windows
-     ;;
+    Darwin)
+        ln -fs ${DOTFILES_DIR}/dotfiles/vscode.json $HOME/Library/Application\ Support/Code/User/settings.json
+        ;;
+    Linux)
+        ln -fs ${DOTFILES_DIR}/dotfiles/vscode.json $HOME/.config/Code/User/settings.json
+        ;;
+    CYGWIN*|MINGW32*|MSYS*) # MS Windows
+        ;;
 esac
 
 set +x # disable echo executed commands
@@ -247,8 +249,10 @@ function install_npm() {
 }
 
 function install_npm_packages() {
-    npm install -g eslint lodash jshint ts-node tslint typescript prettier http-server depcheck npm-check-updates prettier sort-package-json babel-cli pm2@latest alfred-vpn
-}
+    npm install -g eslint lodash jshint typescript ts-node tslint prettier \
+        http-server depcheck npm-check-updates prettier sort-package-json \
+        babel-cli pm2@latest alfred-vpn
+    }
 
 function install_yarn_packages() {
     yarn global add tslint typescript
@@ -272,5 +276,5 @@ for atom in `\ls atom`; do
     ln -fs ~/dotfiles/atom/$atom $HOME/.atom/$atom;
 done
 
-echo -e '\033[1;29;42m DONE \033[0m \033[1;32mSuccessfully symlinked all the files\033[0m'
+echo -e '\033[1;29;42m DONE \033[0m \033[1;32mSuccessfully symlinked all files\033[0m'
 
