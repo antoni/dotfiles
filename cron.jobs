@@ -1,3 +1,5 @@
+# In case of 'Operation not permitted' error on macOS, enable 'Full Disk Access'
+# for iTerm in 'Security & Privacy' -> 'Privacy'
 # * * * * *  command to execute
 # │ │ │ │ │              day of week (0 - 6) (0 to 6 are Sunday to Saturday,
 # │ │ │ │ └───────────── or use names; 7 is Sunday, the same as 0)
@@ -9,5 +11,8 @@
 # Update everything daily at 16:00
 SHELL=/bin/bash
 0 16 * * * source ~/.bashrc && source ~/.aliases && update_all
+# Save stats about current connection speed
+SHELL=/bin/bash
+51 22 * * * source ~/.bashrc && source ~/.aliases && ~/scripts/wifi_speed_test.sh > ~/speed_test.txt
 # Backup crontab at 16:00
 0 16 * * * crontab -l > ~/dotfiles/cron.jobs

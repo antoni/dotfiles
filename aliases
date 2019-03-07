@@ -15,9 +15,6 @@ export unamestr=`uname`
 if [[ "$unamestr" == 'Darwin' ]]; then
     # Mac OS X-specific
     alias setmiddlevolume='sudo osascript -e "set Volume 5"'
-    # alias mvim="/Applications/MacVim.app/contents/MacOS/MacVim"
-    #alias mvim='/Users/antoni/Developer/mvim'
-    alias ctags="`brew --prefix`/bin/ctags"
     alias eclipseclean='/Applications/eclipse/Eclipse.app/Contents/MacOS/eclipse -clean'
     alias topcoder='javaws ~/Developer/Topcoder/ContestAppletProd.jnlp'
     alias copypubkey='xsel --clipboard < id_rsa.pub'
@@ -180,7 +177,7 @@ function md2pdf() {
     open $1.pdf
 }
 
-# Launches github-flavoured Markdown file on localhost:5000
+# Serves github-rendered Markdown file (from .) on localhost:6419
 alias md2html='grip'
 
 # LaTeX
@@ -189,6 +186,7 @@ alias latexed2='gummi'
 
 alias gogo='cd ~/go/'
 alias l='ls'
+
 csview() {
     local file="$1"
     cat "$file" | sed -e 's/,,/, ,/g' | column -s, -t | less -#5 -N -S
@@ -452,6 +450,8 @@ alias di='sudo dnf install -y'
 alias ds='dnf search -C'
 alias dr='sudo dnf remove'
 
+alias ydl='youtube-dl'
+
 # alias mvn='~/scripts/mvncolor.sh'
 
 # function ppgrep() { pgrep "$@" | xargs --no-run-if-empty ps fp; }
@@ -636,10 +636,14 @@ function pip_list() {
 
 function update_packages_mac() {
     echo "Updating Homebrew packages..."
+
+    # Fix casks with `depends_on` that reference pre-Mavericks
+    /usr/bin/find "$(brew --prefix)/Caskroom/"*'/.metadata' -type f -name '*.rb' -print0 | /usr/bin/xargs -0 /usr/bin/sed -i '' '/depends_on macos:/d'
+
     brew update
     brew upgrade
-    brew cask reinstall `brew cask outdated`
-    brew link --overwrite node
+    brew cask upgrade --greedy
+    brew unlink node && brew link --overwrite node
 }
 
 function update_packages_fedora() {
@@ -656,21 +660,47 @@ function update_packages_ubuntu() {
     sudo apt-get autoremove &> /dev/null
 }
 
+function sudo_keep_alive() {
+    # Ask for the administrator password upfront
+    sudo -v
+
+    # kill -0 PID exits with an exit code of 0 if the PID is of
+    # a running process, otherwise exits with an exit code of 1.
+    # So, basically, kill -0 "$$" || exit aborts the while loop child process
+    # as soon as the parent process is no longer running
+
+    # Keep-alive: update existing `sudo` time stamp until `.macos` has finished
+    while true; do sudo --non-interactive true; sleep 60;
+        kill -0 "$$" || exit; done 2>/dev/null &
+}
+
 function update_all() {
-    pushd ~ # to correctly update global NPM packages
+    sudo_keep_alive
+
+    pushd ~ &> /dev/null # to correctly update global NPM packages
     upgrade_oh_my_zsh;
     update_packages_mac;
     echo "Updating Vim plugins..."
-    vim +BundleUpdate +qall;
+    vim -i NONE -c VundleUpdate -c quitall &> /dev/null
     echo "Updating npm packages..."
+
+    # echo "Updating macOS (if updates available)"
+    # softwareupdate -i -a
+
+    ~/dotfiles/mac/post_install.sh
+
+    # Do the rest without sudo
+    sudo --reset-timestamp
+
     npm update -g;
     npm i npm;
     echo "Updating PIP packages..."
     pip3 install --upgrade pip;
     mas upgrade;
-    popd;
 
-    printf "Updated all applications at %s\n" "`date`" >> ~/update_log.txt 
+    popd &> /dev/null 
+
+    printf "Updated all applications on %s\n" "`date`" >> ~/update_log.txt 
 }
 
 function merge_and_push_branch() {
@@ -689,3 +719,38 @@ alias vault=~/scripts/vault
 # Example
 # how_in bash get length of array
 function how_in() { where="$1"; shift;IFS=+ curl "https://cht.sh/$where/ $*"; }
+
+# TESTIT
+# Add changes to a selected commit.
+# Usage:
+
+# * modify file
+# * git-amend-to $old_sha
+git-amend-to() (
+  # Stash, apply to past commit, and rebase the current branch on to of the result.
+  current_branch="$(git rev-parse --abbrev-ref HEAD)"
+  apply_to="$1"
+  git stash
+  git checkout "$apply_to"
+  git stash apply
+  git add -u
+  git commit --amend --no-edit
+  new_sha="$(git log --format="%H" -n 1)"
+  git checkout "$current_branch"
+  git rebase --onto "$new_sha" "$apply_to"
+)
+
+alias bci='brew cask install'
+# Usage openssl_website google.com:80
+alias openssl_website='openssl s_client -connect -crlf'
+
+function json_compare() {
+    diff <(jq -S . $2) <(jq -S . $2)
+}
+
+function diff {
+    colordiff --unified "$@" | less --RAW-CONTROL-CHARS --quit-if-one-screen
+}
+
+alias sizes='du -sh * | sort -hr'
+
