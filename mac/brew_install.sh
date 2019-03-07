@@ -2,27 +2,43 @@ BREW_PACKAGES=(mongodb
 mas
 dockutil
 gpg
+pass
 coreutils
+rlwrap
 osquery
 httpie
+gnu-sed
 pwgen
+p7zip
 nginx
 qemu
 ranger
 jq
+radare2
+grip
+svg2png
+parallel
+librsvg
+dark-mode
 bash-completion
 awscli
 clang-format
+wireshark
 jasmin
 llvm
 protobuf
 flex
+lame
 jflex
 bison
+transmission
+transmission-remote-gui
 R
 boot2docker
 bash-completion
 nmap
+tcl-tk
+libpcap
 nvm
 calc
 groovy
@@ -94,6 +110,7 @@ xquartz
 mackup
 tmux
 speedtest_cli
+sbt
 hub
 htop
 wget
@@ -109,6 +126,7 @@ optipng
 jpeg
 jpegoptim
 vitorgalvao/tiny-scripts/cask-repair
+mitmproxy
 )
 
 BREW_CASK_PACKAGES=(texshop
@@ -116,21 +134,35 @@ caffeine
 rstudio
 elmedia-player
 clion
+alfred
 whatsapp
 visual-studio-code
 jetbrains-toolbox
 leksah
 atom
+opera-developer
+macpass
+kitematic 
+pref-setter
+db-browser-for-sqlite
+signal
 soda-player
 tunnelblick
+rowanj-gitx
+blue-jeans
 skitch
 mounty
+wireshark
+wireshark-chmodbpf
 dropbox
 pym-player
+transmission
 nordvpn
 sequel-pro
 torbrowser
 bettertouchtool
+safari-technology-preview
+owasp-zap
 evernote
 the-unarchiver
 firefox
@@ -142,9 +174,13 @@ postman
 keybase
 spotifree
 macs-fan-control
+vlc
+vlc-webplugin
 cleanmymac
 flux
 iterm2-nightly
+veracrypt
+robo-3t
 gimp
 kindle
 google-earth-pro
@@ -153,7 +189,6 @@ skype
 slack
 wkhtmltopdf
 spectacle
-spotify
 mysqlworkbench
 sublime
 the-unarchiver
@@ -181,6 +216,11 @@ function sdk_man_install() {
     sdk install springboot
     sdk install maven
     sdk install sbt
+}
+
+function scala_post_install() {
+    echo '-J-XX:+CMSClassUnloadingEnabled' >> /usr/local/etc/sbtopts
+    echo '-J-Xmx2G' >> /usr/local/etc/sbtopts
 }
 
 function vim_you_complete_me_install() {
@@ -218,7 +258,7 @@ function mac_install_misc() {
     brew install jmeter --with-plugins
 
     # Install Quick Look plugins https://github.com/sindresorhus/quick-look-plugins
-    brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv qlimagesize webpquicklook qlvideo
+    brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv webpquicklook qlvideo
 
     # Fonts
     brew cask install font-menlo-for-powerline font-inconsolata font-source-code-pro font-hasklig font-monoid font-pragmata-pro
