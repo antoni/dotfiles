@@ -3,6 +3,8 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
+PATH=$PATH:/usr/local/sbin
+
 # export PATH=$HOME/torch/install/bin:$PATH  # Added automatically by torch-dist
 # export LD_LIBRARY_PATH=$HOME/torch/install/lib:$LD_LIBRARY_PATH  # Added automatically by torch-dist
 # export DYLD_LIBRARY_PATH=$HOME/torch/install/lib:$DYLD_LIBRARY_PATH  # Added automatically by torch-dist

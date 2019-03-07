@@ -3,6 +3,10 @@
 # Wallpaper
 WALLPAPER=~/Documents/wallpaper8.jpg
 
+# Needed by f.e. Python 3
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
 export EDITOR="vim"
 # Overcome the madness: http://www.economyofeffort.com/2014/07/04/zsh/
 export TERM=xterm-256color
@@ -81,7 +85,8 @@ function execute_on_login_only() {
     feh --bg-scale $WALLPAPER
     fi
 }
-    # This takes too much time
+
+# This takes too much time
 # execute_on_login_only
 
 
@@ -90,6 +95,3 @@ if command_exists xbindkeys; then
     killall xbindkeys 2> /dev/null
     xbindkeys -f ~/.xbindkeysrc 
 fi
-
-# HappyPack threads count
-# export HAPPY_PACK_THREADS=8
