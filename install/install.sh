@@ -116,8 +116,9 @@ function install_fzf() {
 function install_pip_packages() {
     # PIP packages
     PIP_PACKAGES=(pgcli mycli pyyaml awscli speedtest-cli pika autopep8 pep8 \
-                  jupyter)
+                  jupyter z3-solver matplotlib tensorflow numpy)
     pip install --user $PIP_PACKAGES
+    pip3 install --user $PIP_PACKAGES
 }
 
 # Git kraken (Linux)
