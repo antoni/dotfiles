@@ -21,7 +21,7 @@
     whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
 	excludesfile = ~/.gitignore
 [alias]
-    st = status
+    st = status --short --branch
     ct = commit
     br = branch
     co = checkout
@@ -62,6 +62,7 @@
     dontcommit = "!git checkout ."
     diffclear = "!f() { git diff $1 --color | sed -r 's/^([^-+ ]*)[-+ ]/\\1/' | less -r;};f"
     diffclear2 = "!git diff --color-words"
+	grog = log --graph --abbrev-commit --decorate --all --format=format:\"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(dim white) - %an%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)\"
 [push]
 	default = matching
 ; [pull]
