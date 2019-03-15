@@ -48,6 +48,12 @@ function mac_change_hostname() {
     sudo scutil --set ComputerName $1
 }
 
+function mac_symlink() {
+    # iTerm2 config
+    ln -sf ${DOTFILES_DIR}/com.googlecode.iterm2.plist \
+        ~/Library/Preferences/com.googlecode.iterm2.plist
+}
+
 # Xrdb merge
 XRES_FILE=Xresources.solarized
 xrdb ${DOTFILES_DIR}/${XRES_FILE}
@@ -80,6 +86,9 @@ ln -fs ${DOTFILES_DIR}/pgcli ~/.config/pgcli/config
 # htop
 mkdir -p ~/.config/htop
 ln -fs ${DOTFILES_DIR}/htoprc ~/.config/htop/
+
+# macOS
+mac_symlink
 
 # i3-wm
 I3WM_DIR=~/.config/i3/
