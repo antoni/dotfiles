@@ -1,6 +1,7 @@
 [user]
-	email = antoni@g.pl
+	email = antoni.rosciszewski@gmail.com
 	name = Antoni Rosciszewski
+	signingkey = 34E83938FB6E58DEE53F9E8F044EF77D2A1D91A8
 [branch]
     autosetupmerge = true
 [color]
@@ -73,3 +74,10 @@
     proxy = 
 [https]
     proxy = 
+[commit]
+	gpgsign = false
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f

@@ -143,6 +143,7 @@ atom
 opera-developer
 macpass
 kitematic 
+gpg-suite
 pref-setter
 db-browser-for-sqlite
 signal
