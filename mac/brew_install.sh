@@ -2,12 +2,15 @@ BREW_PACKAGES=(mongodb
 mas
 dockutil
 gpg
+bat
+ccat
 pass
 coreutils
 rlwrap
 osquery
 httpie
 gnu-sed
+ghostscript
 pwgen
 p7zip
 nginx
@@ -15,6 +18,7 @@ qemu
 ranger
 jq
 radare2
+agda
 grip
 svg2png
 parallel
@@ -136,6 +140,10 @@ elmedia-player
 clion
 alfred
 whatsapp
+dropbox
+epic
+supertuxkart
+atext
 visual-studio-code
 jetbrains-toolbox
 leksah
@@ -263,6 +271,10 @@ function mac_install_misc() {
 
     # Fonts
     brew cask install font-menlo-for-powerline font-inconsolata font-source-code-pro font-hasklig font-monoid font-pragmata-pro
+
+    # Dart langauge
+    brew tap dart-lang/dart
+    brew install dart
 }
 
 function install_cargo() {
