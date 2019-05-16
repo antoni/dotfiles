@@ -116,9 +116,12 @@ function install_fzf() {
 function install_pip_packages() {
     # PIP packages
     PIP_PACKAGES=(pgcli mycli pyyaml awscli speedtest-cli pika autopep8 pep8 \
-                  jupyter z3-solver matplotlib tensorflow numpy)
-    pip install --user $PIP_PACKAGES
-    pip3 install --user $PIP_PACKAGES
+                  jupyter z3-solver matplotlib tensorflow numpy agda-kernel)
+    # Use xargs, so that PIP doesn't fail on a single error
+    cat requirements.txt | xargs -n 1 pip install --user
+    cat requirements.txt | xargs -n 1 pip install --user
+    # pip install --user $PIP_PACKAGES
+    # pip3 install --user $PIP_PACKAGES
 }
 
 # Git kraken (Linux)
@@ -174,6 +177,12 @@ function install_haskell_packages() {
     HASKELL_PACKAGES=(happy hscolour funnyprint alex parsec hoogle quickcheck mtl)
     cabal update
     cabal install $HASKELL_PACKAGES
+}
+
+function install_r_packages() {
+    R_PACKAGES=() # see r_packages.txt
+    # TODO: Install all packages
+    echo "install.packages(\"${R_PACKAGES[*]}\", repos=\"https://cran.rstudio.com\")" | R --no-save
 }
 
 function install_go_packages() {

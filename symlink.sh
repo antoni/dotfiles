@@ -36,7 +36,7 @@ echo -e "${colors[White]}"
 
 DOTFILES=(profile bashrc zshrc vimrc paths aliases common_profile.sh tmux.conf \
     gitconfig gitignore ghci gvimrc hgrc lldbinit gdbinit xbindkeysrc \
-    optional.sh eslintrc fzf.sh psqlrc colordiffrc \
+    optional.sh eslintrc fzf.sh psqlrc colordiffrc emacs \
     jupyter) # Directories
 
 function mac_change_hostname() {
