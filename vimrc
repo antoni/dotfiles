@@ -469,10 +469,13 @@ Plugin 'tacahiroy/ctrlp-funky'
 " Snippets {{{
 Bundle 'ervandew/supertab'
 " Plugin 'SirVer/ultisnips'
+
+" SnipMate
 Bundle 'MarcWeber/vim-addon-mw-utils'
-" Bundle 'tomtom/tlib_vim'
+Bundle 'tomtom/tlib_vim'
 Bundle 'garbas/vim-snipmate'
 Bundle 'honza/vim-snippets'
+
 " }}}
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
