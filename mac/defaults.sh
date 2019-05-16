@@ -263,3 +263,6 @@ defaults write com.apple.dock wvous-tr-modifier -int 0
 # Bottom left screen corner → Start screen saver
 defaults write com.apple.dock wvous-bl-corner -int 5
 defaults write com.apple.dock wvous-bl-modifier -int 0
+
+# Disable floating thumbnail screenshot preview
+defaults write com.apple.screencapture show-thumbnail -bool FALSE

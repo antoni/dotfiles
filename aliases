@@ -26,7 +26,7 @@ elif [[ "$unamestr" == 'Linux' ]]; then
     function listkernels() {
         dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d'
     }
-    alias gdebi='sudo gdebi'
+alias gdebi='sudo gdebi'
 
     # Linux specific
     # alias i='sudo apt-get install -y'
@@ -341,7 +341,7 @@ dl_website() {
         --restrict-file-names=windows \
         --no-parent \
         $1
-}
+    }
 
 # cd ../../../
 function up() {
@@ -586,10 +586,10 @@ function vpn() {
     vpn_cmd="up"
     if [[ $(nmcli connection show --active | \grep VPN) ]]; then
         vpn_cmd="down";
-    fi;
+        fi;
 
-    nmcli connection $vpn_cmd id $vpn_conn | tr ' ' '\n' | \grep --color activated
-}
+        nmcli connection $vpn_cmd id $vpn_conn | tr ' ' '\n' | \grep --color activated
+    }
 
 function redshift_loc() {
     redshift-gtk -v -l $DEFAULT_COORDS;
@@ -642,7 +642,7 @@ function update_packages_mac() {
 
     brew update
     brew upgrade
-    brew cask upgrade --greedy
+    brew cask upgrade --greedy --force
     brew unlink node && brew link --overwrite node
 }
 
@@ -672,7 +672,7 @@ function sudo_keep_alive() {
     # Keep-alive: update existing `sudo` time stamp until `.macos` has finished
     while true; do sudo --non-interactive true; sleep 60;
         kill -0 "$$" || exit; done 2>/dev/null &
-}
+    }
 
 function update_all() {
     sudo_keep_alive
@@ -708,8 +708,8 @@ function merge_and_push_branch() {
 }
 
 function response_time() {
-  FORMAT_PATH=`realpath ~/scripts/curl-format.txt`;
-  curl -w "@"$FORMAT_PATH -o /dev/null -s $1;
+    FORMAT_PATH=`realpath ~/scripts/curl-format.txt`;
+    curl -w "@"$FORMAT_PATH -o /dev/null -s $1;
 }
 
 alias yt='youtube-dl --extract-audio --audio-format mp3'
@@ -727,17 +727,17 @@ function how_in() { where="$1"; shift;IFS=+ curl "https://cht.sh/$where/ $*"; }
 # * modify file
 # * git-amend-to $old_sha
 git-amend-to() (
-  # Stash, apply to past commit, and rebase the current branch on to of the result.
-  current_branch="$(git rev-parse --abbrev-ref HEAD)"
-  apply_to="$1"
-  git stash
-  git checkout "$apply_to"
-  git stash apply
-  git add -u
-  git commit --amend --no-edit
-  new_sha="$(git log --format="%H" -n 1)"
-  git checkout "$current_branch"
-  git rebase --onto "$new_sha" "$apply_to"
+# Stash, apply to past commit, and rebase the current branch on to of the result.
+current_branch="$(git rev-parse --abbrev-ref HEAD)"
+apply_to="$1"
+git stash
+git checkout "$apply_to"
+git stash apply
+git add -u
+git commit --amend --no-edit
+new_sha="$(git log --format="%H" -n 1)"
+git checkout "$current_branch"
+git rebase --onto "$new_sha" "$apply_to"
 )
 
 alias bci='brew cask install'
@@ -746,6 +746,12 @@ alias openssl_website='openssl s_client -connect -crlf'
 
 function json_compare() {
     diff <(jq -S . $2) <(jq -S . $2)
+}
+
+function pdf_compress() {
+    local input_file=$1
+    local output_file=${2:-$1_output.pdf}
+    gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4  -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile=$output_file $input_file
 }
 
 function diff {

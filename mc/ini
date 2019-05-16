@@ -98,7 +98,7 @@ menubar_visible=0
 free_space=0
 horizontal_split=0
 vertical_equal=0
-left_panel_size=66
+left_panel_size=65
 horizontal_equal=0
 top_panel_size=13
 
@@ -107,7 +107,7 @@ timeformat_recent=%b %e %H:%M
 timeformat_old=%b %e  %Y
 ftp_proxy_host=gate
 ftpfs_password=anonymous@
-display_codepage=ASCII
+display_codepage=UTF-8
 source_codepage=Other_8_bit
 autodetect_codeset=
 spell_language=en
@@ -122,6 +122,8 @@ color_terminals=
 rxvt-unicode=
 
 xterm-256color=
+
+screen-256color=
 
 [Panels]
 show_mini_info=true
