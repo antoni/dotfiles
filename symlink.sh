@@ -87,6 +87,10 @@ ln -fs ${DOTFILES_DIR}/pgcli ~/.config/pgcli/config
 mkdir -p ~/.config/htop
 ln -fs ${DOTFILES_DIR}/htoprc ~/.config/htop/
 
+# cabal
+mkdir -p ~/.cabal
+ln -fs ${DOTFILES_DIR}/cabal.config ~/.cabal/config
+
 # macOS
 mac_symlink
 

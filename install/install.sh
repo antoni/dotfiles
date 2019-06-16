@@ -64,7 +64,7 @@ function main() {
         ${FEDORA[*]}
         # install_fedora_sound
         install_fedora_chrome
-    else
+    else # macOS
         source ../mac/brew_install.sh
 
         # Remove "Last login" message in new Terminal window open
@@ -73,8 +73,11 @@ function main() {
         mac_install_misc
         brew install ${BREW_PACKAGES[*]}
         brew cask install ${BREW_CASK_PACKAGES[*]}
-        echo "Mac OS X installation not supported"
-        exit 0;
+
+# Generate 'locate' database
+sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
+
+exit 0;
     fi
 
     # Generate SSH key
@@ -116,13 +119,13 @@ function install_fzf() {
 function install_pip_packages() {
     # PIP packages
     PIP_PACKAGES=(pgcli mycli pyyaml awscli speedtest-cli pika autopep8 pep8 \
-                  jupyter z3-solver matplotlib tensorflow numpy agda-kernel)
-    # Use xargs, so that PIP doesn't fail on a single error
-    cat requirements.txt | xargs -n 1 pip install --user
-    cat requirements.txt | xargs -n 1 pip install --user
-    # pip install --user $PIP_PACKAGES
-    # pip3 install --user $PIP_PACKAGES
-}
+        jupyter z3-solver matplotlib tensorflow numpy agda-kernel)
+            # Use xargs, so that PIP doesn't fail on a single error
+            cat requirements.txt | xargs -n 1 pip install --user
+            cat requirements.txt | xargs -n 1 pip install --user
+            # pip install --user $PIP_PACKAGES
+            # pip3 install --user $PIP_PACKAGES
+        }
 
 # Git kraken (Linux)
 function install_gitkraken() {
@@ -198,7 +201,7 @@ function install_nvidia_driver() {
 function install_r_studio() {
     sudo_exec dnf install $(curl -s https://www.rstudio.com/products/rstudio/download/ |
         \grep -o "\"[^ \"]*x86_64.rpm\"" | sed "s/\"//g");
-}
+    }
 
 function start_services() {
     systemctl --user enable redshift.service
