@@ -14,7 +14,9 @@ ghostscript
 pwgen
 p7zip
 nginx
+tmate
 qemu
+lsd
 ranger
 jq
 radare2
