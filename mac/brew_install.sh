@@ -10,6 +10,7 @@ rlwrap
 osquery
 httpie
 gnu-sed
+private-eye
 ghostscript
 pwgen
 p7zip
