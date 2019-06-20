@@ -37,6 +37,8 @@
     lg = log --graph --name-status --pretty=oneline
     cl = clone
     cld = clone --depth 1
+    # Show message from last commit
+    slog = "git log --pretty=format:%s | head -n 1"
     # Rewrite previous commit usernames and emails
     # git change-commits GIT_AUTHOR_NAME "old name" "new name"
     #
