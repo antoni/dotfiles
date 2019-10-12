@@ -3,18 +3,32 @@ mas
 dockutil
 gpg
 bat
+node
+yarn
+xz
 ccat
 pass
+blueutil
+sleepwatcher
+youtube-dl
+cocoapods
+pstree
+lastpass-cli
 coreutils
 rlwrap
+proxychains
+tesseract-lang
 osquery
 httpie
+poppler
 gnu-sed
-private-eye
 ghostscript
+wine
 pwgen
+wget
 p7zip
 nginx
+pandoc
 tmate
 qemu
 lsd
@@ -30,6 +44,7 @@ dark-mode
 bash-completion
 awscli
 clang-format
+tldr
 wireshark
 jasmin
 llvm
@@ -39,21 +54,17 @@ lame
 jflex
 bison
 transmission
-transmission-remote-gui
 R
 boot2docker
-bash-completion
 nmap
 tcl-tk
 libpcap
 nvm
 calc
 groovy
-ccrypt
 dos2unix
 geoip
 gpg
-ffmpeg
 sox
 git-flow
 iproute2mac
@@ -80,8 +91,6 @@ vimpager
 mongodb
 ack
 git
-bash-completion
-bash completion script
 duti
 colordiff
 coreutils
@@ -113,7 +122,6 @@ watchman
 automake
 autoconf
 htop
-xquartz
 mackup
 tmux
 speedtest_cli
@@ -133,7 +141,10 @@ optipng
 jpeg
 jpegoptim
 vitorgalvao/tiny-scripts/cask-repair
+amiaopensource/amiaos/decklinksdk
 mitmproxy
+ant
+gradle
 )
 
 BREW_CASK_PACKAGES=(texshop
@@ -141,44 +152,56 @@ caffeine
 rstudio
 elmedia-player
 clion
+java
+grammarly
 alfred
+macsvg
 whatsapp
+inkscape
+snagit
 dropbox
 epic
-supertuxkart
+eclipse-jee
 atext
 visual-studio-code
+koa11y
+mysides
+ngrok
+xmind-zen
 jetbrains-toolbox
-leksah
 atom
+private-eye
 opera-developer
 macpass
+transmission-remote-gui
 kitematic 
 gpg-suite
 pref-setter
 db-browser-for-sqlite
+zoom
+haskell-stack
 signal
 soda-player
 tunnelblick
 rowanj-gitx
 blue-jeans
+xquartz
 skitch
 mounty
-wireshark
 wireshark-chmodbpf
 dropbox
 pym-player
 transmission
 nordvpn
 sequel-pro
-torbrowser
-bettertouchtool
+tor-browser
 safari-technology-preview
+mactex
 owasp-zap
 evernote
 the-unarchiver
 firefox
-google-chrome
+#google-chrome
 google-chrome-canary
 google-drive-file-stream
 macdown
@@ -209,13 +232,17 @@ macvim
 robo-3t
 hyper
 gitkraken
-caskroom/versions/firefoxdeveloperedition
+caskroom/versions/firefox-developer-edition
 opera
 webstorm
 libreoffice
 quip
 karabiner-elements
-spectacle)
+spectacle
+intel-haxm
+android-studio
+android-sdk
+)
 
 function sdk_man_install() {
     # SDKman
@@ -247,11 +274,7 @@ function mac_install_misc() {
     chsh -s /usr/local/bin/bash
 
     brew install bash-completion
-    brew tap homebrew/completions
-
-    # Java 8
-    brew tap caskroom/versions
-    brew cask install java8
+    brew tap homebrew/homebrew-core
 
     # Brew service (launchd)
     brew tap homebrew/services
@@ -267,13 +290,14 @@ function mac_install_misc() {
     sdk_man_install
     vim_you_complete_me_install
 
-    brew install jmeter --with-plugins
+    # brew install jmeter --with-plugins
+    brew install jmeter
 
     # Install Quick Look plugins https://github.com/sindresorhus/quick-look-plugins
     brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv webpquicklook qlvideo
 
     # Fonts
-    brew cask install font-menlo-for-powerline font-inconsolata font-source-code-pro font-hasklig font-monoid font-pragmata-pro
+    brew cask install font-menlo-for-powerline font-inconsolata font-source-code-pro font-hasklig font-monoid
 
     # Dart langauge
     brew tap dart-lang/dart
