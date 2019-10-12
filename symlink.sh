@@ -2,11 +2,17 @@
 
 HOME_DIR=$HOME
 DOTFILES_DIR=$HOME_DIR/dotfiles
-
 source $DOTFILES_DIR/colors.sh
 
-echo -en "${colors[BGreen]}Enter sudo password:${colors[White]} "
+function print_success_message() {
+    local message=$1
+    echo -e "\033[1;29;42m DONE \033[0m \033[1;32m $1 \033[0m"
+    echo -e ${colors[Black]}
+}
+
+echo -en "${colors[BGreen]}Enter sudo password:${colors[Black]} "
 read -s SUDO_PASS
+clear
 
 source $DOTFILES_DIR/utils.sh
 
@@ -34,9 +40,9 @@ SWEET_HOME_VERSION=`echo $HOME/SweetHome3D-*  | awk -F'-' '{print $2}'`
 echo "SweetHome3D        version symlinked:   " $SWEET_HOME_VERSION
 echo -e "${colors[White]}"
 
-DOTFILES=(profile bashrc zshrc vimrc paths aliases common_profile.sh tmux.conf \
+DOTFILES=(profile bashrc zshrc vimrc paths aliases bash_profile common_profile.sh tmux.conf \
     gitconfig gitignore ghci gvimrc hgrc lldbinit gdbinit xbindkeysrc \
-    optional.sh eslintrc fzf.sh psqlrc colordiffrc emacs \
+    optional.sh fzf.sh psqlrc colordiffrc emacs \
     jupyter) # Directories
 
 function mac_change_hostname() {
@@ -49,22 +55,34 @@ function mac_change_hostname() {
 }
 
 function mac_symlink() {
+    ln -sf ~/dotfiles/mac/sleep.sh ~/.sleep
+    ln -sf ~/dotfiles/mac/wakeup.sh ~/.wakeup
+
     # iTerm2 config
     ln -sf ${DOTFILES_DIR}/com.googlecode.iterm2.plist \
         ~/Library/Preferences/com.googlecode.iterm2.plist
+
+    # Transmission
+     ln -sf org.m0k.transmission.plist ~/Library/Preferences/ 
+
+    # TextMate
+    sudo ln -fs /Applications/TextMate.app/Contents/Resources/mate /usr/local/bin/mate
 }
 
-# Xrdb merge
-XRES_FILE=Xresources.solarized
-xrdb ${DOTFILES_DIR}/${XRES_FILE}
-ln -sf ${DOTFILES_DIR}/${XRES_FILE} ~/.Xresources
+# TODO: Use it in Linux section
+function linux_xrdb() {
+    # Xrdb merge
+    XRES_FILE=Xresources.solarized
+    xrdb ${DOTFILES_DIR}/${XRES_FILE}
+    ln -sf ${DOTFILES_DIR}/${XRES_FILE} ~/.Xresources
+}
 
 # Symlink the files in the current directory with corresponding dotfiles in
 # the home directory
 for f in "${DOTFILES[@]}"
 do
     rm -f ~/.$f
-    ln -s ~/dotfiles/$f ~/.$f > /dev/null
+    ln -sf ~/dotfiles/$f ~/.$f > /dev/null
 done;
 
 # Terminator
@@ -106,7 +124,7 @@ ln -fs ${DOTFILES_DIR}/i3/i3status.config ~/.config/i3/i3status.config
 # Redshift
 if [[ ! -a ~/.config/redshift.conf ]]; then
     mkdir -p ~/.config
-    ln -s ${DOTFILES_DIR}/redshift.conf ~/.config/redshift.conf
+    ln -sf ${DOTFILES_DIR}/redshift.conf ~/.config/redshift.conf
 fi
 
 # MIME types
@@ -135,7 +153,7 @@ function setup_scripts() {
 # .ghci access
 chmod g-w ~/.ghci
 
-set -x # echo executed commands
+# set -x # echo executed commands
 
 # /usr/bin symlinks
 
@@ -163,8 +181,9 @@ sudo_exec ln -fs ${DOTFILES_DIR}/intellij/idea_sysctl.conf /etc/sysctl.d/idea_sy
 sudo_exec sysctl -p --system
 
 # Global aliases
-sudo_exec mkdir -p /etc/profile.d
-sudo_exec ln -fs ${DOTFILES_DIR}/global_aliases /etc/profile.d/global_aliases.sh
+# TODO: Use linux_conditional here
+# sudo_exec mkdir -p /etc/profile.d
+# sudo_exec ln -fs ${DOTFILES_DIR}/global_aliases /etc/profile.d/global_aliases.sh
 
 # lldb
 sudo_exec ln -fs /usr/bin/lldb-$LLDB_VERSION /usr/bin/lldb
@@ -218,8 +237,11 @@ fi
 echo -e "${colors[BYellow]}Things to be (possibly) done manually:\n\n\
     \t* /sys/class/backlight/\t\tto make xbacklight work"${colors[BWhite]}
 
-sudo cp brightness.sh /root/
-sudo sh -c 'echo "$USER $(hostname) = NOPASSWD: /root/brightness.sh" >> /etc/sudoers'
+# TODO: Use this
+function linux_brightness_settings() {
+    sudo cp brightness.sh /root/
+    sudo sh -c 'echo "$USER $(hostname) = NOPASSWD: /root/brightness.sh" >> /etc/sudoers'
+}
 
 function setup_hostname() {
     hostname_default="automatown"
@@ -231,7 +253,7 @@ function setup_hostname() {
 
     mac_change_hostname $hostname
 
-    echo -e "${colors[BGreen]}Hostname changed to:${colors[BBlue]} $hostname ${colors[White]}"
+    print_success_message "Hostname changed to: $hostname"
 }
 
 setup_hostname
@@ -252,34 +274,6 @@ function fedora_system_upgrade() {
     sudo dnf system-upgrade reboot
 }
 
-# JS-related tools
-
-# Make global packages install locally (without sudo)
-function install_npm() {
-    NPM_DIR=$HOME/.npm-global;
-    mkdir -p $NPM_DIR;
-    npm config set prefix "$NPM_DIR";
-}
-
-function install_npm_packages() {
-    npm install -g eslint lodash jshint typescript ts-node tslint prettier \
-        http-server depcheck npm-check-updates prettier sort-package-json \
-        babel-cli pm2@latest alfred-vpn
-    }
-
-function install_yarn_packages() {
-    yarn global add tslint typescript
-}
-
-function install_airbnb_eslint() {
-    export PKG=eslint-config-airbnb;
-    npm info "$PKG@latest" peerDependencies --json | command sed 's/[\{\},]//g ; s/:
-    /@/g' | xargs npm install -g "$PKG@latest"
-}
-
-# install_npm_packages
-# install_airbnb_eslint
-
 # Atom
 
 mkdir -p $HOME/.atom
@@ -289,5 +283,5 @@ for atom in `\ls atom`; do
     ln -fs ~/dotfiles/atom/$atom $HOME/.atom/$atom;
 done
 
-echo -e '\033[1;29;42m DONE \033[0m \033[1;32mSuccessfully symlinked all files\033[0m'
+print_success_message "Successfully symlinked all files"
 

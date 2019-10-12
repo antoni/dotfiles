@@ -127,6 +127,5 @@ shopt -s nocaseglob
 
 source $HOME/.paths
 source $HOME/.aliases
-source $HOME/.common_profile.sh
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash

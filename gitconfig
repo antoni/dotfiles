@@ -5,9 +5,15 @@
 [branch]
     autosetupmerge = true
 [color]
-    branch = auto
-    diff = auto
-    status = auto
+	branch = always
+	; diff = always
+	status = always
+	ui = auto
+	interactive = always
+	grep = always
+	pager = true
+	decorate = always
+	showbranch = always
 [color "branch"]
     current = yellow reverse
     local = yellow
@@ -16,11 +22,10 @@
     added = yellow
     changed = green
     untracked = cyan
-[color]
-    ui = true
 [core]
     whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
 	excludesfile = ~/.gitignore
+	editor = vi
 [alias]
     st = status --short --branch
     ct = commit
