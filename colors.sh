@@ -73,6 +73,9 @@ colors[On_IPurple]='\033[0;105m'  # Purple
 colors[On_ICyan]='\033[0;106m'    # Cyan
 colors[On_IWhite]='\033[0;107m'   # White
 
+# Custom set
+colors[On_CGreen]='\033[1;29;42m'
+
 # Usage:
 # color=${colors[$input_color]}
 # white=${colors[White]}
