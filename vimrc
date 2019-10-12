@@ -981,3 +981,4 @@ let g:tagbar_type_go = {
             \ 'ctagsargs' : '-sort -silent'
             \ }
  "}}}
+let g:go_version_warning = 0
