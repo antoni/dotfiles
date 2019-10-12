@@ -29,3 +29,11 @@ export PATH=$PATH:$HOME/clion/bin
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$HOME/yasara
 export PATH=$PATH:$HOME/.cabal/bin:$HOME/.ghcup/bin
+
+# Android development
+export PATH=$ANT_HOME/bin:$PATH
+export PATH=$MAVEN_HOME/bin:$PATH
+export PATH=$GRADLE_HOME/bin:$PATH
+export PATH=$ANDROID_HOME/tools:$PATH
+export PATH=$ANDROID_HOME/platform-tools:$PATH
+export PATH=$ANDROID_HOME/build-tools/19.1.0:$PATH

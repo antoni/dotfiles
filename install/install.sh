@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
 
+DOTFILES_DIR=~/dotfiles
+
 mkdir -p tmp
 
-source chrome_install.sh
+source $DOTFILES_DIR/install/chrome_install.sh
 
 echo -en "${colors[BGreen]}Enter sudo password:${colors[White]} "
 read -s SUDO_PASS
 
-source ../utils.sh
+source $DOTFILES_DIR/utils.sh
 
 # Install required packages
 PACKAGES=(slock xbindkeys clang vim vim-X11 rdesktop tigervnc make xpdf sysstat
@@ -53,7 +55,22 @@ function install_fedora_sound() {
     sudo_exec dnf install -y gstreamer-plugins-bad gstreamer-plugins-bad-free-extras gstreamer-plugins-bad-nonfree gstreamer-plugins-ugly gstreamer-ffmpeg gstreamer1-libav gstreamer1-plugins-bad-free-extras gstreamer1-plugins-bad-freeworld gstreamer1-plugins-base-tools gstreamer1-plugins-good-extras gstreamer1-plugins-ugly gstreamer1-plugins-bad-free gstreamer1-plugins-good gstreamer1-plugins-base gstreamer1 x264 vlc  smplayer
 }
 
+function generate_ssh_key() {
+
+    if [ ! -e ~/.ssh/id_rsa ]; then 
+        ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
+    fi
+}
+
 function main() {
+
+    generate_ssh_key
+
+    # Generate SSH key
+    if [ ! -e ~/.ssh/id_rsa ]; then
+        ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
+    fi
+
     if [ -f /etc/debian_version ]; then
         echo "Installing required packages on Debian"
         apt-get install -y ${PACKAGES[*]} ${DEBIAN[*]}
@@ -65,39 +82,57 @@ function main() {
         # install_fedora_sound
         install_fedora_chrome
     else # macOS
-        source ../mac/brew_install.sh
+        source $DOTFILES_DIR/mac/brew_install.sh
 
         # Remove "Last login" message in new Terminal window open
         touch ~/.hushlogin
 
         mac_install_misc
-        brew install ${BREW_PACKAGES[*]}
-        brew cask install ${BREW_CASK_PACKAGES[*]}
+        HOMEBREW_NO_AUTO_UPDATE=1 brew install ${BREW_PACKAGES[*]}
+        HOMEBREW_NO_AUTO_UPDATE=1 brew cask install ${BREW_CASK_PACKAGES[*]}
 
-# Generate 'locate' database
-sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
+        sudo chown -R $USER /Library/Ruby/Gems/
 
-exit 0;
+        install_oh_my_zsh
+        install_zsh_plugins
+        install_fzf
+
+        # Generate 'locate' database
+        sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
+
+        $DOTFILES_DIR/mac/post_install.sh
     fi
 
-    # Generate SSH key
-    if [ ! -e ~/.ssh/id_rsa ]; then 
-        ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
-    fi
+    install_javascript_packages_npm
+    install_airbnb_eslint
+    install_vim_plugins
+
+    install_tmux_plugin_manager
+
+    crontab $DOTFILES_DIR/cron.jobs
+}
+
+function install_vim_plugins() {
+    echo "Installing Vim plugins..."
+    vim -i NONE -c VundleInstall -c quitall &> /dev/null
 }
 
 function install_oh_my_zsh() {
-    sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
-    chsh -s /bin/zsh
+    sudo chsh -s $(which zsh) $(whoami)
 
-    install_zsh_plugins
+    curl -Lo install.sh https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
+    sh install.sh --unattended
 }
 
 function install_zsh_plugins() {
     # ZSH_CUSTOM=$HOME/zsh_customizations
     # mkdir -p $ZSH_CUSTOM;
-    git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+    # git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+    # git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
 }
 
 function setup_docker() {
@@ -119,7 +154,7 @@ function install_fzf() {
 function install_pip_packages() {
     # PIP packages
     PIP_PACKAGES=(pgcli mycli pyyaml awscli speedtest-cli pika autopep8 pep8 \
-        jupyter z3-solver matplotlib tensorflow numpy agda-kernel)
+        jupyter z3-solver matplotlib tensorflow numpy agda-kernel pirate-get)
             # Use xargs, so that PIP doesn't fail on a single error
             cat requirements.txt | xargs -n 1 pip install --user
             cat requirements.txt | xargs -n 1 pip install --user
@@ -177,7 +212,7 @@ function configure_postgres() {
 }
 
 function install_haskell_packages() {
-    HASKELL_PACKAGES=(happy hscolour funnyprint alex parsec hoogle quickcheck mtl)
+    HASKELL_PACKAGES=(happy hscolour funnyprint alex parsec hoogle QuickCheck mtl)
     cabal update
     cabal install $HASKELL_PACKAGES
 }
@@ -211,4 +246,26 @@ function install_tmux_plugin_manager() {
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 }
 
-crontab ../cron.jobs
+# JS-related tools
+
+# Make global packages install locally (without sudo)
+function install_npm() {
+    NPM_DIR=$HOME/.npm-global;
+    mkdir -p $NPM_DIR;
+    npm config set prefix "$NPM_DIR";
+}
+
+function install_javascript_packages_npm() {
+    npm install -g eslint lodash jshint typescript ts-node tslint prettier \
+        http-server depcheck npm-check-updates prettier sort-package-json \
+        babel-cli pm2@latest alfred-vpn firebase-tools tslint typescript \
+        @aws-amplify/cli pa11y netlify-cli hygen react-native-cli
+}
+
+function install_airbnb_eslint() {
+    export PKG=eslint-config-airbnb;
+    npm info "$PKG@latest" peerDependencies --json | command sed 's/[\{\},]//g ; s/:
+    /@/g' | xargs npm install -g "$PKG@latest"
+}
+
+main
