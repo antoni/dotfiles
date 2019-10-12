@@ -5,6 +5,8 @@ set +x
 DEFAULT_CITY="Warsaw";
 DEFAULT_COORDS="52.23:21.012'";
 
+export BASH=/usr/local/bin/bash
+
 source $HOME/dotfiles/colors.sh
 
 function command_exists () { type "$1" &> /dev/null ; }
@@ -18,7 +20,7 @@ if [[ "$unamestr" == 'Darwin' ]]; then
     alias eclipseclean='/Applications/eclipse/Eclipse.app/Contents/MacOS/eclipse -clean'
     alias topcoder='javaws ~/Developer/Topcoder/ContestAppletProd.jnlp'
     alias copypubkey='xsel --clipboard < id_rsa.pub'
-    alias vim='mvim -v'
+    # alias vim='mvim -v'
     alias ls='ls -h -lFG'
     alias brew='HOMEBREW_NO_AUTO_UPDATE=1 brew'
 elif [[ "$unamestr" == 'Linux' ]]; then
@@ -113,6 +115,12 @@ alias gcw='git commit -m "WIP"'
 alias gcm='git checkout master'
 alias gg='git add -A && gcw && git squash 2'
 alias gp='git pull'
+alias grm='git rebase master'
+alias gra='git rebase --abort'
+alias grc='git rebase --continue'
+alias gpom='git push origin master'
+alias gca='git commit --amend'
+alias gacw='git add . && gcw'
 
 # Set `indent` parameters according to Linux kernel Coding Style
 #alias indent='indent -kr -i8'
@@ -173,7 +181,7 @@ alias explorer='nautilus --no-desktop'
 
 # Markdown to PDF
 function md2pdf() {
-    pandoc $1 -o $1.pdf
+    pandoc -s -V papersize:a4 -V geometry:margin=1in --from gfm -o $1.pdf $1
     open $1.pdf
 }
 
@@ -450,7 +458,10 @@ alias di='sudo dnf install -y'
 alias ds='dnf search -C'
 alias dr='sudo dnf remove'
 
-alias ydl='youtube-dl'
+alias ydl='youtube-dl --no-playlist'
+alias ydlbest='ydl --format best'
+alias ydlworst='ydl --format worst'
+alias ydlaudio='youtube-dl --format best --extract-audio --audio-format mp3'
 
 # alias mvn='~/scripts/mvncolor.sh'
 
@@ -586,10 +597,10 @@ function vpn() {
     vpn_cmd="up"
     if [[ $(nmcli connection show --active | \grep VPN) ]]; then
         vpn_cmd="down";
-        fi;
+    fi;
 
-        nmcli connection $vpn_cmd id $vpn_conn | tr ' ' '\n' | \grep --color activated
-    }
+    nmcli connection $vpn_cmd id $vpn_conn | tr ' ' '\n' | \grep --color activated
+}
 
 function redshift_loc() {
     redshift-gtk -v -l $DEFAULT_COORDS;
@@ -712,8 +723,6 @@ function response_time() {
     curl -w "@"$FORMAT_PATH -o /dev/null -s $1;
 }
 
-alias yt='youtube-dl --extract-audio --audio-format mp3'
-
 alias vault=~/scripts/vault
 
 # Example
@@ -761,3 +770,135 @@ function diff {
 alias sizes='du -sh * | sort -hr'
 
 alias speedtest='curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -'
+
+function filename_without_extension() {
+    local full_path=$1
+    filename=$(basename -- "$full_path")
+    extension=$([[ "$filename" = *.* ]] && echo ".${filename##*.}" || echo '')
+    filename="${filename%.*}"
+    echo $filename
+}
+
+function filename_extension() {
+    local extension="${1##*.}"
+    echo $extension
+}
+
+# Converts SVG to PNG
+# Usage svgtopng input_image_path [output_image_height]
+function svgtopng() {
+    local filename=`filename_without_extension $1`
+    local output_filename=$filename.png
+    local output_image_height=${2:-32}
+    rsvg-convert -h $output_image_height $1 > "$output_filename" && echo "Succesfully created $output_filename" || echo "Error converting $1 to $output_filename"
+}
+
+function webptopng() {
+    local filename=`filename_without_extension $1`
+    local output_filename=$filename.png
+    local output_image_height=${2:-32}
+    dwebp $1 -o $output_filename
+}
+
+function pdftojpg() {
+    pdfimages -j $1 page
+}
+
+function android_update() {
+    android update sdk --no-ui
+}
+
+function last_modified_directory() {
+    echo `\ls -t | head -n 1`
+}
+
+function convert_all_files() {
+    local substitution="$1"
+    $BASH -c 'for filename in *;do mv $filename ${filename'"$substitution"'};done'
+}
+
+# Lowercase the first letter
+function lowercase_first_letter() {
+    convert_all_files ","
+}
+
+# Uppercase first letter
+function uppercase_first_letter() {
+    convert_all_files "^"
+}
+
+# Lowercase all letters
+function lowercase_all_letters() {
+    convert_all_files "m,"
+}
+
+# Uppercase all letters
+function uppercase_all_letters() {
+    convert_all_files "^^"
+}
+
+alias buildlib='cd ~/components-library ; npm run build && firebase deploy && npm run clean'
+alias mac_serial_number="system_profiler SPHardwareDataType | \grep '      Serial Number' | cut -d' ' -f 10 | pbcopy"
+
+function save_chrome_extension_list() {
+    local OUTPUT_FILE=~/scripts/chrome_extensions.txt
+    rm $OUTPUT_FILE;
+    EXT_DIR="/Users/`whoami`/Library/Application Support/Google/Chrome/Default/Extensions";
+    pushd $EXT_DIR
+    for f in `\ls */*/manifest.json`;do cat $f | jq -r '.name' >> $OUTPUT_FILE;done
+    popd
+    cat $OUTPUT_FILE
+}
+
+# Updates scripts repo with current date in the message
+# of the (possibly empty) commit
+function update_scripts_repo() {
+    pushd ~/scripts
+    git add .
+    git commit --allow-empty --message "Update "$(date +%d-%m-%Y)
+    git push origin
+    popd
+}
+
+alias nrs='npm run start';
+alias ys='yarn start'
+alias yi='yarn install'
+alias yt='yarn test'
+alias yc='yarn run clean'
+alias yrc='yarn run clean'
+
+function mcd() {
+    mkdir $1 && cd $1
+}
+
+alias npmu='npm install -g npm'
+
+# Clip first n seconds of the video
+# Usage:
+# clip_video_seconds filename.mp4 15
+function video_clip_seconds() {
+    local filename=`filename_without_extension $1`
+    local extension=`filename_extension $1`
+    ffmpeg -ss 00:00:00.0 -i $1 -c copy -t 00:00:`printf "%02d" $2`.0 $filename"_clipped."$extension
+}
+
+# Remove audio from the video
+function video_remove_audio() {
+    local filename=`filename_without_extension $1`
+    local extension=`filename_extension $1`
+    echo $extension
+    ffmpeg -i $1 -c copy -an $filename"_no_audio."$extension
+}
+
+alias yarnnoproxy='yarn --no-default-rc'
+
+alias rmrf='rm -rf'
+
+alias tmux2x2='tmux new-session \; split-window -v \; split-window -h \; select-pane -t 0 \; split-window -h\; select-pane -t 0;'
+
+alias removevpn='brew cask remove nordvpn'
+
+# macOS only
+alias flush_dns_cache='dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
+
+alias nvm_default='nvm alias default node'
