@@ -48,6 +48,9 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 # echo "Finder: show all filename extensions"
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
+# echo "Avoid creating .DS_Store files on network volumes"
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+
 # echo "show hidden files by default"
 defaults write com.apple.Finder AppleShowAllFiles -bool false
 
@@ -182,7 +185,7 @@ defaults write com.apple.dock tilesize -int 64
 defaults write com.apple.dock mineffect -string "scale"
 
 # Minimize windows into their application’s icon
-defaults write com.apple.dock minimize-to-application -bool true
+defaults write com.apple.dock minimize-to-application -bool false
 
 # Enable spring loading for all Dock items
 defaults write com.apple.dock enable-spring-load-actions-on-all-items -bool true
@@ -266,3 +269,23 @@ defaults write com.apple.dock wvous-bl-modifier -int 0
 
 # Disable floating thumbnail screenshot preview
 defaults write com.apple.screencapture show-thumbnail -bool FALSE
+
+function setup_menu_bar_date() {
+    defaults write com.apple.menuextra.clock IsAnalog -bool false
+    defaults write com.apple.menuextra.clock DateFormat -string "EEE d MMM HH:mm"
+    defaults write com.apple.menuextra.clock FlashDateSeparators -bool true
+    killall SystemUIServer
+}
+setup_menu_bar_date
+
+# Stop Safari 9 window closing when only pinned tabs are left
+defaults write com.apple.Safari NSUserKeyEquivalents -dict-add 'Close Tab' '<string>@w</string></dict>'
+defaults write com.apple.universalaccess com.apple.custommenu.apps -array-add '<string>com.apple.Safari</string>'
+killall Safari
+
+
+function disable_accesibility() {
+# Disable dictation popup
+defaults write com.apple.HIToolbox AppleDictationAutoEnable -int 1
+}
+disable_accesibility

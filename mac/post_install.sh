@@ -11,7 +11,15 @@ function app_id {
 # Usage:
 # set_wallpaper ~/Documents/wallpaper_evo_x_1.jpg
 function set_wallpaper() {
-    osascript -e "tell application \"System Events\" to tell every desktop to set picture to \"$1\""
+    echo "Changing wallpaper"
+    local wallpaper_file=$1
+    # TODO: check if file exists
+    if [ ! -f $1 ]; then
+        >&2 echo "Wallpaper file not found!"
+        return 1;
+    fi
+    local RESULT=`osascript -e "tell application \"System Events\" to tell every desktop to set picture to \"$wallpaper_file\""`
+    return $RESULT;
 }
 
 # Disabling the dialogs shown when opening an application for the first time
@@ -22,7 +30,9 @@ function disable_first_open_dialog() {
 }
 
 function symlink_vlc_rc() {
-    rm -f /Users/`whoami`/Library/Preferences/org.videolan.vlc/vlcrc
+    local VLC_CONFIG_DIR=~/Library/Preferences/org.videolan.vlc/vlcrc
+    rm -rf $VLC_CONFIG_DIR
+    mkdir -p $VLC_CONFIG_DIR
     ln -sf ~/dotfiles/vlcrc /Users/`whoami`/Library/Preferences/org.videolan.vlc/vlcrc
 }
 
@@ -50,6 +60,7 @@ function post_install() {
     # Make 'airport' command available
     sudo ln -fs /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport /usr/local/bin/airport
 
+    echo Configuring default applications for selected file types
     # Change default application for given file type
     if command_exists duti; then
         duti -s `app_id "PYM Player"`    .avi  all;
@@ -58,7 +69,7 @@ function post_install() {
         duti -s `app_id "TextMate"`      .txt  all;
         duti -s `app_id "TeXShop"`       .tex  all;
         duti -s `app_id "MacDown"`       .md   all;
-        duti -s `app_id "Google Chrome"` .webm all;
+        duti -s `app_id "VLC"`           .webm all;
         duti -s `app_id "LibreOffice"`   .xls  all;
         duti -s `app_id "LibreOffice"`   .xlsx all;
         # Won't work (for any application), see ~/scripts/default_browser_chrome.sh
