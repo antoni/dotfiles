@@ -11,13 +11,14 @@ function app_id {
 # Usage:
 # set_wallpaper ~/Documents/wallpaper_evo_x_1.jpg
 function set_wallpaper() {
-    echo "Changing wallpaper"
+    echo "Changing wallpaper to: $1"
     local wallpaper_file=$1
-    # TODO: check if file exists
+
     if [ ! -f $1 ]; then
-        >&2 echo "Wallpaper file not found!"
+        >&2 echo "Wallpaper file ($1) not found!"
         return 1;
     fi
+    
     local RESULT=`osascript -e "tell application \"System Events\" to tell every desktop to set picture to \"$wallpaper_file\""`
     return $RESULT;
 }
@@ -63,17 +64,19 @@ function post_install() {
     echo Configuring default applications for selected file types
     # Change default application for given file type
     if command_exists duti; then
-        duti -s `app_id "PYM Player"`    .avi  all;
-        duti -s `app_id "PYM Player"`    .mkv  all;
-        duti -s `app_id "PYM Player"`    .mp4  all;
-        duti -s `app_id "TextMate"`      .txt  all;
-        duti -s `app_id "TeXShop"`       .tex  all;
-        duti -s `app_id "MacDown"`       .md   all;
-        duti -s `app_id "VLC"`           .webm all;
-        duti -s `app_id "LibreOffice"`   .xls  all;
-        duti -s `app_id "LibreOffice"`   .xlsx all;
+        duti -s `app_id "PYM Player"`    .avi    all;
+        duti -s `app_id "PYM Player"`    .mkv    all;
+        duti -s `app_id "PYM Player"`    .mp4    all;
+        duti -s `app_id "TextMate"`      .txt    all;
+        duti -s `app_id "TeXShop"`       .tex    all;
+        duti -s `app_id "MacDown"`       .md     all;
+        duti -s `app_id "VLC"`           .webm   all;
+        duti -s `app_id "LibreOffice"`   .xls    all;
+        duti -s `app_id "LibreOffice"`   .xlsx   all;
         # Won't work (for any application), see ~/scripts/default_browser_chrome.sh
         # duti -s `app_id "*"`      .html all;
+        duti -s `app_id "TextMate"`      .lat    all;
+        duti -s `app_id "TextMate"`      .input  all;
     else
         printf "You have to install 'duti' first"
     fi
@@ -90,7 +93,7 @@ function post_install() {
     # install_hping
     symlink_vlc_rc
 
-    set_wallpaper ~/Documents/wallpaper_evo_x_1.jpg
+    set_wallpaper ~/dotfiles/wallpapers/january_suchodolski_bitwa_pod_somosierra.jpg
 
     echo Succesfully performed all post-install tasks
 }
