@@ -118,6 +118,7 @@ alias gp='git pull'
 alias grm='git rebase master'
 alias gra='git rebase --abort'
 alias grc='git rebase --continue'
+alias grs='git rebase --skip'
 alias gpom='git push origin master'
 alias gca='git commit --amend'
 alias gacw='git add . && gcw'
@@ -459,9 +460,11 @@ alias ds='dnf search -C'
 alias dr='sudo dnf remove'
 
 alias ydl='youtube-dl --no-playlist'
+
 alias ydlbest='ydl --format best'
 alias ydlworst='ydl --format worst'
 alias ydlaudio='youtube-dl --format best --extract-audio --audio-format mp3'
+alias ydlwl='ydl https://www.youtube.com/playlist?list=PLxEBYuU7ONUfj68kBjXfHaAutKqtgAc4s'
 
 # alias mvn='~/scripts/mvncolor.sh'
 
@@ -873,23 +876,6 @@ function mcd() {
 
 alias npmu='npm install -g npm'
 
-# Clip first n seconds of the video
-# Usage:
-# clip_video_seconds filename.mp4 15
-function video_clip_seconds() {
-    local filename=`filename_without_extension $1`
-    local extension=`filename_extension $1`
-    ffmpeg -ss 00:00:00.0 -i $1 -c copy -t 00:00:`printf "%02d" $2`.0 $filename"_clipped."$extension
-}
-
-# Remove audio from the video
-function video_remove_audio() {
-    local filename=`filename_without_extension $1`
-    local extension=`filename_extension $1`
-    echo $extension
-    ffmpeg -i $1 -c copy -an $filename"_no_audio."$extension
-}
-
 alias yarnnoproxy='yarn --no-default-rc'
 
 alias rmrf='rm -rf'
@@ -902,3 +888,4 @@ alias removevpn='brew cask remove nordvpn'
 alias flush_dns_cache='dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 
 alias nvm_default='nvm alias default node'
+alias nvm_current='nvm install node --reinstall-packages-from=$(nvm current)'
