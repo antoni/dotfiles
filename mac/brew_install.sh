@@ -4,6 +4,8 @@ dockutil
 gpg
 bat
 node
+wireguard-tools
+rtmpdump
 yarn
 xz
 ccat
@@ -12,11 +14,14 @@ blueutil
 sleepwatcher
 youtube-dl
 cocoapods
+entr
 pstree
 lastpass-cli
+libav
 coreutils
 rlwrap
 proxychains
+shellcheck
 tesseract-lang
 osquery
 httpie
@@ -156,12 +161,14 @@ java
 grammarly
 alfred
 macsvg
+mpv
 whatsapp
 inkscape
 snagit
 dropbox
 epic
 eclipse-jee
+viber
 atext
 visual-studio-code
 koa11y
@@ -225,7 +232,7 @@ slack
 wkhtmltopdf
 spectacle
 mysqlworkbench
-sublime
+sublime-text
 the-unarchiver
 virtualbox
 macvim
@@ -263,7 +270,7 @@ function scala_post_install() {
 }
 
 function vim_you_complete_me_install() {
-    cd ~/.vim/bundle/YouCompleteMe
+    cd ~/.vim/bundle/YouCompleteMe || exit 1
     ./install.py --clang-completer
 }
 
@@ -280,7 +287,7 @@ function mac_install_misc() {
     brew tap homebrew/services
 
     # Fonts
-    brew tap caskroom/fonts
+    brew tap homebrew/cask-fonts
     brew cask install \
         font-fira-code \
         font-fira-mono \
