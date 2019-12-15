@@ -259,7 +259,8 @@ function install_javascript_packages_npm() {
     npm install -g eslint lodash jshint typescript ts-node tslint prettier \
         http-server depcheck npm-check-updates prettier sort-package-json \
         babel-cli pm2@latest alfred-vpn firebase-tools tslint typescript \
-        @aws-amplify/cli pa11y netlify-cli hygen react-native-cli
+        @aws-amplify/cli pa11y netlify-cli hygen react-native-cli \
+        @zeplin/cli @zeplin/cli-connect-react-plugin @zeplin/cli-connect-swift-plugin
 }
 
 function install_airbnb_eslint() {
