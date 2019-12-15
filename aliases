@@ -407,7 +407,7 @@ alias autoremove='sudo apt-get autoremove'
 alias redisgui='redis-desktop-manager'
 
 function g++gtest() {
-    g++ -std=c++11 $1 -lgtest -lpthread && ./a.out
+g++ -std=c++11 $1 -lgtest -lpthread && ./a.out
 }
 
 # Links all .o files to make elf_i386 executable
@@ -540,7 +540,7 @@ function zip_and_move() {
 
 # Download .gitignore
 # Usage: gi language
-function gi() { 
+function gitignore() { 
     curl -L -s https://www.gitignore.io/api/$@ | awk 'NR>2 {print last} {last=$0}' | tee .gitignore;
 }
 
@@ -889,3 +889,8 @@ alias flush_dns_cache='dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 
 alias nvm_default='nvm alias default node'
 alias nvm_current='nvm install node --reinstall-packages-from=$(nvm current)'
+
+function mov2mp4() {
+    local filename=`filename_without_extension $1`
+    ffmpeg -i $filename.mov -vcodec h264 -acodec mp2 $filename.mp4
+}
