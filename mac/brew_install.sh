@@ -7,6 +7,7 @@ node
 wireguard-tools
 rtmpdump
 yarn
+sourcekitten
 xz
 ccat
 pass
