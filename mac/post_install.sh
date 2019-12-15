@@ -93,7 +93,7 @@ function post_install() {
     # install_hping
     symlink_vlc_rc
 
-    set_wallpaper ~/dotfiles/wallpapers/january_suchodolski_bitwa_pod_somosierra.jpg
+    set_wallpaper ~/dotfiles/wallpapers/synthwave_2.jpg
 
     echo Succesfully performed all post-install tasks
 }
