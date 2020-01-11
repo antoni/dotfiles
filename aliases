@@ -111,7 +111,7 @@ alias gitundocommit='git reset --soft HEAD~1'
 alias grb='git rebase master'
 alias gri='git rebase integration'
 alias gd='git diff'
-alias gcw='git commit -m "WIP"'
+alias gcw='git commit -m "WIP $(date)"'
 alias gcm='git checkout master'
 alias gg='git add -A && gcw && git squash 2'
 alias gp='git pull'
@@ -119,6 +119,7 @@ alias grm='git rebase master'
 alias gra='git rebase --abort'
 alias grc='git rebase --continue'
 alias grs='git rebase --skip'
+alias gsa='git stash apply'
 alias gpom='git push origin master'
 alias gca='git commit --amend'
 alias gacw='git add . && gcw'
@@ -464,7 +465,7 @@ alias ydl='youtube-dl --no-playlist'
 alias ydlbest='ydl --format best'
 alias ydlworst='ydl --format worst'
 alias ydlaudio='youtube-dl --format best --extract-audio --audio-format mp3'
-alias ydlwl='ydl https://www.youtube.com/playlist?list=PLxEBYuU7ONUfj68kBjXfHaAutKqtgAc4s'
+alias ydlwl='cd ~/Downloads/watch && ydl https://www.youtube.com/playlist?list=PLxEBYuU7ONUfj68kBjXfHaAutKqtgAc4s'
 
 # alias mvn='~/scripts/mvncolor.sh'
 
@@ -788,12 +789,12 @@ function filename_extension() {
 }
 
 # Converts SVG to PNG
-# Usage svgtopng input_image_path [output_image_height]
-function svgtopng() {
+# Usage svg_to_png input_image_path [output_image_height]
+function svg_to_png() {
     local filename=`filename_without_extension $1`
     local output_filename=$filename.png
     local output_image_height=${2:-32}
-    rsvg-convert -h $output_image_height $1 > "$output_filename" && echo "Succesfully created $output_filename" || echo "Error converting $1 to $output_filename"
+    rsvg-convert -h $output_image_height $1 > "$output_filename" && echo "Successfully created $output_filename" || echo "Error converting $1 to $output_filename"
 }
 
 function webptopng() {
@@ -893,4 +894,13 @@ alias nvm_current='nvm install node --reinstall-packages-from=$(nvm current)'
 function mov2mp4() {
     local filename=`filename_without_extension $1`
     ffmpeg -i $filename.mov -vcodec h264 -acodec mp2 $filename.mp4
+}
+
+
+# Rmove part of filename in each file in a directory
+function remove_filename_part() {
+    for filename in *; do 
+        [ -f "$filename" ] || continue
+        mv "$filename" "${filename//$1/}"
+    done
 }

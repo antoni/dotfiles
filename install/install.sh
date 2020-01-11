@@ -257,7 +257,7 @@ function install_npm() {
 
 function install_javascript_packages_npm() {
     npm install -g eslint lodash jshint typescript ts-node tslint prettier \
-        http-server depcheck npm-check-updates prettier sort-package-json \
+        http-server http-server-spa json-server depcheck npm-check-updates prettier sort-package-json \
         babel-cli pm2@latest alfred-vpn firebase-tools tslint typescript \
         @aws-amplify/cli pa11y netlify-cli hygen react-native-cli \
         @zeplin/cli @zeplin/cli-connect-react-plugin @zeplin/cli-connect-swift-plugin
@@ -271,6 +271,13 @@ function install_airbnb_eslint() {
 
 function install_global_haskell_stack_packages() {
   stack install alex happy hindent haddock hspec
+}
+
+# TODO: macOS only
+# TODO: Download DMG, then use it
+function install_java_8() {
+  sudo hdiutil attach ~/scripts/java/jdk-8u231-macosx-x64.dmg
+  sudo installer -package /Volumes/JDK\ 8\ Update\ 231/JDK\ 8\ Update\ 231.pkg -target /                                                               
 }
 
 main

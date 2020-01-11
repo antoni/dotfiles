@@ -285,7 +285,10 @@ killall Safari
 
 
 function disable_accesibility() {
-# Disable dictation popup
-defaults write com.apple.HIToolbox AppleDictationAutoEnable -int 1
+    # Disable dictation popup
+    defaults write com.apple.HIToolbox AppleDictationAutoEnable -int 1
 }
 disable_accesibility
+
+# disable the red Software Update notification bubble on the System Preferences app
+defaults write com.apple.systempreferences AttentionPrefBundleIDs 0
