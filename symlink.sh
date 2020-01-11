@@ -210,10 +210,10 @@ fi
 
 case "$(uname -s)" in
     Darwin)
-        ln -fs ${DOTFILES_DIR}/dotfiles/vscode.json $HOME/Library/Application\ Support/Code/User/settings.json
+        ln -fs ${DOTFILES_DIR}/vscode.json $HOME/Library/Application\ Support/Code/User/settings.json
         ;;
     Linux)
-        ln -fs ${DOTFILES_DIR}/dotfiles/vscode.json $HOME/.config/Code/User/settings.json
+        ln -fs ${DOTFILES_DIR}/vscode.json $HOME/.config/Code/User/settings.json
         ;;
     CYGWIN*|MINGW32*|MSYS*) # MS Windows
         ;;
