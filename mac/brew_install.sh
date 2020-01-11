@@ -8,16 +8,20 @@ wireguard-tools
 rtmpdump
 yarn
 sourcekitten
+fontforge
 xz
+dvc
 ccat
 pass
 blueutil
+brightness
 sleepwatcher
 youtube-dl
 cocoapods
 entr
 pstree
 lastpass-cli
+scala
 libav
 coreutils
 rlwrap
@@ -161,14 +165,19 @@ clion
 java
 grammarly
 alfred
+spotify
 macsvg
 mpv
 whatsapp
+imageoptim
 inkscape
+thunderbird
 snagit
 dropbox
 epic
+tex-live-utility
 eclipse-jee
+android-file-transfer
 viber
 atext
 visual-studio-code
@@ -179,6 +188,7 @@ xmind-zen
 jetbrains-toolbox
 atom
 private-eye
+fontforge
 opera-developer
 macpass
 transmission-remote-gui
@@ -209,7 +219,7 @@ owasp-zap
 evernote
 the-unarchiver
 firefox
-#google-chrome
+# google-chrome
 google-chrome-canary
 google-drive-file-stream
 macdown
