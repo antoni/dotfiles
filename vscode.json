@@ -5,8 +5,7 @@
     "editor.rulers": [ 80 ],
     "editor.tabSize": 2,
     "files.trimTrailingWhitespace": true,
-    "files.autoSave": "onFocuesChange",
-    "editor.renderWhitespace": true,
+    "files.autoSave": "onFocusChange",
     "align.leftSeparators": [],
     "align.rightSeparators": [
       ":",
