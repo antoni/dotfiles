@@ -260,7 +260,8 @@ function install_javascript_packages_npm() {
         http-server http-server-spa json-server depcheck npm-check-updates prettier sort-package-json \
         babel-cli pm2@latest alfred-vpn firebase-tools tslint typescript \
         @aws-amplify/cli pa11y netlify-cli hygen react-native-cli \
-        @zeplin/cli @zeplin/cli-connect-react-plugin @zeplin/cli-connect-swift-plugin
+        @zeplin/cli @zeplin/cli-connect-react-plugin @zeplin/cli-connect-swift-plugin \
+        yo generator-office
 }
 
 function install_airbnb_eslint() {
