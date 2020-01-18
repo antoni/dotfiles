@@ -292,3 +292,10 @@ disable_accesibility
 
 # disable the red Software Update notification bubble on the System Preferences app
 defaults write com.apple.systempreferences AttentionPrefBundleIDs 0
+
+# Disable "Ask Siri"
+defaults write com.apple.assistant.support "Assistant Enabled" -bool false
+
+# Remove siri icon from status menu
+defaults write com.apple.Siri StatusMenuVisible -bool false
+
