@@ -9,7 +9,6 @@ declare -A ENTRY_TO_LOCATION=(
         [Desktop]=file:///Users/antek.ff_fra/Desktop/
         [Pictures]=file:///Pictures/
         [Music]=file:///Users/antek.ff_fra/Music/
-        [idfc]=file:///Users/antek.ff_fra/Dropbox/idfc/
         [Downloads]=file:///Users/antek.ff_fra/Downloads/
         [Test]=file:///Users/antek.ff_fra/Downloads/pendulum/
         [Documents]=file:///Users/antek.ff_fra/Documents/
