@@ -69,7 +69,7 @@ alias rpm='sudo rpm'
 # System commands
 alias free='free -h'
 
-alias wgetdir='wget -r --no-parent '
+alias wgetdir='wget --recursive --no-parent '
 
 # Programming etc.
 alias m='make'
@@ -184,6 +184,11 @@ alias explorer='nautilus --no-desktop'
 # Markdown to PDF
 function md2pdf() {
     pandoc -s -V papersize:a4 -V geometry:margin=1in --from gfm -o $1.pdf $1
+    open $1.pdf
+}
+
+function rst2pdf() {
+    pandoc -s -V papersize:a4 -V geometry:margin=1in --from rst -o $1.pdf $1
     open $1.pdf
 }
 
@@ -460,12 +465,17 @@ alias di='sudo dnf install -y'
 alias ds='dnf search -C'
 alias dr='sudo dnf remove'
 
-alias ydl='youtube-dl --no-playlist'
+alias ydl='youtube-dl --no-playlist --no-mtime'
 
 alias ydlbest='ydl --format best'
 alias ydlworst='ydl --format worst'
 alias ydlaudio='youtube-dl --format best --extract-audio --audio-format mp3'
-alias ydlwl='cd ~/Downloads/watch && ydl https://www.youtube.com/playlist?list=PLxEBYuU7ONUfj68kBjXfHaAutKqtgAc4s'
+
+function ydlwl() {
+    pushd ~/Documents/watch 
+    ydl --ignore-errors https://www.youtube.com/playlist?list=PLxEBYuU7ONUfj68kBjXfHaAutKqtgAc4s
+    popd
+}
 
 # alias mvn='~/scripts/mvncolor.sh'
 
@@ -883,7 +893,7 @@ alias rmrf='rm -rf'
 
 alias tmux2x2='tmux new-session \; split-window -v \; split-window -h \; select-pane -t 0 \; split-window -h\; select-pane -t 0;'
 
-alias removevpn='brew cask remove nordvpn'
+alias removevpn='brew cask remove nordvpn || brew cask install nordvpn'
 
 # macOS only
 alias flush_dns_cache='dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
@@ -896,11 +906,26 @@ function mov2mp4() {
     ffmpeg -i $filename.mov -vcodec h264 -acodec mp2 $filename.mp4
 }
 
-
-# Rmove part of filename in each file in a directory
+# Remove part of filename in each file in a directory
 function remove_filename_part() {
     for filename in *; do 
         [ -f "$filename" ] || continue
         mv "$filename" "${filename//$1/}"
     done
 }
+
+# Prints the lsof entry of the process that listens on a given port
+# Usage:
+#   listening firefox
+#   listening 8080
+function listening() {
+    if [ $# -eq 0 ]; then
+        sudo lsof -iTCP -sTCP:LISTEN -n -P
+    elif [ $# -eq 1 ]; then
+        sudo lsof -iTCP -sTCP:LISTEN -n -P | grep -i --color $1
+    else
+        echo "Usage: listening [pattern]"
+    fi
+}
+
+alias instagram_dl='instalooter user'

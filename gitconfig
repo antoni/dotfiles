@@ -79,6 +79,7 @@
     ff = only
 [http]
     proxy = 
+	sslVerify = false
 [https]
     proxy = 
 [commit]
