@@ -42,8 +42,8 @@ echo -e "${colors[White]}"
 
 DOTFILES=(profile bashrc zshrc vimrc paths aliases bash_profile common_profile.sh tmux.conf \
     gitconfig gitignore ghci gvimrc hgrc lldbinit gdbinit xbindkeysrc \
-    optional.sh fzf.sh psqlrc colordiffrc emacs \
-    jupyter) # Directories
+    optional.sh fzf.sh psqlrc colordiffrc emacs inputrc \
+    jupyter newsboat) # Directories
 
 function mac_change_hostname() {
     # Fully qualified hostname, for example myMac.domain.com
@@ -67,6 +67,11 @@ function mac_symlink() {
 
     # TextMate
     sudo ln -fs /Applications/TextMate.app/Contents/Resources/mate /usr/local/bin/mate
+
+    # VLC
+    mkdir -p ~/Library/Preferences/org.videolan.vlc
+    cp -fs ${DOTFILES_DIR}/vlcrc ~/Library/Preferences/org.videolan.vlc/vlcrc
+    echo "NOTE: When updating preferences, VLC doesn't modify the existing vlcrc, instead it deletes the last and creates a new one. Instead of symlinking, the ~/dotfiles/vlcrc has been copied"
 }
 
 # TODO: Use it in Linux section

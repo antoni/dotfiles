@@ -154,7 +154,8 @@ function install_fzf() {
 function install_pip_packages() {
     # PIP packages
     PIP_PACKAGES=(pgcli mycli pyyaml awscli speedtest-cli pika autopep8 pep8 \
-        jupyter dl_coursera z3-solver matplotlib tensorflow numpy agda-kernel pirate-get)
+        jupyter dl_coursera z3-solver matplotlib tensorflow numpy agda-kernel \
+        instalooter pirate-get tensorflow opencv-python)
             # Use xargs, so that PIP doesn't fail on a single error
             cat requirements.txt | xargs -n 1 pip install --user
             cat requirements.txt | xargs -n 1 pip install --user
@@ -261,7 +262,7 @@ function install_javascript_packages_npm() {
         babel-cli pm2@latest alfred-vpn firebase-tools tslint typescript \
         @aws-amplify/cli pa11y netlify-cli hygen react-native-cli \
         @zeplin/cli @zeplin/cli-connect-react-plugin @zeplin/cli-connect-swift-plugin \
-        yo generator-office
+        yo generator-office dts-gen yargs rollup pnpm 
 }
 
 function install_airbnb_eslint() {
