@@ -299,3 +299,37 @@ defaults write com.apple.assistant.support "Assistant Enabled" -bool false
 # Remove siri icon from status menu
 defaults write com.apple.Siri StatusMenuVisible -bool false
 
+# Office add-ins development
+
+defaults write com.microsoft.Word CEFRuntimeLoggingFile -string "runtime_logs.txt"
+defaults write com.microsoft.Excel CEFRuntimeLoggingFile -string "runtime_logs.txt"
+defaults write com.microsoft.Powerpoint CEFRuntimeLoggingFile -string "runtime_logs.txt"
+defaults write com.microsoft.Outlook CEFRuntimeLoggingFile -string "runtime_logs.txt"
+# open ~/library/Containers/com.microsoft.Word/Data/runtime_logs.txt
+
+defaults write com.microsoft.Word OfficeWebAddinDeveloperExtras -bool true
+defaults write com.microsoft.Excel OfficeWebAddinDeveloperExtras -bool true
+defaults write com.microsoft.Powerpoint OfficeWebAddinDeveloperExtras -bool true
+defaults write com.microsoft.Outlook OfficeWebAddinDeveloperExtras -bool true
+
+# Enable the Develop menu and the Web Inspector
+defaults write com.apple.Safari ShowDevelopMenu -bool true
+defaults write com.apple.Safari IncludeDevelopMenu -bool true
+defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
+
+# Play user interface sound effects: false
+defaults write com.apple.systemsound "com.apple.sound.uiaudio.enabled" -integer 0
+defaults write com.apple.systemsound "com.apple.sound.uiaudio.enabled" -bool false
+
+# Play feedback when volume is changed: false
+defaults write -g "com.apple.sound.beep.feedback" -integer 0
+defaults write -g "com.apple.sound.beep.feedback" -bool false
+
+killall -HUP SystemUIServer
+
+# No Mac startup sound
+sudo nvram SystemAudioVolume=" "
+
+# Chrome
+defaults write com.google.Chrome ExternalProtocolDialogShowAlwaysOpenCheckbox -bool true

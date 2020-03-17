@@ -1,4 +1,5 @@
 BREW_PACKAGES=(mongodb
+ascii
 mas
 dockutil
 gpg
@@ -14,6 +15,7 @@ dvc
 ccat
 pass
 blueutil
+newsboat
 brightness
 sleepwatcher
 youtube-dl
@@ -25,6 +27,7 @@ scala
 libav
 coreutils
 rlwrap
+rdiff-backup
 proxychains
 shellcheck
 tesseract-lang
@@ -33,6 +36,8 @@ httpie
 poppler
 gnu-sed
 ghostscript
+swi-prolog
+gnu-smalltalk
 wine
 pwgen
 wget
@@ -116,6 +121,7 @@ rlwrap
 tig
 nmap
 vim
+nnn
 emacs
 git-crypt
 speedtest_cli
@@ -159,10 +165,13 @@ gradle
 
 BREW_CASK_PACKAGES=(texshop
 caffeine
+bitwarden
 rstudio
 elmedia-player
 clion
+bitwarden
 java
+imazing
 grammarly
 alfred
 spotify
@@ -170,6 +179,7 @@ macsvg
 mpv
 whatsapp
 imageoptim
+squeak
 inkscape
 thunderbird
 snagit

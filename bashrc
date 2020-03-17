@@ -129,3 +129,5 @@ source $HOME/.paths
 source $HOME/.aliases
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+export ARTIFACTORY_NPM_TOKEN=""""
