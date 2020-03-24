@@ -179,6 +179,7 @@ macsvg
 mpv
 whatsapp
 imageoptim
+balenaetcher
 squeak
 inkscape
 thunderbird
@@ -189,6 +190,7 @@ tex-live-utility
 eclipse-jee
 android-file-transfer
 viber
+gimp
 atext
 visual-studio-code
 koa11y
