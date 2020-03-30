@@ -178,6 +178,7 @@ spotify
 macsvg
 mpv
 whatsapp
+skype-for-business
 imageoptim
 balenaetcher
 squeak
