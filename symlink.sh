@@ -253,10 +253,9 @@ function setup_hostname() {
     echo -en "${colors[BGreen]}Enter hostname for the current machine [$hostname_default]:${colors[White]} "
     read hostname
     hostname=${hostname:-$hostname_default}
-    # TODO: OS check
+    # TODO: OS check, then uncomment
     # hostnamectl set-hostname $hostname
-
-    mac_change_hostname $hostname
+    # mac_change_hostname $hostname
 
     print_success_message "Hostname changed to: $hostname"
 }
