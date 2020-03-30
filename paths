@@ -39,7 +39,8 @@ export PATH=$ANDROID_HOME/platform-tools:$PATH
 export PATH=$ANDROID_HOME/build-tools/19.1.0:$PATH
 
 # LLVM (macOS)
-export PATH="$(brew --prefix llvm)/bin:$PATH"
+# TODO: Add macOS check
+#export PATH="$(brew --prefix llvm)/bin:$PATH"
 
 # Haskell Stack global executables
 export PATH=~/.local/bin:$PATH

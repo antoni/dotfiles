@@ -113,9 +113,5 @@ export ANDROID_NDK_HOME=/usr/local/opt/android-ndk
 # SDK Man replaced GVM. Using for Groovy, Gradle, and Maven Version Management
 # export SDKMAN_DIR="$HOME/.sdkman"
 # [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-#
-# # NVM
-export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
 
 export ARTIFACTORY_NPM_TOKEN=""""
