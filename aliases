@@ -906,6 +906,14 @@ function mov2mp4() {
     ffmpeg -i $filename.mov -vcodec h264 -acodec mp2 $filename.mp4
 }
 
+# Rename  part of filename in each file in a directory
+function rename_filename_part() {
+    for filename in *; do 
+        [ -f "$filename" ] || continue
+        mv "$filename" "${filename/$1/$2}"
+    done
+}
+
 # Remove part of filename in each file in a directory
 function remove_filename_part() {
     for filename in *; do 
