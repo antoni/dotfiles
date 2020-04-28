@@ -174,11 +174,13 @@ java
 imazing
 grammarly
 alfred
+steam
 spotify
 macsvg
 mpv
 whatsapp
 skype-for-business
+telegram
 imageoptim
 balenaetcher
 squeak
