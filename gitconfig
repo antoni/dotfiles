@@ -6,7 +6,7 @@
     autosetupmerge = true
 [color]
 	branch = always
-	; diff = always
+    diff = always
 	status = always
 	ui = auto
 	interactive = always
@@ -52,14 +52,14 @@
     change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch -f --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f "
     # Usage: git squash [n], n - number of last commits to be squashed
     squash = "!f(){ git reset --soft HEAD~${1} && git commit --no-verify --edit -m\"$(git log --format=%B --reverse HEAD..HEAD@{1})\"; };f"
+    # Commit, then squash current changes with previous commmit
+    squash-two = "!export MSG=`git log -1 --pretty=%B | cat` ; git add . ; git reset --soft 'HEAD^' ; git commit --message $MSG"
     # Usage:
         # $ git prevision <N> <filename>
         # will checkout the <N>th revision (counting backwards from HEAD) into the history of the file <filename>.
         #
         # For example to checkout the immediate previous version of a file x/y/z.c use
         # $ git prevision -1 x/y/z.c
-    # Commit, then squash current changes with previous commmit
-    squash-two = "!export MSG=`git log -1 --pretty=%B | cat` ; git add . ; git reset --soft 'HEAD^' ; git commit -m $MSG"
     prevision = "!f() { git checkout `git log --oneline $2 |  awk -v commit="$1" 'FNR == -commit+1 {print $1}'` $2;};f"
     # Reset single file to HEAD
     reset-file = "git checkout HEAD -- "
@@ -73,6 +73,7 @@
 	grog = log --graph --abbrev-commit --decorate --all --format=format:\"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(dim white) - %an%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)\"
 [push]
 	default = matching
+	followTags = true
 ; [pull]
     ; rebase = true
 [merge]

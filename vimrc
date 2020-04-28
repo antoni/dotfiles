@@ -34,7 +34,9 @@ syntax on                     " Syntax colouring
 set pastetoggle=<F12>         " pastetoggle (sane indentation on pastes)
 set ruler                     " Show ruler on the bottom
 set virtualedit=onemore
-" set textwidth=80
+" See: https://unix.stackexchange.com/a/333659/20334
+set wrap formatoptions<
+" set textwidth=0
 " set formatoptions+=w          " gggqG - format to break after 80 characters
 " set wrapmargin=2
 set wrap " don't wrap lines in Insert mode (visual wrapping only)
@@ -466,6 +468,11 @@ Plugin 'tacahiroy/ctrlp-funky'
 " Bundle 'lervag/vim-latex'
 " Plugin 'jamis/fuzzy_file_finder'
 " Plugin 'jamis/fuzzyfinder_textmate'
+" Git commits "{{{
+" Allow longer commit message titles (default: 72)
+autocmd Filetype gitcommit setlocal spell textwidth=256
+" "}}}
+" "}
 " Snippets {{{
 Bundle 'ervandew/supertab'
 " Plugin 'SirVer/ultisnips'
@@ -484,7 +491,7 @@ filetype plugin indent on    " required
 " 4.  UI {{{
 " GVim "{{{
 if os == "Darwin"
-set guifont=Monaco:h18
+    set guifont=Monaco:h18
 endif
 set guioptions=a
 ""}}}
@@ -618,10 +625,6 @@ augroup Binary
     au BufWritePost *.bin,*.evm if &bin | %!xxd
     au BufWritePost *.bin,*.evm set nomod | endif
 augroup END
-""}}}
-" Git commits "{{{
-" Cut commit messsages
-" autocmd Filetype gitcommit setlocal spell textwidth=72
 ""}}}
 " Haskell "{{{
 autocmd BufEnter *.hs set formatprg=pointfree
@@ -980,5 +983,5 @@ let g:tagbar_type_go = {
             \ 'ctagsbin'  : 'gotags',
             \ 'ctagsargs' : '-sort -silent'
             \ }
- "}}}
+"}}}
 let g:go_version_warning = 0
