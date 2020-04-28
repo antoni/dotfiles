@@ -70,7 +70,7 @@ function mac_symlink() {
 
     # VLC
     mkdir -p ~/Library/Preferences/org.videolan.vlc
-    cp -fs ${DOTFILES_DIR}/vlcrc ~/Library/Preferences/org.videolan.vlc/vlcrc
+    cp -f ${DOTFILES_DIR}/vlcrc ~/Library/Preferences/org.videolan.vlc/vlcrc
     echo "NOTE: When updating preferences, VLC doesn't modify the existing vlcrc, instead it deletes the last and creates a new one. Instead of symlinking, the ~/dotfiles/vlcrc has been copied"
 }
 
@@ -93,6 +93,10 @@ done;
 # Terminator
 mkdir -p ~/.config/terminator
 ln -fs ${DOTFILES_DIR}/terminator/config ~/.config/terminator/config
+
+# irssi
+mkdir -p ~/.irssi
+ln -fs ${DOTFILES_DIR}/irssi.config ~/.irssi/config
 
 # Alacritty
 mkdir -p ~/.config/alacritty

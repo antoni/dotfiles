@@ -737,8 +737,6 @@ function response_time() {
     curl -w "@"$FORMAT_PATH -o /dev/null -s $1;
 }
 
-alias vault=~/scripts/vault
-
 # Example
 # how_in bash get length of array
 function how_in() { where="$1"; shift;IFS=+ curl "https://cht.sh/$where/ $*"; }
@@ -762,6 +760,8 @@ new_sha="$(git log --format="%H" -n 1)"
 git checkout "$current_branch"
 git rebase --onto "$new_sha" "$apply_to"
 )
+
+alias pr='~/scripts/pull_request.sh'
 
 alias bci='brew cask install'
 # Usage openssl_website google.com:80
