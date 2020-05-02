@@ -762,6 +762,7 @@ git rebase --onto "$new_sha" "$apply_to"
 )
 
 alias pr='~/scripts/pull_request.sh'
+alias pr_merge='~/scripts/pull_request_merge.sh'
 
 alias bci='brew cask install'
 # Usage openssl_website google.com:80
