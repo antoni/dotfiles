@@ -15,4 +15,3 @@ Host *
     User antoni
     LogLevel ERROR
 
-Include caracas.sshconfig
