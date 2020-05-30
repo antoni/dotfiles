@@ -4,6 +4,10 @@
     "editor.fontSize": 11,
     "editor.rulers": [ 80 ],
     "editor.tabSize": 2,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    },
     "files.trimTrailingWhitespace": true,
     "files.autoSave": "onFocusChange",
     "align.leftSeparators": [],
