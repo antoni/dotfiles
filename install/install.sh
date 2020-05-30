@@ -187,7 +187,7 @@ function install_pip_packages() {
     # PIP packages
     PIP_PACKAGES=(pgcli mycli pyyaml awscli speedtest-cli pika autopep8 pep8 \
         jupyter dl_coursera z3-solver matplotlib tensorflow numpy agda-kernel \
-        instalooter pirate-get tensorflow opencv-python)
+        instalooter pirate-get tensorflow opencv-python virtualenv)
     # Use xargs, so that PIP doesn't fail on a single error
     cat requirements.txt | xargs -n 1 pip install --user
     cat requirements.txt | xargs -n 1 pip install --user
@@ -294,7 +294,7 @@ function install_javascript_packages_npm() {
     npm install -g eslint lodash jshint typescript ts-node tslint prettier \
         http-server http-server-spa json-server depcheck npm-check-updates prettier sort-package-json \
         babel-cli pm2@latest alfred-vpn firebase-tools tslint typescript \
-        @aws-amplify/cli pa11y netlify-cli hygen react-native-cli \
+        @aws-amplify/cli pa11y netlify-cli hygen react-native-cli serve \
         @zeplin/cli @zeplin/cli-connect-react-plugin @zeplin/cli-connect-swift-plugin \
         yo generator-office dts-gen yargs rollup pnpm source-map-explorer
 }

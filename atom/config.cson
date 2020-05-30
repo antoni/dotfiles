@@ -1,4 +1,7 @@
 "*":
+  "agda-mode":
+    agdaPath: "/usr/local/bin/agda                     "
+    maxBodyHeight: 102
   core:
     customFileTypes:
       "source.ini": [
@@ -21,7 +24,9 @@
     ]
   editor:
     fontFamily: "Inconsolata"
+    fontSize: 21
     invisibles: {}
+    scrollPastEnd: true
   "exception-reporting":
     userId: "cea9446d-6db1-9ae1-30db-0ab66ba561d8"
   "sync-settings":
