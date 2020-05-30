@@ -26,6 +26,9 @@
     whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
 	excludesfile = ~/.gitignore
 	editor = vi
+    pager = delta --plus-color="#012800" --minus-color="#340001" --theme='zenburn'
+[interactive]
+    diffFilter = delta --color-only
 [alias]
     st = status --short --branch
     ct = commit
