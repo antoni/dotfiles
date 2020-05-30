@@ -938,3 +938,6 @@ function listening() {
 }
 
 alias instagram_dl='instalooter user'
+
+# macOS
+alias change_main_screen='~/scripts/hmscreens -setMainID `~/scripts/hmscreens -info | \grep "Screen ID:" | head -2 | tail -1 | sed "s/[^0-9]*//g"`'

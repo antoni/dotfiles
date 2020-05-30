@@ -5,6 +5,7 @@ dockutil
 gpg
 bat
 node
+eth-p/software/bat-extras
 wireguard-tools
 rtmpdump
 yarn
@@ -12,6 +13,7 @@ sourcekitten
 fontforge
 xz
 dvc
+docker
 ccat
 pass
 blueutil
@@ -122,7 +124,6 @@ tig
 nmap
 vim
 nnn
-emacs
 git-crypt
 speedtest_cli
 aws-shell
@@ -168,19 +169,27 @@ caffeine
 bitwarden
 rstudio
 elmedia-player
+atom
 clion
 bitwarden
 java
+emacs
 imazing
+aquamacs
 grammarly
+obs
 alfred
+qlstephen
+starcraft
 steam
+qlcolorcode
 spotify
 macsvg
 mpv
 whatsapp
 skype-for-business
 telegram
+epic-games
 imageoptim
 balenaetcher
 squeak
@@ -194,6 +203,7 @@ eclipse-jee
 android-file-transfer
 viber
 gimp
+hopper-debugger-server
 atext
 visual-studio-code
 koa11y
@@ -205,6 +215,7 @@ atom
 private-eye
 fontforge
 opera-developer
+pharo-project/pharo/pharo-launcher
 macpass
 transmission-remote-gui
 kitematic 
@@ -318,6 +329,7 @@ function mac_install_misc() {
         font-fira-code \
         font-fira-mono \
         font-fira-mono-for-powerline \
+        font-inconsolata \
         font-fira-sans
 
     sdk_man_install
