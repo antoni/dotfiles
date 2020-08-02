@@ -39,7 +39,7 @@ xclip redshift-gtk texlive-latex-bin-bin ghc-compiler cabal-install R-devel dnf-
 RXVT=(rxvt-unicode rxvt-unicode-ml rxvt-unicode-256color rxvt-unicode-256color-ml)
 
 DEBIAN=(imagemagick python-dev libxml2-dev libxslt-dev)
-UBUNTU=(libboost-all-dev linux-tools ghc software-properties-common libappindicator-dev vpnc-scripts network-manager-vpnc network-manager-vpnc-gnome exfat-fuse exfat-utils libnotify-bin libboost-all-dev linux-tools terminator fonts-firacode dwm suckless-tools xdm dmenu xorg gnome kde-full)
+UBUNTU=(libboost-all-dev linux-tools ghc software-properties-common libappindicator-dev vpnc-scripts network-manager-vpnc network-manager-vpnc-gnome exfat-fuse exfat-utils libnotify-bin libboost-all-dev linux-tools terminator fonts-firacode dwm suckless-tools xdm dmenu xorg gnome kde-full ntfs-3g swig libpcsclite-dev pcscd)
 
 KERNEL_DEV=(cscope exuberant-ctags)
 
@@ -187,7 +187,9 @@ function install_pip_packages() {
     # PIP packages
     PIP_PACKAGES=(pgcli mycli pyyaml awscli speedtest-cli pika autopep8 pep8 \
         jupyter dl_coursera z3-solver matplotlib tensorflow numpy agda-kernel \
-        instalooter pirate-get tensorflow opencv-python virtualenv)
+        instalooter pirate-get tensorflow opencv-python virtualenv numpy \
+        matplotlib protobuf)
+
     # Use xargs, so that PIP doesn't fail on a single error
     cat requirements.txt | xargs -n 1 pip install --user
     cat requirements.txt | xargs -n 1 pip install --user

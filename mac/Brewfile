@@ -232,6 +232,8 @@ cask "caskroom/versions/opera-developer"
 cask "caskroom/versions/safari-technology-preview"
 
 mas "Amphetamine", id: 937984704
+# mas install 408981434 #iMovie (10.1.8)
+mas "iMovie ", id: 408981434 
 mas "Gapplin", id: 768053424
 mas "GarageBand", id: 682658836
 mas "Todoist", id: 585829637
