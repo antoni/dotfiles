@@ -333,3 +333,8 @@ sudo nvram SystemAudioVolume=" "
 
 # Chrome
 defaults write com.google.Chrome ExternalProtocolDialogShowAlwaysOpenCheckbox -bool true
+
+# Bluetooth
+sudo defaults write bluetoothaudiod "Enable AptX codec" -bool true
+sudo defaults write bluetoothaudiod "Enable AAC codec" -bool true
+

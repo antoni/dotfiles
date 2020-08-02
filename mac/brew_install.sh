@@ -12,13 +12,17 @@ yarn
 sourcekitten
 fontforge
 xz
+dnsmasq
 dvc
 docker
 ccat
 pass
 blueutil
+rtorrent
 newsboat
 brightness
+otx
+class-dump
 sleepwatcher
 youtube-dl
 cocoapods
@@ -154,14 +158,16 @@ maven
 rabbitmq
 erlang
 mc
-optipng
-jpeg
-jpegoptim
 vitorgalvao/tiny-scripts/cask-repair
 amiaopensource/amiaos/decklinksdk
 mitmproxy
 ant
 gradle
+# Image optimization
+optipng
+pngcrush
+jpeg
+jpegoptim
 )
 
 BREW_CASK_PACKAGES=(texshop
@@ -173,14 +179,24 @@ atom
 clion
 bitwarden
 java
+stretchly
 emacs
+filebot
+namebench
+little-snitch
 imazing
+github
 aquamacs
+autojump
+visual-studio
 grammarly
+enolsoft-chm-view
 obs
+livereload
 alfred
 qlstephen
 starcraft
+karabiner-elements
 steam
 qlcolorcode
 spotify
@@ -347,6 +363,8 @@ function mac_install_misc() {
     # Dart langauge
     brew tap dart-lang/dart
     brew install dart
+
+    install_fuse
 }
 
 function install_cargo() {

@@ -383,7 +383,7 @@ Plugin 'majutsushi/tagbar'
 " Bundle 'taku-o/vim-vis'
 " Bundle 'rking/ag.vim'
 Bundle 'jamessan/vim-gnupg'
-Bundle 'Raimondi/delimitMate'
+" Bundle 'Raimondi/delimitMate'
 Bundle 'digitalrounin/vim-yaml-folds'
 " *LEARN*
 " Bundle 'terryma/vim-multiple-cursors'
