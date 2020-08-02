@@ -77,8 +77,8 @@
 [push]
 	default = matching
 	followTags = true
-; [pull]
-    ; rebase = true
+[pull]
+    rebase = true
 [merge]
     ff = only
 [http]
