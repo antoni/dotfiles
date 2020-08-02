@@ -70,6 +70,17 @@ alias rpm='sudo rpm'
 alias free='free -h'
 
 alias wgetdir='wget --recursive --no-parent '
+function wgetdir2() {
+wget \
+     --recursive \
+     --no-clobber \
+     --page-requisites \
+     --html-extension \
+     --convert-links \
+     --restrict-file-names=windows \
+     --domains website.org \
+     --no-parent $1
+ }
 
 # Programming etc.
 alias m='make'
@@ -84,7 +95,7 @@ alias bioex='ssh arosciszewski@bioexploratorium.pl'
 alias xcode="open *.xcodeproj"
 
 function tarfolder() { tar -czf "$1".tar.gz "$1"/*; }
-function zipfolder() { zip -r "$1".zip "$1"/*; }
+function zipfolder() { zip --recurse-paths "$1".zip "$1"/*; }
 
 # SSH
 alias sendstud='~/scripts/sendstud.sh'
@@ -102,6 +113,7 @@ alias gits='git status --short'
 alias gitc='git commit -am'
 alias gitca='git commit --amend -m'
 alias gitch='git checkout'
+alias gitcl='git clean -d --force'
 alias gitd='git diff'
 alias gd='git diff'
 alias gitm='git merge'
@@ -145,7 +157,7 @@ alias ......="cd ../../.."
 # function gg() { pwd > /tmp/last_path; }
 # function hh() { cd $(cat /tmp/last_path); }
 
-alias webserver='python -m SimpleHTTPServer 8080'
+alias webserver='python3 -m http.server 8080'
 alias gprer='grep -R'
 
 alias hgrep='history | grep -i'
@@ -381,7 +393,6 @@ function gcp() {
     git push;
 }
 
-alias find='sudo find'
 alias svim='sudo vim'
 alias gv='gvim'
 
@@ -546,7 +557,7 @@ function list_installed() {
 
 # $1 - name of the folder to zip
 function zip_and_move() {
-    zip -r ~/Downloads/$1.zip $1/* $1/.*
+    zip --recurse-paths ~/Downloads/$1.zip $1/* $1/.*
 }
 
 # Download .gitignore
@@ -937,7 +948,23 @@ function listening() {
     fi
 }
 
+function get_cookies() {
+    local url=$1
+    cgurl  --silent --output /dev/null  --cookie-jar - $url
+}
+
 alias instagram_dl='instalooter user'
 
 # macOS
 alias change_main_screen='~/scripts/hmscreens -setMainID `~/scripts/hmscreens -info | \grep "Screen ID:" | head -2 | tail -1 | sed "s/[^0-9]*//g"`'
+
+# Ubuntu
+function toggle_wifi() {
+    wifi="$(nmcli r wifi | awk 'FNR = 2 {print $1}')"
+    if [ "$wifi" == "enabled" ]
+    then
+        nmcli r wifi off
+    else
+        nmcli r wifi on
+    fi
+}
