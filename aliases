@@ -71,16 +71,16 @@ alias free='free -h'
 
 alias wgetdir='wget --recursive --no-parent '
 function wgetdir2() {
-wget \
-     --recursive \
-     --no-clobber \
-     --page-requisites \
-     --html-extension \
-     --convert-links \
-     --restrict-file-names=windows \
-     --domains website.org \
-     --no-parent $1
- }
+    wget \
+        --recursive \
+        --no-clobber \
+        --page-requisites \
+        --html-extension \
+        --convert-links \
+        --restrict-file-names=windows \
+        --domains website.org \
+        --no-parent $1
+    }
 
 # Programming etc.
 alias m='make'
@@ -714,7 +714,7 @@ function update_all() {
     sudo_keep_alive
 
     pushd ~ &> /dev/null # to correctly update global NPM packages
-    upgrade_oh_my_zsh;
+    omz update
     update_packages_mac;
     echo "Updating Vim plugins..."
     vim -i NONE -c VundleUpdate -c quitall &> /dev/null
@@ -968,3 +968,30 @@ function toggle_wifi() {
         nmcli r wifi on
     fi
 }
+
+# One-liner to generate Self-Signed SSL Certificate+Key without any annoying prompts or CSRs
+function generate_self_signed_certificate() {
+    openssl req -new -newkey rsa:4096 -days $((5*3650)) -nodes -x509 -subj "/C=<Country Code>/ST=<State>/L=<City>/O=<Organization>/CN=<Common Name>" -keyout certificate.key -out certificate.crt
+}
+
+function sync_branch_with_master() {
+    git reset --hard origin/master && git fp    
+}
+
+function resize_to_icon() {
+    local input_file=$1
+    local output_file=$2
+    convert $input_file -thumbnail '1024x1024>' -gravity center -background transparent -extent 1024x1024 $output_file;
+}
+
+function reinstall_cocoapods() {
+    sudo gem uninstall cocoapods
+    sudo gem install -n /usr/local/bin cocoapods
+}
+
+function force_remove_brew_cask() {
+    local cask_name=$1;
+    rm -rf "$(brew --prefix)/Caskroom/$cask_name";
+}
+
+alias killfsck='sudo pkill -f fsck'
