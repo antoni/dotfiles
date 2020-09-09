@@ -298,7 +298,8 @@ function install_javascript_packages_npm() {
         babel-cli pm2@latest alfred-vpn firebase-tools tslint typescript \
         @aws-amplify/cli pa11y netlify-cli hygen react-native-cli serve \
         @zeplin/cli @zeplin/cli-connect-react-plugin @zeplin/cli-connect-swift-plugin \
-        yo generator-office dts-gen yargs rollup pnpm source-map-explorer
+        yo generator-office dts-gen yargs rollup pnpm source-map-explorer \
+        @angular/cli
 }
 
 function install_airbnb_eslint() {
