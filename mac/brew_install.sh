@@ -1,10 +1,12 @@
 BREW_PACKAGES=(mongodb
+apache-httpd
 ascii
 mas
 dockutil
 gpg
 bat
 node
+hashcat
 eth-p/software/bat-extras
 wireguard-tools
 rtmpdump
@@ -181,6 +183,7 @@ bitwarden
 java
 stretchly
 emacs
+colour-contrast-analyser
 filebot
 namebench
 little-snitch
