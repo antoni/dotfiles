@@ -995,3 +995,5 @@ function force_remove_brew_cask() {
 }
 
 alias killfsck='sudo pkill -f fsck'
+
+alias prettify="yarn prettier:fix && gc \"chore: Run Prettier on the entire project\""
