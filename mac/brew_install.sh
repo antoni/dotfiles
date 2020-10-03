@@ -11,9 +11,11 @@ eth-p/software/bat-extras
 wireguard-tools
 rtmpdump
 yarn
+fop
 sourcekitten
 fontforge
 xz
+gh
 dnsmasq
 dvc
 docker
@@ -178,6 +180,7 @@ bitwarden
 rstudio
 elmedia-player
 atom
+figma
 clion
 bitwarden
 java
