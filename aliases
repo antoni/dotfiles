@@ -678,7 +678,7 @@ function update_packages_mac() {
 
     brew update
     brew upgrade
-    brew cask upgrade --greedy --force
+    brew upgrade --cask --force
     brew unlink node && brew link --overwrite node
 }
 
@@ -710,10 +710,18 @@ function sudo_keep_alive() {
         kill -0 "$$" || exit; done 2>/dev/null &
     }
 
+function update_xcode() {
+    sudo rm -rf /Library/Developer/CommandLineTools
+    xcode-select --install
+}
+
 function update_all() {
     sudo_keep_alive
 
     pushd ~ &> /dev/null # to correctly update global NPM packages
+
+    update_xcode
+
     omz update
     update_packages_mac;
     echo "Updating Vim plugins..."
