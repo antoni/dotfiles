@@ -41,7 +41,6 @@ rdiff-backup
 proxychains
 shellcheck
 tesseract-lang
-osquery
 httpie
 poppler
 gnu-sed
@@ -186,14 +185,18 @@ bitwarden
 java
 stretchly
 emacs
+league-of-legends
 colour-contrast-analyser
 filebot
 namebench
+crossover
 little-snitch
 imazing
+discord
 github
 aquamacs
 autojump
+brave-browser
 visual-studio
 grammarly
 enolsoft-chm-view
