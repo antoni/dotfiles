@@ -40,5 +40,6 @@
     "window.zoomLevel": 3,
     "[markdown]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
+    },
+    "deepcode.yesWelcomeNotification": false
   }

@@ -1,3 +1,4 @@
+# shellcheck disable=SC2148
 # -*- shell-script -*-
 # vim:set ft=sh textwidth=0 wrapmargin=0:
 set +x
@@ -676,6 +677,9 @@ function update_packages_mac() {
     # Fix casks with `depends_on` that reference pre-Mavericks
     /usr/bin/find "$(brew --prefix)/Caskroom/"*'/.metadata' -type f -name '*.rb' -print0 | /usr/bin/xargs -0 /usr/bin/sed -i '' '/depends_on macos:/d'
 
+    # Somtimes needed to run before 'brew update'
+    git -C "/usr/local/Homebrew/Library/Taps/homebrew/homebrew-core" fetch --unshallow
+    git -C "/usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask" fetch --unshallow
     brew update
     brew upgrade
     brew upgrade --cask --force
@@ -720,13 +724,13 @@ function update_all() {
 
     pushd ~ &> /dev/null # to correctly update global NPM packages
 
-    update_xcode
+    # This sometimes breaks Homebrew taps upgrade
+    # update_xcode
 
-    omz update
+    omz update --unattended
     update_packages_mac;
     echo "Updating Vim plugins..."
     vim -i NONE -c VundleUpdate -c quitall &> /dev/null
-    echo "Updating npm packages..."
 
     # echo "Updating macOS (if updates available)"
     # softwareupdate -i -a
@@ -736,8 +740,9 @@ function update_all() {
     # Do the rest without sudo
     sudo --reset-timestamp
 
-    npm update -g;
-    npm i npm;
+    # echo "Updating npm packages..."
+    # npm update -g;
+    # npm i npm;
     echo "Updating PIP packages..."
     pip3 install --upgrade pip;
     mas upgrade;
@@ -745,6 +750,7 @@ function update_all() {
     popd &> /dev/null 
 
     printf "Updated all applications on %s\n" "`date`" >> ~/update_log.txt 
+    rm -f ~/package.json
 }
 
 function merge_and_push_branch() {
@@ -821,21 +827,21 @@ function filename_extension() {
 # Converts SVG to PNG
 # Usage svg_to_png input_image_path [output_image_height]
 function svg_to_png() {
-    local filename=`filename_without_extension $1`
+    local filename=`filename_without_extension "$1"`
     local output_filename=$filename.png
     local output_image_height=${2:-32}
-    rsvg-convert -h $output_image_height $1 > "$output_filename" && echo "Successfully created $output_filename" || echo "Error converting $1 to $output_filename"
+    rsvg-convert -h "$output_image_height" "$1" > "$output_filename" && echo "Successfully created $output_filename" || echo "Error converting $1 to $output_filename"
 }
 
 function webptopng() {
-    local filename=`filename_without_extension $1`
+    local filename=$(filename_without_extension "$1")
     local output_filename=$filename.png
     local output_image_height=${2:-32}
-    dwebp $1 -o $output_filename
+    dwebp "$1" -o "$output_filename"
 }
 
 function pdftojpg() {
-    pdfimages -j $1 page
+    pdfimages -j "$1" page
 }
 
 function android_update() {
@@ -843,7 +849,7 @@ function android_update() {
 }
 
 function last_modified_directory() {
-    echo `\ls -t | head -n 1`
+    echo $(\ls -t | head -n 1)
 }
 
 function convert_all_files() {
@@ -877,21 +883,21 @@ alias mac_serial_number="system_profiler SPHardwareDataType | \grep '      Seria
 function save_chrome_extension_list() {
     local OUTPUT_FILE=~/scripts/chrome_extensions.txt
     rm $OUTPUT_FILE;
-    EXT_DIR="/Users/`whoami`/Library/Application Support/Google/Chrome/Default/Extensions";
-    pushd $EXT_DIR
-    for f in `\ls */*/manifest.json`;do cat $f | jq -r '.name' >> $OUTPUT_FILE;done
-    popd
+    EXT_DIR="/Users/$(whoami)/Library/Application Support/Google/Chrome/Default/Extensions";
+    pushd "$EXT_DIR" || exit
+    for f in $(\ls */*/manifest.json);do cat "$f" | jq -r '.name' >> $OUTPUT_FILE;done
+    popd || exit
     cat $OUTPUT_FILE
 }
 
 # Updates scripts repo with current date in the message
 # of the (possibly empty) commit
 function update_scripts_repo() {
-    pushd ~/scripts
+    pushd ~/scripts || exit
     git add .
     git commit --allow-empty --message "Update "$(date +%d-%m-%Y)
     git push origin
-    popd
+    popd || exit
 }
 
 alias nrs='npm run start';
@@ -902,7 +908,7 @@ alias yc='yarn run clean'
 alias yrc='yarn run clean'
 
 function mcd() {
-    mkdir $1 && cd $1
+    mkdir "$1" && cd "$1" || exit
 }
 
 alias npmu='npm install -g npm'
@@ -922,8 +928,8 @@ alias nvm_default='nvm alias default node'
 alias nvm_current='nvm install node --reinstall-packages-from=$(nvm current)'
 
 function mov2mp4() {
-    local filename=`filename_without_extension $1`
-    ffmpeg -i $filename.mov -vcodec h264 -acodec mp2 $filename.mp4
+    local filename=$(filename_without_extension "$1")
+    ffmpeg -i "$filename".mov -vcodec h264 -acodec mp2 "$filename".mp4
 }
 
 # Rename  part of filename in each file in a directory
@@ -942,6 +948,24 @@ function remove_filename_part() {
     done
 }
 
+function add_prefix_to_filename() {
+    local prefix=$1
+    for filename in *; do 
+        [ -f "$filename" ] || continue
+        mv "$filename" "$prefix$filename"
+    done
+}
+
+function add_suffix_to_filename() {
+    local suffix=$1
+    for filename in *; do 
+        [ -f "$filename" ] || continue
+        name=$(filename_without_extension "$filename")
+        extension=$(filename_extension "$filename")
+        mv "$filename" "$name$suffix.$extension"
+    done
+}
+
 # Prints the lsof entry of the process that listens on a given port
 # Usage:
 #   listening firefox
@@ -950,7 +974,7 @@ function listening() {
     if [ $# -eq 0 ]; then
         sudo lsof -iTCP -sTCP:LISTEN -n -P
     elif [ $# -eq 1 ]; then
-        sudo lsof -iTCP -sTCP:LISTEN -n -P | grep -i --color $1
+        sudo lsof -iTCP -sTCP:LISTEN -n -P | grep -i --color "$1"
     else
         echo "Usage: listening [pattern]"
     fi
@@ -958,7 +982,7 @@ function listening() {
 
 function get_cookies() {
     local url=$1
-    cgurl  --silent --output /dev/null  --cookie-jar - $url
+    cgurl  --silent --output /dev/null  --cookie-jar - "$url"
 }
 
 alias instagram_dl='instalooter user'
@@ -989,7 +1013,7 @@ function sync_branch_with_master() {
 function resize_to_icon() {
     local input_file=$1
     local output_file=$2
-    convert $input_file -thumbnail '1024x1024>' -gravity center -background transparent -extent 1024x1024 $output_file;
+    convert "$input_file" -thumbnail '1024x1024>' -gravity center -background transparent -extent 1024x1024 "$output_file";
 }
 
 function reinstall_cocoapods() {
@@ -1005,3 +1029,105 @@ function force_remove_brew_cask() {
 alias killfsck='sudo pkill -f fsck'
 
 alias prettify="yarn prettier:fix && gc \"chore: Run Prettier on the entire project\""
+
+function copy_as_base64() {
+    local file_path=$1
+    openssl base64 < "$file_path" | tr -d '\n' | pbcopy
+}
+
+function display_notification() {
+    local title=$1
+    local message=$2
+    osascript -e "display notification \"$message\" with title \"$title\""
+
+    # Growl alternative
+    # growlnotify -n "$title" -m "$message"
+}
+
+# macOS 
+alias reset_wifi='sudo networksetup -setnetworkserviceenabled Wi-Fi off && sleep 2 && sudo networksetup -setnetworkserviceenabled Wi-Fi on'
+
+function save_last_n_lines_to_file() {
+    local LINES=$1
+    local filename=~/tmp/$(date)last_$LINES.txt
+    fc -ln -"$LINES" | head -n "$LINES" > "$filename"
+    fc -ln -"$LINES" | head -n "$LINES" > pbcopy
+    echo "Saved to $filename"
+}
+
+function get_repo_name() {
+    basename -s .git $(git config --get remote.origin.url)
+}
+
+alias mk_iphone_dir='mkdir $(date +%Y%m%d)_iphone_photos'
+
+# Example: apply_to_all_files 'resize_image 50%'
+function apply_to_all_files() {
+    local command=$@
+    for filename in *;
+    do
+        eval "${command} ${filename}";
+    done
+}
+
+# Resizes image in-place
+function resize_image() {
+    local resize_arg=$1
+    local input=$2
+    mogrify -resize "$resize_arg" "$input"
+}
+
+function shellcheck_autofix() {
+    local filename=$1
+    shellcheck -f diff "$filename" | git apply
+}
+
+alias copy_last_command="fc -ln -1 | awk '{\$1=\$1}1' | pbcopy"
+
+# Usage: add_diagonal_watermak filename quoted_watermark_text
+function add_diagonal_watermak() {
+    local filename=$1;
+    local watermark_text=$2;
+
+    convert $filename \
+        \( -size 1500x -background none -fill blue -gravity center \
+        label:"$watermark_text" -trim -rotate -30 \
+        -bordercolor none -border 10 \
+        -write mpr:wm +delete \
+        +clone -fill mpr:wm  -draw 'color 0,0 reset' \) \
+        -compose over -composite \
+        $filename
+    }
+
+# Usage:
+# random_password [password_length] 
+function random_password() {
+    local password_length=${1:-16}
+    # local PWGEN_REMOVE_CHARACTERS=\'\"\@\?\^\&\*\(\)\`\:\~\?\;\:\[\]\{\}\.\,\\\/\|
+    local PWGEN_REMOVE_CHARACTERS=\&\\
+    pwgen --secure --symbols $password_length 1 --remove-chars $PWGEN_REMOVE_CHARACTERS
+}
+
+# Usage:
+# bcrypt_hash password
+function bcrypt_hash() {
+    local password=$1
+    local bcrypt_cost=10
+    htpasswd -bnBC $bcrypt_has "" $password | tr -d ':\n' | sed 's/$2y/$2a/'
+}
+
+function ios_simulator_screenshot() {
+    xcrun simctl io booted screenshot
+}
+
+function ios_simulator_screencast() {
+    xcrun simctl io booted recordVideo ios_simluator_recording.mp4
+}
+
+# returns commit date, author name and commit subject for a date range given
+# Example: commits_between_dates 2020-12-01 2020-12-31
+function commits_between_dates {
+    local date_from=$1
+    local date_to=$2
+    git log --date=iso --pretty=format:'%ad	%aN	%s' | awk '$0 >= "'$date_from'" && $0 <= "'$date_to'"'
+}

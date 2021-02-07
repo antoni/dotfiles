@@ -1,19 +1,19 @@
 [user]
-	email = antoni.rosciszewski@gmail.com
-	name = Antoni Rosciszewski
-	signingkey = 34E83938FB6E58DEE53F9E8F044EF77D2A1D91A8
+    email = antoni.rosciszewski@gmail.com
+    name = Antoni Rosciszewski
+    signingkey = 34E83938FB6E58DEE53F9E8F044EF77D2A1D91A8
 [branch]
     autosetupmerge = true
 [color]
-	branch = always
-    diff = always
-	status = always
-	ui = auto
-	interactive = always
-	grep = always
-	pager = true
-	decorate = always
-	showbranch = always
+    branch = always
+    diff = auto
+    status = always
+    ui = always
+    interactive = always
+    grep = always
+    pager = true
+    decorate = always
+    showbranch = always
 [color "branch"]
     current = yellow reverse
     local = yellow
@@ -22,11 +22,38 @@
     added = yellow
     changed = green
     untracked = cyan
+[color "diff"]
+    meta = green
+    ; meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
 [core]
     whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
-	excludesfile = ~/.gitignore
-	editor = vi
-    pager = delta --plus-color="#012800" --minus-color="#340001" --theme='zenburn'
+    excludesfile = /Users/antek.ff_fra/.gitignore
+    editor = vi
+    pager = delta
+    ignorecase = false
+[delta]
+    features = decorations
+    whitespace-error-style = 22 reverse
+[delta]
+    features = line-numbers decorations
+    ; features = line-numbers decorations side-by-side
+    ; More themes, see: delta --show-syntax-themes
+    syntax-theme = Dracula
+    plus-style = syntax "#003800"
+    minus-style = syntax "#3f0001"
+[delta "line-numbers"]
+    line-numbers-left-style = cyan
+    line-numbers-right-style = cyan
+    line-numbers-minus-style = 124
+    line-numbers-plus-style = 28
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold yellow ul
+    file-decoration-style = none
+    hunk-header-decoration-style = cyan box ul
 [interactive]
     diffFilter = delta --color-only
 [alias]
@@ -53,6 +80,7 @@
     # For the last 10 commits:
     # git change-commits GIT_AUTHOR_EMAIL "old@email.com" "new@email.com" HEAD~10..HEAD
     change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch -f --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f "
+    rebase-to-root = "rebase --interactive --root"
     # Usage: git squash [n], n - number of last commits to be squashed
     squash = "!f(){ git reset --soft HEAD~${1} && git commit --no-verify --edit -m\"$(git log --format=%B --reverse HEAD..HEAD@{1})\"; };f"
     # Commit, then squash current changes with previous commmit
@@ -73,23 +101,23 @@
     dontcommit = "!git checkout ."
     diffclear = "!f() { git diff $1 --color | sed -r 's/^([^-+ ]*)[-+ ]/\\1/' | less -r;};f"
     diffclear2 = "!git diff --color-words"
-	grog = log --graph --abbrev-commit --decorate --all --format=format:\"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(dim white) - %an%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)\"
+    grog = log --graph --abbrev-commit --decorate --all --format=format:\"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(dim white) - %an%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)\"
 [push]
-	default = matching
-	followTags = true
+    default = matching
+    followTags = true
 [pull]
     rebase = true
 [merge]
     ff = only
 [http]
     proxy = 
-	sslVerify = false
+    sslVerify = false
 [https]
     proxy = 
 [commit]
-	gpgsign = false
+    gpgsign = false
 [filter "lfs"]
-	process = git-lfs filter-process
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f

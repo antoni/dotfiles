@@ -321,6 +321,11 @@ let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
+" SnipMate
+let g:snipMate = {}
+let g:snipMate.snippet_version = 1
+
+
 let g:ycm_global_ycm_extra_conf = "~/dotfiles/ycm_extra_conf.py" 
 
 " let g:ycm_server_use_vim_stdout = 1
@@ -377,15 +382,15 @@ Plugin 'majutsushi/tagbar'
 " Plugin 'vim-scripts/gtags.vim'
 " Plugin 'thinca/vim-quickrun'
 " Plugin 'vim-scripts/netrw.vim'
-" Learn HOW TO USE those (https://www.youtube.com/watch?v=aHm36-na4-4)
 " Bundle 'jondkinney/dragvisuals.vim'
 " Bundle 'nixon/vim-vmath' 
+Bundle 'itspriddle/vim-shellcheck'
+Bundle 'elzr/vim-json'
 " Bundle 'taku-o/vim-vis'
 " Bundle 'rking/ag.vim'
 Bundle 'jamessan/vim-gnupg'
 " Bundle 'Raimondi/delimitMate'
 Bundle 'digitalrounin/vim-yaml-folds'
-" *LEARN*
 " Bundle 'terryma/vim-multiple-cursors'
 " Bundle 'rking/ag.vim'
 " Assembly
@@ -613,6 +618,7 @@ let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute "set rtp+=" . g:opamshare . "/merlin/vim"
 let no_ocaml_comments = 1
 "}}}
+" }}}
 " 7.  Autocommands {{{
 " Binary files "{{{
 augroup Binary
@@ -641,7 +647,7 @@ au VimEnter * set tabpagemax=9999|sil tab ball|set tabpagemax&vim
 au BufRead ~/Documents/Q.txt execute "normal Go"|startinsert!
 au BufRead ~/.remember execute "normal Go"|startinsert!
 "}}}
-if has("au")
+  if has("au")
     " Haskell"{{{
     " au BufWritePost *.hs GhcModCheckAndLintAsync
     "}}}
@@ -657,11 +663,12 @@ if has("au")
     au VimEnter * tab all
     "}}}
     " }}}
-endif
+  endif
 " }}}
 " 8.  Folds {{{
 " set foldmethod=indent   " Fold based on indent
-set foldmethod=syntax     " Fold based on syntax
+" Causes problems with opening some JSON files 
+" set foldmethod=syntax     " Fold based on syntax
 set foldnestmax=3         " Deepest fold is 3 levels
 set foldlevelstart=5
 let javaScript_fold=1         " JavaScript

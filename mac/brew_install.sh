@@ -5,11 +5,21 @@ mas
 dockutil
 gpg
 bat
+exiftool
+advancecomp
+azure-cli
+deno
 node
+gifski
+carthage
+volta
+woff2
 hashcat
 eth-p/software/bat-extras
 wireguard-tools
+ngrok
 rtmpdump
+blender
 yarn
 fop
 sourcekitten
@@ -18,8 +28,9 @@ xz
 gh
 dnsmasq
 dvc
-docker
+docker-machine
 ccat
+rustup-init
 pass
 blueutil
 rtorrent
@@ -174,17 +185,39 @@ jpegoptim
 )
 
 BREW_CASK_PACKAGES=(texshop
+growlnotify
+electrum
+cloudflare-warp
+anaconda
 caffeine
 bitwarden
+workplace-chat
 rstudio
+gog-galaxy
+jubler
+postman
+obsidian
+bettertouchtool
 elmedia-player
 atom
+binance
+shift
+image2icon
+abstract
 figma
 clion
 bitwarden
+adobe-creative-cloud
+fl-studio
 java
+docker
+zeplin
+beaker-browser
 stretchly
 emacs
+1password
+1password-cli
+sketchup
 league-of-legends
 colour-contrast-analyser
 filebot
@@ -196,8 +229,10 @@ discord
 github
 aquamacs
 autojump
+WebPQuickLook
+robo-3t
+studio-3t
 brave-browser
-visual-studio
 grammarly
 enolsoft-chm-view
 obs
@@ -207,7 +242,6 @@ qlstephen
 starcraft
 karabiner-elements
 steam
-qlcolorcode
 spotify
 macsvg
 mpv
@@ -230,6 +264,7 @@ viber
 gimp
 hopper-debugger-server
 atext
+visual-studio
 visual-studio-code
 koa11y
 mysides
@@ -336,6 +371,33 @@ function vim_you_complete_me_install() {
     ./install.py --clang-completer
 }
 
+function install_cargo() {
+    brew install rust;
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null 2> /dev/null ; brew install caskroom/cask/brew-cask 2> /dev/null;
+    brew cask install cargo;
+}
+
+function install_docker() {
+    # https://apple.stackexchange.com/questions/373888/how-do-i-start-the-docker-daemon-on-macos/373914#373914
+    brew cask install docker virtualbox
+    brew install docker-machine
+    docker-machine create --driver virtualbox default
+    docker-machine restart
+    eval "$(docker-machine env default)" # This might throw an TSI connection error. In that case run docker-machine regenerate-certs default
+    docker-machine restart # maybe needed
+    docker run hello-world
+}
+
+function install_dmidecode() {
+    brew install cavaliercoder/dmidecode/dmidecode
+}
+
+function install_fuse() {
+    # https://medium.com/@technikhil/setting-up-ntfs-3g-on-your-mac-os-sierra-11eff1749898
+    brew cask install osxfuse
+    brew install ntfs-3g
+}
+
 function mac_install_misc() {
     # Bash
     brew install bash
@@ -364,10 +426,18 @@ function mac_install_misc() {
     brew install jmeter
 
     # Install Quick Look plugins https://github.com/sindresorhus/quick-look-plugins
-    brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv webpquicklook qlvideo
+    brew cask install qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv webpquicklook qlvideo
 
     # Fonts
     brew cask install font-menlo-for-powerline font-inconsolata font-source-code-pro font-hasklig font-monoid
+
+    # Heroku CLI
+    brew install --cask dotnet-sdk
+    brew tap heroku/brew && brew install heroku
+
+    # mongoDB
+    brew tap mongodb/brew
+    brew install mongodb-community
 
     # Dart langauge
     brew tap dart-lang/dart
@@ -376,23 +446,3 @@ function mac_install_misc() {
     install_fuse
 }
 
-function install_cargo() {
-    brew install rust;
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null 2> /dev/null ; brew install caskroom/cask/brew-cask 2> /dev/null;
-    brew cask install cargo;
-}
-
-function install_docker() {
-    # Get Docker for Mac from here first: https://www.docker.com/docker-mac
-    brew cask install docker-toolbox;
-}
-
-function install_dmidecode() {
-    brew install cavaliercoder/dmidecode/dmidecode
-}
-
-function install_fuse() {
-    # https://medium.com/@technikhil/setting-up-ntfs-3g-on-your-mac-os-sierra-11eff1749898
-    brew cask install osxfuse
-    brew install ntfs-3g
-}
