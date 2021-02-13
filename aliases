@@ -1079,7 +1079,7 @@ function resize_image() {
 
 function shellcheck_autofix() {
     local filename=$1
-    shellcheck -f diff "$filename" | git apply
+    shellcheck --format diff "$filename" | git apply
 }
 
 alias copy_last_command="fc -ln -1 | awk '{\$1=\$1}1' | pbcopy"
@@ -1130,4 +1130,10 @@ function commits_between_dates {
     local date_from=$1
     local date_to=$2
     git log --date=iso --pretty=format:'%ad	%aN	%s' | awk '$0 >= "'$date_from'" && $0 <= "'$date_to'"'
+}
+
+function git_delete_tag() {
+    local tagname=$1
+    git tag --delete $tagname
+    git push --delete origin $tagname
 }

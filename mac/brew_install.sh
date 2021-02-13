@@ -7,6 +7,7 @@ gpg
 bat
 exiftool
 advancecomp
+datamash
 azure-cli
 deno
 node
@@ -194,6 +195,7 @@ bitwarden
 workplace-chat
 rstudio
 gog-galaxy
+freecad
 jubler
 postman
 obsidian
@@ -215,6 +217,7 @@ zeplin
 beaker-browser
 stretchly
 emacs
+dogecoin
 1password
 1password-cli
 sketchup
