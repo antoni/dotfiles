@@ -1,6 +1,7 @@
 BREW_PACKAGES=(mongodb
 apache-httpd
 ascii
+gron
 mas
 dockutil
 gpg
@@ -12,6 +13,7 @@ azure-cli
 deno
 node
 gifski
+gifsicle
 carthage
 volta
 woff2
@@ -33,6 +35,7 @@ docker-machine
 ccat
 rustup-init
 pass
+i2p
 blueutil
 rtorrent
 newsboat

@@ -382,7 +382,8 @@ function up() {
 }
 
 # JSON pretty print
-alias jsonpp='python -m json.tool'
+alias json_pretty_print='python -m json.tool'
+alias jsonpp=json_pretty_print
 
 # Git
 function gc() {
@@ -1137,3 +1138,5 @@ function git_delete_tag() {
     git tag --delete $tagname
     git push --delete origin $tagname
 }
+
+alias github_merge_pr='gh pr merge $(git branch --show-current) --delete-branch  --rebase'
