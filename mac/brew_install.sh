@@ -5,10 +5,12 @@ gron
 mas
 dockutil
 gpg
+handbrake
 bat
 exiftool
 advancecomp
 datamash
+mplayer
 azure-cli
 deno
 node
@@ -16,6 +18,7 @@ gifski
 gifsicle
 carthage
 volta
+pipenv
 woff2
 hashcat
 eth-p/software/bat-extras
