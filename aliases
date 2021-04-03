@@ -136,6 +136,7 @@ alias gsa='git stash apply'
 alias gpom='git push origin master'
 alias gca='git commit --amend'
 alias gacw='git add . && gcw'
+alias gcb='git checkout -b'
 
 # Set `indent` parameters according to Linux kernel Coding Style
 #alias indent='indent -kr -i8'
@@ -745,7 +746,7 @@ function update_all() {
     # npm update -g;
     # npm i npm;
     echo "Updating PIP packages..."
-    pip3 install --upgrade pip;
+    pip3 install --upgrade pip --user;
     mas upgrade;
 
     popd &> /dev/null 
@@ -1140,3 +1141,35 @@ function git_delete_tag() {
 }
 
 alias github_merge_pr='gh pr merge $(git branch --show-current) --delete-branch  --rebase'
+
+# Generate a random 32 character alphanumeric string (upper 
+# and lowercase) and numbers in Bash
+# Alternative
+# tr -dc '[:alnum:]' < /dev/urandom | dd bs=4 count=8 2>/dev/null
+function random-string() {
+# Add special chars:
+# env LC_ALL=C tr -dc '(\&\_a-zA-Z0-9\^\*\@'
+cat /dev/urandom | env LC_ALL=C tr -dc 'a-zA-Z0-9' | fold -w ${1:-32} | head -n 1
+}
+
+function brew_cleanup_package() {
+    local package_name=$1
+
+    # don't use reinstall
+    brew uninstall -f $package_name
+
+    # remove possible broken symlinks
+    brew cleanup
+
+    # install httping again
+    brew install $package_name
+
+    # check the version
+    brew info $package_name
+}
+
+function reinstall_pip() {
+    python -m pip install --upgrade --force-reinstall pip
+    python3 -m pip install --upgrade --force-reinstall pip
+}
+

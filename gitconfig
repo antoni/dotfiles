@@ -102,6 +102,8 @@
     diffclear = "!f() { git diff $1 --color | sed -r 's/^([^-+ ]*)[-+ ]/\\1/' | less -r;};f"
     diffclear2 = "!git diff --color-words"
     grog = log --graph --abbrev-commit --decorate --all --format=format:\"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(dim white) - %an%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)\"
+    create = "hub create --private"
+    rebase-to-master = "rebase --interactive --root master"
 [push]
     default = matching
     followTags = true
