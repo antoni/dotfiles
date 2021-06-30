@@ -9,10 +9,9 @@ install/linux_signing_key*
 node_modules
 npm-debug.log
 
-package.json
-
 */tmp
 
 */*google-chrome-stable_current*
 
 scripts/*
+jupyter

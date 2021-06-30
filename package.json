@@ -1,0 +1,6 @@
+{
+    "licence": "MIT",
+    "dependencies": {
+        "npm": "^6.14.8"
+    }
+}
