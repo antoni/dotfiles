@@ -127,3 +127,22 @@ bindkey '^M' my-accept-line
 # autojump
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
+# https://docs.brew.sh/Shell-Completion
+if type brew &>/dev/null; then
+      FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+
+        autoload -Uz compinit
+          compinit
+fi
+
+# Add .NET Core SDK tools
+export PATH="$PATH:/Users/antek.ff_fra/.dotnet/tools"
+
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
+
+# Moving between words in iTerm
+bindkey "[D" backward-word
+bindkey "[C" forward-word
+bindkey "^[a" beginning-of-line
+bindkey "^[e" end-of-line
