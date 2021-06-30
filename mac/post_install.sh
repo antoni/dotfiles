@@ -77,6 +77,7 @@ function post_install() {
         # duti -s `app_id "*"`      .html all;
         duti -s `app_id "TextMate"`      .lat    all;
         duti -s `app_id "TextMate"`      .input  all;
+        duti -s `app_id "Google Chrome"` .webp  all;
     else
         printf "You have to install 'duti' first"
     fi
