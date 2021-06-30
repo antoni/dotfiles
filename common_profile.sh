@@ -114,4 +114,5 @@ export ANDROID_NDK_HOME=/usr/local/opt/android-ndk
 # export SDKMAN_DIR="$HOME/.sdkman"
 # [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-export ARTIFACTORY_NPM_TOKEN=""""
+# macOS only (delete symlink created after system update)
+rm -f ~/Desktop/Relocated\ Items
