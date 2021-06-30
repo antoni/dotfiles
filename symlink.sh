@@ -72,6 +72,8 @@ function mac_symlink() {
     mkdir -p ~/Library/Preferences/org.videolan.vlc
     cp -f ${DOTFILES_DIR}/vlcrc ~/Library/Preferences/org.videolan.vlc/vlcrc
     echo "NOTE: When updating preferences, VLC doesn't modify the existing vlcrc, instead it deletes the last and creates a new one. Instead of symlinking, the ~/dotfiles/vlcrc has been copied"
+
+    [ -d "~/scripts" ] && ln -fs ~/scripts/Chrome\ Debugger.app /Applications/
 }
 
 # TODO: Use it in Linux section
@@ -148,7 +150,7 @@ ln -fs ${DOTFILES_DIR}/sshconfig ~/.ssh/config
 
 # ~/scripts directory
 function setup_scripts() {
-    if [ -d "scripts" ]; then
+    if [ ! -d "scripts" ]; then
         git clone git@github.com:antoni/scripts.git;
     fi 
     ln -fs ${DOTFILES_DIR}/scripts ~/scripts

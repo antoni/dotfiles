@@ -280,7 +280,7 @@ setup_menu_bar_date
 
 # Stop Safari 9 window closing when only pinned tabs are left
 defaults write com.apple.Safari NSUserKeyEquivalents -dict-add 'Close Tab' '<string>@w</string></dict>'
-defaults write com.apple.universalaccess com.apple.custommenu.apps -array-add '<string>com.apple.Safari</string>'
+# defaults write com.apple.universalaccess com.apple.custommenu.apps -array-add '<string>com.apple.Safari</string>'
 killall Safari
 
 
@@ -338,4 +338,7 @@ defaults write com.google.Chrome ExternalProtocolDialogShowAlwaysOpenCheckbox -b
 # https://gist.github.com/dvf/3771e58085568559c429d05ccc339219
 sudo defaults write bluetoothaudiod "Enable AptX codec" -bool true
 sudo defaults write bluetoothaudiod "Enable AAC codec" -bool true
+
+# Skip verification of DMG images
+sudo defaults write com.apple.frameworks.diskimages skip-verify TRUE
 

@@ -40,5 +40,14 @@
     "window.zoomLevel": 3,
     "[markdown]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
+    },
+    "deepcode.yesWelcomeNotification": false,
+    "settingsSync.ignoredSettings": [
+
+    ],
+    "telemetry.enableCrashReporter": false,
+    "telemetry.enableTelemetry": false,
+    "deepcode.yesTelemetry": false,
+    "redhat.telemetry.enabled": true,
+    "snyk.yesWelcomeNotification": false
   }
