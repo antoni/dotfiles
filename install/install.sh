@@ -5,8 +5,8 @@ mkdir -p tmp
 
 source $DOTFILES_DIR/install/chrome_install.sh
 
-echo -en "${colors[BGreen]}Enter sudo password:${colors[White]} "
-read -s SUDO_PASS
+# echo -en "${colors[BGreen]}Enter sudo password:${colors[White]} "
+# read -s SUDO_PASS
 
 source $DOTFILES_DIR/utils.sh
 
@@ -89,12 +89,13 @@ function install_nord_vpn_debian() {
 
 function main() {
 
-    generate_ssh_key
+    # TODO: Use script from separate file
+    # generate_ssh_key
 
     # Generate SSH key
-    if [ ! -e ~/.ssh/id_rsa ]; then
-        ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
-    fi
+    # if [ ! -e ~/.ssh/id_rsa ]; then
+    #    ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
+    # fi
 
     if [ -f /etc/debian_version ]; then
         echo "Installing required packages on Debian/Ubuntu"
@@ -114,14 +115,14 @@ function main() {
         # install_fedora_sound
         install_fedora_chrome
     else # macOS
-        source $DOTFILES_DIR/mac/brew_install.sh
+        #source $DOTFILES_DIR/mac/brew_install.sh
 
         # Remove "Last login" message in new Terminal window open
         touch ~/.hushlogin
 
-        mac_install_misc
+        #mac_install_misc
         HOMEBREW_NO_AUTO_UPDATE=1 brew install ${BREW_PACKAGES[*]}
-        HOMEBREW_NO_AUTO_UPDATE=1 brew cask install ${BREW_CASK_PACKAGES[*]}
+        HOMEBREW_NO_AUTO_UPDATE=1 brew install --cask ${BREW_CASK_PACKAGES[*]}
 
         sudo chown -R $USER /Library/Ruby/Gems/
 
@@ -136,7 +137,7 @@ function main() {
 
 
     install_javascript_packages_npm
-    install_airbnb_eslint
+    # install_airbnb_eslint
     install_vim_plugins
 
     install_tmux_plugin_manager
@@ -164,7 +165,7 @@ function install_zsh_plugins() {
 
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-
+    git clone https://github.com/chrisands/zsh-yarn-completions ~/.oh-my-zsh/custom/plugins/zsh-yarn-completions
 }
 
 function setup_docker() {
@@ -188,7 +189,8 @@ function install_pip_packages() {
     PIP_PACKAGES=(pgcli mycli pyyaml awscli speedtest-cli pika autopep8 pep8 \
         jupyter jupyterlab dl_coursera z3-solver matplotlib tensorflow numpy agda-kernel \
         instalooter pirate-get tensorflow opencv-python virtualenv numpy \
-        matplotlib protobuf conda haruhi-dl google-api-python-client oauth2client progressbar2)
+        matplotlib protobuf conda haruhi-dl google-api-python-client oauth2client progressbar2 \
+        tdmgr PyQt5 paho-mqtt PyQtWebEngine mvt)
 
     # Use xargs, so that PIP doesn't fail on a single error
     cat requirements.txt | xargs -n 1 pip install --user
@@ -302,7 +304,8 @@ function install_javascript_packages_npm() {
         @zeplin/cli @zeplin/cli-connect-react-plugin @zeplin/cli-connect-swift-plugin \
         yo generator-office dts-gen yargs rollup pnpm source-map-explorer \
         @angular/cli n json5 cordova gltf-pipeline @squoosh/cli depcheck @microsoft/rush \
-        do-not-disturb-cli katex
+        do-not-disturb-cli katex servor degit verdaccio tables gatsby-cli browser-sync \
+        @apidevtools/swagger-cli
 }
 
 function install_airbnb_eslint() {
@@ -322,4 +325,4 @@ function install_java_8() {
     sudo installer -package /Volumes/JDK\ 8\ Update\ 231/JDK\ 8\ Update\ 231.pkg -target /                                                               
 }
 
-main
+# main

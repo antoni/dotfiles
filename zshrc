@@ -47,7 +47,13 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(fzf-zsh zsh-autosuggestions zsh-syntax-highlighting virtualenv)
+plugins=(
+fzf-zsh
+zsh-autosuggestions
+zsh-syntax-highlighting
+virtualenv
+zsh-yarn-completions
+)
 
 # User configuration
 
@@ -100,49 +106,75 @@ unsetopt correct_all
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
 my-accept-line () {
-    # check if the buffer does not contain any words
-    if [ ${#${(z)BUFFER}} -eq 0 ]; then
-        # put newline so that the output does not start next
-        # to the prompt
-        echo
-        # check if inside git repository
-        if git rev-parse --git-dir > /dev/null 2>&1 ; then
-            # if so, execute `git status' and `ls'
+# check if the buffer does not contain any words
+if [ ${#${(z)BUFFER}} -eq 0 ]; then
+    # put newline so that the output does not start next
+    # to the prompt
+    echo
+    # check if inside git repository
+    if git rev-parse --git-dir > /dev/null 2>&1 ; then
+        # if so, execute `git status' and `ls'
         ls
         echo ""
-            git status
-        else
-            # else run `ls'
-            ls
-        fi
+        git status
+    else
+        # else run `ls'
+        ls
     fi
-    # in any case run the `accept-line' widget
-    zle accept-line
+fi
+# in any case run the `accept-line' widget
+zle accept-line
 }
 # create a widget from `my-accept-line' with the same name
 zle -N my-accept-line
 # rebind Enter, usually this is `^M'
-bindkey '^M' my-accept-line
+# TODO: FIXME: It runs `git status` or sthg similar on WSL2
+# bindkey '^M' my-accept-line
 
 # autojump
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
 # https://docs.brew.sh/Shell-Completion
 if type brew &>/dev/null; then
-      FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+    FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 
-        autoload -Uz compinit
-          compinit
+    autoload -Uz compinit
+    compinit
 fi
+
+# retrieves and runs last command
+function run-again {
+    # get previous history item
+    zle up-history
+    # confirm command
+    zle accept-line
+}
+
+# run-again widget from function of the same name
+zle -N run-again
+
+# bind widget to Ctrl+X in viins mode
+bindkey -M viins '^B' run-again 
+# bind widget to Ctrl+X in vicmd mode
+bindkey -M vicmd '^B' run-again
 
 # Add .NET Core SDK tools
 export PATH="$PATH:/Users/antek.ff_fra/.dotnet/tools"
 
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
+#export VOLTA_HOME="$HOME/.volta"
+#export PATH="$VOLTA_HOME/bin:$PATH"
 
 # Moving between words in iTerm
 bindkey "[D" backward-word
 bindkey "[C" forward-word
 bindkey "^[a" beginning-of-line
 bindkey "^[e" end-of-line
+
+# GNU utils (GNU grep, etc.)
+PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

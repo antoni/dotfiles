@@ -261,7 +261,7 @@ function setup_hostname() {
     hostname=${hostname:-$hostname_default}
     # TODO: OS check, then uncomment
     # hostnamectl set-hostname $hostname
-    # mac_change_hostname $hostname
+    mac_change_hostname $hostname
 
     print_success_message "Hostname changed to: $hostname"
 }

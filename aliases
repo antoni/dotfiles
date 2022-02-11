@@ -12,6 +12,10 @@ source $HOME/dotfiles/colors.sh
 
 function command_exists () { type "$1" &> /dev/null ; }
 
+# Windows
+# TODO: Set 'pbcopy' on macOS
+alias copy_to_clipboard='clip.exe'
+
 # Aliases and custom functions
 platform='unknown'
 export unamestr=`uname`
@@ -29,7 +33,7 @@ elif [[ "$unamestr" == 'Linux' ]]; then
     function listkernels() {
         dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d'
     }
-alias gdebi='sudo gdebi'
+    alias gdebi='sudo gdebi'
 
     # Linux specific
     # alias i='sudo apt-get install -y'
@@ -38,7 +42,7 @@ alias gdebi='sudo gdebi'
     function addcmd() { sudo dnf install -y $* && echo $* >> ~/install_apt-get.txt; }
 
     alias sound='alsamixer'
-    alias open='xdg-open'
+    # alias open='xdg-open'
     alias st='scrot -ub '"'"'%Y:%m:%d:%H:%M:%S.png'"'"' -e '"'"'mv $f ~/Downloads/'"'"
     alias catquestions='cat ~/Documents/Q.txt'
     alias mountrw='mount -o remount,rw /'
@@ -62,7 +66,7 @@ alias m='man' ;
 alias mm='man $(fc -ln -1 | cut -d" " -f 1)'
 alias l='ls'
 alias v='vim'
-alias grep='grep --color -ni'
+alias grep='grep --color -i'
 alias rmf='rm -rf'
 alias o='rlwrap ocaml'
 alias rpm='sudo rpm'
@@ -81,7 +85,7 @@ function wgetdir2() {
         --restrict-file-names=windows \
         --domains website.org \
         --no-parent $1
-    }
+}
 
 # Programming etc.
 alias m='make'
@@ -374,7 +378,7 @@ dl_website() {
         --restrict-file-names=windows \
         --no-parent \
         $1
-    }
+}
 
 # cd ../../../
 function up() {
@@ -424,14 +428,13 @@ light() { export BACKGROUND=light && source ~/.common_profile.sh; }
 # alias gsa="gnome-screenshot -a"
 alias rmcmd='sudo apt-get remove'
 
-alias mergepdf='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=merged.pdf ' # here go the PDF to be merged
 
 alias autoremove='sudo apt-get autoremove'
 
 alias redisgui='redis-desktop-manager'
 
 function g++gtest() {
-g++ -std=c++11 $1 -lgtest -lpthread && ./a.out
+    g++ -std=c++11 $1 -lgtest -lpthread && ./a.out
 }
 
 # Links all .o files to make elf_i386 executable
@@ -678,7 +681,13 @@ function pip_list() {
 }
 
 function update_packages_mac() {
+    # Skip this step for now, downloading >10 GBs of XCode every now and then takes a lot of time and 
+    # doesn't really make an improvement
+    # echo "Updating Mac AppStore packages..."
+    # mas upgrade;
+
     echo "Updating Homebrew packages..."
+    brew cleanup
 
     # Fix casks with `depends_on` that reference pre-Mavericks
     /usr/bin/find "$(brew --prefix)/Caskroom/"*'/.metadata' -type f -name '*.rb' -print0 | /usr/bin/xargs -0 /usr/bin/sed -i '' '/depends_on macos:/d'
@@ -717,17 +726,22 @@ function sudo_keep_alive() {
 
     # Keep-alive: update existing `sudo` time stamp until `.macos` has finished
     while true; do sudo --non-interactive true; sleep 60;
-        kill -0 "$$" || exit; done 2>/dev/null &
-    }
+        kill -0 "$$" || exit;
+    done 2>/dev/null &
+}
 
 function update_xcode() {
     sudo rm -rf /Library/Developer/CommandLineTools
     xcode-select --install
 }
 
+function reinstall_pip_packages() {
+    pip3 list --outdated --format=freeze | cut -d = -f 1  | xargs -n1 pip3 install --upgrade --force-reinstall
+}
+
 function update_pip_packages() {
-      pip list --outdated --format=freeze | \grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U
-  }
+    pip3 list --outdated --format=freeze | \grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U
+}
 
 function update_all() {
     sudo_keep_alive
@@ -756,9 +770,7 @@ function update_all() {
     # pip3 install --upgrade pip --user;
     # Running it twice seems to resolve some dependency issues which PIP reports when running it just one time
     update_pip_packages; update_pip_packages
-    mas upgrade;
 
-    echo "Updating Homebrew packages"
     update_packages_mac;
 
     popd &> /dev/null 
@@ -1046,7 +1058,7 @@ alias prettify="yarn prettier:fix && gc \"chore: Run Prettier on the entire proj
 
 function copy_as_base64() {
     local file_path=$1
-    openssl base64 < "$file_path" | tr -d '\n' | pbcopy
+    openssl base64 < "$file_path" | tr -d '\n' | copy_to_clipboard
 }
 
 function display_notification() {
@@ -1065,7 +1077,7 @@ function save_last_n_lines_to_file() {
     local LINES=$1
     local filename=~/tmp/$(date)last_$LINES.txt
     fc -ln -"$LINES" | head -n "$LINES" > "$filename"
-    fc -ln -"$LINES" | head -n "$LINES" > pbcopy
+    fc -ln -"$LINES" | head -n "$LINES" > copy_to_clipboard
     echo "Saved to $filename"
 }
 
@@ -1073,7 +1085,7 @@ function get_repo_name() {
     basename -s .git $(git config --get remote.origin.url)
 }
 
-alias mk_iphone_dir='mkdir $(date +%Y%m%d)_iphone_photos'
+alias mk_iphone_dir='mkdir ~/Desktop/$(date +%Y%m%d)_iphone_photos'
 
 # Example: apply_to_all_files 'resize_image 50%'
 function apply_to_all_files() {
@@ -1096,7 +1108,7 @@ function shellcheck_autofix() {
     shellcheck --format diff "$filename" | git apply
 }
 
-alias copy_last_command="fc -ln -1 | awk '{\$1=\$1}1' | pbcopy"
+alias copy_last_command="fc -ln -1 | awk '{\$1=\$1}1' | copy_to_clipboard"
 
 # Usage: add_diagonal_watermak filename quoted_watermark_text
 function add_diagonal_watermak() {
@@ -1111,14 +1123,14 @@ function add_diagonal_watermak() {
         +clone -fill mpr:wm  -draw 'color 0,0 reset' \) \
         -compose over -composite \
         $filename
-    }
+}
 
 # Usage:
 # random_password [password_length] 
 function random_password() {
     local password_length=${1:-16}
     # local PWGEN_REMOVE_CHARACTERS=\'\"\@\?\^\&\*\(\)\`\:\~\?\;\:\[\]\{\}\.\,\\\/\|
-    local PWGEN_REMOVE_CHARACTERS=\&\\
+        local PWGEN_REMOVE_CHARACTERS=\&\\
     pwgen --secure --symbols $password_length 1 --remove-chars $PWGEN_REMOVE_CHARACTERS
 }
 
@@ -1159,9 +1171,9 @@ alias github_merge_pr='gh pr merge $(git branch --show-current) --delete-branch 
 # Alternative
 # tr -dc '[:alnum:]' < /dev/urandom | dd bs=4 count=8 2>/dev/null
 function random-string() {
-# Add special chars:
-# env LC_ALL=C tr -dc '(\&\_a-zA-Z0-9\^\*\@'
-cat /dev/urandom | env LC_ALL=C tr -dc 'a-zA-Z0-9' | fold -w ${1:-32} | head -n 1
+    # Add special chars:
+    # env LC_ALL=C tr -dc '(\&\_a-zA-Z0-9\^\*\@'
+    cat /dev/urandom | env LC_ALL=C tr -dc 'a-zA-Z0-9' | fold -w ${1:-32} | head -n 1
 }
 
 function brew_cleanup_package() {
@@ -1197,7 +1209,18 @@ function convert_to_grayscale() {
 }
 
 alias gl='git log'
-alias copy_branch_name_to_clipboard='git branch --show-current | pbcopy'
+function copy_branch_name() {
+    if [[ -n $(git branch --show-current 2> /dev/null) ]]; then
+        branch=`git branch --show-current`
+    else
+        branch=`cat .git/HEAD | awk -F '/' '{print $NF}'`;
+    fi
+
+    echo $branch | tr -d "\n" | copy_to_clipboard;
+}
+alias copy_last_commit_message='git log -1 --pretty=%B | tr -d "\n" | copy_to_clipboard'
+alias copy_current_directory='pwd | copy_to_clipboard'
+
 # macOS only
 alias analyze_disk_usage='/Applications/OmniDiskSweeper.app/Contents/MacOS/OmniDiskSweeper'
 
@@ -1214,4 +1237,176 @@ alias dnd-toggle='dnd toggle'
 
 # Copy command output to clipboard
 # Usage: echo 'Hello world' | t
-alias t='tee >(pbcopy)'
+alias t='tee >(copy_to_clipboard)'
+
+function remove_password_from_pdf() {
+    local filename=`filename_without_extension "$1"`
+    local password=$2
+    qpdf -password=$password -decrypt $filename.pdf "$filename""_no_password.pdf"
+}
+
+function sync_dotfiles() {
+    pushd ~/scripts && gacw && git push origin master && popd
+    pushd ~/dotfiles && gacw && git push origin master && popd
+}
+
+# .ts do .mp4:
+# ffmpeg -i in.ts -acodec copy -vcodec copy out.mp4
+function download_youtube_stream() {
+    local youtube_video_url=$1
+    youtube-dl --list-formats $youtube_video_url
+
+    printf "Enter stream format (e.g. 94) " 
+    read stream_format
+
+    ffmpeg -i $(youtube-dl --format $stream_format --get-url $youtube_video_url) -c copy $(date +'%Y%m%d')_recording.ts
+}
+
+# TODO: Finish
+function encrypt_pdf() {
+    qpdf --encrypt [readpass] [ownerpass] 256 -- [infile].pdf [outfile].pdf
+}
+
+alias sc2_hotkeys_edit='vim ~/Library/Application\ Support/Blizzard/StarCraft\ II/Accounts/491096383/Hotkeys/Rapid\ fire\ test.SC2Hotkeys'
+
+function download_npm_tarball() {
+    local package_name="$1"
+    local package_url=`curl --silent --show-error https://registry.npmjs.org/"$package_name"/ | jq --raw-output '.versions[."dist-tags".latest].dist.tarball'`
+    wget $package_url
+}
+
+alias grhom='git reset --hard origin/master'
+alias gs2='git squash 2'
+
+function rebase_all() {
+    local repos=(orval svgo)
+
+    for repo in $repos; do
+        pushd "$HOME/$repo"
+        bash rebase.sh;
+        popd
+    done;
+}
+
+
+function first_day_of_month() {
+    local date=$(gdate --date="$(gdate +'%Y-%m-01')" "+%F")
+    echo $date
+}
+
+function last_day_of_month() {
+    local date=$(gdate --date="$(gdate +'%Y-%m-01') - 1 second" "+%F")
+    echo $date
+}
+
+# macOS only
+function battery_recharge_cycles_count() {
+    system_profiler SPPowerDataType | \grep "Cycle Count" | awk '{print $3}'
+}
+
+alias mysql_client='open -a TablePlus'
+# macOS
+alias heic_to_jpg='magick mogrify -monitor -format jpg *.HEIC'
+
+# macOS
+alias software_version='system_profiler SPSoftwareDataType'
+
+# Fixes a corrupt .zsh_history file
+function fix_zsh_history_file() {
+    mv ~/.zsh_history ~/.zsh_history_bad
+    strings -eS ~/.zsh_history_bad > ~/.zsh_history
+    fc -R ~/.zsh_history
+    rm ~/.zsh_history_bad
+}
+
+function yarn_reinstall_dev() {
+    local package_name=$1
+    yarn remove $package_name;
+    yarn add --dev $package_name;
+}
+
+function show_ip_address() {
+    ip address | grep "scope global" | grep -Po '(?<=inet )[\d.]+'
+}
+
+# TODO: Move to proper place
+alias update_all_npm_packages='npx npm-check --global --update-all'
+
+# Windows
+alias xclip='clip.exe'
+
+# Windows
+# See: https://github.com/microsoft/winget-cli/issues/688#issuecomment-788391878
+alias winget='powershell.exe /c winget.exe'
+
+# Windows
+alias edit_idea_settings='vim /mnt/c/Users/Komputer/AppData/Roaming/JetBrains/IntelliJIdea2021.3/idea64.exe.vmoptions'
+
+# Windows
+function open() {
+    local local_path=$1
+    explorer.exe `wslpath -w "$local_path"`
+}
+
+# TODO: Move somwhere else
+alias copy_notepad_plus_plus_settings='cp /mnt/c/Users/Komputer/AppData/Roaming/Notepad++/config.xml ~/dotfiles/notepad_plus_plus_settings.xml'
+
+# TODO: Move to git aliases
+alias git_reset_to_master='git checkout master -- '
+alias gdh='git diff HEAD~'
+
+# Windows
+alias browse='sensible-browser';
+function github_diff_last_commit() {
+    local url=`gh browse --commit --no-browser | sed --expression 's/tree/commit/g'`
+    browse $url;
+}
+
+# TODO: Copy ~/dotfiles/idea.vmoptions to something like:
+# /mnt/c/Users/Komputer/AppData/Roaming/JetBrains/IntelliJIdea2021.3
+
+# Windows
+alias wmic='WMIC.exe'
+
+# Windows
+# TODO: Move to update_all
+# winget upgrade --all
+
+# Windows
+# Launches Windows uninstall program (GUI-based)
+alias uninstall='cmd.exe /c appwiz.cpl'
+
+# Windows
+alias empty_trash_bin='cmd.exe /c "rd /s /q %systemdrive%\$Recycle.bin" 2&> /dev/null'
+
+function run_after_seconds() {
+    local seconds=$1;
+    shift;
+    sleep $seconds && $@ &;
+}
+
+alias merge_pdfs_1='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=merged.pdf ' # here go the PDF to be merged
+
+function merge_pdfs_2 {
+    pdfunite $@ out.pdf
+    printf 'see out.pdf'
+}
+
+function remove_exif_data() {
+    local filename=$1
+    exiftool -EXIF= $filename
+}
+
+# Windows
+alias analyze_disk_usage='/mnt/c/Program\ Files/WizTree/WizTree.exe';
+
+# macOS
+# alias analyze_disk_usage='open /Applications/OmniDiskSweeper.app';
+
+alias restart_tmux='tmux kill-server && tmux'
+
+# Windows
+function copy_folder_to_desktop() {
+    local src_folder="$1"
+    cp -r $src_folder /mnt/c/Users/Komputer/Desktop/
+}
