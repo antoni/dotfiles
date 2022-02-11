@@ -1,0 +1,17 @@
+[Settings]
+
+[Hotkeys]
+ArmySelect=F6
+IdleWorker=F5
+TargetChoose=LeftMouseButton,Z,F,S
+CameraSave0=Control+F1
+CameraSave1=Control+F2
+CameraSave2=Control+F3
+CameraSave3=Control+F4
+CameraView0=F1
+CameraView1=F2
+CameraView2=F3
+CameraView3=F4
+
+[Commands]
+

@@ -1,33 +1,54 @@
-BREW_PACKAGES=(mongodb
-apache-httpd
+#!/usr/bin/env bash
+
+BREW_PACKAGES=(apache-httpd
+gawk
+gnu-sed
+gnu-tar
+coreutils
+findutils
+gnutls
+grep
 ascii
 gron
 mas
+zoom
+haskell-stack
+autojump
 yarn-completion
 dockutil
+gnumeric
 gpg
+testdisk
 handbrake
+terminal-notifier
 bat
 exiftool
 advancecomp
+hyperfine
 datamash
+php
 mplayer
 azure-cli
+emscripten
 deno
 charles
 node
 gifski
+binaryen
 gifsicle
 corsixth
 git-gui
 carthage
-volta
 pipenv
+starship
 woff2
+xhyve
 act
 hashcat
 eth-p/software/bat-extras
+qpdf
 wireguard-tools
+esptool
 ngrok
 rtmpdump
 blender
@@ -42,6 +63,7 @@ dvc
 docker-machine
 ccat
 rustup-init
+tor
 pass
 i2p
 blueutil
@@ -49,7 +71,6 @@ rtorrent
 newsboat
 brightness
 otx
-class-dump
 sleepwatcher
 youtube-dl
 cocoapods
@@ -61,16 +82,17 @@ libav
 coreutils
 rlwrap
 rdiff-backup
-proxychains
+proxychains-ng
 shellcheck
+hadolint
 tesseract-lang
 httpie
 poppler
-gnu-sed
 ghostscript
 swi-prolog
 gnu-smalltalk
-wine
+# TODO: FIXME
+# wine
 pwgen
 wget
 p7zip
@@ -132,23 +154,19 @@ nmap
 tig
 tmux
 tree
-unrar
+# TODO: FIXME
+# unrar
 wget
 vimpager
-mongodb
 ack
 git
 duti
 colordiff
-coreutils
-gawk
-gnu-sed
 cowsay
 lftp
 wget
 axel
 tree
-unrar
 rlwrap
 tig
 nmap
@@ -189,31 +207,58 @@ amiaopensource/amiaos/decklinksdk
 mitmproxy
 ant
 gradle
-# Image optimization
 optipng
 pngcrush
 jpeg
 jpegoptim
+twitch
 )
 
 BREW_CASK_PACKAGES=(texshop
+docker
+iconjar
 growlnotify
 electrum
+http-toolkit
 streamlabs-obs
 cloudflare-warp
 anaconda
+opera-gx
+powershell
 caffeine
+dashlane
+openvpn-connect
+google-cloud-sdk
+expressvpn
 bitwarden
+wickrme
+messenger
+tableplus
+qlvideo
+zulip
 recordit
+fugu
 workplace-chat
 rstudio
+angry-ip-scanner
+turbo-boost-switcher
+paragon-ntfs
 gog-galaxy
 freecad
+intel-haxm
+hammerspoon
+cyberduck
+mountain-duck
+transmit
+keyboard-maestro
+moom
 proxyman
+raycast
 jubler
 postman
 obsidian
 bettertouchtool
+asana
 elmedia-player
 atom
 daisydisk
@@ -224,10 +269,10 @@ image2icon
 abstract
 figma
 clion
+altair-graphql-client
 bitwarden
 adobe-creative-cloud
-java
-docker
+# idafree
 zeplin
 beaker-browser
 stretchly
@@ -236,23 +281,21 @@ dogecoin
 sketchup
 league-of-legends
 colour-contrast-analyser
-filebot
+# does not run on macOS > Big Sur
+# filebot
 namebench
-crossover
+# crossover
 little-snitch
 imazing
 discord
 github
 aquamacs
-autojump
 WebPQuickLook
 robo-3t
 studio-3t
 brave-browser
 grammarly
-enolsoft-chm-view
 obs
-livereload
 alfred
 qlstephen
 starcraft
@@ -294,18 +337,17 @@ fontforge
 opera-developer
 pharo-project/pharo/pharo-launcher
 macpass
+transmission
 transmission-remote-gui
 kitematic 
 gpg-suite
-pref-setter
+# Does not work on Monterey
+# pref-setter
 db-browser-for-sqlite
-zoom
-haskell-stack
 signal
 soda-player
 tunnelblick
 rowanj-gitx
-blue-jeans
 xquartz
 skitch
 mounty
@@ -323,6 +365,7 @@ evernote
 the-unarchiver
 firefox
 # google-chrome
+jwbargsten/misc/defbro
 google-chrome-canary
 google-drive-file-stream
 macdown
@@ -331,11 +374,10 @@ keybase
 spotifree
 macs-fan-control
 vlc
-vlc-webplugin
+# vlc-webplugin
 cleanmymac
 flux
 iterm2-nightly
-veracrypt
 robo-3t
 gimp
 kindle
@@ -348,19 +390,18 @@ spectacle
 mysqlworkbench
 sublime-text
 the-unarchiver
-virtualbox
-macvim
+# TODO: Move to some other function
+# virtualbox
 robo-3t
 hyper
 gitkraken
-caskroom/versions/firefox-developer-edition
+homebrew/cask-versions/firefox-developer-edition
 opera
 webstorm
 libreoffice
 quip
 karabiner-elements
 spectacle
-intel-haxm
 android-studio
 android-sdk
 )
@@ -391,12 +432,12 @@ function vim_you_complete_me_install() {
 function install_cargo() {
     brew install rust;
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null 2> /dev/null ; brew install caskroom/cask/brew-cask 2> /dev/null;
-    brew cask install cargo;
+    brew install --cask cargo;
 }
 
 function install_docker() {
     # https://apple.stackexchange.com/questions/373888/how-do-i-start-the-docker-daemon-on-macos/373914#373914
-    brew cask install docker virtualbox
+    brew install --cask docker virtualbox
     brew install docker-machine
     docker-machine create --driver virtualbox default
     docker-machine restart
@@ -407,12 +448,6 @@ function install_docker() {
 
 function install_dmidecode() {
     brew install cavaliercoder/dmidecode/dmidecode
-}
-
-function install_fuse() {
-    # https://medium.com/@technikhil/setting-up-ntfs-3g-on-your-mac-os-sierra-11eff1749898
-    brew cask install osxfuse
-    brew install ntfs-3g
 }
 
 function mac_install_misc() {
@@ -427,26 +462,30 @@ function mac_install_misc() {
     # Brew service (launchd)
     brew tap homebrew/services
 
+    # Packages needed to install other packages later
+    brew install svn node
+
+    brew install --cask \
     # Fonts
     brew tap homebrew/cask-fonts
-    brew cask install \
+    brew install --cask \
         font-fira-code \
         font-fira-mono \
         font-fira-mono-for-powerline \
         font-inconsolata \
         font-fira-sans
 
-    sdk_man_install
-    vim_you_complete_me_install
+    # TODO: Make it work again
+    # vim_you_complete_me_install
 
     # brew install jmeter --with-plugins
     brew install jmeter
 
     # Install Quick Look plugins https://github.com/sindresorhus/quick-look-plugins
-    brew cask install qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv webpquicklook qlvideo
+    brew install --cask qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv webpquicklook qlvideo
 
     # Fonts
-    brew cask install font-menlo-for-powerline font-inconsolata font-source-code-pro font-hasklig font-monoid
+    brew install --cask font-menlo-for-powerline font-inconsolata font-source-code-pro font-hasklig font-monoid
 
     # Heroku CLI
     brew install --cask dotnet-sdk
@@ -454,12 +493,15 @@ function mac_install_misc() {
 
     # mongoDB
     brew tap mongodb/brew
-    brew install mongodb-community
+    brew install mongodb-community@5.0
 
     # Dart langauge
     brew tap dart-lang/dart
     brew install dart
 
-    install_fuse
+    # sdk_man_install
 }
 
+function install_packages_with_security_approvals() {
+brew install --cask virtualbox 
+}

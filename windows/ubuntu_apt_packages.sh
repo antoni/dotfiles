@@ -1,0 +1,16 @@
+vim
+tmux
+nodejs
+golang
+npm
+docker
+htop
+nginx
+jq
+gitk
+poppler-utils
+mc
+exiftool
+rand
+subversion
+tig
