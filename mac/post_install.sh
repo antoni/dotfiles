@@ -68,6 +68,7 @@ function post_install() {
         duti -s `app_id "PYM Player"`    .mkv    all;
         duti -s `app_id "PYM Player"`    .mp4    all;
         duti -s `app_id "TextMate"`      .txt    all;
+        duti -s `app_id "TextMate"`      .lua    all;
         duti -s `app_id "TeXShop"`       .tex    all;
         duti -s `app_id "MacDown"`       .md     all;
         duti -s `app_id "VLC"`           .webm   all;
@@ -77,6 +78,7 @@ function post_install() {
         # duti -s `app_id "*"`      .html all;
         duti -s `app_id "TextMate"`      .lat    all;
         duti -s `app_id "TextMate"`      .input  all;
+        duti -s `app_id "TextMate"`      .ts  all;
         duti -s `app_id "Google Chrome"` .webp  all;
     else
         printf "You have to install 'duti' first"
