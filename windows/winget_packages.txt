@@ -1,0 +1,56 @@
+chromium
+wox
+putty
+PuTTY.PuTTY
+GitHub.cli
+vscode
+Python
+vim.vim
+GNU.Emacs
+ImageMagick.ImageMagick
+Docker.DockerDesktop
+Zoom.Zoom
+Oracle.JavaRuntimeEnvironment
+winget install IrfanSkiljan.IrfanView
+Valve.Steam
+Notepad++.Notepad++
+Ghisler.TotalCommander
+winget install SlackTechnologies.Slack
+Microsoft.TeamsExploration
+Microsoft.WindowsTerminal
+OpenJS.NodeJS
+Amazon.AWSCLI
+Zeit.Hyper
+7zip.7zip
+AnyDeskSoftwareGmbH.AnyDesk
+BraveSoftware.BraveBrowser
+Microsoft.dotNetFramework
+Microsoft.dotnet
+Oracle.VirtualBox
+TorProject.TorBrowser
+NordVPN.NordVPN
+7zip.7zip
+mcmilk.7zip-zstd
+Telegram.TelegramDesktop
+OpenWhisperSystems.Signal
+Xming.Xming
+Greenshot.Greenshot
+OpenVPNTechnologies.OpenVPNConnect
+winget install -e --id Discord.Discord
+winget install -e --id Yarn.Yarn
+winget install -e --id Mozilla.Firefox
+winget install -e --id Mozilla.Firefox.DeveloperEdition
+ProtonTechnologies.ProtonVPN
+winget install -e --id ExpressVPN.ExpressVPN
+winget install -e --id Inkscape.Inkscape
+winget install -e --id Microsoft.PowerToys
+winget install -e --id NurgoSoftware.AquaSnap
+winget install -e --id Microsoft.VisualStudioCode
+winget install -e --id BinaryFortress.DisplayFusion
+winget install -e --id TorProject.TorBrowser
+winget install -e --id JetBrains.IntelliJIDEA.Ultimate
+winget install -e --id flux.flux
+winget install -e --id Opera.Opera
+winget install -e --id Opera.OperaGX
+winget install -e --id AntibodySoftware.WizTree
+winget install -e --id ArtifexSoftware.GhostScript

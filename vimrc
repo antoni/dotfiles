@@ -385,7 +385,6 @@ Plugin 'majutsushi/tagbar'
 " Bundle 'jondkinney/dragvisuals.vim'
 " Bundle 'nixon/vim-vmath' 
 Bundle 'itspriddle/vim-shellcheck'
-Bundle 'elzr/vim-json'
 " Bundle 'taku-o/vim-vis'
 " Bundle 'rking/ag.vim'
 Bundle 'jamessan/vim-gnupg'
@@ -484,7 +483,7 @@ Bundle 'ervandew/supertab'
 
 " SnipMate
 Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'tomtom/tlib_vim'
+" Bundle 'tomtom/tlib_vim'
 Bundle 'garbas/vim-snipmate'
 Bundle 'honza/vim-snippets'
 
