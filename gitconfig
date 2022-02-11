@@ -32,8 +32,9 @@
     whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
     excludesfile = /Users/antek.ff_fra/.gitignore
     editor = vi
-    pager = delta
+    ; pager = delta
     ignorecase = false
+	attributesfile = ~/.gitattributes
 [delta]
     features = decorations
     whitespace-error-style = 22 reverse
@@ -73,7 +74,9 @@
     cl = clone
     cld = clone --depth 1
     # Show message from last commit
-    slog = "git log --pretty=format:%s | head -n 1"
+    slog = "!git log --pretty=format:%s | head -n 1"
+    # Show diff with deleted files only
+    deleted = diff --diff-filter=D
     # Rewrite previous commit usernames and emails
     # git change-commits GIT_AUTHOR_NAME "old name" "new name"
     #
@@ -109,6 +112,12 @@
     commit-diff-against-master = "!git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative master..$(git rev-parse --abbrev-ref HEAD)"
     pretty-log-1 = "!pretty_log_1() { COMMITS_COUNT=${1:-10}; git --no-pager log --max-count $COMMITS_COUNT --pretty=format:'%s' --abbrev-commit;};pretty_log_1"
     pretty-log-2 = "!pretty_log_2() { COMMITS_COUNT=${1:-10}; git --no-pager log --max-count $COMMITS_COUNT --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit;}; pretty_log_2"
+	diff-image = "!f() { cd -- \"${GIT_PREFIX:-.}\"; GIT_DIFF_IMAGE_ENABLED=1 git diff \"$@\"; }; f"
+    squash-all = "!f(){ git reset $(git commit-tree HEAD^{tree} -m \"${1:-A new start}\");};f"
+    # Shows all commits for given author (subject only)
+    author-commits = "!git --no-pager log --pretty=format:\"%s\" --author=\"$1\" #"
+    # Shows all commits for given author, with full diff
+    author-commits-full = "!git --no-pager log --author=\"$1\" --oneline | awk '{print $1}' | xargs git show #"
 [push]
     default = matching
     followTags = true
@@ -128,3 +137,7 @@
     required = true
     clean = git-lfs clean -- %f
     smudge = git-lfs smudge -- %f
+[diff "image"]
+	command = ~/git-diff-image/git_diff_image
+[pager]
+	status = true
