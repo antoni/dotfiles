@@ -28,6 +28,52 @@ if [[ "$unamestr" == 'Darwin' ]]; then
     # alias vim='mvim -v'
     alias ls='ls -h -lFG'
     alias brew='HOMEBREW_NO_AUTO_UPDATE=1 brew'
+elif grep -q microsoft /proc/sys/kernel/osrelease; then
+alias xclip='clip.exe'
+
+# Windows
+# See: https://github.com/microsoft/winget-cli/issues/688#issuecomment-788391878
+alias winget='powershell.exe /c winget.exe'
+
+# Windows
+alias edit_idea_settings='vim /mnt/c/Users/Komputer/AppData/Roaming/JetBrains/IntelliJIdea2021.3/idea64.exe.vmoptions'
+
+# Windows
+function open() {
+    local local_path=$1
+    explorer.exe `wslpath -w "$local_path"`
+}
+
+# Windows
+alias browse='sensible-browser';
+function github_diff_last_commit() {
+    local url=`gh browse --commit --no-browser | sed --expression 's/tree/commit/g'`
+    browse $url;
+}
+
+# Windows
+alias wmic='WMIC.exe'
+
+# Windows
+# TODO: Move to update_all
+# winget upgrade --all
+
+# Windows
+# Launches Windows uninstall program (GUI-based)
+alias uninstall='cmd.exe /c appwiz.cpl'
+
+# Windows
+alias empty_trash_bin='cmd.exe /c "rd /s /q %systemdrive%\$Recycle.bin" 2&> /dev/null'
+
+# Windows
+alias analyze_disk_usage='/mnt/c/Program\ Files/WizTree/WizTree.exe';
+
+# Windows
+function copy_folder_to_desktop() {
+    local src_folder="$1"
+    cp -r $src_folder /mnt/c/Users/Komputer/Desktop/
+}
+
 elif [[ "$unamestr" == 'Linux' ]]; then
     # Debian/Ubuntu
     function listkernels() {
@@ -1332,52 +1378,17 @@ function show_ip_address() {
 # TODO: Move to proper place
 alias update_all_npm_packages='npx npm-check --global --update-all'
 
-# Windows
-alias xclip='clip.exe'
 
-# Windows
-# See: https://github.com/microsoft/winget-cli/issues/688#issuecomment-788391878
-alias winget='powershell.exe /c winget.exe'
-
-# Windows
-alias edit_idea_settings='vim /mnt/c/Users/Komputer/AppData/Roaming/JetBrains/IntelliJIdea2021.3/idea64.exe.vmoptions'
-
-# Windows
-function open() {
-    local local_path=$1
-    explorer.exe `wslpath -w "$local_path"`
-}
-
-# TODO: Move somwhere else
+# TODO: Move somewhere else
 alias copy_notepad_plus_plus_settings='cp /mnt/c/Users/Komputer/AppData/Roaming/Notepad++/config.xml ~/dotfiles/notepad_plus_plus_settings.xml'
 
 # TODO: Move to git aliases
 alias git_reset_to_master='git checkout master -- '
 alias gdh='git diff HEAD~'
 
-# Windows
-alias browse='sensible-browser';
-function github_diff_last_commit() {
-    local url=`gh browse --commit --no-browser | sed --expression 's/tree/commit/g'`
-    browse $url;
-}
 
 # TODO: Copy ~/dotfiles/idea.vmoptions to something like:
 # /mnt/c/Users/Komputer/AppData/Roaming/JetBrains/IntelliJIdea2021.3
-
-# Windows
-alias wmic='WMIC.exe'
-
-# Windows
-# TODO: Move to update_all
-# winget upgrade --all
-
-# Windows
-# Launches Windows uninstall program (GUI-based)
-alias uninstall='cmd.exe /c appwiz.cpl'
-
-# Windows
-alias empty_trash_bin='cmd.exe /c "rd /s /q %systemdrive%\$Recycle.bin" 2&> /dev/null'
 
 function run_after_seconds() {
     local seconds=$1;
@@ -1397,16 +1408,9 @@ function remove_exif_data() {
     exiftool -EXIF= $filename
 }
 
-# Windows
-alias analyze_disk_usage='/mnt/c/Program\ Files/WizTree/WizTree.exe';
 
 # macOS
 # alias analyze_disk_usage='open /Applications/OmniDiskSweeper.app';
 
 alias restart_tmux='tmux kill-server && tmux'
 
-# Windows
-function copy_folder_to_desktop() {
-    local src_folder="$1"
-    cp -r $src_folder /mnt/c/Users/Komputer/Desktop/
-}
