@@ -18,7 +18,7 @@ Ghisler.TotalCommander
 winget install SlackTechnologies.Slack
 Microsoft.TeamsExploration
 Microsoft.WindowsTerminal
-OpenJS.NodeJS
+winget install -e --id OpenJS.NodeJS.LTS
 Amazon.AWSCLI
 Zeit.Hyper
 7zip.7zip

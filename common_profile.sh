@@ -14,8 +14,8 @@ export EDITOR="vim"
 # Overcome the madness: http://www.economyofeffort.com/2014/07/04/zsh/
 export TERM=xterm-256color
 
-# [ -n "$TMUX" ] && export TERM=screen-256color
-[ -n "$TMUX" ] && export TERM=tmux-256color
+[ -n "$TMUX" ] && export TERM=screen-256color
+# [ -n "$TMUX" ] && export TERM=tmux-256color
 
 function fix_ubuntu() {
     # See: https://bugs.launchpad.net/ubuntu/+source/at-spi2-core/+bug/1193236
