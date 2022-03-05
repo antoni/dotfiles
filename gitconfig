@@ -35,6 +35,7 @@
     ; pager = delta
     ignorecase = false
 	attributesfile = ~/.gitattributes
+	autocrlf = input
 [delta]
     features = decorations
     whitespace-error-style = 22 reverse

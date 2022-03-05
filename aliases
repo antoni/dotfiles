@@ -1414,3 +1414,10 @@ function remove_exif_data() {
 
 alias restart_tmux='tmux kill-server && tmux'
 
+function mov_to_mp4 () {
+    local filename=`filename_without_extension "$1"`
+    local output_filename=$filename.mp4
+    ffmpeg  -loglevel error -fflags +genpts -i "$1" -r $fps "$output_filename"  && echo "Successfully created $output_filename" || echo "Error converting $1 to $output_filename"
+    ffmpeg -hide_banner loglevel error -i "$1" -vcodec h264 -acodec mp2 "$output_filename"
+}
+
