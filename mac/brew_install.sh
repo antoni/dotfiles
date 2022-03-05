@@ -32,7 +32,7 @@ azure-cli
 emscripten
 deno
 charles
-node
+node@16
 gifski
 binaryen
 gifsicle
@@ -463,7 +463,7 @@ function mac_install_misc() {
     brew tap homebrew/services
 
     # Packages needed to install other packages later
-    brew install svn node
+    brew install svn node@16
 
     brew install --cask \
     # Fonts

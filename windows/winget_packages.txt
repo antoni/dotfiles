@@ -55,4 +55,5 @@ winget install -e --id Opera.OperaGX
 winget install -e --id AntibodySoftware.WizTree
 winget install -e --id ArtifexSoftware.GhostScript
 winget install -e --id WhatsApp.WhatsApp
-
+winget install -e --id vim.vim
+winget install -e --id GNU.Emacs
