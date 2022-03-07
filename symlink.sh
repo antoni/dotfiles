@@ -293,5 +293,9 @@ for atom in `\ls atom`; do
     ln -fs ~/dotfiles/atom/$atom $HOME/.atom/$atom;
 done
 
+# macOS
+# TextMate
+ln -s /Applications/TextMate.app/Contents/MacOS/mate /usr/local/bin/mate
+
 print_success_message "Successfully symlinked all files"
 
