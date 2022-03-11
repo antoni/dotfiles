@@ -29,55 +29,55 @@ if [[ "$unamestr" == 'Darwin' ]]; then
     alias ls='ls -h -lFG'
     alias brew='HOMEBREW_NO_AUTO_UPDATE=1 brew'
 elif grep -q microsoft /proc/sys/kernel/osrelease; then
-alias xclip='clip.exe'
+    alias xclip='clip.exe'
 
-# Windows
-# See: https://github.com/microsoft/winget-cli/issues/688#issuecomment-788391878
-alias winget='powershell.exe /c winget.exe'
+    # Windows
+    # See: https://github.com/microsoft/winget-cli/issues/688#issuecomment-788391878
+    alias winget='powershell.exe /c winget.exe'
 
-# Windows
-alias edit_idea_settings='vim /mnt/c/Users/Komputer/AppData/Roaming/JetBrains/IntelliJIdea2021.3/idea64.exe.vmoptions'
+    # Windows
+    alias edit_idea_settings='vim /mnt/c/Users/Komputer/AppData/Roaming/JetBrains/IntelliJIdea2021.3/idea64.exe.vmoptions'
 
-function open_autostart_folder() {
-cmd.exe /c explorer.exe "C:\Users\Komputer\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
-open /mnt/c/ProgramData/Microsoft/Windows/Start\ Menu/Programs/StartUp
-}
+    function open_autostart_folder() {
+        cmd.exe /c explorer.exe "C:\Users\Komputer\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
+        open /mnt/c/ProgramData/Microsoft/Windows/Start\ Menu/Programs/StartUp
+    }
 
-# Windows
-function open() {
-    local local_path=$1
-    explorer.exe `wslpath -w "$local_path"`
-}
+    # Windows
+    function open() {
+        local local_path=$1
+        explorer.exe `wslpath -w "$local_path"`
+    }
 
-# Windows
-alias browse='sensible-browser';
-function github_diff_last_commit() {
-    local url=`gh browse --commit --no-browser | sed --expression 's/tree/commit/g'`
-    browse $url;
-}
+    # Windows
+    alias browse='sensible-browser';
+    function github_diff_last_commit() {
+        local url=`gh browse --commit --no-browser | sed --expression 's/tree/commit/g'`
+        browse $url;
+    }
 
-# Windows
-alias wmic='WMIC.exe'
+    # Windows
+    alias wmic='WMIC.exe'
 
-# Windows
-# TODO: Move to update_all
-# winget upgrade --all
+    # Windows
+    # TODO: Move to update_all
+    # winget upgrade --all
 
-# Windows
-# Launches Windows uninstall program (GUI-based)
-alias uninstall='cmd.exe /c appwiz.cpl'
+    # Windows
+    # Launches Windows uninstall program (GUI-based)
+    alias uninstall='cmd.exe /c appwiz.cpl'
 
-# Windows
-alias empty_trash_bin='cmd.exe /c "rd /s /q %systemdrive%\$Recycle.bin" 2&> /dev/null'
+    # Windows
+    alias empty_trash_bin='cmd.exe /c "rd /s /q %systemdrive%\$Recycle.bin" 2&> /dev/null'
 
-# Windows
-alias analyze_disk_usage='/mnt/c/Program\ Files/WizTree/WizTree.exe';
+    # Windows
+    alias analyze_disk_usage='/mnt/c/Program\ Files/WizTree/WizTree.exe';
 
-# Windows
-function copy_folder_to_desktop() {
-    local src_folder="$1"
-    cp -r $src_folder /mnt/c/Users/Komputer/Desktop/
-}
+    # Windows
+    function copy_folder_to_desktop() {
+        local src_folder="$1"
+        cp -r $src_folder /mnt/c/Users/Komputer/Desktop/
+    }
 
 elif [[ "$unamestr" == 'Linux' ]]; then
     # Debian/Ubuntu
@@ -1426,4 +1426,7 @@ function mov_to_mp4 () {
     ffmpeg -hide_banner loglevel error -i "$1" -vcodec h264 -acodec mp2 "$output_filename"
 }
 
-
+function kill_process_on_port() { 
+    local port="$1";
+    lsof -t -i tcp:"$port" | xargs kill -9
+}
