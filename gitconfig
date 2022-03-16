@@ -134,10 +134,10 @@
 [commit]
     gpgsign = false
 [filter "lfs"]
-    process = git-lfs filter-process
+	process = git-lfs filter-process
     required = true
     clean = git-lfs clean -- %f
-    smudge = git-lfs smudge -- %f
+	smudge = git-lfs smudge -- %f
 [diff "image"]
 	command = ~/git-diff-image/git_diff_image
 [pager]
