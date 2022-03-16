@@ -58,4 +58,6 @@ winget install -e --id WhatsApp.WhatsApp
 winget install -e --id vim.vim
 winget install -e --id GNU.Emacs
 winget install wsltty
-
+winget install -e --id msys2.msys2
+winget install -e --id GitHub.GitLFS
+winget install -e --id scottlerch.hosts-file-editor
