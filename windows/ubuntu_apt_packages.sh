@@ -14,3 +14,6 @@ exiftool
 rand
 subversion
 tig
+zip
+git-lfs
+
