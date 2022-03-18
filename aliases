@@ -12,15 +12,12 @@ source $HOME/dotfiles/colors.sh
 
 function command_exists () { type "$1" &> /dev/null ; }
 
-# Windows
-# TODO: Set 'pbcopy' on macOS
-alias copy_to_clipboard='clip.exe'
-
 # Aliases and custom functions
 platform='unknown'
 export unamestr=`uname`
 if [[ "$unamestr" == 'Darwin' ]]; then
     # Mac OS X-specific
+    alias copy_to_clipboard='pbcopy'
     alias setmiddlevolume='sudo osascript -e "set Volume 5"'
     alias eclipseclean='/Applications/eclipse/Eclipse.app/Contents/MacOS/eclipse -clean'
     alias topcoder='javaws ~/Developer/Topcoder/ContestAppletProd.jnlp'
@@ -28,7 +25,11 @@ if [[ "$unamestr" == 'Darwin' ]]; then
     # alias vim='mvim -v'
     alias ls='ls -h -lFG'
     alias brew='HOMEBREW_NO_AUTO_UPDATE=1 brew'
+
 elif grep -q microsoft /proc/sys/kernel/osrelease; then
+    # Windows (WSL)
+    alias copy_to_clipboard='clip.exe'
+
     alias xclip='clip.exe'
 
     # Windows
