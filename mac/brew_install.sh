@@ -269,6 +269,7 @@ image2icon
 abstract
 figma
 clion
+qcad
 altair-graphql-client
 bitwarden
 adobe-creative-cloud
