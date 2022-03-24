@@ -243,6 +243,7 @@ rstudio
 angry-ip-scanner
 turbo-boost-switcher
 paragon-ntfs
+librecad
 gog-galaxy
 freecad
 intel-haxm
