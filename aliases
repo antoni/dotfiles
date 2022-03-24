@@ -1433,3 +1433,6 @@ function kill_process_on_port() {
     local port="$1";
     lsof -t -i tcp:"$port" | xargs kill -9
 }
+
+# macOS
+alias dwg2pdf='/Applications/QCAD.app/Contents/Resources/dwg2pdf -no-dock-icon'
