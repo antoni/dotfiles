@@ -104,13 +104,13 @@ function main() {
 		# Add sources
 		curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 
-		sudo apt install -y ${PACKAGES[*]} ${DEBIAN[*]}
+		sudo apt install -y "${PACKAGES[*]}" "${DEBIAN[*]}"
 		install_snap_packages
 		install_yarn_debian
 		#install_debian_chrome
 	elif [ -f /etc/redhat-release ]; then
 		echo "Installing required packages on Fedora"
-		sudo_exec dnf install -y ${PACKAGES[*]}
+		sudo_exec dnf install -y "${PACKAGES[*]}"
 		${FEDORA[*]}
 		# install_fedora_sound
 		install_fedora_chrome
@@ -121,10 +121,10 @@ function main() {
 		touch ~/.hushlogin
 
 		#mac_install_misc
-		HOMEBREW_NO_AUTO_UPDATE=1 brew install ${BREW_PACKAGES[*]}
-		HOMEBREW_NO_AUTO_UPDATE=1 brew install --cask ${BREW_CASK_PACKAGES[*]}
+		HOMEBREW_NO_AUTO_UPDATE=1 brew install "${BREW_PACKAGES[*]}"
+		HOMEBREW_NO_AUTO_UPDATE=1 brew install --cask "${BREW_CASK_PACKAGES[*]}"
 
-		sudo chown -R $USER /Library/Ruby/Gems/
+		sudo chown -R "$USER" /Library/Ruby/Gems/
 
 		# Generate 'locate' database
 		sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
@@ -162,25 +162,25 @@ function install_zsh_plugins() {
 	# git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
 	# git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
 
-	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+	git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions
+	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting
 	git clone https://github.com/chrisands/zsh-yarn-completions ~/.oh-my-zsh/custom/plugins/zsh-yarn-completions
 }
 
 function setup_docker() {
 	# Add current user to docker group
 	sudo_exec groupadd -f docker
-	sudo_exec usermod -aG docker $USER
+	sudo_exec usermod -aG docker "$USER"
 	newgrp docker
-	sudo_exec chown $USER /var/run/docker.sock
+	sudo_exec chown "$USER" /var/run/docker.sock
 }
 
 function install_fzf() {
 	# install fzf to oh-my-zsh custom plugins directory
-	git clone https://github.com/junegunn/fzf.git ${ZSH}/custom/plugins/fzf
-	${ZSH}/custom/plugins/fzf/install --bin
+	git clone https://github.com/junegunn/fzf.git "${ZSH}"/custom/plugins/fzf
+	"${ZSH}"/custom/plugins/fzf/install --bin
 	# install fzf-zsh to oh-my-zsh custom plugins directory
-	git clone https://github.com/Treri/fzf-zsh.git ${ZSH}/custom/plugins/fzf-zsh
+	git clone https://github.com/Treri/fzf-zsh.git "${ZSH}"/custom/plugins/fzf-zsh
 }
 
 function install_pip_packages() {
@@ -221,7 +221,7 @@ function install_k8s() {
 	git clone https://github.com/kubernetes/kubernetes.git
 
 	# 2. Build the binaries
-	cd kubernetes
+	cd kubernetes || exit
 	KUBE_BUILD_PLATFORMS=linux/amd64 ./hack/build-go.sh
 }
 
@@ -235,7 +235,7 @@ function install_alacritty() {
 
 	# Clone the source code:
 	git clone https://github.com/jwilm/alacritty.git ~/alacritty
-	cd alacritty
+	cd alacritty || exit
 	# Make sure you have the right Rust compiler installed. Run
 	rustup override set stable
 	rustup update stable
@@ -253,7 +253,7 @@ function configure_postgres() {
 function install_haskell_packages() {
 	HASKELL_PACKAGES=(happy hscolour funnyprint alex parsec hoogle QuickCheck mtl)
 	cabal update
-	cabal install $HASKELL_PACKAGES
+	cabal install "$HASKELL_PACKAGES"
 }
 
 function install_r_packages() {
@@ -264,7 +264,7 @@ function install_r_packages() {
 
 function install_go_packages() {
 	GO_PACKAGES=(github.com/derekparker/delve/cmd/dlv github.com/Sirupsen/logrus)
-	go get -u $GO_PACKAGES
+	go get -u "$GO_PACKAGES"
 }
 
 function install_nvidia_driver() {
@@ -292,7 +292,7 @@ function install_tmux_plugin_manager() {
 # Make global packages install locally (without sudo)
 function install_npm() {
 	NPM_DIR=$HOME/.npm-global
-	mkdir -p $NPM_DIR
+	mkdir -p "$NPM_DIR"
 	npm config set prefix "$NPM_DIR"
 }
 

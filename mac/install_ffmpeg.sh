@@ -21,7 +21,7 @@ sdl shtool texi2html theora wget x264 x265 xvid nasm
 # just delete the binary (/usr/local/bin/ffmpeg in this case)
 # and start again from this step.
 git clone https://git.ffmpeg.org/ffmpeg.git ffmpeg
-cd ffmpeg
+cd ffmpeg || exit
 
 # at this point, ChromaPrint has to be installed, else this step will fail.
 # sample compilation command. Customize this to your needs
