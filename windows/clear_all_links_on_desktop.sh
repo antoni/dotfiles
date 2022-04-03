@@ -2,4 +2,3 @@
 
 rm -rf /mnt/c/Users/Komputer/Desktop/*.lnk
 rm -rf /mnt/c/Users/Public/Desktop/*.lnk
-

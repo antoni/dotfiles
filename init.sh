@@ -3,7 +3,7 @@ cd ~
 printf 'Disabling macOS Gatekeeper (temporarily)\n'
 spctl --master-disable
 
-# 
+#
 
 # Homebrew
 
@@ -24,20 +24,20 @@ cat ~/.ssh/id_rsa.pub | pbcopy
 
 printf "Login to Github and paste the SSH key:\n\nhttps://github.com/settings/ssh/new\n\n"
 
-git clone git@github.com:antoni/dotfiles.git ; cd dotfiles
+git clone git@github.com:antoni/dotfiles.git
+cd dotfiles
 
 # Clone scripts repository
 
 git clone git@github.com:antoni/scripts.git ~/scripts
 
-# Install xCode (TODO) 
-
+# Install xCode (TODO)
 
 # Install everything else we need
 
 ./install/install.sh
 
-# 
+#
 
 # Set deafult browser
 
@@ -62,4 +62,3 @@ npm login --registry=https://npm.pkg.github.com/
 
 printf 'Enabling back macOS Gatekeeper\n'
 spctl --master-disable
-
