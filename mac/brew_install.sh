@@ -29,6 +29,7 @@ BREW_PACKAGES=(apache-httpd
 	php
 	mplayer
 	azure-cli
+    pillow
 	emscripten
 	shfmt
 	deno
