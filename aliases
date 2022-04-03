@@ -8,7 +8,7 @@ DEFAULT_COORDS="52.23:21.012'"
 
 export BASH=/usr/local/bin/bash
 
-source $HOME/dotfiles/colors.sh
+source "$HOME"/dotfiles/colors.sh
 
 function command_exists() { type "$1" &>/dev/null; }
 
@@ -52,7 +52,7 @@ elif test -f /proc/sys/kernel/osrelease && grep -q microsoft /proc/sys/kernel/os
 	alias browse='sensible-browser'
 	function github_diff_last_commit() {
 		local url=$(gh browse --commit --no-browser | sed --expression 's/tree/commit/g')
-		browse $url
+		browse "$url"
 	}
 
 	alias wmic='WMIC.exe'
@@ -70,7 +70,7 @@ elif test -f /proc/sys/kernel/osrelease && grep -q microsoft /proc/sys/kernel/os
 	function copy_folder_to_desktop() {
 		local src_folder="$1"
 		# TODO: Get username dynamically
-		cp -r $src_folder /mnt/c/Users/Komputer/Desktop/
+		cp -r "$src_folder" /mnt/c/Users/Komputer/Desktop/
 	}
 
 elif [[ "$unamestr" == 'Linux' ]]; then
@@ -84,7 +84,7 @@ elif [[ "$unamestr" == 'Linux' ]]; then
 	# alias i='sudo apt-get install -y'
 	# Install through apt-get and add installed software to list of used commands
 	# addcmd() { sudo apt-get install -y $* && echo $* >> ~/install_apt-get.txt; }
-	function addcmd() { sudo dnf install -y $* && echo $* >>~/install_apt-get.txt; }
+	function addcmd() { sudo dnf install -y "$*" && echo "$*" >>~/install_apt-get.txt; }
 
 	alias sound='alsamixer'
 	# alias open='xdg-open'
@@ -129,7 +129,7 @@ function wgetdir2() {
 		--convert-links \
 		--restrict-file-names=windows \
 		--domains website.org \
-		--no-parent $1
+		--no-parent "$1"
 }
 
 # Programming etc.
@@ -252,13 +252,13 @@ alias explorer='nautilus --no-desktop'
 
 # Markdown to PDF
 function md2pdf() {
-	pandoc -s -V papersize:a4 -V geometry:margin=1in --from gfm -o $1.pdf $1
-	open $1.pdf
+	pandoc -s -V papersize:a4 -V geometry:margin=1in --from gfm -o "$1".pdf "$1"
+	open "$1".pdf
 }
 
 function rst2pdf() {
-	pandoc -s -V papersize:a4 -V geometry:margin=1in --from rst -o $1.pdf $1
-	open $1.pdf
+	pandoc -s -V papersize:a4 -V geometry:margin=1in --from rst -o "$1".pdf "$1"
+	open "$1".pdf
 }
 
 # Serves github-rendered Markdown file (from .) on localhost:6419
@@ -277,12 +277,12 @@ csview() {
 }
 # Custom cat: colourised and tabulated for CSV files alias cat='pygmentize -g'
 xcat() {
-	filename=$(basename $1)
+	filename=$(basename "$1")
 	fileext=${filename##*.}
 	if [ "$fileext" = "csv" ]; then
-		csview $1
+		csview "$1"
 	else
-		pygmentize -g $1
+		pygmentize -g "$1"
 	fi
 }
 
@@ -295,7 +295,7 @@ s() {
 
 # Launch Vim solarized theme depending on the time of the day
 vv() {
-	echo $1
+	echo "$1"
 	hour=$(date +%H)
 	theme=dark
 	if [[ $hour -ge 6 && $hour -le 17 ]]; then
@@ -350,7 +350,7 @@ alias pil='pip list'
 
 # Execute nth line of a file
 nth() {
-	eval $(sed $1'q;d' $2)
+	eval $(sed "$1"'q;d' "$2")
 }
 
 # Countdown, usage: countdown 60, countdown $((2*60*60))
@@ -370,7 +370,7 @@ function stopwatch() {
 	done
 }
 
-function mvd() { mv $1 ~/Downloads/; }
+function mvd() { mv "$1" ~/Downloads/; }
 
 # Utils
 # Print primitive data types sizes
@@ -404,10 +404,10 @@ h() {
 
 pat() {
 	if hash csearch 2>/dev/null; then
-		csearch -i $1
+		csearch -i "$1"
 	else
 		[ ! -z "$2" ] && search_dir="$2" || search_dir="."
-		grep -rnw $search_dir -e $1
+		grep -rnw $search_dir -e "$1"
 	fi
 }
 
@@ -424,13 +424,13 @@ dl_website() {
 		--convert-links \
 		--restrict-file-names=windows \
 		--no-parent \
-		$1
+		"$1"
 }
 
 # cd ../../../
 function up() {
 	i=$1
-	while [ $i -gt 0 ]; do
+	while [ "$i" -gt 0 ]; do
 		cd ..
 		i=$(($i - 1))
 	done
@@ -465,7 +465,7 @@ alias p='python'
 alias fixandroidstudio='IBUS_ENABLE_SYNC_MODE=1 ibus-daemon -xrd'
 
 diffcount() {
-	diff -U 0 $1 $2 | grep -c ^@
+	diff -U 0 "$1" "$2" | grep -c ^@
 }
 
 dark() { export BACKGROUND=dark && source ~/.common_profile.sh; }
@@ -479,20 +479,20 @@ alias autoremove='sudo apt-get autoremove'
 alias redisgui='redis-desktop-manager'
 
 function g++gtest() {
-	g++ -std=c++11 $1 -lgtest -lpthread && ./a.out
+	g++ -std=c++11 "$1" -lgtest -lpthread && ./a.out
 }
 
 # Links all .o files to make elf_i386 executable
 function link() {
 	# Default value = test
 	BIN=${1:-test}
-	ld -m elf_i386 -s -o $BIN *.o
+	ld -m elf_i386 -s -o "$BIN" *.o
 }
 # GCC flags:
 # -fverbose-asm -S
 
 function compile() {
-	nasm -f elf $1
+	nasm -f elf "$1"
 }
 
 alias burn_iso='wodim'
@@ -500,7 +500,7 @@ alias burn_iso='wodim'
 # Recursive chmod
 chmod_rec() {
 	# find . -type d -exec chmod +rx {} \;
-	find . -type d -exec chmod $1 {} \;
+	find . -type d -exec chmod "$1" {} \;
 }
 
 alias make='make -j 4'
@@ -538,9 +538,9 @@ alias ydlworst='ydl --format worst'
 alias ydlaudio='youtube-dl --format best --extract-audio --audio-format mp3'
 
 function ydlwl() {
-	pushd ~/Documents/watch
+	pushd ~/Documents/watch || exit
 	ydl --ignore-errors https://www.youtube.com/playlist?list=PLxEBYuU7ONUfj68kBjXfHaAutKqtgAc4s
-	popd
+	popd || exit
 }
 
 # alias mvn='~/scripts/mvncolor.sh'
@@ -563,9 +563,9 @@ alias copykey='cat ~/.ssh/id_rsa.pub | xsel -i -b'
 function dnfs() {
 	arg_count = "$#"
 	if [ arg_count -eq 2 ]; then
-		dnf search $1 | grep $2
+		dnf search "$1" | grep "$2"
 	elif [ arg_count -eq 1 ]; then
-		dnf search $1
+		dnf search "$1"
 	fi
 }
 
@@ -574,7 +574,7 @@ alias cups='lpstat' # -p -d
 alias zsh_debug='zsh -i -x -c exit'
 
 function fix_zsh_history() {
-	cd $HOME >/dev/null
+	cd "$HOME" >/dev/null || exit
 	mv .zsh_history .zsh_history_bad
 	strings .zsh_history_bad >.zsh_history
 	fc -R .zsh_history
@@ -586,13 +586,13 @@ function fix_perms() {
 }
 
 function get_ip() {
-	host $1 | awk '/has address/ { print $4 }' | head -n 1
+	host "$1" | awk '/has address/ { print $4 }' | head -n 1
 }
 
 # Query Linux man page for certain flag
 # Example: manf iptables -t
 function manf() {
-	man $1 | less -p "^ +\-${2}"
+	man "$1" | less -p "^ +\-${2}"
 }
 
 alias rs='xfreerdp /kbd:0x415 /multimon +fonts /d:ger +clipboard +aero /home-drive /audio-mode:1 /v:GKSRDS007 /monitors:2'
@@ -611,7 +611,7 @@ function list_installed() {
 
 # $1 - name of the folder to zip
 function zip_and_move() {
-	zip --recurse-paths ~/Downloads/$1.zip $1/* $1/.*
+	zip --recurse-paths ~/Downloads/"$1".zip "$1"/* "$1"/.*
 }
 
 # Download .gitignore
@@ -623,13 +623,13 @@ function gitignore() {
 # Helper for watch_dir
 function watch_dir_action() {
 	while read path action file; do
-		printf "[${colors[Green]}%s${colors[White]}]\t${colors[Red]}%s${colors[White]}\tin\t%s\n" $action $file $path
+		printf "[${colors[Green]}%s${colors[White]}]\t${colors[Red]}%s${colors[White]}\tin\t%s\n" "$action" "$file" "$path"
 	done
 }
 
 # $1 - dir to be watched for CREATE or MOVED_TO events
 function watch_dir() {
-	inotifywait -m $1 -e create -e moved_to | watch_dir_action
+	inotifywait -m "$1" -e create -e moved_to | watch_dir_action
 }
 
 HTML_TIDY_TMP_FILE="/tmp/tidy_log.txt"
@@ -642,7 +642,7 @@ function reformat() {
 	filename=$(basename "$1")
 	ext="${filename##*.}"
 
-	echo "File extension: "$ext
+	echo "File extension: ""$ext"
 
 	case $ext in
 	"md")
@@ -650,19 +650,19 @@ function reformat() {
 		pandoc -f markdown -t markdown_github "$1" >"$tmpf"
 		;;
 	"js")
-		eslint --fix $1 >"$tmpf"
+		eslint --fix "$1" >"$tmpf"
 		;;
 	"jsx")
-		prettier --write $1
+		prettier --write "$1"
 		;;
 	"json")
 		jq -M '.' >"$tmpf" <"$1"
 		;;
 	"py")
-		autopep8 --in-place $1
+		autopep8 --in-place "$1"
 		;;
 	"html")
-		tidy -indent -wrap 80 -utf8 -clean -file $HTML_TIDY_TMP_FILE $1 >"$tmpf"
+		tidy -indent -wrap 80 -utf8 -clean -file $HTML_TIDY_TMP_FILE "$1" >"$tmpf"
 		;;
 	esac
 	mv -f "$tmpf" "$1" 2>/dev/null
@@ -691,7 +691,7 @@ function weather() {
 
 # Prints aggregated %MEM for a process ($1)
 function total_mem() {
-	top -b -n1 | \grep $1 | awk '{ SUM += $10} END { print SUM }'
+	top -b -n1 | \grep "$1" | awk '{ SUM += $10} END { print SUM }'
 }
 
 # Edit last gnome-screenshot taken
@@ -704,19 +704,19 @@ function nomacslast() {
 # $1 - input file
 # $2 - password
 function encrypt() {
-	openssl enc -aes-256-cbc -in $1 -out $1.enc -k $2
+	openssl enc -aes-256-cbc -in "$1" -out "$1".enc -k "$2"
 }
 
 # decrypt (filename.enc -> filename)
 # $1 - input file
 # $2 - password
 function decrypt() {
-	openssl enc -aes-256-cbc -d -in $1.enc -out $1 -k $2
+	openssl enc -aes-256-cbc -d -in "$1".enc -out "$1" -k "$2"
 }
 
 # SSH and attach to tmux
 function sshtmux() {
-	ssh $1 -t tmux a
+	ssh "$1" -t tmux a
 }
 
 function pip_list() {
@@ -794,7 +794,7 @@ function update_pip_packages() {
 function update_all() {
 	sudo_keep_alive
 
-	pushd ~ &>/dev/null # to correctly update global NPM packages
+	pushd ~ &>/dev/null || exit # to correctly update global NPM packages
 
 	# This sometimes breaks Homebrew taps upgrade
 	# update_xcode
@@ -822,19 +822,19 @@ function update_all() {
 
 	update_packages_mac
 
-	popd &>/dev/null
+	popd &>/dev/null || exit
 
 	printf "Updated all applications on %s\n" "$(date)" >>~/update_log.txt
 	rm -f ~/package.json
 }
 
 function merge_and_push_branch() {
-	$HOME/scripts/merge_and_push_branch.sh $1
+	"$HOME"/scripts/merge_and_push_branch.sh "$1"
 }
 
 function response_time() {
 	FORMAT_PATH=$(realpath ~/scripts/curl-format.txt)
-	curl -w "@"$FORMAT_PATH -o /dev/null -s $1
+	curl -w "@""$FORMAT_PATH" -o /dev/null -s "$1"
 }
 
 # Example
@@ -873,13 +873,13 @@ alias bci='brew cask install'
 alias openssl_website='openssl s_client -connect -crlf'
 
 function json_compare() {
-	diff <(jq -S . $2) <(jq -S . $2)
+	diff <(jq -S . "$2") <(jq -S . "$2")
 }
 
 function pdf_compress() {
 	local input_file=$1
 	local output_file=${2:-$1_output.pdf}
-	gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile=$output_file $input_file
+	gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile="$output_file" "$input_file"
 }
 
 function diff {
@@ -895,12 +895,12 @@ function filename_without_extension() {
 	filename=$(basename -- "$full_path")
 	extension=$([[ "$filename" = *.* ]] && echo ".${filename##*.}" || echo '')
 	filename="${filename%.*}"
-	echo $filename
+	echo "$filename"
 }
 
 function filename_extension() {
 	local extension="${1##*.}"
-	echo $extension
+	echo "$extension"
 }
 
 # Converts SVG to PNG
@@ -1166,14 +1166,14 @@ function add_diagonal_watermak() {
 	local filename=$1
 	local watermark_text=$2
 
-	convert $filename \
+	convert "$filename" \
 		\( -size 1500x -background none -fill blue -gravity center \
 		label:"$watermark_text" -trim -rotate -30 \
 		-bordercolor none -border 10 \
 		-write mpr:wm +delete \
 		+clone -fill mpr:wm -draw 'color 0,0 reset' \) \
 		-compose over -composite \
-		$filename
+		"$filename"
 }
 
 # Usage:
@@ -1182,7 +1182,7 @@ function random_password() {
 	local password_length=${1:-16}
 	# local PWGEN_REMOVE_CHARACTERS=\'\"\@\?\^\&\*\(\)\`\:\~\?\;\:\[\]\{\}\.\,\\\/\|
 	local PWGEN_REMOVE_CHARACTERS=\&\\
-	pwgen --secure --symbols $password_length 1 --remove-chars $PWGEN_REMOVE_CHARACTERS
+	pwgen --secure --symbols "$password_length" 1 --remove-chars $PWGEN_REMOVE_CHARACTERS
 }
 
 # Usage:
@@ -1190,7 +1190,7 @@ function random_password() {
 function bcrypt_hash() {
 	local password=$1
 	local bcrypt_cost=10
-	htpasswd -bnBC $bcrypt_has "" $password | tr -d ':\n' | sed 's/$2y/$2a/'
+	htpasswd -bnBC "$bcrypt_has" "" "$password" | tr -d ':\n' | sed 's/$2y/$2a/'
 }
 
 function ios_simulator_screenshot() {
@@ -1206,13 +1206,13 @@ function ios_simulator_screencast() {
 function commits_between_dates {
 	local date_from=$1
 	local date_to=$2
-	git log --date=iso --pretty=format:'%ad	%aN	%s' | awk '$0 >= "'$date_from'" && $0 <= "'$date_to'"'
+	git log --date=iso --pretty=format:'%ad	%aN	%s' | awk '$0 >= "'"$date_from"'" && $0 <= "'"$date_to"'"'
 }
 
 function git_delete_tag() {
 	local tagname=$1
-	git tag --delete $tagname
-	git push --delete origin $tagname
+	git tag --delete "$tagname"
+	git push --delete origin "$tagname"
 }
 
 alias github_merge_pr='gh pr merge $(git branch --show-current) --delete-branch  --rebase'
@@ -1224,23 +1224,23 @@ alias github_merge_pr='gh pr merge $(git branch --show-current) --delete-branch 
 function random-string() {
 	# Add special chars:
 	# env LC_ALL=C tr -dc '(\&\_a-zA-Z0-9\^\*\@'
-	cat /dev/urandom | env LC_ALL=C tr -dc 'a-zA-Z0-9' | fold -w ${1:-32} | head -n 1
+	cat /dev/urandom | env LC_ALL=C tr -dc 'a-zA-Z0-9' | fold -w "${1:-32}" | head -n 1
 }
 
 function brew_cleanup_package() {
 	local package_name=$1
 
 	# don't use reinstall
-	brew uninstall -f $package_name
+	brew uninstall -f "$package_name"
 
 	# remove possible broken symlinks
 	brew cleanup
 
 	# install httping again
-	brew install $package_name
+	brew install "$package_name"
 
 	# check the version
-	brew info $package_name
+	brew info "$package_name"
 }
 
 function reinstall_pip() {
@@ -1255,7 +1255,7 @@ function convert_to_grayscale() {
 	local input_filename="$1"
 	local filename=$(filename_without_extension "$1")
 	local output_filename="$filename"_grayscale.png
-	convert $input_filename -grayscale Rec709Luminance $output_filename
+	convert "$input_filename" -grayscale Rec709Luminance "$output_filename"
 }
 
 alias gl='git log'
@@ -1266,7 +1266,7 @@ function copy_branch_name() {
 		branch=$(cat .git/HEAD | awk -F '/' '{print $NF}')
 	fi
 
-	echo $branch | tr -d "\n" | copy_to_clipboard
+	echo "$branch" | tr -d "\n" | copy_to_clipboard
 }
 alias copy_last_commit_message='git log -1 --pretty=%B | tr -d "\n" | copy_to_clipboard'
 alias copy_current_directory='pwd | copy_to_clipboard'
@@ -1289,24 +1289,24 @@ alias t='tee >(copy_to_clipboard)'
 function remove_password_from_pdf() {
 	local filename=$(filename_without_extension "$1")
 	local password=$2
-	qpdf -password=$password -decrypt $filename.pdf "$filename""_no_password.pdf"
+	qpdf -password="$password" -decrypt "$filename".pdf "$filename""_no_password.pdf"
 }
 
 function sync_dotfiles() {
-	pushd ~/scripts && gacw && git push origin master && popd
-	pushd ~/dotfiles && gacw && git push origin master && popd
+	pushd ~/scripts && gacw && git push origin master && popd || exit
+	pushd ~/dotfiles && gacw && git push origin master && popd || exit
 }
 
 # .ts do .mp4:
 # ffmpeg -i in.ts -acodec copy -vcodec copy out.mp4
 function download_youtube_stream() {
 	local youtube_video_url=$1
-	youtube-dl --list-formats $youtube_video_url
+	youtube-dl --list-formats "$youtube_video_url"
 
 	printf "Enter stream format (e.g. 94) "
 	read stream_format
 
-	ffmpeg -i $(youtube-dl --format $stream_format --get-url $youtube_video_url) -c copy $(date +'%Y%m%d')_recording.ts
+	ffmpeg -i $(youtube-dl --format "$stream_format" --get-url "$youtube_video_url") -c copy $(date +'%Y%m%d')_recording.ts
 }
 
 # TODO: Finish
@@ -1319,7 +1319,7 @@ alias sc2_hotkeys_edit='vim ~/Library/Application\ Support/Blizzard/StarCraft\ I
 function download_npm_tarball() {
 	local package_name="$1"
 	local package_url=$(curl --silent --show-error https://registry.npmjs.org/"$package_name"/ | jq --raw-output '.versions[."dist-tags".latest].dist.tarball')
-	wget $package_url
+	wget "$package_url"
 }
 
 alias grhom='git reset --hard origin/master'
@@ -1329,20 +1329,20 @@ function rebase_all() {
 	local repos=(orval svgo)
 
 	for repo in $repos; do
-		pushd "$HOME/$repo"
+		pushd "$HOME/$repo" || exit
 		bash rebase.sh
-		popd
+		popd || exit
 	done
 }
 
 function first_day_of_month() {
 	local date=$(gdate --date="$(gdate +'%Y-%m-01')" "+%F")
-	echo $date
+	echo "$date"
 }
 
 function last_day_of_month() {
 	local date=$(gdate --date="$(gdate +'%Y-%m-01') - 1 second" "+%F")
-	echo $date
+	echo "$date"
 }
 
 # macOS only
@@ -1367,8 +1367,8 @@ function fix_zsh_history_file() {
 
 function yarn_reinstall_dev() {
 	local package_name=$1
-	yarn remove $package_name
-	yarn add --dev $package_name
+	yarn remove "$package_name"
+	yarn add --dev "$package_name"
 }
 
 function show_ip_address() {
@@ -1385,7 +1385,7 @@ alias copy_notepad_plus_plus_settings='cp /mnt/c/Users/Komputer/AppData/Roaming/
 alias git_reset_to_master='git checkout master -- '
 function git_reset_to_branch() {
 	local branch_name="$1"
-	git checkout $branch_name --
+	git checkout "$branch_name" --
 }
 alias gdh='git diff HEAD~'
 
@@ -1395,7 +1395,7 @@ alias gdh='git diff HEAD~'
 function run_after_seconds() {
 	local seconds=$1
 	shift
-	sleep $seconds && $@ &
+	sleep "$seconds" && $@ &
 }
 
 alias merge_pdfs_1='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=merged.pdf ' # here go the PDF to be merged
@@ -1407,7 +1407,7 @@ function merge_pdfs_2 {
 
 function remove_exif_data() {
 	local filename=$1
-	exiftool -EXIF= $filename
+	exiftool -EXIF= "$filename"
 }
 
 alias restart_tmux='tmux kill-server && tmux'
@@ -1430,13 +1430,13 @@ alias dwg2pdf='/Applications/QCAD.app/Contents/Resources/dwg2pdf -no-dock-icon'
 function move_files_created_at_to_directory() {
 	local creation_date="$1"
 	# TODO: Move to separate function
-	local creation_date_plus_1_day=$(date -j -f %Y-%m-%d -v+1d $creation_date +%Y-%m-%d)
+	local creation_date_plus_1_day=$(date -j -f %Y-%m-%d -v+1d "$creation_date" +%Y-%m-%d)
 	local directory="$2"
 
-	echo $creation_date
-	echo $creation_date_plus_1_day
+	echo "$creation_date"
+	echo "$creation_date_plus_1_day"
 
 	set -x
-	find . -type f -newermt $creation_date ! -newermt $creation_date_plus_1_day -exec mv "{}" $directory \;
+	find . -type f -newermt "$creation_date" ! -newermt "$creation_date_plus_1_day" -exec mv "{}" "$directory" \;
 	set +x
 }

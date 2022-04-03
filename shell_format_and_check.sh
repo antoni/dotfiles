@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Prepend text at the beginning of each line 
+# Prepend text at the beginning of each line
 function prepend() { while read line; do echo "${1}${line}"; done; }
 
 # Files that are not recognized as shell by shfmt

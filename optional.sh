@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-cd ~/Downloads >/dev/null
+cd ~/Downloads >/dev/null || exit

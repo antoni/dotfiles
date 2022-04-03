@@ -17,5 +17,5 @@ declare -A ENTRY_TO_LOCATION=(
 )
 
 for K in "${!ENTRY_TO_LOCATION[@]}"; do
-	echo mysides add $K ${ENTRY_TO_LOCATION[$K]}
+	echo mysides add "$K" "${ENTRY_TO_LOCATION[$K]}"
 done
