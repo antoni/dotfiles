@@ -104,7 +104,7 @@ supports_hyperlinks() {
 
 	# VTE-based terminals above v0.50 (Gnome Terminal, Guake, ROXTerm, etc)
 	if [ -n "$VTE_VERSION" ]; then
-		[ $VTE_VERSION -ge 5000 ]
+		[ "$VTE_VERSION" -ge 5000 ]
 		return $?
 	fi
 
@@ -347,12 +347,12 @@ EOF
 
 # shellcheck disable=SC2183  # printf string has more %s than arguments ($RAINBOW expands to multiple arguments)
 print_success() {
-	printf '%s         %s__      %s           %s        %s       %s     %s__   %s\n' $RAINBOW $RESET
-	printf '%s  ____  %s/ /_    %s ____ ___  %s__  __  %s ____  %s_____%s/ /_  %s\n' $RAINBOW $RESET
-	printf '%s / __ \\%s/ __ \\  %s / __ `__ \\%s/ / / / %s /_  / %s/ ___/%s __ \\ %s\n' $RAINBOW $RESET
-	printf '%s/ /_/ /%s / / / %s / / / / / /%s /_/ / %s   / /_%s(__  )%s / / / %s\n' $RAINBOW $RESET
-	printf '%s\\____/%s_/ /_/ %s /_/ /_/ /_/%s\\__, / %s   /___/%s____/%s_/ /_/  %s\n' $RAINBOW $RESET
-	printf '%s    %s        %s           %s /____/ %s       %s     %s          %s....is now installed!%s\n' $RAINBOW $GREEN $RESET
+	printf '%s         %s__      %s           %s        %s       %s     %s__   %s\n' "$RAINBOW" "$RESET"
+	printf '%s  ____  %s/ /_    %s ____ ___  %s__  __  %s ____  %s_____%s/ /_  %s\n' "$RAINBOW" "$RESET"
+	printf '%s / __ \\%s/ __ \\  %s / __ `__ \\%s/ / / / %s /_  / %s/ ___/%s __ \\ %s\n' "$RAINBOW" "$RESET"
+	printf '%s/ /_/ /%s / / / %s / / / / / /%s /_/ / %s   / /_%s(__  )%s / / / %s\n' "$RAINBOW" "$RESET"
+	printf '%s\\____/%s_/ /_/ %s /_/ /_/ /_/%s\\__, / %s   /___/%s____/%s_/ /_/  %s\n' "$RAINBOW" "$RESET"
+	printf '%s    %s        %s           %s /____/ %s       %s     %s          %s....is now installed!%s\n' "$RAINBOW" "$GREEN" "$RESET"
 	printf '\n'
 	printf '\n'
 	printf "%s %s %s\n" "Before you scream ${BOLD}${YELLOW}Oh My Zsh!${RESET} look over the" \
@@ -362,7 +362,7 @@ print_success() {
 	printf '%s\n' "• Follow us on Twitter: $(fmt_link @ohmyzsh https://twitter.com/ohmyzsh)"
 	printf '%s\n' "• Join our Discord community: $(fmt_link "Discord server" https://discord.gg/ohmyzsh)"
 	printf '%s\n' "• Get stickers, t-shirts, coffee mugs and more: $(fmt_link "Planet Argon Shop" https://shop.planetargon.com/collections/oh-my-zsh)"
-	printf '%s\n' $RESET
+	printf '%s\n' "$RESET"
 }
 
 main() {
