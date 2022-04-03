@@ -18,23 +18,23 @@ export TERM=xterm-256color
 # [ -n "$TMUX" ] && export TERM=tmux-256color
 
 function fix_ubuntu() {
-    # See: https://bugs.launchpad.net/ubuntu/+source/at-spi2-core/+bug/1193236
-    export NO_AT_BRIDGE=1
-    # Fix .Xresources 
-    # (https://bugs.launchpad.net/ubuntu/+source/unity/+bug/1163129)
-    if [ -e ~/.Xresources ]; then
-        xrdb ~/.Xresources
-    fi
+	# See: https://bugs.launchpad.net/ubuntu/+source/at-spi2-core/+bug/1193236
+	export NO_AT_BRIDGE=1
+	# Fix .Xresources
+	# (https://bugs.launchpad.net/ubuntu/+source/unity/+bug/1163129)
+	if [ -e ~/.Xresources ]; then
+		xrdb ~/.Xresources
+	fi
 
-    # Files with commands to be loaded by both Bash and ZSH
-    if command_exists wmname; then
-        wmname LG3D
-    fi
-    # Disable touchpad while typing (reactive 1 second after typing finished) 
-    # if command_exists xinput && ((xinput list | grep synaptics > /dev/null) || (xinput list | grep ALPS > /dev/null)); then
-    # echo "syndaemon configured"
-    # syndaemon -i 1 -d 
-    # fi
+	# Files with commands to be loaded by both Bash and ZSH
+	if command_exists wmname; then
+		wmname LG3D
+	fi
+	# Disable touchpad while typing (reactive 1 second after typing finished)
+	# if command_exists xinput && ((xinput list | grep synaptics > /dev/null) || (xinput list | grep ALPS > /dev/null)); then
+	# echo "syndaemon configured"
+	# syndaemon -i 1 -d
+	# fi
 }
 
 # Get distribution name
@@ -58,7 +58,7 @@ function fix_ubuntu() {
 # fi # end DISPLAY setup
 
 if [ -f ~/.optional.sh ]; then
-    source ~/.optional.sh
+	source ~/.optional.sh
 fi
 
 # Disable iBUS (IntelliJ, etc.)
@@ -83,10 +83,10 @@ fi
 # source $HOME/.cargo/env
 
 function execute_on_login_only() {
-    # Wallpaper
-    if [ -e $WALLPAPER ]; then
-    feh --bg-scale $WALLPAPER
-    fi
+	# Wallpaper
+	if [ -e $WALLPAPER ]; then
+		feh --bg-scale $WALLPAPER
+	fi
 }
 
 # This takes too much time
@@ -94,14 +94,14 @@ function execute_on_login_only() {
 
 # Keyboard
 if command_exists xbindkeys; then
-    killall xbindkeys 2> /dev/null
-    xbindkeys -f ~/.xbindkeysrc 
+	killall xbindkeys 2>/dev/null
+	xbindkeys -f ~/.xbindkeysrc
 fi
 
 # TODO: Add macOS conditional
 # Uncomment for no Homebrew updates at all
 # export HOMEBREW_NO_AUTO_UPDATE=1
-export HOMEBREW_AUTO_UPDATE_SECS="$((60*60*3))"
+export HOMEBREW_AUTO_UPDATE_SECS="$((60 * 60 * 3))"
 
 # Android development
 export ANDROID_SDK_ROOT="/usr/local/share/android-sdk"

@@ -32,7 +32,7 @@ defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
 ###################################################################
-# Finder 
+# Finder
 ###################################################################
 
 # Avoid creating .DS_Store files on network or USB volumes
@@ -142,9 +142,9 @@ defaults write com.apple.Dock autohide-delay -float 0 && killall Dock
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 
 function optional_defaults() {
-    # echo "Stop iTunes from responding to the keyboard media keys"
-    # launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null
-    :
+	# echo "Stop iTunes from responding to the keyboard media keys"
+	# launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null
+	:
 }
 
 # iTerm copy-paste settings
@@ -271,10 +271,10 @@ defaults write com.apple.dock wvous-bl-modifier -int 0
 defaults write com.apple.screencapture show-thumbnail -bool FALSE
 
 function setup_menu_bar_date() {
-    defaults write com.apple.menuextra.clock IsAnalog -bool false
-    defaults write com.apple.menuextra.clock DateFormat -string "EEE d MMM HH:mm"
-    defaults write com.apple.menuextra.clock FlashDateSeparators -bool true
-    killall SystemUIServer
+	defaults write com.apple.menuextra.clock IsAnalog -bool false
+	defaults write com.apple.menuextra.clock DateFormat -string "EEE d MMM HH:mm"
+	defaults write com.apple.menuextra.clock FlashDateSeparators -bool true
+	killall SystemUIServer
 }
 setup_menu_bar_date
 
@@ -283,10 +283,9 @@ defaults write com.apple.Safari NSUserKeyEquivalents -dict-add 'Close Tab' '<str
 # defaults write com.apple.universalaccess com.apple.custommenu.apps -array-add '<string>com.apple.Safari</string>'
 killall Safari
 
-
 function disable_accesibility() {
-    # Disable dictation popup
-    defaults write com.apple.HIToolbox AppleDictationAutoEnable -int 1
+	# Disable dictation popup
+	defaults write com.apple.HIToolbox AppleDictationAutoEnable -int 1
 }
 disable_accesibility
 
@@ -341,4 +340,3 @@ sudo defaults write bluetoothaudiod "Enable AAC codec" -bool true
 
 # Skip verification of DMG images
 sudo defaults write com.apple.frameworks.diskimages skip-verify TRUE
-

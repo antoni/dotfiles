@@ -1,8 +1,8 @@
 #!/bin/bash
 if [[ -e Makefile ]]; then
-    sudo make clean install
+	sudo make clean install
 else
-    echo "Error: No Makefile present"
+	echo "Error: No Makefile present"
 fi
 
 # Arch

@@ -2,14 +2,10 @@
 
 declare -a names=("idea-IU-172.3544.35/" "idea-IU-172.4343.14")
 
-for name in "${names[@]}"
-do
-    mkdir -p ~/.$name
+for name in "${names[@]}"; do
+	mkdir -p ~/.$name
 
-    if [[ ! -a ~/.$name/config ]]
-    then
-        ln -s $HOME/dotfiles/intellij/config ~/.$name/config
-    fi
+	if [[ ! -e ~/.$name/config ]]; then
+		ln -s $HOME/dotfiles/intellij/config ~/.$name/config
+	fi
 done
-
-
