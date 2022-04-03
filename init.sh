@@ -1,4 +1,4 @@
-cd ~
+cd ~ || exit
 
 printf 'Disabling macOS Gatekeeper (temporarily)\n'
 spctl --master-disable
@@ -25,7 +25,7 @@ cat ~/.ssh/id_rsa.pub | pbcopy
 printf "Login to Github and paste the SSH key:\n\nhttps://github.com/settings/ssh/new\n\n"
 
 git clone git@github.com:antoni/dotfiles.git
-cd dotfiles
+cd dotfiles || exit
 
 # Clone scripts repository
 
