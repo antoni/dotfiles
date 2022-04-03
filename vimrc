@@ -224,9 +224,9 @@ nmap <F9> :exec '!'.getline('.')<CR>
 " Refactoring variable names "{{{
 " Source: http://stackoverflow.com/a/597932/963881
 function! Refactor()
-    call inputsave()
-    let @z=input("What do you want to rename '" . @z . "' to? ")
-    call inputrestore()
+call inputsave()
+let @z=input("What do you want to rename '" . @z . "' to? ")
+call inputrestore()
 endfunction
 
 " Locally (local to block) rename a variable
@@ -266,15 +266,15 @@ au FileType go nmap gd <Plug>(go-def-tab)
 au Filetype go set makeprg=go\ build\ ./...
 
 function! s:GoVet()
-    cexpr system("go vet " . shellescape(expand('%')))
-    copen
+cexpr system("go vet " . shellescape(expand('%')))
+copen
 endfunction
 command! GoVet :call s:GoVet()
 
 
 function! s:GoLint()
-    cexpr system("golint " . shellescape(expand('%')))
-    copen
+cexpr system("golint " . shellescape(expand('%')))
+copen
 endfunction
 command! GoLint :call s:GoLint()
 
@@ -646,7 +646,7 @@ au VimEnter * set tabpagemax=9999|sil tab ball|set tabpagemax&vim
 au BufRead ~/Documents/Q.txt execute "normal Go"|startinsert!
 au BufRead ~/.remember execute "normal Go"|startinsert!
 "}}}
-  if has("au")
+if has("au")
     " Haskell"{{{
     " au BufWritePost *.hs GhcModCheckAndLintAsync
     "}}}
@@ -662,7 +662,7 @@ au BufRead ~/.remember execute "normal Go"|startinsert!
     au VimEnter * tab all
     "}}}
     " }}}
-  endif
+endif
 " }}}
 " 8.  Folds {{{
 " set foldmethod=indent   " Fold based on indent
@@ -677,8 +677,8 @@ let xml_syntax_folding=1      " XML
 " 9.  Helper functions {{{
 " Get info for specific key mapping (show grep output in a dialog) {{{
 function! MappingInfo(mapping)
-    execute "silent !grep -iB 1 " . a:mapping . " ~/.vimrc > minfo.tmp && dialog --textbox minfo.tmp 22 70 && rm minfo.tmp && clear"
-    redraw!
+execute "silent !grep -iB 1 " . a:mapping . " ~/.vimrc > minfo.tmp && dialog --textbox minfo.tmp 22 70 && rm minfo.tmp && clear"
+redraw!
 endfunction
 command! -nargs=1 Minfo call MappingInfo(<f-args>)
 " "}}}
@@ -689,29 +689,29 @@ command! -nargs=1 Minfo call MappingInfo(<f-args>)
 " files.
 
 function! RangeChooser()
-    let temp = tempname()
-    " The option "--choosefiles" was added in ranger 1.5.1. Use the next line
-    " with ranger 1.4.2 through 1.5.0 instead.
-    "exec 'silent !ranger --choosefile=' . shellescape(temp)
-    exec 'silent !ranger --choosefiles=' . shellescape(temp)
-    if !filereadable(temp)
-        redraw!
-        " Nothing to read.
-        return
-    endif
-    let names = readfile(temp)
-    if empty(names)
-        redraw!
-        " Nothing to open.
-        return
-    endif
-    " Edit the first item.
-    exec 'edit ' . fnameescape(names[0])
-    " Add any remaning items to the arg list/buffer list.
-    for name in names[1:]
-        exec 'argadd ' . fnameescape(name)
-    endfor
+let temp = tempname()
+" The option "--choosefiles" was added in ranger 1.5.1. Use the next line
+" with ranger 1.4.2 through 1.5.0 instead.
+"exec 'silent !ranger --choosefile=' . shellescape(temp)
+exec 'silent !ranger --choosefiles=' . shellescape(temp)
+if !filereadable(temp)
     redraw!
+    " Nothing to read.
+    return
+endif
+let names = readfile(temp)
+if empty(names)
+    redraw!
+    " Nothing to open.
+    return
+endif
+" Edit the first item.
+exec 'edit ' . fnameescape(names[0])
+" Add any remaning items to the arg list/buffer list.
+for name in names[1:]
+    exec 'argadd ' . fnameescape(name)
+endfor
+redraw!
 endfunction
 command! -bar RangerChooser call RangeChooser()
 "}}}
@@ -720,12 +720,12 @@ command! -bar RangerChooser call RangeChooser()
 " nnoremap <F10> :set nonumber!<CR>
 
 function! NumberToggle()
-    if(&relativenumber == 1)
-        set norelativenumber
-        " set number
-    else
-        set relativenumber
-    endif
+if(&relativenumber == 1)
+    set norelativenumber
+    " set number
+else
+    set relativenumber
+endif
 endfunc
 
 au FocusLost * :set number
@@ -738,34 +738,34 @@ nnoremap <F10> :call NumberToggle()<cr>
 "}}}
 " Restore cursor position, window pos., and last search after running a cmd {{{
 function! Preserve(command)
-    " Save the last search.
-    let search = @/
+" Save the last search.
+let search = @/
 
-    " Save the current cursor position.
-    let cursor_position = getpos('.')
+" Save the current cursor position.
+let cursor_position = getpos('.')
 
-    " Save the current window position.
-    normal! H
-    let window_position = getpos('.')
-    call setpos('.', cursor_position)
+" Save the current window position.
+normal! H
+let window_position = getpos('.')
+call setpos('.', cursor_position)
 
-    " Execute the command.
-    execute a:command
+" Execute the command.
+execute a:command
 
-    " Restore the last search.
-    let @/ = search
+" Restore the last search.
+let @/ = search
 
-    " Restore the previous window position.
-    call setpos('.', window_position)
-    normal! zt
+" Restore the previous window position.
+call setpos('.', window_position)
+normal! zt
 
-    " Restore the previous cursor position.
-    call setpos('.', cursor_position)
+" Restore the previous cursor position.
+call setpos('.', cursor_position)
 endfunction
 "}}}
 " Re-indent the whole buffer {{{
 function! Indent()
-    call Preserve('normal gg=G')
+call Preserve('normal gg=G')
 endfunction
 
 " Indent on save hook
@@ -776,7 +776,7 @@ endfunction
 "}}}
 " Modernize C++ code {{{
 function! ClangModernize()
-    :!clang-modernize -style=Google -format -loop-convert -pass-by-value -replace-auto_ptr -use-nullptr -use-auto -add-override -override-macros %
+:!clang-modernize -style=Google -format -loop-convert -pass-by-value -replace-auto_ptr -use-nullptr -use-auto -add-override -override-macros %
 endfunction
 command ClangModernize :call ClangModernize()
 " }}}
@@ -785,24 +785,24 @@ command ClangModernize :call ClangModernize()
 "&l: buffer-local options
 "see :help internal-variables
 function! s:ToggleTabs  ()
-    if !exists("b:tab_toggler_large")
-        let b:tab_toggler_large = 1
-    endif
-    if b:tab_toggler_large == 0 
-        let b:tab_toggler_large = 1 
-        let &l:ts = b:tab_toggler_ts
-        let &l:sw = b:tab_toggler_sw
-        let &l:sts = b:tab_toggler_sts
-    else
-        "save the previous tab settings
-        let b:tab_toggler_large = 0
-        let b:tab_toggler_ts = &ts
-        let b:tab_toggler_sw = &sw
-        let b:tab_toggler_sts = &sts
-        let &l:ts = 1
-        let &l:sw = 1
-        let &l:sts = 1
-    endif
+if !exists("b:tab_toggler_large")
+    let b:tab_toggler_large = 1
+endif
+if b:tab_toggler_large == 0 
+    let b:tab_toggler_large = 1 
+    let &l:ts = b:tab_toggler_ts
+    let &l:sw = b:tab_toggler_sw
+    let &l:sts = b:tab_toggler_sts
+else
+    "save the previous tab settings
+    let b:tab_toggler_large = 0
+    let b:tab_toggler_ts = &ts
+    let b:tab_toggler_sw = &sw
+    let b:tab_toggler_sts = &sts
+    let &l:ts = 1
+    let &l:sw = 1
+    let &l:sts = 1
+endif
 endfunction
 "}}}
 " Use TAB to complete when typing words, else inserts TABs as usual {{{
@@ -825,29 +825,29 @@ endfunction
 " Automatic insertion of C/C++ header gates/guards {{{
 " Creates guards when header file is created
 function! s:insert_gates()
-    let gatename = substitute(toupper(expand("%:t")), "\\.", "_", "g")
-    execute "normal! i#ifndef " . gatename
-    execute "normal! o#define " . gatename . " "
-    execute "normal! Go#endif /* " . gatename . " */"
-    normal! kk
+let gatename = substitute(toupper(expand("%:t")), "\\.", "_", "g")
+execute "normal! i#ifndef " . gatename
+execute "normal! o#define " . gatename . " "
+execute "normal! Go#endif /* " . gatename . " */"
+normal! kk
 endfunction
 au BufNewFile *.{h,hpp} call <SID>insert_gates()
 "}}}
 " Jumping through error list {{{
 function! <SID>LocationPrevious()                       
-    try                                                   
-        lprev                                               
-    catch /^Vim\%((\a\+)\)\=:E553/                        
-        llast                                               
-    endtry                                                
+try                                                   
+    lprev                                               
+catch /^Vim\%((\a\+)\)\=:E553/                        
+    llast                                               
+endtry                                                
 endfunction                                             
 
 function! <SID>LocationNext()                           
-    try                                                   
-        lnext                                               
-    catch /^Vim\%((\a\+)\)\=:E553/                        
-        lfirst                                              
-    endtry                                                
+try                                                   
+    lnext                                               
+catch /^Vim\%((\a\+)\)\=:E553/                        
+    lfirst                                              
+endtry                                                
 endfunction                                             
 
 nnoremap <silent> <Plug>LocationPrevious    :<C-u>exe 'call <SID>LocationPrevious()'<CR>                                        
@@ -889,16 +889,16 @@ let g:ctrlp_funky_syntax_highlight = 1
 " Man pages using ConqueTerm {{{
 let g:ConqueTerm_StartMessages = 0
 function! ConqueMan()
-    let cmd = &keywordprg . ' '
-    if cmd ==# 'man ' || cmd ==# 'man -s '
-        if v:count > 0
-            let cmd .= v:count . ' '
-        else
-            let cmd = 'man '
-        endif
+let cmd = &keywordprg . ' '
+if cmd ==# 'man ' || cmd ==# 'man -s '
+    if v:count > 0
+        let cmd .= v:count . ' '
+    else
+        let cmd = 'man '
     endif
-    let cmd .= expand('<cword>')
-    execute 'ConqueTermSplit' cmd
+endif
+let cmd .= expand('<cword>')
+execute 'ConqueTermSplit' cmd
 endfunction
 map K :<C-U>call ConqueMan()<CR>
 ounmap K
@@ -965,29 +965,29 @@ endif
 let g:tagbar_type_go = {
             \ 'ctagstype' : 'go',
             \ 'kinds'     : [
-            \ 'p:package',
-            \ 'i:imports:1',
-            \ 'c:constants',
-            \ 'v:variables',
-            \ 't:types',
-            \ 'n:interfaces',
-            \ 'w:fields',
-            \ 'e:embedded',
-            \ 'm:methods',
-            \ 'r:constructor',
-            \ 'f:functions'
-            \ ],
-            \ 'sro' : '.',
-            \ 'kind2scope' : {
-            \ 't' : 'ctype',
-            \ 'n' : 'ntype'
-            \ },
-            \ 'scope2kind' : {
-            \ 'ctype' : 't',
-            \ 'ntype' : 'n'
-            \ },
-            \ 'ctagsbin'  : 'gotags',
-            \ 'ctagsargs' : '-sort -silent'
-            \ }
+                \ 'p:package',
+                \ 'i:imports:1',
+                \ 'c:constants',
+                \ 'v:variables',
+                \ 't:types',
+                \ 'n:interfaces',
+                \ 'w:fields',
+                \ 'e:embedded',
+                \ 'm:methods',
+                \ 'r:constructor',
+                \ 'f:functions'
+                \ ],
+                \ 'sro' : '.',
+                \ 'kind2scope' : {
+                    \ 't' : 'ctype',
+                    \ 'n' : 'ntype'
+                    \ },
+                    \ 'scope2kind' : {
+                        \ 'ctype' : 't',
+                        \ 'ntype' : 'n'
+                        \ },
+                        \ 'ctagsbin'  : 'gotags',
+                        \ 'ctagsargs' : '-sort -silent'
+                        \ }
 "}}}
 let g:go_version_warning = 0

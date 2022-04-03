@@ -63,3 +63,15 @@ winget install -e --id GitHub.GitLFS
 winget install -e --id scottlerch.hosts-file-editor
 winget install -e --id Streamlink.Streamlink
 winget install -e --id VideoLAN.VLC
+ winget install -e --id Google.CloudSDK
+winget install -e --id Google.EarthPro
+winget install -e --id Google.EarthPro
+winget install -e --id TIDALMusicAS.TIDAL
+winget install -e --id Amazon.Kindle
+winget install -e --id Amazon.SendToKindle
+winget install -e --id Autodesk.sketchbook
+winget install -e --id IObit.DriverBooster9
+winget install -e --id IObit.IObitSysInfo
+winget install -e --id IObit.AdvancedSystemCare
+winget install -e --id Files-Community.Files
+winget install -e --id TranslucentTB.TranslucentTB
