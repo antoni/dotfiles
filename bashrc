@@ -125,8 +125,8 @@ stty stop undef
 # Ignore case when 'ls'
 shopt -s nocaseglob
 
-source $HOME/.paths
-source $HOME/.aliases
+source "$HOME"/.paths
+source "$HOME"/.aliases
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 

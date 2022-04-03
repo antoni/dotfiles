@@ -14,13 +14,13 @@ function set_wallpaper() {
 	echo "Changing wallpaper to: $1"
 	local wallpaper_file=$1
 
-	if [ ! -f $1 ]; then
+	if [ ! -f "$1" ]; then
 		echo >&2 "Wallpaper file ($1) not found!"
 		return 1
 	fi
 
 	local RESULT=$(osascript -e "tell application \"System Events\" to tell every desktop to set picture to \"$wallpaper_file\"")
-	return $RESULT
+	return "$RESULT"
 }
 
 # Disabling the dialogs shown when opening an application for the first time
@@ -44,14 +44,14 @@ function install_hping() {
 	git clone https://github.com/antirez/hping.git ~/hping
 	# brew install tcl-tk
 	# brew install libpcap
-	pushd ~/hping
+	pushd ~/hping || exit
 	./configure
 	make
 	sudo make install
 	# hping
 	sudo cp -f hping3 /usr/local/sbin/
 	sudo cp -f hping3 /usr/local/sbin/hping
-	popd
+	popd || exit
 }
 
 function post_install() {
