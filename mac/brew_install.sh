@@ -216,6 +216,8 @@ BREW_PACKAGES=(apache-httpd
 )
 
 BREW_CASK_PACKAGES=(texshop
+    anydesk
+    microsoft-remote-desktop
 	docker
 	iconjar
 	growlnotify
