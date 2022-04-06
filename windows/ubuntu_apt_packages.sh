@@ -17,3 +17,4 @@ tig
 zip
 git-lfs
 librecad
+p7zip
