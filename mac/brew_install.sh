@@ -74,6 +74,7 @@ BREW_PACKAGES=(apache-httpd
 	brightness
 	otx
 	sleepwatcher
+    yt-dlp/taps/yt-dlp
 	youtube-dl
 	cocoapods
 	entr
