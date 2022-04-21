@@ -531,6 +531,7 @@ alias di='sudo dnf install -y'
 alias ds='dnf search -C'
 alias dr='sudo dnf remove'
 
+alias youtube-dl='yt-dlp'
 alias ydl='youtube-dl --no-playlist --no-mtime'
 
 alias ydlbest='ydl --format best'
