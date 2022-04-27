@@ -18,3 +18,4 @@ zip
 git-lfs
 librecad
 p7zip
+sudo apt-get install libasound2
