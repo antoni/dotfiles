@@ -75,3 +75,5 @@ winget install -e --id IObit.IObitSysInfo
 winget install -e --id IObit.AdvancedSystemCare
 winget install -e --id Files-Community.Files
 winget install -e --id TranslucentTB.TranslucentTB
+winget install -e --id Lexikos.AutoHotkey
+
