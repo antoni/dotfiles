@@ -1465,3 +1465,7 @@ function kill_executable() {
     local executable="$1";
     taskkill.exe /F /IM "$executable.exe" /T
 }
+
+function git_repository_name() {
+    basename `git rev-parse --show-toplevel`
+}
