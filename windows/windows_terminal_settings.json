@@ -1,8 +1,12 @@
 {
     "$schema": "https://aka.ms/terminal-profiles-schema",
     "startOnUserLogin": true,
+    "alwaysOnTop": false,
+    "alwaysShowTabs": true,
+    "showTabsInTitlebar": true,
     "experimental.rendering.forceFullRepaint": true,
     "experimental.retroTerminalEffect": true,
+    "experimental.useAtlasEngine": true,
     "actions": [
         {
             "command": {
@@ -42,7 +46,8 @@
                 "guid": "{c6eaf9f4-32a7-5fdc-b5cf-066e8a4b1e42}",
                 "hidden": false,
                 "name": "Ubuntu-18.04 (with tmux)",
-                "commandline": "wsl.exe tmux attach || tmux"
+                "commandline": "wsl.exe tmux attach || tmux",
+                "bellSound": ""
             },
             {
                 "guid": "{c6eaf9f4-32a7-5fdc-b5cf-066e8a4b1e40}",
