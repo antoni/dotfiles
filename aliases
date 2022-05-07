@@ -1469,3 +1469,17 @@ function kill_executable() {
 function git_repository_name() {
     basename `git rev-parse --show-toplevel`
 }
+
+# Usage:
+# extract_field_from_json package.json version
+function extract_field_from_json() {
+    local filename=$1;
+    local field_name=$2;
+json_field_value=$(cat $filename \
+      | grep $field_name \
+        | head -1 \
+          | awk -F: '{ print $2 }' \
+            | sed 's/[",]//g')
+
+printf $json_field_value;
+}
