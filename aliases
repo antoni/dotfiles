@@ -792,18 +792,13 @@ function update_pip_packages() {
 function update_all() {
     sudo_keep_alive
 
-
-
-
     pushd ~ &>/dev/null || exit # to correctly update global NPM packages
-
 
 
     if [[ "$unamestr" == 'Darwin' ]]; then
 
     elif test -f /proc/sys/kernel/osrelease && grep -q microsoft /proc/sys/kernel/osrelease; then
         winget upgrade --all
-
 
         # TODO: Move to postinstall
         powershell.exe -File ~/dotfiles/windows/RemoveShortcutsFromDesktop.ps1
