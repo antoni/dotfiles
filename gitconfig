@@ -87,6 +87,7 @@
     rebase-to-root = "rebase --interactive --root"
     # Usage: git squash [n], n - number of last commits to be squashed
     squash = "!f(){ git reset --soft HEAD~${1} && git commit --no-verify --edit -m\"$(git log --format=%B --reverse HEAD..HEAD@{1})\"; };f"
+    squash-previous = "!f(){ local commit_message=\"$(git log --format=%B | head -1)\"; local commits_back=2; git reset --soft HEAD~${commits_back} && git commit --no-verify -m\"$commit_message\"; };f"
     # Commit, then squash current changes with previous commmit
     squash-two = "!export MSG=`git log -1 --pretty=%B | cat` ; git add . ; git reset --soft 'HEAD^' ; git commit --message $MSG"
     # Usage:
