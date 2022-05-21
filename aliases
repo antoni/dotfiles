@@ -1486,3 +1486,15 @@ local        extension=$(filename_extension "$filename")
 convert -scale 10% -scale 1000% $filename "$name""_pixelated""$extension"
 
 }
+
+# TODO: Move somewhere else
+function ubuntu_upgrade() {
+sudo -s -- <<EOF
+apt-get update
+apt-get upgrade -y
+apt-get full-upgrade -y
+apt-get dist-upgrade -y
+apt-get autoremove -y
+apt-get autoclean -y
+EOF
+}
