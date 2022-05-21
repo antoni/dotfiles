@@ -220,6 +220,7 @@ BREW_CASK_PACKAGES=(texshop
     anydesk
     microsoft-remote-desktop
 	docker
+    docker-compose
 	iconjar
 	growlnotify
 	electrum
