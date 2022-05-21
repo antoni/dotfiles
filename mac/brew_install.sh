@@ -221,6 +221,7 @@ BREW_CASK_PACKAGES=(texshop
     microsoft-remote-desktop
 	docker
     docker-compose
+    terraform
 	iconjar
 	growlnotify
 	electrum
