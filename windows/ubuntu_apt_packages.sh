@@ -19,3 +19,5 @@ git-lfs
 librecad
 p7zip
 sudo apt-get install libasound2
+docker-compose
+
