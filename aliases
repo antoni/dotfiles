@@ -1498,3 +1498,5 @@ apt-get autoremove -y
 apt-get autoclean -y
 EOF
 }
+
+alias c='code -n .'

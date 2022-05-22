@@ -20,4 +20,4 @@ librecad
 p7zip
 sudo apt-get install libasound2
 docker-compose
-
+sudo apt-get install default-jdk scala
