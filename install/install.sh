@@ -189,7 +189,7 @@ function install_pip_packages() {
 		jupyter jupyterlab dl_coursera z3-solver matplotlib tensorflow numpy agda-kernel
 		instalooter pirate-get tensorflow opencv-python virtualenv numpy
 		matplotlib protobuf conda haruhi-dl google-api-python-client oauth2client progressbar2
-        tdmgr PyQt5 paho-mqtt PyQtWebEngine mvt yt-dlp)
+		tdmgr PyQt5 paho-mqtt PyQtWebEngine mvt yt-dlp)
 
 	# Use xargs, so that PIP doesn't fail on a single error
 	cat requirements.txt | xargs -n 1 pip install --user
