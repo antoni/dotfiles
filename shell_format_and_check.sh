@@ -20,10 +20,10 @@ shell_format_and_check.sh
 ALL_FILES=$(printf "$shell_files" "$(shfmt -f .)" | sort -u)
 
 # Format code
-printf "$ALL_FILES" | xargs shfmt -l -w
+printf "$ALL_FILES" | xargs shfmt -l -w || exit 1
 
 # Lint code
-printf "$ALL_FILES" | xargs shellcheck --format diff | git apply --allow-empty
+printf "$ALL_FILES" | xargs shellcheck --format diff | git apply --allow-empty || exit 1
 
 # Run again for files that could not be autofixed
-printf "$ALL_FILES" | xargs shellcheck
+printf "$ALL_FILES" | xargs shellcheck || exit 1
