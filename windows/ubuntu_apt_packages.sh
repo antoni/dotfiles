@@ -21,3 +21,5 @@ p7zip
 sudo apt-get install libasound2
 docker-compose
 sudo apt-get install default-jdk scala
+cmake
+sudo apt-get install -y shellcheck
