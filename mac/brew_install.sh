@@ -29,7 +29,7 @@ BREW_PACKAGES=(apache-httpd
 	php
 	mplayer
 	azure-cli
-    pillow
+	pillow
 	emscripten
 	shfmt
 	deno
@@ -74,7 +74,7 @@ BREW_PACKAGES=(apache-httpd
 	brightness
 	otx
 	sleepwatcher
-    yt-dlp/taps/yt-dlp
+	yt-dlp/taps/yt-dlp
 	youtube-dl
 	cocoapods
 	entr
@@ -217,11 +217,11 @@ BREW_PACKAGES=(apache-httpd
 )
 
 BREW_CASK_PACKAGES=(texshop
-    anydesk
-    microsoft-remote-desktop
+	anydesk
+	microsoft-remote-desktop
 	docker
-    docker-compose
-    terraform
+	docker-compose
+	terraform
 	iconjar
 	growlnotify
 	electrum
