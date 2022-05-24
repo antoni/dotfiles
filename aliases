@@ -16,80 +16,80 @@ function command_exists() { type "$1" &>/dev/null; }
 platform='unknown'
 export unamestr=$(uname)
 if [[ "$unamestr" == 'Darwin' ]]; then
-    # Mac OS X-specific
-    alias copy_to_clipboard='pbcopy'
-    alias setmiddlevolume='sudo osascript -e "set Volume 5"'
-    alias eclipseclean='/Applications/eclipse/Eclipse.app/Contents/MacOS/eclipse -clean'
-    alias topcoder='javaws ~/Developer/Topcoder/ContestAppletProd.jnlp'
-    alias copypubkey='xsel --clipboard < id_rsa.pub'
-    # alias vim='mvim -v'
-    alias ls='ls -h -lFG'
-    alias brew='HOMEBREW_NO_AUTO_UPDATE=1 brew'
+	# Mac OS X-specific
+	alias copy_to_clipboard='pbcopy'
+	alias setmiddlevolume='sudo osascript -e "set Volume 5"'
+	alias eclipseclean='/Applications/eclipse/Eclipse.app/Contents/MacOS/eclipse -clean'
+	alias topcoder='javaws ~/Developer/Topcoder/ContestAppletProd.jnlp'
+	alias copypubkey='xsel --clipboard < id_rsa.pub'
+	# alias vim='mvim -v'
+	alias ls='ls -h -lFG'
+	alias brew='HOMEBREW_NO_AUTO_UPDATE=1 brew'
 
-    # macOS only
-    alias analyze_disk_usage='/Applications/OmniDiskSweeper.app/Contents/MacOS/OmniDiskSweeper'
+	# macOS only
+	alias analyze_disk_usage='/Applications/OmniDiskSweeper.app/Contents/MacOS/OmniDiskSweeper'
 elif test -f /proc/sys/kernel/osrelease && grep -q microsoft /proc/sys/kernel/osrelease; then
-    # Windows (WSL)
-    alias copy_to_clipboard='clip.exe'
+	# Windows (WSL)
+	alias copy_to_clipboard='clip.exe'
 
-    alias xclip='clip.exe'
+	alias xclip='clip.exe'
 
-    # See: https://github.com/microsoft/winget-cli/issues/688#issuecomment-788391878
-    alias winget='powershell.exe /c winget.exe'
+	# See: https://github.com/microsoft/winget-cli/issues/688#issuecomment-788391878
+	alias winget='powershell.exe /c winget.exe'
 
-    alias edit_idea_settings='vim /mnt/c/Users/Komputer/AppData/Roaming/JetBrains/IntelliJIdea2021.3/idea64.exe.vmoptions'
+	alias edit_idea_settings='vim /mnt/c/Users/Komputer/AppData/Roaming/JetBrains/IntelliJIdea2021.3/idea64.exe.vmoptions'
 
-    function open_autostart_folder() {
-        cmd.exe /c explorer.exe "C:\Users\Komputer\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
-        open /mnt/c/ProgramData/Microsoft/Windows/Start\ Menu/Programs/StartUp
-    }
+	function open_autostart_folder() {
+		cmd.exe /c explorer.exe "C:\Users\Komputer\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
+		open /mnt/c/ProgramData/Microsoft/Windows/Start\ Menu/Programs/StartUp
+	}
 
-    function open() {
-        local local_path=$1
-        explorer.exe $(wslpath -w "$local_path")
-    }
+	function open() {
+		local local_path=$1
+		explorer.exe $(wslpath -w "$local_path")
+	}
 
-    alias browse='sensible-browser'
-    function github_diff_last_commit() {
-        local url=$(gh browse --commit --no-browser | sed --expression 's/tree/commit/g')
-        browse "$url"
-    }
+	alias browse='sensible-browser'
+	function github_diff_last_commit() {
+		local url=$(gh browse --commit --no-browser | sed --expression 's/tree/commit/g')
+		browse "$url"
+	}
 
-    alias wmic='WMIC.exe'
+	alias wmic='WMIC.exe'
 
-    # Launches Windows uninstall program (GUI-based)
-    alias uninstall='cmd.exe /c appwiz.cpl'
+	# Launches Windows uninstall program (GUI-based)
+	alias uninstall='cmd.exe /c appwiz.cpl'
 
-    alias empty_trash_bin='cmd.exe /c "rd /s /q %systemdrive%\$Recycle.bin" 2&> /dev/null'
+	alias empty_trash_bin='cmd.exe /c "rd /s /q %systemdrive%\$Recycle.bin" 2&> /dev/null'
 
-    alias analyze_disk_usage='/mnt/c/Program\ Files/WizTree/WizTree.exe'
+	alias analyze_disk_usage='/mnt/c/Program\ Files/WizTree/WizTree.exe'
 
-    function copy_folder_to_desktop() {
-        local src_folder="$1"
-        # TODO: Get username dynamically
-        cp -r "$src_folder" /mnt/c/Users/Komputer/Desktop/
-    }
+	function copy_folder_to_desktop() {
+		local src_folder="$1"
+		# TODO: Get username dynamically
+		cp -r "$src_folder" /mnt/c/Users/Komputer/Desktop/
+	}
 
 elif [[ "$unamestr" == 'Linux' ]]; then
-    # Debian/Ubuntu
-    function listkernels() {
-        dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d'
-    }
-    alias gdebi='sudo gdebi'
+	# Debian/Ubuntu
+	function listkernels() {
+		dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d'
+	}
+	alias gdebi='sudo gdebi'
 
-    # Linux specific
-    # alias i='sudo apt-get install -y'
-    # Install through apt-get and add installed software to list of used commands
-    # addcmd() { sudo apt-get install -y $* && echo $* >> ~/install_apt-get.txt; }
-    function addcmd() { sudo dnf install -y "$*" && echo "$*" >>~/install_apt-get.txt; }
+	# Linux specific
+	# alias i='sudo apt-get install -y'
+	# Install through apt-get and add installed software to list of used commands
+	# addcmd() { sudo apt-get install -y $* && echo $* >> ~/install_apt-get.txt; }
+	function addcmd() { sudo dnf install -y "$*" && echo "$*" >>~/install_apt-get.txt; }
 
-    alias sound='alsamixer'
-    # alias open='xdg-open'
-    alias st='scrot -ub '"'"'%Y:%m:%d:%H:%M:%S.png'"'"' -e '"'"'mv $f ~/Downloads/'"'"
-    alias catquestions='cat ~/Documents/Q.txt'
-    alias mountrw='mount -o remount,rw /'
-    alias vim='vim -o'
-    alias ls='ls -h --color -lFG'
+	alias sound='alsamixer'
+	# alias open='xdg-open'
+	alias st='scrot -ub '"'"'%Y:%m:%d:%H:%M:%S.png'"'"' -e '"'"'mv $f ~/Downloads/'"'"
+	alias catquestions='cat ~/Documents/Q.txt'
+	alias mountrw='mount -o remount,rw /'
+	alias vim='vim -o'
+	alias ls='ls -h --color -lFG'
 fi
 
 # General purpose
@@ -118,15 +118,15 @@ alias free='free -h'
 
 alias wgetdir='wget --recursive --no-parent '
 function wgetdir2() {
-    wget \
-        --recursive \
-        --no-clobber \
-        --page-requisites \
-        --html-extension \
-        --convert-links \
-        --restrict-file-names=windows \
-        --domains website.org \
-        --no-parent "$1"
+	wget \
+		--recursive \
+		--no-clobber \
+		--page-requisites \
+		--html-extension \
+		--convert-links \
+		--restrict-file-names=windows \
+		--domains website.org \
+		--no-parent "$1"
 }
 
 # Programming etc.
@@ -219,14 +219,14 @@ alias gopath="export GOPATH=\$(pwd)"
 alias dbgui='/usr/share/dbeaver/dbeaver'
 
 function singlemonitor() {
-    primary=$(xrandr | \grep "connected primary" | cut -d' ' -f1)
-    secondary=$(xrandr | \grep " connected" | \grep -v "primary" | cut -d' ' -f1)
-    if [[ $secondary ]]; then
-        xrandr --output "$secondary" --off --output "$primary" --auto
-    else
-        xrandr --output "$primary" --off
-        xrandr --output "$primary" --auto
-    fi
+	primary=$(xrandr | \grep "connected primary" | cut -d' ' -f1)
+	secondary=$(xrandr | \grep " connected" | \grep -v "primary" | cut -d' ' -f1)
+	if [[ $secondary ]]; then
+		xrandr --output "$secondary" --off --output "$primary" --auto
+	else
+		xrandr --output "$primary" --off
+		xrandr --output "$primary" --auto
+	fi
 }
 
 # alias dualmonitor='xrandr --output VGA1 --mode 1920x1200 --right-of LVDS1'
@@ -249,13 +249,13 @@ alias explorer='nautilus --no-desktop'
 
 # Markdown to PDF
 function md2pdf() {
-    pandoc -s -V papersize:a4 -V geometry:margin=1in --from gfm -o "$1".pdf "$1"
-    open "$1".pdf
+	pandoc -s -V papersize:a4 -V geometry:margin=1in --from gfm -o "$1".pdf "$1"
+	open "$1".pdf
 }
 
 function rst2pdf() {
-    pandoc -s -V papersize:a4 -V geometry:margin=1in --from rst -o "$1".pdf "$1"
-    open "$1".pdf
+	pandoc -s -V papersize:a4 -V geometry:margin=1in --from rst -o "$1".pdf "$1"
+	open "$1".pdf
 }
 
 # Serves github-rendered Markdown file (from .) on localhost:6419
@@ -269,36 +269,36 @@ alias gogo='cd ~/go/'
 alias l='ls'
 
 csview() {
-    local file="$1"
-    cat "$file" | sed -e 's/,,/, ,/g' | column -s, -t | less -#5 -N -S
+	local file="$1"
+	cat "$file" | sed -e 's/,,/, ,/g' | column -s, -t | less -#5 -N -S
 }
 # Custom cat: colourised and tabulated for CSV files alias cat='pygmentize -g'
 xcat() {
-    filename=$(basename "$1")
-    fileext=${filename##*.}
-    if [ "$fileext" = "csv" ]; then
-        csview "$1"
-    else
-        pygmentize -g "$1"
-    fi
+	filename=$(basename "$1")
+	fileext=${filename##*.}
+	if [ "$fileext" = "csv" ]; then
+		csview "$1"
+	else
+		pygmentize -g "$1"
+	fi
 }
 
 # Google search
 s() {
-    args=$@
-    searchterm=${args// /%20}
-    google-chrome-stable "http://www.google.com/search?q=$searchterm"
+	args=$@
+	searchterm=${args// /%20}
+	google-chrome-stable "http://www.google.com/search?q=$searchterm"
 }
 
 # Launch Vim solarized theme depending on the time of the day
 vv() {
-    echo "$1"
-    hour=$(date +%H)
-    theme=dark
-    if [[ $hour -ge 6 && $hour -le 17 ]]; then
-        theme=light
-    fi
-    terminator -l vim-solarized-$theme -c "vim -c 'set gb=$theme'"
+	echo "$1"
+	hour=$(date +%H)
+	theme=dark
+	if [[ $hour -ge 6 && $hour -le 17 ]]; then
+		theme=light
+	fi
+	terminator -l vim-solarized-$theme -c "vim -c 'set gb=$theme'"
 }
 # Use less +F instead of tail -f
 # function tail() {
@@ -320,7 +320,7 @@ other_commands=(ruptime rwho)
 networking_commands=(netstat ethtool ping ifconfig arping traceroute iwconfig ifconfig tshark nethogs nmap nbtscan iptables tcpdump iproute2 chargen netcat tc insmod fping nslookup host p0f mtr ipcalc sipcalc iperf)
 
 function whichport() {
-    netstat -tulpn | grep $@
+	netstat -tulpn | grep $@
 }
 
 # ip a s #List addresses for interfaces
@@ -347,24 +347,24 @@ alias pil='pip list'
 
 # Execute nth line of a file
 nth() {
-    eval $(sed "$1"'q;d' "$2")
+	eval $(sed "$1"'q;d' "$2")
 }
 
 # Countdown, usage: countdown 60, countdown $((2*60*60))
 function countdown() {
-    date1=$(($(date +%s) + $1))
-    while [ "$date1" -ne $(date +%s) ]; do
-        echo -ne "$(date -u --date @$(($date1 - $(date +%s))) +%H:%M:%S)\r"
-        sleep 0.1
-    done
+	date1=$(($(date +%s) + $1))
+	while [ "$date1" -ne $(date +%s) ]; do
+		echo -ne "$(date -u --date @$(($date1 - $(date +%s))) +%H:%M:%S)\r"
+		sleep 0.1
+	done
 }
 # Stopwach
 function stopwatch() {
-    date1=$(date +%s)
-    while true; do
-        echo -ne "$(date -u --date @$(($(date +%s) - $date1)) +%H:%M:%S)\r"
-        sleep 0.1
-    done
+	date1=$(date +%s)
+	while true; do
+		echo -ne "$(date -u --date @$(($(date +%s) - $date1)) +%H:%M:%S)\r"
+		sleep 0.1
+	done
 }
 
 function mvd() { mv "$1" ~/Downloads/; }
@@ -396,16 +396,16 @@ alias wificonn='sudo wifi-menu wlp2s0'
 alias install_ycm='~/.vim/bundle/YouCompleteMe/install.sh --clang-completer'
 
 h() {
-    head -n $@
+	head -n $@
 }
 
 pat() {
-    if hash csearch 2>/dev/null; then
-        csearch -i "$1"
-    else
-        [ ! -z "$2" ] && search_dir="$2" || search_dir="."
-        grep -rnw $search_dir -e "$1"
-    fi
+	if hash csearch 2>/dev/null; then
+		csearch -i "$1"
+	else
+		[ ! -z "$2" ] && search_dir="$2" || search_dir="."
+		grep -rnw $search_dir -e "$1"
+	fi
 }
 
 alias cal='gcalcli'
@@ -413,24 +413,24 @@ alias dhcp0='sudo dhcpcd -n eth0'
 alias top10size="find . -type f -printf '%s %p\n'| sort -nr | head -10﻿"
 
 dl_website() {
-    wget \
-        --recursive \
-        --no-clobber \
-        --page-requisites \
-        --html-extension \
-        --convert-links \
-        --restrict-file-names=windows \
-        --no-parent \
-        "$1"
+	wget \
+		--recursive \
+		--no-clobber \
+		--page-requisites \
+		--html-extension \
+		--convert-links \
+		--restrict-file-names=windows \
+		--no-parent \
+		"$1"
 }
 
 # cd ../../../
 function up() {
-    i=$1
-    while [ "$i" -gt 0 ]; do
-        cd ..
-        i=$(($i - 1))
-    done
+	i=$1
+	while [ "$i" -gt 0 ]; do
+		cd ..
+		i=$(($i - 1))
+	done
 }
 
 # JSON pretty print
@@ -439,12 +439,12 @@ alias jsonpp=json_pretty_print
 
 # Git
 function gc() {
-    git commit -am "$*"
+	git commit -am "$*"
 }
 
 function gcp() {
-    gc "$*"
-    git push
+	gc "$*"
+	git push
 }
 
 alias svim='sudo vim'
@@ -462,7 +462,7 @@ alias p='python'
 alias fixandroidstudio='IBUS_ENABLE_SYNC_MODE=1 ibus-daemon -xrd'
 
 diffcount() {
-    diff -U 0 "$1" "$2" | grep -c ^@
+	diff -U 0 "$1" "$2" | grep -c ^@
 }
 
 dark() { export BACKGROUND=dark && source ~/.common_profile.sh; }
@@ -476,28 +476,28 @@ alias autoremove='sudo apt-get autoremove'
 alias redisgui='redis-desktop-manager'
 
 function g++gtest() {
-    g++ -std=c++11 "$1" -lgtest -lpthread && ./a.out
+	g++ -std=c++11 "$1" -lgtest -lpthread && ./a.out
 }
 
 # Links all .o files to make elf_i386 executable
 function link() {
-    # Default value = test
-    BIN=${1:-test}
-    ld -m elf_i386 -s -o "$BIN" *.o
+	# Default value = test
+	BIN=${1:-test}
+	ld -m elf_i386 -s -o "$BIN" *.o
 }
 # GCC flags:
 # -fverbose-asm -S
 
 function compile() {
-    nasm -f elf "$1"
+	nasm -f elf "$1"
 }
 
 alias burn_iso='wodim'
 
 # Recursive chmod
 chmod_rec() {
-    # find . -type d -exec chmod +rx {} \;
-    find . -type d -exec chmod "$1" {} \;
+	# find . -type d -exec chmod +rx {} \;
+	find . -type d -exec chmod "$1" {} \;
 }
 
 alias make='make -j 4'
@@ -536,9 +536,9 @@ alias ydlworst='ydl --format worst'
 alias ydlaudio='youtube-dl --format best --extract-audio --audio-format mp3'
 
 function ydlwl() {
-    pushd ~/Documents/watch || exit
-    ydl --ignore-errors https://www.youtube.com/playlist?list=PLxEBYuU7ONUfj68kBjXfHaAutKqtgAc4s
-    popd || exit
+	pushd ~/Documents/watch || exit
+	ydl --ignore-errors https://www.youtube.com/playlist?list=PLxEBYuU7ONUfj68kBjXfHaAutKqtgAc4s
+	popd || exit
 }
 
 # alias mvn='~/scripts/mvncolor.sh'
@@ -549,22 +549,22 @@ function ppgrep() { \pgrep "$@" -a | egrep --color "[0-9]"; }
 function rdp() { rdesktop "$@" -rsound:remote -5 -K -r clipboard:CLIPBOARD; }
 
 function swap() {
-    local TMPFILE=tmp.$$
-    mv "$1" $TMPFILE
-    mv "$2" "$1"
-    mv $TMPFILE "$2"
+	local TMPFILE=tmp.$$
+	mv "$1" $TMPFILE
+	mv "$2" "$1"
+	mv $TMPFILE "$2"
 }
 
 # Copies SSH RSA key to X clipboard
 alias copykey='cat ~/.ssh/id_rsa.pub | xsel -i -b'
 
 function dnfs() {
-    arg_count = "$#"
-    if [ arg_count -eq 2 ]; then
-        dnf search "$1" | grep "$2"
-    elif [ arg_count -eq 1 ]; then
-        dnf search "$1"
-    fi
+	arg_count = "$#"
+	if [ arg_count -eq 2 ]; then
+		dnf search "$1" | grep "$2"
+	elif [ arg_count -eq 1 ]; then
+		dnf search "$1"
+	fi
 }
 
 alias cups='lpstat' # -p -d
@@ -572,25 +572,25 @@ alias cups='lpstat' # -p -d
 alias zsh_debug='zsh -i -x -c exit'
 
 function fix_zsh_history() {
-    cd "$HOME" >/dev/null || exit
-    mv .zsh_history .zsh_history_bad
-    strings .zsh_history_bad >.zsh_history
-    fc -R .zsh_history
+	cd "$HOME" >/dev/null || exit
+	mv .zsh_history .zsh_history_bad
+	strings .zsh_history_bad >.zsh_history
+	fc -R .zsh_history
 }
 
 function fix_perms() {
-    find . -type d -exec chmod 775 {} \;
-    find . -type f -exec chmod 664 {} \;
+	find . -type d -exec chmod 775 {} \;
+	find . -type f -exec chmod 664 {} \;
 }
 
 function get_ip() {
-    host "$1" | awk '/has address/ { print $4 }' | head -n 1
+	host "$1" | awk '/has address/ { print $4 }' | head -n 1
 }
 
 # Query Linux man page for certain flag
 # Example: manf iptables -t
 function manf() {
-    man "$1" | less -p "^ +\-${2}"
+	man "$1" | less -p "^ +\-${2}"
 }
 
 alias rs='xfreerdp /kbd:0x415 /multimon +fonts /d:ger +clipboard +aero /home-drive /audio-mode:1 /v:GKSRDS007 /monitors:2'
@@ -600,34 +600,34 @@ alias ipconfig='ifconfig'
 
 # Delete all containers & all images
 function dockerrmall() {
-    docker rm $(docker ps -a -q) && docker rmi $(docker images -q)
+	docker rm $(docker ps -a -q) && docker rmi $(docker images -q)
 }
 
 function list_installed() {
-    dnf list installed | awk -F. -v ORS="\0" '{print $1" "}' | sort -zu && echo ""
+	dnf list installed | awk -F. -v ORS="\0" '{print $1" "}' | sort -zu && echo ""
 }
 
 # $1 - name of the folder to zip
 function zip_and_move() {
-    zip --recurse-paths ~/Downloads/"$1".zip "$1"/* "$1"/.*
+	zip --recurse-paths ~/Downloads/"$1".zip "$1"/* "$1"/.*
 }
 
 # Download .gitignore
 # Usage: gi language
 function gitignore() {
-    curl -L -s https://www.gitignore.io/api/$@ | awk 'NR>2 {print last} {last=$0}' | tee .gitignore
+	curl -L -s https://www.gitignore.io/api/$@ | awk 'NR>2 {print last} {last=$0}' | tee .gitignore
 }
 
 # Helper for watch_dir
 function watch_dir_action() {
-    while read path action file; do
-        printf "[${colors[Green]}%s${colors[White]}]\t${colors[Red]}%s${colors[White]}\tin\t%s\n" "$action" "$file" "$path"
-    done
+	while read path action file; do
+		printf "[${colors[Green]}%s${colors[White]}]\t${colors[Red]}%s${colors[White]}\tin\t%s\n" "$action" "$file" "$path"
+	done
 }
 
 # $1 - dir to be watched for CREATE or MOVED_TO events
 function watch_dir() {
-    inotifywait -m "$1" -e create -e moved_to | watch_dir_action
+	inotifywait -m "$1" -e create -e moved_to | watch_dir_action
 }
 
 HTML_TIDY_TMP_FILE="/tmp/tidy_log.txt"
@@ -636,222 +636,220 @@ HTML_TIDY_TMP_FILE="/tmp/tidy_log.txt"
 # Usage:
 #   ./reformat filename
 function reformat() {
-    tmpf=/tmp/in_place_change_tmp
-    filename=$(basename "$1")
-    ext="${filename##*.}"
+	tmpf=/tmp/in_place_change_tmp
+	filename=$(basename "$1")
+	ext="${filename##*.}"
 
-    echo "File extension: ""$ext"
+	echo "File extension: ""$ext"
 
-    case $ext in
-        "md")
-            # Reformat against Github's Markdown styleguide
-            pandoc -f markdown -t markdown_github "$1" >"$tmpf"
-            ;;
-        "js")
-            eslint --fix "$1" >"$tmpf"
-            ;;
-        "jsx")
-            prettier --write "$1"
-            ;;
-        "json")
-            jq -M '.' >"$tmpf" <"$1"
-            ;;
-        "py")
-            autopep8 --in-place "$1"
-            ;;
-        "html")
-            tidy -indent -wrap 80 -utf8 -clean -file $HTML_TIDY_TMP_FILE "$1" >"$tmpf"
-            ;;
-    esac
-    mv -f "$tmpf" "$1" 2>/dev/null
+	case $ext in
+	"md")
+		# Reformat against Github's Markdown styleguide
+		pandoc -f markdown -t markdown_github "$1" >"$tmpf"
+		;;
+	"js")
+		eslint --fix "$1" >"$tmpf"
+		;;
+	"jsx")
+		prettier --write "$1"
+		;;
+	"json")
+		jq -M '.' >"$tmpf" <"$1"
+		;;
+	"py")
+		autopep8 --in-place "$1"
+		;;
+	"html")
+		tidy -indent -wrap 80 -utf8 -clean -file $HTML_TIDY_TMP_FILE "$1" >"$tmpf"
+		;;
+	esac
+	mv -f "$tmpf" "$1" 2>/dev/null
 }
 
 alias a='cd ~/adnetwork'
 
 # Toggles VPN connection
 function vpn() {
-    vpn_conn="VPN"
-    vpn_cmd="up"
-    if [[ $(nmcli connection show --active | \grep VPN) ]]; then
-        vpn_cmd="down"
-    fi
+	vpn_conn="VPN"
+	vpn_cmd="up"
+	if [[ $(nmcli connection show --active | \grep VPN) ]]; then
+		vpn_cmd="down"
+	fi
 
-    nmcli connection $vpn_cmd id $vpn_conn | tr ' ' '\n' | \grep --color activated
+	nmcli connection $vpn_cmd id $vpn_conn | tr ' ' '\n' | \grep --color activated
 }
 
 function redshift_loc() {
-    redshift-gtk -v -l $DEFAULT_COORDS
+	redshift-gtk -v -l $DEFAULT_COORDS
 }
 
 function weather() {
-    curl --silent wttr.in/"${1:-$DEFAULT_CITY}" | head -n 7
+	curl --silent wttr.in/"${1:-$DEFAULT_CITY}" | head -n 7
 }
 
 # Prints aggregated %MEM for a process ($1)
 function total_mem() {
-    top -b -n1 | \grep "$1" | awk '{ SUM += $10} END { print SUM }'
+	top -b -n1 | \grep "$1" | awk '{ SUM += $10} END { print SUM }'
 }
 
 # Edit last gnome-screenshot taken
 function nomacslast() {
-    files=(~/Pictures/*)
-    nomacs "${files[-1]}"
+	files=(~/Pictures/*)
+	nomacs "${files[-1]}"
 }
 
 # encrypt (filename -> filename.enc)
 # $1 - input file
 # $2 - password
 function encrypt() {
-    openssl enc -aes-256-cbc -in "$1" -out "$1".enc -k "$2"
+	openssl enc -aes-256-cbc -in "$1" -out "$1".enc -k "$2"
 }
 
 # decrypt (filename.enc -> filename)
 # $1 - input file
 # $2 - password
 function decrypt() {
-    openssl enc -aes-256-cbc -d -in "$1".enc -out "$1" -k "$2"
+	openssl enc -aes-256-cbc -d -in "$1".enc -out "$1" -k "$2"
 }
 
 # SSH and attach to tmux
 function sshtmux() {
-    ssh "$1" -t tmux a
+	ssh "$1" -t tmux a
 }
 
 function pip_list() {
-    pip3 list --format=columns | awk '!/Package|---/{ print $1}'
-    pip list --format=columns | awk '!/Package|---/{ print $1}'
+	pip3 list --format=columns | awk '!/Package|---/{ print $1}'
+	pip list --format=columns | awk '!/Package|---/{ print $1}'
 }
 
 function update_packages_mac() {
-    # Skip this step for now, downloading >10 GBs of XCode every now and then takes a lot of time and
-    # doesn't really make an improvement
-    # echo "Updating Mac AppStore packages..."
-    # mas upgrade;
+	# Skip this step for now, downloading >10 GBs of XCode every now and then takes a lot of time and
+	# doesn't really make an improvement
+	# echo "Updating Mac AppStore packages..."
+	# mas upgrade;
 
-    echo "Updating Homebrew packages..."
-    brew cleanup
+	echo "Updating Homebrew packages..."
+	brew cleanup
 
-    # Fix casks with `depends_on` that reference pre-Mavericks
-    /usr/bin/find "$(brew --prefix)/Caskroom/"*'/.metadata' -type f -name '*.rb' -print0 | /usr/bin/xargs -0 /usr/bin/sed -i '' '/depends_on macos:/d'
+	# Fix casks with `depends_on` that reference pre-Mavericks
+	/usr/bin/find "$(brew --prefix)/Caskroom/"*'/.metadata' -type f -name '*.rb' -print0 | /usr/bin/xargs -0 /usr/bin/sed -i '' '/depends_on macos:/d'
 
-    # Somtimes needed to run before 'brew update'
-    git -C "/usr/local/Homebrew/Library/Taps/homebrew/homebrew-core" fetch --unshallow
-    git -C "/usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask" fetch --unshallow
-    brew update
-    brew upgrade
-    brew upgrade --cask --force
-    brew unlink node && brew link --overwrite node
-    # Temporary overwrite for Node 16
-    brew link --force --overwrite node@16
+	# Somtimes needed to run before 'brew update'
+	git -C "/usr/local/Homebrew/Library/Taps/homebrew/homebrew-core" fetch --unshallow
+	git -C "/usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask" fetch --unshallow
+	brew update
+	brew upgrade
+	brew upgrade --cask --force
+	brew unlink node && brew link --overwrite node
+	# Temporary overwrite for Node 16
+	brew link --force --overwrite node@16
 }
 
 function update_packages_fedora() {
-    sudo dnf -y update
-    sudo dnf -y autoremove
+	sudo dnf -y update
+	sudo dnf -y autoremove
 }
 
 function update_packages_ubuntu() {
-    echo "Updating apt packages..."
-    sudo apt-get update &>/dev/null
-    echo "Upgrading apt packages..."
-    sudo apt-get upgrade -y &>/dev/null
-    echo "Autoremoving apt packages..."
-    sudo apt-get autoremove &>/dev/null
+	echo "Updating apt packages..."
+	sudo apt-get update &>/dev/null
+	echo "Upgrading apt packages..."
+	sudo apt-get upgrade -y &>/dev/null
+	echo "Autoremoving apt packages..."
+	sudo apt-get autoremove &>/dev/null
 }
 
 function sudo_keep_alive() {
-    # Ask for the administrator password upfront
-    sudo -v
+	# Ask for the administrator password upfront
+	sudo -v
 
-    # kill -0 PID exits with an exit code of 0 if the PID is of
-    # a running process, otherwise exits with an exit code of 1.
-    # So, basically, kill -0 "$$" || exit aborts the while loop child process
-    # as soon as the parent process is no longer running
+	# kill -0 PID exits with an exit code of 0 if the PID is of
+	# a running process, otherwise exits with an exit code of 1.
+	# So, basically, kill -0 "$$" || exit aborts the while loop child process
+	# as soon as the parent process is no longer running
 
-    # Keep-alive: update existing `sudo` time stamp until `.macos` has finished
-    while true; do
-        sudo --non-interactive true
-        sleep 60
-        kill -0 "$$" || exit
-    done 2>/dev/null &
+	# Keep-alive: update existing `sudo` time stamp until `.macos` has finished
+	while true; do
+		sudo --non-interactive true
+		sleep 60
+		kill -0 "$$" || exit
+	done 2>/dev/null &
 }
 
 function update_xcode() {
-    sudo rm -rf /Library/Developer/CommandLineTools
-    xcode-select --install
+	sudo rm -rf /Library/Developer/CommandLineTools
+	xcode-select --install
 }
 
 function reinstall_pip_packages() {
-    pip3 list --outdated --format=freeze | cut -d = -f 1 | xargs -n1 pip3 install --upgrade --force-reinstall
+	pip3 list --outdated --format=freeze | cut -d = -f 1 | xargs -n1 pip3 install --upgrade --force-reinstall
 }
 
 function update_pip_packages() {
-    pip3 list --outdated --format=freeze | \grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip3 install -U
+	pip3 list --outdated --format=freeze | \grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip3 install -U
 }
 
 function update_all() {
-    sudo_keep_alive
+	sudo_keep_alive
 
-    pushd ~ &>/dev/null || exit # to correctly update global NPM packages
+	pushd ~ &>/dev/null || exit # to correctly update global NPM packages
 
+	if [[ "$unamestr" == 'Darwin' ]]; then
 
-    if [[ "$unamestr" == 'Darwin' ]]; then
+	elif test -f /proc/sys/kernel/osrelease && grep -q microsoft /proc/sys/kernel/osrelease; then
+		winget upgrade --all
 
-    elif test -f /proc/sys/kernel/osrelease && grep -q microsoft /proc/sys/kernel/osrelease; then
-        winget upgrade --all
+		# TODO: Move to postinstall
+		powershell.exe -File ~/dotfiles/windows/RemoveShortcutsFromDesktop.ps1
+	fi
 
-        # TODO: Move to postinstall
-        powershell.exe -File ~/dotfiles/windows/RemoveShortcutsFromDesktop.ps1
-    fi
+	# This sometimes breaks Homebrew taps upgrade
+	# update_xcode
 
+	omz update --unattended
+	echo "Updating Vim plugins..."
+	vim -i NONE -c VundleUpdate -c quitall &>/dev/null
 
-    # This sometimes breaks Homebrew taps upgrade
-    # update_xcode
+	# echo "Updating macOS (if updates available)"
+	# softwareupdate -i -a
 
-    omz update --unattended
-    echo "Updating Vim plugins..."
-    vim -i NONE -c VundleUpdate -c quitall &>/dev/null
+	~/dotfiles/mac/post_install.sh
 
-    # echo "Updating macOS (if updates available)"
-    # softwareupdate -i -a
+	# Do the rest without sudo
+	sudo --reset-timestamp
 
-    ~/dotfiles/mac/post_install.sh
+	# echo "Updating npm packages..."
+	# npm update -g;
+	# npm i npm;
+	echo "Updating PIP packages..."
+	# pip3 install --upgrade pip --user;
+	# Running it twice seems to resolve some dependency issues which PIP reports when running it just one time
+	update_pip_packages
+	update_pip_packages
 
-    # Do the rest without sudo
-    sudo --reset-timestamp
+	update_packages_mac
 
-    # echo "Updating npm packages..."
-    # npm update -g;
-    # npm i npm;
-    echo "Updating PIP packages..."
-    # pip3 install --upgrade pip --user;
-    # Running it twice seems to resolve some dependency issues which PIP reports when running it just one time
-    update_pip_packages
-    update_pip_packages
+	popd &>/dev/null || exit
 
-    update_packages_mac
-
-    popd &>/dev/null || exit
-
-    printf "Updated all applications on %s\n" "$(date)" >>~/update_log.txt
-    rm -f ~/package.json
+	printf "Updated all applications on %s\n" "$(date)" >>~/update_log.txt
+	rm -f ~/package.json
 }
 
 function merge_and_push_branch() {
-    "$HOME"/scripts/merge_and_push_branch.sh "$1"
+	"$HOME"/scripts/merge_and_push_branch.sh "$1"
 }
 
 function response_time() {
-    FORMAT_PATH=$(realpath ~/scripts/curl-format.txt)
-    curl -w "@""$FORMAT_PATH" -o /dev/null -s "$1"
+	FORMAT_PATH=$(realpath ~/scripts/curl-format.txt)
+	curl -w "@""$FORMAT_PATH" -o /dev/null -s "$1"
 }
 
 # Example
 # how_in bash get length of array
 function how_in() {
-    where="$1"
-    shift
-    IFS=+ curl "https://cht.sh/$where/ $*"
+	where="$1"
+	shift
+	IFS=+ curl "https://cht.sh/$where/ $*"
 }
 
 # TESTIT
@@ -861,17 +859,17 @@ function how_in() {
 # * modify file
 # * git-amend-to $old_sha
 git-amend-to() (
-# Stash, apply to past commit, and rebase the current branch on to of the result.
-current_branch="$(git rev-parse --abbrev-ref HEAD)"
-apply_to="$1"
-git stash
-git checkout "$apply_to"
-git stash apply
-git add -u
-git commit --amend --no-edit
-new_sha="$(git log --format="%H" -n 1)"
-git checkout "$current_branch"
-git rebase --onto "$new_sha" "$apply_to"
+	# Stash, apply to past commit, and rebase the current branch on to of the result.
+	current_branch="$(git rev-parse --abbrev-ref HEAD)"
+	apply_to="$1"
+	git stash
+	git checkout "$apply_to"
+	git stash apply
+	git add -u
+	git commit --amend --no-edit
+	new_sha="$(git log --format="%H" -n 1)"
+	git checkout "$current_branch"
+	git rebase --onto "$new_sha" "$apply_to"
 )
 
 alias pr='~/scripts/pull_request.sh'
@@ -882,17 +880,17 @@ alias bci='brew cask install'
 alias openssl_website='openssl s_client -connect -crlf'
 
 function json_compare() {
-    diff <(jq -S . "$2") <(jq -S . "$2")
+	diff <(jq -S . "$2") <(jq -S . "$2")
 }
 
 function pdf_compress() {
-    local input_file=$1
-    local output_file=${2:-$1_output.pdf}
-    gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile="$output_file" "$input_file"
+	local input_file=$1
+	local output_file=${2:-$1_output.pdf}
+	gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile="$output_file" "$input_file"
 }
 
 function diff {
-    colordiff --unified "$@" | less --RAW-CONTROL-CHARS --quit-if-one-screen
+	colordiff --unified "$@" | less --RAW-CONTROL-CHARS --quit-if-one-screen
 }
 
 alias sizes='du -sh * | sort -hr'
@@ -900,92 +898,92 @@ alias sizes='du -sh * | sort -hr'
 alias speedtest='curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -'
 
 function filename_without_extension() {
-    local full_path=$1
-    filename=$(basename -- "$full_path")
-    extension=$([[ "$filename" = *.* ]] && echo ".${filename##*.}" || echo '')
-    filename="${filename%.*}"
-    echo "$filename"
+	local full_path=$1
+	filename=$(basename -- "$full_path")
+	extension=$([[ "$filename" = *.* ]] && echo ".${filename##*.}" || echo '')
+	filename="${filename%.*}"
+	echo "$filename"
 }
 
 function filename_extension() {
-    local extension="${1##*.}"
-    echo "$extension"
+	local extension="${1##*.}"
+	echo "$extension"
 }
 
 # Converts SVG to PNG
 # Usage svg_to_png input_image_path [output_image_height]
 function svg_to_png() {
-    local filename=$(filename_without_extension "$1")
-    local output_filename=$filename.png
-    local output_image_height=${2:-32}
-    rsvg-convert -h "$output_image_height" "$1" >"$output_filename" && echo "Successfully created $output_filename" || echo "Error converting $1 to $output_filename"
+	local filename=$(filename_without_extension "$1")
+	local output_filename=$filename.png
+	local output_image_height=${2:-32}
+	rsvg-convert -h "$output_image_height" "$1" >"$output_filename" && echo "Successfully created $output_filename" || echo "Error converting $1 to $output_filename"
 }
 
 function webptopng() {
-    local filename=$(filename_without_extension "$1")
-    local output_filename=$filename.png
-    local output_image_height=${2:-32}
-    dwebp "$1" -o "$output_filename"
+	local filename=$(filename_without_extension "$1")
+	local output_filename=$filename.png
+	local output_image_height=${2:-32}
+	dwebp "$1" -o "$output_filename"
 }
 
 function pdftojpg() {
-    pdfimages -j "$1" page
+	pdfimages -j "$1" page
 }
 
 function android_update() {
-    android update sdk --no-ui
+	android update sdk --no-ui
 }
 
 function last_modified_directory() {
-    echo $(\ls -t | head -n 1)
+	echo $(\ls -t | head -n 1)
 }
 
 function convert_all_files() {
-    local substitution="$1"
-    $BASH -c 'for filename in *;do mv $filename ${filename'"$substitution"'};done'
+	local substitution="$1"
+	$BASH -c 'for filename in *;do mv $filename ${filename'"$substitution"'};done'
 }
 
 # Lowercase the first letter
 function lowercase_first_letter() {
-    convert_all_files ","
+	convert_all_files ","
 }
 
 # Uppercase first letter
 function uppercase_first_letter() {
-    convert_all_files "^"
+	convert_all_files "^"
 }
 
 # Lowercase all letters
 function lowercase_all_letters() {
-    convert_all_files "m,"
+	convert_all_files "m,"
 }
 
 # Uppercase all letters
 function uppercase_all_letters() {
-    convert_all_files "^^"
+	convert_all_files "^^"
 }
 
 alias buildlib='cd ~/components-library ; npm run build && firebase deploy && npm run clean'
 alias mac_serial_number="system_profiler SPHardwareDataType | \grep '      Serial Number' | cut -d' ' -f 10 | pbcopy"
 
 function save_chrome_extension_list() {
-    local OUTPUT_FILE=~/scripts/chrome_extensions.txt
-    rm $OUTPUT_FILE
-    EXT_DIR="/Users/$(whoami)/Library/Application Support/Google/Chrome/Default/Extensions"
-    pushd "$EXT_DIR" || exit
-    for f in $(\ls */*/manifest.json); do cat "$f" | jq -r '.name' >>$OUTPUT_FILE; done
-    popd || exit
-    cat $OUTPUT_FILE
+	local OUTPUT_FILE=~/scripts/chrome_extensions.txt
+	rm $OUTPUT_FILE
+	EXT_DIR="/Users/$(whoami)/Library/Application Support/Google/Chrome/Default/Extensions"
+	pushd "$EXT_DIR" || exit
+	for f in $(\ls */*/manifest.json); do cat "$f" | jq -r '.name' >>$OUTPUT_FILE; done
+	popd || exit
+	cat $OUTPUT_FILE
 }
 
 # Updates scripts repo with current date in the message
 # of the (possibly empty) commit
 function update_scripts_repo() {
-    pushd ~/scripts || exit
-    git add .
-    git commit --allow-empty --message "Update "$(date +%d-%m-%Y)
-    git push origin
-    popd || exit
+	pushd ~/scripts || exit
+	git add .
+	git commit --allow-empty --message "Update "$(date +%d-%m-%Y)
+	git push origin
+	popd || exit
 }
 
 alias nrs='npm run start'
@@ -996,7 +994,7 @@ alias yc='yarn run clean'
 alias yrc='yarn run clean'
 
 function mcd() {
-    mkdir "$1" && cd "$1" || exit
+	mkdir "$1" && cd "$1" || exit
 }
 
 alias npmu='npm install -g npm'
@@ -1016,42 +1014,42 @@ alias nvm_default='nvm alias default node'
 alias nvm_current='nvm install node --reinstall-packages-from=$(nvm current)'
 
 function mov2mp4() {
-    local filename=$(filename_without_extension "$1")
-    ffmpeg -i "$filename".mov -vcodec h264 -acodec mp2 "$filename".mp4
+	local filename=$(filename_without_extension "$1")
+	ffmpeg -i "$filename".mov -vcodec h264 -acodec mp2 "$filename".mp4
 }
 
 # Rename  part of filename in each file in a directory
 function rename_filename_part() {
-    for filename in *; do
-        [ -f "$filename" ] || continue
-        mv "$filename" "${filename/$1/$2}"
-    done
+	for filename in *; do
+		[ -f "$filename" ] || continue
+		mv "$filename" "${filename/$1/$2}"
+	done
 }
 
 # Remove part of filename in each file in a directory
 function remove_filename_part() {
-    for filename in *; do
-        [ -f "$filename" ] || continue
-        mv "$filename" "${filename//$1/}"
-    done
+	for filename in *; do
+		[ -f "$filename" ] || continue
+		mv "$filename" "${filename//$1/}"
+	done
 }
 
 function add_prefix_to_filename() {
-    local prefix=$1
-    for filename in *; do
-        [ -f "$filename" ] || continue
-        mv "$filename" "$prefix$filename"
-    done
+	local prefix=$1
+	for filename in *; do
+		[ -f "$filename" ] || continue
+		mv "$filename" "$prefix$filename"
+	done
 }
 
 function add_suffix_to_filename() {
-    local suffix=$1
-    for filename in *; do
-        [ -f "$filename" ] || continue
-        name=$(filename_without_extension "$filename")
-        extension=$(filename_extension "$filename")
-        mv "$filename" "$name$suffix.$extension"
-    done
+	local suffix=$1
+	for filename in *; do
+		[ -f "$filename" ] || continue
+		name=$(filename_without_extension "$filename")
+		extension=$(filename_extension "$filename")
+		mv "$filename" "$name$suffix.$extension"
+	done
 }
 
 # Prints the lsof entry of the process that listens on a given port
@@ -1059,18 +1057,18 @@ function add_suffix_to_filename() {
 #   listening firefox
 #   listening 8080
 function listening() {
-    if [ $# -eq 0 ]; then
-        sudo lsof -iTCP -sTCP:LISTEN -n -P
-    elif [ $# -eq 1 ]; then
-        sudo lsof -iTCP -sTCP:LISTEN -n -P | grep -i --color "$1"
-    else
-        echo "Usage: listening [pattern]"
-    fi
+	if [ $# -eq 0 ]; then
+		sudo lsof -iTCP -sTCP:LISTEN -n -P
+	elif [ $# -eq 1 ]; then
+		sudo lsof -iTCP -sTCP:LISTEN -n -P | grep -i --color "$1"
+	else
+		echo "Usage: listening [pattern]"
+	fi
 }
 
 function get_cookies() {
-    local url=$1
-    cgurl --silent --output /dev/null --cookie-jar - "$url"
+	local url=$1
+	cgurl --silent --output /dev/null --cookie-jar - "$url"
 }
 
 alias instagram_dl='instalooter user'
@@ -1080,37 +1078,37 @@ alias change_main_screen='~/scripts/hmscreens -setMainID `~/scripts/hmscreens -i
 
 # Ubuntu
 function toggle_wifi() {
-    wifi="$(nmcli r wifi | awk 'FNR = 2 {print $1}')"
-    if [ "$wifi" == "enabled" ]; then
-        nmcli r wifi off
-    else
-        nmcli r wifi on
-    fi
+	wifi="$(nmcli r wifi | awk 'FNR = 2 {print $1}')"
+	if [ "$wifi" == "enabled" ]; then
+		nmcli r wifi off
+	else
+		nmcli r wifi on
+	fi
 }
 
 # One-liner to generate Self-Signed SSL Certificate+Key without any annoying prompts or CSRs
 function generate_self_signed_certificate() {
-    openssl req -new -newkey rsa:4096 -days $((5 * 3650)) -nodes -x509 -subj "/C=<Country Code>/ST=<State>/L=<City>/O=<Organization>/CN=<Common Name>" -keyout certificate.key -out certificate.crt
+	openssl req -new -newkey rsa:4096 -days $((5 * 3650)) -nodes -x509 -subj "/C=<Country Code>/ST=<State>/L=<City>/O=<Organization>/CN=<Common Name>" -keyout certificate.key -out certificate.crt
 }
 
 function sync_branch_with_master() {
-    git reset --hard origin/master && git fp
+	git reset --hard origin/master && git fp
 }
 
 function resize_to_icon() {
-    local input_file=$1
-    local output_file=$2
-    convert "$input_file" -thumbnail '1024x1024>' -gravity center -background transparent -extent 1024x1024 "$output_file"
+	local input_file=$1
+	local output_file=$2
+	convert "$input_file" -thumbnail '1024x1024>' -gravity center -background transparent -extent 1024x1024 "$output_file"
 }
 
 function reinstall_cocoapods() {
-    sudo gem uninstall cocoapods
-    sudo gem install -n /usr/local/bin cocoapods
+	sudo gem uninstall cocoapods
+	sudo gem install -n /usr/local/bin cocoapods
 }
 
 function force_remove_brew_cask() {
-    local cask_name=$1
-    rm -rf "$(brew --prefix)/Caskroom/$cask_name"
+	local cask_name=$1
+	rm -rf "$(brew --prefix)/Caskroom/$cask_name"
 }
 
 alias killfsck='sudo pkill -f fsck'
@@ -1118,110 +1116,110 @@ alias killfsck='sudo pkill -f fsck'
 alias prettify="yarn prettier:fix && gc \"chore: Run Prettier on the entire project\""
 
 function copy_as_base64() {
-    local file_path=$1
-    openssl base64 <"$file_path" | tr -d '\n' | copy_to_clipboard
+	local file_path=$1
+	openssl base64 <"$file_path" | tr -d '\n' | copy_to_clipboard
 }
 
 function display_notification() {
-    local title=$1
-    local message=$2
-    osascript -e "display notification \"$message\" with title \"$title\""
+	local title=$1
+	local message=$2
+	osascript -e "display notification \"$message\" with title \"$title\""
 
-    # Growl alternative
-    # growlnotify -n "$title" -m "$message"
+	# Growl alternative
+	# growlnotify -n "$title" -m "$message"
 }
 
 # macOS
 alias reset_wifi='sudo networksetup -setnetworkserviceenabled Wi-Fi off && sleep 2 && sudo networksetup -setnetworkserviceenabled Wi-Fi on'
 
 function save_last_n_lines_to_file() {
-    local LINES=$1
-    local filename=~/tmp/$(date)last_$LINES.txt
-    fc -ln -"$LINES" | head -n "$LINES" >"$filename"
-    fc -ln -"$LINES" | head -n "$LINES" >copy_to_clipboard
-    echo "Saved to $filename"
+	local LINES=$1
+	local filename=~/tmp/$(date)last_$LINES.txt
+	fc -ln -"$LINES" | head -n "$LINES" >"$filename"
+	fc -ln -"$LINES" | head -n "$LINES" >copy_to_clipboard
+	echo "Saved to $filename"
 }
 
 function get_repo_name() {
-    basename -s .git $(git config --get remote.origin.url)
+	basename -s .git $(git config --get remote.origin.url)
 }
 
 alias mk_iphone_dir='mkdir ~/Desktop/$(date +%Y%m%d)_iphone_photos'
 
 # Example: apply_to_all_files 'resize_image 50%'
 function apply_to_all_files() {
-    local command=$@
-    for filename in *; do
-        eval "${command} ${filename}"
-    done
+	local command=$@
+	for filename in *; do
+		eval "${command} ${filename}"
+	done
 }
 
 # Resizes image in-place
 function resize_image() {
-    local resize_arg=$1
-    local input=$2
-    mogrify -resize "$resize_arg" "$input"
+	local resize_arg=$1
+	local input=$2
+	mogrify -resize "$resize_arg" "$input"
 }
 
 function shellcheck_autofix() {
-    local filename=$1
-    shellcheck --format diff "$filename" | git apply
+	local filename=$1
+	shellcheck --format diff "$filename" | git apply
 }
 
 alias copy_last_command="fc -ln -1 | awk '{\$1=\$1}1' | copy_to_clipboard"
 
 # Usage: add_diagonal_watermak filename quoted_watermark_text
 function add_diagonal_watermak() {
-    local filename=$1
-    local watermark_text=$2
+	local filename=$1
+	local watermark_text=$2
 
-    convert "$filename" \
-        \( -size 1500x -background none -fill blue -gravity center \
-        label:"$watermark_text" -trim -rotate -30 \
-        -bordercolor none -border 10 \
-        -write mpr:wm +delete \
-        +clone -fill mpr:wm -draw 'color 0,0 reset' \) \
-        -compose over -composite \
-        "$filename"
+	convert "$filename" \
+		\( -size 1500x -background none -fill blue -gravity center \
+		label:"$watermark_text" -trim -rotate -30 \
+		-bordercolor none -border 10 \
+		-write mpr:wm +delete \
+		+clone -fill mpr:wm -draw 'color 0,0 reset' \) \
+		-compose over -composite \
+		"$filename"
 }
 
 # Usage:
 # random_password [password_length]
 function random_password() {
-    local password_length=${1:-16}
-    # local PWGEN_REMOVE_CHARACTERS=\'\"\@\?\^\&\*\(\)\`\:\~\?\;\:\[\]\{\}\.\,\\\/\|
-        local PWGEN_REMOVE_CHARACTERS=\&\\
-    pwgen --secure --symbols "$password_length" 1 --remove-chars $PWGEN_REMOVE_CHARACTERS
+	local password_length=${1:-16}
+	# local PWGEN_REMOVE_CHARACTERS=\'\"\@\?\^\&\*\(\)\`\:\~\?\;\:\[\]\{\}\.\,\\\/\|
+	local PWGEN_REMOVE_CHARACTERS=\&\\
+	pwgen --secure --symbols "$password_length" 1 --remove-chars $PWGEN_REMOVE_CHARACTERS
 }
 
 # Usage:
 # bcrypt_hash password
 function bcrypt_hash() {
-    local password=$1
-    local bcrypt_cost=10
-    htpasswd -bnBC "$bcrypt_has" "" "$password" | tr -d ':\n' | sed 's/$2y/$2a/'
+	local password=$1
+	local bcrypt_cost=10
+	htpasswd -bnBC "$bcrypt_has" "" "$password" | tr -d ':\n' | sed 's/$2y/$2a/'
 }
 
 function ios_simulator_screenshot() {
-    xcrun simctl io booted screenshot
+	xcrun simctl io booted screenshot
 }
 
 function ios_simulator_screencast() {
-    xcrun simctl io booted recordVideo ios_simluator_recording.mp4
+	xcrun simctl io booted recordVideo ios_simluator_recording.mp4
 }
 
 # returns commit date, author name and commit subject for a date range given
 # Example: commits_between_dates 2020-12-01 2020-12-31
 function commits_between_dates {
-    local date_from=$1
-    local date_to=$2
-    git log --date=iso --pretty=format:'%ad	%aN	%s' | awk '$0 >= "'"$date_from"'" && $0 <= "'"$date_to"'"'
+	local date_from=$1
+	local date_to=$2
+	git log --date=iso --pretty=format:'%ad	%aN	%s' | awk '$0 >= "'"$date_from"'" && $0 <= "'"$date_to"'"'
 }
 
 function git_delete_tag() {
-    local tagname=$1
-    git tag --delete "$tagname"
-    git push --delete origin "$tagname"
+	local tagname=$1
+	git tag --delete "$tagname"
+	git push --delete origin "$tagname"
 }
 
 alias github_merge_pr='gh pr merge $(git branch --show-current) --delete-branch  --rebase'
@@ -1231,61 +1229,61 @@ alias github_merge_pr='gh pr merge $(git branch --show-current) --delete-branch 
 # Alternative
 # tr -dc '[:alnum:]' < /dev/urandom | dd bs=4 count=8 2>/dev/null
 function random-string() {
-    # Add special chars:
-    # env LC_ALL=C tr -dc '(\&\_a-zA-Z0-9\^\*\@'
-    cat /dev/urandom | env LC_ALL=C tr -dc 'a-zA-Z0-9' | fold -w "${1:-32}" | head -n 1
+	# Add special chars:
+	# env LC_ALL=C tr -dc '(\&\_a-zA-Z0-9\^\*\@'
+	cat /dev/urandom | env LC_ALL=C tr -dc 'a-zA-Z0-9' | fold -w "${1:-32}" | head -n 1
 }
 
 function brew_cleanup_package() {
-    local package_name=$1
+	local package_name=$1
 
-    # don't use reinstall
-    brew uninstall -f "$package_name"
+	# don't use reinstall
+	brew uninstall -f "$package_name"
 
-    # remove possible broken symlinks
-    brew cleanup
+	# remove possible broken symlinks
+	brew cleanup
 
-    # install httping again
-    brew install "$package_name"
+	# install httping again
+	brew install "$package_name"
 
-    # check the version
-    brew info "$package_name"
+	# check the version
+	brew info "$package_name"
 }
 
 function reinstall_pip() {
-    python -m pip install --upgrade --force-reinstall pip
-    python3 -m pip install --upgrade --force-reinstall pip
+	python -m pip install --upgrade --force-reinstall pip
+	python3 -m pip install --upgrade --force-reinstall pip
 }
 
 # TODO: Move outside of aliases
 alias sync_transmission_settings='cp $HOME/Library/Preferences/org.m0k.transmission.plist ~/dotfiles/'
 
 function convert_to_grayscale() {
-    local input_filename="$1"
-    local filename=$(filename_without_extension "$1")
-    local output_filename="$filename"_grayscale.png
-    convert "$input_filename" -grayscale Rec709Luminance "$output_filename"
+	local input_filename="$1"
+	local filename=$(filename_without_extension "$1")
+	local output_filename="$filename"_grayscale.png
+	convert "$input_filename" -grayscale Rec709Luminance "$output_filename"
 }
 
 alias gl='git log'
 function copy_branch_name() {
-    if [[ -n $(git branch --show-current 2>/dev/null) ]]; then
-        branch=$(git branch --show-current)
-    else
-        branch=$(cat .git/HEAD | awk -F '/' '{print $NF}')
-    fi
+	if [[ -n $(git branch --show-current 2>/dev/null) ]]; then
+		branch=$(git branch --show-current)
+	else
+		branch=$(cat .git/HEAD | awk -F '/' '{print $NF}')
+	fi
 
-    echo "$branch" | tr -d "\n" | copy_to_clipboard
+	echo "$branch" | tr -d "\n" | copy_to_clipboard
 }
 alias copy_last_commit_message='git log -1 --pretty=%B | tr -d "\n" | copy_to_clipboard'
 alias copy_current_directory='pwd | copy_to_clipboard'
 
 function webm_to_mp4() {
-    local filename=$(filename_without_extension "$1")
-    local output_filename=$filename.mp4
-    local output_image_height=${2:-32}
-    local fps=24
-    ffmpeg -hide_banner -loglevel error -fflags +genpts -i "$1" -r $fps "$output_filename" && echo "Successfully created $output_filename" || echo "Error converting $1 to $output_filename"
+	local filename=$(filename_without_extension "$1")
+	local output_filename=$filename.mp4
+	local output_image_height=${2:-32}
+	local fps=24
+	ffmpeg -hide_banner -loglevel error -fflags +genpts -i "$1" -r $fps "$output_filename" && echo "Successfully created $output_filename" || echo "Error converting $1 to $output_filename"
 }
 
 # Toggle "Do not disturb" mode on macOS (via: https://github.com/sindresorhus/do-not-disturb-cli)
@@ -1296,67 +1294,67 @@ alias dnd-toggle='dnd toggle'
 alias t='tee >(copy_to_clipboard)'
 
 function remove_password_from_pdf() {
-    local filename=$(filename_without_extension "$1")
-    local password=$2
-    qpdf -password="$password" -decrypt "$filename".pdf "$filename""_no_password.pdf"
+	local filename=$(filename_without_extension "$1")
+	local password=$2
+	qpdf -password="$password" -decrypt "$filename".pdf "$filename""_no_password.pdf"
 }
 
 function sync_dotfiles() {
-    pushd ~/scripts && gacw && git push origin master && popd || exit
-    pushd ~/dotfiles && gacw && git push origin master && popd || exit
+	pushd ~/scripts && gacw && git push origin master && popd || exit
+	pushd ~/dotfiles && gacw && git push origin master && popd || exit
 }
 
 # .ts do .mp4:
 # ffmpeg -i in.ts -acodec copy -vcodec copy out.mp4
 function download_youtube_stream() {
-    local youtube_video_url=$1
-    youtube-dl --list-formats "$youtube_video_url"
+	local youtube_video_url=$1
+	youtube-dl --list-formats "$youtube_video_url"
 
-    printf "Enter stream format (e.g. 94) "
-    read stream_format
+	printf "Enter stream format (e.g. 94) "
+	read stream_format
 
-    ffmpeg -i $(youtube-dl --format "$stream_format" --get-url "$youtube_video_url") -c copy $(date +'%Y%m%d')_recording.ts
+	ffmpeg -i $(youtube-dl --format "$stream_format" --get-url "$youtube_video_url") -c copy $(date +'%Y%m%d')_recording.ts
 }
 
 # TODO: Finish
 function encrypt_pdf() {
-    qpdf --encrypt [readpass] [ownerpass] 256 -- [infile].pdf [outfile].pdf
+	qpdf --encrypt [readpass] [ownerpass] 256 -- [infile].pdf [outfile].pdf
 }
 
 alias sc2_hotkeys_edit='vim ~/Library/Application\ Support/Blizzard/StarCraft\ II/Accounts/491096383/Hotkeys/Rapid\ fire\ test.SC2Hotkeys'
 
 function download_npm_tarball() {
-    local package_name="$1"
-    local package_url=$(curl --silent --show-error https://registry.npmjs.org/"$package_name"/ | jq --raw-output '.versions[."dist-tags".latest].dist.tarball')
-    wget "$package_url"
+	local package_name="$1"
+	local package_url=$(curl --silent --show-error https://registry.npmjs.org/"$package_name"/ | jq --raw-output '.versions[."dist-tags".latest].dist.tarball')
+	wget "$package_url"
 }
 
 alias grhom='git reset --hard origin/master'
 alias gs2='git squash 2'
 
 function rebase_all() {
-    local repos=(orval svgo)
+	local repos=(orval svgo)
 
-    for repo in $repos; do
-        pushd "$HOME/$repo" || exit
-        bash rebase.sh
-        popd || exit
-    done
+	for repo in $repos; do
+		pushd "$HOME/$repo" || exit
+		bash rebase.sh
+		popd || exit
+	done
 }
 
 function first_day_of_month() {
-    local date=$(gdate --date="$(gdate +'%Y-%m-01')" "+%F")
-    echo "$date"
+	local date=$(gdate --date="$(gdate +'%Y-%m-01')" "+%F")
+	echo "$date"
 }
 
 function last_day_of_month() {
-    local date=$(gdate --date="$(gdate +'%Y-%m-01') - 1 second" "+%F")
-    echo "$date"
+	local date=$(gdate --date="$(gdate +'%Y-%m-01') - 1 second" "+%F")
+	echo "$date"
 }
 
 # macOS only
 function battery_recharge_cycles_count() {
-    system_profiler SPPowerDataType | \grep "Cycle Count" | awk '{print $3}'
+	system_profiler SPPowerDataType | \grep "Cycle Count" | awk '{print $3}'
 }
 
 alias mysql_client='open -a TablePlus'
@@ -1368,20 +1366,20 @@ alias software_version='system_profiler SPSoftwareDataType'
 
 # Fixes a corrupt .zsh_history file
 function fix_zsh_history_file() {
-    mv ~/.zsh_history ~/.zsh_history_bad
-    strings -eS ~/.zsh_history_bad >~/.zsh_history
-    fc -R ~/.zsh_history
-    rm ~/.zsh_history_bad
+	mv ~/.zsh_history ~/.zsh_history_bad
+	strings -eS ~/.zsh_history_bad >~/.zsh_history
+	fc -R ~/.zsh_history
+	rm ~/.zsh_history_bad
 }
 
 function yarn_reinstall_dev() {
-    local package_name=$1
-    yarn remove "$package_name"
-    yarn add --dev "$package_name"
+	local package_name=$1
+	yarn remove "$package_name"
+	yarn add --dev "$package_name"
 }
 
 function show_ip_address() {
-    ip address | grep "scope global" | grep -Po '(?<=inet )[\d.]+'
+	ip address | grep "scope global" | grep -Po '(?<=inet )[\d.]+'
 }
 
 # TODO: Move to proper place
@@ -1393,8 +1391,8 @@ alias copy_notepad_plus_plus_settings='cp /mnt/c/Users/Komputer/AppData/Roaming/
 # TODO: Move to git aliases
 alias git_reset_to_master='git checkout master -- '
 function git_reset_to_branch() {
-    local branch_name="$1"
-    git checkout "$branch_name" --
+	local branch_name="$1"
+	git checkout "$branch_name" --
 }
 alias gdh='git diff HEAD~'
 
@@ -1402,94 +1400,94 @@ alias gdh='git diff HEAD~'
 # /mnt/c/Users/Komputer/AppData/Roaming/JetBrains/IntelliJIdea2021.3
 
 function run_after_seconds() {
-    local seconds=$1
-    shift
-    sleep "$seconds" && $@ &
+	local seconds=$1
+	shift
+	sleep "$seconds" && $@ &
 }
 
 alias merge_pdfs_1='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=merged.pdf ' # here go the PDF to be merged
 
 function merge_pdfs_2 {
-    pdfunite $@ out.pdf
-    printf 'see out.pdf'
+	pdfunite $@ out.pdf
+	printf 'see out.pdf'
 }
 
 function remove_exif_data() {
-    local filename=$1
-    exiftool -EXIF= "$filename"
+	local filename=$1
+	exiftool -EXIF= "$filename"
 }
 
 alias restart_tmux='tmux kill-server && tmux'
 
 function mov_to_mp4() {
-    local filename=$(filename_without_extension "$1")
-    local output_filename=$filename.mp4
-    ffmpeg -loglevel error -fflags +genpts -i "$1" -r $fps "$output_filename" && echo "Successfully created $output_filename" || echo "Error converting $1 to $output_filename"
-    ffmpeg -hide_banner loglevel error -i "$1" -vcodec h264 -acodec mp2 "$output_filename"
+	local filename=$(filename_without_extension "$1")
+	local output_filename=$filename.mp4
+	ffmpeg -loglevel error -fflags +genpts -i "$1" -r $fps "$output_filename" && echo "Successfully created $output_filename" || echo "Error converting $1 to $output_filename"
+	ffmpeg -hide_banner loglevel error -i "$1" -vcodec h264 -acodec mp2 "$output_filename"
 }
 
 function kill_process_on_port() {
-    local port="$1"
-    lsof -t -i tcp:"$port" | xargs kill -9
+	local port="$1"
+	lsof -t -i tcp:"$port" | xargs kill -9
 }
 
 # macOS
 alias dwg2pdf='/Applications/QCAD.app/Contents/Resources/dwg2pdf -no-dock-icon'
 
 function move_files_created_at_to_directory() {
-    local creation_date="$1"
-    # TODO: Move to separate function
-    local creation_date_plus_1_day=$(date -j -f %Y-%m-%d -v+1d "$creation_date" +%Y-%m-%d)
-    local directory="$2"
+	local creation_date="$1"
+	# TODO: Move to separate function
+	local creation_date_plus_1_day=$(date -j -f %Y-%m-%d -v+1d "$creation_date" +%Y-%m-%d)
+	local directory="$2"
 
-    echo "$creation_date"
-    echo "$creation_date_plus_1_day"
+	echo "$creation_date"
+	echo "$creation_date_plus_1_day"
 
-    set -x
-    find . -type f -newermt "$creation_date" ! -newermt "$creation_date_plus_1_day" -exec mv "{}" "$directory" \;
-    set +x
+	set -x
+	find . -type f -newermt "$creation_date" ! -newermt "$creation_date_plus_1_day" -exec mv "{}" "$directory" \;
+	set +x
 }
 
 function count_files_in_directory() {
-    local directory="$1";
-    find $directory -type f | wc -l;
+	local directory="$1"
+	find $directory -type f | wc -l
 }
 
 # Windows
 function kill_executable() {
-    local executable="$1";
-    taskkill.exe /F /IM "$executable.exe" /T
+	local executable="$1"
+	taskkill.exe /F /IM "$executable.exe" /T
 }
 
 function git_repository_name() {
-    basename `git rev-parse --show-toplevel`
+	basename $(git rev-parse --show-toplevel)
 }
 
 # Usage:
 # extract_field_from_json package.json version
 function extract_field_from_json() {
-    local filename=$1;
-    local field_name=$2;
-    json_field_value=$(cat $filename \
-        | grep $field_name \
-        | head -1 \
-        | awk -F: '{ print $2 }' \
-        | sed 's/[",]//g')
+	local filename=$1
+	local field_name=$2
+	json_field_value=$(cat $filename |
+		grep $field_name |
+		head -1 |
+		awk -F: '{ print $2 }' |
+		sed 's/[",]//g')
 
-    printf $json_field_value;
+	printf $json_field_value
 }
 
 function pixelate() {
-    local filename="$1";
-    local        name=$(filename_without_extension "$filename")
-    local        extension=$(filename_extension "$filename")
-    convert -scale 10% -scale 1000% $filename "$name""_pixelated""$extension"
+	local filename="$1"
+	local name=$(filename_without_extension "$filename")
+	local extension=$(filename_extension "$filename")
+	convert -scale 10% -scale 1000% $filename "$name""_pixelated""$extension"
 
 }
 
 # TODO: Move somewhere else
 function ubuntu_upgrade() {
-    sudo -s -- <<EOF
+	sudo -s -- <<EOF
 apt-get update
 apt-get upgrade -y
 apt-get full-upgrade -y
@@ -1508,21 +1506,19 @@ alias c='code -n .'
 # Examples:
 # winenv PROGRAMFILES
 # winenv APPDATA
-winenv()
-{
-    if [ "$#" == "0" ] || [ "$1" == "--help" ]
-    then
-        echo $'\n'Usage:
-        echo $'\t'winenv [-d] WINDOWS_ENVIRONEMENT_VARIABLE_NAME
-        echo $'\t'-d: Defines environment variable in current shell
-        echo $'\t    Note that paths will be translated into un*x-like paths\n'
-        return
-    fi
-    local IFS='$\n'
-    local PATH_TO_TRANSLATE=$1
-    [ "$1" == "-d" ] && PATH_TO_TRANSLATE=$2
-    local VAR=$(cmd.exe /c echo %${PATH_TO_TRANSLATE}% | tr -d '\r')
-    local NEW=$(wslpath -u "${VAR}" 2>/dev/null || echo ${VAR})
-    echo "${PATH_TO_TRANSLATE} = ${VAR} -> ${NEW}"
-    [ "$1" == "-d" ] && export "${PATH_TO_TRANSLATE}=${NEW}"
+winenv() {
+	if [ "$#" == "0" ] || [ "$1" == "--help" ]; then
+		echo $'\n'Usage:
+		echo $'\t'winenv [-d] WINDOWS_ENVIRONEMENT_VARIABLE_NAME
+		echo $'\t'-d: Defines environment variable in current shell
+		echo $'\t    Note that paths will be translated into un*x-like paths\n'
+		return
+	fi
+	local IFS='$\n'
+	local PATH_TO_TRANSLATE=$1
+	[ "$1" == "-d" ] && PATH_TO_TRANSLATE=$2
+	local VAR=$(cmd.exe /c echo %${PATH_TO_TRANSLATE}% | tr -d '\r')
+	local NEW=$(wslpath -u "${VAR}" 2>/dev/null || echo ${VAR})
+	echo "${PATH_TO_TRANSLATE} = ${VAR} -> ${NEW}"
+	[ "$1" == "-d" ] && export "${PATH_TO_TRANSLATE}=${NEW}"
 }
