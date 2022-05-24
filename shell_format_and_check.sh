@@ -23,4 +23,7 @@ ALL_FILES=$(printf "$shell_files" "$(shfmt -f .)" | sort -u)
 printf "$ALL_FILES" | xargs shfmt -l -w
 
 # Lint code
-printf "$ALL_FILES" | xargs shellcheck -f diff | git apply --allow-empty
+printf "$ALL_FILES" | xargs shellcheck --format diff | git apply --allow-empty
+
+# Run again for files that could not be autofixed
+printf "$ALL_FILES" | xargs shellcheck
