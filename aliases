@@ -1500,7 +1500,6 @@ EOF
 }
 
 alias c='code -n .'
-<<<<<<< Updated upstream
 
 # Windows only
 # TODO: Rewrite this ugly function
@@ -1527,5 +1526,3 @@ winenv()
     echo "${PATH_TO_TRANSLATE} = ${VAR} -> ${NEW}"
     [ "$1" == "-d" ] && export "${PATH_TO_TRANSLATE}=${NEW}"
 }
-=======
->>>>>>> Stashed changes
