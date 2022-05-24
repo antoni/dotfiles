@@ -1470,26 +1470,26 @@ function git_repository_name() {
 function extract_field_from_json() {
     local filename=$1;
     local field_name=$2;
-json_field_value=$(cat $filename \
-      | grep $field_name \
+    json_field_value=$(cat $filename \
+        | grep $field_name \
         | head -1 \
-          | awk -F: '{ print $2 }' \
-            | sed 's/[",]//g')
+        | awk -F: '{ print $2 }' \
+        | sed 's/[",]//g')
 
-printf $json_field_value;
+    printf $json_field_value;
 }
 
 function pixelate() {
     local filename="$1";
-local        name=$(filename_without_extension "$filename")
-local        extension=$(filename_extension "$filename")
-convert -scale 10% -scale 1000% $filename "$name""_pixelated""$extension"
+    local        name=$(filename_without_extension "$filename")
+    local        extension=$(filename_extension "$filename")
+    convert -scale 10% -scale 1000% $filename "$name""_pixelated""$extension"
 
 }
 
 # TODO: Move somewhere else
 function ubuntu_upgrade() {
-sudo -s -- <<EOF
+    sudo -s -- <<EOF
 apt-get update
 apt-get upgrade -y
 apt-get full-upgrade -y
@@ -1500,3 +1500,26 @@ EOF
 }
 
 alias c='code -n .'
+
+# Windows only
+# TODO: Rewrite this ugly function
+# easily retrieve (and define, if asked to) any Windows Environment variable.
+# It also takes care of paths so they get converted from Win32 to Un*x-line.
+winenv()
+{
+    if [ "$#" == "0" ] || [ "$1" == "--help" ]
+    then
+        echo $'\n'Usage:
+        echo $'\t'winenv [-d] WINDOWS_ENVIRONEMENT_VARIABLE_NAME
+        echo $'\t'-d: Defines environment variable in current shell
+        echo $'\t    Note that paths will be translated into un*x-like paths\n'
+        return
+    fi
+    local IFS='$\n'
+    local PATH_TO_TRANSLATE=$1
+    [ "$1" == "-d" ] && PATH_TO_TRANSLATE=$2
+    local VAR=$(cmd.exe /c echo %${PATH_TO_TRANSLATE}% | tr -d '\r')
+    local NEW=$(wslpath -u "${VAR}" 2>/dev/null || echo ${VAR})
+    echo "${PATH_TO_TRANSLATE} = ${VAR} -> ${NEW}"
+    [ "$1" == "-d" ] && export "${PATH_TO_TRANSLATE}=${NEW}"
+}
