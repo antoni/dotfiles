@@ -1,3 +1,6 @@
+#!/usr/bin/env bash
+
+APT_PACKAGES=(apache-httpd
 vim
 tmux
 nodejs
@@ -23,3 +26,4 @@ docker-compose
 sudo apt-get install default-jdk scala
 cmake
 sudo apt-get install -y shellcheck
+)
