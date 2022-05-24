@@ -1505,6 +1505,9 @@ alias c='code -n .'
 # TODO: Rewrite this ugly function
 # easily retrieve (and define, if asked to) any Windows Environment variable.
 # It also takes care of paths so they get converted from Win32 to Un*x-line.
+# Examples:
+# winenv PROGRAMFILES
+# winenv APPDATA
 winenv()
 {
     if [ "$#" == "0" ] || [ "$1" == "--help" ]
