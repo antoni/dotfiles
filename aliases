@@ -1523,8 +1523,7 @@ winenv() {
 	[ "$1" == "-d" ] && export "${PATH_TO_TRANSLATE}=${NEW}"
 }
 
-    function show_function_code() {
-local function_name="$1"
-declare -f $function_name
-    }
-
+function show_function_code() {
+	local function_name="$1"
+	declare -f $function_name
+}
