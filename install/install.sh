@@ -246,8 +246,8 @@ function install_alacritty() {
 }
 
 function configure_postgres() {
-	sudo_exec -u postgres createuser -s $(whoami)
-	createdb $(whoami)
+	sudo_exec -u postgres createuser -s "$(whoami)"
+	createdb "$(whoami)"
 }
 
 function install_haskell_packages() {
