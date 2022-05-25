@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Common profile file for Bash and ZSH
 source ~/.aliases
 

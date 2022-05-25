@@ -17,6 +17,7 @@ function change_brightness() {
 	# new=$(($new<0?0:$new))
 	# echo $new > "$file_brightness"
 	# echo "New brightness: $new/$max."
+	true # FIXME: implement
 }
 
 # if [[ -z "$1" || -z "$2" ]]; then

@@ -73,7 +73,7 @@ function mac_symlink() {
 	cp -f "${DOTFILES_DIR}"/vlcrc ~/Library/Preferences/org.videolan.vlc/vlcrc
 	echo "NOTE: When updating preferences, VLC doesn't modify the existing vlcrc, instead it deletes the last and creates a new one. Instead of symlinking, the ~/dotfiles/vlcrc has been copied"
 
-	[ -d "~/scripts" ] && ln -fs ~/scripts/Chrome\ Debugger.app /Applications/
+	[ -d "$HOME/scripts" ] && ln -fs ~/scripts/Chrome\ Debugger.app /Applications/
 }
 
 # TODO: Use it in Linux section

@@ -1,4 +1,4 @@
-#!/usr/bin env
+#!/usr/bin/env bash
 
 # Turn Screen Saver on after x minutes (1800 s/30 m)
 
