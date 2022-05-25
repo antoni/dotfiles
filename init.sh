@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 cd ~ || exit
 
 printf 'Disabling macOS Gatekeeper (temporarily)\n'

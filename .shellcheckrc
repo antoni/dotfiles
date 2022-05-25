@@ -1,0 +1,2 @@
+# Unused variables are fine
+disable=SC2034

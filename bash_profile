@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 #source $HOME/.common_profile.sh
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
