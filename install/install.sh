@@ -121,8 +121,11 @@ function main() {
 		touch ~/.hushlogin
 
 		#mac_install_misc
-		HOMEBREW_NO_AUTO_UPDATE=1 brew install "${BREW_PACKAGES[*]}"
-		HOMEBREW_NO_AUTO_UPDATE=1 brew install --cask "${BREW_CASK_PACKAGES[*]}"
+		HOMEBREW_NO_AUTO_UPDATE=1 brew install "${BREW_PACKAGES_MUST_HAVE[*]}"
+		HOMEBREW_NO_AUTO_UPDATE=1 brew install "${BREW_PACKAGES_MAY_HAVE[*]}"
+
+		HOMEBREW_NO_AUTO_UPDATE=1 brew install --cask "${BREW_CASK_PACKAGES_MUST_HAVE[*]}"
+		HOMEBREW_NO_AUTO_UPDATE=1 brew install --cask "${BREW_CASK_PACKAGES_MAY_HAVE[*]}"
 
 		sudo chown -R "$USER" /Library/Ruby/Gems/
 
