@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-BREW_PACKAGES=(apache-httpd
+BREW_PACKAGES_MUST_HAVE=(
 	gawk
 	gnu-sed
 	gnu-tar
@@ -9,32 +9,43 @@ BREW_PACKAGES=(apache-httpd
 	gnutls
 	grep
 	ascii
+
+gpg
+	exiftool
+
+shfmt
+	node@16
+	ngrok
+	yarn
+
+
+	zoom
+
+	azure-cli
+
+);
+
+BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	gron
 	mas
-	zoom
 	haskell-stack
 	autojump
 	yarn-completion
 	dockutil
 	gnumeric
-	gpg
 	testdisk
 	handbrake
 	terminal-notifier
 	bat
-	exiftool
 	advancecomp
 	hyperfine
 	datamash
 	php
 	mplayer
-	azure-cli
 	pillow
 	emscripten
-	shfmt
 	deno
 	charles
-	node@16
 	gifski
 	binaryen
 	gifsicle
@@ -51,13 +62,12 @@ BREW_PACKAGES=(apache-httpd
 	qpdf
 	wireguard-tools
 	esptool
-	ngrok
 	rtmpdump
 	blender
-	yarn
 	fop
 	sourcekitten
 	fontforge
+	# Left here
 	xz
 	gh
 	dnsmasq
@@ -216,7 +226,11 @@ BREW_PACKAGES=(apache-httpd
 	jpegoptim
 )
 
-BREW_CASK_PACKAGES=(texshop
+BREW_CASK_PACKAGES_MAY_HAVE=(
+
+);
+
+BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	anydesk
 	microsoft-remote-desktop
 	docker
