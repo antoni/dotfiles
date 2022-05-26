@@ -1527,3 +1527,9 @@ function show_function_code() {
 	local function_name="$1"
 	declare -f $function_name
 }
+
+# Windows only
+# Show file app association
+alias assoc='cmd.exe /c assoc'
+
+alias ftype='cmd.exe /c ftype'
