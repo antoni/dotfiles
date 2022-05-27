@@ -795,28 +795,29 @@ function update_all() {
 	pushd ~ &>/dev/null || exit # to correctly update global NPM packages
 
 	if [[ "$unamestr" == 'Darwin' ]]; then
+		# This sometimes breaks Homebrew taps upgrade
+		# update_xcode
 
-	elif test -f /proc/sys/kernel/osrelease && grep -q microsoft /proc/sys/kernel/osrelease; then
+		omz update --unattended
+		echo "Updating Vim plugins..."
+		vim -i NONE -c VundleUpdate -c quitall &>/dev/null
+
+		# echo "Updating macOS (if updates available)"
+		# softwareupdate -i -a
+
+		# TODO: Move post-install
+		~/dotfiles/mac/post_install.sh
+
+		# Do the rest without sudo
+		sudo --reset-timestamp
+	fi
+
+	if test -f /proc/sys/kernel/osrelease && grep -q microsoft /proc/sys/kernel/osrelease; then
 		winget upgrade --all
 
 		# TODO: Move to postinstall
 		powershell.exe -File ~/dotfiles/windows/RemoveShortcutsFromDesktop.ps1
 	fi
-
-	# This sometimes breaks Homebrew taps upgrade
-	# update_xcode
-
-	omz update --unattended
-	echo "Updating Vim plugins..."
-	vim -i NONE -c VundleUpdate -c quitall &>/dev/null
-
-	# echo "Updating macOS (if updates available)"
-	# softwareupdate -i -a
-
-	~/dotfiles/mac/post_install.sh
-
-	# Do the rest without sudo
-	sudo --reset-timestamp
 
 	# echo "Updating npm packages..."
 	# npm update -g;
@@ -1450,7 +1451,7 @@ function move_files_created_at_to_directory() {
 
 function count_files_in_directory() {
 	local directory="$1"
-	find $directory -type f | wc -l
+	find "$directory" -type f | wc -l
 }
 
 # Windows
@@ -1468,20 +1469,20 @@ function git_repository_name() {
 function extract_field_from_json() {
 	local filename=$1
 	local field_name=$2
-	json_field_value=$(cat $filename |
-		grep $field_name |
+	json_field_value=$(cat "$filename" |
+		grep "$field_name" |
 		head -1 |
 		awk -F: '{ print $2 }' |
 		sed 's/[",]//g')
 
-	printf $json_field_value
+	printf "$json_field_value"
 }
 
 function pixelate() {
 	local filename="$1"
 	local name=$(filename_without_extension "$filename")
 	local extension=$(filename_extension "$filename")
-	convert -scale 10% -scale 1000% $filename "$name""_pixelated""$extension"
+	convert -scale 10% -scale 1000% "$filename" "$name""_pixelated""$extension"
 
 }
 
@@ -1517,15 +1518,15 @@ winenv() {
 	local IFS='$\n'
 	local PATH_TO_TRANSLATE=$1
 	[ "$1" == "-d" ] && PATH_TO_TRANSLATE=$2
-	local VAR=$(cmd.exe /c echo %${PATH_TO_TRANSLATE}% | tr -d '\r')
-	local NEW=$(wslpath -u "${VAR}" 2>/dev/null || echo ${VAR})
+	local VAR=$(cmd.exe /c echo %"${PATH_TO_TRANSLATE}"% | tr -d '\r')
+	local NEW=$(wslpath -u "${VAR}" 2>/dev/null || echo "${VAR}")
 	echo "${PATH_TO_TRANSLATE} = ${VAR} -> ${NEW}"
 	[ "$1" == "-d" ] && export "${PATH_TO_TRANSLATE}=${NEW}"
 }
 
 function show_function_code() {
 	local function_name="$1"
-	declare -f $function_name
+	declare -f "$function_name"
 }
 
 # Windows only
