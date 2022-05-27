@@ -9,21 +9,40 @@ BREW_PACKAGES_MUST_HAVE=(
 	gnutls
 	grep
 	ascii
-
-gpg
+	gpg
 	exiftool
-
-shfmt
+	shfmt
 	node@16
 	ngrok
 	yarn
-
-
 	zoom
-
 	azure-cli
-
-);
+	gh
+	pstree
+	coreutils
+	shellcheck
+	wget
+	pandoc
+	jq
+	parallel
+	clang-format
+	llvm
+	nmap
+	gpg
+	htop
+	go
+	python3
+	tmux
+	tree
+	git
+	duti
+	vim
+	imagemagick
+	watch
+	ffmpeg
+	cmake
+	mc
+)
 
 BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	gron
@@ -67,9 +86,7 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	fop
 	sourcekitten
 	fontforge
-	# Left here
 	xz
-	gh
 	dnsmasq
 	dvc
 	docker-machine
@@ -88,15 +105,12 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	youtube-dl
 	cocoapods
 	entr
-	pstree
 	lastpass-cli
 	scala
 	libav
-	coreutils
 	rlwrap
 	rdiff-backup
 	proxychains-ng
-	shellcheck
 	hadolint
 	tesseract-lang
 	httpie
@@ -104,32 +118,24 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	ghostscript
 	swi-prolog
 	gnu-smalltalk
-	# TODO: FIXME
-	# wine
 	pwgen
-	wget
 	p7zip
 	nginx
-	pandoc
 	tmate
 	qemu
 	lsd
 	ranger
-	jq
 	radare2
 	agda
 	grip
 	svg2png
-	parallel
 	librsvg
 	dark-mode
 	bash-completion
 	awscli
-	clang-format
 	tldr
 	wireshark
 	jasmin
-	llvm
 	protobuf
 	flex
 	lame
@@ -138,7 +144,6 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	transmission
 	R
 	boot2docker
-	nmap
 	tcl-tk
 	libpcap
 	nvm
@@ -146,91 +151,80 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	groovy
 	dos2unix
 	geoip
-	gpg
 	sox
 	git-flow
 	iproute2mac
 	lnav
 	hh
-	htop
 	irssi
 	telnet
-	go
-	python3
-	jq
 	lftp
 	links
 	lynx
 	jhipster
 	ncdu
-	nmap
 	tig
-	tmux
-	tree
-	# TODO: FIXME
-	# unrar
-	wget
 	vimpager
 	ack
-	git
-	duti
 	colordiff
 	cowsay
 	lftp
-	wget
 	axel
 	tree
 	rlwrap
 	tig
 	nmap
-	vim
 	nnn
 	git-crypt
 	speedtest_cli
 	aws-shell
-	wget
-	imagemagick
-	tree
 	webkit2png
 	graphicsmagick
-	python
-	python3
-	watch
 	watchman
 	automake
 	autoconf
-	htop
 	mackup
-	tmux
 	speedtest_cli
 	sbt
 	hub
-	htop
-	wget
-	ffmpeg
-	cmake
 	mysql
 	gradle
 	maven
 	rabbitmq
 	erlang
-	mc
 	vitorgalvao/tiny-scripts/cask-repair
 	amiaopensource/amiaos/decklinksdk
+	carlocab/personal/unrar
 	mitmproxy
 	ant
-	gradle
 	optipng
 	pngcrush
 	jpeg
 	jpegoptim
 )
 
-BREW_CASK_PACKAGES_MAY_HAVE=(
-
-);
+BREW_CASK_PACKAGES_MUST_HAVE=(
+	iterm2-nightly
+	atom
+	spotify
+	alfred
+	mpv
+	whatsapp
+	telegram
+	atext
+	visual-studio-code
+	visual-studio-code-insiders
+	signal
+	pym-player
+	mactex
+	firefox
+	vlc
+	slack
+	libreoffice
+)
 
 BREW_CASK_PACKAGES_MAY_HAVE=(texshop
+	wine-stable
 	anydesk
 	microsoft-remote-desktop
 	docker
@@ -242,6 +236,7 @@ BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	http-toolkit
 	streamlabs-obs
 	cloudflare-warp
+	brave-browser
 	anaconda
 	opera-gx
 	powershell
@@ -281,21 +276,20 @@ BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	bettertouchtool
 	asana
 	elmedia-player
-	atom
 	daisydisk
 	binance
 	omnidisksweeper
-	miro
 	image2icon
+	miro
 	abstract
 	figma
+	zeplin
 	clion
 	qcad
 	altair-graphql-client
 	bitwarden
 	adobe-creative-cloud
-	# idafree
-	zeplin
+	idafree
 	beaker-browser
 	stretchly
 	emacs
@@ -303,10 +297,7 @@ BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	sketchup
 	league-of-legends
 	colour-contrast-analyser
-	# does not run on macOS > Big Sur
-	# filebot
 	namebench
-	# crossover
 	little-snitch
 	imazing
 	discord
@@ -315,20 +306,14 @@ BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	WebPQuickLook
 	robo-3t
 	studio-3t
-	brave-browser
 	grammarly
 	obs
-	alfred
 	qlstephen
 	starcraft
 	karabiner-elements
 	steam
-	spotify
 	macsvg
-	mpv
-	whatsapp
 	skype-for-business
-	telegram
 	epic-games
 	imageoptim
 	balenaetcher
@@ -344,29 +329,20 @@ BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	viber
 	gimp
 	hopper-debugger-server
-	atext
 	visual-studio
-	visual-studio-code
-	visual-studio-code-insiders
 	koa11y
 	mysides
-	ngrok
 	xmind-zen
 	jetbrains-toolbox
-	atom
 	private-eye
 	fontforge
 	opera-developer
-	pharo-project/pharo/pharo-launcher
 	macpass
 	transmission
 	transmission-remote-gui
 	kitematic
 	gpg-suite
-	# Does not work on Monterey
-	# pref-setter
 	db-browser-for-sqlite
-	signal
 	soda-player
 	tunnelblick
 	rowanj-gitx
@@ -374,20 +350,14 @@ BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	skitch
 	mounty
 	wireshark-chmodbpf
-	dropbox
-	pym-player
 	transmission
 	nordvpn
 	sequel-pro
 	tor-browser
 	safari-technology-preview
-	mactex
 	owasp-zap
 	evernote
 	the-unarchiver
-	firefox
-	# google-chrome
-	jwbargsten/misc/defbro
 	google-chrome-canary
 	google-drive-file-stream
 	macdown
@@ -395,37 +365,32 @@ BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	keybase
 	spotifree
 	macs-fan-control
-	vlc
-	# vlc-webplugin
+	jwbargsten/misc/defbro
 	cleanmymac
 	flux
-	iterm2-nightly
 	robo-3t
 	gimp
 	kindle
 	google-earth-pro
 	omnigraffle
 	skype
-	slack
 	wkhtmltopdf
 	spectacle
 	mysqlworkbench
 	sublime-text
 	the-unarchiver
-	# TODO: Move to some other function
-	# virtualbox
 	robo-3t
 	hyper
 	gitkraken
-	homebrew/cask-versions/firefox-developer-edition
 	opera
 	webstorm
-	libreoffice
 	quip
 	karabiner-elements
 	spectacle
 	android-studio
 	android-sdk
+	homebrew/cask-versions/firefox-developer-edition
+	pharo-project/pharo/pharo-launcher
 )
 
 function sdk_man_install() {
