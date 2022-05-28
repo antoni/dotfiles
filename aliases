@@ -1534,3 +1534,11 @@ function show_function_code() {
 alias assoc='cmd.exe /c assoc'
 
 alias ftype='cmd.exe /c ftype'
+
+# Windows
+alias wsl='wsl.exe'
+
+# Windows only for now
+function idea() {
+    cmd.exe /c "C:\Program Files (x86)\JetBrains\IntelliJ IDEA 2022.1\bin\idea64.exe" dontReopenProjects nosplash
+}
