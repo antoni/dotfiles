@@ -221,6 +221,7 @@ BREW_CASK_PACKAGES_MUST_HAVE=(
 	vlc
 	slack
 	libreoffice
+    espanso
 )
 
 BREW_CASK_PACKAGES_MAY_HAVE=(texshop
