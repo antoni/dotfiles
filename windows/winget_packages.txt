@@ -80,3 +80,4 @@ winget install -e --id GIMP.GIMP
 winget install -e --id SublimeHQ.SublimeText.3
 winget install -e --id Microsoft.WindowsTerminal.Preview
 winget install -e --id Alacritty.Alacritty
+winget install -e --id FedericoTerzi.espanso
