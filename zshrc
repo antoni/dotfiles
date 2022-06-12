@@ -82,15 +82,12 @@ stty stop undef
 # This will prevent ZSH to print an error when no match can be found.
 unsetopt nomatch
 
-# xmodmap .speedswapper   
+# xmodmap .speedswapper
 
 # Execute ls after cd
 chpwd() ls
 
-source $HOME/.paths
-source $HOME/.aliases
-source $HOME/.common_profile.sh
-source $HOME/.fzf.sh
+source $HOME/dotfiles/common_rc.sh
 
 # Ignore case when 'ls'
 unsetopt CASE_GLOB
@@ -154,7 +151,7 @@ function run-again {
 zle -N run-again
 
 # bind widget to Ctrl+X in viins mode
-bindkey -M viins '^B' run-again 
+bindkey -M viins '^B' run-again
 # bind widget to Ctrl+X in vicmd mode
 bindkey -M vicmd '^B' run-again
 

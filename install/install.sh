@@ -3,6 +3,24 @@ DOTFILES_DIR=~/dotfiles
 
 mkdir -p tmp
 
+# TODO: Duplicated, move to some commons file
+function sudo_keep_alive() {
+	# Ask for the administrator password upfront
+	sudo -v
+
+	# kill -0 PID exits with an exit code of 0 if the PID is of
+	# a running process, otherwise exits with an exit code of 1.
+	# So, basically, kill -0 "$$" || exit aborts the while loop child process
+	# as soon as the parent process is no longer running
+
+	# Keep-alive: update existing `sudo` time stamp until `.macos` has finished
+	while true; do
+		sudo --non-interactive true
+		sleep 60
+		kill -0 "$$" || exit
+	done 2>/dev/null &
+}
+
 source $DOTFILES_DIR/install/chrome_install.sh
 
 # echo -en "${colors[BGreen]}Enter sudo password:${colors[White]} "
@@ -97,6 +115,8 @@ function main() {
 	#    ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
 	# fi
 
+	sudo_keep_alive
+
 	if [ -f /etc/debian_version ]; then
 		echo "Installing required packages on Debian/Ubuntu"
 
@@ -109,11 +129,13 @@ function main() {
 		install_yarn_debian
 		#install_debian_chrome
 	elif [ -f /etc/redhat-release ]; then
-		echo "Installing required packages on Fedora"
-		sudo_exec dnf install -y "${PACKAGES[*]}"
-		${FEDORA[*]}
+		echo "Installing required packages on Fedora/CentOS"
+
+		dnf install --assumeyes "${PACKAGES[*]}" || exit 1
+		dnf install --assumeyes "${FEDORA[*]}" || exit 1
+
 		# install_fedora_sound
-		install_fedora_chrome
+		# install_fedora_chrome
 	else # macOS
 		#source $DOTFILES_DIR/mac/brew_install.sh
 
@@ -134,17 +156,18 @@ function main() {
 
 		$DOTFILES_DIR/mac/post_install.sh
 	fi
-	install_oh_my_zsh
-	install_zsh_plugins
-	install_fzf
+	install_oh_my_zsh || exit 1
+	install_zsh_plugins || exit 1
+	install_fzf || exit 1
 
-	install_javascript_packages_npm
+	install_javascript_packages_npm || exit 1
+	# TODO: Remove?
 	# install_airbnb_eslint
-	install_vim_plugins
+	install_vim_plugins || exit 1
 
-	install_tmux_plugin_manager
+	install_tmux_plugin_manager || exit 1
 
-	crontab $DOTFILES_DIR/cron.jobs
+	crontab $DOTFILES_DIR/cron.jobs || exit 1
 }
 
 function install_vim_plugins() {
@@ -328,4 +351,4 @@ function install_java_8() {
 	sudo installer -package /Volumes/JDK\ 8\ Update\ 231/JDK\ 8\ Update\ 231.pkg -target /
 }
 
-# main
+main

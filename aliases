@@ -9,6 +9,7 @@ DEFAULT_COORDS="52.23:21.012'"
 export BASH=/usr/local/bin/bash
 
 source "$HOME"/dotfiles/colors.sh
+source "$HOME"/dotfiles/utils.sh
 
 function command_exists() { type "$1" &>/dev/null; }
 
@@ -759,6 +760,7 @@ function update_packages_ubuntu() {
 	sudo apt-get autoremove &>/dev/null
 }
 
+# TODO: Duplicated, move to some commons file
 function sudo_keep_alive() {
 	# Ask for the administrator password upfront
 	sudo -v
@@ -1424,7 +1426,9 @@ function mov_to_mp4() {
 	local filename=$(filename_without_extension "$1")
 	local output_filename=$filename.mp4
 	ffmpeg -loglevel error -fflags +genpts -i "$1" -r $fps "$output_filename" && echo "Successfully created $output_filename" || echo "Error converting $1 to $output_filename"
-	ffmpeg -hide_banner loglevel error -i "$1" -vcodec h264 -acodec mp2 "$output_filename"
+	# TODO: Fix loglevel
+	ffmpeg -hide_banner -loglevel error -i "$1" -vcodec h264 -acodec mp2 "$output_filename"
+	#ffmpeg -hide_banner -i "$1" -vcodec h264 -acodec mp2 "$output_filename"
 }
 
 function kill_process_on_port() {
@@ -1540,5 +1544,11 @@ alias wsl='wsl.exe'
 
 # Windows only for now
 function idea() {
-    cmd.exe /c "C:\Program Files (x86)\JetBrains\IntelliJ IDEA 2022.1\bin\idea64.exe" dontReopenProjects nosplash
+	cmd.exe /c "C:\Program Files (x86)\JetBrains\IntelliJ IDEA 2022.1\bin\idea64.exe" dontReopenProjects nosplash
 }
+
+function collage() {
+	montage -density 300 -tile 2x0 -geometry +5+50 -border 10 *.png collage.png
+}
+
+alias np='/mnt/c/Program\ Files/Notepad++/notepad++.exe'
