@@ -221,7 +221,7 @@ BREW_CASK_PACKAGES_MUST_HAVE=(
 	vlc
 	slack
 	libreoffice
-    espanso
+	espanso
 )
 
 BREW_CASK_PACKAGES_MAY_HAVE=(texshop
@@ -243,9 +243,9 @@ BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	powershell
 	caffeine
 	dashlane
+	lens
 	openvpn-connect
 	google-cloud-sdk
-	expressvpn
 	bitwarden
 	wickrme
 	messenger
@@ -314,7 +314,6 @@ BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	karabiner-elements
 	steam
 	macsvg
-	skype-for-business
 	epic-games
 	imageoptim
 	balenaetcher
