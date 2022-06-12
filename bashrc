@@ -125,8 +125,7 @@ stty stop undef
 # Ignore case when 'ls'
 shopt -s nocaseglob
 
-source "$HOME"/.paths
-source "$HOME"/.aliases
+source "$HOME"/dotfiles/common_rc.sh
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
