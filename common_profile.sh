@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# Common profile file for Bash and ZSH
-source ~/.aliases
-
 export MANPAGER="less --ignore-case"
 
 # Wallpaper
@@ -19,6 +16,7 @@ export TERM=xterm-256color
 [ -n "$TMUX" ] && export TERM=screen-256color
 # [ -n "$TMUX" ] && export TERM=tmux-256color
 
+# TODO: Comment
 function fix_ubuntu() {
 	# See: https://bugs.launchpad.net/ubuntu/+source/at-spi2-core/+bug/1193236
 	export NO_AT_BRIDGE=1
@@ -62,27 +60,6 @@ function fix_ubuntu() {
 if [ -f ~/.optional.sh ]; then
 	source ~/.optional.sh
 fi
-
-# Disable iBUS (IntelliJ, etc.)
-# export IBUS_ENABLE_SYNC_MODE=1
-
-# Go
-# export GOROOT=$HOME/gosrc
-# export GOPATH=$HOME/go
-# export PATH=$PATH:$GOROOT/bin
-
-# Qt
-# export QTDIR=$HOME/Qt/5.4/gcc_64/
-
-# CUDA
-# export PATH=$PATH:/usr/local/cuda/bin
-# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/cuda/lib
-
-# MPI
-# export PATH=$PATH:/usr/lib64/openmpi/bin
-
-# Rust
-# source $HOME/.cargo/env
 
 function execute_on_login_only() {
 	# Wallpaper
