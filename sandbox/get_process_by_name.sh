@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Windows only
 function get_process_by_name() {
 	local process_name="$1"
