@@ -12,8 +12,8 @@ brew install chromaprint amiaopensource/amiaos/decklinksdk
 brew unlink ffmpeg
 
 # install dependencies to cook our own
-brew install automake fdk-aac git lame libass libtool libvorbis libvpx opus \ 
-sdl shtool texi2html theora wget x264 x265 xvid nasm
+brew install automake fdk-aac git lame libass libtool libvorbis libvpx opus \
+	sdl shtool texi2html theora wget x264 x265 xvid nasm
 # and we're done brewing. Lay off the beer for now.
 
 # clone head
@@ -28,8 +28,8 @@ cd ffmpeg || exit
 # the flags are different from the brew version LDO. RTFM.
 ./configure --prefix=/usr/local --enable-gpl --enable-nonfree --enable-libass \
 	--enable-libfdk-aac --enable-libfreetype --enable-libmp3lame \
-	--enable-libtheora --enable-libvorbis --enable-libvpx --enable-libx264 --enable-libx265 \ 
---enable-libopus --enable-libxvid --enable-chromaprint --enable-decklink --samples=fate-suite/
+	-enable-libtheora --enable-libvorbis --enable-libvpx --enable-libx264 --enable-libx265 \
+	--enable-libopus --enable-libxvid --enable-chromaprint --enable-decklink --samples=fate-suite/
 
 # the actual install once you're done configuring
 make && make install
