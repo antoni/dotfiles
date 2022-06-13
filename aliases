@@ -1551,4 +1551,8 @@ function collage() {
 	montage -density 300 -tile 2x0 -geometry +5+50 -border 10 *.png collage.png
 }
 
-alias np='/mnt/c/Program\ Files/Notepad++/notepad++.exe'
+function np() {
+local path=$(wslpath -w $1)
+
+"/mnt/c/Program Files/Notepad++/notepad++.exe" $path
+}
