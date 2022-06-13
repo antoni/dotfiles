@@ -1552,6 +1552,7 @@ function collage() {
 }
 
 function np() {
+    # To follow symlinks inside WSL
 local path=$(wslpath -w $1)
 
 "/mnt/c/Program Files/Notepad++/notepad++.exe" $path
