@@ -1,4 +1,4 @@
-# shellcheck disable=SC2148
+# shellcheck disable=SC2148,SC2089
 # -*- shell-script -*-
 # vim:set ft=sh textwidth=0 wrapmargin=0:
 set +x
@@ -15,7 +15,9 @@ function command_exists() { type "$1" &>/dev/null; }
 
 # Aliases and custom functions
 platform='unknown'
-export unamestr=$(uname)
+unamestr="$(uname)"
+export unamestr
+
 if [[ "$unamestr" == 'Darwin' ]]; then
 	# Mac OS X-specific
 	alias copy_to_clipboard='pbcopy'
@@ -47,10 +49,13 @@ elif test -f /proc/sys/kernel/osrelease && grep -q microsoft /proc/sys/kernel/os
 
 	function open() {
 		local local_path=$1
-		explorer.exe $(wslpath -w "$local_path")
+		explorer.exe "$(wslpath -w "$local_path")"
 	}
 
-	alias browse='sensible-browser'
+	function browse() {
+		sensible-browser "$@"
+	}
+
 	function github_diff_last_commit() {
 		local url=$(gh browse --commit --no-browser | sed --expression 's/tree/commit/g')
 		browse "$url"
@@ -1552,8 +1557,8 @@ function collage() {
 }
 
 function np() {
-    # To follow symlinks inside WSL
-local path=$(wslpath -w $1)
+	# To follow symlinks inside WSL
+	local path=$(wslpath -w "$1")
 
-"/mnt/c/Program Files/Notepad++/notepad++.exe" $path
+	"/mnt/c/Program Files/Notepad++/notepad++.exe" "$path"
 }
