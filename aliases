@@ -1562,3 +1562,5 @@ function np() {
 
 	"/mnt/c/Program Files/Notepad++/notepad++.exe" "$path"
 }
+
+alias remove_all_docker_images='docker rm -vf $(docker ps -aq)'
