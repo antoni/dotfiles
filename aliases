@@ -1564,3 +1564,10 @@ function np() {
 }
 
 alias remove_all_docker_images='docker rm -vf $(docker ps -aq)'
+
+function is_linux_inside_wsl() {
+	if grep -q Microsoft /proc/version; then
+		#"Ubuntu on Windows"
+		echo 1
+	fi
+}

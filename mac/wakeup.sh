@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-source ~/dotfiles/mac/sleep_and_wake.sh && wake
+source "$HOME"/dotfiles/mac/sleep_and_wake.sh && wake
