@@ -22,15 +22,15 @@ function generate_ssh_key() {
 	FILE=~/.ssh/id_rsa.pub
 
 	if [ -f "$FILE" ]; then
-		printf "$FILE exists. Using existing one\n"
+		printf "%s exists. Using existing one\n" "$FILE"
 	else
-		printf "Generating new $FILE\n"
+		printf "Generating new %s\n" "$FILE"
 		ssh-keygen -q -t rsa -N '' <<<$'\ny' >/dev/null 2>&1
 	fi
 }
 
 function copy_ssh_key_to_clipboard() {
-	cat ~/.ssh/id_rsa.pub | copy_to_clipboard
+	copy_to_clipboard < ~/.ssh/id_rsa.pub
 	printf "SSH key pasted to clipboard. Please open this page on GitHub and paste the key there:\n
 https://github.com/settings/keys\n"
 
