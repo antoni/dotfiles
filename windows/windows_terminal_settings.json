@@ -1,30 +1,27 @@
 {
+    "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema",
-    "startOnUserLogin": true,
-    "alwaysOnTop": false,
-    "alwaysShowTabs": true,
-    "showTabsInTitlebar": true,
-    "experimental.rendering.forceFullRepaint": true,
-    "experimental.retroTerminalEffect": true,
-    "experimental.useAtlasEngine": true,
-    "actions": [
+    "actions":
+    [
         {
-            "command": {
+            "command": "paste",
+            "keys": "ctrl+v"
+        },
+        {
+            "command":
+            {
                 "action": "copy",
                 "singleLine": false
             },
             "keys": "ctrl+c"
         },
         {
-            "command": "paste",
-            "keys": "ctrl+v"
-        },
-        {
             "command": "find",
             "keys": "ctrl+shift+f"
         },
         {
-            "command": {
+            "command":
+            {
                 "action": "splitPane",
                 "split": "auto",
                 "splitMode": "duplicate"
@@ -32,22 +29,26 @@
             "keys": "alt+shift+d"
         }
     ],
+    "alwaysOnTop": false,
+    "alwaysShowTabs": true,
     "copyFormatting": "none",
     "copyOnSelect": true,
     "defaultProfile": "{c6eaf9f4-32a7-5fdc-b5cf-066e8a4b1e42}",
+    "experimental.rendering.forceFullRepaint": true,
     "initialCols": 230,
-    "initialRows": 60,
     "initialPosition": "50,50",
+    "initialRows": 60,
     "multiLinePasteWarning": false,
-    "profiles": {
+    "profiles":
+    {
         "defaults": {},
-        "list": [
+        "list":
+        [
             {
+                "commandline": "wsl.exe tmux attach || tmux",
                 "guid": "{c6eaf9f4-32a7-5fdc-b5cf-066e8a4b1e42}",
                 "hidden": false,
-                "name": "Ubuntu-18.04 (with tmux)",
-                "commandline": "wsl.exe tmux attach || tmux",
-                "bellSound": ""
+                "name": "Ubuntu-18.04 (with tmux)"
             },
             {
                 "guid": "{c6eaf9f4-32a7-5fdc-b5cf-066e8a4b1e40}",
@@ -56,13 +57,12 @@
                 "source": "Windows.Terminal.Wsl"
             },
             {
-                "commandline": "powershell.exe",
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
                 "hidden": false,
-                "name": "Windows PowerShell"
+                "name": "Windows PowerShell",
+                "startingDirectory": "\\\\wsl$\\Ubuntu-18.04\\home\\antoni\\"
             },
             {
-                "commandline": "cmd.exe",
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
                 "hidden": false,
                 "name": "Command Prompt"
@@ -72,10 +72,23 @@
                 "hidden": false,
                 "name": "Azure Cloud Shell",
                 "source": "Windows.Terminal.Azure"
-            }
+            },
+            {
+                "guid": "{4ca3f36a-954b-5f17-a131-52dc5790981e}",
+                "hidden": false,
+                "name": "Ubuntu 18.04.5 on Windows",
+                "source": "CanonicalGroupLimited.Ubuntu18.04onWindows_79rhkp1fndgsc"
+            },
+            {
+                "guid": "{a8202b0e-781a-5dab-98e2-e9d469a63619}",
+                "hidden": false,
+                "name": "CentOS7",
+                "source": "Windows.Terminal.Wsl"
+            },
         ]
     },
-    "schemes": [
+    "schemes":
+    [
         {
             "background": "#0C0C0C",
             "black": "#0C0C0C",
@@ -261,6 +274,29 @@
             "yellow": "#C4A000"
         },
         {
+            "background": "#300A24",
+            "black": "#171421",
+            "blue": "#0037DA",
+            "brightBlack": "#767676",
+            "brightBlue": "#08458F",
+            "brightCyan": "#2C9FB3",
+            "brightGreen": "#26A269",
+            "brightPurple": "#A347BA",
+            "brightRed": "#C01C28",
+            "brightWhite": "#F2F2F2",
+            "brightYellow": "#A2734C",
+            "cursorColor": "#FFFFFF",
+            "cyan": "#3A96DD",
+            "foreground": "#FFFFFF",
+            "green": "#26A269",
+            "name": "Ubuntu-18.04-ColorScheme",
+            "purple": "#881798",
+            "red": "#C21A23",
+            "selectionBackground": "#FFFFFF",
+            "white": "#CCCCCC",
+            "yellow": "#A2734C"
+        },
+        {
             "background": "#000000",
             "black": "#000000",
             "blue": "#000080",
@@ -284,5 +320,7 @@
             "yellow": "#808000"
         }
     ],
+    "showTabsInTitlebar": true,
+    "startOnUserLogin": true,
     "theme": "dark"
 }
