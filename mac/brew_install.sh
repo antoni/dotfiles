@@ -21,6 +21,7 @@ BREW_PACKAGES_MUST_HAVE=(
 	pstree
 	coreutils
 	shellcheck
+    fpp
 	wget
 	pandoc
 	jq
