@@ -30,7 +30,7 @@ function generate_ssh_key() {
 }
 
 function copy_ssh_key_to_clipboard() {
-	copy_to_clipboard < ~/.ssh/id_rsa.pub
+	copy_to_clipboard <~/.ssh/id_rsa.pub
 	printf "SSH key pasted to clipboard. Please open this page on GitHub and paste the key there:\n
 https://github.com/settings/keys\n"
 
