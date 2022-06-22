@@ -1571,3 +1571,6 @@ function is_linux_inside_wsl() {
 		echo 1
 	fi
 }
+
+# TODO: Move to rc
+export GITHUB_USER="antoni"
