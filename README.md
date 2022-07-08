@@ -20,3 +20,6 @@ Get Homebrew (it will install macOS Command Line Tools, like Git, as well):
     ~/dotfiles/symlink.sh
     ~/dotfiles/mac/defaults.sh # Configure the system
     ```
+## Thanks to…
+
+* @ur0n2 for [ur0n2/dotfiles-for-windows](https://github.com/ur0n2/dotfiles-for-windows), where I have taken few scripts/aliases/ideas from

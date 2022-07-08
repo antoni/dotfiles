@@ -106,6 +106,7 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	youtube-dl
 	cocoapods
 	entr
+	ansible
 	lastpass-cli
 	scala
 	libav
@@ -202,6 +203,9 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	pngcrush
 	jpeg
 	jpegoptim
+	terraform
+	terragrunt
+	tflint
 )
 
 BREW_CASK_PACKAGES_MUST_HAVE=(
@@ -392,6 +396,7 @@ BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	android-sdk
 	homebrew/cask-versions/firefox-developer-edition
 	pharo-project/pharo/pharo-launcher
+	vagrant
 )
 
 function sdk_man_install() {
@@ -493,4 +498,9 @@ function mac_install_misc() {
 
 function install_packages_with_security_approvals() {
 	brew install --cask virtualbox
+}
+
+function remove_may_have_packages() {
+	brew remove --force --ignore-dependencies "${BREW_PACKAGES_MAY_HAVE[*]}"
+	brew remove --force --ignore-dependencies --cask "${BREW_CASK_PACKAGES_MAY_HAVE[*]}"
 }
