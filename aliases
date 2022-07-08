@@ -68,7 +68,8 @@ elif test -f /proc/sys/kernel/osrelease && grep -q microsoft /proc/sys/kernel/os
 
 	alias empty_trash_bin='cmd.exe /c "rd /s /q %systemdrive%\$Recycle.bin" 2&> /dev/null'
 
-	alias analyze_disk_usage='/mnt/c/Program\ Files/WizTree/WizTree.exe'
+	# Note: assumes 'C' is the main drive
+	alias analyze_disk_usage='/mnt/c/Program\ Files/WizTree/WizTree.exe "c:"'
 
 	function copy_folder_to_desktop() {
 		local src_folder="$1"
@@ -608,30 +609,7 @@ alias remove_all_docker_images='docker rm -vf $(docker ps -aq)'
 
 # Delete all containers & all images
 function docker_remove_all() {
-	# Stop all containers
-	docker stop $(docker ps -qa)
-
-	# Remove all containers
-	docker rm --force $(docker ps -qa)
-
-	# Remove all images
-	docker rmi --force $(docker images -qa)
-
-	# Remove all volumes
-	docker volume rm $(docker volume ls -qf)
-
-	# Remove all networks
-	docker network rm $(docker network ls -q)
-
-	# Your installation should now be all fresh and clean.
-
-	# The following commands should not output any items:
-	# docker ps -a
-	# docker images -a
-	# docker volume ls
-
-	# The following command show only show the default networks:
-	# docker network ls
+	~/scripts/docker_remove_all.sh
 }
 
 function list_installed() {
@@ -1463,7 +1441,12 @@ function mov_to_mp4() {
 
 function kill_process_on_port() {
 	local port="$1"
-	lsof -t -i tcp:"$port" | xargs kill -9
+	# TODO: Check if process listens on port
+	if lsof -t -i tcp:"$port"; then
+		lsof -t -i tcp:"$port" | xargs kill -9
+	else
+		printf "No process listening on port %s\n" "$port"
+	fi
 }
 
 # macOS
@@ -1581,6 +1564,8 @@ function collage() {
 	montage -density 300 -tile 2x0 -geometry +5+50 -border 10 *.png collage.png
 }
 
+# Windows
+# Opens Notepad++
 function np() {
 	# To follow symlinks inside WSL
 	local path=$(wslpath -w "$1")
@@ -1597,3 +1582,40 @@ function is_linux_inside_wsl() {
 
 # TODO: Move to rc
 export GITHUB_USER="antoni"
+
+function terminate_docker() {
+	wsl --terminate docker-desktop
+	wsl --terminate docker-desktop-data
+}
+
+function sync_dotfiles() {
+	pushd ~/dotfiles || exit
+	git pull
+	git push origin master
+	popd || exit
+	pushd ~/scripts || exit
+	git pull
+	git push origin master
+	popd || exit
+}
+
+function clear_sensitive_data_in_shell_history() {
+	# macOS
+	# LC_ALL=C sed -i '' '/TOKEN/d' $HISTFILE;
+	LC_ALL=C sed -i '/TOKEN/d' "$HISTFILE"
+}
+
+function set_sensitive_variable() {
+	local variable_name=$1
+	local variable_value=$2
+
+	current_histfile=$HISTFILE
+	unset HISTFILE
+	export "$variable_name"="$variable_value"
+	HISTFILE=$current_histfile
+}
+
+# sudo will prompt for a password (if one is required by the security policy) and will not update the user's cached credentials.
+function sudo_forget() {
+	sudo -k "$@"
+}
