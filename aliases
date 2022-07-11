@@ -1619,3 +1619,5 @@ function set_sensitive_variable() {
 function sudo_forget() {
 	sudo -k "$@"
 }
+
+alias node='bun'
