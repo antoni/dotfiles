@@ -175,3 +175,10 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+# bun completions
+[ -s "/Users/antoni/.bun/_bun" ] && source "/Users/antoni/.bun/_bun"
+
+# Bun
+export BUN_INSTALL="/Users/antoni/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
