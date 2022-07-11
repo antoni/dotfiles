@@ -1623,3 +1623,5 @@ function sudo_forget() {
 	sudo -k "$@"
 }
 
+# Windows
+alias systeminfo='systeminfo.exe'
