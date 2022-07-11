@@ -177,8 +177,7 @@ export NVM_DIR="$HOME/.nvm"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 # bun completions
-[ -s "/Users/antoni/.bun/_bun" ] && source "/Users/antoni/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
-# Bun
-export BUN_INSTALL="/Users/antoni/.bun"
+export BUN_INSTALL="$HOME/antoni/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
