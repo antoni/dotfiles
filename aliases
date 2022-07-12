@@ -1625,3 +1625,7 @@ function sudo_forget() {
 
 # Windows
 alias systeminfo='systeminfo.exe'
+# Windows
+alias systeminfo2='msinfo32.exe'
+
+alias p3='python3'
