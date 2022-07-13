@@ -44,3 +44,7 @@ export PATH=$ANDROID_HOME/build-tools/19.1.0:$PATH
 
 # Haskell Stack global executables
 export PATH=~/.local/bin:$PATH
+
+# Ruby GEMs
+export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+export PATH="$PATH:$GEM_HOME/bin"
