@@ -1629,3 +1629,7 @@ alias systeminfo='systeminfo.exe'
 alias systeminfo2='msinfo32.exe'
 
 alias p3='python3'
+
+function desktop_shortcut_to_wsl_folder() {
+	~/scripts/windows/desktop_shortcut_to_wsl_folder.sh $@
+}
