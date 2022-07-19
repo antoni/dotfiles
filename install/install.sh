@@ -217,6 +217,9 @@ function install_pip_packages() {
 		matplotlib protobuf conda haruhi-dl google-api-python-client oauth2client progressbar2
 		tdmgr PyQt5 paho-mqtt PyQtWebEngine mvt yt-dlp)
 
+        # TODO: Install these as well or switch to P3 completely
+        PIP_3_PACKAGES=(yq)
+
 	# Use xargs, so that PIP doesn't fail on a single error
 	cat requirements.txt | xargs -n 1 pip install --user
 	cat requirements.txt | xargs -n 1 pip install --user
