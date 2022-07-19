@@ -33,58 +33,49 @@
     "alwaysShowTabs": true,
     "copyFormatting": "none",
     "copyOnSelect": true,
-    "defaultProfile": "{c6eaf9f4-32a7-5fdc-b5cf-066e8a4b1e42}",
+    "defaultProfile": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
     "experimental.rendering.forceFullRepaint": true,
     "initialCols": 230,
     "initialPosition": "50,50",
     "initialRows": 60,
     "multiLinePasteWarning": false,
-    "profiles":
+    "profiles": 
     {
         "defaults": {},
-        "list":
+        "list": 
         [
             {
-                "commandline": "wsl.exe tmux attach || tmux",
-                "guid": "{c6eaf9f4-32a7-5fdc-b5cf-066e8a4b1e42}",
-                "hidden": false,
-                "name": "Ubuntu-18.04 (with tmux)"
-            },
-            {
-                "guid": "{c6eaf9f4-32a7-5fdc-b5cf-066e8a4b1e40}",
-                "hidden": false,
-                "name": "Ubuntu-18.04",
-                "source": "Windows.Terminal.Wsl"
-            },
-            {
+                "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
                 "hidden": false,
                 "name": "Windows PowerShell",
                 "startingDirectory": "\\\\wsl$\\Ubuntu-18.04\\home\\antoni\\"
             },
             {
+                "commandline": "%SystemRoot%\\System32\\cmd.exe",
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
                 "hidden": false,
                 "name": "Command Prompt"
+            },
+            {
+                "commandline": "wsl.exe tmux attach || tmux",
+                "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
+                "hidden": false,
+                "name": "Ubuntu-20.04 (with tmux)",
+                "source": "Windows.Terminal.Wsl"
+            },
+            {
+                "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c274}",
+                "hidden": false,
+                "name": "Ubuntu-20.04",
+                "source": "Windows.Terminal.Wsl"
             },
             {
                 "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
                 "hidden": false,
                 "name": "Azure Cloud Shell",
                 "source": "Windows.Terminal.Azure"
-            },
-            {
-                "guid": "{4ca3f36a-954b-5f17-a131-52dc5790981e}",
-                "hidden": false,
-                "name": "Ubuntu 18.04.5 on Windows",
-                "source": "CanonicalGroupLimited.Ubuntu18.04onWindows_79rhkp1fndgsc"
-            },
-            {
-                "guid": "{a8202b0e-781a-5dab-98e2-e9d469a63619}",
-                "hidden": false,
-                "name": "CentOS7",
-                "source": "Windows.Terminal.Wsl"
-            },
+            }
         ]
     },
     "schemes":
