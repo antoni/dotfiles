@@ -23,3 +23,8 @@ Get Homebrew (it will install macOS Command Line Tools, like Git, as well):
 ## Thanks to…
 
 * @ur0n2 for [ur0n2/dotfiles-for-windows](https://github.com/ur0n2/dotfiles-for-windows), where I have taken few scripts/aliases/ideas from
+
+## TODO
+
+- Windows - list steps needed to configure the system, then implement them
+- make Windows username configurable (Komputer -> WINDOWS_USERNAME)
