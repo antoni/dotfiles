@@ -227,6 +227,7 @@ BREW_CASK_PACKAGES_MUST_HAVE=(
 	vlc
 	slack
 	libreoffice
+    microsoft-office
 	espanso
 )
 
