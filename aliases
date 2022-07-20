@@ -1635,3 +1635,11 @@ alias p3='python3'
 function desktop_shortcut_to_wsl_folder() {
 	~/scripts/windows/desktop_shortcut_to_wsl_folder.sh $@
 }
+
+# TODO (Windows):
+# alias disk_management
+# diskmgmt.msc
+# alias device_management
+# devmgmt.msc
+
+
