@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+WINGET_COMMAND="winget install --accept-source-agreements  --accept-package-agreements --exact --id "
+
 MUST_HAVE=(
 	chromium
 	wox
@@ -90,4 +92,9 @@ MAY_HAVE=(
 	Mirantis.Lens
 	Telerik.Fiddler.Everywhere
 	winget install -e --id Hashicorp.Vagrant
+	winget install -e --id JetBrains.IntelliJIDEA.Ultimate
+winget install -e --id Google.AndroidStudio
+winget install -e --id RStudio.RStudio.OpenSource
+winget install -e --id wez.wezterm
+winget install --exact --id JetBrains.DataSpell.EarlyPreview
 )
