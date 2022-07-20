@@ -245,6 +245,7 @@ BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	brave-browser
 	anaconda
 	opera-gx
+    disk-drill
 	powershell
 	caffeine
 	dashlane
