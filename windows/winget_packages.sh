@@ -33,6 +33,7 @@ MUST_HAVE=(
 	VideoLAN.VLC
 	Google.CloudSDK
 	Microsoft.WindowsTerminal.Preview
+	winget install -e --id Piriform.Recuva
 )
 
 CONFERENCE_SOFTWARE=(
