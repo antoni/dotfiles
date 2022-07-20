@@ -209,6 +209,7 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 )
 
 BREW_CASK_PACKAGES_MUST_HAVE=(
+    google-chrome
 	iterm2-nightly
 	atom
 	spotify
