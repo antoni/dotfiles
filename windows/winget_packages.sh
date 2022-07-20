@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-WINGET_COMMAND="winget install --accept-source-agreements  --accept-package-agreements --exact --id "
+WINGET_COMMAND="powershell.exe /c winget.exe install --accept-source-agreements  --accept-package-agreements --exact --id "
 
 MUST_HAVE=(
 	chromium
@@ -33,7 +33,7 @@ MUST_HAVE=(
 	VideoLAN.VLC
 	Google.CloudSDK
 	Microsoft.WindowsTerminal.Preview
-	winget install -e --id Piriform.Recuva
+	Piriform.Recuva
 )
 
 CONFERENCE_SOFTWARE=(
@@ -92,10 +92,20 @@ MAY_HAVE=(
 	FedericoTerzi.espanso
 	Mirantis.Lens
 	Telerik.Fiddler.Everywhere
-	winget install -e --id Hashicorp.Vagrant
-	winget install -e --id JetBrains.IntelliJIDEA.Ultimate
-winget install -e --id Google.AndroidStudio
-winget install -e --id RStudio.RStudio.OpenSource
-winget install -e --id wez.wezterm
-winget install --exact --id JetBrains.DataSpell.EarlyPreview
+	Hashicorp.Vagrant
+	JetBrains.IntelliJIDEA.Ultimate
+Google.AndroidStudio
+RStudio.RStudio.OpenSource
+wez.wezterm
+JetBrains.DataSpell.EarlyPreview
 )
+
+for package in ${MUST_HAVE[@]}; do 
+    ${WINGET_COMMAND} $package;
+done;
+for package in ${MAY_HAVE[@]}; do 
+    ${WINGET_COMMAND} $package;
+done;
+for package in ${MUST_HAVE[@]}; do 
+    ${WINGET_COMMAND} $package;
+done;
