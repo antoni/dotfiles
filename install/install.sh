@@ -30,7 +30,7 @@ source $DOTFILES_DIR/utils.sh
 
 # Install required packages
 PACKAGES=(slock xbindkeys clang vim rdesktop make xpdf sysstat
-	nodejs make cmake gitk vlc okular xdotool xbindkeys xautomation mosh mc
+	make cmake gitk vlc okular xdotool xbindkeys xautomation mosh mc
 	libreoffice cscope ctags pavucontrol jq dmidecode xsel i3 zsh lsb ntp feh help2man rpl
 	thunar acpi tmux gitg nomacs docker vpnc
 	hexchat rlwrap xautolock yamllint
@@ -122,7 +122,8 @@ function main() {
 
 		sudo apt install curl
 		# Add sources
-		curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+        # TODO: Install LTS version instead
+		# curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 
 		sudo apt install -y "${PACKAGES[*]}" "${DEBIAN[*]}"
 		install_snap_packages
