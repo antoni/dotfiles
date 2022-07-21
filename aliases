@@ -1642,4 +1642,9 @@ function desktop_shortcut_to_wsl_folder() {
 # alias device_management
 # devmgmt.msc
 
-
+# macOS
+# TODO: Move somewhere else
+function brew_uninstall_all() {
+	brew remove --force $(brew list --formula)
+	brew remove --cask --force $(brew list)
+}
