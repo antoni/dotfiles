@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-WINGET_COMMAND="powershell.exe /c winget.exe install --accept-source-agreements  --accept-package-agreements --exact --id "
+WINGET_ALIAS="powershell.exe /c winget.exe"
+WINGET_COMMAND_LIST="$WINGET_ALIAS list"
+WINGET_COMMAND_INSTALL="$WINGET_ALIAS install --accept-source-agreements  --accept-package-agreements --exact --id "
 
 MUST_HAVE=(
 	chromium
@@ -100,12 +102,14 @@ wez.wezterm
 JetBrains.DataSpell.EarlyPreview
 )
 
-for package in ${MUST_HAVE[@]}; do 
-    ${WINGET_COMMAND} $package;
-done;
-for package in ${MAY_HAVE[@]}; do 
-    ${WINGET_COMMAND} $package;
-done;
-for package in ${MUST_HAVE[@]}; do 
-    ${WINGET_COMMAND} $package;
-done;
+#for package in ${MUST_HAVE[@]}; do 
+#    ${WINGET_COMMAND} $package;
+#done;
+#for package in ${MAY_HAVE[@]}; do 
+#    ${WINGET_COMMAND} $package;
+#done;
+#for package in ${MUST_HAVE[@]}; do 
+#    ${WINGET_COMMAND} $package;
+#done;
+
+${WINGET_COMMAND_LIST} tradasdasas
