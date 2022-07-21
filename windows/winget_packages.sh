@@ -5,6 +5,7 @@ WINGET_COMMAND_LIST="$WINGET_ALIAS list"
 WINGET_COMMAND_INSTALL="$WINGET_ALIAS install --accept-source-agreements  --accept-package-agreements --exact --id "
 
 MUST_HAVE=(
+	Google.Chrome
 	chromium
 	wox
 	putty
@@ -100,6 +101,8 @@ Google.AndroidStudio
 RStudio.RStudio.OpenSource
 wez.wezterm
 JetBrains.DataSpell.EarlyPreview
+Microsoft.WindowsInstallationAssistant
+Microsoft.VisualStudioCode
 )
 
 #for package in ${MUST_HAVE[@]}; do 
