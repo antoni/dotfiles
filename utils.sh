@@ -23,3 +23,7 @@ function shell_check_and_format() {
 	# Run again for files that could not be autofixed
 	printf "%s" "$ALL_FILES" | xargs shellcheck --external-sources || exit 1
 }
+
+function sudo_exec() {
+    sudo $@;
+}

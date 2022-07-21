@@ -117,6 +117,9 @@ function main() {
 
 	sudo_keep_alive
 
+        # Remove "Last login" message in new Terminal window open (some UNIX systems)
+		touch ~/.hushlogin
+
 	if [ -f /etc/debian_version ]; then
 		echo "Installing required packages on Debian/Ubuntu"
 
@@ -126,6 +129,8 @@ function main() {
 		# curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 
 		sudo apt install -y "${PACKAGES[*]}" "${DEBIAN[*]}"
+    sudo apt-get install -y zsh
+
 		install_snap_packages
 		install_yarn_debian
 		#install_debian_chrome
@@ -139,9 +144,6 @@ function main() {
 		# install_fedora_chrome
 	else # macOS
 		#source $DOTFILES_DIR/mac/brew_install.sh
-
-		# Remove "Last login" message in new Terminal window open
-		touch ~/.hushlogin
 
 		#mac_install_misc
 		HOMEBREW_NO_AUTO_UPDATE=1 brew install "${BREW_PACKAGES_MUST_HAVE[*]}"
@@ -159,8 +161,9 @@ function main() {
 	fi
 	install_oh_my_zsh || exit 1
 	install_zsh_plugins || exit 1
-	install_fzf || exit 1
-
+	
+    # TODO: Rename this to what it actually does
+    install_npm
 	install_javascript_packages_npm || exit 1
 	# TODO: Remove?
 	# install_airbnb_eslint
@@ -177,21 +180,21 @@ function install_vim_plugins() {
 }
 
 function install_oh_my_zsh() {
-	sudo chsh -s $(which zsh) $(whoami)
+    sudo sed s/required/sufficient/g -i /etc/pam.d/chsh
+	chsh --shell $(which zsh) $(whoami) || exit 1
 
+    rm -rf ~/.oh-my-zsh
 	curl -Lo install.sh https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
 	sh install.sh --unattended
 }
 
 function install_zsh_plugins() {
+    echo "Installing zsh plugins"
 	# ZSH_CUSTOM=$HOME/zsh_customizations
 	# mkdir -p $ZSH_CUSTOM;
-	# git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
-	# git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
-
-	git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions
-	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting
-	git clone https://github.com/chrisands/zsh-yarn-completions ~/.oh-my-zsh/custom/plugins/zsh-yarn-completions
+	rm -rf ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+rm -rf ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-zsh-plugin && git clone https://github.com/unixorn/fzf-zsh-plugin.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-zsh-plugin
+rm -rf ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 }
 
 function setup_docker() {
@@ -200,14 +203,6 @@ function setup_docker() {
 	sudo_exec usermod -aG docker "$USER"
 	newgrp docker
 	sudo_exec chown "$USER" /var/run/docker.sock
-}
-
-function install_fzf() {
-	# install fzf to oh-my-zsh custom plugins directory
-	git clone https://github.com/junegunn/fzf.git "${ZSH}"/custom/plugins/fzf
-	"${ZSH}"/custom/plugins/fzf/install --bin
-	# install fzf-zsh to oh-my-zsh custom plugins directory
-	git clone https://github.com/Treri/fzf-zsh.git "${ZSH}"/custom/plugins/fzf-zsh
 }
 
 function install_pip_packages() {
@@ -327,21 +322,23 @@ function install_npm() {
 }
 
 function install_javascript_packages_npm() {
-	npm install -g eslint lodash jshint typescript ts-node tslint prettier \
+	npm install --location=global eslint lodash jshint typescript ts-node prettier \
 		http-server http-server-spa json-server depcheck npm-check-updates prettier sort-package-json \
-		babel-cli pm2@latest alfred-vpn firebase-tools tslint typescript \
+		babel-cli pm2@latest firebase-tools \
 		@aws-amplify/cli pa11y netlify-cli hygen react-native-cli serve \
 		@zeplin/cli @zeplin/cli-connect-react-plugin @zeplin/cli-connect-swift-plugin \
 		yo generator-office dts-gen yargs rollup pnpm source-map-explorer \
 		@angular/cli n json5 cordova gltf-pipeline @squoosh/cli depcheck @microsoft/rush \
 		do-not-disturb-cli katex servor degit verdaccio tables gatsby-cli browser-sync \
 		@apidevtools/swagger-cli kill-port-process
+    # TODO: Install these somewhere: Optional macOS packages:
+    # alfred-vpn
 }
 
 function install_airbnb_eslint() {
 	export PKG=eslint-config-airbnb
 	npm info "$PKG@latest" peerDependencies --json | command sed 's/[\{\},]//g ; s/:
-    /@/g' | xargs npm install -g "$PKG@latest"
+    /@/g' | xargs npm install --location=global "$PKG@latest"
 }
 
 function install_global_haskell_stack_packages() {

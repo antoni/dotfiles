@@ -1,11 +1,9 @@
 #!/usr/bin/env bash
 
-APT_PACKAGES=(apache-httpd
+APT_PACKAGES=(apache2
 	vim
 	tmux
-	nodejs
 	golang
-	npm
 	docker
 	htop
 	nginx
@@ -21,12 +19,14 @@ APT_PACKAGES=(apache-httpd
 	git-lfs
 	librecad
 	p7zip
-	sudo apt-get install libasound2
+	libasound2
 	docker-compose
-	sudo apt-get install default-jdk scala
+	default-jdk scala
 	cmake
-	sudo apt-get install -y shellcheck
-	sudo apt-get install build-essential cmake pkg-config libicu-dev zlib1g-dev libcurl4-openssl-dev libssl-dev ruby-dev
-	sudo apt-get install ruby-full build-essential zlib1g-dev
+	shellcheck
+	build-essential cmake pkg-config libicu-dev zlib1g-dev libcurl4-openssl-dev libssl-dev ruby-dev
+	ruby-full build-essential zlib1g-dev
     python3-pip
 )
+
+sudo apt install -y ${APT_PACKAGES[@]}
