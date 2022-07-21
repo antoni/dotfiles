@@ -19,3 +19,9 @@ AppsUseLightTheme
 REG_DWORD
 value:
 0
+
+switch the time between 24 hour and 12 hour
+Move to HKEY_CURRENT_USER\Control Panel\International
+From the Edit menu select New - String
+Enter a name of iTime
+Double click and set to 0 for 12 hours and 1 for 24 hours. Click OK
