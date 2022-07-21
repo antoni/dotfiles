@@ -7,7 +7,7 @@ source "$DOTFILES_DIR"/colors.sh
 function print_success_message() {
 	local message=$1
 	echo -e "\033[1;29;42m DONE \033[0m \033[1;32m $1 \033[0m"
-	echo -e "${colors[Black]}"
+	echo -e "${colors[Color_Off]}"
 }
 
 echo -en "${colors[BGreen]}Enter sudo password:${colors[Black]} "
@@ -297,3 +297,4 @@ done
 ln -s /Applications/TextMate.app/Contents/MacOS/mate /usr/local/bin/mate
 
 print_success_message "Successfully symlinked all files"
+
