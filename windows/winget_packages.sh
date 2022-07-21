@@ -7,7 +7,7 @@ WINGET_COMMAND_INSTALL="$WINGET_ALIAS install --accept-source-agreements  --acce
 MUST_HAVE=(
 	Google.Chrome
 	chromium
-	wox
+	Wox.Wox
 	putty
 	PuTTY.PuTTY
 	GitHub.cli
@@ -97,22 +97,44 @@ MAY_HAVE=(
 	Telerik.Fiddler.Everywhere
 	Hashicorp.Vagrant
 	JetBrains.IntelliJIDEA.Ultimate
-Google.AndroidStudio
-RStudio.RStudio.OpenSource
-wez.wezterm
-JetBrains.DataSpell.EarlyPreview
-Microsoft.WindowsInstallationAssistant
-Microsoft.VisualStudioCode
+	Google.AndroidStudio
+	RStudio.RStudio.OpenSource
+	wez.wezterm
+	JetBrains.DataSpell.EarlyPreview
+	Microsoft.WindowsInstallationAssistant
+	Microsoft.VisualStudioCode
 )
 
-#for package in ${MUST_HAVE[@]}; do 
+#for package in ${MUST_HAVE[@]}; do
 #    ${WINGET_COMMAND} $package;
 #done;
-#for package in ${MAY_HAVE[@]}; do 
+#for package in ${MAY_HAVE[@]}; do
 #    ${WINGET_COMMAND} $package;
 #done;
-#for package in ${MUST_HAVE[@]}; do 
+#for package in ${MUST_HAVE[@]}; do
 #    ${WINGET_COMMAND} $package;
 #done;
 
-${WINGET_COMMAND_LIST} tradasdasas
+package_not_installed=$(${WINGET_COMMAND_LIST} Some.NonExistent.PackageName)
+
+function install_if_not_installed() {
+	local package_name="$1"
+
+	is_package_installed=$(${WINGET_COMMAND_LIST} "$package_name")
+
+	if [[ "$is_package_installed" == "$package_not_installed" ]]; then
+		echo "NOT Installed: ""$package_name"
+
+		${WINGET_COMMAND_INSTALL} "$package_name"
+	fi
+}
+
+for package in ${MUST_HAVE[@]}; do
+	install_if_not_installed $package
+done
+for package in ${MAY_HAVE[@]}; do
+	install_if_not_installed $package
+done
+for package in ${MUST_HAVE[@]}; do
+	install_if_not_installed $package
+done
