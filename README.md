@@ -28,3 +28,5 @@ Get Homebrew (it will install macOS Command Line Tools, like Git, as well):
 
 - Windows - list steps needed to configure the system, then implement them
 - make Windows username configurable (Komputer -> WINDOWS_USERNAME)
+- clone all repos from the given org (do I have a script for that?)
+- Winget install script - check if packages has been installed via winget list vscode
