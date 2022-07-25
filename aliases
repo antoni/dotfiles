@@ -1646,3 +1646,6 @@ function brew_uninstall_all() {
 	brew remove --force $(brew list --formula)
 	brew remove --cask --force $(brew list)
 }
+
+# macOS
+alias fix_disk="/Applications/Disk\ Drill.app"
