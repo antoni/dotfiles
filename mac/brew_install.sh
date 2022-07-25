@@ -94,6 +94,7 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	ccat
 	rustup-init
 	tor
+    infracost
 	pass
 	i2p
 	blueutil
