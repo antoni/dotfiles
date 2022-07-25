@@ -1636,11 +1636,9 @@ function desktop_shortcut_to_wsl_folder() {
 	~/scripts/windows/desktop_shortcut_to_wsl_folder.sh $@
 }
 
-# TODO (Windows):
-# alias disk_management
-# diskmgmt.msc
-# alias device_management
-# devmgmt.msc
+# Windows
+alias disk_management='cmd.exe /c diskmgmt.msc'
+alias device_management='cmd.exe /c devmgmt.msc'
 
 # macOS
 # TODO: Move somewhere else
