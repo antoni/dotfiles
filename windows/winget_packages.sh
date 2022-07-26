@@ -102,7 +102,16 @@ MAY_HAVE=(
 	wez.wezterm
 	JetBrains.DataSpell.EarlyPreview
 	Microsoft.WindowsInstallationAssistant
-	Microsoft.VisualStudioCode
+	winget install -e --id Microsoft.AzureFunctionsCoreTools
+	winget install -e --id Microsoft.AzureDataStudio
+	winget install -e --id Microsoft.AzureDataStudio.Insiders
+	winget install -e --id Microsoft.AzureCosmosEmulator
+	winget install -e --id Microsoft.azure-iot-explorer
+	winget install -e --id Microsoft.AzureStorageExplorer
+	winget install -e --id Microsoft.AzureCLI
+	winget install -e --id Microsoft.AzureDataCLI
+	winget install -e --id Microsoft.AzureStorageEmulator
+
 )
 
 #for package in ${MUST_HAVE[@]}; do
