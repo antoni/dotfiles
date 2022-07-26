@@ -1649,3 +1649,25 @@ function brew_uninstall_all() {
 
 # macOS
 alias fix_disk="/Applications/Disk\ Drill.app"
+
+# Usage:
+# json_to_table t.json id,name
+# Where t.json is:
+# [{
+#  "name": "George",
+#  "id": 12,
+#  "email": "george@domain.example"
+# }, {
+#  "name": "Jack",
+#  "id": 18,
+#  "email": "jack@domain.example"
+# }]
+function json_to_table() {
+  local filename="$1";
+  local table_fields="$2";
+
+  JSON_FIELDS='[.'$(echo $table_fields | sed -e 's/,/, ./g')']'
+  TABLE_FIELDS='"'$(echo $table_fields | sed -e 's/,/","/g')'"'
+  jq -r "([$TABLE_FIELDS] | (., map(length*\"-\"))), (.[] | $JSON_FIELDS) | @tsv" $filename
+}
+
