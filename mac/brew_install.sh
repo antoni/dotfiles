@@ -71,7 +71,6 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	gifsicle
 	corsixth
 	git-gui
-    azure-cli
 	carthage
 	pipenv
 	starship
