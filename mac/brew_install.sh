@@ -6,6 +6,7 @@ BREW_PACKAGES_MUST_HAVE=(
 	gnu-tar
 	coreutils
 	findutils
+    openjdk
 	gnutls
 	grep
 	ascii
