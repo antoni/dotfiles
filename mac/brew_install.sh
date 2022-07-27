@@ -7,6 +7,7 @@ BREW_PACKAGES_MUST_HAVE=(
 	coreutils
 	findutils
     openjdk
+    temurin
 	gnutls
 	grep
 	ascii
