@@ -7,6 +7,7 @@ APT_PACKAGES=(apache2
 	docker
 	htop
 	nginx
+    parallel
 	jq
 	gitk
 	poppler-utils
