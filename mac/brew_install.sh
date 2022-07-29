@@ -6,8 +6,8 @@ BREW_PACKAGES_MUST_HAVE=(
 	gnu-tar
 	coreutils
 	findutils
-    openjdk
-    temurin
+	openjdk
+	temurin
 	gnutls
 	grep
 	ascii
@@ -67,6 +67,7 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	pillow
 	emscripten
 	deno
+	graphviz
 	charles
 	gifski
 	binaryen
@@ -96,7 +97,7 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	ccat
 	rustup-init
 	tor
-    infracost
+	infracost
 	pass
 	i2p
 	blueutil
@@ -212,7 +213,7 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 )
 
 BREW_CASK_PACKAGES_MUST_HAVE=(
-    google-chrome
+	google-chrome
 	iterm2-nightly
 	atom
 	spotify
@@ -230,7 +231,7 @@ BREW_CASK_PACKAGES_MUST_HAVE=(
 	vlc
 	slack
 	libreoffice
-    microsoft-office
+	microsoft-office
 	espanso
 )
 
@@ -250,9 +251,9 @@ BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	brave-browser
 	anaconda
 	opera-gx
-    disk-drill
+	disk-drill
 	powershell
-    azure-data-studio
+	azure-data-studio
 	caffeine
 	dashlane
 	lens
