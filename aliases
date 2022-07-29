@@ -33,7 +33,7 @@ if [[ "$unamestr" == 'Darwin' ]]; then
 	alias analyze_disk_usage='/Applications/OmniDiskSweeper.app/Contents/MacOS/OmniDiskSweeper'
 
 	# TODO: Move to non-OS-specific
-	alias node='bun'
+	# alias node='bun'
 elif test -f /proc/sys/kernel/osrelease && grep -q microsoft /proc/sys/kernel/osrelease; then
 	# Windows (WSL)
 	alias copy_to_clipboard='clip.exe'
