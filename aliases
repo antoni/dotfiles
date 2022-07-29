@@ -219,7 +219,8 @@ alias ......="cd ../../.."
 # function gg() { pwd > /tmp/last_path; }
 # function hh() { cd $(cat /tmp/last_path); }
 
-alias webserver='python3 -m http.server 8080'
+alias webserver='python3 -m http.server --bind localhost 8080'
+alias s='webserver'
 alias gprer='grep --recursive'
 
 alias hgrep='history | grep -i'
@@ -278,12 +279,12 @@ alias latexed2='gummi'
 alias gogo='cd ~/go/'
 alias l='ls'
 
-csview() {
+function csview() {
 	local file="$1"
 	cat "$file" | sed -e 's/,,/, ,/g' | column -s, -t | less -#5 -N -S
 }
 # Custom cat: colourised and tabulated for CSV files alias cat='pygmentize -g'
-xcat() {
+function xcat() {
 	filename=$(basename "$1")
 	fileext=${filename##*.}
 	if [ "$fileext" = "csv" ]; then
@@ -294,14 +295,14 @@ xcat() {
 }
 
 # Google search
-s() {
+function s() {
 	args=$@
 	searchterm=${args// /%20}
 	google-chrome-stable "http://www.google.com/search?q=$searchterm"
 }
 
 # Launch Vim solarized theme depending on the time of the day
-vv() {
+function vv() {
 	echo "$1"
 	hour=$(date +%H)
 	theme=dark
