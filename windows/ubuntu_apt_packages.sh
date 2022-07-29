@@ -7,7 +7,8 @@ APT_PACKAGES=(apache2
 	docker
 	htop
 	nginx
-    parallel
+	parallel
+	graphviz
 	jq
 	gitk
 	poppler-utils
@@ -27,7 +28,7 @@ APT_PACKAGES=(apache2
 	shellcheck
 	build-essential cmake pkg-config libicu-dev zlib1g-dev libcurl4-openssl-dev libssl-dev ruby-dev
 	ruby-full build-essential zlib1g-dev
-    python3-pip
+	python3-pip
 )
 
 sudo apt install -y ${APT_PACKAGES[@]}
