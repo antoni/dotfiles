@@ -139,11 +139,11 @@ function install_if_not_installed() {
 }
 
 for package in ${MUST_HAVE[@]}; do
-	install_if_not_installed $package
+	install_if_not_installed "$package"
 done
 for package in ${MAY_HAVE[@]}; do
-	install_if_not_installed $package
+	install_if_not_installed "$package"
 done
 for package in ${MUST_HAVE[@]}; do
-	install_if_not_installed $package
+	install_if_not_installed "$package"
 done

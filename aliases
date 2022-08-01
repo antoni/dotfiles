@@ -1664,11 +1664,10 @@ alias fix_disk="/Applications/Disk\ Drill.app"
 #  "email": "jack@domain.example"
 # }]
 function json_to_table() {
-  local filename="$1";
-  local table_fields="$2";
+	local filename="$1"
+	local table_fields="$2"
 
-  JSON_FIELDS='[.'$(echo $table_fields | sed -e 's/,/, ./g')']'
-  TABLE_FIELDS='"'$(echo $table_fields | sed -e 's/,/","/g')'"'
-  jq -r "([$TABLE_FIELDS] | (., map(length*\"-\"))), (.[] | $JSON_FIELDS) | @tsv" $filename
+	JSON_FIELDS='[.'$(echo "$table_fields" | sed -e 's/,/, ./g')']'
+	TABLE_FIELDS='"'$(echo "$table_fields" | sed -e 's/,/","/g')'"'
+	jq -r "([$TABLE_FIELDS] | (., map(length*\"-\"))), (.[] | $JSON_FIELDS) | @tsv" "$filename"
 }
-
