@@ -297,4 +297,3 @@ done
 ln -s /Applications/TextMate.app/Contents/MacOS/mate /usr/local/bin/mate
 
 print_success_message "Successfully symlinked all files"
-
