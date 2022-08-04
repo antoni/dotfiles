@@ -142,6 +142,7 @@
 [diff "image"]
 	command = ~/git-diff-image/git_diff_image
 [diff "xml_diff"]
-    command = xmldiff
+    ; command = xmldiff
+    command = ~/scripts/git_xml_diff.sh
 [pager]
 	status = true
