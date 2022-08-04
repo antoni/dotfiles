@@ -1671,3 +1671,11 @@ function json_to_table() {
 	TABLE_FIELDS='"'$(echo "$table_fields" | sed -e 's/,/","/g')'"'
 	jq -r "([$TABLE_FIELDS] | (., map(length*\"-\"))), (.[] | $JSON_FIELDS) | @tsv" "$filename"
 }
+
+# Windows
+# Usage:
+# print_windows_environmnent_variable APPDATA
+function print_windows_environmnent_variable() {
+    local variable_name="$1"
+powershell.exe "\$env:$variable_name"
+}
