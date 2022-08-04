@@ -141,5 +141,7 @@
 	smudge = git-lfs smudge -- %f
 [diff "image"]
 	command = ~/git-diff-image/git_diff_image
+[diff "xml_diff"]
+    command = xmldiff
 [pager]
 	status = true
