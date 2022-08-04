@@ -1,2 +1,3 @@
 *.xml diff=xml_diff
+*.xml.rels diff=xml_diff
 
