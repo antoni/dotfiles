@@ -41,7 +41,7 @@ echo "SweetHome3D        version symlinked:   " "$SWEET_HOME_VERSION"
 echo -e "${colors[White]}"
 
 DOTFILES=(profile bashrc zshrc vimrc paths aliases bash_profile common_profile.sh tmux.conf
-	gitconfig gitignore ghci gvimrc hgrc lldbinit gdbinit xbindkeysrc
+	gitconfig gitignore gitattributes  ghci gvimrc hgrc lldbinit gdbinit xbindkeysrc
 	optional.sh fzf.sh psqlrc colordiffrc emacs inputrc agda
 	jupyter newsboat) # Directories
 
