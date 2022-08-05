@@ -83,9 +83,6 @@ MAY_HAVE=(
 	Amazon.Kindle
 	Amazon.SendToKindle
 	Autodesk.sketchbook
-	IObit.DriverBooster9
-	IObit.IObitSysInfo
-	IObit.AdvancedSystemCare
 	Files-Community.Files
 	TranslucentTB.TranslucentTB
 	Lexikos.AutoHotkey
