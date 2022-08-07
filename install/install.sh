@@ -214,7 +214,7 @@ function install_pip_packages() {
 		tdmgr PyQt5 paho-mqtt PyQtWebEngine mvt yt-dlp xmldiff)
 
 	# TODO: Install these as well or switch to P3 completely
-	PIP_3_PACKAGES=(yq)
+	PIP_3_PACKAGES=(yq poetry)
 
 	# Use xargs, so that PIP doesn't fail on a single error
 	cat requirements.txt | xargs -n 1 pip install --user
