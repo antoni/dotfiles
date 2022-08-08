@@ -1679,3 +1679,7 @@ function print_windows_environmnent_variable() {
     local variable_name="$1"
 powershell.exe "\$env:$variable_name"
 }
+
+# macOS
+alias lsblk='diskutil list'
+
