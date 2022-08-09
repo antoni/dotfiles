@@ -1,56 +1,61 @@
 {
-    "editor.fontLigatures": true,
-    "editor.fontFamily": "Fira Code",
-    "editor.fontSize": 11,
-    "editor.rulers": [ 80 ],
-    "editor.tabSize": 2,
-    "editor.formatOnSave": true,
-    "editor.codeActionsOnSave": {
-      "source.organizeImports": true
-    },
-    "files.trimTrailingWhitespace": true,
-    "files.autoSave": "onFocusChange",
-    "align.leftSeparators": [],
-    "align.rightSeparators": [
-      ":",
-      "=",
-      "+=",
-      "-=",
-      "*=",
-      "/=",
-      "?=",
-      "|=",
-      "%=",
-      ".=",
-      "=>"
-    ],
-    "align.spaceSeparators": [
-      ":",
-      "=",
-      "+=",
-      "-=",
-      "*=",
-      "/=",
-      "?=",
-      "|=",
-      "%=",
-      ".=",
-      "=>"
-    ],
-    "[markdown]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "deepcode.yesWelcomeNotification": false,
-    "settingsSync.ignoredSettings": [
-
-    ],
-    "telemetry.enableCrashReporter": false,
-    "telemetry.enableTelemetry": false,
-    "deepcode.yesTelemetry": false,
-    "redhat.telemetry.enabled": true,
-    "snyk.yesWelcomeNotification": false,
-    "editor.inlineSuggest.enabled": true,
-    "editor.suggestSelection": "first",
-    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-    "window.zoomLevel": 1
-  }
+  "editor.fontLigatures": true,
+  "editor.fontFamily": "Fira Code",
+  "editor.fontSize": 11,
+  "editor.rulers": [80],
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  },
+  "files.trimTrailingWhitespace": true,
+  "files.autoSave": "onFocusChange",
+  "align.leftSeparators": [],
+  "align.rightSeparators": [
+    ":",
+    "=",
+    "+=",
+    "-=",
+    "*=",
+    "/=",
+    "?=",
+    "|=",
+    "%=",
+    ".=",
+    "=>"
+  ],
+  "align.spaceSeparators": [
+    ":",
+    "=",
+    "+=",
+    "-=",
+    "*=",
+    "/=",
+    "?=",
+    "|=",
+    "%=",
+    ".=",
+    "=>"
+  ],
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "deepcode.yesWelcomeNotification": false,
+  "settingsSync.ignoredSettings": [],
+  "telemetry.enableCrashReporter": false,
+  "telemetry.enableTelemetry": false,
+  "deepcode.yesTelemetry": false,
+  "redhat.telemetry.enabled": true,
+  "snyk.yesWelcomeNotification": false,
+  "editor.inlineSuggest.enabled": true,
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "files.associations": {
+    "*.jxa": "javascript"
+  },
+  "explorer.confirmDragAndDrop": false,
+  "explorer.confirmDelete": false,
+  "tabnine.experimentalAutoImports": true,
+  "vsicons.dontShowNewVersionMessage": true,
+  "window.zoomLevel": 1
+}
