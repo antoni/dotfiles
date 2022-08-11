@@ -98,3 +98,7 @@ export ANDROID_NDK_HOME=/usr/local/opt/android-ndk
 rm -f ~/Desktop/Relocated\ Items
 
 export PATH=$PATH:$HOME/.npm-packages/bin
+
+# Windows
+export DISPLAY=$(ip route list default | awk '{print $3}'):0
+export LIBGL_ALWAYS_INDIRECT=1
