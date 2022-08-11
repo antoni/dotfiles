@@ -1683,3 +1683,7 @@ powershell.exe "\$env:$variable_name"
 # macOS
 alias lsblk='diskutil list'
 
+# Windows
+function toggle_windows_defender() {
+
+}
