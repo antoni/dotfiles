@@ -54,10 +54,13 @@ MAY_HAVE=(
 	Amazon.AWSCLI
 	Zeit.Hyper
 	AnyDeskSoftwareGmbH.AnyDesk
+    opticos.gwsl
+    marha.VcXsrv
 	BraveSoftware.BraveBrowser
 	Microsoft.dotNetFramework
 	Microsoft.dotnet
 	Oracle.VirtualBox
+	VMware.WorkstationPlayer
 	TorProject.TorBrowser
 	NordVPN.NordVPN
 	Xming.Xming
