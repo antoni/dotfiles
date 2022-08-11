@@ -1683,7 +1683,4 @@ powershell.exe "\$env:$variable_name"
 # macOS
 alias lsblk='diskutil list'
 
-# Windows
-function toggle_windows_defender() {
-
-}
+alias grhom='git reset --hard origin/master'
