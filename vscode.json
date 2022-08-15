@@ -2,7 +2,9 @@
   "editor.fontLigatures": true,
   "editor.fontFamily": "Fira Code",
   "editor.fontSize": 11,
-  "editor.rulers": [80],
+  "editor.rulers": [
+    80
+  ],
   "editor.tabSize": 2,
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
@@ -50,12 +52,32 @@
   "editor.inlineSuggest.enabled": true,
   "editor.suggestSelection": "first",
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-  "files.associations": {
-    "*.jxa": "javascript"
+  "editor.fontSize": 13,
+  "workbench.startupEditor": "none",
+  "workbench.editor.wrapTabs": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "vsicons.dontShowNewVersionMessage": true,
+  "window.zoomLevel": 1,
+  "vscode-edge-devtools.mirrorEdits": true,
+  "security.workspace.trust.untrustedFiles": "open",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "explorer.confirmDragAndDrop": false,
   "explorer.confirmDelete": false,
-  "tabnine.experimentalAutoImports": true,
-  "vsicons.dontShowNewVersionMessage": true,
-  "window.zoomLevel": 1
+  "[dockerfile]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+  },
+  "workbench.iconTheme": "vscode-icons",
+  "editor.formatOnPaste": true
 }
