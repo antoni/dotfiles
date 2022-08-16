@@ -262,6 +262,7 @@ BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	google-cloud-sdk
 	bitwarden
 	wickrme
+    roblox
 	messenger
 	tableplus
 	qlvideo
