@@ -48,14 +48,15 @@ CONFERENCE_SOFTWARE=(
 MAY_HAVE=(
 	GNU.Emacs
 	Valve.Steam
+	WireGuard.WireGuard
 	Ghisler.TotalCommander
 	Microsoft.WindowsTerminal
 	OpenJS.NodeJS.LTS
 	Amazon.AWSCLI
 	Zeit.Hyper
 	AnyDeskSoftwareGmbH.AnyDesk
-    opticos.gwsl
-    marha.VcXsrv
+	opticos.gwsl
+	marha.VcXsrv
 	BraveSoftware.BraveBrowser
 	Microsoft.dotNetFramework
 	Microsoft.dotnet
@@ -65,6 +66,7 @@ MAY_HAVE=(
 	NordVPN.NordVPN
 	Xming.Xming
 	Greenshot.Greenshot
+	CrystalDewWorld.CrystalDiskMark # disk benchmark
 	Discord.Discord
 	Mozilla.Firefox.DeveloperEdition
 	ProtonTechnologies.ProtonVPN
@@ -102,6 +104,7 @@ MAY_HAVE=(
 	wez.wezterm
 	JetBrains.DataSpell.EarlyPreview
 	Microsoft.WindowsInstallationAssistant
+	winget install -e --id Mojang.MinecraftLauncher
 	winget install -e --id Microsoft.AzureFunctionsCoreTools
 	winget install -e --id Microsoft.AzureDataStudio
 	winget install -e --id Microsoft.AzureDataStudio.Insiders
