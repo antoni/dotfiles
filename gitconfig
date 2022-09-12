@@ -144,5 +144,9 @@
 [diff "xml_diff"]
     ; command = xmldiff
     command = ~/scripts/git_xml_diff.sh
+[diff "jd"]
+    command = 'jd --git-diff-driver'
 [pager]
 	status = true
+[init]
+	defaultBranch = master

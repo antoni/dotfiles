@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Steps to build and install tmux from source on Ubuntu.
 # Takes < 25 seconds on EC2 env [even on a low-end config instance].
 VERSION="3.3a"
