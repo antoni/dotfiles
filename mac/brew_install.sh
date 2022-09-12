@@ -10,6 +10,7 @@ BREW_PACKAGES_MUST_HAVE=(
 	temurin
 	gnutls
 	grep
+	jd
 	ascii
 	gpg
 	exiftool
@@ -18,6 +19,7 @@ BREW_PACKAGES_MUST_HAVE=(
 	ngrok
 	yarn
 	zoom
+	kotlin
 	azure-cli
 	gh
 	pstree
@@ -48,10 +50,13 @@ BREW_PACKAGES_MUST_HAVE=(
 )
 
 BREW_PACKAGES_MAY_HAVE=(apache-httpd
+	i2p
+	i2pd
 	gron
 	mas
 	haskell-stack
 	autojump
+	azcopy
 	yarn-completion
 	dockutil
 	gnumeric
@@ -99,7 +104,6 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	tor
 	infracost
 	pass
-	i2p
 	blueutil
 	rtorrent
 	newsboat
@@ -233,13 +237,17 @@ BREW_CASK_PACKAGES_MUST_HAVE=(
 	slack
 	libreoffice
 	microsoft-office
-	espanso
+	tor-browser
+	openvpn-connect
+	skitch
 )
 
 BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	wine-stable
+	surfshark
 	anydesk
 	microsoft-remote-desktop
+	duckduckgo
 	docker
 	docker-compose
 	terraform
@@ -252,17 +260,17 @@ BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	brave-browser
 	anaconda
 	opera-gx
+	espanso
 	disk-drill
 	powershell
 	azure-data-studio
 	caffeine
 	dashlane
 	lens
-	openvpn-connect
 	google-cloud-sdk
 	bitwarden
 	wickrme
-    roblox
+	roblox
 	messenger
 	tableplus
 	qlvideo
@@ -362,13 +370,11 @@ BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	tunnelblick
 	rowanj-gitx
 	xquartz
-	skitch
 	mounty
 	wireshark-chmodbpf
 	transmission
 	nordvpn
 	sequel-pro
-	tor-browser
 	safari-technology-preview
 	owasp-zap
 	evernote
@@ -469,16 +475,6 @@ function mac_install_misc() {
 	# Packages needed to install other packages later
 	brew install svn node@16
 
-	brew install --cask
-	# Fonts
-	brew tap homebrew/cask-fonts
-	brew install --cask \
-		font-fira-code \
-		font-fira-mono \
-		font-fira-mono-for-powerline \
-		font-inconsolata \
-		font-fira-sans
-
 	# TODO: Make it work again
 	# vim_you_complete_me_install
 
@@ -510,7 +506,20 @@ function install_packages_with_security_approvals() {
 	brew install --cask virtualbox
 }
 
+function remove_may_have_packages_cask() {
+	echo "${BREW_CASK_PACKAGES_MAY_HAVE[*]}" | xargs brew uninstall --force
+}
+
+function remove_may_have_packages_main() {
+	echo "${BREW_PACKAGES_MAY_HAVE[*]}" | xargs brew uninstall --force
+}
+
 function remove_may_have_packages() {
-	brew remove --force --ignore-dependencies "${BREW_PACKAGES_MAY_HAVE[*]}"
-	brew remove --force --ignore-dependencies --cask "${BREW_CASK_PACKAGES_MAY_HAVE[*]}"
+	remove_may_have_packages_main
+	remove_may_have_packages_cask
+}
+
+function is_package_installed() {
+	local package_name="$1"
+	brew list "$package_name"
 }

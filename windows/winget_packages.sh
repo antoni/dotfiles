@@ -49,6 +49,7 @@ MAY_HAVE=(
 	GNU.Emacs
 	Valve.Steam
 	WireGuard.WireGuard
+	CPUID.HWMonitor
 	Ghisler.TotalCommander
 	Microsoft.WindowsTerminal
 	OpenJS.NodeJS.LTS
@@ -60,9 +61,11 @@ MAY_HAVE=(
 	BraveSoftware.BraveBrowser
 	Microsoft.dotNetFramework
 	Microsoft.dotnet
+	alcpu.CoreTemp
 	Oracle.VirtualBox
 	VMware.WorkstationPlayer
 	TorProject.TorBrowser
+	Surfshark.SurfsharkVPN
 	NordVPN.NordVPN
 	Xming.Xming
 	Greenshot.Greenshot
@@ -71,6 +74,8 @@ MAY_HAVE=(
 	Mozilla.Firefox.DeveloperEdition
 	ProtonTechnologies.ProtonVPN
 	ExpressVPN.ExpressVPN
+	Microsoft.OfficeDeploymentTool
+	Grammarly.ForOffice
 	Inkscape.Inkscape
 	BinaryFortress.DisplayFusion
 	TorProject.TorBrowser
@@ -141,12 +146,12 @@ function install_if_not_installed() {
 	fi
 }
 
-for package in ${MUST_HAVE[@]}; do
+for package in "${MUST_HAVE[@]}"; do
 	install_if_not_installed "$package"
 done
-for package in ${MAY_HAVE[@]}; do
+for package in "${MAY_HAVE[@]}"; do
 	install_if_not_installed "$package"
 done
-for package in ${MUST_HAVE[@]}; do
+for package in "${MUST_HAVE[@]}"; do
 	install_if_not_installed "$package"
 done

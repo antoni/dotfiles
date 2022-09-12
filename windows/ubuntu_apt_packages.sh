@@ -10,6 +10,7 @@ APT_PACKAGES=(apache2
 	parallel
 	graphviz
 	jq
+	flatpak
 	gitk
 	poppler-utils
 	mc
@@ -29,9 +30,10 @@ APT_PACKAGES=(apache2
 	build-essential cmake pkg-config libicu-dev zlib1g-dev libcurl4-openssl-dev libssl-dev ruby-dev
 	ruby-full build-essential zlib1g-dev
 	python3-pip
-    haveged
-    yamllint
-    tree
+	haveged
+	yamllint
+	tree
+	dos2unix
 )
 
-sudo apt install -y ${APT_PACKAGES[@]}
+sudo apt install -y "${APT_PACKAGES[@]}"

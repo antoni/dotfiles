@@ -79,7 +79,7 @@ function install_yarn_debian() {
 
 function install_fedora_sound() {
 	echo "Installing Video and audio codecs on Fedora"
-	su -c 'dnf install --nogpgcheck http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm'
+	su -c "dnf install --nogpgcheck http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
 
 	sudo_exec dnf update
 
@@ -181,7 +181,7 @@ function install_vim_plugins() {
 
 function install_oh_my_zsh() {
 	sudo sed s/required/sufficient/g -i /etc/pam.d/chsh
-	chsh --shell $(which zsh) $(whoami) || exit 1
+	chsh --shell "$(which zsh)" "$(whoami)" || exit 1
 
 	rm -rf ~/.oh-my-zsh
 	curl -Lo install.sh https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
@@ -216,9 +216,11 @@ function install_pip_packages() {
 	# TODO: Install these as well or switch to P3 completely
 	PIP_3_PACKAGES=(yq poetry)
 
+	# TODO: Use pip3?
 	# Use xargs, so that PIP doesn't fail on a single error
-	cat requirements.txt | xargs -n 1 pip install --user
-	cat requirements.txt | xargs -n 1 pip install --user
+	xargs -n 1 pip install --user <requirements.txt
+	# TODO: Use pip3?
+	xargs -n 1 pip install --user <requirements.txt
 	# pip install --user $PIP_PACKAGES --upgrade
 	# pip3 install --user $PIP_PACKAGES --upgrade
 
@@ -278,7 +280,8 @@ function configure_postgres() {
 function install_haskell_packages() {
 	HASKELL_PACKAGES=(happy hscolour funnyprint alex parsec hoogle QuickCheck mtl)
 	cabal update
-	cabal install "$HASKELL_PACKAGES"
+	# TODO FIXME
+	# cabal install "$HASKELL_PACKAGES"
 }
 
 function install_r_packages() {
@@ -289,7 +292,8 @@ function install_r_packages() {
 
 function install_go_packages() {
 	GO_PACKAGES=(github.com/derekparker/delve/cmd/dlv github.com/Sirupsen/logrus)
-	go get -u "$GO_PACKAGES"
+	# TODO: FIXME
+	# go get -u "$GO_PACKAGES"
 }
 
 function install_nvidia_driver() {
@@ -298,8 +302,8 @@ function install_nvidia_driver() {
 }
 
 function install_r_studio() {
-	sudo_exec dnf install $(curl -s https://www.rstudio.com/products/rstudio/download/ |
-		\grep -o "\"[^ \"]*x86_64.rpm\"" | sed "s/\"//g")
+	sudo_exec dnf install "$(curl -s https://www.rstudio.com/products/rstudio/download/ |
+		\grep -o "\"[^ \"]*x86_64.rpm\"" | sed "s/\"//g")"
 }
 
 function start_services() {

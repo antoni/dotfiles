@@ -15,3 +15,5 @@ npm-debug.log
 
 scripts/*
 jupyter
+
+*:Zone.Identifier

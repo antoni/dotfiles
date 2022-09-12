@@ -22,7 +22,7 @@ ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa <<<y >/dev/null 2>&1
 # copy generated SSH key
 
 printf "Copied SSH key to clipboard"
-cat ~/.ssh/id_rsa.pub | pbcopy
+pbcopy <~/.ssh/id_rsa.pub
 
 printf "Login to Github and paste the SSH key:\n\nhttps://github.com/settings/ssh/new\n\n"
 

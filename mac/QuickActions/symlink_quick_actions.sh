@@ -4,7 +4,7 @@
 
 rm -rf tmp_workflows
 mkdir tmp_workflows
-cp -r *workflow tmp_workflows/
+cp -r ./*workflow tmp_workflows/
 open tmp_workflows
 
 osascript -e 'display notification "To install workflow, open each .workflow file manually" with title "Workflows installation"'

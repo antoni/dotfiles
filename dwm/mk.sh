@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 if [[ -e Makefile ]]; then
 	sudo make clean install
 else

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# shellcheck disable=SC1001
+
 # Windows only
 function get_process_by_name() {
 	local process_name="$1"

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 declare -a names=("idea-IU-172.3544.35/" "idea-IU-172.4343.14")
 

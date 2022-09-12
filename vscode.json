@@ -1,10 +1,8 @@
 {
   "editor.fontLigatures": true,
   "editor.fontFamily": "Fira Code",
-  "editor.fontSize": 11,
-  "editor.rulers": [
-    80
-  ],
+  "editor.fontSize": 12,
+  "editor.rulers": [80],
   "editor.tabSize": 2,
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
@@ -52,13 +50,12 @@
   "editor.inlineSuggest.enabled": true,
   "editor.suggestSelection": "first",
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-  "editor.fontSize": 13,
   "workbench.startupEditor": "none",
   "workbench.editor.wrapTabs": true,
   "javascript.updateImportsOnFileMove.enabled": "always",
   "typescript.updateImportsOnFileMove.enabled": "always",
   "vsicons.dontShowNewVersionMessage": true,
-  "window.zoomLevel": 1,
+  "typescript.preferences.importModuleSpecifier": "relative",
   "vscode-edge-devtools.mirrorEdits": true,
   "security.workspace.trust.untrustedFiles": "open",
   "[typescriptreact]": {
@@ -79,5 +76,8 @@
     "editor.defaultFormatter": "ms-azuretools.vscode-docker"
   },
   "workbench.iconTheme": "vscode-icons",
-  "editor.formatOnPaste": true
+  "editor.formatOnPaste": true,
+  "terminal.integrated.fontFamily": "Fira Code, monospace",
+  "window.zoomLevel": 1,
+  "workbench.editor.enablePreview": false
 }

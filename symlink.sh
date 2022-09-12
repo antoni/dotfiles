@@ -11,7 +11,7 @@ function print_success_message() {
 }
 
 echo -en "${colors[BGreen]}Enter sudo password:${colors[Black]} "
-read -s SUDO_PASS
+read -rs SUDO_PASS
 clear
 
 source "$DOTFILES_DIR"/utils.sh
@@ -41,7 +41,7 @@ echo "SweetHome3D        version symlinked:   " "$SWEET_HOME_VERSION"
 echo -e "${colors[White]}"
 
 DOTFILES=(profile bashrc zshrc vimrc paths aliases bash_profile common_profile.sh tmux.conf
-	gitconfig gitignore gitattributes  ghci gvimrc hgrc lldbinit gdbinit xbindkeysrc
+	gitconfig gitignore gitattributes ghci gvimrc hgrc lldbinit gdbinit xbindkeysrc
 	optional.sh fzf.sh psqlrc colordiffrc emacs inputrc agda
 	jupyter newsboat) # Directories
 
@@ -66,7 +66,8 @@ function mac_symlink() {
 	ln -sf org.m0k.transmission.plist ~/Library/Preferences/
 
 	# TextMate
-	sudo ln -fs /Applications/TextMate.app/Contents/Resources/mate /usr/local/bin/mate
+	rm -rf /usr/local/bin/mate
+	sudo ln -s /Applications/TextMate.app/Contents/MacOS/mate /usr/local/bin/mate
 
 	# VLC
 	mkdir -p ~/Library/Preferences/org.videolan.vlc
@@ -75,6 +76,9 @@ function mac_symlink() {
 
 	[ -d "$HOME/scripts" ] && ln -fs ~/scripts/Chrome\ Debugger.app /Applications/
 }
+
+mac_symlink
+exit 1
 
 # TODO: Use it in Linux section
 function linux_xrdb() {
@@ -119,6 +123,7 @@ ln -fs "${DOTFILES_DIR}"/htoprc ~/.config/htop/
 mkdir -p ~/.cabal
 ln -fs "${DOTFILES_DIR}"/cabal.config ~/.cabal/config
 
+# TODO: Check OS
 # macOS
 mac_symlink
 
@@ -256,7 +261,7 @@ function linux_brightness_settings() {
 function setup_hostname() {
 	hostname_default="automatown"
 	echo -en "${colors[BGreen]}Enter hostname for the current machine [$hostname_default]:${colors[White]} "
-	read hostname
+	read -r hostname
 	hostname=${hostname:-$hostname_default}
 	# TODO: OS check, then uncomment
 	# hostnamectl set-hostname $hostname
@@ -286,14 +291,21 @@ function fedora_system_upgrade() {
 # Atom
 
 mkdir -p "$HOME"/.atom
+# TODO: return_with_error
+pushd atom || return
 
-for atom in $(\ls atom); do
+for atom in *; do
 	rm -f "$HOME"/.atom/"$atom"
 	ln -fs ~/dotfiles/atom/"$atom" "$HOME"/.atom/"$atom"
 done
 
-# macOS
-# TextMate
-ln -s /Applications/TextMate.app/Contents/MacOS/mate /usr/local/bin/mate
+# TODO: return_with_error
+popd || return
+
+# TODO: Windows only
+function copy_notepad_plus_plus_settings() {
+	cp ~/dotfiles/notepad_plus_plus_settings.xml /mnt/c/Users/Komputer/AppData/Roaming/Notepad++/config.xml
+}
+copy_notepad_plus_plus_settings
 
 print_success_message "Successfully symlinked all files"
