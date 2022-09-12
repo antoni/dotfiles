@@ -1,3 +1,6 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC2155
+
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ]; then
 	PATH="$HOME/bin:$PATH"
@@ -46,5 +49,7 @@ export PATH=$ANDROID_HOME/build-tools/19.1.0:$PATH
 export PATH=~/.local/bin:$PATH
 
 # Ruby GEMs
-export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
-export PATH="$PATH:$GEM_HOME/bin"
+GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+export GEM_HOME
+
+export PATH="$PATH:$(npm get prefix)/bin:$GEM_HOME/bin"
