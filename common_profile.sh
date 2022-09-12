@@ -58,7 +58,7 @@ function fix_ubuntu() {
 # fi # end DISPLAY setup
 
 if [ -f ~/.optional.sh ]; then
-	source ~/.optional.sh
+	source "$HOME"/.optional.sh
 fi
 
 function execute_on_login_only() {
@@ -99,6 +99,10 @@ rm -f ~/Desktop/Relocated\ Items
 
 export PATH=$PATH:$HOME/.npm-packages/bin
 
-# Windows
-export DISPLAY=$(ip route list default | awk '{print $3}'):0
-export LIBGL_ALWAYS_INDIRECT=1
+# Windows (WSL)
+if grep -qEi "(Microsoft|WSL)" /proc/version &>/dev/null; then
+	DISPLAY=$(ip route list default | awk '{print $3}'):0
+	export DISPLAY
+
+	export LIBGL_ALWAYS_INDIRECT=1
+fi

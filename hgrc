@@ -1,7 +1,7 @@
 # example config (see "hg help config" for more info)
 
 [ui]
-username = Antoni Rościszewski <antoni.rosciszewski@gmail.com>
+username = antoni
 editor = gvim
 
 [extensions]

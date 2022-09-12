@@ -25,5 +25,5 @@ function shell_check_and_format() {
 }
 
 function sudo_exec() {
-	sudo $@
+	sudo "$@"
 }
