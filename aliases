@@ -1,10 +1,15 @@
-# shellcheck disable=SC2148,SC2089
+#!/usr/bin/env bash
+
+# shellcheck disable=SC2148,SC2089,SC2154
 # -*- shell-script -*-
 # vim:set ft=sh textwidth=0 wrapmargin=0:
 set +x
 
 DEFAULT_CITY="Warsaw"
 DEFAULT_COORDS="52.23:21.012'"
+# TODO: Get username dynamically: powershell.exe '$env:UserName'
+# (it takes time, return value should be stored somewhere)
+WINDOWS_USERNAME="Komputer"
 
 export BASH=/usr/local/bin/bash
 
@@ -18,6 +23,15 @@ platform='unknown'
 unamestr="$(uname)"
 export unamestr
 
+# macOS
+alias brew='HOMEBREW_NO_AUTO_UPDATE=1 brew'
+
+# macOS
+function brew_uninstall_all() {
+	brew remove --force "$(brew list --formula)"
+	brew remove --cask --force "$(brew list)"
+}
+
 if [[ "$unamestr" == 'Darwin' ]]; then
 	# Mac OS X-specific
 	alias copy_to_clipboard='pbcopy'
@@ -27,10 +41,50 @@ if [[ "$unamestr" == 'Darwin' ]]; then
 	alias copypubkey='xsel --clipboard < id_rsa.pub'
 	# alias vim='mvim -v'
 	alias ls='ls -h -lFG'
-	alias brew='HOMEBREW_NO_AUTO_UPDATE=1 brew'
 
 	# macOS only
 	alias analyze_disk_usage='/Applications/OmniDiskSweeper.app/Contents/MacOS/OmniDiskSweeper'
+
+	# macOS
+	alias lsblk='diskutil list'
+
+	# macOS only
+	alias flush_dns_cache='dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
+
+	# macOS
+	alias change_main_screen='~/scripts/hmscreens -setMainID `~/scripts/hmscreens -info | \grep "Screen ID:" | head -2 | tail -1 | sed "s/[^0-9]*//g"`'
+
+	# macOS
+	alias reset_wifi='sudo networksetup -setnetworkserviceenabled Wi-Fi off && sleep 2 && sudo networksetup -setnetworkserviceenabled Wi-Fi on'
+
+	# macOS only
+	function battery_recharge_cycles_count() {
+		system_profiler SPPowerDataType | \grep "Cycle Count" | awk '{print $3}'
+	}
+	# macOS
+	alias heic_to_jpg='magick mogrify -monitor -format jpg *.HEIC'
+
+	# macOS
+	alias software_version='system_profiler SPSoftwareDataType'
+
+	# macOS
+	alias dwg2pdf='/Applications/QCAD.app/Contents/Resources/dwg2pdf -no-dock-icon'
+
+	# macOS
+	alias fix_disk="/Applications/Disk\ Drill.app"
+
+	function ios_simulator_screenshot() {
+		xcrun simctl io booted screenshot
+	}
+
+	function ios_simulator_screencast() {
+		xcrun simctl io booted recordVideo ios_simluator_recording.mp4
+	}
+
+	alias date='gdate'
+
+	# Toggle "Do not disturb" mode on macOS (via: https://github.com/sindresorhus/do-not-disturb-cli)
+	alias dnd-toggle='dnd toggle'
 
 	# TODO: Move to non-OS-specific
 	# alias node='bun'
@@ -60,7 +114,7 @@ elif test -f /proc/sys/kernel/osrelease && grep -q microsoft /proc/sys/kernel/os
 	}
 
 	function github_diff_last_commit() {
-		local url=$(gh browse --commit --no-browser | sed --expression 's/tree/commit/g')
+		local -r url=$(gh browse --commit --no-browser | sed --expression 's/tree/commit/g')
 		browse "$url"
 	}
 
@@ -69,6 +123,7 @@ elif test -f /proc/sys/kernel/osrelease && grep -q microsoft /proc/sys/kernel/os
 	# Launches Windows uninstall program (GUI-based)
 	alias uninstall='cmd.exe /c appwiz.cpl'
 
+	# shellcheck disable=2154
 	alias empty_trash_bin='cmd.exe /c "rd /s /q %systemdrive%\$Recycle.bin" 2&> /dev/null'
 
 	# Note: assumes 'C' is the main drive
@@ -76,8 +131,7 @@ elif test -f /proc/sys/kernel/osrelease && grep -q microsoft /proc/sys/kernel/os
 
 	function copy_folder_to_desktop() {
 		local src_folder="$1"
-		# TODO: Get username dynamically
-		cp -r "$src_folder" /mnt/c/Users/Komputer/Desktop/
+		cp -r "$src_folder" "/mnt/c/Users/""$WINDOWS_USERNAME""/Desktop/"
 	}
 
 elif [[ "$unamestr" == 'Linux' ]]; then
@@ -147,7 +201,6 @@ alias mountstudents='sshfs ar267209@students.mimuw.edu.pl: /Users/antoni/student
 alias students='export TERM=vt100 ; ssh students.mimuw.edu.pl -l ar267209 -t tmux a'
 alias icm='ssh antoni@hpc.icm.edu.pl'
 alias icmgw='ssh antoni@gw.icm.edu.pl'
-alias bioex='ssh arosciszewski@bioexploratorium.pl'
 #alias wget='curl -0'
 alias xcode="open *.xcodeproj"
 
@@ -252,7 +305,11 @@ alias dualmonitor_mirror='xrandr --output eDP-1 --rate 60 --mode 1920x1080 --fb 
 alias fixaudio='pulseaudio -k'
 alias fixaudio2='pavucontrol'
 alias fixaudio3='rm -r ~/.config/pulse; pulseaudio -k'
-alias fixpowerctl='for i in /sys/bus/usb/devices/*/power/control; do echo on > $i; done'
+function fixpowerctl() {
+	for device in /sys/bus/usb/devices/*/power/control; do
+		echo on >"$device"
+	done
+}
 alias fixtouchpad='sudo rmmod psmouse && sudo modprobe psmouse'
 alias ubuntu_fix_apt='sudo apt-get install --fix-broken && sudo apt-get autoremove && sudo apt-get update'
 
@@ -281,7 +338,7 @@ alias l='ls'
 
 function csview() {
 	local file="$1"
-	cat "$file" | sed -e 's/,,/, ,/g' | column -s, -t | less -#5 -N -S
+	sed -e 's/,,/, ,/g' <"$file" | column -s, -t | less -#5 -N -S
 }
 # Custom cat: colourised and tabulated for CSV files alias cat='pygmentize -g'
 function xcat() {
@@ -295,10 +352,10 @@ function xcat() {
 }
 
 # Google search
-function s() {
-	args=$@
+function search() {
+	args="$*"
 	searchterm=${args// /%20}
-	google-chrome-stable "http://www.google.com/search?q=$searchterm"
+	open "http://www.google.com/search?q=$searchterm"
 }
 
 # Launch Vim solarized theme depending on the time of the day
@@ -324,14 +381,14 @@ function vv() {
 alias mostfrequent='history | cut -d " " -f 4 | tr -c "[:alnum:]" "[\n*]" | sort | uniq -c | sort -nr | head  -20'
 # 20 Command Line Tools to Monitor Linux Performance
 debug_commands=(ddd kdbg idaq cgdb)
-perf_commands=(top vmstat tload stress lsof tcpdump netstat htop atop iotop iostat iptraf iftop monitorix monit arpwatch vnstat dstat nmon collectl dig mpstat, pkill powertop pidstat intel_gpu_top glances pstree nload sysstat sysdig)
+perf_commands=(top vmstat tload stress lsof tcpdump netstat htop atop iotop iostat iptraf iftop monitorix monit arpwatch vnstat dstat nmon collectl dig mpstat pkill powertop pidstat intel_gpu_top glances pstree nload sysstat sysdig)
 hex_editors=(jeex okteta hte bless wxHexEditor dhex)
 other_commands=(ruptime rwho)
 # Networking
 networking_commands=(netstat ethtool ping ifconfig arping traceroute iwconfig ifconfig tshark nethogs nmap nbtscan iptables tcpdump iproute2 chargen netcat tc insmod fping nslookup host p0f mtr ipcalc sipcalc iperf)
 
 function whichport() {
-	netstat -tulpn | grep $@
+	netstat -tulpn | grep "$@"
 }
 
 # ip a s #List addresses for interfaces
@@ -357,23 +414,27 @@ alias piu='sudo pip-review --interactive'
 alias pil='pip list'
 
 # Execute nth line of a file
-nth() {
-	eval $(sed "$1"'q;d' "$2")
+function execute_nth_line_of_file() {
+	eval "$(sed "$1"'q;d' "$2")"
 }
 
-# Countdown, usage: countdown 60, countdown $((2*60*60))
+# Countdown, usage:
+# countdown 60
+# countdown $((2*60*60))
 function countdown() {
 	date1=$(($(date +%s) + $1))
-	while [ "$date1" -ne $(date +%s) ]; do
-		echo -ne "$(date -u --date @$(($date1 - $(date +%s))) +%H:%M:%S)\r"
+	while [ "$date1" -ne "$(date +%s)" ]; do
+		echo -ne "$(date -u --date @$((date1 - $(date +%s))) +%H:%M:%S)\r"
 		sleep 0.1
 	done
 }
-# Stopwach
+
+# Stopwach, usage:
+# stopwatch
 function stopwatch() {
 	date1=$(date +%s)
 	while true; do
-		echo -ne "$(date -u --date @$(($(date +%s) - $date1)) +%H:%M:%S)\r"
+		echo -ne "$(date -u --date @$(($(date +%s) - date1)) +%H:%M:%S)\r"
 		sleep 0.1
 	done
 }
@@ -406,15 +467,17 @@ alias rsync='rsync --progress'
 alias wificonn='sudo wifi-menu wlp2s0'
 alias install_ycm='~/.vim/bundle/YouCompleteMe/install.sh --clang-completer'
 
+# TODO: Move to shortnamed aliases/utils module
 h() {
-	head -n $@
+	head -n "$@"
 }
 
+# TODO: Comment
 pat() {
 	if hash csearch 2>/dev/null; then
 		csearch -i "$1"
 	else
-		[ ! -z "$2" ] && search_dir="$2" || search_dir="."
+		[ -n "$2" ] && search_dir="$2" || search_dir="."
 		grep -rnw $search_dir -e "$1"
 	fi
 }
@@ -437,10 +500,10 @@ dl_website() {
 
 # cd ../../../
 function up() {
-	i=$1
-	while [ "$i" -gt 0 ]; do
+	how_many_levels="$1"
+	while [ "$how_many_levels" -gt 0 ]; do
 		cd ..
-		i=$(($i - 1))
+		how_many_levels=$((how_many_levels - 1))
 	done
 }
 
@@ -468,7 +531,7 @@ alias gv='gvim'
 alias showerrors="cpp -dM /usr/include/errno.h | grep 'define E' | sort -n -k 3"
 
 alias sourcetmux='tmux source-file ~/.tmux.conf'
-alias p='python'
+alias p='python3'
 
 alias fixandroidstudio='IBUS_ENABLE_SYNC_MODE=1 ibus-daemon -xrd'
 
@@ -476,10 +539,10 @@ diffcount() {
 	diff -U 0 "$1" "$2" | grep -c ^@
 }
 
-dark() { export BACKGROUND=dark && source ~/.common_profile.sh; }
-light() { export BACKGROUND=light && source ~/.common_profile.sh; }
+# TODO: Rename
+function dark() { export BACKGROUND=dark && source "$HOME"/.common_profile.sh; }
+function light() { export BACKGROUND=light && source "$HOME"/.common_profile.sh; }
 
-# alias gsa="gnome-screenshot -a"
 alias rmcmd='sudo apt-get remove'
 
 alias autoremove='sudo apt-get autoremove'
@@ -494,7 +557,7 @@ function g++gtest() {
 function link() {
 	# Default value = test
 	BIN=${1:-test}
-	ld -m elf_i386 -s -o "$BIN" *.o
+	ld -m elf_i386 -s -o "$BIN" ./*.o
 }
 # GCC flags:
 # -fverbose-asm -S
@@ -523,12 +586,9 @@ pythontools=(2to3 pylint pyflakes autopep8)
 
 alias classdiagram='staruml'
 
-alias uwb='ssh a.rosciszewski@login.uco.uwb.edu.pl -p 9022'
-
 alias tmuxhelp='cat ~/dotfiles/tmux.cheat | less'
 
-alias sshprozacopy='ssh prozomat@213.135.59.214'
-
+# TODO: Explain
 alias entropy='cat /proc/sys/kernel/random/entropy_avail'
 
 alias dns_list_all='dig +nocmd yourdomain.com any +multiline +noall +answer'
@@ -554,8 +614,9 @@ function ydlwl() {
 
 # alias mvn='~/scripts/mvncolor.sh'
 
+# TODO: Comment
 # function ppgrep() { pgrep "$@" | xargs --no-run-if-empty ps fp; }
-function ppgrep() { \pgrep "$@" -a | egrep --color "[0-9]"; }
+function ppgrep() { \pgrep "$@" -a | grep -E --color "[0-9]"; }
 
 function rdp() { rdesktop "$@" -rsound:remote -5 -K -r clipboard:CLIPBOARD; }
 
@@ -570,10 +631,10 @@ function swap() {
 alias copykey='cat ~/.ssh/id_rsa.pub | xsel -i -b'
 
 function dnfs() {
-	arg_count = "$#"
-	if [ arg_count -eq 2 ]; then
+	arg_count="$#"
+	if [ $arg_count -eq 2 ]; then
 		dnf search "$1" | grep "$2"
-	elif [ arg_count -eq 1 ]; then
+	elif [ $arg_count -eq 1 ]; then
 		dnf search "$1"
 	fi
 }
@@ -626,14 +687,16 @@ function zip_and_move() {
 }
 
 # Download .gitignore
-# Usage: gi language
+# Usage: gitignore language
 function gitignore() {
-	curl -L -s https://www.gitignore.io/api/$@ | awk 'NR>2 {print last} {last=$0}' | tee .gitignore
+	local -r language_name="$1"
+
+	curl -L -s "https://www.gitignore.io/api/""$language_name" | awk 'NR>2 {print last} {last=$0}' | tee .gitignore
 }
 
 # Helper for watch_dir
 function watch_dir_action() {
-	while read path action file; do
+	while read -r path action file; do
 		printf "[${colors[Green]}%s${colors[White]}]\t${colors[Red]}%s${colors[White]}\tin\t%s\n" "$action" "$file" "$path"
 	done
 }
@@ -685,7 +748,7 @@ alias a='cd ~/adnetwork'
 function vpn() {
 	vpn_conn="VPN"
 	vpn_cmd="up"
-	if [[ $(nmcli connection show --active | \grep VPN) ]]; then
+	if nmcli connection show --active | grep -q VPN; then
 		vpn_cmd="down"
 	fi
 
@@ -693,7 +756,7 @@ function vpn() {
 }
 
 function redshift_loc() {
-	redshift-gtk -v -l $DEFAULT_COORDS
+	redshift-gtk -v -l "$DEFAULT_COORDS"
 }
 
 function weather() {
@@ -904,9 +967,9 @@ function pdf_compress() {
 	gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile="$output_file" "$input_file"
 }
 
-function diff {
-	colordiff --unified "$@" | less --RAW-CONTROL-CHARS --quit-if-one-screen
-}
+# function diff {
+# colordiff --unified "$@" | less --RAW-CONTROL-CHARS --quit-if-one-screen
+# }
 
 alias sizes='du -sh * | sort -hr'
 
@@ -928,14 +991,14 @@ function filename_extension() {
 # Converts SVG to PNG
 # Usage svg_to_png input_image_path [output_image_height]
 function svg_to_png() {
-	local filename=$(filename_without_extension "$1")
+	local -r filename=$(filename_without_extension "$1")
 	local output_filename=$filename.png
 	local output_image_height=${2:-32}
 	rsvg-convert -h "$output_image_height" "$1" >"$output_filename" && echo "Successfully created $output_filename" || echo "Error converting $1 to $output_filename"
 }
 
 function webptopng() {
-	local filename=$(filename_without_extension "$1")
+	local -r filename=$(filename_without_extension "$1")
 	local output_filename=$filename.png
 	local output_image_height=${2:-32}
 	dwebp "$1" -o "$output_filename"
@@ -950,11 +1013,15 @@ function android_update() {
 }
 
 function last_modified_directory() {
-	echo $(\ls -t | head -n 1)
+	# shellcheck disable=2012
+	\ls -t | head -n 1
 }
 
+# TODO: Explain
 function convert_all_files() {
 	local substitution="$1"
+
+	# shellcheck disable=SC2016
 	$BASH -c 'for filename in *;do mv $filename ${filename'"$substitution"'};done'
 }
 
@@ -981,22 +1048,12 @@ function uppercase_all_letters() {
 alias buildlib='cd ~/components-library ; npm run build && firebase deploy && npm run clean'
 alias mac_serial_number="system_profiler SPHardwareDataType | \grep '      Serial Number' | cut -d' ' -f 10 | pbcopy"
 
-function save_chrome_extension_list() {
-	local OUTPUT_FILE=~/scripts/chrome_extensions.txt
-	rm $OUTPUT_FILE
-	EXT_DIR="/Users/$(whoami)/Library/Application Support/Google/Chrome/Default/Extensions"
-	pushd "$EXT_DIR" || exit
-	for f in $(\ls */*/manifest.json); do cat "$f" | jq -r '.name' >>$OUTPUT_FILE; done
-	popd || exit
-	cat $OUTPUT_FILE
-}
-
 # Updates scripts repo with current date in the message
 # of the (possibly empty) commit
 function update_scripts_repo() {
 	pushd ~/scripts || exit
 	git add .
-	git commit --allow-empty --message "Update "$(date +%d-%m-%Y)
+	git commit --allow-empty --message "Update ""$(date +%d-%m-%Y)"
 	git push origin
 	popd || exit
 }
@@ -1022,14 +1079,11 @@ alias tmux2x2='tmux new-session \; split-window -v \; split-window -h \; select-
 
 alias removevpn='brew cask remove nordvpn || brew cask install nordvpn'
 
-# macOS only
-alias flush_dns_cache='dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
-
 alias nvm_default='nvm alias default node'
 alias nvm_current='nvm install node --reinstall-packages-from=$(nvm current)'
 
 function mov2mp4() {
-	local filename=$(filename_without_extension "$1")
+	local -r filename=$(filename_without_extension "$1")
 	ffmpeg -i "$filename".mov -vcodec h264 -acodec mp2 "$filename".mp4
 }
 
@@ -1088,9 +1142,6 @@ function get_cookies() {
 
 alias instagram_dl='instalooter user'
 
-# macOS
-alias change_main_screen='~/scripts/hmscreens -setMainID `~/scripts/hmscreens -info | \grep "Screen ID:" | head -2 | tail -1 | sed "s/[^0-9]*//g"`'
-
 # Ubuntu
 function toggle_wifi() {
 	wifi="$(nmcli r wifi | awk 'FNR = 2 {print $1}')"
@@ -1144,26 +1195,23 @@ function display_notification() {
 	# growlnotify -n "$title" -m "$message"
 }
 
-# macOS
-alias reset_wifi='sudo networksetup -setnetworkserviceenabled Wi-Fi off && sleep 2 && sudo networksetup -setnetworkserviceenabled Wi-Fi on'
-
 function save_last_n_lines_to_file() {
 	local LINES=$1
-	local filename=~/tmp/$(date)last_$LINES.txt
+	local -r filename=~/tmp/$(date)last_$LINES.txt
 	fc -ln -"$LINES" | head -n "$LINES" >"$filename"
 	fc -ln -"$LINES" | head -n "$LINES" >copy_to_clipboard
 	echo "Saved to $filename"
 }
 
 function get_repo_name() {
-	basename -s .git $(git config --get remote.origin.url)
+	basename -s .git "$(git config --get remote.origin.url)"
 }
 
 alias mk_iphone_dir='mkdir ~/Desktop/$(date +%Y%m%d)_iphone_photos'
 
 # Example: apply_to_all_files 'resize_image 50%'
 function apply_to_all_files() {
-	local command=$@
+	local command="$*"
 	for filename in *; do
 		eval "${command} ${filename}"
 	done
@@ -1181,7 +1229,9 @@ function shellcheck_autofix() {
 	shellcheck --format diff "$filename" | git apply
 }
 
-alias copy_last_command="fc -ln -1 | awk '{\$1=\$1}1' | copy_to_clipboard"
+function copy_last_command() {
+	fc -ln -1 | awk '{$1=$1}1' | copy_to_clipboard
+}
 
 # Usage: add_diagonal_watermak filename quoted_watermark_text
 function add_diagonal_watermak() {
@@ -1207,22 +1257,6 @@ function random_password() {
 	pwgen --secure --symbols "$password_length" 1 --remove-chars $PWGEN_REMOVE_CHARACTERS
 }
 
-# Usage:
-# bcrypt_hash password
-function bcrypt_hash() {
-	local password=$1
-	local bcrypt_cost=10
-	htpasswd -bnBC "$bcrypt_has" "" "$password" | tr -d ':\n' | sed 's/$2y/$2a/'
-}
-
-function ios_simulator_screenshot() {
-	xcrun simctl io booted screenshot
-}
-
-function ios_simulator_screencast() {
-	xcrun simctl io booted recordVideo ios_simluator_recording.mp4
-}
-
 # returns commit date, author name and commit subject for a date range given
 # Example: commits_between_dates 2020-12-01 2020-12-31
 function commits_between_dates {
@@ -1246,7 +1280,7 @@ alias github_merge_pr='gh pr merge $(git branch --show-current) --delete-branch 
 function random-string() {
 	# Add special chars:
 	# env LC_ALL=C tr -dc '(\&\_a-zA-Z0-9\^\*\@'
-	cat /dev/urandom | env LC_ALL=C tr -dc 'a-zA-Z0-9' | fold -w "${1:-32}" | head -n 1
+	env LC_ALL=C tr -dc 'a-zA-Z0-9' </dev/urandom | fold -w "${1:-32}" | head -n 1
 }
 
 function brew_cleanup_package() {
@@ -1275,7 +1309,7 @@ alias sync_transmission_settings='cp $HOME/Library/Preferences/org.m0k.transmiss
 
 function convert_to_grayscale() {
 	local input_filename="$1"
-	local filename=$(filename_without_extension "$1")
+	local -r filename=$(filename_without_extension "$1")
 	local output_filename="$filename"_grayscale.png
 	convert "$input_filename" -grayscale Rec709Luminance "$output_filename"
 }
@@ -1285,7 +1319,7 @@ function copy_branch_name() {
 	if [[ -n $(git branch --show-current 2>/dev/null) ]]; then
 		branch=$(git branch --show-current)
 	else
-		branch=$(cat .git/HEAD | awk -F '/' '{print $NF}')
+		branch=$(awk -F '/' '{print $NF}' <.git/HEAD)
 	fi
 
 	echo "$branch" | tr -d "\n" | copy_to_clipboard
@@ -1294,23 +1328,20 @@ alias copy_last_commit_message='git log -1 --pretty=%B | tr -d "\n" | copy_to_cl
 alias copy_current_directory='pwd | copy_to_clipboard'
 
 function webm_to_mp4() {
-	local filename=$(filename_without_extension "$1")
+	local -r filename=$(filename_without_extension "$1")
 	local output_filename=$filename.mp4
 	local output_image_height=${2:-32}
 	local fps=24
 	ffmpeg -hide_banner -loglevel error -fflags +genpts -i "$1" -r $fps "$output_filename" && echo "Successfully created $output_filename" || echo "Error converting $1 to $output_filename"
 }
 
-# Toggle "Do not disturb" mode on macOS (via: https://github.com/sindresorhus/do-not-disturb-cli)
-alias dnd-toggle='dnd toggle'
-
 # Copy command output to clipboard
 # Usage: echo 'Hello world' | t
 alias t='tee >(copy_to_clipboard)'
 
 function remove_password_from_pdf() {
-	local filename=$(filename_without_extension "$1")
-	local password=$2
+	local -r filename=$(filename_without_extension "$1")
+	local -r password=$2
 	qpdf -password="$password" -decrypt "$filename".pdf "$filename""_no_password.pdf"
 }
 
@@ -1326,21 +1357,22 @@ function download_youtube_stream() {
 	youtube-dl --list-formats "$youtube_video_url"
 
 	printf "Enter stream format (e.g. 94) "
-	read stream_format
+	read -r stream_format
 
-	ffmpeg -i $(youtube-dl --format "$stream_format" --get-url "$youtube_video_url") -c copy $(date +'%Y%m%d')_recording.ts
+	ffmpeg -i "$(youtube-dl --format "$stream_format" --get-url "$youtube_video_url") -c copy $(date +'%Y%m%d')"_recording.ts
 }
 
 # TODO: Finish
-function encrypt_pdf() {
-	qpdf --encrypt [readpass] [ownerpass] 256 -- [infile].pdf [outfile].pdf
-}
+# function encrypt_pdf() {
+# 	qpdf --encrypt [readpass] [ownerpass] 256 -- [infile].pdf [outfile].pdf
+# }
 
 alias sc2_hotkeys_edit='vim ~/Library/Application\ Support/Blizzard/StarCraft\ II/Accounts/491096383/Hotkeys/Rapid\ fire\ test.SC2Hotkeys'
 
 function download_npm_tarball() {
-	local package_name="$1"
-	local package_url=$(curl --silent --show-error https://registry.npmjs.org/"$package_name"/ | jq --raw-output '.versions[."dist-tags".latest].dist.tarball')
+	local -r package_name="$1"
+	local -r package_url=$(curl --silent --show-error https://registry.npmjs.org/"$package_name"/ | jq --raw-output '.versions[."dist-tags".latest].dist.tarball')
+
 	wget "$package_url"
 }
 
@@ -1350,7 +1382,7 @@ alias gs2='git squash 2'
 function rebase_all() {
 	local repos=(orval svgo)
 
-	for repo in $repos; do
+	for repo in "${repos[@]}"; do
 		pushd "$HOME/$repo" || exit
 		bash rebase.sh
 		popd || exit
@@ -1358,26 +1390,19 @@ function rebase_all() {
 }
 
 function first_day_of_month() {
-	local date=$(gdate --date="$(gdate +'%Y-%m-01')" "+%F")
+	local -r date=$(gdate --date="$(gdate +'%Y-%m-01')" "+%F")
+
 	echo "$date"
 }
 
 function last_day_of_month() {
-	local date=$(gdate --date="$(gdate +'%Y-%m-01') - 1 second" "+%F")
+	local -r date=$(gdate --date="$(gdate +'%Y-%m-01') - 1 second" "+%F")
+
 	echo "$date"
 }
 
-# macOS only
-function battery_recharge_cycles_count() {
-	system_profiler SPPowerDataType | \grep "Cycle Count" | awk '{print $3}'
-}
-
+# TODO: Which OS?
 alias mysql_client='open -a TablePlus'
-# macOS
-alias heic_to_jpg='magick mogrify -monitor -format jpg *.HEIC'
-
-# macOS
-alias software_version='system_profiler SPSoftwareDataType'
 
 # Fixes a corrupt .zsh_history file
 function fix_zsh_history_file() {
@@ -1400,9 +1425,6 @@ function show_ip_address() {
 # TODO: Move to proper place
 alias update_all_npm_packages='npx npm-check --global --update-all'
 
-# TODO: Move somewhere else
-alias copy_notepad_plus_plus_settings='cp /mnt/c/Users/Komputer/AppData/Roaming/Notepad++/config.xml ~/dotfiles/notepad_plus_plus_settings.xml'
-
 # TODO: Move to git aliases
 alias git_reset_to_master='git checkout master -- '
 function git_reset_to_branch() {
@@ -1417,13 +1439,13 @@ alias gdh='git diff HEAD~'
 function run_after_seconds() {
 	local seconds=$1
 	shift
-	sleep "$seconds" && $@ &
+	sleep "$seconds" && "$@" &
 }
 
 alias merge_pdfs_1='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=merged.pdf ' # here go the PDF to be merged
 
 function merge_pdfs_2 {
-	pdfunite $@ out.pdf
+	pdfunite "$@" out.pdf
 	printf 'see out.pdf'
 }
 
@@ -1435,12 +1457,13 @@ function remove_exif_data() {
 alias restart_tmux='tmux kill-server && tmux'
 
 function mov_to_mp4() {
-	local filename=$(filename_without_extension "$1")
+	local -r filename=$(filename_without_extension "$1")
+
 	local output_filename=$filename.mp4
 	ffmpeg -loglevel error -fflags +genpts -i "$1" -r $fps "$output_filename" && echo "Successfully created $output_filename" || echo "Error converting $1 to $output_filename"
 	# TODO: Fix loglevel
 	ffmpeg -hide_banner -loglevel error -i "$1" -vcodec h264 -acodec mp2 "$output_filename"
-	#ffmpeg -hide_banner -i "$1" -vcodec h264 -acodec mp2 "$output_filename"
+	# ffmpeg -hide_banner -i "$1" -vcodec h264 -acodec mp2 "$output_filename"
 }
 
 function kill_process_on_port() {
@@ -1453,13 +1476,11 @@ function kill_process_on_port() {
 	fi
 }
 
-# macOS
-alias dwg2pdf='/Applications/QCAD.app/Contents/Resources/dwg2pdf -no-dock-icon'
-
 function move_files_created_at_to_directory() {
 	local creation_date="$1"
 	# TODO: Move to separate function
-	local creation_date_plus_1_day=$(date -j -f %Y-%m-%d -v+1d "$creation_date" +%Y-%m-%d)
+	local -r creation_date_plus_1_day=$(date -j -f %Y-%m-%d -v+1d "$creation_date" +%Y-%m-%d)
+
 	local directory="$2"
 
 	echo "$creation_date"
@@ -1471,7 +1492,7 @@ function move_files_created_at_to_directory() {
 }
 
 function count_files_in_directory() {
-	local directory="$1"
+	local -r directory="$1"
 	find "$directory" -type f | wc -l
 }
 
@@ -1482,7 +1503,7 @@ function kill_executable() {
 }
 
 function git_repository_name() {
-	basename $(git rev-parse --show-toplevel)
+	basename "$(git rev-parse --show-toplevel)"
 }
 
 # Usage:
@@ -1490,19 +1511,25 @@ function git_repository_name() {
 function extract_field_from_json() {
 	local filename=$1
 	local field_name=$2
-	json_field_value=$(cat "$filename" |
-		grep "$field_name" |
-		head -1 |
-		awk -F: '{ print $2 }' |
-		sed 's/[",]//g')
+	json_field_value=$(
+		grep "$field_name" "$filename" |
+			head -1 |
+			awk -F: '{ print $2 }' |
+			sed 's/[",]//g'
+	)
 
-	printf "$json_field_value"
+	printf "%s" "$json_field_value" |
+		xargs # trim
 }
 
 function pixelate() {
 	local filename="$1"
-	local name=$(filename_without_extension "$filename")
-	local extension=$(filename_extension "$filename")
+	name=$(filename_without_extension "$filename")
+	local name
+
+	extension=$(filename_extension "$filename")
+	local extension
+
 	convert -scale 10% -scale 1000% "$filename" "$name""_pixelated""$extension"
 
 }
@@ -1536,11 +1563,11 @@ winenv() {
 		echo $'\t    Note that paths will be translated into un*x-like paths\n'
 		return
 	fi
-	local IFS='$\n'
+	local -r IFS=$'\n'
 	local PATH_TO_TRANSLATE=$1
 	[ "$1" == "-d" ] && PATH_TO_TRANSLATE=$2
-	local VAR=$(cmd.exe /c echo %"${PATH_TO_TRANSLATE}"% | tr -d '\r')
-	local NEW=$(wslpath -u "${VAR}" 2>/dev/null || echo "${VAR}")
+	local -r VAR=$(cmd.exe /c echo %"${PATH_TO_TRANSLATE}"% | tr -d '\r')
+	local -r NEW=$(wslpath -u "${VAR}" 2>/dev/null || echo "${VAR}")
 	echo "${PATH_TO_TRANSLATE} = ${VAR} -> ${NEW}"
 	[ "$1" == "-d" ] && export "${PATH_TO_TRANSLATE}=${NEW}"
 }
@@ -1565,14 +1592,15 @@ function idea() {
 }
 
 function collage() {
-	montage -density 300 -tile 2x0 -geometry +5+50 -border 10 *.png collage.png
+	montage -density 300 -tile 2x0 -geometry +5+50 -border 10 ./*.png collage.png
 }
 
 # Windows
 # Opens Notepad++
 function np() {
 	# To follow symlinks inside WSL
-	local path=$(wslpath -w "$1")
+	local path
+	path=$(wslpath -w "$1")
 
 	"/mnt/c/Program Files/Notepad++/notepad++.exe" "$path"
 }
@@ -1634,22 +1662,12 @@ alias p3='python3'
 # Usage:
 # desktop_shortcut_to_wsl_folder folder_path
 function desktop_shortcut_to_wsl_folder() {
-	~/scripts/windows/desktop_shortcut_to_wsl_folder.sh $@
+	~/scripts/windows/desktop_shortcut_to_wsl_folder.sh "$@"
 }
 
 # Windows
 alias disk_management='cmd.exe /c diskmgmt.msc'
 alias device_management='cmd.exe /c devmgmt.msc'
-
-# macOS
-# TODO: Move somewhere else
-function brew_uninstall_all() {
-	brew remove --force $(brew list --formula)
-	brew remove --cask --force $(brew list)
-}
-
-# macOS
-alias fix_disk="/Applications/Disk\ Drill.app"
 
 # Usage:
 # json_to_table t.json id,name
@@ -1667,20 +1685,28 @@ function json_to_table() {
 	local filename="$1"
 	local table_fields="$2"
 
-	JSON_FIELDS='[.'$(echo "$table_fields" | sed -e 's/,/, ./g')']'
-	TABLE_FIELDS='"'$(echo "$table_fields" | sed -e 's/,/","/g')'"'
-	jq -r "([$TABLE_FIELDS] | (., map(length*\"-\"))), (.[] | $JSON_FIELDS) | @tsv" "$filename"
+	# TODO: Check args
+	JSON_FIELDS='[.'${table_fields//,/, .}']'
+	TABLE_FIELDS='"'${table_fields//,/\",\"}'"'
+	jq --raw-output \
+		"([$TABLE_FIELDS] | (., map(length*\"-\"))), (.[] | $JSON_FIELDS) | @tsv" "$filename"
 }
 
 # Windows
 # Usage:
 # print_windows_environmnent_variable APPDATA
 function print_windows_environmnent_variable() {
-    local variable_name="$1"
-powershell.exe "\$env:$variable_name"
+	local variable_name="$1"
+	powershell.exe "\$env:$variable_name"
 }
 
-# macOS
-alias lsblk='diskutil list'
-
 alias grhom='git reset --hard origin/master'
+
+function grep33() {
+	grep -A 3 -B 3 "$@"
+}
+
+function ls_n_random_files() {
+	local -r files_count="$1"
+	find . | shuf --head-count "$files_count"
+}

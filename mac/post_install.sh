@@ -19,7 +19,7 @@ function set_wallpaper() {
 		return 1
 	fi
 
-	local RESULT=$(osascript -e "tell application \"System Events\" to tell every desktop to set picture to \"$wallpaper_file\"")
+	local -r RESULT=$(osascript -e "tell application \"System Events\" to tell every desktop to set picture to \"$wallpaper_file\"")
 	return "$RESULT"
 }
 
