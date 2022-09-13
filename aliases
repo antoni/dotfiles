@@ -1562,3 +1562,121 @@ function ls_n_random_files() {
 	local -r files_count="$1"
 	find . | shuf --head-count "$files_count"
 }
+
+### Windows-only
+
+# Windows only
+# Show file app association
+alias assoc='cmd.exe /c assoc'
+
+alias ftype='cmd.exe /c ftype'
+
+# Windows
+alias wsl='wsl.exe'
+
+# Windows only for now
+function idea() {
+	cmd.exe /c "C:\Program Files (x86)\JetBrains\IntelliJ IDEA 2022.1\bin\idea64.exe" dontReopenProjects nosplash
+}
+
+# Windows
+# Opens Notepad++
+function np() {
+	# To follow symlinks inside WSL
+	local path
+	path=$(wslpath -w "$1")
+
+	"/mnt/c/Program Files/Notepad++/notepad++.exe" "$path"
+}
+
+# Windows
+function terminate_docker() {
+	wsl --terminate docker-desktop
+	wsl --terminate docker-desktop-data
+}
+
+# Windows
+alias systeminfo='systeminfo.exe'
+# Windows
+alias systeminfo2='msinfo32.exe'
+
+# Usage:
+# desktop_shortcut_to_wsl_folder folder_path
+function desktop_shortcut_to_wsl_folder() {
+	~/scripts/windows/desktop_shortcut_to_wsl_folder.sh "$@"
+}
+
+# Windows
+alias disk_management='cmd.exe /c diskmgmt.msc'
+alias device_management='cmd.exe /c devmgmt.msc'
+
+# Windows
+# Usage:
+# print_windows_environmnent_variable APPDATA
+function print_windows_environmnent_variable() {
+	local variable_name="$1"
+	powershell.exe "\$env:$variable_name"
+}
+
+# Windows only
+# TODO: Rewrite this ugly function
+# easily retrieve (and define, if asked to) any Windows Environment variable.
+# It also takes care of paths so they get converted from Win32 to Un*x-line.
+# Examples:
+# winenv PROGRAMFILES
+# winenv APPDATA
+function winenv() {
+	if [ "$#" == "0" ] || [ "$1" == "--help" ]; then
+		echo $'\n'Usage:
+		echo $'\t'winenv [-d] WINDOWS_ENVIRONEMENT_VARIABLE_NAME
+		echo $'\t'-d: Defines environment variable in current shell
+		echo $'\t    Note that paths will be translated into un*x-like paths\n'
+		return
+	fi
+	local -r IFS=$'\n'
+	local PATH_TO_TRANSLATE=$1
+	[ "$1" == "-d" ] && PATH_TO_TRANSLATE=$2
+	local -r VAR=$(cmd.exe /c echo %"${PATH_TO_TRANSLATE}"% | tr -d '\r')
+	local -r NEW=$(wslpath -u "${VAR}" 2>/dev/null || echo "${VAR}")
+	echo "${PATH_TO_TRANSLATE} = ${VAR} -> ${NEW}"
+	[ "$1" == "-d" ] && export "${PATH_TO_TRANSLATE}=${NEW}"
+}
+
+### TODO: Move aliases below somewhere else
+
+#!/usr/bin/env bash
+
+alias p3='python3'
+
+function h() {
+	head -n "$@"
+}
+
+alias c='code -n .'
+
+# Git aliases
+
+# TODO: Move to git aliases
+alias git_reset_to_master='git checkout master -- '
+function git_reset_to_branch() {
+	local branch_name="$1"
+	git checkout "$branch_name" --
+}
+alias gdh='git diff HEAD~'
+
+# Upgrade functions
+
+# TODO: Move somewhere else
+function ubuntu_upgrade() {
+	sudo -s -- <<EOF
+apt-get update
+apt-get upgrade -y
+apt-get full-upgrade -y
+apt-get dist-upgrade -y
+apt-get autoremove -y
+apt-get autoclean -y
+EOF
+}
+
+# TODO: Move to proper place
+alias update_all_npm_packages='npx npm-check --global --update-all'
