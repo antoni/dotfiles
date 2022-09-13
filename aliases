@@ -5,72 +5,67 @@
 # vim:set ft=sh textwidth=0 wrapmargin=0:
 set +x
 
+# Aliases and custom functions
+
 DEFAULT_CITY="Warsaw"
 DEFAULT_COORDS="52.23:21.012'"
 # TODO: Get username dynamically: powershell.exe '$env:UserName'
 # (it takes time, return value should be stored somewhere)
 WINDOWS_USERNAME="Komputer"
+export HOMEBREW_NO_AUTO_UPDATE=1
 
 export BASH=/usr/local/bin/bash
+# TODO: Move to rc
+export GITHUB_USER="antoni"
 
 source "$HOME"/dotfiles/colors.sh
 source "$HOME"/dotfiles/utils.sh
 
 function command_exists() { type "$1" &>/dev/null; }
 
-# Aliases and custom functions
 platform='unknown'
 unamestr="$(uname)"
 export unamestr
 
-# macOS
-alias brew='HOMEBREW_NO_AUTO_UPDATE=1 brew'
-
-# macOS
-function brew_uninstall_all() {
-	brew remove --force "$(brew list --formula)"
-	brew remove --cask --force "$(brew list)"
-}
-
 if [[ "$unamestr" == 'Darwin' ]]; then
-	# Mac OS X-specific
+	# macOS-specific
 	alias copy_to_clipboard='pbcopy'
 	alias setmiddlevolume='sudo osascript -e "set Volume 5"'
 	alias eclipseclean='/Applications/eclipse/Eclipse.app/Contents/MacOS/eclipse -clean'
 	alias topcoder='javaws ~/Developer/Topcoder/ContestAppletProd.jnlp'
-	alias copypubkey='xsel --clipboard < id_rsa.pub'
+	alias mysql_client='open -a TablePlus'
+	alias sc2_hotkeys_edit='vim ~/Library/Application\ Support/Blizzard/StarCraft\ II/Accounts/491096383/Hotkeys/Rapid\ fire\ test.SC2Hotkeys'
+
 	# alias vim='mvim -v'
 	alias ls='ls -h -lFG'
 
-	# macOS only
+	function brew_uninstall_all() {
+		brew remove --force "$(brew list --formula)"
+		brew remove --cask --force "$(brew list)"
+	}
+
+	# TODO: Move outside of aliases
+	alias sync_transmission_settings='cp $HOME/Library/Preferences/org.m0k.transmission.plist ~/dotfiles/'
+
 	alias analyze_disk_usage='/Applications/OmniDiskSweeper.app/Contents/MacOS/OmniDiskSweeper'
 
-	# macOS
 	alias lsblk='diskutil list'
 
-	# macOS only
 	alias flush_dns_cache='dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 
-	# macOS
 	alias change_main_screen='~/scripts/hmscreens -setMainID `~/scripts/hmscreens -info | \grep "Screen ID:" | head -2 | tail -1 | sed "s/[^0-9]*//g"`'
 
-	# macOS
 	alias reset_wifi='sudo networksetup -setnetworkserviceenabled Wi-Fi off && sleep 2 && sudo networksetup -setnetworkserviceenabled Wi-Fi on'
 
-	# macOS only
 	function battery_recharge_cycles_count() {
 		system_profiler SPPowerDataType | \grep "Cycle Count" | awk '{print $3}'
 	}
-	# macOS
 	alias heic_to_jpg='magick mogrify -monitor -format jpg *.HEIC'
 
-	# macOS
 	alias software_version='system_profiler SPSoftwareDataType'
 
-	# macOS
 	alias dwg2pdf='/Applications/QCAD.app/Contents/Resources/dwg2pdf -no-dock-icon'
 
-	# macOS
 	alias fix_disk="/Applications/Disk\ Drill.app"
 
 	function ios_simulator_screenshot() {
@@ -86,8 +81,6 @@ if [[ "$unamestr" == 'Darwin' ]]; then
 	# Toggle "Do not disturb" mode on macOS (via: https://github.com/sindresorhus/do-not-disturb-cli)
 	alias dnd-toggle='dnd toggle'
 
-	# TODO: Move to non-OS-specific
-	# alias node='bun'
 elif test -f /proc/sys/kernel/osrelease && grep -q microsoft /proc/sys/kernel/osrelease; then
 	# Windows (WSL)
 	alias copy_to_clipboard='clip.exe'
@@ -467,11 +460,6 @@ alias rsync='rsync --progress'
 alias wificonn='sudo wifi-menu wlp2s0'
 alias install_ycm='~/.vim/bundle/YouCompleteMe/install.sh --clang-completer'
 
-# TODO: Move to shortnamed aliases/utils module
-h() {
-	head -n "$@"
-}
-
 # TODO: Comment
 pat() {
 	if hash csearch 2>/dev/null; then
@@ -535,13 +523,12 @@ alias p='python3'
 
 alias fixandroidstudio='IBUS_ENABLE_SYNC_MODE=1 ibus-daemon -xrd'
 
-diffcount() {
+function diffcount() {
 	diff -U 0 "$1" "$2" | grep -c ^@
 }
 
-# TODO: Rename
-function dark() { export BACKGROUND=dark && source "$HOME"/.common_profile.sh; }
-function light() { export BACKGROUND=light && source "$HOME"/.common_profile.sh; }
+function dark_background() { export BACKGROUND=dark && source "$HOME"/.common_profile.sh; }
+function light_background() { export BACKGROUND=light && source "$HOME"/.common_profile.sh; }
 
 alias rmcmd='sudo apt-get remove'
 
@@ -568,8 +555,9 @@ function compile() {
 
 alias burn_iso='wodim'
 
-# Recursive chmod
-chmod_rec() {
+# Recursive chmod, usage:
+# chmod_rec +rx
+function chmod_rec() {
 	# find . -type d -exec chmod +rx {} \;
 	find . -type d -exec chmod "$1" {} \;
 }
@@ -588,8 +576,8 @@ alias classdiagram='staruml'
 
 alias tmuxhelp='cat ~/dotfiles/tmux.cheat | less'
 
-# TODO: Explain
-alias entropy='cat /proc/sys/kernel/random/entropy_avail'
+# Linux
+alias show_available_entropy='cat /proc/sys/kernel/random/entropy_avail'
 
 alias dns_list_all='dig +nocmd yourdomain.com any +multiline +noall +answer'
 alias install_ycm='~/.vim/bundle/YouCompleteMe/install.py --clang-completer  --gocode-completer'
@@ -628,7 +616,7 @@ function swap() {
 }
 
 # Copies SSH RSA key to X clipboard
-alias copykey='cat ~/.ssh/id_rsa.pub | xsel -i -b'
+alias copy_ssh_public_key_to_clipboard='cat ~/.ssh/id_rsa.pub | copy_to_clipboard'
 
 function dnfs() {
 	arg_count="$#"
@@ -665,6 +653,8 @@ function manf() {
 	man "$1" | less -p "^ +\-${2}"
 }
 
+# Linux
+# TODO: Exaplin
 alias rs='xfreerdp /kbd:0x415 /multimon +fonts /d:ger +clipboard +aero /home-drive /audio-mode:1 /v:GKSRDS007 /monitors:2'
 
 alias dmidecode='sudo dmidecode'
@@ -1304,9 +1294,6 @@ function reinstall_pip() {
 	python3 -m pip install --upgrade --force-reinstall pip
 }
 
-# TODO: Move outside of aliases
-alias sync_transmission_settings='cp $HOME/Library/Preferences/org.m0k.transmission.plist ~/dotfiles/'
-
 function convert_to_grayscale() {
 	local input_filename="$1"
 	local -r filename=$(filename_without_extension "$1")
@@ -1367,8 +1354,6 @@ function download_youtube_stream() {
 # 	qpdf --encrypt [readpass] [ownerpass] 256 -- [infile].pdf [outfile].pdf
 # }
 
-alias sc2_hotkeys_edit='vim ~/Library/Application\ Support/Blizzard/StarCraft\ II/Accounts/491096383/Hotkeys/Rapid\ fire\ test.SC2Hotkeys'
-
 function download_npm_tarball() {
 	local -r package_name="$1"
 	local -r package_url=$(curl --silent --show-error https://registry.npmjs.org/"$package_name"/ | jq --raw-output '.versions[."dist-tags".latest].dist.tarball')
@@ -1401,17 +1386,6 @@ function last_day_of_month() {
 	echo "$date"
 }
 
-# TODO: Which OS?
-alias mysql_client='open -a TablePlus'
-
-# Fixes a corrupt .zsh_history file
-function fix_zsh_history_file() {
-	mv ~/.zsh_history ~/.zsh_history_bad
-	strings -eS ~/.zsh_history_bad >~/.zsh_history
-	fc -R ~/.zsh_history
-	rm ~/.zsh_history_bad
-}
-
 function yarn_reinstall_dev() {
 	local package_name=$1
 	yarn remove "$package_name"
@@ -1421,17 +1395,6 @@ function yarn_reinstall_dev() {
 function show_ip_address() {
 	ip address | grep "scope global" | grep -Po '(?<=inet )[\d.]+'
 }
-
-# TODO: Move to proper place
-alias update_all_npm_packages='npx npm-check --global --update-all'
-
-# TODO: Move to git aliases
-alias git_reset_to_master='git checkout master -- '
-function git_reset_to_branch() {
-	local branch_name="$1"
-	git checkout "$branch_name" --
-}
-alias gdh='git diff HEAD~'
 
 # TODO: Copy ~/dotfiles/idea.vmoptions to something like:
 # /mnt/c/Users/Komputer/AppData/Roaming/JetBrains/IntelliJIdea2021.3
@@ -1445,13 +1408,8 @@ function run_after_seconds() {
 alias merge_pdfs_1='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=merged.pdf ' # here go the PDF to be merged
 
 function merge_pdfs_2 {
-	pdfunite "$@" out.pdf
-	printf 'see out.pdf'
-}
-
-function remove_exif_data() {
-	local filename=$1
-	exiftool -EXIF= "$filename"
+	pdfunite "$@" merged.pdf
+	printf 'Files merged into merged.pdf file'
 }
 
 alias restart_tmux='tmux kill-server && tmux'
@@ -1482,9 +1440,6 @@ function move_files_created_at_to_directory() {
 	local -r creation_date_plus_1_day=$(date -j -f %Y-%m-%d -v+1d "$creation_date" +%Y-%m-%d)
 
 	local directory="$2"
-
-	echo "$creation_date"
-	echo "$creation_date_plus_1_day"
 
 	set -x
 	find . -type f -newermt "$creation_date" ! -newermt "$creation_date_plus_1_day" -exec mv "{}" "$directory" \;
@@ -1522,87 +1477,9 @@ function extract_field_from_json() {
 		xargs # trim
 }
 
-function pixelate() {
-	local filename="$1"
-	name=$(filename_without_extension "$filename")
-	local name
-
-	extension=$(filename_extension "$filename")
-	local extension
-
-	convert -scale 10% -scale 1000% "$filename" "$name""_pixelated""$extension"
-
-}
-
-# TODO: Move somewhere else
-function ubuntu_upgrade() {
-	sudo -s -- <<EOF
-apt-get update
-apt-get upgrade -y
-apt-get full-upgrade -y
-apt-get dist-upgrade -y
-apt-get autoremove -y
-apt-get autoclean -y
-EOF
-}
-
-alias c='code -n .'
-
-# Windows only
-# TODO: Rewrite this ugly function
-# easily retrieve (and define, if asked to) any Windows Environment variable.
-# It also takes care of paths so they get converted from Win32 to Un*x-line.
-# Examples:
-# winenv PROGRAMFILES
-# winenv APPDATA
-winenv() {
-	if [ "$#" == "0" ] || [ "$1" == "--help" ]; then
-		echo $'\n'Usage:
-		echo $'\t'winenv [-d] WINDOWS_ENVIRONEMENT_VARIABLE_NAME
-		echo $'\t'-d: Defines environment variable in current shell
-		echo $'\t    Note that paths will be translated into un*x-like paths\n'
-		return
-	fi
-	local -r IFS=$'\n'
-	local PATH_TO_TRANSLATE=$1
-	[ "$1" == "-d" ] && PATH_TO_TRANSLATE=$2
-	local -r VAR=$(cmd.exe /c echo %"${PATH_TO_TRANSLATE}"% | tr -d '\r')
-	local -r NEW=$(wslpath -u "${VAR}" 2>/dev/null || echo "${VAR}")
-	echo "${PATH_TO_TRANSLATE} = ${VAR} -> ${NEW}"
-	[ "$1" == "-d" ] && export "${PATH_TO_TRANSLATE}=${NEW}"
-}
-
 function show_function_code() {
 	local function_name="$1"
 	declare -f "$function_name"
-}
-
-# Windows only
-# Show file app association
-alias assoc='cmd.exe /c assoc'
-
-alias ftype='cmd.exe /c ftype'
-
-# Windows
-alias wsl='wsl.exe'
-
-# Windows only for now
-function idea() {
-	cmd.exe /c "C:\Program Files (x86)\JetBrains\IntelliJ IDEA 2022.1\bin\idea64.exe" dontReopenProjects nosplash
-}
-
-function collage() {
-	montage -density 300 -tile 2x0 -geometry +5+50 -border 10 ./*.png collage.png
-}
-
-# Windows
-# Opens Notepad++
-function np() {
-	# To follow symlinks inside WSL
-	local path
-	path=$(wslpath -w "$1")
-
-	"/mnt/c/Program Files/Notepad++/notepad++.exe" "$path"
 }
 
 function is_linux_inside_wsl() {
@@ -1610,14 +1487,6 @@ function is_linux_inside_wsl() {
 		#"Ubuntu on Windows"
 		echo 1
 	fi
-}
-
-# TODO: Move to rc
-export GITHUB_USER="antoni"
-
-function terminate_docker() {
-	wsl --terminate docker-desktop
-	wsl --terminate docker-desktop-data
 }
 
 function sync_dotfiles() {
@@ -1629,6 +1498,14 @@ function sync_dotfiles() {
 	git pull
 	git push origin master
 	popd || exit
+}
+
+# Fixes a corrupt .zsh_history file
+function fix_zsh_history_file() {
+	mv ~/.zsh_history ~/.zsh_history_bad
+	strings -eS ~/.zsh_history_bad >~/.zsh_history
+	fc -R ~/.zsh_history
+	rm ~/.zsh_history_bad
 }
 
 function clear_sensitive_data_in_shell_history() {
@@ -1652,23 +1529,6 @@ function sudo_forget() {
 	sudo -k "$@"
 }
 
-# Windows
-alias systeminfo='systeminfo.exe'
-# Windows
-alias systeminfo2='msinfo32.exe'
-
-alias p3='python3'
-
-# Usage:
-# desktop_shortcut_to_wsl_folder folder_path
-function desktop_shortcut_to_wsl_folder() {
-	~/scripts/windows/desktop_shortcut_to_wsl_folder.sh "$@"
-}
-
-# Windows
-alias disk_management='cmd.exe /c diskmgmt.msc'
-alias device_management='cmd.exe /c devmgmt.msc'
-
 # Usage:
 # json_to_table t.json id,name
 # Where t.json is:
@@ -1690,14 +1550,6 @@ function json_to_table() {
 	TABLE_FIELDS='"'${table_fields//,/\",\"}'"'
 	jq --raw-output \
 		"([$TABLE_FIELDS] | (., map(length*\"-\"))), (.[] | $JSON_FIELDS) | @tsv" "$filename"
-}
-
-# Windows
-# Usage:
-# print_windows_environmnent_variable APPDATA
-function print_windows_environmnent_variable() {
-	local variable_name="$1"
-	powershell.exe "\$env:$variable_name"
 }
 
 alias grhom='git reset --hard origin/master'
