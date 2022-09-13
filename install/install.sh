@@ -211,20 +211,15 @@ function install_pip_packages() {
 		jupyter jupyterlab dl_coursera z3-solver matplotlib tensorflow numpy agda-kernel
 		instalooter pirate-get tensorflow opencv-python virtualenv numpy
 		matplotlib protobuf conda haruhi-dl google-api-python-client oauth2client progressbar2
-		tdmgr PyQt5 paho-mqtt PyQtWebEngine mvt yt-dlp xmldiff)
+		tdmgr PyQt5 paho-mqtt PyQtWebEngine mvt yt-dlp xmldiff yq poetry)
 
-	# TODO: Install these as well or switch to P3 completely
-	PIP_3_PACKAGES=(yq poetry)
-
-	# TODO: Use pip3?
 	# Use xargs, so that PIP doesn't fail on a single error
-	xargs -n 1 pip install --user <requirements.txt
+	xargs -n 1 pip3 install --user <requirements.txt
 	# TODO: Use pip3?
-	xargs -n 1 pip install --user <requirements.txt
-	# pip install --user $PIP_PACKAGES --upgrade
-	# pip3 install --user $PIP_PACKAGES --upgrade
+	xargs -n 1 pip3 install --user <requirements.txt
+	pip3 install --user "${PIP_PACKAGES[*]}" --upgrade
 
-	pip install "qiskit[visualization]" --user --upgrade
+	pip3 install "qiskit[visualization]" --user --upgrade
 }
 
 # Git kraken (Linux)
@@ -280,8 +275,7 @@ function configure_postgres() {
 function install_haskell_packages() {
 	HASKELL_PACKAGES=(happy hscolour funnyprint alex parsec hoogle QuickCheck mtl)
 	cabal update
-	# TODO FIXME
-	# cabal install "$HASKELL_PACKAGES"
+	cabal install "${HASKELL_PACKAGES[*]}"
 }
 
 function install_r_packages() {
@@ -292,8 +286,7 @@ function install_r_packages() {
 
 function install_go_packages() {
 	GO_PACKAGES=(github.com/derekparker/delve/cmd/dlv github.com/Sirupsen/logrus)
-	# TODO: FIXME
-	# go get -u "$GO_PACKAGES"
+	go get -u "${GO_PACKAGES[*]}"
 }
 
 function install_nvidia_driver() {
@@ -347,13 +340,6 @@ function install_airbnb_eslint() {
 
 function install_global_haskell_stack_packages() {
 	stack install alex happy hindent haddock hspec
-}
-
-# TODO: macOS only
-# TODO: Download DMG, then use it
-function install_java_8() {
-	sudo hdiutil attach ~/scripts/java/jdk-8u231-macosx-x64.dmg
-	sudo installer -package /Volumes/JDK\ 8\ Update\ 231/JDK\ 8\ Update\ 231.pkg -target /
 }
 
 main
