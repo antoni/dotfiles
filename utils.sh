@@ -27,3 +27,20 @@ function shell_check_and_format() {
 function sudo_exec() {
 	sudo "$@"
 }
+
+function sudo_keep_alive() {
+	# Ask for the administrator password upfront
+	sudo -v
+
+	# kill -0 PID exits with an exit code of 0 if the PID is of
+	# a running process, otherwise exits with an exit code of 1.
+	# So, basically, kill -0 "$$" || exit aborts the while loop child process
+	# as soon as the parent process is no longer running
+
+	# Keep-alive: update existing `sudo` time stamp until `.macos` has finished
+	while true; do
+		sudo --non-interactive true
+		sleep 60
+		kill -0 "$$" || exit
+	done 2>/dev/null &
+}
