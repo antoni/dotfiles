@@ -5,7 +5,7 @@ export MANPAGER="less --ignore-case"
 # Wallpaper
 WALLPAPER=~/Documents/wallpaper8.jpg
 
-# Needed by f.e. Python 3
+# Needed by Python 3 and others
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
@@ -14,9 +14,9 @@ export EDITOR="vim"
 export TERM=xterm-256color
 
 [ -n "$TMUX" ] && export TERM=screen-256color
-# [ -n "$TMUX" ] && export TERM=tmux-256color
 
-# TODO: Comment
+# Fixes different things on Ubuntu. May not be up-to-date, since Ubuntu gets
+# better every year
 function fix_ubuntu() {
 	# See: https://bugs.launchpad.net/ubuntu/+source/at-spi2-core/+bug/1193236
 	export NO_AT_BRIDGE=1
@@ -77,9 +77,6 @@ if command_exists xbindkeys; then
 	xbindkeys -f ~/.xbindkeysrc
 fi
 
-# TODO: Add macOS conditional
-# Uncomment for no Homebrew updates at all
-# export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_AUTO_UPDATE_SECS="$((60 * 60 * 3))"
 
 # Android development
