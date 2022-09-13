@@ -3,30 +3,11 @@ DOTFILES_DIR=~/dotfiles
 
 mkdir -p tmp
 
-# TODO: Duplicated, move to some commons file
-function sudo_keep_alive() {
-	# Ask for the administrator password upfront
-	sudo -v
-
-	# kill -0 PID exits with an exit code of 0 if the PID is of
-	# a running process, otherwise exits with an exit code of 1.
-	# So, basically, kill -0 "$$" || exit aborts the while loop child process
-	# as soon as the parent process is no longer running
-
-	# Keep-alive: update existing `sudo` time stamp until `.macos` has finished
-	while true; do
-		sudo --non-interactive true
-		sleep 60
-		kill -0 "$$" || exit
-	done 2>/dev/null &
-}
-
 source $DOTFILES_DIR/install/chrome_install.sh
+source $DOTFILES_DIR/utils.sh
 
 # echo -en "${colors[BGreen]}Enter sudo password:${colors[White]} "
 # read -s SUDO_PASS
-
-source $DOTFILES_DIR/utils.sh
 
 # Install required packages
 PACKAGES=(slock xbindkeys clang vim rdesktop make xpdf sysstat
@@ -215,7 +196,6 @@ function install_pip_packages() {
 
 	# Use xargs, so that PIP doesn't fail on a single error
 	xargs -n 1 pip3 install --user <requirements.txt
-	# TODO: Use pip3?
 	xargs -n 1 pip3 install --user <requirements.txt
 	pip3 install --user "${PIP_PACKAGES[*]}" --upgrade
 
@@ -280,7 +260,6 @@ function install_haskell_packages() {
 
 function install_r_packages() {
 	R_PACKAGES=() # see r_packages.txt
-	# TODO: Install all packages
 	echo "install.packages(\"${R_PACKAGES[*]}\", repos=\"https://cran.rstudio.com\")" | R --no-save
 }
 
@@ -328,8 +307,6 @@ function install_javascript_packages_npm() {
 		@angular/cli n json5 cordova gltf-pipeline @squoosh/cli depcheck @microsoft/rush \
 		do-not-disturb-cli katex servor degit verdaccio tables gatsby-cli browser-sync \
 		@apidevtools/swagger-cli kill-port-process
-	# TODO: Install these somewhere: Optional macOS packages:
-	# alfred-vpn
 }
 
 function install_airbnb_eslint() {
