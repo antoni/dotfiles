@@ -199,6 +199,13 @@ Linux)
 	sudo_exec mkdir -p /etc/profile.d
 	sudo_exec ln -fs "${DOTFILES_DIR}"/global_aliases /etc/profile.d/global_aliases.sh
 
+	function linux_brightness_settings() {
+		sudo cp brightness.sh /root/
+		sudo sh -c 'echo "$USER $(hostname) = NOPASSWD: /root/brightness.sh" >> /etc/sudoers'
+	}
+
+	linux_brightness_settings
+
 	function linux_xrdb() {
 		# Xrdb merge
 		XRES_FILE=Xresources.solarized
@@ -272,12 +279,6 @@ fi
 
 echo -e "${colors[BYellow]}Things to be (possibly) done manually:\n\n\
     \t* /sys/class/backlight/\t\tto make xbacklight work""${colors[BWhite]}"
-
-# TODO: Use this
-function linux_brightness_settings() {
-	sudo cp brightness.sh /root/
-	sudo sh -c 'echo "$USER $(hostname) = NOPASSWD: /root/brightness.sh" >> /etc/sudoers'
-}
 
 function setup_hostname() {
 	hostname_default="automatown"
