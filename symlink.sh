@@ -77,16 +77,8 @@ function mac_symlink() {
 	[ -d "$HOME/scripts" ] && ln -fs ~/scripts/Chrome\ Debugger.app /Applications/
 }
 
-mac_symlink
-exit 1
-
-# TODO: Use it in Linux section
-function linux_xrdb() {
-	# Xrdb merge
-	XRES_FILE=Xresources.solarized
-	xrdb "${DOTFILES_DIR}"/${XRES_FILE}
-	ln -sf "${DOTFILES_DIR}"/${XRES_FILE} ~/.Xresources
-}
+# mac_symlink
+# exit 1
 
 # Symlink the files in the current directory with corresponding dotfiles in
 # the home directory
@@ -196,9 +188,38 @@ sudo_exec ln -fs "${DOTFILES_DIR}"/intellij/idea_sysctl.conf /etc/sysctl.d/idea_
 sudo_exec sysctl -p --system
 
 # Global aliases
-# TODO: Use linux_conditional here
-# sudo_exec mkdir -p /etc/profile.d
-# sudo_exec ln -fs ${DOTFILES_DIR}/global_aliases /etc/profile.d/global_aliases.sh
+case "$(uname -s)" in
+
+Darwin)
+	echo 'Mac OS X'
+	;;
+
+Linux)
+	echo 'Linux'
+	sudo_exec mkdir -p /etc/profile.d
+	sudo_exec ln -fs "${DOTFILES_DIR}"/global_aliases /etc/profile.d/global_aliases.sh
+
+	function linux_xrdb() {
+		# Xrdb merge
+		XRES_FILE=Xresources.solarized
+		xrdb "${DOTFILES_DIR}"/${XRES_FILE}
+		ln -sf "${DOTFILES_DIR}"/${XRES_FILE} ~/.Xresources
+	}
+
+	linux_xrdb
+	;;
+
+CYGWIN* | MINGW32* | MSYS* | MINGW*)
+	echo 'MS Windows'
+	;;
+
+# Add here more strings to compare
+# See correspondence table at the bottom of this answer
+
+*)
+	echo 'Other OS'
+	;;
+esac
 
 # lldb
 sudo_exec ln -fs /usr/bin/lldb-$LLDB_VERSION /usr/bin/lldb

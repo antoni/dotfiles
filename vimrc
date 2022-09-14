@@ -367,7 +367,7 @@ Plugin 'gmarik/Vundle.vim'
 " Must-haves "{{{
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
-" Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'majutsushi/tagbar'
 "}}}
 " Plugin 'Lokaltog/vim-easymotion'
