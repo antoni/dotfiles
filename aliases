@@ -44,9 +44,6 @@ if [[ "$unamestr" == 'Darwin' ]]; then
 		brew remove --cask --force "$(brew list)"
 	}
 
-	# TODO: Move outside of aliases
-	alias sync_transmission_settings='cp $HOME/Library/Preferences/org.m0k.transmission.plist ~/dotfiles/'
-
 	alias analyze_disk_usage='/Applications/OmniDiskSweeper.app/Contents/MacOS/OmniDiskSweeper'
 
 	alias lsblk='diskutil list'
@@ -823,24 +820,6 @@ function update_packages_ubuntu() {
 	sudo apt-get upgrade -y &>/dev/null
 	echo "Autoremoving apt packages..."
 	sudo apt-get autoremove &>/dev/null
-}
-
-# TODO: Duplicated, move to some commons file
-function sudo_keep_alive() {
-	# Ask for the administrator password upfront
-	sudo -v
-
-	# kill -0 PID exits with an exit code of 0 if the PID is of
-	# a running process, otherwise exits with an exit code of 1.
-	# So, basically, kill -0 "$$" || exit aborts the while loop child process
-	# as soon as the parent process is no longer running
-
-	# Keep-alive: update existing `sudo` time stamp until `.macos` has finished
-	while true; do
-		sudo --non-interactive true
-		sleep 60
-		kill -0 "$$" || exit
-	done 2>/dev/null &
 }
 
 function update_xcode() {
