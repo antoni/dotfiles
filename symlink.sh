@@ -77,9 +77,6 @@ function mac_symlink() {
 	[ -d "$HOME/scripts" ] && ln -fs ~/scripts/Chrome\ Debugger.app /Applications/
 }
 
-# mac_symlink
-# exit 1
-
 # Symlink the files in the current directory with corresponding dotfiles in
 # the home directory
 for f in "${DOTFILES[@]}"; do
@@ -114,10 +111,6 @@ ln -fs "${DOTFILES_DIR}"/htoprc ~/.config/htop/
 # cabal
 mkdir -p ~/.cabal
 ln -fs "${DOTFILES_DIR}"/cabal.config ~/.cabal/config
-
-# TODO: Check OS
-# macOS
-mac_symlink
 
 # i3-wm
 I3WM_DIR=~/.config/i3/
@@ -192,6 +185,7 @@ case "$(uname -s)" in
 
 Darwin)
 	echo 'Mac OS X'
+	mac_symlink
 	;;
 
 Linux)
@@ -218,13 +212,19 @@ Linux)
 
 CYGWIN* | MINGW32* | MSYS* | MINGW*)
 	echo 'MS Windows'
+
+	# TODO: Apply all things below in WSL2 Linux instead of Windows
+	function copy_notepad_plus_plus_settings() {
+		cp ~/dotfiles/notepad_plus_plus_settings.xml /mnt/c/Users/Komputer/AppData/Roaming/Notepad++/config.xml
+	}
+	copy_notepad_plus_plus_settings
+
 	;;
 
-# Add here more strings to compare
-# See correspondence table at the bottom of this answer
-
-*)
+\
+	*)
 	echo 'Other OS'
+	# See: https://stackoverflow.com/a/27776822/963881
 	;;
 esac
 
@@ -285,9 +285,12 @@ function setup_hostname() {
 	echo -en "${colors[BGreen]}Enter hostname for the current machine [$hostname_default]:${colors[White]} "
 	read -r hostname
 	hostname=${hostname:-$hostname_default}
-	# TODO: OS check, then uncomment
-	# hostnamectl set-hostname $hostname
-	mac_change_hostname "$hostname"
+
+	if [ "${OSTYPE//[0-9.]/}" == "darwin" ]; then
+		mac_change_hostname "$hostname"
+	else
+		hostnamectl set-hostname "$hostname"
+	fi
 
 	print_success_message "Hostname changed to: $hostname"
 }
@@ -313,21 +316,13 @@ function fedora_system_upgrade() {
 # Atom
 
 mkdir -p "$HOME"/.atom
-# TODO: return_with_error
-pushd atom || return
+pushd atom || exit 1
 
 for atom in *; do
 	rm -f "$HOME"/.atom/"$atom"
 	ln -fs ~/dotfiles/atom/"$atom" "$HOME"/.atom/"$atom"
 done
 
-# TODO: return_with_error
-popd || return
-
-# TODO: Windows only
-function copy_notepad_plus_plus_settings() {
-	cp ~/dotfiles/notepad_plus_plus_settings.xml /mnt/c/Users/Komputer/AppData/Roaming/Notepad++/config.xml
-}
-copy_notepad_plus_plus_settings
+popd || exit 1
 
 print_success_message "Successfully symlinked all files"

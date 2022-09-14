@@ -59,3 +59,11 @@ function sort_array_in_place() { # array name
 	array=$sorted
 	unset sorted
 }
+
+function generate_ssh_key() {
+	if [ ! -e ~/.ssh/id_rsa ]; then
+		ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
+	else
+		printf "SSH key already at ~/.ssh/id_rsa. Not creating one\n"
+	fi
+}
