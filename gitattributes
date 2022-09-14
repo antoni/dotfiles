@@ -1,5 +1,3 @@
 *.xml diff=xml_diff
 *.xml.rels diff=xml_diff
-# TODO: Enable once --git-diff-driver lands in 'jd'
-# ref.: https://github.com/josephburnett/jd/commit/c79c2ec5b3bd3491f2a0168640ac6b850ba906fe
-# *.json diff=jd
+*.json diff=jd
