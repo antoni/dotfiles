@@ -102,6 +102,7 @@ unsetopt correct_all
 # Fix: https://github.com/zsh-users/zsh-autosuggestions/issues/141#issuecomment-210615799
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
+# Print current directory contents on Enter
 my-accept-line () {
 # check if the buffer does not contain any words
 if [ ${#${(z)BUFFER}} -eq 0 ]; then
@@ -126,7 +127,7 @@ zle accept-line
 zle -N my-accept-line
 # rebind Enter, usually this is `^M'
 # TODO: FIXME: It runs `git status` or sthg similar on WSL2
-# bindkey '^M' my-accept-line
+bindkey '^M' my-accept-line
 
 # autojump
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
