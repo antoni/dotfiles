@@ -208,21 +208,19 @@ Linux)
 	}
 
 	linux_xrdb
-	;;
 
+	if [[ -n "$IS_WSL" ]]; then
+		function copy_notepad_plus_plus_settings() {
+			cp ~/dotfiles/notepad_plus_plus_settings.xml /mnt/c/Users/Komputer/AppData/Roaming/Notepad++/config.xml
+		}
+		copy_notepad_plus_plus_settings
+	fi
+	;;
 CYGWIN* | MINGW32* | MSYS* | MINGW*)
 	echo 'MS Windows'
-
-	# TODO: Apply all things below in WSL2 Linux instead of Windows
-	function copy_notepad_plus_plus_settings() {
-		cp ~/dotfiles/notepad_plus_plus_settings.xml /mnt/c/Users/Komputer/AppData/Roaming/Notepad++/config.xml
-	}
-	copy_notepad_plus_plus_settings
-
+	# Note: put only non-WSL things here
 	;;
-
-\
-	*)
+*)
 	echo 'Other OS'
 	# See: https://stackoverflow.com/a/27776822/963881
 	;;

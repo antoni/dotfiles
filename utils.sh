@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+export IS_WSL="$WSL_DISTRO_NAME"
+
 # Example:
 # array=("one" "two" "three")
 # find_duplicates_in_array "${array[@]}"
