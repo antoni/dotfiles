@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
-DOTFILES_DIR=~/dotfiles
+
+DOTFILES_DIR="$HOME"/dotfiles
 
 mkdir -p tmp
 
-source $DOTFILES_DIR/install/chrome_install.sh
-source $DOTFILES_DIR/utils.sh
+source "$DOTFILES_DIR"/install/chrome_install.sh
+source "$DOTFILES_DIR"/mac/brew_install.sh
+source "$DOTFILES_DIR"/utils.sh
 
 # echo -en "${colors[BGreen]}Enter sudo password:${colors[White]} "
 # read -s SUDO_PASS
@@ -67,13 +69,6 @@ function install_fedora_sound() {
 	sudo_exec dnf install -y gstreamer-plugins-bad gstreamer-plugins-bad-free-extras gstreamer-plugins-bad-nonfree gstreamer-plugins-ugly gstreamer-ffmpeg gstreamer1-libav gstreamer1-plugins-bad-free-extras gstreamer1-plugins-bad-freeworld gstreamer1-plugins-base-tools gstreamer1-plugins-good-extras gstreamer1-plugins-ugly gstreamer1-plugins-bad-free gstreamer1-plugins-good gstreamer1-plugins-base gstreamer1 x264 vlc smplayer
 }
 
-function generate_ssh_key() {
-
-	if [ ! -e ~/.ssh/id_rsa ]; then
-		ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
-	fi
-}
-
 function install_snap_packages() {
 	sudo snap install slack --classic
 }
@@ -87,14 +82,7 @@ function install_nord_vpn_debian() {
 }
 
 function main() {
-
-	# TODO: Use script from separate file
-	# generate_ssh_key
-
-	# Generate SSH key
-	# if [ ! -e ~/.ssh/id_rsa ]; then
-	#    ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
-	# fi
+	generate_ssh_key
 
 	sudo_keep_alive
 
@@ -105,9 +93,6 @@ function main() {
 		echo "Installing required packages on Debian/Ubuntu"
 
 		sudo apt install curl
-		# Add sources
-		# TODO: Install LTS version instead
-		# curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 
 		sudo apt install -y "${PACKAGES[*]}" "${DEBIAN[*]}"
 		sudo apt-get install -y zsh
@@ -120,13 +105,10 @@ function main() {
 
 		dnf install --assumeyes "${PACKAGES[*]}" || exit 1
 		dnf install --assumeyes "${FEDORA[*]}" || exit 1
-
-		# install_fedora_sound
-		# install_fedora_chrome
 	else # macOS
 		#source $DOTFILES_DIR/mac/brew_install.sh
 
-		#mac_install_misc
+		mac_install_misc
 		HOMEBREW_NO_AUTO_UPDATE=1 brew install "${BREW_PACKAGES_MUST_HAVE[*]}"
 		HOMEBREW_NO_AUTO_UPDATE=1 brew install "${BREW_PACKAGES_MAY_HAVE[*]}"
 
@@ -145,11 +127,8 @@ function main() {
 	install_oh_my_zsh || exit 1
 	install_zsh_plugins || exit 1
 
-	# TODO: Rename this to what it actually does
-	install_npm
+	create_npm_global_packages_directory
 	install_javascript_packages_npm || exit 1
-	# TODO: Remove?
-	# install_airbnb_eslint
 	install_vim_plugins || exit 1
 
 	install_tmux_plugin_manager || exit 1
@@ -293,7 +272,7 @@ function install_tmux_plugin_manager() {
 # JS-related tools
 
 # Make global packages install locally (without sudo)
-function install_npm() {
+function create_npm_global_packages_directory() {
 	NPM_DIR=$HOME/.npm-global
 	mkdir -p "$NPM_DIR"
 	npm config set prefix "$NPM_DIR"
