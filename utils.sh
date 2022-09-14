@@ -12,15 +12,18 @@ function shell_check_and_format() {
 	local unrecognized_shell_files=$1
 
 	# shellcheck disable=SC2059
-	ALL_FILES=$(printf "$unrecognized_shell_files" "$(shfmt --find .)" | sort -u)
+	ALL_FILES=$(printf "%s\n%s" "$unrecognized_shell_files" "$(shfmt --find .)" | sed 's/ /\\\ /g' | sort -u)
 
-	# Format code
+	# echo $ALL_FILES[*]
+	# shfmt --find . | sed 's/ /\\\ /g'
+
+	# # Format code
 	printf "%s" "$ALL_FILES" | xargs shfmt --list --write || exit 1
 
-	# Lint code
+	# # Lint code
 	printf "%s" "$ALL_FILES" | xargs shellcheck --external-sources --format diff | git apply --allow-empty || exit 1
 
-	# Run again for files that could not be autofixed
+	# # Run again for files that could not be autofixed
 	printf "%s" "$ALL_FILES" | xargs shellcheck --external-sources || exit 1
 }
 
@@ -43,4 +46,16 @@ function sudo_keep_alive() {
 		sleep 60
 		kill -0 "$$" || exit
 	done 2>/dev/null &
+}
+
+# Usage:
+# array=(x h gg a c b f 3 5)
+# sort_array_in_place array
+# Bash v4.3+
+function sort_array_in_place() { # array name
+	local -n array="$1"
+	IFS=$'\n' sorted=($(sort <<<"${array[*]}"))
+	unset IFS
+	array=$sorted
+	unset sorted
 }

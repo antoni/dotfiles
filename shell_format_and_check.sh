@@ -13,7 +13,6 @@ bash_profile
 common_profile.sh
 optional.sh
 fzf.sh
-shell_format_and_check.sh
-%s" # files found automatically using shfmt
+shell_format_and_check.sh" # files found automatically using shfmt
 
 shell_check_and_format "$unrecognized_shell_files"
