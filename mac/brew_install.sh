@@ -478,8 +478,7 @@ function mac_install_misc() {
 	# Packages needed to install other packages later
 	brew install svn node@16
 
-	# TODO: Make it work again
-	# vim_you_complete_me_install
+	vim_you_complete_me_install
 
 	# brew install jmeter --with-plugins
 	brew install jmeter
