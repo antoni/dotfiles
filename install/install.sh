@@ -138,6 +138,8 @@ function main() {
 		# Generate 'locate' database
 		sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
 
+		sync_transmission_settings
+
 		$DOTFILES_DIR/mac/post_install.sh
 	fi
 	install_oh_my_zsh || exit 1
@@ -317,6 +319,10 @@ function install_airbnb_eslint() {
 
 function install_global_haskell_stack_packages() {
 	stack install alex happy hindent haddock hspec
+}
+
+function sync_transmission_settings() {
+	cp "$HOME"/Library/Preferences/org.m0k.transmission.plist "$HOME"/dotfiles/
 }
 
 main
