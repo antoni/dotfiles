@@ -244,7 +244,10 @@ BREW_CASK_PACKAGES_MUST_HAVE=(
 
 BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	wine-stable
+	# VPNs
 	surfshark
+	nordvpn
+	mullvadvpn
 	anydesk
 	microsoft-remote-desktop
 	duckduckgo
