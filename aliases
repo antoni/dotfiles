@@ -944,19 +944,6 @@ alias sizes='du -sh * | sort -hr'
 
 alias speedtest='curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -'
 
-function filename_without_extension() {
-	local full_path=$1
-	filename=$(basename -- "$full_path")
-	extension=$([[ "$filename" = *.* ]] && echo ".${filename##*.}" || echo '')
-	filename="${filename%.*}"
-	echo "$filename"
-}
-
-function filename_extension() {
-	local extension="${1##*.}"
-	echo "$extension"
-}
-
 # Converts SVG to PNG
 # Usage svg_to_png input_image_path [output_image_height]
 function svg_to_png() {
@@ -1394,18 +1381,17 @@ function merge_pdfs_2 {
 alias restart_tmux='tmux kill-server && tmux'
 
 function mov_to_mp4() {
+	local input_filename="$1"
 	local -r filename=$(filename_without_extension "$1")
-
 	local output_filename=$filename.mp4
-	ffmpeg -loglevel error -fflags +genpts -i "$1" -r $fps "$output_filename" && echo "Successfully created $output_filename" || echo "Error converting $1 to $output_filename"
-	# TODO: Fix loglevel
-	ffmpeg -hide_banner -loglevel error -i "$1" -vcodec h264 -acodec mp2 "$output_filename"
-	# ffmpeg -hide_banner -i "$1" -vcodec h264 -acodec mp2 "$output_filename"
+	local fps=60
+
+	ffmpeg -i "$input_filename" -loglevel error -fflags +genpts -r $fps "$output_filename" && echo "Successfully created $output_filename" || echo "Error converting $1 to $output_filename"
 }
 
 function kill_process_on_port() {
 	local port="$1"
-	# TODO: Check if process listens on port
+
 	if lsof -t -i tcp:"$port"; then
 		lsof -t -i tcp:"$port" | xargs kill -9
 	else
@@ -1415,13 +1401,11 @@ function kill_process_on_port() {
 
 function move_files_created_at_to_directory() {
 	local creation_date="$1"
-	# TODO: Move to separate function
-	local -r creation_date_plus_1_day=$(date -j -f %Y-%m-%d -v+1d "$creation_date" +%Y-%m-%d)
 
 	local directory="$2"
 
 	set -x
-	find . -type f -newermt "$creation_date" ! -newermt "$creation_date_plus_1_day" -exec mv "{}" "$directory" \;
+	find . -type f -newermt "$(date_plus_days "$creation_date" 1)" ! -newermt "$creation_date_plus_1_day" -exec mv "{}" "$directory" \;
 	set +x
 }
 
@@ -1524,7 +1508,6 @@ function json_to_table() {
 	local filename="$1"
 	local table_fields="$2"
 
-	# TODO: Check args
 	JSON_FIELDS='[.'${table_fields//,/, .}']'
 	TABLE_FIELDS='"'${table_fields//,/\",\"}'"'
 	jq --raw-output \
@@ -1621,9 +1604,7 @@ function winenv() {
 	[ "$1" == "-d" ] && export "${PATH_TO_TRANSLATE}=${NEW}"
 }
 
-### TODO: Move aliases below somewhere else
-
-#!/usr/bin/env bash
+# Shorthand aliases
 
 alias p3='python3'
 
@@ -1635,27 +1616,9 @@ alias c='code -n .'
 
 # Git aliases
 
-# TODO: Move to git aliases
-alias git_reset_to_master='git checkout master -- '
 function git_reset_to_branch() {
 	local branch_name="$1"
 	git checkout "$branch_name" --
 }
+
 alias gdh='git diff HEAD~'
-
-# Upgrade functions
-
-# TODO: Move somewhere else
-function ubuntu_upgrade() {
-	sudo -s -- <<EOF
-apt-get update
-apt-get upgrade -y
-apt-get full-upgrade -y
-apt-get dist-upgrade -y
-apt-get autoremove -y
-apt-get autoclean -y
-EOF
-}
-
-# TODO: Move to proper place
-alias update_all_npm_packages='npx npm-check --global --update-all'
