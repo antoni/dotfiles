@@ -2,6 +2,9 @@
 
 export IS_WSL="$WSL_DISTRO_NAME"
 
+unamestr="$(uname)"
+export unamestr
+
 # Example:
 # array=("one" "two" "three")
 # find_duplicates_in_array "${array[@]}"
