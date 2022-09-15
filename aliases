@@ -6,26 +6,10 @@
 set +x
 
 # Aliases and custom functions
-
-DEFAULT_CITY="Warsaw"
-DEFAULT_COORDS="52.23:21.012'"
-# TODO: Get username dynamically: powershell.exe '$env:UserName'
-# (it takes time, return value should be stored somewhere)
-WINDOWS_USERNAME="Komputer"
-export HOMEBREW_NO_AUTO_UPDATE=1
-
-export BASH=/usr/local/bin/bash
-# TODO: Move to rc
-export GITHUB_USER="antoni"
-
 source "$HOME"/dotfiles/colors.sh
 source "$HOME"/dotfiles/utils.sh
 
 function command_exists() { type "$1" &>/dev/null; }
-
-platform='unknown'
-unamestr="$(uname)"
-export unamestr
 
 if [[ "$unamestr" == 'Darwin' ]]; then
 	# macOS-specific
@@ -457,16 +441,6 @@ alias rsync='rsync --progress'
 alias wificonn='sudo wifi-menu wlp2s0'
 alias install_ycm='~/.vim/bundle/YouCompleteMe/install.sh --clang-completer'
 
-# TODO: Comment
-pat() {
-	if hash csearch 2>/dev/null; then
-		csearch -i "$1"
-	else
-		[ -n "$2" ] && search_dir="$2" || search_dir="."
-		grep -rnw $search_dir -e "$1"
-	fi
-}
-
 alias cal='gcalcli'
 alias dhcp0='sudo dhcpcd -n eth0'
 alias top10size="find . -type f -printf '%s %p\n'| sort -nr | head -10﻿"
@@ -596,12 +570,6 @@ function ydlwl() {
 	ydl --ignore-errors https://www.youtube.com/playlist?list=PLxEBYuU7ONUfj68kBjXfHaAutKqtgAc4s
 	popd || exit
 }
-
-# alias mvn='~/scripts/mvncolor.sh'
-
-# TODO: Comment
-# function ppgrep() { pgrep "$@" | xargs --no-run-if-empty ps fp; }
-function ppgrep() { \pgrep "$@" -a | grep -E --color "[0-9]"; }
 
 function rdp() { rdesktop "$@" -rsound:remote -5 -K -r clipboard:CLIPBOARD; }
 
@@ -851,18 +819,15 @@ function update_all() {
 		# echo "Updating macOS (if updates available)"
 		# softwareupdate -i -a
 
-		# TODO: Move post-install
-		~/dotfiles/mac/post_install.sh
+		"$DOTFILES_DIR"/mac/post_install.sh
 
 		# Do the rest without sudo
 		sudo --reset-timestamp
 	fi
 
+	# WSL 2
 	if test -f /proc/sys/kernel/osrelease && grep -q microsoft /proc/sys/kernel/osrelease; then
 		winget upgrade --all
-
-		# TODO: Move to postinstall
-		powershell.exe -File ~/dotfiles/windows/RemoveShortcutsFromDesktop.ps1
 	fi
 
 	# echo "Updating npm packages..."
