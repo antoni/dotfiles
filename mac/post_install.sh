@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-# ⌘
+
+source "$HOME"/dotfiles/utils.sh
+
 function command_exists() { type "$1" &>/dev/null; }
 
 # Returns internal application ID for given application name
@@ -62,41 +64,47 @@ function post_install() {
 	sudo ln -fs /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport /usr/local/bin/airport
 
 	echo Configuring default applications for selected file types
-	# Change default application for given file type
-	if command_exists duti; then
-		duti -s "$(app_id 'PYM Player')" .avi all
-		duti -s "$(app_id 'PYM Player')" .mkv all
-		duti -s "$(app_id 'PYM Player')" .mp4 all
-		duti -s "$(app_id 'TextMate')" .txt all
-		duti -s "$(app_id 'TextMate')" .lua all
-		duti -s "$(app_id 'TeXShop')" .tex all
-		duti -s "$(app_id 'MacDown')" .md all
-		duti -s "$(app_id 'VLC')" .webm all
-		duti -s "$(app_id 'LibreOffice')" .xls all
-		duti -s "$(app_id 'LibreOffice')" .xlsx all
-		# Won't work (for any application), see ~/scripts/default_browser_chrome.sh
-		# duti -s `app_id "*"`      .html all;
-		duti -s "$(app_id 'TextMate')" .lat all
-		duti -s "$(app_id 'TextMate')" .input all
-		duti -s "$(app_id 'TextMate')" .ts all
-		duti -s "$(app_id 'Google Chrome')" .webp all
-	else
-		printf "Error: you have to install 'duti' first\n"
+	if [[ "$unamestr" == 'Darwin' ]]; then
+		# Change default application for given file type
+		if command_exists duti; then
+			duti -s "$(app_id 'PYM Player')" .avi all
+			duti -s "$(app_id 'PYM Player')" .mkv all
+			duti -s "$(app_id 'PYM Player')" .mp4 all
+			duti -s "$(app_id 'TextMate')" .txt all
+			duti -s "$(app_id 'TextMate')" .lua all
+			duti -s "$(app_id 'TeXShop')" .tex all
+			duti -s "$(app_id 'MacDown')" .md all
+			duti -s "$(app_id 'VLC')" .webm all
+			duti -s "$(app_id 'LibreOffice')" .xls all
+			duti -s "$(app_id 'LibreOffice')" .xlsx all
+			# Won't work (for any application), see ~/scripts/default_browser_chrome.sh
+			# duti -s `app_id "*"`      .html all;
+			duti -s "$(app_id 'TextMate')" .lat all
+			duti -s "$(app_id 'TextMate')" .input all
+			duti -s "$(app_id 'TextMate')" .ts all
+			duti -s "$(app_id 'Google Chrome')" .webp all
+		else
+			printf "Error: you have to install 'duti' first\n"
+		fi
+
+		disable_first_open_dialog "/Applications/PYM Player.app"
+
+		# Create link for 'jsc'
+		ln -fs /System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc /usr/local/bin
+
+		# Create link for 'package.json' to avoid some errors and warnings
+		# when updating globally installed NPM packages
+		ln -fs ~/dotfiles/package.json ~/package.json
+
+		# install_hping
+		symlink_vlc_rc
 	fi
 
-	disable_first_open_dialog "/Applications/PYM Player.app"
+	if [[ -n "$IS_WSL" ]]; then
+		winget upgrade --all
 
-	# Create link for 'jsc'
-	ln -fs /System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc /usr/local/bin
-
-	# Create link for 'package.json' to avoid some errors and warnings
-	# when updating globally installed NPM packages
-	ln -fs ~/dotfiles/package.json ~/package.json
-
-	# install_hping
-	symlink_vlc_rc
-
-	# set_wallpaper ~/dotfiles/wallpapers/synthwave_2.jpg
+		powershell.exe -File ~/dotfiles/windows/RemoveShortcutsFromDesktop.ps1
+	fi
 
 	echo Succesfully performed all post-install tasks
 }
