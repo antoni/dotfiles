@@ -74,6 +74,7 @@
     lg = log --graph --name-status --pretty=oneline
     cl = clone
     cld = clone --depth 1
+    reset-to-master = "checkout master --"
     # Show message from last commit
     slog = "!git log --pretty=format:%s | head -n 1"
     # Show diff with deleted files only
@@ -128,10 +129,10 @@
 [merge]
     ff = only
 [http]
-    proxy = 
+    proxy =
     sslVerify = false
 [https]
-    proxy = 
+    proxy =
 [commit]
     gpgsign = false
 [filter "lfs"]
