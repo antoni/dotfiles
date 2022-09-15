@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
 export IS_WSL="$WSL_DISTRO_NAME"
+export HOME_DIR=$HOME
+export DOTFILES_DIR=$HOME_DIR/dotfiles
+
+source "$DOTFILES_DIR"/colors.sh
 
 unamestr="$(uname)"
 export unamestr
@@ -45,7 +49,7 @@ function sudo_keep_alive() {
 	# So, basically, kill -0 "$$" || exit aborts the while loop child process
 	# as soon as the parent process is no longer running
 
-	# Keep-alive: update existing `sudo` time stamp until `.macos` has finished
+	# Keep-alive: update existing `sudo` time stamp until process has finished
 	while true; do
 		sudo --non-interactive true
 		sleep 60
@@ -98,4 +102,10 @@ function date_plus_days() {
 		echo 'Invalid date format'
 		return 1
 	fi
+}
+
+function print_success_message() {
+	local message=$1
+	echo -e "\033[1;29;42m DONE \033[0m \033[1;32m $1 \033[0m"
+	echo -e "${colors[Color_Off]}"
 }
