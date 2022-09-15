@@ -69,3 +69,30 @@ function generate_ssh_key() {
 		printf "SSH key already at ~/.ssh/id_rsa. Not creating one\n"
 	fi
 }
+
+function filename_without_extension() {
+	local full_path=$1
+	filename=$(basename -- "$full_path")
+	extension=$([[ "$filename" = *.* ]] && echo ".${filename##*.}" || echo '')
+	filename="${filename%.*}"
+	echo "$filename"
+}
+
+function filename_extension() {
+	local extension="${1##*.}"
+	echo "$extension"
+}
+
+function date_plus_days() {
+	local -r dd="$1"
+	local -r plus_days="$2"
+
+	local -r days_add_string=$(printf "%s+%s days" $dd $plus_days)
+
+	if [[ $(gdate -d "$dd" "+%Y-%m-%d") == "$dd" ]]; then
+		gdate -d "$days_add_string" "+%Y-%m-%d"
+	else
+		echo 'Invalid date format'
+		return 1
+	fi
+}

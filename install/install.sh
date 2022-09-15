@@ -304,4 +304,20 @@ function sync_transmission_settings() {
 	cp "$HOME"/Library/Preferences/org.m0k.transmission.plist "$HOME"/dotfiles/
 }
 
+# Upgrade functions
+
+function ubuntu_upgrade() {
+	sudo -s -- <<EOF
+apt-get update
+apt-get upgrade -y
+apt-get full-upgrade -y
+apt-get dist-upgrade -y
+apt-get autoremove -y
+apt-get autoclean -y
+EOF
+}
+
+# TODO: Move to proper place
+alias update_all_npm_packages='npx npm-check --global --update-all'
+
 main
