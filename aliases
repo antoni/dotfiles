@@ -71,10 +71,13 @@ elif test -f /proc/sys/kernel/osrelease && grep -q microsoft /proc/sys/kernel/os
 	# See: https://github.com/microsoft/winget-cli/issues/688#issuecomment-788391878
 	alias winget='powershell.exe /c winget.exe'
 
-	alias edit_idea_settings='vim /mnt/c/Users/Komputer/AppData/Roaming/JetBrains/IntelliJIdea2021.3/idea64.exe.vmoptions'
+	function edit_idea_settings() {
+		vim "/mnt/c/Users/""$WINDOWS_USERNAME""/AppData/Roaming/JetBrains/IntelliJIdea2021.3/idea64.exe.vmoptions"
+	}
 
 	function open_autostart_folder() {
-		cmd.exe /c explorer.exe "C:\Users\Komputer\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
+		local -r autostart_path=$(printf "C:\Users\%s\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup" "$WINDOWS_USERNAME")
+		cmd.exe /c explorer.exe "$autostart_path"
 		open /mnt/c/ProgramData/Microsoft/Windows/Start\ Menu/Programs/StartUp
 	}
 
@@ -1326,9 +1329,6 @@ function yarn_reinstall_dev() {
 function show_ip_address() {
 	ip address | grep "scope global" | grep -Po '(?<=inet )[\d.]+'
 }
-
-# TODO: Copy ~/dotfiles/idea.vmoptions to something like:
-# /mnt/c/Users/Komputer/AppData/Roaming/JetBrains/IntelliJIdea2021.3
 
 function run_after_seconds() {
 	local seconds=$1
