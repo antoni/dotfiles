@@ -57,9 +57,9 @@ function fix_ubuntu() {
 # fi
 # fi # end DISPLAY setup
 
-if [ -f ~/.optional.sh ]; then
-	source "$HOME"/.optional.sh
-fi
+# if [ -f ~/.optional.sh ]; then
+# 	source "$HOME"/.optional.sh
+# fi
 
 function execute_on_login_only() {
 	# Wallpaper

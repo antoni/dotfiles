@@ -11,7 +11,6 @@ paths
 aliases
 bash_profile
 common_profile.sh
-optional.sh
 fzf.sh
 shell_format_and_check.sh" # files found automatically using shfmt
 
