@@ -55,6 +55,8 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	gron
 	mas
 	haskell-stack
+    ykman
+    yubico-piv-tool
 	autojump
 	azcopy
 	yarn-completion
