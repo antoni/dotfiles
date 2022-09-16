@@ -228,7 +228,7 @@ function main() {
 
 		if [[ -n "$IS_WSL" ]]; then
 			function copy_notepad_plus_plus_settings() {
-				cp ~/dotfiles/notepad_plus_plus_settings.xml /mnt/c/Users/Komputer/AppData/Roaming/Notepad++/config.xml
+				cp ~/dotfiles/notepad_plus_plus_settings.xml "/mnt/c/Users/""$WINDOWS_USERNAME""/AppData/Roaming/Notepad++/config.xml"
 			}
 			copy_notepad_plus_plus_settings
 		fi

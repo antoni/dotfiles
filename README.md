@@ -29,7 +29,6 @@
 ## TODO
 
 - Windows - list steps needed to configure the system, then implement them
-- make Windows username configurable (Komputer -> WINDOWS_USERNAME)
 - clone all repos from the given org (do I have a script for that?)
 - save PowerToys config (Windows): https://github.com/microsoft/PowerToys/issues/3004#issuecnt-638686691
 - touch additional file (WSL/Linux): https://askubuntu.com/questions/22607/remove-note-about-sudo-that-appears-when-opening-the-terminal/22614#22614
