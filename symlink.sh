@@ -2,7 +2,19 @@
 
 source "$HOME"/dotfiles/utils.sh
 
-echo -en "${colors[BGreen]}Enter sudo password:${colors[Black]} "
+function int_signal_handler() {
+	printf "\nQuitting... You will have to do cleanup manually\n"
+	exit
+}
+
+function setup_int_handler() {
+stty -echoctl # hide ^C
+
+trap int_signal_handler INT
+# }
+
+# setup_int_handler
+echo -en "${colors[BGreen]}Enter sudo password:${colors[Black]}"
 # read -rs SUDO_PASS
 # clear
 sudo_keep_alive
