@@ -74,6 +74,14 @@
     lg = log --graph --name-status --pretty=oneline
     cl = clone
     cld = clone --depth 1
+    # Amends author of last commit
+    # Usage: 
+    # git amend-author 4025621 Eugen
+    amend-author = !bash -c 'git commit --amend --author=$1' --
+    # Amends author of any commit
+    # Usage:
+    # git amend-author-for-commit 4025621 Eugen
+    amend-author-for-commit = !bash -c 'git rebase --onto $2 --exec \"git commit --amend --author=$1\" $2' --
     reset-to-master = "checkout master --"
     # Show message from last commit
     slog = "!git log --pretty=format:%s | head -n 1"
