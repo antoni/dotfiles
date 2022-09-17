@@ -37,6 +37,8 @@ psql --Version
 # Allow remote connections
 # edit line #listen_addresses to listen_addresses = '*'
 sudo vim /etc/postgresql/13/main/postgresql.conf
+# change port to:
+# port = 5450
 
 # edit file
 sudo vim /etc/postgresql/13/main/pg_hba.conf
@@ -55,7 +57,7 @@ sudo -u postgres psql
 alter user postgres with encrypted password 'test'
 
 # Create user
-create user your_username with encrypted password 'test'
+create user test with encrypted password 'test'
 
 # OR a superuser
 # CREATE ROLE your_username WITH LOGIN SUPERUSER CREATEDB CREATEROLE PASSWORD 'test';
