@@ -223,6 +223,7 @@ BREW_CASK_PACKAGES_MUST_HAVE=(
 	microsoft-teams
 	iterm2-nightly
 	atom
+    google-cloud-sdk
 	spotify
 	alfred
 	mpv
@@ -272,7 +273,6 @@ BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	caffeine
 	dashlane
 	lens
-	google-cloud-sdk
 	bitwarden
 	wickrme
 	roblox
