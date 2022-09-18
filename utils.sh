@@ -94,7 +94,7 @@ function date_plus_days() {
 	local -r dd="$1"
 	local -r plus_days="$2"
 
-	local -r days_add_string=$(printf "%s+%s days" $dd $plus_days)
+	local -r days_add_string=$(printf "%s+%s days" "$dd" "$plus_days")
 
 	if [[ $(gdate -d "$dd" "+%Y-%m-%d") == "$dd" ]]; then
 		gdate -d "$days_add_string" "+%Y-%m-%d"
