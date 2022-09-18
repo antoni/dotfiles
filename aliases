@@ -621,10 +621,6 @@ function manf() {
 	man "$1" | less -p "^ +\-${2}"
 }
 
-# Linux
-# TODO: Exaplin
-alias rs='xfreerdp /kbd:0x415 /multimon +fonts /d:ger +clipboard +aero /home-drive /audio-mode:1 /v:GKSRDS007 /monitors:2'
-
 alias dmidecode='sudo dmidecode'
 alias ipconfig='ifconfig'
 
@@ -941,7 +937,8 @@ function last_modified_directory() {
 	\ls -t | head -n 1
 }
 
-# TODO: Explain
+# Does a subsitution in filenames in all files in the current directory
+# See lowercase_first_letter for example use case
 function convert_all_files() {
 	local substitution="$1"
 
@@ -1283,10 +1280,17 @@ function download_youtube_stream() {
 	ffmpeg -i "$(youtube-dl --format "$stream_format" --get-url "$youtube_video_url") -c copy $(date +'%Y%m%d')"_recording.ts
 }
 
-# TODO: Finish
-# function encrypt_pdf() {
-# 	qpdf --encrypt [readpass] [ownerpass] 256 -- [infile].pdf [outfile].pdf
-# }
+# password protect (encrypt) PDF with 256-bit AES encryption
+# usage: 
+# encrypt_pdf filename.pdf password
+# filename_encrypted will be created.pdf
+function encrypt_pdf() {
+	local -r input_file="$1"
+	# TODO: Read pass instead of passing it
+		local -r user_password="$2"
+		local -r owner_password="$user_password"
+	qpdf --encrypt $user_password $owner_password 256 -- $input_file $(filename_without_extension "$1")_encrypted.pdf
+}
 
 function download_npm_tarball() {
 	local -r package_name="$1"
@@ -1546,7 +1550,6 @@ function print_windows_environmnent_variable() {
 }
 
 # Windows only
-# TODO: Rewrite this ugly function
 # easily retrieve (and define, if asked to) any Windows Environment variable.
 # It also takes care of paths so they get converted from Win32 to Un*x-line.
 # Examples:
@@ -1560,12 +1563,17 @@ function winenv() {
 		echo $'\t    Note that paths will be translated into un*x-like paths\n'
 		return
 	fi
+
 	local -r IFS=$'\n'
 	local PATH_TO_TRANSLATE=$1
+
 	[ "$1" == "-d" ] && PATH_TO_TRANSLATE=$2
+
 	local -r VAR=$(cmd.exe /c echo %"${PATH_TO_TRANSLATE}"% | tr -d '\r')
 	local -r NEW=$(wslpath -u "${VAR}" 2>/dev/null || echo "${VAR}")
+
 	echo "${PATH_TO_TRANSLATE} = ${VAR} -> ${NEW}"
+
 	[ "$1" == "-d" ] && export "${PATH_TO_TRANSLATE}=${NEW}"
 }
 

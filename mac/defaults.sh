@@ -42,9 +42,9 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 ###################################################################
 
 # https://www.defaults-write.com/
-# TODO:
 # https://github.com/orrsella/dotfiles/blob/master/setup-macos.sh
 # https://github.com/hjuutilainen/dotfiles/blob/master/bin/osx-user-defaults.sh
+#
 # echo "Finder: show all filename extensions"
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
