@@ -102,7 +102,7 @@ unsetopt correct_all
 # Fix: https://github.com/zsh-users/zsh-autosuggestions/issues/141#issuecomment-210615799
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
-# Print current directory contents on Enter
+# Print current directory contents and 'git status' on Enter
 my-accept-line () {
 # check if the buffer does not contain any words
 if [ ${#${(z)BUFFER}} -eq 0 ]; then
@@ -114,7 +114,7 @@ if [ ${#${(z)BUFFER}} -eq 0 ]; then
         # if so, execute `git status' and `ls'
         ls
         echo ""
-        git status
+        git --no-pager status
     else
         # else run `ls'
         ls
@@ -126,7 +126,6 @@ zle accept-line
 # create a widget from `my-accept-line' with the same name
 zle -N my-accept-line
 # rebind Enter, usually this is `^M'
-# TODO: FIXME: It runs `git status` or sthg similar on WSL2
 bindkey '^M' my-accept-line
 
 # autojump
