@@ -8,10 +8,10 @@ function int_signal_handler() {
 }
 
 function setup_int_handler() {
-stty -echoctl # hide ^C
+	stty -echoctl # hide ^C
 
-trap int_signal_handler INT
-# }
+	trap int_signal_handler INT
+}
 
 # setup_int_handler
 echo -en "${colors[BGreen]}Enter sudo password:${colors[Black]}"
@@ -45,7 +45,7 @@ echo -e "${colors[White]}"
 
 DOTFILES=(profile bashrc zshrc vimrc paths aliases bash_profile common_profile.sh tmux.conf
 	gitconfig gitignore gitattributes ghci gvimrc hgrc lldbinit gdbinit xbindkeysrc
-	fzf.sh psqlrc colordiffrc emacs inputrc agda
+	fzf.sh psqlrc colordiffrc emacs inputrc agda sudo_as_admin_successful
 	jupyter newsboat) # Directories
 
 function mac_change_hostname() {
