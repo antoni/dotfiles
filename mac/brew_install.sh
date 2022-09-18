@@ -55,8 +55,8 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	gron
 	mas
 	haskell-stack
-    ykman
-    yubico-piv-tool
+	ykman
+	yubico-piv-tool
 	autojump
 	azcopy
 	yarn-completion
@@ -223,7 +223,7 @@ BREW_CASK_PACKAGES_MUST_HAVE=(
 	microsoft-teams
 	iterm2-nightly
 	atom
-    google-cloud-sdk
+	google-cloud-sdk
 	spotify
 	alfred
 	mpv

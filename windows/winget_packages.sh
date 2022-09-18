@@ -62,7 +62,7 @@ MAY_HAVE=(
 	Microsoft.dotNetFramework
 	Microsoft.dotnet
 	alcpu.CoreTemp
-    Yubico.YubikeyManager
+	Yubico.YubikeyManager
 	Oracle.VirtualBox
 	VMware.WorkstationPlayer
 	TorProject.TorBrowser
