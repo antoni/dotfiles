@@ -122,7 +122,7 @@ function main() {
 
 		sync_transmission_settings
 
-		$DOTFILES_DIR/mac/post_install.sh
+		"$DOTFILES_DIR"/mac/post_install.sh
 	fi
 	install_oh_my_zsh || exit 1
 	install_zsh_plugins || exit 1
@@ -133,7 +133,7 @@ function main() {
 
 	install_tmux_plugin_manager || exit 1
 
-	crontab $DOTFILES_DIR/cron.jobs || exit 1
+	crontab "$DOTFILES_DIR"/cron.jobs || exit 1
 }
 
 function install_vim_plugins() {
