@@ -1281,16 +1281,16 @@ function download_youtube_stream() {
 }
 
 # password protect (encrypt) PDF with 256-bit AES encryption
-# usage: 
+# usage:
 # encrypt_pdf filename.pdf
 # filename_encrypted.pdf will be created
 function encrypt_pdf() {
 	local -r input_file="$1"
 	printf "Enter password:"
 	read -rs pdf_password
-		printf "\n"
-		local -r user_password="$pdf_password"
-		local -r owner_password="$user_password"
+	printf "\n"
+	local -r user_password="$pdf_password"
+	local -r owner_password="$user_password"
 	qpdf --encrypt $user_password $owner_password 256 -- $input_file $(filename_without_extension "$1")_encrypted.pdf
 }
 
@@ -1599,10 +1599,9 @@ function git_reset_to_branch() {
 alias gdh='git diff HEAD~'
 
 function logout_from_all() {
-# Google Cloud
-gcloud auth revoke
+	# Google Cloud
+	gcloud auth revoke
 
-# Azure
-az logout
+	# Azure
+	az logout
 }
-
