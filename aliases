@@ -1291,7 +1291,7 @@ function encrypt_pdf() {
 	printf "\n"
 	local -r user_password="$pdf_password"
 	local -r owner_password="$user_password"
-	qpdf --encrypt $user_password $owner_password 256 -- $input_file $(filename_without_extension "$1")_encrypted.pdf
+	qpdf --encrypt "$user_password" "$owner_password" 256 -- "$input_file" $(filename_without_extension "$1")_encrypted.pdf
 }
 
 function download_npm_tarball() {
