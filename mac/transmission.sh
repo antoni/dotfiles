@@ -1,3 +1,6 @@
+# Settings file location
+# ls -ld ~/Library/Preferences/org.m0k.transmission.*
+
 defaults write org.m0k.transmission DeleteOriginalTorrent -bool true
 defaults write org.m0k.transmission DownloadAsk -bool false
 defaults write org.m0k.transmission MagnetOpenAsk -bool false
