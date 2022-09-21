@@ -1605,3 +1605,9 @@ function logout_from_all() {
 	# Azure
 	az logout
 }
+
+function ocr() {
+    local -r filepath="$1";
+
+tesseract "$filepath" stdout;
+}
