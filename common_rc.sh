@@ -20,3 +20,5 @@ source "$HOME"/.fzf.sh
 
 export BUN_INSTALL="/home/antoni/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+export GO111MODULE=on
