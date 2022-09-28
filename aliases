@@ -111,19 +111,7 @@ elif test -f /proc/sys/kernel/osrelease && grep -q microsoft /proc/sys/kernel/os
 		cp -r "$src_folder" "/mnt/c/Users/""$WINDOWS_USERNAME""/Desktop/"
 	}
 
-	# Opens Notepad++
-	function np() {
-		# To follow symlinks inside WSL
-		local path
-		path=$(/bin/wslpath -w "$1")
-
-		"/mnt/c/Program Files/Notepad++/notepad++.exe" "$path"
-	}
-
-elif
-
-	[[ "$unamestr" == 'Linux' ]]
-then
+elif [[ "$unamestr" == 'Linux' ]]; then
 	# Debian/Ubuntu
 	function listkernels() {
 		dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d'
@@ -1395,6 +1383,15 @@ function move_files_created_at_to_directory() {
 function count_files_in_directory() {
 	local -r directory="$1"
 	find "$directory" -type f | wc -l
+}
+
+# Windows
+# Opens Notepad++
+function np() {
+	# To follow symlinks inside WSL
+	local -r file_path=$(wslpath -w "$1")
+
+	/mnt/c/Program\ Files/Notepad++/notepad++.exe "$file_path"
 }
 
 # Windows
