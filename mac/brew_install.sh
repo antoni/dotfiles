@@ -270,7 +270,7 @@ BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	disk-drill
 	powershell
 	azure-data-studio
-    ledger-live
+	ledger-live
 	caffeine
 	dashlane
 	lens
