@@ -16,15 +16,21 @@
     ```
 
 3.  Install:
-    ```shell
+
+```shell
     ~/dotfiles/mac/install.sh
     ~/dotfiles/symlink.sh
     ~/dotfiles/mac/defaults.sh # Configure the system
-    ```
+```
 
 ## Thanks to
 
-- @ur0n2 for [ur0n2/dotfiles-for-windows](https://github.com/ur0n2/dotfiles-for-windows), where I have taken few scripts/aliases/ideas from
+- [ur0n2/dotfiles-for-windows](https://github.com/ur0n2/dotfiles-for-windows), where I have taken few scripts/aliases/ideas from
+
+## Other dotfiles repositories
+
+- [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles)
+- https://github.com/CMCDragonkai/.dotfiles-windows
 
 ## TODO
 
