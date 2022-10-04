@@ -235,6 +235,7 @@ BREW_CASK_PACKAGES_MUST_HAVE=(
 	signal
 	pym-player
 	mactex
+    omnidisksweeper
 	firefox
 	vlc
 	slack
@@ -308,7 +309,6 @@ BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	elmedia-player
 	daisydisk
 	binance
-	omnidisksweeper
 	image2icon
 	miro
 	abstract
