@@ -1302,6 +1302,7 @@ function download_npm_tarball() {
 }
 
 alias grhom='git reset --hard origin/master'
+alias grhh='git reset --hard HEAD~'
 alias gs2='git squash 2'
 
 function rebase_all() {
@@ -1493,8 +1494,6 @@ function json_to_table() {
 	jq --raw-output \
 		"([$TABLE_FIELDS] | (., map(length*\"-\"))), (.[] | $JSON_FIELDS) | @tsv" "$filename"
 }
-
-alias grhom='git reset --hard origin/master'
 
 function grep33() {
 	grep -A 3 -B 3 "$@"
