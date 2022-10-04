@@ -22,3 +22,6 @@ export BUN_INSTALL="/home/antoni/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 export GO111MODULE=on
+
+export PGDATA='/usr/local/share/postgres@14'
+export PGHOST=localhost
