@@ -235,7 +235,7 @@ BREW_CASK_PACKAGES_MUST_HAVE=(
 	signal
 	pym-player
 	mactex
-    omnidisksweeper
+	omnidisksweeper
 	firefox
 	vlc
 	slack

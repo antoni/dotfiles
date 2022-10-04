@@ -12,5 +12,3 @@ brew install postgresql
 # brew services start postgresql@14
 # brew services stop postgresql@14
 # brew services info postgresql@14
-
-
