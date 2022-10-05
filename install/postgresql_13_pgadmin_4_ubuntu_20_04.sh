@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -ue
 
 # Update all your packages
 sudo apt update
