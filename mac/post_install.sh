@@ -57,6 +57,8 @@ function install_hping() {
 }
 
 function post_install() {
+	unamestr="$(uname)"
+
 	# Ask for the administrator password upfront
 	sudo -v
 

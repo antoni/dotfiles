@@ -57,18 +57,6 @@ function sudo_keep_alive() {
 	done 2>/dev/null &
 }
 
-# Usage:
-# array=(x h gg a c b f 3 5)
-# sort_array_in_place array
-# Bash v4.3+
-function sort_array_in_place() { # array name
-	local -n array="$1"
-	IFS=$'\n' sorted=($(sort <<<"${array[*]}"))
-	unset IFS
-	array=$sorted
-	unset sorted
-}
-
 function generate_ssh_key() {
 	if [ ! -e ~/.ssh/id_rsa ]; then
 		ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa

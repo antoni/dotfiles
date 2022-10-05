@@ -14,6 +14,7 @@ function setup_int_handler() {
 }
 
 # setup_int_handler
+# shellcheck disable=SC2154
 echo -en "${colors[BGreen]}Enter sudo password:${colors[Black]}"
 # read -rs SUDO_PASS
 # clear
