@@ -799,21 +799,23 @@ function reinstall_pip_packages() {
 }
 
 function update_pip_packages() {
-	pip3 list --outdated --format=freeze | \grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip3 install -U
+	pip3 list --outdated --quiet --format=freeze | \grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip3 install -U
+}
+
+function upgrade_apt_packages() {
+	echo "Upgrading APT packages..."
+	# https://askubuntu.com/a/668859/342465
+	sudo apt-get update -qq -o=Dpkg::Use-Pty=0 && sudo apt-get upgrade -qq -o=Dpkg::Use-Pty=0 --assume-yes
 }
 
 function update_all() {
-	sudo_keep_alive
+	# sudo_keep_alive
 
 	pushd ~ &>/dev/null || exit # to correctly update global NPM packages
 
 	if [[ "$unamestr" == 'Darwin' ]]; then
 		# This sometimes breaks Homebrew taps upgrade
 		# update_xcode
-
-		omz update --unattended
-		echo "Updating Vim plugins..."
-		vim -i NONE -c VundleUpdate -c quitall &>/dev/null
 
 		# echo "Updating macOS (if updates available)"
 		# softwareupdate -i -a
@@ -826,24 +828,34 @@ function update_all() {
 
 	# WSL 2
 	if test -f /proc/sys/kernel/osrelease && grep -q microsoft /proc/sys/kernel/osrelease; then
+		echo "Upgrading WSL packages..."
 		winget upgrade --all
+
+		upgrade_apt_packages
 	fi
 
-	# echo "Updating npm packages..."
-	# npm update -g;
-	# npm i npm;
-	echo "Updating PIP packages..."
+	echo "Upgrading oh-my-zsh..."
+	omz update --unattended
+
+	echo "Upgrading Vim plugins..."
+	vim -i NONE -c VundleUpdate -c quitall &>/dev/null
+
+	echo "Upgrading npm packages..."
+	npm update --no-progress --quiet --global
+	npm install --no-progress --silent --quiet npm
+
+	echo "Upgrading PIP packages..."
 	# pip3 install --upgrade pip --user;
 	# Running it twice seems to resolve some dependency issues which PIP reports when running it just one time
 	update_pip_packages
 	update_pip_packages
 
-	update_packages_mac
+	# update_packages_mac
 
 	popd &>/dev/null || exit
 
-	printf "Updated all applications on %s\n" "$(date)" >>~/update_log.txt
-	rm -f ~/package.json
+	printf "Upgrading all applications on %s\n" "$(date)" >>~/update_log.txt
+	# rm -f ~/package.json
 }
 
 function merge_and_push_branch() {
