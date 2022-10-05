@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -ue
 
 DOTFILES_DIR="$HOME"/dotfiles
 
