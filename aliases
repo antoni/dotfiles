@@ -802,6 +802,11 @@ function update_pip_packages() {
 	pip3 list --outdated --quiet --format=freeze | \grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip3 install -U
 }
 
+function reinstall_python() {
+	sudo apt-get remove --assume-yes python python3 python3-pip
+	sudo apt-get install --assume-yes python python3 python3-pip
+}
+
 function upgrade_apt_packages() {
 	echo "Upgrading APT packages..."
 	# https://askubuntu.com/a/668859/342465
@@ -1233,7 +1238,6 @@ function brew_cleanup_package() {
 }
 
 function reinstall_pip() {
-	python -m pip install --upgrade --force-reinstall pip
 	python3 -m pip install --upgrade --force-reinstall pip
 }
 

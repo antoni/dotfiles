@@ -176,9 +176,9 @@ function install_pip_packages() {
 		tdmgr PyQt5 paho-mqtt PyQtWebEngine mvt yt-dlp xmldiff yq poetry)
 
 	# Use xargs, so that PIP doesn't fail on a single error
-	xargs -n 1 pip3 install --user <requirements.txt
-	xargs -n 1 pip3 install --user <requirements.txt
-	pip3 install --user "${PIP_PACKAGES[*]}" --upgrade
+	# xargs -n 1 pip3 install --user <requirements.txt
+	# xargs -n 1 pip3 install --user <requirements.txt
+	pip3 install --user "${PIP_PACKAGES[@]}" --upgrade
 
 	pip3 install "qiskit[visualization]" --user --upgrade
 }
