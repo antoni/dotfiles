@@ -78,6 +78,6 @@
   "workbench.iconTheme": "vscode-icons",
   "editor.formatOnPaste": true,
   "terminal.integrated.fontFamily": "Fira Code, monospace",
-  "window.zoomLevel": 1,
-  "workbench.editor.enablePreview": false
+  "workbench.editor.enablePreview": false,
+  "window.zoomLevel": 1
 }
