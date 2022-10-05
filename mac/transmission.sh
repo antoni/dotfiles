@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Settings file location
 # ls -ld ~/Library/Preferences/org.m0k.transmission.*
 
