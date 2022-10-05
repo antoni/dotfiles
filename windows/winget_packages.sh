@@ -43,6 +43,7 @@ CONFERENCE_SOFTWARE=(
 	SlackTechnologies.Slack
 	Microsoft.TeamsExploration
 	Zoom.Zoom
+    Cisco.WebexTeams
 )
 
 MAY_HAVE=(
