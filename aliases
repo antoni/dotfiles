@@ -1634,5 +1634,6 @@ alias show-pg-status='pg_ctl status'
 alias restart-pg='pg_ctl reload'
 
 function identify_website_technologies() {
+    # https://github.com/rverton/webanalyze
     webanalyze -apps ~/dotfiles/technologies.json -host "$1" -crawl 1
 }
