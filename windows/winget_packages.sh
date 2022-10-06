@@ -82,6 +82,7 @@ MAY_HAVE=(
 	BinaryFortress.DisplayFusion
 	TorProject.TorBrowser
 	flux.flux
+	winget install -e --id Postman.Postman
 	Opera.Opera
 	Opera.OperaGX
 	AntibodySoftware.WizTree
