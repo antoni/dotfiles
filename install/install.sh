@@ -246,7 +246,8 @@ function install_r_packages() {
 }
 
 function install_go_packages() {
-	GO_PACKAGES=(github.com/derekparker/delve/cmd/dlv github.com/Sirupsen/logrus github.com/mvdan/sh/cmd/shfmt github.com/tomnomnom/gron@latest)
+	GO_PACKAGES=(github.com/derekparker/delve/cmd/dlv github.com/Sirupsen/logrus github.com/mvdan/sh/cmd/shfmt github.com/tomnomnom/gron@latest
+		github.com/rverton/webanalyze/cmd/webanalyze@latest)
 	go get -u "${GO_PACKAGES[*]}"
 }
 
