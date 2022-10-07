@@ -10,6 +10,9 @@
 #sudo scutil --set LocalHostName "0x6D746873"
 #sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "0x6D746873"
 
+# Disable “{appname} can’t be opened because it is from an unidentified developer”
+sudo spctl --master-disable
+
 # Set standby delay to 24 hours (default is 1 hour)
 sudo pmset -a standbydelay 86400
 
