@@ -74,6 +74,7 @@ MAY_HAVE=(
 	CrystalDewWorld.CrystalDiskMark # disk benchmark
 	Discord.Discord
 	Mozilla.Firefox.DeveloperEdition
+    winget install -e --id Balena.Etcher
 	ProtonTechnologies.ProtonVPN
 	ExpressVPN.ExpressVPN
 	Microsoft.OfficeDeploymentTool
