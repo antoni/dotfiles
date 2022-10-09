@@ -15,6 +15,7 @@ MUST_HAVE=(
 	Python
 	vim.vim
 	ImageMagick.ImageMagick
+    winget install -e --id Microsoft.dotNetFramework
 	Docker.DockerDesktop
 	Notepad++.Notepad++
 	Oracle.JavaRuntimeEnvironment
