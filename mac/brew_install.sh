@@ -269,7 +269,6 @@ BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	opera-gx
 	espanso
 	disk-drill
-	powershell
 	azure-data-studio
 	ledger-live
 	caffeine
@@ -282,6 +281,7 @@ BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	tableplus
 	qlvideo
 	zulip
+    powershell
 	recordit
 	fugu
 	workplace-chat
