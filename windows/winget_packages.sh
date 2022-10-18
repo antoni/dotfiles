@@ -14,6 +14,7 @@ MUST_HAVE=(
 	vscode
 	Python
 	vim.vim
+    winget install -e --id Neovim.Neovim
 	ImageMagick.ImageMagick
     winget install -e --id Microsoft.dotNetFramework
 	Docker.DockerDesktop
