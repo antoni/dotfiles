@@ -1642,3 +1642,29 @@ function identify_website_technologies() {
 	# https://github.com/rverton/webanalyze
 	webanalyze -apps ~/dotfiles/technologies.json -host "$1" -crawl 1
 }
+
+# DNS server settings
+function dns_server_settings_clear() {
+	# macOS
+	networksetup -setdnsservers Wi-Fi
+	# TODO: Windows (via WSL)
+}
+
+function dns_server_settings_clear() {
+	# macOS
+	networksetup -setdnsservers Wi-Fi 8.8.8.8
+	# TODO: Windows (via WSL)
+
+}
+
+function check_dns_server_settings_check() {
+	# macOS
+	networksetup -getdnsservers Wi-Fi
+	# TODO: Windows (via WSL)
+}
+
+function flush_dns_cache() {
+	# macOS
+	sudo killall -HUP mDNSResponder
+	# TODO: Windows (via WSL)
+}
