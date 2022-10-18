@@ -2,6 +2,6 @@
     "licence": "MIT",
     "dependencies": {
         "@nativedocuments/docx-wasm": "^2.2.13-1561490777",
-        "npm": "^6.14.8"
+        "npm": "^6.14.17"
     }
 }
