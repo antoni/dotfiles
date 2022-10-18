@@ -39,17 +39,17 @@
     "initialPosition": "50,50",
     "initialRows": 60,
     "multiLinePasteWarning": false,
-    "profiles": 
+    "profiles":
     {
         "defaults": {},
-        "list": 
+        "list":
         [
             {
                 "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
                 "hidden": false,
                 "name": "Windows PowerShell",
-                "startingDirectory": "\\\\wsl$\\Ubuntu-18.04\\home\\antoni\\"
+                "startingDirectory": "\\\\wsl$\\Ubuntu-20.04\\home\\antoni\\"
             },
             {
                 "commandline": "%SystemRoot%\\System32\\cmd.exe",
@@ -65,16 +65,28 @@
                 "source": "Windows.Terminal.Wsl"
             },
             {
-                "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c274}",
-                "hidden": false,
-                "name": "Ubuntu-20.04",
-                "source": "Windows.Terminal.Wsl"
-            },
-            {
                 "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
                 "hidden": false,
                 "name": "Azure Cloud Shell",
                 "source": "Windows.Terminal.Azure"
+            },
+            {
+                "guid": "{4ca3f36a-954b-5f17-a131-52dc5790981e}",
+                "hidden": false,
+                "name": "Ubuntu 18.04.5 on Windows",
+                "source": "CanonicalGroupLimited.Ubuntu18.04onWindows_79rhkp1fndgsc"
+            },
+            {
+                "commandline": "C:\\wsl_images\\CentOS7\\CentOS7.exe",
+                "guid": "{2c80c433-9ea4-4608-bab3-68d0efe94e35}",
+                "hidden": false,
+                "name": "CentOS 7.9"
+            },
+            {
+                "guid": "{a8202b0e-781a-5dab-98e2-e9d469a63619}",
+                "hidden": false,
+                "name": "CentOS7",
+                "source": "Windows.Terminal.Wsl"
             }
         ]
     },
