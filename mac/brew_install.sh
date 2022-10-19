@@ -71,6 +71,7 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	datamash
 	php
 	mplayer
+	origin
 	pillow
 	emscripten
 	deno
@@ -281,7 +282,7 @@ BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	tableplus
 	qlvideo
 	zulip
-    powershell
+	powershell
 	recordit
 	fugu
 	workplace-chat
