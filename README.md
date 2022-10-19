@@ -34,5 +34,6 @@
 
 ## TODO
 
+- macOS: toggle Bluetooth on lid open/close
 - [save PowerToys config (Windows)](https://github.com/microsoft/PowerToys/issues/3004#issuecnt-638686691)
 - [copy some patterns from this repo?](https://github.com/ur0n2/dotfiles-for-windows)
