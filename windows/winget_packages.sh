@@ -14,9 +14,9 @@ MUST_HAVE=(
 	vscode
 	Python
 	vim.vim
-    winget install -e --id Neovim.Neovim
+	Neovim.Neovim
 	ImageMagick.ImageMagick
-    winget install -e --id Microsoft.dotNetFramework
+	Microsoft.dotNetFramework
 	Docker.DockerDesktop
 	Notepad++.Notepad++
 	Oracle.JavaRuntimeEnvironment
@@ -76,7 +76,7 @@ MAY_HAVE=(
 	CrystalDewWorld.CrystalDiskMark # disk benchmark
 	Discord.Discord
 	Mozilla.Firefox.DeveloperEdition
-    winget install -e --id Balena.Etcher
+	Balena.Etcher
 	ProtonTechnologies.ProtonVPN
 	ExpressVPN.ExpressVPN
 	Microsoft.OfficeDeploymentTool
@@ -85,7 +85,8 @@ MAY_HAVE=(
 	BinaryFortress.DisplayFusion
 	TorProject.TorBrowser
 	flux.flux
-	winget install -e --id Postman.Postman
+	Postman.Postman
+	ElectronicArts.EADesktop
 	Opera.Opera
 	Opera.OperaGX
 	AntibodySoftware.WizTree
@@ -115,17 +116,16 @@ MAY_HAVE=(
 	wez.wezterm
 	JetBrains.DataSpell.EarlyPreview
 	Microsoft.WindowsInstallationAssistant
-	winget install -e --id Mojang.MinecraftLauncher
-	winget install -e --id Microsoft.AzureFunctionsCoreTools
-	winget install -e --id Microsoft.AzureDataStudio
-	winget install -e --id Microsoft.AzureDataStudio.Insiders
-	winget install -e --id Microsoft.AzureCosmosEmulator
-	winget install -e --id Microsoft.azure-iot-explorer
-	winget install -e --id Microsoft.AzureStorageExplorer
-	winget install -e --id Microsoft.AzureCLI
-	winget install -e --id Microsoft.AzureDataCLI
-	winget install -e --id Microsoft.AzureStorageEmulator
-
+	Mojang.MinecraftLauncher
+	Microsoft.AzureFunctionsCoreTools
+	Microsoft.AzureDataStudio
+	Microsoft.AzureDataStudio.Insiders
+	Microsoft.AzureCosmosEmulator
+	Microsoft.azure-iot-explorer
+	Microsoft.AzureStorageExplorer
+	Microsoft.AzureCLI
+	Microsoft.AzureDataCLI
+	Microsoft.AzureStorageEmulator
 )
 
 #for package in ${MUST_HAVE[@]}; do
