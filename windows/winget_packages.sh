@@ -57,6 +57,7 @@ MAY_HAVE=(
 	Microsoft.WindowsTerminal
 	OpenJS.NodeJS.LTS
 	Amazon.AWSCLI
+	winget install -e --id EpicGames.EpicGamesLauncher
 	Zeit.Hyper
 	AnyDeskSoftwareGmbH.AnyDesk
 	opticos.gwsl
