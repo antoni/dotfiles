@@ -837,6 +837,13 @@ function update_all() {
 		winget upgrade --all
 
 		upgrade_apt_packages
+
+		# Delete all links on Desktop: current user
+		rm -rf /mnt/c/Users/Komputer/Desktop/*.{lnk,url}
+
+		# Delete all links on Desktop: all users
+		# [Environment]::GetFolderPath('CommonDesktopDirectory')
+		rm -rf /mnt/c/Users/Public/Desktop/*.{lnk,url}
 	fi
 
 	echo "Upgrading oh-my-zsh..."
