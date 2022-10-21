@@ -70,6 +70,7 @@ MAY_HAVE=(
 	Oracle.VirtualBox
 	VMware.WorkstationPlayer
 	TorProject.TorBrowser
+	winget install -e --id Loom.Loom
 	Surfshark.SurfsharkVPN
 	NordVPN.NordVPN
 	Xming.Xming
