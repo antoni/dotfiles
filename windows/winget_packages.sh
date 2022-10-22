@@ -63,6 +63,7 @@ MAY_HAVE=(
 	opticos.gwsl
 	marha.VcXsrv
 	BraveSoftware.BraveBrowser
+	winget install -e --id Rustlang.Rustup
 	Microsoft.dotNetFramework
 	Microsoft.dotnet
 	alcpu.CoreTemp
