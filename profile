@@ -18,8 +18,8 @@ if [ -n "$BASH_VERSION" ]; then
 	fi
 fi
 
-export PATH="$HOME/.cargo/bin:$PATH"
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
 export HOMEBREW_NO_ENV_HINTS=TRUE
+. "$HOME/.cargo/env"
