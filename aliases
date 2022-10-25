@@ -1675,3 +1675,11 @@ function flush_dns_cache() {
 	sudo killall -HUP mDNSResponder
 	# TODO: Windows (via WSL)
 }
+
+# Windows
+function exec_powershell_script() {
+local script_path="$1"
+
+powershell.exe -ExecutionPolicy Bypass -File "$script_path";
+}
+
