@@ -23,6 +23,10 @@
     ~/dotfiles/mac/defaults.sh # Configure the system
 ```
 
+## Useful links
+
+- [Automatically reattach tmux session using iTerm2](https://coderwall.com/p/-mumdg/automatically-reattach-tmux-session-using-iterm2): `tmux attach -t base || tmux new -s base`
+
 ## Thanks to
 
 - [ur0n2/dotfiles-for-windows](https://github.com/ur0n2/dotfiles-for-windows), where I have taken few scripts/aliases/ideas from
