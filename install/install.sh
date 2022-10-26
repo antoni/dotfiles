@@ -5,7 +5,8 @@ DOTFILES_DIR="$HOME"/dotfiles
 
 mkdir -p tmp
 
-source "$DOTFILES_DIR"/install/chrome_install.sh
+# TODO: Fixme
+# source "$DOTFILES_DIR"/install/chrome_install.sh
 source "$DOTFILES_DIR"/mac/brew_install.sh
 source "$DOTFILES_DIR"/utils.sh
 
