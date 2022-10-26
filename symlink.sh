@@ -63,7 +63,7 @@ function mac_symlink() {
 	ln -sf ~/dotfiles/mac/wakeup.sh ~/.wakeup
 
 	# iTerm2 config
-	ln -sf "${DOTFILES_DIR}"/com.googlecode.iterm2.plist \
+	ln -sf "${DOTFILES_DIR}"/mac/com.googlecode.iterm2.plist \
 		~/Library/Preferences/com.googlecode.iterm2.plist
 
 	# Transmission
