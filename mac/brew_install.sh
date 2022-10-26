@@ -63,6 +63,7 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	dockutil
 	gnumeric
 	testdisk
+    pv
 	handbrake
 	terminal-notifier
 	bat
