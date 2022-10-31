@@ -60,6 +60,7 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	autojump
 	azcopy
 	yarn-completion
+    git-lfs
 	dockutil
 	gnumeric
 	testdisk
