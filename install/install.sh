@@ -83,6 +83,12 @@ function install_nord_vpn_debian() {
 	rm ./nordvpn*.deb
 }
 
+function exit_with_error_message() {
+	local -r error_message="$1"
+	printf "Error: %s\n" "$error_message"
+	return
+}
+
 function main() {
 	generate_ssh_key
 
@@ -105,8 +111,8 @@ function main() {
 	elif [ -f /etc/redhat-release ]; then
 		echo "Installing required packages on Fedora/CentOS"
 
-		dnf install --assumeyes "${PACKAGES[*]}" || exit 1
-		dnf install --assumeyes "${FEDORA[*]}" || exit 1
+		dnf install --assumeyes "${PACKAGES[*]}" || exit_with_error_message ""
+		dnf install --assumeyes "${FEDORA[*]}" || exit_with_error_message ""
 	else # macOS
 		#source $DOTFILES_DIR/mac/brew_install.sh
 
@@ -126,16 +132,16 @@ function main() {
 
 		"$DOTFILES_DIR"/mac/post_install.sh
 	fi
-	install_oh_my_zsh || exit 1
-	install_zsh_plugins || exit 1
+	install_oh_my_zsh || exit_with_error_message ""
+	install_zsh_plugins || exit_with_error_message ""
 
 	create_npm_global_packages_directory
-	install_javascript_packages_npm || exit 1
-	install_vim_plugins || exit 1
+	install_javascript_packages_npm || exit_with_error_message ""
+	install_vim_plugins || exit_with_error_message ""
 
-	install_tmux_plugin_manager || exit 1
+	install_tmux_plugin_manager || exit_with_error_message ""
 
-	crontab "$DOTFILES_DIR"/cron.jobs || exit 1
+	crontab "$DOTFILES_DIR"/cron.jobs || exit_with_error_message ""
 }
 
 function install_vim_plugins() {
@@ -145,7 +151,7 @@ function install_vim_plugins() {
 
 function install_oh_my_zsh() {
 	sudo sed s/required/sufficient/g -i /etc/pam.d/chsh
-	chsh --shell "$(which zsh)" "$(whoami)" || exit 1
+	chsh --shell "$(which zsh)" "$(whoami)" || exit_with_error_message ""
 
 	rm -rf ~/.oh-my-zsh
 	curl -Lo install.sh https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
