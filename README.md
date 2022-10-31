@@ -42,6 +42,6 @@
 - macOS: toggle Bluetooth on lid open/close
 - [save PowerToys config (Windows)](https://github.com/microsoft/PowerToys/issues/3004#issuecnt-638686691)
 - [copy some patterns from this repo?](https://github.com/ur0n2/dotfiles-for-windows)
-- Linux/WSL: write Windows on USB: https://github.com/WoeUSB/WoeUSB-ng
-- technology badges (a la https://github.com/dolanmiu)
+- Linux/WSL: [write Windows on US](https://github.com/WoeUSB/WoeUSB-ng)
+- technology badges (a la [dolanmiu](https://github.com/dolanmiu))
 -
