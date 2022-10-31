@@ -240,6 +240,7 @@ BREW_CASK_PACKAGES_MUST_HAVE=(
 	omnidisksweeper
 	firefox
 	vlc
+	macdown
 	slack
 	libreoffice
 	microsoft-office
@@ -389,7 +390,6 @@ BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	the-unarchiver
 	google-chrome-canary
 	google-drive-file-stream
-	macdown
 	postman
 	keybase
 	spotifree
