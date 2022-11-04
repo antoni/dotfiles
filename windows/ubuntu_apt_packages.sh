@@ -10,6 +10,8 @@ APT_PACKAGES=(apache2
 	parallel
 	graphviz
 	jq
+    qemu-utils
+    maven
 	flatpak
 	gitk
 	poppler-utils
@@ -26,6 +28,7 @@ APT_PACKAGES=(apache2
 	docker-compose
 	default-jdk scala
 	cmake
+	git-lfs
 	shellcheck
 	build-essential cmake pkg-config libicu-dev zlib1g-dev libcurl4-openssl-dev libssl-dev ruby-dev
 	ruby-full build-essential zlib1g-dev
