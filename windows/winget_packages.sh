@@ -48,6 +48,10 @@ CONFERENCE_SOFTWARE=(
 	Cisco.WebexTeams
 )
 
+GAMES=(
+    winget install -e --id RiotGames.LeagueOfLegends.EUNE
+)
+
 MAY_HAVE=(
 	GNU.Emacs
 	Valve.Steam
