@@ -2,7 +2,8 @@
 
 WINGET_ALIAS="powershell.exe /c winget.exe"
 WINGET_COMMAND_LIST="$WINGET_ALIAS list"
-WINGET_COMMAND_INSTALL="$WINGET_ALIAS install --accept-source-agreements  --accept-package-agreements --exact --id "
+# don't install an already installed package
+WINGET_COMMAND_INSTALL="$WINGET_ALIAS install --no-upgrade --accept-source-agreements  --accept-package-agreements --exact --id "
 
 MUST_HAVE=(
 	Google.Chrome
@@ -49,12 +50,13 @@ CONFERENCE_SOFTWARE=(
 )
 
 GAMES=(
-    winget install -e --id RiotGames.LeagueOfLegends.EUNE
+	RiotGames.LeagueOfLegends.EUNE
+	Valve.Steam
+	ElectronicArts.EADesktop
 )
 
 MAY_HAVE=(
 	GNU.Emacs
-	Valve.Steam
 	WireGuard.WireGuard
 	CPUID.HWMonitor
 	Ghisler.TotalCommander
@@ -95,7 +97,6 @@ MAY_HAVE=(
 	TorProject.TorBrowser
 	flux.flux
 	Postman.Postman
-	ElectronicArts.EADesktop
 	Opera.Opera
 	Opera.OperaGX
 	AntibodySoftware.WizTree
