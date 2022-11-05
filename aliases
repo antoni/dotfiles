@@ -833,11 +833,12 @@ function update_all() {
 
     # WSL 2
     if test -f /proc/sys/kernel/osrelease && grep -q microsoft /proc/sys/kernel/osrelease; then
+        # Run it first as it requires sudo
+        upgrade_apt_packages
+
         echo "Upgrading WSL packages..."
         # TODO: Close VS Code beforehand (it won't upgrade otherwise)
         winget upgrade --all
-
-        upgrade_apt_packages
 
         # Delete all links on Desktop: current user
         rm -rf /mnt/c/Users/Komputer/Desktop/*.{lnk,url}
