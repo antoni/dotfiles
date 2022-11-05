@@ -75,7 +75,7 @@
     cl = clone
     cld = clone --depth 1
     # Amends author of last commit
-    # Usage: 
+    # Usage:
     # git amend-author 4025621 Eugen
     amend-author = !bash -c 'git commit --amend --author=$1' --
     # Amends author of any commit
@@ -129,6 +129,7 @@
     author-commits = "!git --no-pager log --pretty=format:\"%s\" --author=\"$1\" #"
     # Shows all commits for given author, with full diff
     author-commits-full = "!git --no-pager log --author=\"$1\" --oneline | awk '{print $1}' | xargs git show #"
+    remove-ignored-files = "!git ls-files -c --ignored --exclude-standard | sed 's/.*/"&"/' | xargs git rm -r --cached"
 [push]
     default = matching
     followTags = true
