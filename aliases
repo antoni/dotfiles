@@ -28,36 +28,36 @@ if [[ "$unamestr" == 'Darwin' ]]; then
         brew remove --cask --force "$(brew list)"
     }
 
-alias analyze_disk_usage='/Applications/OmniDiskSweeper.app/Contents/MacOS/OmniDiskSweeper'
+    alias analyze_disk_usage='/Applications/OmniDiskSweeper.app/Contents/MacOS/OmniDiskSweeper'
 
-alias lsblk='diskutil list'
+    alias lsblk='diskutil list'
 
-alias flush_dns_cache='dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
+    alias flush_dns_cache='dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 
-alias change_main_screen='~/scripts/hmscreens -setMainID `~/scripts/hmscreens -info | \grep "Screen ID:" | head -2 | tail -1 | sed "s/[^0-9]*//g"`'
+    alias change_main_screen='~/scripts/hmscreens -setMainID `~/scripts/hmscreens -info | \grep "Screen ID:" | head -2 | tail -1 | sed "s/[^0-9]*//g"`'
 
-alias reset_wifi='sudo networksetup -setnetworkserviceenabled Wi-Fi off && sleep 2 && sudo networksetup -setnetworkserviceenabled Wi-Fi on'
+    alias reset_wifi='sudo networksetup -setnetworkserviceenabled Wi-Fi off && sleep 2 && sudo networksetup -setnetworkserviceenabled Wi-Fi on'
 
-function battery_recharge_cycles_count() {
-    system_profiler SPPowerDataType | \grep "Cycle Count" | awk '{print $3}'
-}
-alias heic_to_jpg='magick mogrify -monitor -format jpg *.HEIC'
+    function battery_recharge_cycles_count() {
+        system_profiler SPPowerDataType | \grep "Cycle Count" | awk '{print $3}'
+    }
+    alias heic_to_jpg='magick mogrify -monitor -format jpg *.HEIC'
 
-alias software_version='system_profiler SPSoftwareDataType'
+    alias software_version='system_profiler SPSoftwareDataType'
 
-alias dwg2pdf='/Applications/QCAD.app/Contents/Resources/dwg2pdf -no-dock-icon'
+    alias dwg2pdf='/Applications/QCAD.app/Contents/Resources/dwg2pdf -no-dock-icon'
 
-alias fix_disk="/Applications/Disk\ Drill.app"
+    alias fix_disk="/Applications/Disk\ Drill.app"
 
-function ios_simulator_screenshot() {
-    xcrun simctl io booted screenshot
-}
+    function ios_simulator_screenshot() {
+        xcrun simctl io booted screenshot
+    }
 
-function ios_simulator_screencast() {
-    xcrun simctl io booted recordVideo ios_simluator_recording.mp4
-}
+    function ios_simulator_screencast() {
+        xcrun simctl io booted recordVideo ios_simluator_recording.mp4
+    }
 
-alias date='gdate'
+    alias date='gdate'
 
     # Toggle "Do not disturb" mode on macOS (via: https://github.com/sindresorhus/do-not-disturb-cli)
     alias dnd-toggle='dnd toggle'
@@ -75,27 +75,27 @@ elif test -f /proc/sys/kernel/osrelease && grep -q microsoft /proc/sys/kernel/os
         vim "/mnt/c/Users/""$WINDOWS_USERNAME""/AppData/Roaming/JetBrains/IntelliJIdea2021.3/idea64.exe.vmoptions"
     }
 
-function open_autostart_folder() {
-    local -r autostart_path=$(printf "C:\Users\%s\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup" "$WINDOWS_USERNAME")
-    cmd.exe /c explorer.exe "$autostart_path"
-    open /mnt/c/ProgramData/Microsoft/Windows/Start\ Menu/Programs/StartUp
-}
+    function open_autostart_folder() {
+        local -r autostart_path=$(printf "C:\Users\%s\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup" "$WINDOWS_USERNAME")
+        cmd.exe /c explorer.exe "$autostart_path"
+        open /mnt/c/ProgramData/Microsoft/Windows/Start\ Menu/Programs/StartUp
+    }
 
-function open() {
-    local local_path=$1
-    explorer.exe "$(wslpath -w "$local_path")"
-}
+    function open() {
+        local local_path=$1
+        explorer.exe "$(wslpath -w "$local_path")"
+    }
 
-function browse() {
-    sensible-browser "$@"
-}
+    function browse() {
+        sensible-browser "$@"
+    }
 
-function github_diff_last_commit() {
-    local -r url=$(gh browse --commit --no-browser | sed --expression 's/tree/commit/g')
-    browse "$url"
-}
+    function github_diff_last_commit() {
+        local -r url=$(gh browse --commit --no-browser | sed --expression 's/tree/commit/g')
+        browse "$url"
+    }
 
-alias wmic='WMIC.exe'
+    alias wmic='WMIC.exe'
 
     # Launches Windows uninstall program (GUI-based)
     alias uninstall='cmd.exe /c appwiz.cpl'
@@ -116,7 +116,7 @@ elif [[ "$unamestr" == 'Linux' ]]; then
     function listkernels() {
         dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d'
     }
-alias gdebi='sudo gdebi'
+    alias gdebi='sudo gdebi'
 
     # Linux specific
     # alias i='sudo apt-get install -y'
@@ -168,7 +168,7 @@ function wgetdir2() {
         --restrict-file-names=windows \
         --domains website.org \
         --no-parent "$1"
-    }
+}
 
 # Programming etc.
 alias m='make'
@@ -458,7 +458,7 @@ dl_website() {
         --restrict-file-names=windows \
         --no-parent \
         "$1"
-    }
+}
 
 # cd ../../../
 function up() {
@@ -511,7 +511,7 @@ alias autoremove='sudo apt-get autoremove'
 alias redisgui='redis-desktop-manager'
 
 function g++gtest() {
-g++ -std=c++11 "$1" -lgtest -lpthread && ./a.out
+    g++ -std=c++11 "$1" -lgtest -lpthread && ./a.out
 }
 
 # Links all .o files to make elf_i386 executable
@@ -673,25 +673,25 @@ function reformat() {
     echo "File extension: ""$ext"
 
     case $ext in
-        "md")
-            # Reformat against Github's Markdown styleguide
-            pandoc -f markdown -t markdown_github "$1" >"$tmpf"
-            ;;
-        "js")
-            eslint --fix "$1" >"$tmpf"
-            ;;
-        "jsx")
-            prettier --write "$1"
-            ;;
-        "json")
-            jq -M '.' >"$tmpf" <"$1"
-            ;;
-        "py")
-            autopep8 --in-place "$1"
-            ;;
-        "html")
-            tidy -indent -wrap 80 -utf8 -clean -file $HTML_TIDY_TMP_FILE "$1" >"$tmpf"
-            ;;
+    "md")
+        # Reformat against Github's Markdown styleguide
+        pandoc -f markdown -t markdown_github "$1" >"$tmpf"
+        ;;
+    "js")
+        eslint --fix "$1" >"$tmpf"
+        ;;
+    "jsx")
+        prettier --write "$1"
+        ;;
+    "json")
+        jq -M '.' >"$tmpf" <"$1"
+        ;;
+    "py")
+        autopep8 --in-place "$1"
+        ;;
+    "html")
+        tidy -indent -wrap 80 -utf8 -clean -file $HTML_TIDY_TMP_FILE "$1" >"$tmpf"
+        ;;
     esac
     mv -f "$tmpf" "$1" 2>/dev/null
 }
@@ -834,6 +834,7 @@ function update_all() {
     # WSL 2
     if test -f /proc/sys/kernel/osrelease && grep -q microsoft /proc/sys/kernel/osrelease; then
         echo "Upgrading WSL packages..."
+        # TODO: Close VS Code beforehand (it won't upgrade otherwise)
         winget upgrade --all
 
         upgrade_apt_packages
@@ -894,17 +895,17 @@ function how_in() {
 # * modify file
 # * git-amend-to $old_sha
 git-amend-to() (
-# Stash, apply to past commit, and rebase the current branch on to of the result.
-current_branch="$(git rev-parse --abbrev-ref HEAD)"
-apply_to="$1"
-git stash
-git checkout "$apply_to"
-git stash apply
-git add -u
-git commit --amend --no-edit
-new_sha="$(git log --format="%H" -n 1)"
-git checkout "$current_branch"
-git rebase --onto "$new_sha" "$apply_to"
+    # Stash, apply to past commit, and rebase the current branch on to of the result.
+    current_branch="$(git rev-parse --abbrev-ref HEAD)"
+    apply_to="$1"
+    git stash
+    git checkout "$apply_to"
+    git stash apply
+    git add -u
+    git commit --amend --no-edit
+    new_sha="$(git log --format="%H" -n 1)"
+    git checkout "$current_branch"
+    git rebase --onto "$new_sha" "$apply_to"
 )
 
 alias pr='~/scripts/pull_request.sh'
@@ -1196,7 +1197,7 @@ function add_diagonal_watermak() {
         +clone -fill mpr:wm -draw 'color 0,0 reset' \) \
         -compose over -composite \
         "$filename"
-    }
+}
 
 # Usage:
 # random_password [password_length]
@@ -1228,9 +1229,9 @@ alias github_merge_pr='gh pr merge $(git branch --show-current) --delete-branch 
 # Alternative
 # tr -dc '[:alnum:]' < /dev/urandom | dd bs=4 count=8 2>/dev/null
 function random-string() {
-# Add special chars:
-# env LC_ALL=C tr -dc '(\&\_a-zA-Z0-9\^\*\@'
-env LC_ALL=C tr -dc 'a-zA-Z0-9' </dev/urandom | fold -w "${1:-32}" | head -n 1
+    # Add special chars:
+    # env LC_ALL=C tr -dc '(\&\_a-zA-Z0-9\^\*\@'
+    env LC_ALL=C tr -dc 'a-zA-Z0-9' </dev/urandom | fold -w "${1:-32}" | head -n 1
 }
 
 function brew_cleanup_package() {
@@ -1439,15 +1440,15 @@ function extract_field_from_json() {
     local filename=$1
     local field_name=$2
     json_field_value=$(
-    grep "$field_name" "$filename" |
-        head -1 |
-        awk -F: '{ print $2 }' |
-        sed 's/[",]//g'
+        grep "$field_name" "$filename" |
+            head -1 |
+            awk -F: '{ print $2 }' |
+            sed 's/[",]//g'
     )
 
     printf "%s" "$json_field_value" |
         xargs # trim
-    }
+}
 
 function show_function_code() {
     local function_name="$1"
@@ -1521,7 +1522,7 @@ function json_to_table() {
     TABLE_FIELDS='"'${table_fields//,/\",\"}'"'
     jq --raw-output \
         "([$TABLE_FIELDS] | (., map(length*\"-\"))), (.[] | $JSON_FIELDS) | @tsv" "$filename"
-    }
+}
 
 function grep33() {
     grep -A 3 -B 3 "$@"
@@ -1680,15 +1681,13 @@ function flush_dns_cache() {
 function exec_powershell_script() {
     local script_path="$1"
 
-    powershell.exe -ExecutionPolicy Bypass -File "$script_path";
+    powershell.exe -ExecutionPolicy Bypass -File "$script_path"
 }
 
-
 function is_inside_virtual_env() {
-    if [[ "$VIRTUAL_ENV" != "" ]]
-    then
-        echo 1;
+    if [[ "$VIRTUAL_ENV" != "" ]]; then
+        echo 1
     else
-        echo 0;
+        echo 0
     fi
 }
