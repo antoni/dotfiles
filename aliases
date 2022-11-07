@@ -1692,3 +1692,8 @@ function is_inside_virtual_env() {
         echo 0
     fi
 }
+
+# Windows
+function safely_remove_hardware() {
+rundll32.exe shell32.dll,Control_RunDLL hotplug.dll
+}
