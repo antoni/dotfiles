@@ -10,8 +10,8 @@ APT_PACKAGES=(apache2
 	parallel
 	graphviz
 	jq
-    qemu-utils
-    maven
+	qemu-utils
+	maven
 	flatpak
 	gitk
 	poppler-utils
@@ -33,10 +33,14 @@ APT_PACKAGES=(apache2
 	build-essential cmake pkg-config libicu-dev zlib1g-dev libcurl4-openssl-dev libssl-dev ruby-dev
 	ruby-full build-essential zlib1g-dev
 	python3-pip
+	libtool
 	haveged
+	g++ automake autoconf libtool cmake libicu-dev
+	libboost-dev libboost-system-dev libboost-filesystem-dev libboost-regex-dev libboost-program-options-dev libboost-iostreams-dev libboost-serialization-dev
 	yamllint
 	tree
 	dos2unix
+	libreadline-dev lib32readline8 lib32readline-dev
 )
 
 sudo apt install -y "${APT_PACKAGES[@]}"

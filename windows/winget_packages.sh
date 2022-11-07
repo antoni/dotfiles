@@ -68,6 +68,7 @@ MAY_HAVE=(
 	AnyDeskSoftwareGmbH.AnyDesk
 	opticos.gwsl
 	marha.VcXsrv
+	winget install -e --id RaspberryPiFoundation.RaspberryPiImager
 	BraveSoftware.BraveBrowser
 	winget install -e --id Rustlang.Rustup
 	Microsoft.dotNetFramework
