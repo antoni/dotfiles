@@ -1697,3 +1697,7 @@ function is_inside_virtual_env() {
 function safely_remove_hardware() {
 rundll32.exe shell32.dll,Control_RunDLL hotplug.dll
 }
+
+function clone_website() {
+httrack "$1"
+}
