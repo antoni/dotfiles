@@ -36,6 +36,7 @@ APT_PACKAGES=(apache2
 	libtool
 	haveged
 	httrack
+	clang-tidy
 	webhttrack
 	g++ automake autoconf libtool cmake libicu-dev
 	libboost-dev libboost-system-dev libboost-filesystem-dev libboost-regex-dev libboost-program-options-dev libboost-iostreams-dev libboost-serialization-dev
