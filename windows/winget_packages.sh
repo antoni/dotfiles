@@ -81,6 +81,7 @@ MAY_HAVE=(
 	winget install -e --id Loom.Loom
 	Surfshark.SurfsharkVPN
 	NordVPN.NordVPN
+	winget install -e --id mRemoteNG.mRemoteNG
 	winget install -e --id RiotGames.Valorant.EU
 	winget install -e --id GitHub.GitLFS
 	Xming.Xming
