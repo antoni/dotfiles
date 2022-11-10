@@ -35,6 +35,7 @@ APT_PACKAGES=(apache2
 	python3-pip
 	libtool
 	haveged
+	freerdp2-x11 rdesktop
 	httrack
 	clang-tidy
 	webhttrack
