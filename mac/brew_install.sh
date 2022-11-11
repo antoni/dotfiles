@@ -60,11 +60,11 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	autojump
 	azcopy
 	yarn-completion
-    git-lfs
+	git-lfs
 	dockutil
 	gnumeric
 	testdisk
-    pv
+	pv
 	handbrake
 	terminal-notifier
 	bat
@@ -247,6 +247,7 @@ BREW_CASK_PACKAGES_MUST_HAVE=(
 	microsoft-office
 	tor-browser
 	openvpn-connect
+	tailscale
 	skitch
 )
 

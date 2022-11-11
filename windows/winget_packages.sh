@@ -63,14 +63,14 @@ MAY_HAVE=(
 	Microsoft.WindowsTerminal
 	OpenJS.NodeJS.LTS
 	Amazon.AWSCLI
-	winget install -e --id EpicGames.EpicGamesLauncher
+	EpicGames.EpicGamesLauncher
 	Zeit.Hyper
 	AnyDeskSoftwareGmbH.AnyDesk
 	opticos.gwsl
 	marha.VcXsrv
-	winget install -e --id RaspberryPiFoundation.RaspberryPiImager
+	RaspberryPiFoundation.RaspberryPiImager
 	BraveSoftware.BraveBrowser
-	winget install -e --id Rustlang.Rustup
+	Rustlang.Rustup
 	Microsoft.dotNetFramework
 	Microsoft.dotnet
 	alcpu.CoreTemp
@@ -78,12 +78,13 @@ MAY_HAVE=(
 	Oracle.VirtualBox
 	VMware.WorkstationPlayer
 	TorProject.TorBrowser
-	winget install -e --id Loom.Loom
+	Loom.Loom
 	Surfshark.SurfsharkVPN
 	NordVPN.NordVPN
-	winget install -e --id mRemoteNG.mRemoteNG
-	winget install -e --id RiotGames.Valorant.EU
-	winget install -e --id GitHub.GitLFS
+	tailscale.tailscale
+	mRemoteNG.mRemoteNG
+	RiotGames.Valorant.EU
+	GitHub.GitLFS
 	Xming.Xming
 	Greenshot.Greenshot
 	CrystalDewWorld.CrystalDiskMark # disk benchmark
