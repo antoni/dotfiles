@@ -32,7 +32,7 @@ if [[ "$unamestr" == 'Darwin' ]]; then
 
     alias lsblk='diskutil list'
 
-    alias flush_dns_cache='dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
+    alias flush_dns_cache='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 
     alias change_main_screen='~/scripts/hmscreens -setMainID `~/scripts/hmscreens -info | \grep "Screen ID:" | head -2 | tail -1 | sed "s/[^0-9]*//g"`'
 
@@ -65,6 +65,8 @@ if [[ "$unamestr" == 'Darwin' ]]; then
 elif test -f /proc/sys/kernel/osrelease && grep -q microsoft /proc/sys/kernel/osrelease; then
     # Windows (WSL)
     alias copy_to_clipboard='clip.exe'
+
+    alias powershell='powershell.exe'
 
     alias xclip='clip.exe'
 
@@ -1695,9 +1697,11 @@ function is_inside_virtual_env() {
 
 # Windows
 function safely_remove_hardware() {
-rundll32.exe shell32.dll,Control_RunDLL hotplug.dll
+    rundll32.exe shell32.dll,Control_RunDLL hotplug.dll
 }
 
 function clone_website() {
-httrack "$1"
+    httrack "$1"
 }
+
+alias start_all_projects='c ~/dotfiles ~/scripts ~/design-system ~/static-pages'
