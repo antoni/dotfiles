@@ -19,3 +19,5 @@ jupyter
 *:Zone.Identifier
 
 package.json
+
+.DS_Store
