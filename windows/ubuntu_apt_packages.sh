@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+MUST_HAVE=(software-properties-common
+	build-essential flex bison libssl-dev libelf-dev git dwarves
+	nmap
+)
+
 APT_PACKAGES=(apache2
 	vim
 	tmux
@@ -45,6 +50,9 @@ APT_PACKAGES=(apache2
 	tree
 	dos2unix
 	libreadline-dev lib32readline8 lib32readline-dev
+	virtualbox
+	virtualbox-ext-pack
+	virtualbox-dkms
 )
 
 sudo apt install -y "${APT_PACKAGES[@]}"
