@@ -1705,3 +1705,8 @@ function clone_website() {
 }
 
 alias start_all_projects='c ~/dotfiles ~/scripts ~/design-system ~/static-pages'
+
+function mkdircd() {
+mkdir $1;
+cd $1;
+}
