@@ -75,6 +75,7 @@ MAY_HAVE=(
 	Microsoft.dotnet
 	alcpu.CoreTemp
 	Yubico.YubikeyManager
+	winget install -e --id IDRIX.VeraCrypt
 	Oracle.VirtualBox
 	VMware.WorkstationPlayer
 	TorProject.TorBrowser
