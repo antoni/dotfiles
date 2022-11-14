@@ -54,7 +54,7 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	i2pd
 	gron
 	mas
-    dialog
+	dialog
 	haskell-stack
 	ykman
 	yubico-piv-tool
