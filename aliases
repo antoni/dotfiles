@@ -1712,3 +1712,4 @@ function mkdircd() {
 }
 
 alias whiptail='dialog'
+alias gsa='git stash apply'
