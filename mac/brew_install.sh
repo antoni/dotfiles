@@ -54,6 +54,7 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	i2pd
 	gron
 	mas
+	certbot
 	dialog
 	haskell-stack
 	ykman
@@ -265,9 +266,11 @@ BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	docker-compose
 	terraform
 	iconjar
+	iina
 	growlnotify
 	electrum
 	http-toolkit
+	veracrypt
 	streamlabs-obs
 	cloudflare-warp
 	brave-browser
