@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
 
-WINGET_ALIAS="powershell.exe /c winget.exe"
+# winget.exe install --no-upgrade --accept-source-agreements --accept-package-agreements --exact --id chromium
+
+# WINGET_ALIAS="powershell.exe /c winget.exe"
+WINGET_ALIAS="winget.exe"
 WINGET_COMMAND_LIST="$WINGET_ALIAS list"
 # don't install an already installed package
-WINGET_COMMAND_INSTALL="$WINGET_ALIAS install --no-upgrade --accept-source-agreements  --accept-package-agreements --exact --id "
+# TODO: Add --no-upgrade once it's released
+WINGET_COMMAND_INSTALL="$WINGET_ALIAS install --accept-source-agreements --accept-package-agreements --exact --id "
 
 MUST_HAVE=(
 	Google.Chrome
@@ -31,7 +35,6 @@ MUST_HAVE=(
 	Mozilla.Firefox
 	WhatsApp.WhatsApp
 	Microsoft.PowerToys
-	NurgoSoftware.AquaSnap
 	JetBrains.IntelliJIDEA.Ultimate
 	Microsoft.VisualStudioCode
 	vim.vim
