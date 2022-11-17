@@ -78,7 +78,7 @@
   "workbench.iconTheme": "vscode-icons",
   "editor.formatOnPaste": true,
   "terminal.integrated.fontFamily": "Fira Code, monospace",
-  "workbench.editor.enablePreview": false,
-  "window.zoomLevel": 1,
+"workbench.editor.enablePreview": false,
+"window.zoomLevel": 1,
   "snyk.advanced.cliPath": "/Users/antoni/Library/Application Support/snyk-ls/snyk-macos"
 }
