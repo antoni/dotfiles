@@ -13,15 +13,18 @@ source "$DOTFILES_DIR"/utils.sh
 # echo -en "${colors[BGreen]}Enter sudo password:${colors[White]} "
 # read -s SUDO_PASS
 
+# TODO: Fix PACKAGES below (missing on Ubuntu)
+# xpdf gnome-do 
+
 # Install required packages
-PACKAGES=(slock xbindkeys clang vim rdesktop make xpdf sysstat
+PACKAGES=(slock xbindkeys clang vim rdesktop make sysstat
 	make cmake gitk vlc okular xdotool xbindkeys xautomation mosh mc
 	libreoffice cscope ctags pavucontrol jq dmidecode xsel i3 zsh lsb ntp feh help2man rpl
 	thunar acpi tmux gitg nomacs docker vpnc
 	hexchat rlwrap xautolock yamllint
 	eom eog inotify-tools xbacklight arandr pulseaudio gnome-bluetooth
 	tidy pandoc tig ncdu redshift rustc
-	dunst httpie udev autofs gnome-do pinta)
+	dunst httpie udev autofs pinta)
 
 SNAP_PACKAGES=(slack code)
 RUST_PACKAGES=(rust cargo)
@@ -100,10 +103,12 @@ function main() {
 	if [ -f /etc/debian_version ]; then
 		echo "Installing required packages on Debian/Ubuntu"
 
-		sudo apt install curl
+		sudo apt-get install --assume-yes curl
 
-		sudo apt install -y "${PACKAGES[*]}" "${DEBIAN[*]}"
-		sudo apt-get install -y zsh
+		sudo apt-get update
+		sudo apt-get install --assume-yes "${PACKAGES[@]}"
+		sudo apt-get install --assume-yes "${DEBIAN[@]}"
+		sudo apt-get install --assume-yes zsh
 
 		install_snap_packages
 		install_yarn_debian
