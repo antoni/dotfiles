@@ -55,4 +55,5 @@ APT_PACKAGES=(apache2
 	virtualbox-dkms
 )
 
+sudo apt install -y "${MUST_HAVE[@]}"
 sudo apt install -y "${APT_PACKAGES[@]}"
