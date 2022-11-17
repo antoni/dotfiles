@@ -14,7 +14,7 @@ source "$DOTFILES_DIR"/utils.sh
 # read -s SUDO_PASS
 
 # TODO: Fix PACKAGES below (missing on Ubuntu)
-# xpdf gnome-do 
+# xpdf gnome-do
 
 # Install required packages
 PACKAGES=(slock xbindkeys clang vim rdesktop make sysstat
@@ -44,7 +44,7 @@ FEDORA=(gnome-icon-theme system-config-printer libreoffice-langpack-pl boost-dev
 
 RXVT=(rxvt-unicode rxvt-unicode-ml rxvt-unicode-256color rxvt-unicode-256color-ml)
 
-DEBIAN=(imagemagick python-dev libxml2-dev libxslt-dev)
+DEBIAN_PACKAGES=(imagemagick python-dev libxml2-dev libxslt-dev libatk-adaptor)
 UBUNTU=(libboost-all-dev linux-tools ghc software-properties-common libappindicator-dev vpnc-scripts network-manager-vpnc network-manager-vpnc-gnome exfat-fuse exfat-utils libnotify-bin libboost-all-dev linux-tools terminator fonts-firacode dwm suckless-tools xdm dmenu xorg gnome kde-full ntfs-3g swig libpcsclite-dev pcscd)
 
 KERNEL_DEV=(cscope exuberant-ctags)
@@ -107,7 +107,7 @@ function main() {
 
 		sudo apt-get update
 		sudo apt-get install --assume-yes "${PACKAGES[@]}"
-		sudo apt-get install --assume-yes "${DEBIAN[@]}"
+		sudo apt-get install --assume-yes "${DEBIAN_PACKAGES[@]}"
 		sudo apt-get install --assume-yes zsh
 
 		install_snap_packages
