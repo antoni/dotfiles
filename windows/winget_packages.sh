@@ -175,6 +175,9 @@ done
 for package in "${MAY_HAVE[@]}"; do
 	install_if_not_installed "$package"
 done
-for package in "${MUST_HAVE[@]}"; do
+for package in "${CONFERENCE_SOFTWARE[@]}"; do
+	install_if_not_installed "$package"
+done
+for package in "${GAMES[@]}"; do
 	install_if_not_installed "$package"
 done
