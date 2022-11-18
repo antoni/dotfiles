@@ -839,7 +839,9 @@ function update_all() {
 		upgrade_apt_packages
 
 		echo "Upgrading WSL packages..."
-		# TODO: Close VS Code beforehand (it won't upgrade otherwise)
+		# Close VS Code beforehand (winget will request to close it via GUI otherwise)
+		taskkill.exe /IM Code.exe
+
 		winget upgrade --all
 
 		# Delete all links on Desktop: current user
