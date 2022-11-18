@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -ue
 
+# TODO: Make it work for Postgres v14:
+# https://techviewleo.com/how-to-install-postgresql-database-on-ubuntu/
+# https://www.cybertec-postgresql.com/en/postgresql-on-wsl2-for-windows-install-and-setup/
+
 # Update all your packages
 sudo apt update
 sudo apt upgrade -y
