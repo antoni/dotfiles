@@ -145,19 +145,14 @@ MAY_HAVE=(
 	Microsoft.AzureStorageEmulator
 )
 
-#for package in ${MUST_HAVE[@]}; do
-#    ${WINGET_COMMAND} $package;
-#done;
-#for package in ${MAY_HAVE[@]}; do
-#    ${WINGET_COMMAND} $package;
-#done;
-#for package in ${MUST_HAVE[@]}; do
-#    ${WINGET_COMMAND} $package;
-#done;
-
 package_not_installed=$(${WINGET_COMMAND_LIST} Some.NonExistent.PackageName)
 
 function install_if_not_installed() {
+  # TODO: FIXME (currently just tries to install every package without checking)
+	echo $WINGET_COMMAND_INSTALL $package
+	${WINGET_COMMAND_INSTALL} "$package_name"
+
+  return
 	local package_name="$1"
 
 	is_package_installed=$(${WINGET_COMMAND_LIST} "$package_name")
