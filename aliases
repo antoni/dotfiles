@@ -835,6 +835,10 @@ function update_all() {
 
 	# WSL 2
 	if test -f /proc/sys/kernel/osrelease && grep -q microsoft /proc/sys/kernel/osrelease; then
+		echo "Updating WSL..."
+		wsl.exe --update
+
+		echo "Upgrading APT packages..."
 		# Run it first as it requires sudo
 		upgrade_apt_packages
 
@@ -1718,3 +1722,6 @@ alias gsa='git stash apply'
 
 # Windows
 alias wsl2_host_ip='cat /etc/resolv.conf | \grep nameserver | cut -d" " -f2'
+
+# Windows, see: https://stackoverflow.com/a/69011313/963881
+alias pip3='DISPLAY="" pip3'
