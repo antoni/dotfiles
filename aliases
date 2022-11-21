@@ -1731,3 +1731,4 @@ alias python='python3'
 # Windows
 alias reboot='shutdown -r'
 
+alias test_internet_speed='speedtest --secure'
