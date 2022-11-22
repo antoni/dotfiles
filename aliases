@@ -1693,6 +1693,18 @@ function exec_powershell_script() {
 	powershell.exe -ExecutionPolicy Bypass -File "$script_path"
 }
 
+# Windows
+# Note: run it with 'wslpath -w'
+# Ex.:
+# powershell.exe -ExecutionPolicy Bypass -command
+# "$(wslpath -w ~/scripts/SomeScript.ps1) -param \"val\""
+function exec_powershell_command() {
+	local script_path="$1"
+
+	# powershell.exe -ExecutionPolicy Bypass -File "$script_path"
+	powershell.exe -ExecutionPolicy Bypass -Command "$script_path"
+}
+
 function is_inside_virtual_env() {
 	if [[ "$VIRTUAL_ENV" != "" ]]; then
 		echo 1
