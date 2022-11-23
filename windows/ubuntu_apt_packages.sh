@@ -25,6 +25,9 @@ APT_PACKAGES=(apache2
 	rand
 	subversion
 	tig
+	python-setuptools
+	python3-setuptools
+	libhivex-bin
 	zip
 	git-lfs
 	librecad
