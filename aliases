@@ -1737,6 +1737,7 @@ alias wsl2_host_ip='cat /etc/resolv.conf | \grep nameserver | cut -d" " -f2'
 
 # Windows, see: https://stackoverflow.com/a/69011313/963881
 alias pip3='DISPLAY="" pip3'
+#alias pip='pip3'
 
 alias python='python3'
 
