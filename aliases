@@ -292,8 +292,6 @@ function fixpowerctl() {
 alias fixtouchpad='sudo rmmod psmouse && sudo modprobe psmouse'
 alias ubuntu_fix_apt='sudo apt-get install --fix-broken && sudo apt-get autoremove && sudo apt-get update'
 
-alias explorer='nautilus --no-desktop'
-
 # Markdown to PDF
 function md2pdf() {
 	pandoc -s -V papersize:a4 -V geometry:margin=1in --from gfm -o "$1".pdf "$1"
@@ -849,7 +847,7 @@ function update_all() {
 		winget upgrade --all
 
 		# Delete all links on Desktop: current user
-		rm -rf /mnt/c/Users/Komputer/Desktop/*.{lnk,url}
+		rm -rf /mnt/c/Users/${WINDOWS_USERNAME}/Desktop/*.{lnk,url}
 
 		# Delete all links on Desktop: all users
 		# [Environment]::GetFolderPath('CommonDesktopDirectory')
@@ -1745,3 +1743,19 @@ alias python='python3'
 alias reboot='shutdown -r'
 
 alias test_internet_speed='speedtest --secure'
+
+function change_extension() {
+	local filename="$1"
+	local -r filename_no_extension=$(filename_without_extension "$1")
+	local -r extension_to="$2"
+
+  # local -r new_filename=$(printf "%s.%s" $filename_no_extension $extension_to)
+
+	mv $filename $(printf "%s.%s" $filename_no_extension $extension_to);
+}
+
+# Windows
+alias explorer='explorer.exe'
+
+# Linus
+alias explorer='nautilus --no-desktop'
