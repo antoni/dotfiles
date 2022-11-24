@@ -810,7 +810,7 @@ function reinstall_python() {
 }
 
 function upgrade_apt_packages() {
-	echo "Upgrading APT packages..."
+	echo "Upgrading apt packages..."
 	# https://askubuntu.com/a/668859/342465
 	sudo apt-get update -qq -o=Dpkg::Use-Pty=0 && sudo apt-get upgrade -qq -o=Dpkg::Use-Pty=0 --assume-yes
 }
@@ -838,7 +838,7 @@ function update_all() {
 		echo "Updating WSL..."
 		wsl.exe --update
 
-		echo "Upgrading APT packages..."
+		echo "Upgrading apt packages..."
 		# Run it first as it requires sudo
 		upgrade_apt_packages
 
