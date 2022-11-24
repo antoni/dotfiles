@@ -14,8 +14,8 @@
         <GUIConfig name="ScintillaViewsSplitter">vertical</GUIConfig>
         <GUIConfig name="UserDefineDlg" position="undocked">hide</GUIConfig>
         <GUIConfig name="TabSetting" replaceBySpace="no" size="4" />
-        <GUIConfig name="AppPosition" x="493" y="257" width="1083" height="790" isMaximized="no" />
-        <GUIConfig name="FindWindowPosition" left="248" top="189" right="837" bottom="553" />
+        <GUIConfig name="AppPosition" x="493" y="257" width="1583" height="1090" isMaximized="no" />
+        <GUIConfig name="FindWindowPosition" left="20" top="20" right="837" bottom="553" />
         <GUIConfig name="FinderConfig" wrappedLines="no" purgeBeforeEverySearch="no" showOnlyOneEntryPerFoundLine="yes" />
         <GUIConfig name="noUpdate" intervalDays="15" nextUpdateDate="20221013">no</GUIConfig>
         <GUIConfig name="Auto-detection">yes</GUIConfig>
