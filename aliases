@@ -795,11 +795,11 @@ function update_xcode() {
 }
 
 function reinstall_pip_packages() {
-	pip3 list --outdated --format=freeze | cut -d = -f 1 | xargs -n1 pip3 install --upgrade --force-reinstall
+	DISPLAY="" pip3 list --outdated | sed 's/\s.*$//' | tail -n +3 | DISPLAY="" xargs -n1 pip3 install --upgrade --force-reinstall
 }
 
 function update_pip_packages() {
-	pip3 list --outdated --format=freeze | \grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip3 install -U
+	DISPLAY="" pip3 list --outdated | sed 's/\s.*$//' | tail -n +3 | DISPLAY="" xargs -n1 pip3 install -U
 }
 
 function reinstall_python() {
@@ -1759,3 +1759,14 @@ alias explorer='explorer.exe'
 
 # Linus
 alias explorer='nautilus --no-desktop'
+
+# string1 99 12313
+# string2 string3
+#
+# to:
+#
+# string1
+# string2
+function cut_after_first_space() {
+  sed 's/\s.*$//' $@
+}
