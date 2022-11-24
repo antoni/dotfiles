@@ -72,7 +72,7 @@ function execute_on_login_only() {
 # execute_on_login_only
 
 # Keyboard
-if command_exists xbindkeys; then
+if command_exists xbindkeys && [[ -n $IS_WSL ]]; then
 	killall xbindkeys 2>/dev/null
 	xbindkeys -f ~/.xbindkeysrc
 fi
