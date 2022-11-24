@@ -232,10 +232,10 @@ function main() {
 		linux_xrdb
 
 		if [[ -n "$IS_WSL" ]]; then
-			function copy_notepad_plus_plus_settings() {
-				cp ~/dotfiles/notepad_plus_plus_settings.xml "/mnt/c/Users/""$WINDOWS_USERNAME""/AppData/Roaming/Notepad++/config.xml"
+			function replace_notepad_plus_plus_settings() {
+				cat ~/dotfiles/windows/notepad_plus_plus_settings.xml > /mnt/c/Users/${WINDOWS_USERNAME}/AppData/Roaming/Notepad++/config.xml
 			}
-			copy_notepad_plus_plus_settings
+			replace_notepad_plus_plus_settings
 		fi
 		;;
 	CYGWIN* | MINGW32* | MSYS* | MINGW*)
