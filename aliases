@@ -1770,3 +1770,10 @@ alias explorer='nautilus --no-desktop'
 function cut_after_first_space() {
   sed 's/\s.*$//' $@
 }
+
+function cal_restart() {
+    sudo service postgresql restart
+git pull origin
+yarn
+yarn workspace @calcom/prisma db-deploy
+}
