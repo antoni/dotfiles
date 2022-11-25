@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# TODO: Add SIGINT handler
+
 # winget.exe install --no-upgrade --accept-source-agreements --accept-package-agreements --exact --id chromium
 
 # WINGET_ALIAS="powershell.exe /c winget.exe"
@@ -58,6 +60,7 @@ GAMES=(
 	RiotGames.LeagueOfLegends.EUNE
 	Valve.Steam
 	ElectronicArts.EADesktop
+	EpicGames.EpicGamesLauncher
 	RiotGames.Valorant.EU
 )
 
@@ -69,7 +72,6 @@ MAY_HAVE=(
 	Microsoft.WindowsTerminal
 	OpenJS.NodeJS.LTS
 	Amazon.AWSCLI
-	EpicGames.EpicGamesLauncher
 	Zeit.Hyper
 	AnyDeskSoftwareGmbH.AnyDesk
 	opticos.gwsl
@@ -81,7 +83,7 @@ MAY_HAVE=(
 	Microsoft.dotnet
 	alcpu.CoreTemp
 	Yubico.YubikeyManager
-	winget install -e --id IDRIX.VeraCrypt
+	IDRIX.VeraCrypt
 	Oracle.VirtualBox
 	VMware.WorkstationPlayer
 	TorProject.TorBrowser
@@ -145,11 +147,18 @@ MAY_HAVE=(
 	Microsoft.AzureStorageEmulator
 )
 
+# In case there is a need to accept some new Terms of Transaction
+${WINGET_ALIAS} list
+
+# Needs to be executed before every install/update
+${WINGET_ALIAS} source update
+# if this doesn't help, try:
+# winget source reset --force
+
 package_not_installed=$(${WINGET_COMMAND_LIST} Some.NonExistent.PackageName)
 
 function install_if_not_installed() {
   # TODO: FIXME (currently just tries to install every package without checking)
-	echo $WINGET_COMMAND_INSTALL $package
 	${WINGET_COMMAND_INSTALL} "$package_name"
 
   return
@@ -164,15 +173,15 @@ function install_if_not_installed() {
 	fi
 }
 
-for package in "${MUST_HAVE[@]}"; do
-	install_if_not_installed "$package"
-done
+# for package in "${MUST_HAVE[@]}"; do
+# 	install_if_not_installed "$package"
+# done
 for package in "${MAY_HAVE[@]}"; do
 	install_if_not_installed "$package"
 done
-for package in "${CONFERENCE_SOFTWARE[@]}"; do
-	install_if_not_installed "$package"
-done
-for package in "${GAMES[@]}"; do
-	install_if_not_installed "$package"
-done
+# for package in "${CONFERENCE_SOFTWARE[@]}"; do
+# 	install_if_not_installed "$package"
+# done
+# for package in "${GAMES[@]}"; do
+# 	install_if_not_installed "$package"
+# done
