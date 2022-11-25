@@ -20,6 +20,8 @@ MUST_HAVE=(
 	Python
 	vim.vim
 	Neovim.Neovim
+	Greenshot.Greenshot
+	GitHub.GitLFS
 	ImageMagick.ImageMagick
 	Microsoft.dotNetFramework
 	Docker.DockerDesktop
@@ -56,6 +58,7 @@ GAMES=(
 	RiotGames.LeagueOfLegends.EUNE
 	Valve.Steam
 	ElectronicArts.EADesktop
+	RiotGames.Valorant.EU
 )
 
 MAY_HAVE=(
@@ -87,10 +90,7 @@ MAY_HAVE=(
 	NordVPN.NordVPN
 	tailscale.tailscale
 	mRemoteNG.mRemoteNG
-	RiotGames.Valorant.EU
-	GitHub.GitLFS
 	Xming.Xming
-	Greenshot.Greenshot
 	CrystalDewWorld.CrystalDiskMark # disk benchmark
 	Discord.Discord
 	Mozilla.Firefox.DeveloperEdition
