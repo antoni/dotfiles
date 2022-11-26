@@ -46,6 +46,8 @@ MUST_HAVE=(
 	VideoLAN.VLC
 	Google.CloudSDK
 	Microsoft.WindowsTerminal.Preview
+	Microsoft.dotNetFramework
+	Microsoft.dotnet
 	Piriform.Recuva
 )
 
@@ -73,14 +75,13 @@ MAY_HAVE=(
 	OpenJS.NodeJS.LTS
 	Amazon.AWSCLI
 	Zeit.Hyper
+	Rufus.Rufus
 	AnyDeskSoftwareGmbH.AnyDesk
 	opticos.gwsl
 	marha.VcXsrv
 	RaspberryPiFoundation.RaspberryPiImager
 	BraveSoftware.BraveBrowser
 	Rustlang.Rustup
-	Microsoft.dotNetFramework
-	Microsoft.dotnet
 	alcpu.CoreTemp
 	Yubico.YubikeyManager
 	IDRIX.VeraCrypt
