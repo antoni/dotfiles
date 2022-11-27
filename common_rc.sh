@@ -6,6 +6,7 @@ function export_variables() {
 	export GITHUB_USER="antoni"
 	# TODO: Get username dynamically: powershell.exe '$env:UserName'
 	# (it takes time, return value should be stored somewhere)
+	export MACOS_USERNAME="antoni"
 	export WINDOWS_USERNAME="Komputer"
 	export HOMEBREW_NO_AUTO_UPDATE=1
 	export BASH=/usr/local/bin/bash
