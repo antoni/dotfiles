@@ -1,6 +1,8 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
+source $HOME/dotfiles/common_rc.sh
+
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -87,8 +89,6 @@ unsetopt nomatch
 # Execute ls after cd
 chpwd() ls
 
-source $HOME/dotfiles/common_rc.sh
-
 # Ignore case when 'ls'
 unsetopt CASE_GLOB
 
@@ -156,7 +156,7 @@ bindkey -M viins '^B' run-again
 bindkey -M vicmd '^B' run-again
 
 # Add .NET Core SDK tools
-export PATH="$PATH:/Users/antek.ff_fra/.dotnet/tools"
+export PATH="$PATH:/Users/${WINDOWS_USERNAME}/.dotnet/tools"
 
 #export VOLTA_HOME="$HOME/.volta"
 #export PATH="$VOLTA_HOME/bin:$PATH"
