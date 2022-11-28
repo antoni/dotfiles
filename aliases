@@ -1777,3 +1777,8 @@ git pull origin
 yarn
 yarn workspace @calcom/prisma db-deploy
 }
+
+# Usage
+# clone Tuhinshubhra/ExtAnalysis
+alias clone='gh repo clone'
+
