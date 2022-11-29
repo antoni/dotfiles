@@ -189,7 +189,7 @@ function install_pip_packages() {
 		matplotlib protobuf conda haruhi-dl google-api-python-client oauth2client progressbar2
 		tdmgr PyQt5 paho-mqtt PyQtWebEngine mvt yt-dlp xmldiff yq poetry beautysh
 		yt-dlp speedtest-cli pipupgrade shodan linode-cli mvt
-		)
+	)
 
 	# Use xargs, so that PIP doesn't fail on a single error
 	# xargs -n 1 pip3 install --user <requirements.txt
