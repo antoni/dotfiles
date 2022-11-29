@@ -811,6 +811,8 @@ function upgrade_apt_packages() {
 	echo "Upgrading apt packages..."
 	# https://askubuntu.com/a/668859/342465
 	sudo apt-get update -qq -o=Dpkg::Use-Pty=0 && sudo apt-get upgrade -qq -o=Dpkg::Use-Pty=0 --assume-yes
+
+	sudo apt autoremove
 }
 
 function update_all() {
@@ -847,7 +849,7 @@ function update_all() {
 		winget upgrade --all
 
 		# Delete all links on Desktop: current user
-		rm -rf /mnt/c/Users/${WINDOWS_USERNAME}/Desktop/*.{lnk,url}
+		rm -rf /mnt/c/Users/"${WINDOWS_USERNAME}"/Desktop/*.{lnk,url}
 
 		# Delete all links on Desktop: all users
 		# [Environment]::GetFolderPath('CommonDesktopDirectory')
@@ -1749,9 +1751,9 @@ function change_extension() {
 	local -r filename_no_extension=$(filename_without_extension "$1")
 	local -r extension_to="$2"
 
-  # local -r new_filename=$(printf "%s.%s" $filename_no_extension $extension_to)
+	# local -r new_filename=$(printf "%s.%s" $filename_no_extension $extension_to)
 
-	mv $filename $(printf "%s.%s" $filename_no_extension $extension_to);
+	mv "$filename" $(printf "%s.%s" "$filename_no_extension" "$extension_to")
 }
 
 # Windows
@@ -1768,17 +1770,19 @@ alias explorer='nautilus --no-desktop'
 # string1
 # string2
 function cut_after_first_space() {
-  sed 's/\s.*$//' $@
+	sed 's/\s.*$//' $@
 }
 
 function cal_restart() {
-    sudo service postgresql restart
-git pull origin
-yarn
-yarn workspace @calcom/prisma db-deploy
+	sudo service postgresql restart
+	git pull origin
+	yarn
+	yarn workspace @calcom/prisma db-deploy
 }
 
 # Usage
 # clone Tuhinshubhra/ExtAnalysis
 alias clone='gh repo clone'
 
+# Windows
+alias gz='gzip'
