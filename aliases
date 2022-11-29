@@ -1786,3 +1786,5 @@ alias clone='gh repo clone'
 
 # Windows
 alias gz='gzip'
+
+alias update_all_npm_packages='npx npm-check --global --update-all'
