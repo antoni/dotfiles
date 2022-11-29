@@ -8,7 +8,6 @@ MUST_HAVE=(software-properties-common
 APT_PACKAGES=(apache2
 	vim
 	tmux
-	golang
 	docker
 	htop
 	nginx
