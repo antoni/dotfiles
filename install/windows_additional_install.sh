@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Website
 https://www.dymo.com/support?cfid=user-guide
 

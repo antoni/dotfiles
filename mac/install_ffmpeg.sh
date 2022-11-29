@@ -35,5 +35,5 @@ cd ffmpeg || exit
 make && make install
 
 # ffmpeg should install to /usr/local/bin/ffmpeg. Test this out
-which ffmpeg
+command -v ffmpeg
 ffmpeg -version
