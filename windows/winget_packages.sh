@@ -96,6 +96,7 @@ MAY_HAVE=(
 	Xming.Xming
 	CrystalDewWorld.CrystalDiskMark # disk benchmark
 	Discord.Discord
+	NVAccess.NVDA
 	Mozilla.Firefox.DeveloperEdition
 	Balena.Etcher
 	ProtonTechnologies.ProtonVPN
