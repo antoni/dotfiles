@@ -106,7 +106,9 @@ elif test -f /proc/sys/kernel/osrelease && grep -q microsoft /proc/sys/kernel/os
 	alias empty_trash_bin='cmd.exe /c "rd /s /q %systemdrive%\$Recycle.bin" 2&> /dev/null'
 
 	# Note: assumes 'C' is the main drive
-	alias analyze_disk_usage='/mnt/c/Program\ Files/WizTree/WizTree.exe "c:"'
+	alias analyze_disk_usage='/mnt/c/Program\ Files\ (x86)/WinDirStat/windirstat.exe'
+# Alternative:
+  # alias analyze_disk_usage='/mnt/c/Program\ Files/WizTree/WizTree.exe "c:"'
 
 	function copy_folder_to_desktop() {
 		local src_folder="$1"
