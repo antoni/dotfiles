@@ -111,6 +111,8 @@ MAY_HAVE=(
 	Opera.Opera
 	Opera.OperaGX
 	AntibodySoftware.WizTree
+	WinDirStat.WinDirStat
+	Transmission.Transmission
 	ArtifexSoftware.GhostScript
 	wsltty
 	msys2.msys2
