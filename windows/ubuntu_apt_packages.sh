@@ -22,6 +22,10 @@ APT_PACKAGES=(apache2
 	mc
 	exiftool
 	rand
+	librsvg2-bin
+	inkscape
+	advancecomp
+	webp
 	subversion
 	tig
 	python-setuptools
