@@ -94,7 +94,7 @@ export ANDROID_NDK_HOME=/usr/local/opt/android-ndk
 # macOS only (delete symlink created after system update)
 rm -f ~/Desktop/Relocated\ Items
 
-export PATH=$PATH:$HOME/.npm-packages/bin:/mnt/c/Windows:/mnt/c/Windows/System32/WindowsPowerShell/v1.0
+export PATH=$PATH:$HOME/.npm-packages/bin:/mnt/c/Windows:/mnt/c/Windows/System32/WindowsPowerShell/v1.0:/mnt/c/Windows/System32
 
 # Windows (WSL)
 if grep -qEi "(Microsoft|WSL)" /proc/version &>/dev/null; then
