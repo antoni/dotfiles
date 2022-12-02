@@ -263,12 +263,12 @@ function install_r_packages() {
 # TODO: Add it to install script
 function install_go_packages() {
 	GO_PACKAGES=(github.com/derekparker/delve/cmd/dlv github.com/Sirupsen/logrus
-	github.com/mvdan/sh/cmd/shfmt github.com/tomnomnom/gron
+		github.com/mvdan/sh/cmd/shfmt github.com/tomnomnom/gron
 		github.com/rverton/webanalyze/cmd/webanalyze mvdan.cc/sh/v3/cmd/shfmt)
 
-for package in $GO_PACKAGES; do
-	go install "$package""@latest";
-	done;
+	for package in $GO_PACKAGES; do
+		go install "$package""@latest"
+	done
 }
 
 function install_nvidia_driver() {
