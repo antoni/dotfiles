@@ -814,7 +814,7 @@ function upgrade_apt_packages() {
 	# https://askubuntu.com/a/668859/342465
 	sudo apt-get update -qq -o=Dpkg::Use-Pty=0 && sudo apt-get upgrade -qq -o=Dpkg::Use-Pty=0 --assume-yes
 
-	sudo apt autoremove
+	sudo apt autoremove --assume-yes
 }
 
 function update_all() {
