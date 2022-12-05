@@ -840,7 +840,6 @@ function update_all() {
 		echo "Updating WSL..."
 		wsl.exe --update
 
-		echo "Upgrading apt packages..."
 		# Run it first as it requires sudo
 		upgrade_apt_packages
 
