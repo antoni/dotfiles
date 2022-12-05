@@ -215,6 +215,14 @@ function main() {
 		sudo_exec mkdir -p /etc/profile.d
 		sudo_exec ln -fs "${DOTFILES_DIR}"/global_aliases /etc/profile.d/global_aliases.sh
 
+
+
+		if [[ -n "$IS_WSL" ]]; then
+			function replace_notepad_plus_plus_settings() {
+				cat ~/dotfiles/windows/notepad_plus_plus_settings.xml >/mnt/c/Users/"${WINDOWS_USERNAME}"/AppData/Roaming/Notepad++/config.xml
+			}
+			replace_notepad_plus_plus_settings
+		else
 		function linux_brightness_settings() {
 			sudo cp brightness.sh /root/
 			sudo sh -c 'echo "$USER $(hostname) = NOPASSWD: /root/brightness.sh" >> /etc/sudoers'
@@ -229,13 +237,7 @@ function main() {
 			ln -sf "${DOTFILES_DIR}"/${XRES_FILE} ~/.Xresources
 		}
 
-		linux_xrdb
-
-		if [[ -n "$IS_WSL" ]]; then
-			function replace_notepad_plus_plus_settings() {
-				cat ~/dotfiles/windows/notepad_plus_plus_settings.xml >/mnt/c/Users/"${WINDOWS_USERNAME}"/AppData/Roaming/Notepad++/config.xml
-			}
-			replace_notepad_plus_plus_settings
+linux_xrdb
 		fi
 		;;
 	CYGWIN* | MINGW32* | MSYS* | MINGW*)
