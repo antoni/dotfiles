@@ -94,6 +94,7 @@ MAY_HAVE=(
 	tailscale.tailscale
 	mRemoteNG.mRemoteNG
 	Xming.Xming
+	Mikrotik.TheDude
 	CrystalDewWorld.CrystalDiskMark # disk benchmark
 	Discord.Discord
 	NVAccess.NVDA
