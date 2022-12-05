@@ -25,6 +25,7 @@ APT_PACKAGES=(apache2
 	librsvg2-bin
 	inkscape
 	advancecomp
+	geoip-bin
 	webp
 	subversion
 	tig
