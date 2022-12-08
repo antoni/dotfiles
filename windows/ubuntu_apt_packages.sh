@@ -29,9 +29,13 @@ APT_PACKAGES=(apache2
 	webp
 	subversion
 	tig
+	python3-pip
 	python-setuptools
 	python3-setuptools
+	python-dev
+	python3-dev
 	libhivex-bin
+	libcups2-dev
 	zip
 	git-lfs
 	librecad
@@ -44,7 +48,6 @@ APT_PACKAGES=(apache2
 	shellcheck
 	build-essential cmake pkg-config libicu-dev zlib1g-dev libcurl4-openssl-dev libssl-dev ruby-dev
 	ruby-full build-essential zlib1g-dev
-	python3-pip
 	libtool
 	haveged
 	freerdp2-x11 rdesktop
