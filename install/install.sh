@@ -188,7 +188,7 @@ function install_pip_packages() {
 		instalooter pirate-get tensorflow opencv-python virtualenv numpy
 		matplotlib protobuf conda haruhi-dl google-api-python-client oauth2client progressbar2
 		tdmgr PyQt5 paho-mqtt PyQtWebEngine mvt yt-dlp xmldiff yq poetry beautysh
-		yt-dlp speedtest-cli pipupgrade shodan linode-cli mvt
+		yt-dlp speedtest-cli pipupgrade shodan linode-cli mvt jupyter
 	)
 
 	# Use xargs, so that PIP doesn't fail on a single error
