@@ -46,6 +46,7 @@
         <GUIConfig name="Caret" width="1" blinkRate="600" />
         <GUIConfig name="ScintillaGlobalSettings" enableMultiSelection="no" />
         <GUIConfig name="openSaveDir" value="2" defaultDirPath="C:\Users\vivob\Desktop" />
+        <GUIConfig name="stylerTheme" path="C:\Users\vivob\AppData\Roaming\Notepad++\stylers.xml" />
         <GUIConfig name="titleBar" short="no" />
         <GUIConfig name="insertDateTime" customizedFormat="yyyy-MM-dd HH:mm:ss" reverseDefaultOrder="no" />
         <GUIConfig name="wordCharList" useDefault="yes" charsAdded="" />
