@@ -34,7 +34,6 @@ MUST_HAVE=(
 	mcmilk.7zip-zstd
 	Telegram.TelegramDesktop
 	OpenWhisperSystems.Signal
-	OpenVPNTechnologies.OpenVPNConnect
 	Yarn.Yarn
 	Mozilla.Firefox
 	WhatsApp.WhatsApp
@@ -89,8 +88,12 @@ MAY_HAVE=(
 	VMware.WorkstationPlayer
 	TorProject.TorBrowser
 	Loom.Loom
+	OpenVPNTechnologies.OpenVPNConnect
+	MullvadVPN.MullvadVPN
 	Surfshark.SurfsharkVPN
 	NordVPN.NordVPN
+	ProtonTechnologies.ProtonVPN
+	ExpressVPN.ExpressVPN
 	tailscale.tailscale
 	mRemoteNG.mRemoteNG
 	Xming.Xming
@@ -100,8 +103,6 @@ MAY_HAVE=(
 	NVAccess.NVDA
 	Mozilla.Firefox.DeveloperEdition
 	Balena.Etcher
-	ProtonTechnologies.ProtonVPN
-	ExpressVPN.ExpressVPN
 	Microsoft.OfficeDeploymentTool
 	Grammarly.ForOffice
 	Inkscape.Inkscape
