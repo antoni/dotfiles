@@ -1791,3 +1791,5 @@ alias gz='gzip'
 alias update_all_npm_packages='npx npm-check --global --update-all'
 
 alias geolocate_ip='geoiplookup'
+
+alias updatecal='git stash && git pull origin main && yarn workspace @calcom/prisma db-deploy'
