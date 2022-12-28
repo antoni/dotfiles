@@ -102,6 +102,7 @@ MAY_HAVE=(
 	Discord.Discord
 	NVAccess.NVDA
 	Mozilla.Firefox.DeveloperEdition
+  Nextcloud.NextcloudDesktop
 	Balena.Etcher
 	Microsoft.OfficeDeploymentTool
 	Grammarly.ForOffice
