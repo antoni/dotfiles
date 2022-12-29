@@ -84,6 +84,7 @@ MAY_HAVE=(
 	alcpu.CoreTemp
 	Yubico.YubikeyManager
 	IDRIX.VeraCrypt
+	Mega.MEGASync
 	Oracle.VirtualBox
 	VMware.WorkstationPlayer
 	TorProject.TorBrowser
@@ -102,7 +103,7 @@ MAY_HAVE=(
 	Discord.Discord
 	NVAccess.NVDA
 	Mozilla.Firefox.DeveloperEdition
-  Nextcloud.NextcloudDesktop
+	Nextcloud.NextcloudDesktop
 	Balena.Etcher
 	Microsoft.OfficeDeploymentTool
 	Grammarly.ForOffice
