@@ -24,7 +24,9 @@ MUST_HAVE=(
 	Neovim.Neovim
 	Greenshot.Greenshot
 	GitHub.GitLFS
-	ImageMagick.ImageMagick
+	# reinstalling this doesn't work unattended (brings focus always).
+	# also, I'm only using it inside WSL
+	# ImageMagick.ImageMagick
 	Microsoft.dotNetFramework
 	Docker.DockerDesktop
 	Notepad++.Notepad++
