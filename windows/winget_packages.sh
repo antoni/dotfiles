@@ -17,12 +17,13 @@ MUST_HAVE=(
 	Wox.Wox
 	putty
 	PuTTY.PuTTY
-	GitHub.cli
 	vscode
 	Python
 	vim.vim
 	Neovim.Neovim
 	Greenshot.Greenshot
+	Git.Git
+	GitHub.cli
 	GitHub.GitLFS
 	# reinstalling this doesn't work unattended (brings focus always).
 	# also, I'm only using it inside WSL
@@ -43,7 +44,6 @@ MUST_HAVE=(
 	JetBrains.IntelliJIDEA.Ultimate
 	Microsoft.VisualStudioCode
 	vim.vim
-	GitHub.GitLFS
 	VideoLAN.VLC
 	Google.CloudSDK
 	Microsoft.WindowsTerminal.Preview
