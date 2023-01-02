@@ -22,8 +22,7 @@
     changed = green
     untracked = cyan
 [color "diff"]
-    meta = green
-    ; meta = yellow bold
+    meta = green ; yellow bold
     frag = magenta bold
     old = red bold
     new = green bold
