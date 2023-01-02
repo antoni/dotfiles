@@ -75,6 +75,7 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	datamash
 	php
 	mplayer
+	gitleaks
 	origin
 	pillow
 	emscripten
