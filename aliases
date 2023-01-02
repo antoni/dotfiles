@@ -797,11 +797,11 @@ function update_xcode() {
 }
 
 function reinstall_pip_packages() {
-	DISPLAY="" pip3 list --outdated | sed 's/\s.*$//' | tail -n +3 | DISPLAY="" xargs -n1 pip3 install --upgrade --force-reinstall
+	DISPLAY="" pip3 list --outdated | sed 's/\s.*$//' | tail -n +3 | DISPLAY="" xargs -n1 sh -c 'pip3 install --upgrade --force-reinstall'
 }
 
 function update_pip_packages() {
-	DISPLAY="" pip3 list --outdated | sed 's/\s.*$//' | tail -n +3 | DISPLAY="" xargs -n1 pip3 install -U
+	DISPLAY="" pip3 list --outdated | sed 's/\s.*$//' | tail -n +3 | DISPLAY="" xargs -n1 sh -c 'pip3 install -U'
 }
 
 function reinstall_python() {
@@ -1668,7 +1668,7 @@ function dns_server_settings_clear() {
 	# TODO: Windows (via WSL)
 }
 
-function dns_server_settings_clear() {
+function dns_server_settings_set() {
 	# macOS
 	networksetup -setdnsservers Wi-Fi 8.8.8.8
 	# TODO: Windows (via WSL)
@@ -1754,7 +1754,8 @@ function change_extension() {
 
 	# local -r new_filename=$(printf "%s.%s" $filename_no_extension $extension_to)
 
-	mv "$filename" $(printf "%s.%s" "$filename_no_extension" "$extension_to")
+	new_filename=$(printf "%s.%s" "$filename_no_extension" "$extension_to")
+	mv "$filename" "$new_filename"
 }
 
 # Windows
@@ -1771,7 +1772,7 @@ alias explorer='nautilus --no-desktop'
 # string1
 # string2
 function cut_after_first_space() {
-	sed 's/\s.*$//' $@
+	sed 's/\s.*$//' "$@"
 }
 
 function cal_restart() {
