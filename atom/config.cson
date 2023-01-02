@@ -29,11 +29,6 @@
     scrollPastEnd: true
   "exception-reporting":
     userId: "cea9446d-6db1-9ae1-30db-0ab66ba561d8"
-  "sync-settings":
-    _analyticsUserId: "a9dd9a60-e51b-4a73-9abf-b5e5b4867c2b"
-    _lastBackupHash: "cc07bd6253b767941adbea205b262c0316e2fff2"
-    gistId: "46de63ee4d025dbf40ed"
-    personalAccessToken: """"
   welcome:
     showOnStartup: false
   "you-complete-me": {}
