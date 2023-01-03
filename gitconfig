@@ -149,9 +149,9 @@
 	smudge = git-lfs smudge -- %f
 [diff "image"]
 	command = ~/git-diff-image/git_diff_image
-[diff "xml_diff"]
+;[diff "xml_diff"]
     ; command = xmldiff
-    command = ~/scripts/git/git_xml_diff.sh
+    ; command = ~/scripts/git/git_xml_diff.sh
 [diff "jd"]
     command = 'jd --git-diff-driver'
 [pager]
