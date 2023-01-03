@@ -17,5 +17,5 @@ function pixelate() {
 
 function remove_exif_data() {
 	local filename=$1
-	exiftool -EXIF= "$filename"
+	exiftool -Adobe:All= -all:all=  -EXIF= "$filename"
 }
