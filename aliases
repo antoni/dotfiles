@@ -1740,7 +1740,8 @@ alias wsl2_host_ip='cat /etc/resolv.conf | \grep nameserver | cut -d" " -f2'
 alias pip3='DISPLAY="" pip3'
 #alias pip='pip3'
 
-alias python='python3'
+# TODO: Replace with system wide link, cross-OS
+# alias python='python3'
 
 # Windows
 alias reboot='shutdown -r'
