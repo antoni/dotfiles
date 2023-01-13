@@ -140,7 +140,6 @@ function main() {
 	install_oh_my_zsh || exit_with_error_message ""
 	install_zsh_plugins || exit_with_error_message ""
 
-	create_npm_global_packages_directory
 	install_javascript_packages_npm || exit_with_error_message ""
 	install_vim_plugins || exit_with_error_message ""
 
@@ -302,6 +301,8 @@ function create_npm_global_packages_directory() {
 }
 
 function install_javascript_packages_npm() {
+	create_npm_global_packages_directory
+
 	npm install --location=global eslint lodash jshint typescript ts-node prettier \
 		http-server http-server-spa json-server depcheck npm-check-updates prettier sort-package-json \
 		babel-cli pm2@latest firebase-tools \
