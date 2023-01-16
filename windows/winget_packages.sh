@@ -42,6 +42,7 @@ MUST_HAVE=(
 	WhatsApp.WhatsApp
 	Microsoft.PowerToys
 	JetBrains.IntelliJIDEA.Ultimate
+  JetBrains.IntelliJIDEA.Community
 	Microsoft.VisualStudioCode
 	vim.vim
 	VideoLAN.VLC
