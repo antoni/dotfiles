@@ -33,6 +33,7 @@ MUST_HAVE=(
 	Notepad++.Notepad++
 	Oracle.JavaRuntimeEnvironment
 	IrfanSkiljan.IrfanView
+	gsass1.NTop
 	7zip.7zip
 	mcmilk.7zip-zstd
 	Telegram.TelegramDesktop
@@ -42,7 +43,7 @@ MUST_HAVE=(
 	WhatsApp.WhatsApp
 	Microsoft.PowerToys
 	JetBrains.IntelliJIDEA.Ultimate
-  JetBrains.IntelliJIDEA.Community
+	JetBrains.IntelliJIDEA.Community
 	Microsoft.VisualStudioCode
 	vim.vim
 	VideoLAN.VLC
