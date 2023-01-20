@@ -14,7 +14,6 @@ WINGET_COMMAND_INSTALL="$WINGET_ALIAS install --accept-source-agreements --accep
 MUST_HAVE=(
 	Google.Chrome
 	chromium
-	Wox.Wox
 	putty
 	PuTTY.PuTTY
 	vscode
