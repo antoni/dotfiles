@@ -52,6 +52,7 @@ BREW_PACKAGES_MUST_HAVE=(
 BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	i2p
 	i2pd
+	cog
 	gron
 	mas
 	certbot
