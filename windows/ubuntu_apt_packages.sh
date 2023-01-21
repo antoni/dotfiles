@@ -20,6 +20,7 @@ APT_PACKAGES=(apache2
 	gitk
 	poppler-utils
 	mc
+	pv
 	exiftool
 	rand
 	librsvg2-bin
