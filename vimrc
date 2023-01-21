@@ -167,6 +167,9 @@ silent! unmap <C-F>
 noremap  <C-S>  :w<CR> :wa<CR> 
 vnoremap <C-S>  <C-C>:w<CR>
 inoremap <C-S>  <C-O>:w<CR>
+" leader is ","
+nnoremap <leader>q :q<CR>
+nnoremap <C-w> :q<CR>
 
 " Fix deleting without yanking
 nnoremap <leader>d "_d
@@ -284,7 +287,7 @@ command! GoLint :call s:GoLint()
 let g:go_fmt_command = "goimports"
 " disable fmt on save
 let g:go_fmt_autosave = 1
-
+let g:go_version_warning = 0
 "}}}
 " Change behavior of <Space> when there is '"' under the cursor"{{{
 " http://stackoverflow.com/a/27669139/963881
@@ -646,15 +649,15 @@ au VimEnter * set tabpagemax=9999|sil tab ball|set tabpagemax&vim
 au BufRead ~/Documents/Q.txt execute "normal Go"|startinsert!
 au BufRead ~/.remember execute "normal Go"|startinsert!
 "}}}
-if has("au")
     " Haskell"{{{
     " au BufWritePost *.hs GhcModCheckAndLintAsync
     "}}}
     " .md files as Markdown"{{{
     au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
     "}}}
-    " C 
+    " C {{{
     au FileType c set makeprg=gcc\ %\ &&\ ./a.out
+    "}}}
     " Turn on C++ autocompletion"{{{
     " au BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
     "}}}
@@ -662,8 +665,6 @@ if has("au")
     au VimEnter * tab all
     "}}}
     " }}}
-endif
-" }}}
 " 8.  Folds {{{
 " set foldmethod=indent   " Fold based on indent
 " Causes problems with opening some JSON files 
@@ -990,4 +991,3 @@ let g:tagbar_type_go = {
                         \ 'ctagsargs' : '-sort -silent'
                         \ }
 "}}}
-let g:go_version_warning = 0
