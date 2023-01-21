@@ -1799,3 +1799,7 @@ alias updatecal='git stash && git pull origin main && yarn workspace @calcom/pri
 function get_node_lts_version() {
 curl -L resolve-node.now.sh/lts
 }
+
+function help() {
+bash -c "help $1"
+}
