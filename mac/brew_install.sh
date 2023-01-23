@@ -47,6 +47,7 @@ BREW_PACKAGES_MUST_HAVE=(
 	ffmpeg
 	cmake
 	mc
+	rar
 )
 
 BREW_PACKAGES_MAY_HAVE=(apache-httpd
@@ -213,7 +214,6 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	erlang
 	vitorgalvao/tiny-scripts/cask-repair
 	amiaopensource/amiaos/decklinksdk
-	carlocab/personal/unrar
 	mitmproxy
 	ant
 	optipng
