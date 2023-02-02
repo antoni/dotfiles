@@ -197,8 +197,8 @@ function main() {
 	# adb
 	sudo_exec ln -fs "$HOME_DIR"/Android/Sdk/platform-tools/adb /usr/local/bin/adb
 
-    # python
-    sudo_exec ln -fs $(which python3) /usr/local/bin/python
+	# python
+	sudo_exec ln -fs "$(which python3)" /usr/local/bin/python
 
 	# IDEA
 	# sudo_exec mkdir -p /etc/sysctl.d

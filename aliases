@@ -1797,9 +1797,9 @@ alias geolocate_ip='geoiplookup'
 alias updatecal='git stash && git pull origin main && yarn workspace @calcom/prisma db-deploy'
 
 function get_node_lts_version() {
-curl -L resolve-node.now.sh/lts
+	curl -L resolve-node.now.sh/lts
 }
 
 function help() {
-bash -c "help $1"
+	bash -c "help $1"
 }
