@@ -84,5 +84,8 @@
   "editor.accessibilitySupport": "on",
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "git.ignoredRepositories": [
+    "/Users/antoni/.vscode/extensions/stepsize.stepsize-1.0.4/resources/demo-repository"
+  ]
 }
