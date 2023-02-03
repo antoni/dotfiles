@@ -26,3 +26,9 @@ export GO111MODULE=on
 
 export PGDATA='/usr/local/share/postgres@14'
 export PGHOST=localhost
+
+# Get color support for 'less'
+export LESS="--RAW-CONTROL-CHARS"
+
+# Use colors for less, man, etc.
+[[ -f ~/.LESS_TERMCAP ]] && . ~/.LESS_TERMCAP
