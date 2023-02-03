@@ -142,11 +142,6 @@
     proxy =
 [commit]
     gpgsign = false
-[filter "lfs"]
-	process = git-lfs filter-process
-    required = true
-    clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
 [diff "image"]
 	command = ~/git-diff-image/git_diff_image
 ;[diff "xml_diff"]
@@ -158,3 +153,8 @@
 	status = true
 [init]
 	defaultBranch = master
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
