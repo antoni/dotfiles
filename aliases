@@ -797,11 +797,11 @@ function update_xcode() {
 }
 
 function reinstall_pip_packages() {
-	DISPLAY="" pip3 list --outdated | sed 's/\s.*$//' | tail -n +3 | DISPLAY="" xargs -n1 sh -c 'pip3 install --upgrade --force-reinstall'
+	DISPLAY="" pip3 list --outdated | awk '{print $1}' | tail -n +3 | DISPLAY="" xargs --I % sh -c 'pip3 install --upgrade --force-reinstall %'
 }
 
 function update_pip_packages() {
-	DISPLAY="" pip3 list --outdated | sed 's/\s.*$//' | tail -n +3 | DISPLAY="" xargs -n1 sh -c 'pip3 install -U'
+	DISPLAY="" pip3 list --outdated | awk '{print $1}' | tail -n +3 | DISPLAY="" xargs -I % sh -c 'pip3 install --upgrade %'
 }
 
 function reinstall_python() {
@@ -1643,10 +1643,12 @@ function logout_from_all() {
 	az logout
 }
 
-# Usage: ocr filepath language [eng,pol]
+# Usage: ocr filepath [language: eng,pol]
 function ocr() {
 	local -r filepath="$1"
 	local -r language="${2:-eng}"
+
+	printf "Performing OCR using language: %s\n" "$language"
 
 	tesseract "$filepath" stdout --oem 1 -l "$language"
 }
