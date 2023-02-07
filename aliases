@@ -1805,3 +1805,7 @@ function get_node_lts_version() {
 function help() {
 	bash -c "help $1"
 }
+
+function http_headers() {
+curl -sSL -D - $1 -o /dev/null
+}
