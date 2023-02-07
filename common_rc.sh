@@ -32,9 +32,3 @@ export LESS="--RAW-CONTROL-CHARS"
 
 # Use colors for less, man, etc.
 [[ -f ~/.LESS_TERMCAP ]] && . ~/.LESS_TERMCAP
-
-function update_pip_package() {
-	pip3 install --upgrade "$1"
-}
-
-export -f update_pip_package >/dev/null
