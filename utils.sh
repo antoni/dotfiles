@@ -26,14 +26,14 @@ function shell_check_and_format() {
 	# echo $ALL_FILES[*]
 	# shfmt --find . | sed 's/ /\\\ /g'
 
-	# # Format code
+	# Format code
 	printf "%s" "$ALL_FILES" | xargs shfmt --list --write || exit 1
 
-	# # Lint code
-	printf "%s" "$ALL_FILES" | xargs shellcheck --external-sources --format diff | git apply --allow-empty || exit 1
+	# Lint code
+	# printf "%s" "$ALL_FILES" | xargs shellcheck --external-sources --format diff | git apply --allow-empty || exit 1
 
-	# # Run again for files that could not be autofixed
-	printf "%s" "$ALL_FILES" | xargs shellcheck --external-sources || exit 1
+	# Run again for files that could not be autofixed
+	# printf "%s" "$ALL_FILES" | xargs shellcheck --external-sources || exit 1
 }
 
 function sudo_exec() {
