@@ -86,6 +86,6 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "git.ignoredRepositories": [
-    "/Users/antoni/.vscode/extensions/stepsize.stepsize-1.0.4/resources/demo-repository"
+    "/Users/antoni/.vscode/extensions/stepsize.stepsize-1.0.7/resources/demo-repository"
   ]
 }
