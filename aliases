@@ -1813,6 +1813,9 @@ function http_headers() {
 # TODO: add support for Windows (macOS only for now)
 function open_debugging_browser() {
 	open ~/scripts/chrome_symlinks/Chrome\ Canary\ with\ Debugger.app
+
+    # Windows
+    # open 'chrome Windows with debugging on port 9999.lnk'
 }
 
 function yarn_last() {
