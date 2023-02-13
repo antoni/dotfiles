@@ -1814,10 +1814,10 @@ function http_headers() {
 function open_debugging_browser() {
 	open ~/scripts/chrome_symlinks/Chrome\ Canary\ with\ Debugger.app
 
-    # Windows
-    # open 'chrome Windows with debugging on port 9999.lnk'
+	# Windows
+	# open 'chrome Windows with debugging on port 9999.lnk'
 }
 
 function yarn_last() {
-    yarn && fc -e : -1;
-    }
+	yarn && fc -e : -1
+}
