@@ -311,7 +311,7 @@ function install_javascript_packages_npm() {
 		yo generator-office dts-gen yargs rollup pnpm source-map-explorer \
 		@angular/cli n json5 cordova gltf-pipeline @squoosh/cli depcheck @microsoft/rush \
 		do-not-disturb-cli katex servor degit verdaccio tables gatsby-cli browser-sync \
-		@apidevtools/swagger-cli kill-port-process ngrok
+		@apidevtools/swagger-cli kill-port-process ngrok @google/clasp
 }
 
 function install_airbnb_eslint() {
