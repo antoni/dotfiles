@@ -79,7 +79,6 @@ MAY_HAVE=(
 	Zeit.Hyper
 	Rufus.Rufus
 	AnyDeskSoftwareGmbH.AnyDesk
-	opticos.gwsl
 	marha.VcXsrv
 	RaspberryPiFoundation.RaspberryPiImager
 	BraveSoftware.BraveBrowser
