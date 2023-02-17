@@ -32,8 +32,6 @@ if [[ "$unamestr" == 'Darwin' ]]; then
 
 	alias lsblk='diskutil list'
 
-	alias flush_dns_cache='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
-
 	alias change_main_screen='~/scripts/hmscreens -setMainID `~/scripts/hmscreens -info | \grep "Screen ID:" | head -2 | tail -1 | sed "s/[^0-9]*//g"`'
 
 	alias reset_wifi='sudo networksetup -setnetworkserviceenabled Wi-Fi off && sleep 2 && sudo networksetup -setnetworkserviceenabled Wi-Fi on'
@@ -1685,8 +1683,17 @@ function check_dns_server_settings_check() {
 
 function flush_dns_cache() {
 	# macOS
+	if [[ "$unamestr" == 'Darwin' ]]; then
+	sudo dscacheutil -flushcache
 	sudo killall -HUP mDNSResponder
+	fi;
+
+
 	# TODO: Windows (via WSL)
+			if [[ -n "$IS_WSL" ]]; then
+			echo "Flushing DNS cache on WSL"
+	ipconfig.exe /flushdns
+	fi;
 }
 
 # Windows
