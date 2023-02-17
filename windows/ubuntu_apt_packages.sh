@@ -6,6 +6,7 @@ MUST_HAVE=(software-properties-common
 )
 
 APT_PACKAGES=(apache2
+  ubuntu-release-upgrader-core
 	vim
 	tmux
 	docker

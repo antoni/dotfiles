@@ -1684,16 +1684,15 @@ function check_dns_server_settings_check() {
 function flush_dns_cache() {
 	# macOS
 	if [[ "$unamestr" == 'Darwin' ]]; then
-	sudo dscacheutil -flushcache
-	sudo killall -HUP mDNSResponder
-	fi;
-
+		sudo dscacheutil -flushcache
+		sudo killall -HUP mDNSResponder
+	fi
 
 	# TODO: Windows (via WSL)
-			if [[ -n "$IS_WSL" ]]; then
-			echo "Flushing DNS cache on WSL"
-	ipconfig.exe /flushdns
-	fi;
+	if [[ -n "$IS_WSL" ]]; then
+		echo "Flushing DNS cache on WSL"
+		ipconfig.exe /flushdns
+	fi
 }
 
 # Windows
@@ -1827,4 +1826,8 @@ function open_debugging_browser() {
 
 function yarn_last() {
 	yarn && fc -e : -1
+}
+
+function refresh_apt_keys() {
+	alias sudo apt-key adv --refresh-keys --keyserver keyserver.ubuntu.com
 }
