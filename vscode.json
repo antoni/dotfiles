@@ -2,7 +2,9 @@
   "editor.fontLigatures": true,
   "editor.fontFamily": "Fira Code",
   "editor.fontSize": 12,
-  "editor.rulers": [80],
+  "editor.rulers": [
+    80
+  ],
   "editor.tabSize": 2,
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
@@ -87,5 +89,6 @@
   },
   "git.ignoredRepositories": [
     "/home/antoni/.vscode-server/extensions/stepsize.stepsize-1.0.10/resources/demo-repository"
-  ]
+  ],
+  "cmake.configureOnOpen": true
 }
