@@ -1831,3 +1831,8 @@ function yarn_last() {
 function refresh_apt_keys() {
 	alias sudo apt-key adv --refresh-keys --keyserver keyserver.ubuntu.com
 }
+
+# TODO: Add support for other file formats
+function compress_images() {
+  jpegoptim --size=1000k **
+}
