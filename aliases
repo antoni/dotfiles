@@ -1836,3 +1836,7 @@ function refresh_apt_keys() {
 function compress_images() {
   jpegoptim --size=1000k **
 }
+
+function code_no_extensions() {
+  code --disable-extensions "$@"
+}
