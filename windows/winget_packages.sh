@@ -78,6 +78,7 @@ MAY_HAVE=(
 	Amazon.AWSCLI
 	Zeit.Hyper
 	Rufus.Rufus
+	winget install -e --id Hex-Rays.IDA.Free
 	AnyDeskSoftwareGmbH.AnyDesk
 	marha.VcXsrv
 	RaspberryPiFoundation.RaspberryPiImager
