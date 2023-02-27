@@ -150,7 +150,7 @@ function main() {
 
 function install_vim_plugins() {
 	echo "Installing Vim plugins..."
-	vim -i NONE -c VundleInstall -c quitall &>/dev/null
+	vim -i NONE -c PlugInstall -c quitall &>/dev/null
 }
 
 function install_oh_my_zsh() {
