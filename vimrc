@@ -8,7 +8,7 @@ set confirm
 
 " visual shifting (does not exit Visual mode)
 vnoremap < <gv
-vnoremap > >gv 
+vnoremap > >gv
 set complete+=k
 set complete-=i
 
@@ -57,7 +57,7 @@ set lazyredraw
 set complete+=k
 set complete-=i
 " Clear terminal before executing the command
-" Adding -i significantly slows down Vim's startup 
+" Adding -i significantly slows down Vim's startup
 " (it's needed to run aliases though)
 " set shell=/bin/bash\ -i
 set shell=/bin/bash
@@ -65,7 +65,7 @@ set shell=/bin/bash
 " Configure backspace so it acts as it should act
 set backspace=eol,start,indent
 " Disable swap file creation"{{{
-set noswapfile 
+set noswapfile
 "}}}
 " Tabs"{{{
 set expandtab
@@ -82,7 +82,7 @@ set colorcolumn=80
 set dictionary="/usr/dict/words"
 set number                    " Line numbers
 " set numberwidth=3
-set history=700               " How many lines of history VIM has to remember 
+set history=700               " How many lines of history VIM has to remember
 set ttyfast
 set ttymouse=xterm2
 set mouse=a
@@ -113,7 +113,7 @@ set smartcase                   " case sensitive when uc present
 set wildmenu   " Turn on the WiLd menu
 set mouse=a
 " Remember to (settings outside the vimrc) "{{{
-"  1. Swap Esc and Caps lock 
+"  1. Swap Esc and Caps lock
 "  (http://vim.wikia.com/wiki/Map_caps_lock_to_escape_in_XWindows)
 ""}}}
 " }}}
@@ -164,7 +164,7 @@ silent! unmap <C-F>
 
 " Reformat current file (:w) & save all (:wa; can't reformat all because of
 " the way BufWritePre works
-noremap  <C-S>  :w<CR> :wa<CR> 
+noremap  <C-S>  :w<CR> :wa<CR>
 vnoremap <C-S>  <C-C>:w<CR>
 inoremap <C-S>  <C-O>:w<CR>
 " leader is ","
@@ -177,7 +177,7 @@ vnoremap <leader>d "_d
 vnoremap <leader>p "_dP
 
 " Vertical split with leader-w
-nnoremap <leader>w <C-w>v<C-w>l  
+nnoremap <leader>w <C-w>v<C-w>l
 
 " Control+W closes the current file
 " noremap  <C-W>  :wq<CR>
@@ -222,7 +222,7 @@ nmap <leader>s<down>   :rightbelow new<CR>
 map <F6> <C-W>w
 " nnoremap <tab> :wincmd w<cr>
 " inoremap <tab> <c-o>:wincmd w<cr>
-" Execute current line in bash 
+" Execute current line in bash
 nmap <F9> :exec '!'.getline('.')<CR>
 " Refactoring variable names "{{{
 " Source: http://stackoverflow.com/a/597932/963881
@@ -238,7 +238,7 @@ nmap <Leader>rf "zyiw:call Refactor()<cr>mx:silent! norm gd<cr>[{V%:s/<C-R>//<c-
 " Open .vimrc in a tab, on a 'Key mappings' section
 command! Vr :tabe ~/.vimrc | execute "normal /Key mappings \<CR><Space>" | nohlsearch
 " Remove blank lines
-command! RemoveBlankLines :g/^$/d 
+command! RemoveBlankLines :g/^$/d
 " Alias for PluginInstall
 command! I :PluginInstall
 " Replace commands "{{{
@@ -256,7 +256,7 @@ let g:tex_flavor = "latex"
 command! Lt :!pdflatex % && evince %:r.pdf
 " Toggle small/normal tabs
 " noremap <F8> :call <SID>ToggleTabs()<CR>
-" Double-click to copy word 
+" Double-click to copy word
 nnoremap <silent> <2-LeftMouse> byw
 " Go-related "{{{
 au FileType go nmap <Leader>i <Plug>(go-info)
@@ -282,7 +282,7 @@ endfunction
 command! GoLint :call s:GoLint()
 
 " vim-go settings
-" let g:go_disable_autoinstall = 0  
+" let g:go_disable_autoinstall = 0
 " format with goimports instead of gofmt
 let g:go_fmt_command = "goimports"
 " disable fmt on save
@@ -329,7 +329,7 @@ let g:snipMate = {}
 let g:snipMate.snippet_version = 1
 
 
-let g:ycm_global_ycm_extra_conf = "~/dotfiles/ycm_extra_conf.py" 
+let g:ycm_global_ycm_extra_conf = "~/dotfiles/ycm_extra_conf.py"
 
 " let g:ycm_server_use_vim_stdout = 1
 " let g:ycm_server_log_level = 'debug'
@@ -343,10 +343,10 @@ augroup vim
     au FileType vim setlocal keywordprg=:help
 augroup END
 " Remap code completion to Ctrl+Space {{{
-" inoremap <Nul> <C-x><C-o> 
+" inoremap <Nul> <C-x><C-o>
 " In your case you want:
 " inoremap <Nul> <C-n>
-" }}} 
+" }}}
 " Leader key bindings"{{{
 " Move back to current position after doing gg=G (code reformat)
 map <Leader>f mzgg=G`z<CR>
@@ -360,139 +360,141 @@ map <leader>fg :! astyle --style=google %<CR>
 " }}}
 " }}}
 " }}}
-" 3.  Vundle config & plugins {{{
-filetype off                  " required by Vundle
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#begin() 
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+" 3.  vim-plug config & plugins {{{
+call plug#begin()
+" The default plugin directory will be as follows:
+" "   - Vim (Linux/macOS): '~/.vim/plugged'
+" "   - Vim (Windows): '~/vimfiles/plugged'
+" "   - Neovim (Linux/macOS/Windows): stdpath('data') . '/plugged'
+" " You can specify a custom plugin directory by passing it as the argument
+" "   - e.g. `call plug#begin('~/.vim/plugged')`
+" "   - Avoid using standard Vim directory names like 'plugin'
 " Must-haves "{{{
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'majutsushi/tagbar'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'Valloric/YouCompleteMe'
+Plug 'majutsushi/tagbar'
 "}}}
-" Plugin 'Lokaltog/vim-easymotion'
-" Plugin 'tpope/vim-vinegar'
-" Plugin 'wikitopian/hardmode'
-"Plugin 'Yggdroot/indentLine'
-" Plugin 'nathanaelkane/vim-indent-guides'
+" Plug 'Lokaltog/vim-easymotion'
+" Plug 'tpope/vim-vinegar'
+" Plug 'wikitopian/hardmode'
+"Plug 'Yggdroot/indentLine'
+" Plug 'nathanaelkane/vim-indent-guides'
 " A Git wrapper so awesome, it should be illegal
-" Plugin 'tpope/vim-repeat'
-" Plugin 'tpope/vim-unimpaired' " For jumping to errors shortcuts
+" Plug 'tpope/vim-repeat'
+" Plug 'tpope/vim-unimpaired' " For jumping to errors shortcuts
 " undle 'tpope/vim-fugitive'
-" Plugin 'vim-scripts/gtags.vim'
-" Plugin 'thinca/vim-quickrun'
-" Plugin 'vim-scripts/netrw.vim'
-" Bundle 'jondkinney/dragvisuals.vim'
-" Bundle 'nixon/vim-vmath' 
-Bundle 'itspriddle/vim-shellcheck'
-" Bundle 'taku-o/vim-vis'
-" Bundle 'rking/ag.vim'
-Bundle 'jamessan/vim-gnupg'
-" Bundle 'Raimondi/delimitMate'
-Bundle 'digitalrounin/vim-yaml-folds'
-" Bundle 'terryma/vim-multiple-cursors'
-" Bundle 'rking/ag.vim'
+" Plug 'vim-scripts/gtags.vim'
+" Plug 'thinca/vim-quickrun'
+" Plug 'vim-scripts/netrw.vim'
+" Plug 'jondkinney/dragvisuals.vim'
+" Plug 'nixon/vim-vmath'
+Plug 'itspriddle/vim-shellcheck'
+" Plug 'taku-o/vim-vis'
+" Plug 'rking/ag.vim'
+Plug 'jamessan/vim-gnupg'
+" Plug 'Raimondi/delimitMate'
+Plug 'digitalrounin/vim-yaml-folds'
+" Plug 'terryma/vim-multiple-cursors'
+" Plug 'rking/ag.vim'
 " Assembly
-" Bundle 'vim-scripts/asmx86'
+" Plug 'vim-scripts/asmx86'
 " JavaScript (temporary - for Node.js) {{{
-Bundle 'lukaszb/vim-web-indent'
-Bundle 'digitaltoad/vim-jade'
-Bundle 'Chiel92/vim-autoformat'
+Plug 'lukaszb/vim-web-indent'
+Plug 'digitaltoad/vim-jade'
+Plug 'Chiel92/vim-autoformat'
 " }}}
 
 " Color schemes "{{{
-Plugin 'morhetz/gruvbox'
-Bundle 'changyuheng/color-scheme-holokai-for-vim'
-Bundle 'sjl/badwolf'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'vim-scripts/orangeocean256'
-" Bundle 'Lokaltog/vim-distinguished'
-" Bundle 'jnurmine/Zenburn'
-Bundle 'vim-scripts/torte.vim'
-" Bundle 'vim-scripts/Wombat'
-Bundle 'tpope/vim-vividchalk'
-Bundle 'croaker/mustang-vim'
+Plug 'morhetz/gruvbox'
+Plug 'changyuheng/color-scheme-holokai-for-vim'
+Plug 'sjl/badwolf'
+Plug 'altercation/vim-colors-solarized'
+Plug 'vim-scripts/orangeocean256'
+" Plug 'Lokaltog/vim-distinguished'
+" Plug 'jnurmine/Zenburn'
+Plug 'vim-scripts/torte.vim'
+" Plug 'vim-scripts/Wombat'
+Plug 'tpope/vim-vividchalk'
+Plug 'croaker/mustang-vim'
 " "}}}
 " Language-specific
 " C++ {{{
-Plugin 'rhysd/vim-clang-format'
-" Bundle 'Mizuchi/STL-Syntax'
-" Bundle 'rmartinho/vim-cpp11'
+Plug 'rhysd/vim-clang-format'
+" Plug 'Mizuchi/STL-Syntax'
+" Plug 'rmartinho/vim-cpp11'
 " C++ IDE-related {{{
-Bundle 'vim-scripts/a.vim'
-" Bundle 'DoxygenToolkit.vim'
-" Bundle 'godlygeek/tabular'
-" Bundle 'tpope/vim-sensible'
-" Bundle 'tpope/vim-unimpaired'
-" Bundle 'tpope/vim-endwise'
-" Bundle 'tpope/vim-fugitive'
-Bundle 'airblade/vim-gitgutter'
-" Bundle 'Lokaltog/vim-easymotion'
-" Bundle 'rstacruz/sparkup'
+Plug 'vim-scripts/a.vim'
+" Plug 'DoxygenToolkit.vim'
+" Plug 'godlygeek/tabular'
+" Plug 'tpope/vim-sensible'
+" Plug 'tpope/vim-unimpaired'
+" Plug 'tpope/vim-endwise'
+" Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+" Plug 'Lokaltog/vim-easymotion'
+" Plug 'rstacruz/sparkup'
 " }}}
 " }}}
 " Python {{{
-Plugin 'tmhedberg/SimpylFold'
-" Bundle 'nvie/vim-flake8'
-" Bundle 'klen/python-mode'
+Plug 'tmhedberg/SimpylFold'
+" Plug 'nvie/vim-flake8'
+" Plug 'klen/python-mode'
 " }}}
 " Haskell (http://haskelllive.com/environment.html) {{{
-" Bundle 'lukerandall/haskellmode-vim'
-" Bundle 'eagletmt/ghcmod-vim'
-Bundle 'bitc/lushtags'
-Bundle 'raichoo/haskell-vim'
-Bundle 'eagletmt/neco-ghc'
+" Plug 'lukerandall/haskellmode-vim'
+" Plug 'eagletmt/ghcmod-vim'
+Plug 'bitc/lushtags'
+Plug 'raichoo/haskell-vim'
+Plug 'eagletmt/neco-ghc'
 " }}}
 " Smalltalk {{{
-" Bundle 'vim-scripts/st.vim' 
+" Plug 'vim-scripts/st.vim'
 " }}}
 " Prolog {{{
-Bundle 'adimit/prolog.vim'  
+Plug 'adimit/prolog.vim'
 " }}}
 " Promela {{{
-Plugin 'vim-scripts/promela.vim'
+Plug 'vim-scripts/promela.vim'
 " }}}
 " Go {{{
-Plugin 'fatih/vim-go'
+Plug 'fatih/vim-go'
 " }}}
-" Plugin 'stefandtw/quickfix-reflector.vim'
-" Plugin 'vim-scripts/linuxsty.vim'
-"Plugin 'bling/vim-airline'
-"Plugin 'kana/vim-operator-user'     " Recommended by clang-format
-" Plugin 'vim-scripts/vim-auto-save'
-Plugin 'kien/ctrlp.vim'             " For tag creation
-Plugin 'tacahiroy/ctrlp-funky'
-" Bundle 'christoomey/vim-tmux-navigator'
+" Plug 'stefandtw/quickfix-reflector.vim'
+" Plug 'vim-scripts/linuxsty.vim'
+"Plug 'bling/vim-airline'
+"Plug 'kana/vim-operator-user'     " Recommended by clang-format
+" Plug 'vim-scripts/vim-auto-save'
+Plug 'kien/ctrlp.vim'             " For tag creation
+Plug 'tacahiroy/ctrlp-funky'
+" Plug 'christoomey/vim-tmux-navigator'
 
-" Bundle 'https://bitbucket.org/ns9tks/vim-l9' " Bundle throws: repo not found
-" Bundle 'https://bitbucket.org/ns9tks/vim-fuzzyfinder' " Bundle throws: repo not found
+" Plug 'https://bitbucket.org/ns9tks/vim-l9' " Plug throws: repo not found
+" Plug 'https://bitbucket.org/ns9tks/vim-fuzzyfinder' " Plug throws: repo not found
 
 " Latex
-" Bundle 'gerw/vim-latex-suite'
-" Bundle 'lervag/vim-latex'
-" Plugin 'jamis/fuzzy_file_finder'
-" Plugin 'jamis/fuzzyfinder_textmate'
+" Plug 'gerw/vim-latex-suite'
+" Plug 'lervag/vim-latex'
+" Plug 'jamis/fuzzy_file_finder'
+" Plug 'jamis/fuzzyfinder_textmate'
 " Git commits "{{{
 " Allow longer commit message titles (default: 72)
 autocmd Filetype gitcommit setlocal spell textwidth=256
 " "}}}
 " "}
 " Snippets {{{
-Bundle 'ervandew/supertab'
-" Plugin 'SirVer/ultisnips'
+Plug 'ervandew/supertab'
+" Plug 'SirVer/ultisnips'
 
 " SnipMate
-Bundle 'MarcWeber/vim-addon-mw-utils'
-" Bundle 'tomtom/tlib_vim'
-Bundle 'garbas/vim-snipmate'
-Bundle 'honza/vim-snippets'
+Plug 'MarcWeber/vim-addon-mw-utils'
+" Plug 'tomtom/tlib_vim'
+Plug 'garbas/vim-snipmate'
+Plug 'honza/vim-snippets'
 
 " }}}
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
+call plug#end()            " required
 filetype plugin indent on    " required
 " }}}
 " 4.  UI {{{
@@ -585,7 +587,7 @@ highlight PmenuSel ctermfg=black ctermbg=gray
 "}}}
 " Fold colors"{{{
 " hi Folded term=standout ctermfg=White ctermbg=233 guifg=241 guibg=233
-" hi Folded term=NONE cterm=NONE gui=NONE ctermbg=None 
+" hi Folded term=NONE cterm=NONE gui=NONE ctermbg=None
 hi Folded term=NONE cterm=bold gui=NONE ctermbg=NONE ctermfg=red
 " hi LineNr ctermfg=white ctermbg=none
 " set foldtext=""
@@ -600,13 +602,13 @@ hi Identifier guifg=red
 "}}}
 " 6.  Tags {{{
 " Tag dirs "{{{
-" This will look in the current directory for "tags", and work up the tree towards 
-" root until one is found. IOW, you can be anywhere in your source tree instead of 
+" This will look in the current directory for "tags", and work up the tree towards
+" root until one is found. IOW, you can be anywhere in your source tree instead of
 " just the root of it.
 set tags=./tags;/
 
 " Going up to root is excessive. I suggest only going up to home instead:
-" tags+=tags;$HOME 
+" tags+=tags;$HOME
 "}}}
 " build tags of your own project with Ctrl-F12"{{{
 map <C-F12> :!ctags -R --sort=yes --langmap=C++:+.cu --c++-kinds=+pl --fields=+iaS --extra=+q .<CR>
@@ -667,7 +669,7 @@ au BufRead ~/.remember execute "normal Go"|startinsert!
     " }}}
 " 8.  Folds {{{
 " set foldmethod=indent   " Fold based on indent
-" Causes problems with opening some JSON files 
+" Causes problems with opening some JSON files
 " set foldmethod=syntax     " Fold based on syntax
 set foldnestmax=3         " Deepest fold is 3 levels
 set foldlevelstart=5
@@ -789,8 +791,8 @@ function! s:ToggleTabs  ()
 if !exists("b:tab_toggler_large")
     let b:tab_toggler_large = 1
 endif
-if b:tab_toggler_large == 0 
-    let b:tab_toggler_large = 1 
+if b:tab_toggler_large == 0
+    let b:tab_toggler_large = 1
     let &l:ts = b:tab_toggler_ts
     let &l:sw = b:tab_toggler_sw
     let &l:sts = b:tab_toggler_sts
@@ -835,25 +837,25 @@ endfunction
 au BufNewFile *.{h,hpp} call <SID>insert_gates()
 "}}}
 " Jumping through error list {{{
-function! <SID>LocationPrevious()                       
-try                                                   
-    lprev                                               
-catch /^Vim\%((\a\+)\)\=:E553/                        
-    llast                                               
-endtry                                                
-endfunction                                             
+function! <SID>LocationPrevious()
+try
+    lprev
+catch /^Vim\%((\a\+)\)\=:E553/
+    llast
+endtry
+endfunction
 
-function! <SID>LocationNext()                           
-try                                                   
-    lnext                                               
-catch /^Vim\%((\a\+)\)\=:E553/                        
-    lfirst                                              
-endtry                                                
-endfunction                                             
+function! <SID>LocationNext()
+try
+    lnext
+catch /^Vim\%((\a\+)\)\=:E553/
+    lfirst
+endtry
+endfunction
 
-nnoremap <silent> <Plug>LocationPrevious    :<C-u>exe 'call <SID>LocationPrevious()'<CR>                                        
+nnoremap <silent> <Plug>LocationPrevious    :<C-u>exe 'call <SID>LocationPrevious()'<CR>
 nnoremap <silent> <Plug>LocationNext        :<C-u>exe 'call <SID>LocationNext()'<CR>
-nmap <silent> ,,    <Plug>LocationPrevious              
+nmap <silent> ,,    <Plug>LocationPrevious
 nmap <silent> ..    <Plug>LocationNext
 "}}}"}}}
 " 10. Filetypes {{{

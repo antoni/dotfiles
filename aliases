@@ -859,7 +859,7 @@ function update_all() {
 	omz update --unattended
 
 	echo "Upgrading Vim plugins..."
-	vim -i NONE -c VundleUpdate -c quitall &>/dev/null
+	vim -i NONE -c PlugUpdate -c quitall &>/dev/null
 
 	echo "Upgrading npm packages..."
 	npm update --no-progress --quiet --global

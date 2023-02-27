@@ -290,10 +290,8 @@ function main() {
 	# Vim
 
 	# Clone Vundle repository
-	VUNDLEDIR=~/.vim/bundle/Vundle.vim
-	if [ ! "$(ls -A ${VUNDLEDIR})" ]; then
-		git clone https://github.com/gmarik/Vundle.vim.git ${VUNDLEDIR}
-	fi
+  curl -sfLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 	# CUDA snippets for Vim
 	# wget
