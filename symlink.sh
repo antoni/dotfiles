@@ -289,9 +289,9 @@ function main() {
 
 	# Vim
 
-	# Clone Vundle repository
-  curl -sfLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	# (Re)install vim-plug
+	curl -sfLo ~/.vim/autoload/plug.vim --create-dirs \
+		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 	# CUDA snippets for Vim
 	# wget
