@@ -1834,9 +1834,9 @@ function refresh_apt_keys() {
 
 # TODO: Add support for other file formats
 function compress_images() {
-  jpegoptim --size=1000k **
+	jpegoptim --size=1000k **
 }
 
 function code_no_extensions() {
-  code --disable-extensions "$@"
+	code --disable-extensions "$@"
 }
