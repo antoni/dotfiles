@@ -1840,3 +1840,8 @@ function compress_images() {
 function code_no_extensions() {
 	code --disable-extensions "$@"
 }
+
+function approve_pull_request() {
+    local -r pull_request_id="$1"
+    gh pr review --approve "$pull_request_id"
+}
