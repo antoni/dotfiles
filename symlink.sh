@@ -25,7 +25,7 @@ mkdir -p "$HOME_DIR"/tmp
 
 # Version of clang-format, should be taken from /usr/bin/clang-format-X.Y,
 # same for clang-modernize
-CLANG_VERSION=3.9
+CLANG_VERSION=14.0.0
 echo "Clang    version symlinked:   " $CLANG_VERSION
 CLANG_FORMAT_VERSION=$CLANG_VERSION
 CLANG_MODERNIZE_VERSION=$CLANG_VERSION
@@ -56,6 +56,14 @@ function mac_change_hostname() {
 	sudo scutil --set LocalHostName "$1"
 	# User-friendly computer name you see in Finder, for example myMac.
 	sudo scutil --set ComputerName "$1"
+}
+
+# TODO: Start using it
+function gcc_symlink() {
+# these are symlinks, so we can delete these safely
+sudo rm -rf /usr/bin/{gcc,g++}
+sudo ln -s gcc-12 /usr/bin/gcc
+sudo ln -s g++-12 /usr/bin/g++
 }
 
 function mac_symlink() {
