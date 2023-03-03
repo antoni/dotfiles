@@ -140,7 +140,8 @@ function main() {
 	install_oh_my_zsh || exit_with_error_message ""
 	install_zsh_plugins || exit_with_error_message ""
 
-	install_javascript_packages_npm || exit_with_error_message ""
+	source ./install_global_javascript_npm_packages.sh
+	install_global_javascript_npm_packages || exit_with_error_message ""
 	install_vim_plugins || exit_with_error_message ""
 
 	install_tmux_plugin_manager || exit_with_error_message ""
@@ -186,7 +187,7 @@ function install_pip_packages() {
 		jupyter jupyterlab dl_coursera z3-solver matplotlib tensorflow numpy agda-kernel
 		instalooter pirate-get tensorflow opencv-python virtualenv numpy
 		matplotlib protobuf conda haruhi-dl google-api-python-client oauth2client progressbar2
-		tdmgr PyQt5 paho-mqtt PyQtWebEngine mvt yt-dlp xmldiff yq poetry beautysh
+		tdmgr PyQt5 paho-mqtt PyQtWebEngine mvt xmldiff yq poetry beautysh
 		yt-dlp speedtest-cli pipupgrade shodan linode-cli mvt jupyter truffleHog
 	)
 
@@ -289,35 +290,6 @@ function install_tmux_plugin_manager() {
 	local TPM_PATH=~/.tmux/plugins/tpm
 	rm -rf $TPM_PATH
 	git clone https://github.com/tmux-plugins/tpm $TPM_PATH
-}
-
-# JS-related tools
-
-# Make global packages install locally (without sudo)
-function create_npm_global_packages_directory() {
-	NPM_DIR=$HOME/.npm-global_packages
-	mkdir -p "$NPM_DIR"
-	npm config set prefix "$NPM_DIR"
-}
-
-function install_javascript_packages_npm() {
-	create_npm_global_packages_directory
-
-	npm install --location=global eslint lodash jshint typescript ts-node prettier \
-		http-server http-server-spa json-server depcheck npm-check-updates prettier sort-package-json \
-		babel-cli pm2@latest firebase-tools \
-		@aws-amplify/cli pa11y netlify-cli hygen react-native-cli serve \
-		@zeplin/cli @zeplin/cli-connect-react-plugin @zeplin/cli-connect-swift-plugin \
-		yo generator-office dts-gen yargs rollup pnpm source-map-explorer \
-		@angular/cli n json5 cordova gltf-pipeline @squoosh/cli depcheck @microsoft/rush \
-		do-not-disturb-cli katex servor degit verdaccio tables gatsby-cli browser-sync \
-		@apidevtools/swagger-cli kill-port-process ngrok @google/clasp
-}
-
-function install_airbnb_eslint() {
-	export PKG=eslint-config-airbnb
-	npm info "$PKG@latest" peerDependencies --json | command sed 's/[\{\},]//g ; s/:
-    /@/g' | xargs npm install --location=global "$PKG@latest"
 }
 
 function install_global_haskell_stack_packages() {
