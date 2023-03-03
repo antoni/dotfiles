@@ -77,8 +77,8 @@ function post_install() {
 			duti -s "$(app_id 'TeXShop')" .tex all
 			duti -s "$(app_id 'MacDown')" .md all
 			duti -s "$(app_id 'VLC')" .webm all
-			duti -s "$(app_id 'LibreOffice')" .xls all
-			duti -s "$(app_id 'LibreOffice')" .xlsx all
+			# duti -s "$(app_id 'LibreOffice')" .xls all
+			# duti -s "$(app_id 'LibreOffice')" .xlsx all
 			# Won't work (for any application), see ~/scripts/default_browser_chrome.sh
 			# duti -s `app_id "*"`      .html all;
 			duti -s "$(app_id 'TextMate')" .lat all
