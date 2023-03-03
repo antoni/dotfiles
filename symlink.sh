@@ -60,10 +60,10 @@ function mac_change_hostname() {
 
 # TODO: Start using it
 function gcc_symlink() {
-# these are symlinks, so we can delete these safely
-sudo rm -rf /usr/bin/{gcc,g++}
-sudo ln -s gcc-12 /usr/bin/gcc
-sudo ln -s g++-12 /usr/bin/g++
+	# these are symlinks, so we can delete these safely
+	sudo rm -rf /usr/bin/{gcc,g++}
+	sudo ln -s gcc-12 /usr/bin/gcc
+	sudo ln -s g++-12 /usr/bin/g++
 }
 
 function mac_symlink() {

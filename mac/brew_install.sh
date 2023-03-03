@@ -120,7 +120,6 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	brightness
 	otx
 	sleepwatcher
-	yt-dlp/taps/yt-dlp
 	youtube-dl
 	cocoapods
 	entr

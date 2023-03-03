@@ -862,7 +862,12 @@ function update_all() {
 	vim -i NONE -c PlugUpdate -c quitall &>/dev/null
 
 	echo "Upgrading npm packages..."
-	npm update --no-progress --quiet --global
+	# The following command sometimes doesn't work:
+	# npx npm-check --global --update-all
+	# So instead we remove all the packages and do a fresh install:
+	rm -rf .npm-global_packages
+	source ./install/install_global_javascript_npm_packages.sh
+	install_global_javascript_npm_packages
 	npm install --no-progress --silent --quiet npm
 
 	echo "Upgrading PIP packages..."
@@ -1798,8 +1803,6 @@ alias clone='gh repo clone'
 # Windows
 alias gz='gzip'
 
-alias update_all_npm_packages='npx npm-check --global --update-all'
-
 alias geolocate_ip='geoiplookup'
 
 alias updatecal='git stash && git pull origin main && yarn workspace @calcom/prisma db-deploy'
@@ -1842,6 +1845,6 @@ function code_no_extensions() {
 }
 
 function approve_pull_request() {
-    local -r pull_request_id="$1"
-    gh pr review --approve "$pull_request_id"
+	local -r pull_request_id="$1"
+	gh pr review --approve "$pull_request_id"
 }
