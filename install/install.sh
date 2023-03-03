@@ -140,7 +140,7 @@ function main() {
 	install_oh_my_zsh || exit_with_error_message ""
 	install_zsh_plugins || exit_with_error_message ""
 
-	source ./install_global_javascript_npm_packages.sh
+  source "${BASH_SOURCE%/*}/install_global_javascript_npm_packages.sh"
 	install_global_javascript_npm_packages || exit_with_error_message ""
 	install_vim_plugins || exit_with_error_message ""
 

@@ -90,5 +90,8 @@
   "git.ignoredRepositories": [
     "/home/antoni/.vscode-server/extensions/stepsize.stepsize-1.0.10/resources/demo-repository"
   ],
-  "cmake.configureOnOpen": true
+  "cmake.configureOnOpen": true,
+  "[shellscript]": {
+    "editor.defaultFormatter": "shakram02.bash-beautify"
+  }
 }
