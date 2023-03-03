@@ -8,7 +8,7 @@ function create_npm_global_packages_directory() {
 function install_global_javascript_npm_packages() {
 	create_npm_global_packages_directory
 
-	npm install --location=global eslint lodash jshint typescript ts-node prettier \
+	npm install --no-fund --location=global eslint lodash jshint typescript ts-node prettier \
 		http-server http-server-spa json-server depcheck npm-check-updates prettier sort-package-json \
 		babel-cli pm2@latest firebase-tools \
 		@aws-amplify/cli pa11y netlify-cli hygen react-native-cli serve \
@@ -17,6 +17,10 @@ function install_global_javascript_npm_packages() {
 		@angular/cli n json5 cordova gltf-pipeline @squoosh/cli depcheck @microsoft/rush \
 		do-not-disturb-cli katex servor degit verdaccio tables gatsby-cli browser-sync \
 		@apidevtools/swagger-cli kill-port-process ngrok @google/clasp
+
+    # Disable 'npm fund' messages
+  npm config set fund false
+
 }
 
 function install_airbnb_eslint() {
