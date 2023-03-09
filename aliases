@@ -1758,7 +1758,7 @@ function refresh_apt_keys() {
 # TODO: Move to scripts/images
 # TODO: Add support for other file formats
 function compress_images() {
-    local compressed_size_limit="${1:-1000k}" 
+    local compressed_size_limit="${1:-1000k}"
 	jpegoptim --size="$compressed_size_limit" **
 }
 
@@ -1772,6 +1772,14 @@ function approve_pull_request() {
 }
 
 function git_default_branch() {
-    local origin_name="${1:-origin}" 
+    local origin_name="${1:-origin}"
     LC_ALL=C git remote show $origin_name | sed -n '/HEAD branch/s/.*: //p'
+}
+
+# TODO: Usage
+function diff_json() {
+    local file1="${1}"
+		local file2="${2}"
+
+    diff --color <(jq --sort-keys . "$file1") <(jq --sort-keys . "$file2")
 }
