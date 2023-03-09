@@ -1755,9 +1755,11 @@ function refresh_apt_keys() {
 	alias sudo apt-key adv --refresh-keys --keyserver keyserver.ubuntu.com
 }
 
+# TODO: Move to scripts/images
 # TODO: Add support for other file formats
 function compress_images() {
-	jpegoptim --size=1000k **
+    local compressed_size_limit="${1:-1000k}" 
+	jpegoptim --size="$compressed_size_limit" **
 }
 
 function code_no_extensions() {
@@ -1767,4 +1769,9 @@ function code_no_extensions() {
 function approve_pull_request() {
 	local -r pull_request_id="$1"
 	gh pr review --approve "$pull_request_id"
+}
+
+function git_default_branch() {
+    local origin_name="${1:-origin}" 
+    LC_ALL=C git remote show $origin_name | sed -n '/HEAD branch/s/.*: //p'
 }
