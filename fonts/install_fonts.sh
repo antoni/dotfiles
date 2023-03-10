@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-powershell.exe -File InstallFonts.ps1
+powershell.exe -NoLogo -File InstallFonts.ps1

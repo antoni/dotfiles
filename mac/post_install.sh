@@ -105,7 +105,7 @@ function post_install() {
 	if [[ -n "$IS_WSL" ]]; then
 		winget upgrade --all
 
-		powershell.exe -File ~/dotfiles/windows/RemoveShortcutsFromDesktop.ps1
+		powershell.exe -NoLogo -File ~/dotfiles/windows/RemoveShortcutsFromDesktop.ps1
 	fi
 
 	echo Succesfully performed all post-install tasks

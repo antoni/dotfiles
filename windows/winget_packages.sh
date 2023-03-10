@@ -4,7 +4,7 @@
 
 # winget.exe install --no-upgrade --accept-source-agreements --accept-package-agreements --exact --id chromium
 
-# WINGET_ALIAS="powershell.exe /c winget.exe"
+# WINGET_ALIAS="powershell.exe -NoLogo /c winget.exe"
 WINGET_ALIAS="winget.exe"
 WINGET_COMMAND_LIST="$WINGET_ALIAS list"
 # don't install an already installed package
