@@ -1782,3 +1782,10 @@ function diff_json() {
 
 	diff --color <(jq --sort-keys . "$file1") <(jq --sort-keys . "$file2")
 }
+
+# Usage (quotes!):
+# hex_to_rgb "#d60093"
+function hex_to_rgb() {
+    local -r hex="$(echo $1 | sed 's/\#//')"
+    printf "%d,%d,%d\n" 0x${hex:0:2} 0x${hex:2:2} 0x${hex:4:2}
+}
