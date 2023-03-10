@@ -4,7 +4,7 @@ function export_variables() {
 	export DEFAULT_CITY="Warsaw"
 	export DEFAULT_COORDS="52.23:21.012'"
 	export GITHUB_USER="antoni"
-	# TODO: Get username dynamically: powershell.exe '$env:UserName'
+	# TODO: Get username dynamically: powershell.exe -NoLogo '$env:UserName'
 	# (it takes time, return value should be stored somewhere)
 	export MACOS_USERNAME="antoni"
 	export WINDOWS_USERNAME="vivob"
