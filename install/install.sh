@@ -102,7 +102,10 @@ function main() {
     sudo hwclock --hctosys
     # TODO: Add guard: WSL2 only
     # This is needed to provide WSL ↔ Windows interoperability (see: https://github.com/microsoft/WSL/issues/5466#issuecomment-695155716)
-    sudo update-binfmts --disable cli
+    function fix_run_detectors() {
+  		sudo update-binfmts --disable cli
+		}
+		fix_run_detectors
 
 	# Remove "Last login" message in new Terminal window open (some UNIX systems)
 	touch ~/.hushlogin
