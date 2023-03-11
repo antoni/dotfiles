@@ -1786,19 +1786,19 @@ function diff_json() {
 # Usage (quotes!):
 # hex_to_rgb "#d60093"
 function hex_to_rgb() {
-    local -r hex="$(echo $1 | sed 's/\#//')"
-    printf "%d;%d;%d\n" 0x${hex:0:2} 0x${hex:2:2} 0x${hex:4:2}
+	local -r hex="$(echo $1 | sed 's/\#//')"
+	printf "%d;%d;%d\n" 0x${hex:0:2} 0x${hex:2:2} 0x${hex:4:2}
 }
 
 # Usage:
 # print_color_bar "#d60093"
 function print_color_bar() {
-    local hex_color="$1";
-    local length=${2:-24}
-    local bar_string=$(printf '%*s' "$length")
-    printf '\e[48;2;%sm%s\e[0m\n' "$(hex_to_rgb $hex_color)" "$bar_string"
+	local hex_color="$1"
+	local length=${2:-24}
+	local bar_string=$(printf '%*s' "$length")
+	printf '\e[48;2;%sm%s\e[0m\n' "$(hex_to_rgb $hex_color)" "$bar_string"
 }
 
 function update_all() {
-    ~/dotfiles/update_all.sh
+	~/dotfiles/update_all.sh
 }
