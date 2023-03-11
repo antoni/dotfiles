@@ -1800,5 +1800,5 @@ function print_color_bar() {
 }
 
 function update_all() {
-    ~/scripts/update_all.sh
+    ~/dotfiles/update_all.sh
 }

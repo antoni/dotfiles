@@ -41,7 +41,7 @@ function update_all() {
         # Close VS Code beforehand (winget will request to close it via GUI otherwise)
         taskkill.exe /IM Code.exe
         
-        winget upgrade --all --include-unknown
+        winget.exe upgrade --all --include-unknown
         
         # Delete all links on Desktop: current user
         rm -rf /mnt/c/Users/"${WINDOWS_USERNAME}"/Desktop/*.{lnk,url}
