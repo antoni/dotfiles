@@ -141,6 +141,9 @@ function main() {
 
 		"$DOTFILES_DIR"/mac/post_install.sh
 	fi
+    # TODO: Add guard: Linux only
+     sudo locale-gen en_US.UTF-8
+
 	install_oh_my_zsh || exit_with_error_message ""
 	install_zsh_plugins || exit_with_error_message ""
 
