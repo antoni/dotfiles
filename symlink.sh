@@ -248,10 +248,10 @@ function main() {
 
 			linux_xrdb
 
-            function symlink_wsl_conf() {
-sudo				ln -sf "${DOTFILES_DIR}"/wsl.conf /etc/wsl.conf
-            }
-            symlink_wsl_conf
+			function symlink_wsl_conf() {
+				sudo ln -sf "${DOTFILES_DIR}"/wsl.conf /etc/wsl.conf
+			}
+			symlink_wsl_conf
 		fi
 		;;
 	CYGWIN* | MINGW32* | MSYS* | MINGW*)
