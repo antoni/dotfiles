@@ -1798,3 +1798,7 @@ function print_color_bar() {
     local bar_string=$(printf '%*s' "$length")
     printf '\e[48;2;%sm%s\e[0m\n' "$(hex_to_rgb $hex_color)" "$bar_string"
 }
+
+function update_all() {
+    ~/scripts/update_all.sh
+}
