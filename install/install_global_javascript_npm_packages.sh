@@ -18,8 +18,8 @@ function install_global_javascript_npm_packages() {
 		do-not-disturb-cli katex servor degit verdaccio tables gatsby-cli browser-sync \
 		@apidevtools/swagger-cli kill-port-process ngrok @google/clasp
 
-    # Disable 'npm fund' messages
-  npm config set fund false
+	# Disable 'npm fund' messages
+	npm config set fund false
 
 }
 
