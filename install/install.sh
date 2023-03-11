@@ -147,8 +147,9 @@ function main() {
     # TODO: Add guard: Linux only
      sudo locale-gen en_US.UTF-8
 
-	install_oh_my_zsh || exit_with_error_message ""
-	install_zsh_plugins || exit_with_error_message ""
+  # TODO: Use color in exit_with_error_message
+	install_oh_my_zsh || exit_with_error_message "Could not install oh-my-zsh"
+	install_zsh_plugins || exit_with_error_message "Could not install zsh plugins"
 
   source "${BASH_SOURCE%/*}/install_global_javascript_npm_packages.sh"
 	install_global_javascript_npm_packages || exit_with_error_message ""
