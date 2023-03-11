@@ -17,14 +17,14 @@ source "$DOTFILES_DIR"/utils.sh
 # xpdf gnome-do
 
 # Install required packages
-PACKAGES=(slock xbindkeys clang vim rdesktop make sysstat
+PACKAGES=(suckless-tools xbindkeys clang vim rdesktop make sysstat
 	make cmake gitk vlc okular xdotool xbindkeys xautomation mosh mc
-	libreoffice cscope ctags pavucontrol jq dmidecode xsel i3 zsh lsb ntp feh help2man rpl
+	libreoffice cscope universal-ctags pavucontrol jq dmidecode xsel i3 zsh lsb ntp feh help2man rpl
 	thunar acpi tmux gitg nomacs docker vpnc
 	hexchat rlwrap xautolock yamllint
 	eom eog inotify-tools xbacklight arandr pulseaudio gnome-bluetooth
 	tidy pandoc tig ncdu redshift rustc
-	dunst httpie udev autofs pinta)
+	dunst httpie udev autofs pinta ruby nodejs)
 
 SNAP_PACKAGES=(slack code)
 RUST_PACKAGES=(rust cargo)
@@ -44,7 +44,7 @@ FEDORA=(gnome-icon-theme system-config-printer libreoffice-langpack-pl boost-dev
 
 RXVT=(rxvt-unicode rxvt-unicode-ml rxvt-unicode-256color rxvt-unicode-256color-ml)
 
-DEBIAN_PACKAGES=(imagemagick python-dev libxml2-dev libxslt-dev libatk-adaptor)
+DEBIAN_PACKAGES=(imagemagick libxml2-dev libxslt-dev libatk-adaptor)
 UBUNTU=(libboost-all-dev linux-tools ghc software-properties-common libappindicator-dev vpnc-scripts network-manager-vpnc network-manager-vpnc-gnome exfat-fuse exfat-utils libnotify-bin libboost-all-dev linux-tools terminator fonts-firacode dwm suckless-tools xdm dmenu xorg gnome kde-full ntfs-3g swig libpcsclite-dev pcscd)
 
 KERNEL_DEV=(cscope exuberant-ctags)
@@ -62,7 +62,7 @@ function install_prolog_debian() {
 function install_yarn_debian() {
 	curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 	echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-	sudo apt update && sudo apt install yarn
+	sudo apt update && sudo apt --assume-yes install yarn
 }
 
 function install_fedora_sound() {
@@ -82,7 +82,7 @@ function install_nord_vpn_debian() {
 	wget https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb
 	sudo apt-get install ./nordvpn*.deb
 	sudo apt update
-	sudo apt install -y nordvpn
+	sudo apt --assume-yes install nordvpn
 	rm ./nordvpn*.deb
 }
 
@@ -103,12 +103,12 @@ function main() {
 	if [ -f /etc/debian_version ]; then
 		echo "Installing required packages on Debian/Ubuntu"
 
-		sudo apt-get install --assume-yes curl
+		sudo apt-get --assume-yes install curl
 
 		sudo apt-get update
-		sudo apt-get install --assume-yes "${PACKAGES[@]}"
-		sudo apt-get install --assume-yes "${DEBIAN_PACKAGES[@]}"
-		sudo apt-get install --assume-yes zsh
+		sudo apt-get --assume-yes install "${PACKAGES[@]}"
+		sudo apt-get --assume-yes install "${DEBIAN_PACKAGES[@]}"
+		sudo apt-get --assume-yes install zsh
 
 		install_snap_packages
 		install_yarn_debian
@@ -313,4 +313,4 @@ apt-get autoclean -y
 EOF
 }
 
-# main
+main
