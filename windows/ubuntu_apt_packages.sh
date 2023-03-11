@@ -34,7 +34,6 @@ APT_PACKAGES=(apache2
 	python3-pip
 	python-setuptools
 	python3-setuptools
-	python-dev
 	python3-dev
 	libhivex-bin
 	libcups2-dev
@@ -47,7 +46,6 @@ APT_PACKAGES=(apache2
 	docker-compose
 	default-jdk scala
 	cmake
-	git-lfs
 	shellcheck
 	build-essential cmake pkg-config libicu-dev zlib1g-dev libcurl4-openssl-dev libssl-dev ruby-dev
 	ruby-full build-essential zlib1g-dev
@@ -64,6 +62,8 @@ APT_PACKAGES=(apache2
 	dos2unix
 	libreadline-dev lib32readline8 lib32readline-dev
 	virtualbox
+	# TODO: This packages requires user to accept to licence
+	# figure out how to dot it non-interactively
 	virtualbox-ext-pack
 	virtualbox-dkms
 )
