@@ -97,15 +97,15 @@ function main() {
 
 	sudo_keep_alive
 
-    # TODO: Add guard: WSL2 only
-    # Get the latest time from your Windows machine’s RTC and set the system time to that
-    sudo hwclock --hctosys
-    # TODO: Add guard: WSL2 only
-    # This is needed to provide WSL ↔ Windows interoperability (see: https://github.com/microsoft/WSL/issues/5466#issuecomment-695155716)
-    function fix_run_detectors() {
-  		sudo update-binfmts --disable cli
-		}
-		fix_run_detectors
+	# TODO: Add guard: WSL2 only
+	# Get the latest time from your Windows machine’s RTC and set the system time to that
+	sudo hwclock --hctosys
+	# TODO: Add guard: WSL2 only
+	# This is needed to provide WSL ↔ Windows interoperability (see: https://github.com/microsoft/WSL/issues/5466#issuecomment-695155716)
+	function fix_run_detectors() {
+		sudo update-binfmts --disable cli
+	}
+	fix_run_detectors
 
 	# Remove "Last login" message in new Terminal window open (some UNIX systems)
 	touch ~/.hushlogin
@@ -147,14 +147,14 @@ function main() {
 
 		"$DOTFILES_DIR"/mac/post_install.sh
 	fi
-    # TODO: Add guard: Linux only
-     sudo locale-gen en_US.UTF-8
+	# TODO: Add guard: Linux only
+	sudo locale-gen en_US.UTF-8
 
-  # TODO: Use color in exit_with_error_message
+	# TODO: Use color in exit_with_error_message
 	install_oh_my_zsh || exit_with_error_message "Could not install oh-my-zsh"
 	install_zsh_plugins || exit_with_error_message "Could not install zsh plugins"
 
-  source "${BASH_SOURCE%/*}/install_global_javascript_npm_packages.sh"
+	source "${BASH_SOURCE%/*}/install_global_javascript_npm_packages.sh"
 	install_global_javascript_npm_packages || exit_with_error_message ""
 	install_vim_plugins || exit_with_error_message ""
 
