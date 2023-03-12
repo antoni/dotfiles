@@ -1804,3 +1804,8 @@ function update_all() {
 }
 
 alias cut_after_first_space="sed 's/\s.*$//'"
+
+# Opens all files with given name in Visual Studio Code
+function code_files_named() {
+	find . -iname "$1" | xargs code
+}
