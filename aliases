@@ -1802,3 +1802,5 @@ function print_color_bar() {
 function update_all() {
 	~/dotfiles/update_all.sh
 }
+
+alias cut_after_first_space="sed 's/\s.*$//'"
