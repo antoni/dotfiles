@@ -2,6 +2,8 @@
 
 source "$HOME"/dotfiles/utils.sh
 
+DOTFILES_MAC_DIR=$DOTFILES_DIR/mac
+
 function int_signal_handler() {
 	printf "\nQuitting... You will have to do cleanup manually\n"
 	exit
@@ -70,17 +72,34 @@ function mac_symlink() {
 	ln -sf ~/dotfiles/mac/sleep.sh ~/.sleep
 	ln -sf ~/dotfiles/mac/wakeup.sh ~/.wakeup
 
-	ln -s "$(brew --prefix llvm)/bin/clang-format" "/usr/local/bin/clang-format"
-	ln -s "$(brew --prefix llvm)/bin/clang-tidy" "/usr/local/bin/clang-tidy"
-	ln -s "$(brew --prefix llvm)/bin/clang-apply-replacements" "/usr/local/bin/clang-apply-replacements"
+	# TODO: Delete symlinks before (only if symlinks)
+	function create_symlink_delete_before() {
+		local to="$1"
+		local from="$2"
+
+		if [[ -L "$from" ]]; then
+			printf "symlink '%s' exists, removing\n" "$from"
+			rm -rf "$from"
+		fi
+
+		ln -s "$to" "$from"
+	}
+
+	create_symlink_delete_before "$(brew --prefix llvm)/bin/clang-format" "/usr/local/bin/clang-format"
+	create_symlink_delete_before "$(brew --prefix llvm)/bin/clang-tidy" "/usr/local/bin/clang-tidy"
+	create_symlink_delete_before "$(brew --prefix llvm)/bin/clang-apply-replacements" "/usr/local/bin/clang-apply-replacements"
 
 	# iTerm2 config
 	ln -sf "${DOTFILES_DIR}"/mac/com.googlecode.iterm2.plist \
 		~/Library/Preferences/com.googlecode.iterm2.plist
 
 	# Transmission
-	~/"$DOTFILES_DIR"/transmission.sh
+	"$DOTFILES_MAC_DIR"/transmission.sh
+
 	# ln -sf org.m0k.transmission.plist ~/Library/Preferences/
+
+	# Karabiner config
+	ln -fs "$DOTFILES_MAC_DIR"/karabiner ~/.config/
 
 	# TextMate
 	rm -rf /usr/local/bin/mate
@@ -347,6 +366,15 @@ function main() {
 
 	popd &>/dev/null || exit 1
 	print_success_message "Successfully symlinked all files"
+
+	function find_broken_symlinks() {
+		printf "Found broken symlinks:\n"
+		# find ~ -type l ! -exec test -e {} \; -print
+		# TODO: Fix these:
+		find /usr/bin -type l ! -exec test -e {} \; -print
+		find /usr/local/bin -type l ! -exec test -e {} \; -print
+	}
+	find_broken_symlinks
 }
 
 main
