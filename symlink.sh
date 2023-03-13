@@ -79,7 +79,8 @@ function mac_symlink() {
 		~/Library/Preferences/com.googlecode.iterm2.plist
 
 	# Transmission
-	ln -sf org.m0k.transmission.plist ~/Library/Preferences/
+	~/"$DOTFILES_DIR"/transmission.sh
+	# ln -sf org.m0k.transmission.plist ~/Library/Preferences/
 
 	# TextMate
 	rm -rf /usr/local/bin/mate
