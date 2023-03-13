@@ -1809,3 +1809,5 @@ alias cut_after_first_space="sed 's/\s.*$//'"
 function code_files_named() {
 	find . -iname "$1" | xargs code
 }
+
+function dos2unix_all() { find . -type f -print0 | xargs -0 dos2unix }
