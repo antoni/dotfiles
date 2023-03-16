@@ -51,6 +51,7 @@ MUST_HAVE=(
 	Microsoft.dotNetFramework
 	Microsoft.dotnet
 	Piriform.Recuva
+	Discord.Discord
 )
 
 CONFERENCE_SOFTWARE=(
@@ -103,7 +104,6 @@ MAY_HAVE=(
 	Xming.Xming
 	Mikrotik.TheDude
 	CrystalDewWorld.CrystalDiskMark # disk benchmark
-	Discord.Discord
 	NVAccess.NVDA
 	Mozilla.Firefox.DeveloperEdition
 	Nextcloud.NextcloudDesktop
