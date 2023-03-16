@@ -98,16 +98,7 @@ function main() {
 	sudo_keep_alive
 
 	# TODO: Add guard: WSL2 only
-	# Get the latest time from your Windows machine’s RTC and set the system time to that
-	# TODO: Move to wsl_fixes.sh (create it)
-	sudo hwclock --hctosys
-	# TODO: Add guard: WSL2 only
-	# This is needed to provide WSL ↔ Windows interoperability (see: https://github.com/microsoft/WSL/issues/5466#issuecomment-695155716)
-	function fix_run_detectors() {
-		sudo update-binfmts --disable cli
-	}
-	fix_run_detectors
-
+  ../windows/apply_wsl_fixes.sh
 	# Remove "Last login" message in new Terminal window open (some UNIX systems)
 	touch ~/.hushlogin
 
