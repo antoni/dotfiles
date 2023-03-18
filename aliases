@@ -1704,8 +1704,23 @@ alias explorer='nautilus --no-desktop'
 #
 # string1
 # string2
-function cut_after_first_space() {
-	sed 's/\s.*$//' "$@"
+alias cut_after_first_space="sed 's/\s.*$//'"
+
+# string1 99 12313
+# string2 string3
+#
+# to:
+#
+# 99 12313
+# string3
+alias cut_before_first_space="cut -d' ' -f 2-"
+
+# TODO: Move to git commands
+function show_commit_from_n_last_days() {
+	local -r n_last_days="$1"
+	local -r author="$2"
+	git --no-pager log --pretty=format:%s --abbrev-commit --since="$n_last_days days ago" --author="$author" |
+		cut_before_first_space
 }
 
 function cal_restart() {
@@ -1803,11 +1818,11 @@ function update_all() {
 	~/dotfiles/update_all.sh
 }
 
-alias cut_after_first_space="sed 's/\s.*$//'"
-
 # Opens all files with given name in Visual Studio Code
 function code_files_named() {
 	find . -iname "$1" | xargs code
 }
 
-function dos2unix_all() { find . -type f -print0 | xargs -0 dos2unix }
+function dos2unix_all() {
+	find . -type f -print0 | xargs -0 dos2unix
+}
