@@ -239,8 +239,8 @@ nmap <Leader>rf "zyiw:call Refactor()<cr>mx:silent! norm gd<cr>[{V%:s/<C-R>//<c-
 command! Vr :tabe ~/.vimrc | execute "normal /Key mappings \<CR><Space>" | nohlsearch
 " Remove blank lines
 command! RemoveBlankLines :g/^$/d
-" Alias for PluginInstall
-command! I :PluginInstall
+" Alias for PlugInstall
+command! I :PlugInstall
 " Replace commands "{{{
 command! SpacesToNewline :%s/ /\r/g
 command! UnderscoreToNewline :%s/_/\r/g
@@ -392,6 +392,7 @@ Plug 'majutsushi/tagbar'
 Plug 'itspriddle/vim-shellcheck'
 " Plug 'taku-o/vim-vis'
 " Plug 'rking/ag.vim'
+Plug 'darfink/vim-plist'
 Plug 'jamessan/vim-gnupg'
 " Plug 'Raimondi/delimitMate'
 Plug 'digitalrounin/vim-yaml-folds'
