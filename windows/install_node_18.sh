@@ -6,7 +6,7 @@ sudo apt --assume-yes remove libnode72
 
 # For Ubuntu (https://github.com/nodesource/distributions#debinstall)
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-sudo apt-get install -y nodejs
+sudo apt-get install --assume-yes nodejs
 
 # Yarn
 curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | sudo tee /usr/share/keyrings/yarnkey.gpg >/dev/null
