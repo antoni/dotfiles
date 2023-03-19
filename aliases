@@ -121,9 +121,9 @@ elif [[ "$unamestr" == 'Linux' ]]; then
 	alias gdebi='sudo gdebi'
 
 	# Linux specific
-	# alias i='sudo apt-get install -y'
+	# alias i='sudo apt-get install --assume-yes'
 	# Install through apt-get and add installed software to list of used commands
-	# addcmd() { sudo apt-get install -y $* && echo $* >> ~/install_apt-get.txt; }
+	# addcmd() { sudo apt-get install --assume-yes $* && echo $* >> ~/install_apt-get.txt; }
 	function addcmd() { sudo dnf install -y "$*" && echo "$*" >>~/install_apt-get.txt; }
 
 	alias sound='alsamixer'
