@@ -58,4 +58,3 @@ export PATH="$PATH:$(npm get prefix)/bin:$GEM_HOME/bin"
 # npm global packages
 # TODO: Move .npm-global_packages to constant
 export PATH=~/.npm-global_packages/bin:$PATH
-

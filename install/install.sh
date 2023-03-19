@@ -98,7 +98,7 @@ function main() {
 	sudo_keep_alive
 
 	# TODO: Add guard: WSL2 only
-  ../windows/apply_wsl_fixes.sh
+	../windows/apply_wsl_fixes.sh
 	# Remove "Last login" message in new Terminal window open (some UNIX systems)
 	touch ~/.hushlogin
 
