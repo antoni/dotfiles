@@ -1828,3 +1828,14 @@ function dos2unix_all() {
 }
 
 alias ybw="yarn build:watch"
+
+# pdf_split_pages <filename>
+# Splits a PDF into individual pages and saves them as separate PDF files with names in the format ""page-0001.pdf"".
+#
+# Arguments:
+#   filename: The name of the PDF file to split
+#
+function pdf_split_pages() {
+	local -r filename="$1"
+	convert "$filename" -quality 100 -density 1000x1000 page-%04d.pdf
+}
