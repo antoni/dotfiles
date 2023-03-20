@@ -17,4 +17,3 @@ shell_format_and_check.sh" # files found automatically using shfmt
 shell_check_and_format "$unrecognized_shell_files"
 
 gitleaks --no-banner detect --source . --verbose
-
