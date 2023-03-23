@@ -32,3 +32,6 @@ export LESS="--RAW-CONTROL-CHARS"
 
 # Use colors for less, man, etc.
 [[ -f ~/.LESS_TERMCAP ]] && . ~/.LESS_TERMCAP
+
+export N_PREFIX=$HOME/.n
+export PATH=$N_PREFIX/bin:$PATH
