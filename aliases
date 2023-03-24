@@ -1753,12 +1753,13 @@ function http_headers() {
 	curl -sSL -D - $1 -o /dev/null
 }
 
-# TODO: add support for Windows (macOS only for now)
 function open_debugging_browser() {
-	open ~/scripts/chrome_symlinks/Chrome\ Canary\ with\ Debugger.app
+    # TODO: Add OS check
+	# open ~/scripts/chrome_symlinks/Chrome\ Canary\ with\ Debugger.app
 
-	# Windows
+    # Windows (WSL)
 	# open 'chrome Windows with debugging on port 9999.lnk'
+    ~/scripts/chrome_symlinks/chrome_linux_inside_wsl.sh
 }
 
 function yarn_last() {
