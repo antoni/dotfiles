@@ -1846,7 +1846,7 @@ alias fix_wsl='~/dotfiles/windows/apply_wsl_fixes.sh'
 # flatten the contents of a given directory.
 # It will move all files and subdirectories in the given directory to the given directory
 # and delete all subdirectories.
-flatten_directory() {
+function flatten_directory() {
 	# Check for valid input
 	if [ $# -ne 1 ]; then
 		echo ""Error: invalid number of arguments, 1 argument required.""
