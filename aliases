@@ -1839,3 +1839,5 @@ function pdf_split_pages() {
 	local -r filename="$1"
 	convert "$filename" -quality 100 -density 1000x1000 page-%04d.pdf
 }
+
+alias fix_wsl='~/dotfiles/windows/apply_wsl_fixes.sh'
