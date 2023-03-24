@@ -1754,12 +1754,12 @@ function http_headers() {
 }
 
 function open_debugging_browser() {
-    # TODO: Add OS check
+	# TODO: Add OS check
 	# open ~/scripts/chrome_symlinks/Chrome\ Canary\ with\ Debugger.app
 
-    # Windows (WSL)
+	# Windows (WSL)
 	# open 'chrome Windows with debugging on port 9999.lnk'
-    ~/scripts/chrome_symlinks/chrome_linux_inside_wsl.sh
+	~/scripts/chrome_symlinks/chrome_linux_inside_wsl.sh
 }
 
 function yarn_last() {
@@ -1842,3 +1842,25 @@ function pdf_split_pages() {
 }
 
 alias fix_wsl='~/dotfiles/windows/apply_wsl_fixes.sh'
+
+# flatten the contents of a given directory.
+# It will move all files and subdirectories in the given directory to the given directory
+# and delete all subdirectories.
+flatten_directory() {
+	# Check for valid input
+	if [ $# -ne 1 ]; then
+		echo ""Error: invalid number of arguments, 1 argument required.""
+		return 1
+	fi
+
+	# Get the directory to flatten
+	dir=$1
+
+	# Move all files and subdirectories to the given directory
+	for file in ""$dir""/*; do
+		mv ""$file"" ""$dir""
+	done
+
+	# Delete all subdirectories
+	find ""$dir"" -type d -depth 1 -exec rm -r {} \;
+}
