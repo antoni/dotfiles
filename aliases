@@ -1864,3 +1864,5 @@ function flatten_directory() {
 	# Delete all subdirectories
 	find ""$dir"" -type d -depth 1 -exec rm -r {} \;
 }
+
+alias gs='git stash'
