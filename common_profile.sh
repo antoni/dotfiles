@@ -98,8 +98,13 @@ export PATH=$PATH:$HOME/.npm-packages/bin:/mnt/c/Windows:/mnt/c/Windows/System32
 
 # Windows (WSL)
 if grep -qEi "(Microsoft|WSL)" /proc/version &>/dev/null; then
-	DISPLAY=$(ip route list default | awk '{print $3}'):0
-	export DISPLAY
+	# Making GUI applications work on WSL:
+	# https://github.com/gencay/vscode-chatgpt/issues/25#issuecomment-1425089512
+	export DISPLAY=:0
+	# alternatively try:
+	# export DISPLAY=$(grep -m 1 nameserver /etc/resolv.conf | awk '{print $2}'):0
+	# or:
+	# export DISPLAY=$(ip route list default | awk '{print $3}'):0
 
 	export LIBGL_ALWAYS_INDIRECT=1
 fi
