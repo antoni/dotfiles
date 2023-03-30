@@ -66,6 +66,7 @@ APT_PACKAGES=(apache2
 	# figure out how to dot it non-interactively
 	virtualbox-ext-pack
 	virtualbox-dkms
+	dotnet-sdk-6.0
 )
 
 sudo apt install --assume-yes "${MUST_HAVE[@]}"
