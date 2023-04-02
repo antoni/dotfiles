@@ -88,7 +88,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "git.ignoredRepositories": [
-    "/home/antoni/.vscode-server/extensions/stepsize.stepsize-1.0.13/resources/demo-repository"
+    "/home/antoni/.vscode-server/extensions/stepsize.stepsize-1.0.14/resources/demo-repository"
   ],
   "cmake.configureOnOpen": true,
   "[shellscript]": {
