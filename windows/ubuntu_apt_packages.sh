@@ -16,6 +16,7 @@ APT_PACKAGES=(apache2
 	graphviz
 	jq
 	qemu-utils
+	ffmpeg
 	maven
 	flatpak
 	gitk
