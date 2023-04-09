@@ -39,6 +39,7 @@
 ## TODO
 
 - Add Windows install script absed on (fly.io)[https://fly.io/]: https://fly.io/install.ps1
+- Use this for Windows machine prov.?: https://github.com/ntdevlabs/tiny11builder
 - Windows: automatyczne podpisanie custom keyboard layotu
 - macOS: toggle Bluetooth on lid open/close
 - [save PowerToys config (Windows)](https://github.com/microsoft/PowerToys/issues/3004#issuecnt-638686691)
