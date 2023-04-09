@@ -1866,3 +1866,9 @@ function flatten_directory() {
 }
 
 alias gs='git stash'
+
+function record_audio() {
+	# TODO: Make it work on Linux (macOS only for now)
+	OUT=${1-output.aac}
+	ffmpeg -f avfoundation -ac 2 -i :0 -c:a aac -ab 96k $OUT
+}
