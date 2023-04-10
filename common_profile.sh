@@ -107,4 +107,12 @@ if grep -qEi "(Microsoft|WSL)" /proc/version &>/dev/null; then
 	# export DISPLAY=$(ip route list default | awk '{print $3}'):0
 
 	export LIBGL_ALWAYS_INDIRECT=1
+
+export ANDROID_HOME=/home/xxx/Android/cmdline-tools/latest
+export ANDROID_SDK_ROOT=/home/xxx/Android
+
+PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
+PATH=$PATH:$ANDROID_HOME/bin
+
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 fi
