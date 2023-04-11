@@ -1322,6 +1322,11 @@ function mov_to_mp4() {
 	ffmpeg -i "$input_filename" -loglevel error -fflags +genpts -r $fps "$output_filename" && echo "Successfully created $output_filename" || echo "Error converting $1 to $output_filename"
 }
 
+function find_process_on_port() {
+	local port="$1"
+	lsof -i tcp:"$port"
+}
+
 function kill_process_on_port() {
 	local port="$1"
 
