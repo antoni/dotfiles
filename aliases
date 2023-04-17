@@ -1760,11 +1760,11 @@ function http_headers() {
 
 function open_debugging_browser() {
 	# TODO: Add OS check
-	# open ~/scripts/chrome_symlinks/Chrome\ Canary\ with\ Debugger.app
+	open ~/scripts/chrome_symlinks/Chrome\ Canary\ with\ Debugger.app
 
 	# Windows (WSL)
 	# open 'chrome Windows with debugging on port 9999.lnk'
-	~/scripts/chrome_symlinks/chrome_linux_inside_wsl.sh
+	# ~/scripts/chrome_symlinks/chrome_linux_inside_wsl.sh
 }
 
 function yarn_last() {
