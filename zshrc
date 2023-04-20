@@ -192,3 +192,48 @@ esac
 # pnpm end
 # bun completions
 [ -s "/Users/antoni/antoni/.bun/_bun" ] && source "/Users/antoni/antoni/.bun/_bun"
+
+
+
+
+# export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+# export PATH=$PATH:$JAVA_HOME/bin
+
+# export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+# export PATH=$PATH:$JAVA_HOME/bin
+
+# export ANDROID_HOME=/home/antoni/Android
+# export PATH=$PATH:$ANDROID_HOME/tools
+# export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+# export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+# export PATH=$PATH:$JAVA_HOME/bin
+
+# export ANDROID_HOME=/home/antoni/Android
+# export PATH=$PATH:$ANDROID_HOME/tools
+# export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+# alias adb="/mnt/c/Program\ Files\ \(x86\)/adb/adb.exe"
+# alias adb="/mnt/c/Users/vivob/AppData/Local/Android/Sdk/platform-tools/adb.exe"
+# alias emulator="/mnt/c/Users/vivob/AppData/Local/Android/Sdk/tools/emulator.exe"
+# alias emulator="/mnt/c/Program\ Files\ \(x86\)/Android/android-sdk/emulator/emulator.exe"
+
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export PATH=$PATH:$JAVA_HOME/bin
+
+# export $(dbus-launch)
+# export LIBGL_ALWAYS_INDIRECT=1
+export WSL_HOST=$(tail -1 /etc/resolv.conf | cut -d' ' -f2)
+# export DISPLAY=$WSL_HOST:0
+
+# export WSL_HOST=$(tail -1 /etc/resolv.conf | cut -d' ' -f2)
+# export ADB_SERVER_SOCKET=tcp:$WSL_HOST:5037
+# export WSL_HOST=127.0.0.1
+# export WSL_HOST=localhost
+export ADB_SERVER_SOCKET=tcp:$WSL_HOST:5037
+
+export ANDROID_HOME=$HOME/Android
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
