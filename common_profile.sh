@@ -80,12 +80,12 @@ fi
 export HOMEBREW_AUTO_UPDATE_SECS="$((60 * 60 * 3))"
 
 # Android development
-export ANDROID_SDK_ROOT="/usr/local/share/android-sdk"
-export ANT_HOME=/usr/local/opt/ant
-export MAVEN_HOME=/usr/local/opt/maven
-export GRADLE_HOME=/usr/local/opt/gradle
-export ANDROID_HOME=/usr/local/opt/android-sdk
-export ANDROID_NDK_HOME=/usr/local/opt/android-ndk
+# export ANDROID_SDK_ROOT="/usr/local/share/android-sdk"
+# export ANT_HOME=/usr/local/opt/ant
+# export MAVEN_HOME=/usr/local/opt/maven
+# export GRADLE_HOME=/usr/local/opt/gradle
+# export ANDROID_HOME=/usr/local/opt/android-sdk
+# export ANDROID_NDK_HOME=/usr/local/opt/android-ndk
 
 # SDK Man replaced GVM. Using for Groovy, Gradle, and Maven Version Management
 # export SDKMAN_DIR="$HOME/.sdkman"
@@ -107,12 +107,12 @@ if grep -qEi "(Microsoft|WSL)" /proc/version &>/dev/null; then
 	# export DISPLAY=$(ip route list default | awk '{print $3}'):0
 
 	export LIBGL_ALWAYS_INDIRECT=1
+fi
 
-export ANDROID_HOME=/home/xxx/Android/cmdline-tools/latest
-export ANDROID_SDK_ROOT=/home/xxx/Android
+export ANDROID_HOME=/home/antoni/Android/cmdline-tools/latest
+export ANDROID_SDK_ROOT=/home/antoni/Android
 
 PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
 PATH=$PATH:$ANDROID_HOME/bin
 
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-fi

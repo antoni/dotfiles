@@ -46,4 +46,4 @@
 - [copy some patterns from this repo?](https://github.com/ur0n2/dotfiles-for-windows)
 - Linux/WSL: [write Windows on US](https://github.com/WoeUSB/WoeUSB-ng)
 - technology badges (a la [dolanmiu](https://github.com/dolanmiu))
--
+- sysctl.conf: https://stackoverflow.com/a/55763478/963881
