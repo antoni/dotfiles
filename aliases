@@ -1877,3 +1877,7 @@ function record_audio() {
 	OUT=${1-output.aac}
 	ffmpeg -f avfoundation -ac 2 -i :0 -c:a aac -ab 96k $OUT
 }
+
+function jpg_to_png() {
+  mogrify -format png "$1"
+}
