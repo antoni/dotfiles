@@ -1881,3 +1881,13 @@ function record_audio() {
 function jpg_to_png() {
   mogrify -format png "$1"
 }
+
+# TODO: Move to image utils
+# Resize image, keep aspect ratio and fill blank space
+function jpg_to_png() {
+    local input="$1"
+    local output="$2"
+  convert $input -resize 200x200 -background white -gravity center -extent 200x200 $output
+
+}
+
