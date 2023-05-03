@@ -94,6 +94,9 @@ export HOMEBREW_AUTO_UPDATE_SECS="$((60 * 60 * 3))"
 # macOS only (delete symlink created after system update)
 rm -f ~/Desktop/Relocated\ Items
 
+# Make Bash 4 work on macOS
+export PATH="/usr/local/bin:$PATH"
+
 export PATH=$PATH:$HOME/.npm-packages/bin:/mnt/c/Windows:/mnt/c/Windows/System32/WindowsPowerShell/v1.0:/mnt/c/Windows/System32
 
 # Windows (WSL)
