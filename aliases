@@ -1833,6 +1833,8 @@ function dos2unix_all() {
 	find . -type f -print0 | xargs -0 dos2unix
 }
 
+alias fix_crlf='dos2unix_all'
+
 alias ybw="yarn build:watch"
 
 # pdf_split_pages <filename>
@@ -1879,15 +1881,14 @@ function record_audio() {
 }
 
 function jpg_to_png() {
-  mogrify -format png "$1"
+	mogrify -format png "$1"
 }
 
 # TODO: Move to image utils
 # Resize image, keep aspect ratio and fill blank space
 function jpg_to_png() {
-    local input="$1"
-    local output="$2"
-  convert $input -resize 200x200 -background white -gravity center -extent 200x200 $output
+	local input="$1"
+	local output="$2"
+	convert $input -resize 200x200 -background white -gravity center -extent 200x200 $output
 
 }
-
