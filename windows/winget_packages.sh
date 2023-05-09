@@ -99,6 +99,7 @@ MAY_HAVE=(
 	NordVPN.NordVPN
 	ProtonTechnologies.ProtonVPN
 	ExpressVPN.ExpressVPN
+	Jigsaw.OutlineManager
 	tailscale.tailscale
 	mRemoteNG.mRemoteNG
 	Xming.Xming
