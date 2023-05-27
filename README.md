@@ -47,3 +47,10 @@
 - Linux/WSL: [write Windows on US](https://github.com/WoeUSB/WoeUSB-ng)
 - technology badges (a la [dolanmiu](https://github.com/dolanmiu))
 - sysctl.conf: https://stackoverflow.com/a/55763478/963881
+
+## ChatGPT prompts
+
+```text
+Write this Bash command so that it uses only command flags with double hyphen (wherever possible):
+<bash command goes here>
+```
