@@ -25,6 +25,7 @@ APT_PACKAGES=(apache2
 	pv
 	exiftool
 	rand
+	wkhtmltopdf
 	librsvg2-bin
 	inkscape
 	advancecomp

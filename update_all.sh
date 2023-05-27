@@ -7,6 +7,10 @@ function update_pip_packages() {
 
 function upgrade_apt_packages() {
 	echo "Upgrading apt packages..."
+
+	# TODO: Run this on WSL only
+	sudo hwclock --hctosys
+
 	# https://askubuntu.com/a/668859/342465
 	sudo apt-get update -qq -o=Dpkg::Use-Pty=0 && sudo apt-get upgrade -qq -o=Dpkg::Use-Pty=0 --assume-yes
 
