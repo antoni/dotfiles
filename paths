@@ -53,7 +53,7 @@ export PATH=~/.local/bin:$PATH
 GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
 export GEM_HOME
 
-export PATH="$PATH:$(npm get prefix)/bin:$GEM_HOME/bin"
+export PATH="$PATH:$(npm --prefix $HOME/tmp get prefix)/bin:$GEM_HOME/bin"
 
 # npm global packages
 # TODO: Move .npm-global_packages to constant
