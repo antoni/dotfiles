@@ -294,8 +294,9 @@ alias ubuntu_fix_apt='sudo apt-get install --fix-broken && sudo apt-get autoremo
 
 # Markdown to PDF
 function md2pdf() {
-	pandoc -s -V papersize:a4 -V geometry:margin=1in --from gfm -o "$1".pdf "$1"
-	open "$1".pdf
+	local -r filename=$(filename_without_extension "$1")
+	pandoc --standalone --variable=papersize:a4 --variable=geometry:margin=1in --from=gfm -o "$filename".pdf "$filename".md
+	open "$filename".pdf
 }
 
 function rst2pdf() {
@@ -1154,6 +1155,12 @@ function git_delete_tag() {
 	git push --delete origin "$tagname"
 }
 
+function git_delete_all_tags() {
+	# (more dirty) equivalent of bash's export -f + xargs, for zsh:
+	FUNCS=$(functions git_delete_tag)
+	git tag | xargs -I{} zsh -c "eval $FUNCS; git_delete_tag {}"
+}
+
 alias github_merge_pr='gh pr merge $(git branch --show-current) --delete-branch  --rebase'
 
 # Generate a random 32 character alphanumeric string (upper
@@ -1890,5 +1897,22 @@ function jpg_to_png() {
 	local input="$1"
 	local output="$2"
 	convert $input -resize 200x200 -background white -gravity center -extent 200x200 $output
+}
 
+function random_mac_address() {
+	openssl rand -hex 6 | sed 's/../&:/g;s/:$//'
+}
+
+# Note: you need to disconnect from network first
+# on macOS:
+# sudo /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -z
+function set_random_mac_address() {
+	sudo ifconfig en0 ether "$(random_mac_address)"
+}
+
+function check_connection_on_port() {
+	ip="$1"
+	port="$2"
+
+	nc -v -w5 -z $hostip $port
 }
