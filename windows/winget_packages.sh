@@ -24,6 +24,7 @@ MUST_HAVE=(
 	Git.Git
 	GitHub.cli
 	GitHub.GitLFS
+	Python.Python.3.11
 	# reinstalling this doesn't work unattended (brings focus always).
 	# also, I'm only using it inside WSL
 	# ImageMagick.ImageMagick
@@ -85,6 +86,8 @@ MAY_HAVE=(
 	RaspberryPiFoundation.RaspberryPiImager
 	BraveSoftware.BraveBrowser
 	Rustlang.Rustup
+	Google.Chrome.Canary
+	DeepL.DeepL
 	alcpu.CoreTemp
 	Yubico.YubikeyManager
 	IDRIX.VeraCrypt
