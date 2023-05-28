@@ -1916,3 +1916,8 @@ function check_connection_on_port() {
 
 	nc -v -w5 -z $hostip $port
 }
+
+function cd_windows_desktop() {
+    # TODO: Make vivob come from env var
+    cd /mnt/c/Users/vivob/Desktop/
+}
