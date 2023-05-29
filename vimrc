@@ -372,7 +372,7 @@ call plug#begin()
 " Must-haves "{{{
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
-Plug 'Valloric/YouCompleteMe'
+" Plug 'Valloric/YouCompleteMe'
 Plug 'majutsushi/tagbar'
 "}}}
 " Plug 'Lokaltog/vim-easymotion'
