@@ -1368,6 +1368,15 @@ function np() {
 	/mnt/c/Program\ Files/Notepad++/notepad++.exe "$file_path"
 }
 
+# Opens Typora
+function typora() {
+	# To follow symlinks inside WSL
+	local -r file_path=$(wslpath -w "$1")
+
+    /mnt/c/Program\ Files/Typora/Typora.exe "$file_path"
+}
+
+
 # Windows
 function kill_executable() {
 	local executable="$1"
