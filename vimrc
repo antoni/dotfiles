@@ -314,19 +314,19 @@ vnoremap K K<CR>
 
 " make YCM compatible with UltiSnips (using supertab)
 " let g:ycm_key_list_select_completion = ['<C-n>', '<Down>', '<C-Space>']
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:ycm_min_num_of_chars_for_completion = 1
-let g:SuperTabDefaultCompletionType = '<C-n>'
+" let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+" let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+" let g:ycm_min_num_of_chars_for_completion = 1
+" let g:SuperTabDefaultCompletionType = '<C-n>'
 
 " better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+" let g:UltiSnipsExpandTrigger = "<tab>"
+" let g:UltiSnipsJumpForwardTrigger = "<tab>"
+" let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 " SnipMate
-let g:snipMate = {}
-let g:snipMate.snippet_version = 1
+" let g:snipMate = {}
+" let g:snipMate.snippet_version = 1
 
 
 let g:ycm_global_ycm_extra_conf = "~/dotfiles/ycm_extra_conf.py"
@@ -372,7 +372,9 @@ call plug#begin()
 " Must-haves "{{{
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
-" Plug 'Valloric/YouCompleteMe'
+Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc.nvim'
+Plug 'rafi/awesome-vim-colorschemes'
 Plug 'majutsushi/tagbar'
 "}}}
 " Plug 'Lokaltog/vim-easymotion'
@@ -490,7 +492,7 @@ Plug 'ervandew/supertab'
 " SnipMate
 Plug 'MarcWeber/vim-addon-mw-utils'
 " Plug 'tomtom/tlib_vim'
-Plug 'garbas/vim-snipmate'
+" Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
 
 " }}}
@@ -498,7 +500,54 @@ Plug 'honza/vim-snippets'
 call plug#end()            " required
 filetype plugin indent on    " required
 " }}}
-" 4.  UI {{{
+" 4.  CoC plugin config {{{
+" install CoC plugins:
+" :CocInstall coc-tsserver coc-eslint coc-json coc-prettier coc-css coc-html coc-snippets
+
+"CoC Settings
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+" TODO:  <18-06-23, antoni> make it work
+" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+"Ultisnips Settings
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+"coc-snippets Settings
+"inoremap <silent><expr> <TAB>
+"      \ coc#pum#visible() ? coc#_select_confirm() :
+"      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+"      \ CheckBackspace() ? "\<TAB>" :
+"      \ coc#refresh()
+"
+"function! CheckBackspace() abort
+"  let col = col('.') - 1
+"  return !col || getline('.')[col - 1]  =~# '\s'
+"endfunction
+"
+"let g:coc_snippet_next = '<tab>'
+
+" }}}
+" 5.  UI {{{
 " GVim "{{{
 if os == "Darwin"
     set guifont=Monaco:h18
