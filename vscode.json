@@ -49,7 +49,6 @@
   "snyk.yesWelcomeNotification": false,
   "editor.inlineSuggest.enabled": true,
   "editor.suggestSelection": "first",
-  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "workbench.startupEditor": "none",
   "workbench.editor.wrapTabs": true,
   "javascript.updateImportsOnFileMove.enabled": "always",

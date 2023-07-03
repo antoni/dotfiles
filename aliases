@@ -1930,3 +1930,9 @@ function cd_windows_desktop() {
     # TODO: Make vivob come from env var
     cd /mnt/c/Users/vivob/Desktop/
 }
+
+function show_image_geo_location() {
+    local -r image_path="$1";
+
+    ./get_geo_coordinates.sh "$image_path"
+}
