@@ -38,6 +38,9 @@ function update_all() {
 		echo "Updating WSL..."
 		wsl.exe --update
 
+		# https://askubuntu.com/a/1169203/342465
+		sudo hwclock --hctosys
+
 		# Run it first as it requires sudo
 		upgrade_apt_packages
 
