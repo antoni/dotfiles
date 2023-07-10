@@ -264,6 +264,7 @@ BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	anydesk
 	microsoft-remote-desktop
 	duckduckgo
+	xournal-plus-plus
 	docker
 	docker-compose
 	terraform
