@@ -16,7 +16,8 @@ function install_global_javascript_npm_packages() {
 		yo generator-office dts-gen yargs rollup pnpm source-map-explorer \
 		@angular/cli n json5 cordova gltf-pipeline @squoosh/cli depcheck @microsoft/rush \
 		do-not-disturb-cli katex servor degit verdaccio tables gatsby-cli browser-sync \
-		@apidevtools/swagger-cli kill-port-process ngrok @google/clasp js-beautify doctoc \ ts_dependency_graph
+		@apidevtools/swagger-cli kill-port-process ngrok @google/clasp js-beautify doctoc \ ts_dependency_graph \
+		syncpack
 
 	# Disable 'npm fund' messages
 	npm config set fund false
