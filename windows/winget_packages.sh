@@ -107,6 +107,7 @@ MAY_HAVE=(
 	mRemoteNG.mRemoteNG
 	Xming.Xming
 	Mikrotik.TheDude
+	Elgato.ControlCenter            # control of Elgato Key Light Mini
 	CrystalDewWorld.CrystalDiskMark # disk benchmark
 	NVAccess.NVDA
 	Mozilla.Firefox.DeveloperEdition
