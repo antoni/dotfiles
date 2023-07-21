@@ -248,7 +248,11 @@ function main() {
 
 		if [[ -n "$IS_WSL" ]]; then
 			function replace_notepad_plus_plus_settings() {
-				cat ~/dotfiles/windows/notepad_plus_plus_settings.xml >/mnt/c/Users/"${WINDOWS_USERNAME}"/AppData/Roaming/Notepad++/config.xml
+				local -r target_path="/mnt/c/Users/""${WINDOWS_USERNAME}""/AppData/Roaming/Notepad++/config.xml"
+
+				printf "Replacing Notepad++ settings at: '%s'\n" "$target_path"
+
+				cat ~/dotfiles/windows/notepad_plus_plus_settings.xml >"$target_path"
 			}
 			replace_notepad_plus_plus_settings
 		else
