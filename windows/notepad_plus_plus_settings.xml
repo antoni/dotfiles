@@ -31,7 +31,7 @@
         <GUIConfig name="TrayIcon">no</GUIConfig>
         <GUIConfig name="MaitainIndent">yes</GUIConfig>
         <GUIConfig name="TagsMatchHighLight" TagAttrHighLight="yes" HighLightNonHtmlZone="no">yes</GUIConfig>
-        <GUIConfig name="RememberLastSession">no</GUIConfig>
+        <GUIConfig name="RememberLastSession">yes</GUIConfig>
         <GUIConfig name="DetectEncoding">yes</GUIConfig>
         <GUIConfig name="SaveAllConfirm">yes</GUIConfig>
         <GUIConfig name="NewDocDefaultSettings" format="0" encoding="4" lang="0" codepage="-1" openAnsiAsUTF8="yes" />
