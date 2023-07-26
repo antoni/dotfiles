@@ -25,7 +25,7 @@
         <GUIConfig name="AppPosition" x="229" y="586" width="2471" height="1090" isMaximized="no" />
         <GUIConfig name="FindWindowPosition" left="20" top="20" right="1192" bottom="716" isLessModeOn="no" />
         <GUIConfig name="FinderConfig" wrappedLines="no" purgeBeforeEverySearch="no" showOnlyOneEntryPerFoundLine="yes" />
-        <GUIConfig name="noUpdate" intervalDays="15" nextUpdateDate="20230805">yes</GUIConfig>
+        <GUIConfig name="noUpdate" intervalDays="100" nextUpdateDate="20230805">yes</GUIConfig>
         <GUIConfig name="Auto-detection">yes</GUIConfig>
         <GUIConfig name="CheckHistoryFiles">no</GUIConfig>
         <GUIConfig name="TrayIcon">no</GUIConfig>
