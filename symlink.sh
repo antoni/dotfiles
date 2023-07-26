@@ -353,7 +353,8 @@ function main() {
 		print_success_message "Hostname changed to: $hostname"
 	}
 
-	setup_hostname
+	# TODO: This should come from a config file (hostname per machine)
+	# setup_hostname
 
 	# Midnight Commander
 	ln -fs "$DOTFILES_DIR"/mc ~/.config
