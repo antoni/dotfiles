@@ -1373,9 +1373,8 @@ function typora() {
 	# To follow symlinks inside WSL
 	local -r file_path=$(wslpath -w "$1")
 
-    /mnt/c/Program\ Files/Typora/Typora.exe "$file_path" &
+	/mnt/c/Program\ Files/Typora/Typora.exe "$file_path" &
 }
-
 
 # Windows
 function kill_executable() {
@@ -1927,14 +1926,14 @@ function check_connection_on_port() {
 }
 
 function cd_windows_desktop() {
-    # TODO: Make vivob come from env var
-    cd /mnt/c/Users/vivob/Desktop/
+	# TODO: Make vivob come from env var
+	cd /mnt/c/Users/vivob/Desktop/
 }
 
 function show_image_geo_location() {
-    local -r image_path="$1";
+	local -r image_path="$1"
 
-    ./get_geo_coordinates.sh "$image_path"
+	./get_geo_coordinates.sh "$image_path"
 }
 
 # Usage:
@@ -1943,6 +1942,25 @@ function show_image_geo_location() {
 # TODO: Export awk function to sep. func. for converting
 # file sizes to human-readable form
 function list_files_greater_than() {
-    local -r greater_than="+$1";
-    find . -type f -size "$greater_than" -exec ls -l {} \; | sort --stable --numeric-sort --key=5 --reverse | awk '{ split( "B kB MB GB TB PB EB ZB YB" , v ); s=1; while( $5>1024 && s<9 ){ $5/=1024; s++ } printf "%6.2f%s %s\n", $5, v[s], $9 }'
+	local -r greater_than="+$1"
+	find . -type f -size "$greater_than" -exec ls -l {} \; | sort --stable --numeric-sort --key=5 --reverse | awk '{ split( "B kB MB GB TB PB EB ZB YB" , v ); s=1; while( $5>1024 && s<9 ){ $5/=1024; s++ } printf "%6.2f%s %s\n", $5, v[s], $9 }'
+}
+
+function transpose() {
+	awk '
+{
+    for (i=1; i<=NF; i++)  {
+        a[NR,i] = $i
+    }
+}
+NF>p { p = NF }
+END {
+    for(j=1; j<=p; j++) {
+        str=a[1,j]
+        for(i=2; i<=NR; i++){
+            str=str" "a[i,j];
+        }
+        print str
+    }
+}' "$@"
 }
