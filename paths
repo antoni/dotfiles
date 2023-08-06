@@ -3,7 +3,7 @@
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ]; then
-	PATH="$HOME/bin:$PATH"
+    PATH="$HOME/bin:$PATH"
 fi
 
 PATH=$PATH:/usr/local/sbin
@@ -43,8 +43,9 @@ export PATH=$ANDROID_HOME/platform-tools:$PATH
 export PATH=$ANDROID_HOME/build-tools/19.1.0:$PATH
 
 # LLVM (macOS)
-# TODO: Add macOS check
-#export PATH="$(brew --prefix llvm)/bin:$PATH"
+if [[ "$unamestr" == 'Darwin' ]]; then
+    export PATH="$(brew --prefix llvm)/bin:$PATH"
+fi
 
 # Haskell Stack global executables
 export PATH=~/.local/bin:$PATH
