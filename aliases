@@ -1955,3 +1955,8 @@ END {
     }
 }' "$@"
 }
+
+function find_and_replace() {
+    find . -type f -not -path *.git/* -not -path *node_modules/* -not -path *.yarn/* -exec \
+        sed -i "s/""$1""/""$2""/g" {} \;
+}
