@@ -209,15 +209,6 @@ esac
 # export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 # export PATH=$PATH:$JAVA_HOME/bin
 
-# export ANDROID_HOME=/home/antoni/Android
-# export PATH=$PATH:$ANDROID_HOME/tools
-# export PATH=$PATH:$ANDROID_HOME/platform-tools
-
-# alias adb="/mnt/c/Program\ Files\ \(x86\)/adb/adb.exe"
-# alias adb="/mnt/c/Users/vivob/AppData/Local/Android/Sdk/platform-tools/adb.exe"
-# alias emulator="/mnt/c/Users/vivob/AppData/Local/Android/Sdk/tools/emulator.exe"
-# alias emulator="/mnt/c/Program\ Files\ \(x86\)/Android/android-sdk/emulator/emulator.exe"
-
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 export PATH=$PATH:$JAVA_HOME/bin
 

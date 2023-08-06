@@ -1632,7 +1632,6 @@ function flush_dns_cache() {
 		sudo killall -HUP mDNSResponder
 	fi
 
-	# TODO: Windows (via WSL)
 	if [[ -n "$IS_WSL" ]]; then
 		echo "Flushing DNS cache on WSL"
 		ipconfig.exe /flushdns
@@ -1919,8 +1918,7 @@ function check_connection_on_port() {
 }
 
 function cd_windows_desktop() {
-	# TODO: Make vivob come from env var
-	cd /mnt/c/Users/vivob/Desktop/
+	cd "/mnt/c/Users/""$WINDOWS_USERNAME""/Desktop/"
 }
 
 function show_image_geo_location() {
