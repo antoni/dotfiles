@@ -252,7 +252,8 @@ function main() {
 
 				printf "Replacing Notepad++ settings at: '%s'\n" "$target_path"
 
-				cat ~/dotfiles/windows/notepad_plus_plus_settings.xml >"$target_path"
+				# TODO: Check if WINDOWS_USERNAME var is set
+				envsubst notepad_plus_plus_settings.template.xml >"$target_path"
 			}
 			replace_notepad_plus_plus_settings
 		else
