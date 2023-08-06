@@ -83,6 +83,7 @@ MAY_HAVE=(
 	winget install -e --id Hex-Rays.IDA.Free
 	AnyDeskSoftwareGmbH.AnyDesk
 	marha.VcXsrv
+	winget install -e --id Yarn.Yarn
 	RaspberryPiFoundation.RaspberryPiImager
 	BraveSoftware.BraveBrowser
 	Rustlang.Rustup
