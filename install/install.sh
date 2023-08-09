@@ -89,7 +89,8 @@ function install_nord_vpn_debian() {
 
 function exit_with_error_message() {
 	local -r error_message="$1"
-	printf "Error: %s\n" "$error_message"
+	printf "${colors[Red]}Error: %s${colors[Reset_Color]}\n" "$error_message"
+
 	return
 }
 
