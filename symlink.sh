@@ -374,11 +374,11 @@ function main() {
 
 	function find_broken_symlinks() {
 		printf "Found broken symlinks:\n"
-		# find ~ -type l ! -exec test -e {} \; -print
-		# TODO: Fix these:
+		find ~ -type l -maxdepth 3 ! -exec test -e {} \; -print
 		find /usr/bin -type l ! -exec test -e {} \; -print
 		find /usr/local/bin -type l ! -exec test -e {} \; -print
 	}
+
 	find_broken_symlinks
 }
 
