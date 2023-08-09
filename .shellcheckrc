@@ -1,6 +1,7 @@
 # Unused variables are fine
 disable=SC2034
 
-# Some paths will be reported as incorrect because these will only work when dotfiles are symlinked
+# Some paths will be reported as incorrect
+# because these will only work when dotfiles are symlinked
 disable=SC1091
 
