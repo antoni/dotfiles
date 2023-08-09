@@ -6,8 +6,8 @@ export DOTFILES_DIR=$HOME_DIR/dotfiles
 
 source "$DOTFILES_DIR"/colors.sh
 
-unamestr="$(uname)"
-export unamestr
+UNAME_OUTPUT="$(uname)"
+export UNAME_OUTPUT
 
 # Example:
 # array=("one" "two" "three")

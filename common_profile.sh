@@ -52,7 +52,7 @@ function fix_ubuntu() {
 # xrandr --output VGA1 --mode 1680x1050 --right-of LVDS1
 
 # PL keyboard layout
-# if command_exists setxkbmap && [[ "$unamestr" != 'Darwin' ]] ; then
+# if command_exists setxkbmap && [[ "$UNAME_OUTPUT" != 'Darwin' ]] ; then
 # setxkbmap pl
 # fi
 # fi # end DISPLAY setup

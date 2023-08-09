@@ -57,7 +57,7 @@ function install_hping() {
 }
 
 function post_install() {
-	unamestr="$(uname)"
+	UNAME_OUTPUT="$(uname)"
 
 	# Ask for the administrator password upfront
 	sudo -v
@@ -66,7 +66,7 @@ function post_install() {
 	sudo ln -fs /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport /usr/local/bin/airport
 
 	echo Configuring default applications for selected file types
-	if [[ "$unamestr" == 'Darwin' ]]; then
+	if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
 		# Change default application for given file type
 		if command_exists duti; then
 			duti -s "$(app_id 'PYM Player')" .avi all
