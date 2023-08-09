@@ -8,8 +8,12 @@
 WINGET_ALIAS="winget.exe"
 WINGET_COMMAND_LIST="$WINGET_ALIAS list"
 # don't install an already installed package
-# TODO: Add --no-upgrade once it's released
-WINGET_COMMAND_INSTALL="$WINGET_ALIAS install --accept-source-agreements --accept-package-agreements --exact --id "
+WINGET_COMMAND_INSTALL="$WINGET_ALIAS install \
+--no-upgrade \
+--accept-source-agreements \
+--accept-package-agreements \
+--exact \
+--id "
 
 MUST_HAVE=(
 	Google.Chrome

@@ -27,6 +27,7 @@ function upgrade_apt_packages() {
 function update_all() {
 	pushd ~ &>/dev/null || exit # to correctly update global NPM packages
 
+	# macOS
 	if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
 		# This sometimes breaks Homebrew taps upgrade
 		# update_xcode

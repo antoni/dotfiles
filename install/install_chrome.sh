@@ -18,3 +18,6 @@ function install_debian_chrome() {
 	sudo apt-get update
 	sudo apt-get install --assume-yes google-chrome-stable
 }
+
+# TODO: Add macOS support
+# TODO: Add main() function with OS check

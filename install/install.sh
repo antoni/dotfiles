@@ -9,8 +9,9 @@ mkdir -p tmp
 # source "$DOTFILES_DIR"/install/chrome_install.sh
 source "$DOTFILES_DIR"/mac/brew_install.sh
 source "$DOTFILES_DIR"/utils.sh
+source "$DOTFILES_DIR"/colors.sh
 
-# echo -en "${colors[BGreen]}Enter sudo password:${colors[White]} "
+# echo -en "${colors[BoldGreen]}Enter sudo password:${colors[White]} "
 # read -s SUDO_PASS
 
 # TODO: Fix PACKAGES below (missing on Ubuntu)
@@ -97,8 +98,10 @@ function main() {
 
 	sudo_keep_alive
 
-	# TODO: Add guard: WSL2 only
-	../windows/apply_wsl_fixes.sh
+	if [[ -n "$IS_WSL" ]]; then
+		source "$HOME"/dotfiles/windows/apply_wsl_fixes.sh
+	fi
+
 	# Remove "Last login" message in new Terminal window open (some UNIX systems)
 	touch ~/.hushlogin
 
@@ -311,11 +314,11 @@ function sync_transmission_settings() {
 function ubuntu_upgrade() {
 	sudo -s -- <<EOF
 apt-get update
-apt-get upgrade -y
-apt-get full-upgrade -y
-apt-get dist-upgrade -y
-apt-get autoremove -y
-apt-get autoclean -y
+apt-get upgrade --assume-yes
+apt-get full-upgrade --assume-yes
+apt-get dist-upgrade --assume-yes
+apt-get autoremove --assume-yes
+apt-get autoclean --assume-yes
 EOF
 }
 

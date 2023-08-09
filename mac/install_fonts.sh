@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 brew tap homebrew/cask-fonts
+
 brew install --cask font-montserrat \
 	font-nunito \
 	font-roboto \
