@@ -256,7 +256,7 @@ alias gprer='grep --recursive'
 
 alias hgrep='history | grep -i'
 
-# tmux  && source ~/.paths'
+# tmux && source ~/.paths'
 alias gopath="export GOPATH=\$(pwd)"
 alias dbgui='/usr/share/dbeaver/dbeaver'
 
@@ -355,7 +355,7 @@ function vv() {
 # fi
 # }
 # Display 20 most frequently used commands in Bash
-alias mostfrequent='history | cut -d " " -f 4 | tr -c "[:alnum:]" "[\n*]" | sort | uniq -c | sort -nr | head  -20'
+alias mostfrequent='history | cut -d " " -f 4 | tr -c "[:alnum:]" "[\n*]" | sort | uniq -c | sort -nr | head -20'
 # 20 Command Line Tools to Monitor Linux Performance
 debug_commands=(ddd kdbg idaq cgdb)
 perf_commands=(top vmstat tload stress lsof tcpdump netstat htop atop iotop iostat iptraf iftop monitorix monit arpwatch vnstat dstat nmon collectl dig mpstat pkill powertop pidstat intel_gpu_top glances pstree nload sysstat sysdig)
@@ -554,7 +554,7 @@ alias tmuxhelp='cat ~/dotfiles/tmux.cheat | less'
 alias show_available_entropy='cat /proc/sys/kernel/random/entropy_avail'
 
 alias dns_list_all='dig +nocmd yourdomain.com any +multiline +noall +answer'
-alias install_ycm='~/.vim/bundle/YouCompleteMe/install.py --clang-completer  --gocode-completer'
+alias install_ycm='~/.vim/bundle/YouCompleteMe/install.py --clang-completer --gocode-completer'
 alias switchm="xrandr --output VGA1 --left-of DP2" # switches monitors (left-right)
 
 alias di='sudo dnf install -y'
@@ -665,7 +665,7 @@ HTML_TIDY_TMP_FILE="/tmp/tidy_log.txt"
 
 # Reformats JS/JSON/HTML code
 # Usage:
-#   ./reformat filename
+# ./reformat filename
 function reformat() {
 	tmpf=/tmp/in_place_change_tmp
 	filename=$(basename "$1")
@@ -910,7 +910,7 @@ function uppercase_all_letters() {
 }
 
 alias buildlib='cd ~/components-library ; npm run build && firebase deploy && npm run clean'
-alias mac_serial_number="system_profiler SPHardwareDataType | \grep '      Serial Number' | cut -d' ' -f 10 | pbcopy"
+alias mac_serial_number="system_profiler SPHardwareDataType | \grep ' Serial Number' | cut -d' ' -f 10 | pbcopy"
 
 # Updates scripts repo with current date in the message
 # of the (possibly empty) commit
@@ -951,7 +951,7 @@ function mov2mp4() {
 	ffmpeg -i "$filename".mov -vcodec h264 -acodec mp2 "$filename".mp4
 }
 
-# Rename  part of filename in each file in a directory
+# Rename part of filename in each file in a directory
 function rename_filename_part() {
 	for filename in *; do
 		[ -f "$filename" ] || continue
@@ -987,8 +987,8 @@ function add_suffix_to_filename() {
 
 # Prints the lsof entry of the process that listens on a given port
 # Usage:
-#   listening firefox
-#   listening 8080
+# listening firefox
+# listening 8080
 function listening() {
 	if [ $# -eq 0 ]; then
 		sudo lsof -iTCP -sTCP:LISTEN -n -P
@@ -1141,7 +1141,7 @@ function git_delete_all_tags() {
 	git tag | xargs -I{} zsh -c "eval $FUNCS; git_delete_tag {}"
 }
 
-alias github_merge_pr='gh pr merge $(git branch --show-current) --delete-branch  --rebase'
+alias github_merge_pr='gh pr merge $(git branch --show-current) --delete-branch --rebase'
 
 # Generate a random 32 character alphanumeric string (upper
 # and lowercase) and numbers in Bash
@@ -1438,13 +1438,13 @@ function sudo_forget() {
 # json_to_table t.json id,name
 # Where t.json is:
 # [{
-#  "name": "George",
-#  "id": 12,
-#  "email": "george@domain.example"
+# "name": "George",
+# "id": 12,
+# "email": "george@domain.example"
 # }, {
-#  "name": "Jack",
-#  "id": 18,
-#  "email": "jack@domain.example"
+# "name": "Jack",
+# "id": 18,
+# "email": "jack@domain.example"
 # }]
 function json_to_table() {
 	local filename="$1"
@@ -1521,7 +1521,7 @@ function winenv() {
 		echo $'\n'Usage:
 		echo $'\t'winenv [-d] WINDOWS_ENVIRONEMENT_VARIABLE_NAME
 		echo $'\t'-d: Defines environment variable in current shell
-		echo $'\t    Note that paths will be translated into un*x-like paths\n'
+		echo $'\t Note that paths will be translated into un*x-like paths\n'
 		return
 	fi
 
@@ -1815,7 +1815,7 @@ alias ybw="yarn build:watch"
 # Splits a PDF into individual pages and saves them as separate PDF files with names in the format ""page-0001.pdf"".
 #
 # Arguments:
-#   filename: The name of the PDF file to split
+# filename: The name of the PDF file to split
 #
 function pdf_split_pages() {
 	local -r filename="$1"
@@ -1884,12 +1884,12 @@ function show_image_geo_location() {
 
 # Converts input to human-readable form
 # Assumes the following input:
-# -rw-r--r--  1 antoni  staff  1288818 Dec 30  2022 ./file1.svg
-# -rw-r--r--  1 antoni  staff  1282458 Dec 30  2022 ./file2.svg
-# -rw-r--r--  1 antoni  staff  1281326 Dec 30  2022 ./file3.svg
+# -rw-r--r-- 1 antoni staff 1288818 Dec 30 2022 ./file1.svg
+# -rw-r--r-- 1 antoni staff 1282458 Dec 30 2022 ./file2.svg
+# -rw-r--r-- 1 antoni staff 1281326 Dec 30 2022 ./file3.svg
 function convert_size_to_human_readable_form() {
 	awk '{ split( "B kB MB GB TB PB EB ZB YB" , sizeValue );
-	       sizeIncrement=1;
+	 sizeIncrement=1;
 				 while( $5 > 1024 && sizeIncrement < 9 ){ $5/=1024; sizeIncrement++ }
 				 printf "%6.2f%s %s\n", $5, sizeValue[sizeIncrement], $9 }'
 }
@@ -1907,19 +1907,19 @@ function list_files_greater_than() {
 function transpose() {
 	awk '
 {
-    for (i=1; i<=NF; i++)  {
-        a[NR,i] = $i
-    }
+ for (i=1; i<=NF; i++) {
+ a[NR,i] = $i
+ }
 }
 NF>p { p = NF }
 END {
-    for(j=1; j<=p; j++) {
-        str=a[1,j]
-        for(i=2; i<=NR; i++){
-            str=str" "a[i,j];
-        }
-        print str
-    }
+ for(j=1; j<=p; j++) {
+ str=a[1,j]
+ for(i=2; i<=NR; i++){
+ str=str" "a[i,j];
+ }
+ print str
+ }
 }' "$@"
 }
 
