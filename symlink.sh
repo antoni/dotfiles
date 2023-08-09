@@ -17,7 +17,7 @@ function setup_int_handler() {
 
 # setup_int_handler
 # shellcheck disable=SC2154
-echo -en "${colors[BGreen]}Enter sudo password:${colors[Black]}"
+echo -en "${colors[BoldGreen]}Enter sudo password:${colors[Color_Off]}"
 # read -rs SUDO_PASS
 # clear
 sudo_keep_alive
@@ -252,7 +252,6 @@ function main() {
 
 				printf "Replacing Notepad++ settings at: '%s'\n" "$target_path"
 
-				# TODO: Check if WINDOWS_USERNAME var is set
 				envsubst notepad_plus_plus_settings.template.xml >"$target_path"
 			}
 			replace_notepad_plus_plus_settings
@@ -336,12 +335,12 @@ function main() {
 	# https://gist.githubusercontent.com/antoni/d8ac9973b2f28765b329/raw/811fa82e6ff738e06c11453bfa93d846d76d2386/cuda.snippets
 	# && mv cuda.snippets ~/.vim/bundle/vim-snippets/snippets/
 
-	echo -e "${colors[BYellow]}Things to be (possibly) done manually:\n\n\
-    \t* /sys/class/backlight/\t\tto make xbacklight work""${colors[BWhite]}"
+	echo -e "${colors[BoldYellow]}Things to be (possibly) done manually:\n\n\
+    \t* /sys/class/backlight/\t\tto make xbacklight work""${colors[BoldWhite]}"
 
 	function setup_hostname() {
 		hostname_default="automatown"
-		echo -en "${colors[BGreen]}Enter hostname for the current machine [$hostname_default]:${colors[White]} "
+		echo -en "${colors[BoldGreen]}Enter hostname for the current machine [$hostname_default]:${colors[White]} "
 		read -r hostname
 		hostname=${hostname:-$hostname_default}
 

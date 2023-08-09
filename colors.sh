@@ -2,7 +2,10 @@
 
 declare -A colors
 
+# TODO: Create log_info, log_warning, log_error functions
+
 # Reset
+# TODO: Check is it's being used everywhere
 colors[Color_Off]='\033[0m' # Text Reset
 
 # Regular Colors
@@ -16,24 +19,24 @@ colors[Cyan]='\033[0;36m'   # Cyan
 colors[White]='\033[0;37m'  # White
 
 # Bold
-colors[BBlack]='\033[1;30m'  # Black
-colors[BRed]='\033[1;31m'    # Red
-colors[BGreen]='\033[1;32m'  # Green
-colors[BYellow]='\033[1;33m' # Yellow
-colors[BBlue]='\033[1;34m'   # Blue
-colors[BPurple]='\033[1;35m' # Purple
-colors[BCyan]='\033[1;36m'   # Cyan
-colors[BWhite]='\033[1;37m'  # White
+colors[BoldBlack]='\033[1;30m'  # Black
+colors[BoldRed]='\033[1;31m'    # Red
+colors[BoldGreen]='\033[1;32m'  # Green
+colors[BoldYellow]='\033[1;33m' # Yellow
+colors[BoldBlue]='\033[1;34m'   # Blue
+colors[BoldPurple]='\033[1;35m' # Purple
+colors[BoldCyan]='\033[1;36m'   # Cyan
+colors[BoldWhite]='\033[1;37m'  # White
 
 # Underline
-colors[UBlack]='\033[4;30m'  # Black
-colors[URed]='\033[4;31m'    # Red
-colors[UGreen]='\033[4;32m'  # Green
-colors[UYellow]='\033[4;33m' # Yellow
-colors[UBlue]='\033[4;34m'   # Blue
-colors[UPurple]='\033[4;35m' # Purple
-colors[UCyan]='\033[4;36m'   # Cyan
-colors[UWhite]='\033[4;37m'  # White
+colors[UnderlineBlack]='\033[4;30m'  # Black
+colors[UnderlineRed]='\033[4;31m'    # Red
+colors[UnderlineGreen]='\033[4;32m'  # Green
+colors[UnderlineYellow]='\033[4;33m' # Yellow
+colors[UnderlineBlue]='\033[4;34m'   # Blue
+colors[UnderlinePurple]='\033[4;35m' # Purple
+colors[UnderlineCyan]='\033[4;36m'   # Cyan
+colors[UnderlineWhite]='\033[4;37m'  # White
 
 # Background
 colors[On_Black]='\033[40m'  # Black
@@ -46,37 +49,34 @@ colors[On_Cyan]='\033[46m'   # Cyan
 colors[On_White]='\033[47m'  # White
 
 # High Intensity
-colors[IBlack]='\033[0;90m'  # Black
-colors[IRed]='\033[0;91m'    # Red
-colors[IGreen]='\033[0;92m'  # Green
-colors[IYellow]='\033[0;93m' # Yellow
-colors[IBlue]='\033[0;94m'   # Blue
-colors[IPurple]='\033[0;95m' # Purple
-colors[ICyan]='\033[0;96m'   # Cyan
-colors[IWhite]='\033[0;97m'  # White
+colors[HighIntensityBlack]='\033[0;90m'  # Black
+colors[HighIntensityRed]='\033[0;91m'    # Red
+colors[HighIntensityGreen]='\033[0;92m'  # Green
+colors[HighIntensityYellow]='\033[0;93m' # Yellow
+colors[HighIntensityBlue]='\033[0;94m'   # Blue
+colors[HighIntensityPurple]='\033[0;95m' # Purple
+colors[HighIntensityCyan]='\033[0;96m'   # Cyan
+colors[HighIntensityWhite]='\033[0;97m'  # White
 
 # Bold High Intensity
-colors[BIBlack]='\033[1;90m'  # Black
-colors[BIRed]='\033[1;91m'    # Red
-colors[BIGreen]='\033[1;92m'  # Green
-colors[BIYellow]='\033[1;93m' # Yellow
-colors[BIBlue]='\033[1;94m'   # Blue
-colors[BIPurple]='\033[1;95m' # Purple
-colors[BICyan]='\033[1;96m'   # Cyan
-colors[BIWhite]='\033[1;97m'  # White
+colors[HighIntensityBoldBlack]='\033[1;90m'  # Black
+colors[HighIntensityBoldRed]='\033[1;91m'    # Red
+colors[HighIntensityBoldGreen]='\033[1;92m'  # Green
+colors[HighIntensityBoldYellow]='\033[1;93m' # Yellow
+colors[HighIntensityBoldBlue]='\033[1;94m'   # Blue
+colors[HighIntensityBoldPurple]='\033[1;95m' # Purple
+colors[HighIntensityBoldCyan]='\033[1;96m'   # Cyan
+colors[HighIntensityBoldWhite]='\033[1;97m'  # White
 
 # High Intensity backgrounds
-colors[On_IBlack]='\033[0;100m'  # Black
-colors[On_IRed]='\033[0;101m'    # Red
-colors[On_IGreen]='\033[0;102m'  # Green
-colors[On_IYellow]='\033[0;103m' # Yellow
-colors[On_IBlue]='\033[0;104m'   # Blue
-colors[On_IPurple]='\033[0;105m' # Purple
-colors[On_ICyan]='\033[0;106m'   # Cyan
-colors[On_IWhite]='\033[0;107m'  # White
-
-# Custom set
-colors[On_CGreen]='\033[1;29;42m'
+colors[On_HighIntensityBlack]='\033[0;100m'  # Black
+colors[On_HighIntensityRed]='\033[0;101m'    # Red
+colors[On_HighIntensityGreen]='\033[0;102m'  # Green
+colors[On_HighIntensityYellow]='\033[0;103m' # Yellow
+colors[On_HighIntensityBlue]='\033[0;104m'   # Blue
+colors[On_HighIntensityPurple]='\033[0;105m' # Purple
+colors[On_HighIntensityCyan]='\033[0;106m'   # Cyan
+colors[On_HighIntensityWhite]='\033[0;107m'  # White
 
 # Usage:
 # color=${colors[$input_color]}
