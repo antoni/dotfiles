@@ -11,7 +11,7 @@ source "$HOME"/dotfiles/utils.sh
 
 function command_exists() { type "$1" &>/dev/null; }
 
-if [[ "$unamestr" == 'Darwin' ]]; then
+if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
 	# macOS-specific
 	alias copy_to_clipboard='pbcopy'
 	alias setmiddlevolume='sudo osascript -e "set Volume 5"'
@@ -113,7 +113,7 @@ elif test -f /proc/sys/kernel/osrelease && grep -q microsoft /proc/sys/kernel/os
 		cp -r "$src_folder" "/mnt/c/Users/""$WINDOWS_USERNAME""/Desktop/"
 	}
 
-elif [[ "$unamestr" == 'Linux' ]]; then
+elif [[ "$UNAME_OUTPUT" == 'Linux' ]]; then
 	# Debian/Ubuntu
 	function listkernels() {
 		dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d'
@@ -1627,7 +1627,7 @@ function check_dns_server_settings_check() {
 
 function flush_dns_cache() {
 	# macOS
-	if [[ "$unamestr" == 'Darwin' ]]; then
+	if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
 		sudo dscacheutil -flushcache
 		sudo killall -HUP mDNSResponder
 	fi
@@ -1957,6 +1957,6 @@ END {
 }
 
 function find_and_replace() {
-    find . -type f -not -path *.git/* -not -path *node_modules/* -not -path *.yarn/* -exec \
-        sed -i "s/""$1""/""$2""/g" {} \;
+	find . -type f -not -path *.git/* -not -path *node_modules/* -not -path *.yarn/* -exec \
+		sed -i "s/""$1""/""$2""/g" {} \;
 }
