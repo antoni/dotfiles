@@ -4,9 +4,7 @@ declare -A colors
 
 # TODO: Create log_info, log_warning, log_error functions
 
-# Reset
-# TODO: Check is it's being used everywhere
-colors[Color_Off]='\033[0m' # Text Reset
+colors[Reset_Color]='\033[0m' # Text color reset
 
 # Regular Colors
 colors[Black]='\033[0;30m'  # Black

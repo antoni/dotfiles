@@ -96,5 +96,5 @@ function date_plus_days() {
 function print_success_message() {
 	local message=$1
 	echo -e "\033[1;29;42m DONE \033[0m \033[1;32m $1 \033[0m"
-	echo -e "${colors[Color_Off]}"
+	echo -e "${colors[Reset_Color]}"
 }
