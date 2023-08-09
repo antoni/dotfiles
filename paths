@@ -43,7 +43,7 @@ export PATH=$ANDROID_HOME/platform-tools:$PATH
 export PATH=$ANDROID_HOME/build-tools/19.1.0:$PATH
 
 # LLVM (macOS)
-if [[ "$unamestr" == 'Darwin' ]]; then
+if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
     export PATH="$(brew --prefix llvm)/bin:$PATH"
 fi
 
