@@ -39,24 +39,17 @@ git clone git@github.com:antoni/scripts.git ~/scripts
 
 ./install/install.sh
 
-#
-
 # Set deafult browser
-
 defbro com.google.Chrome
 
 # VSCode settings sync
-
 printf 'You need to configure VSCode settings sync manually ("Turn on Settings sync")'
-
-# XX
 
 printf 'Login to Github using (Github CLI)'
 
 gh auth login
 
-# Githu NPM registry login
-
+# GitHub NPM registry login
 printf 'Login to Github NPM registry'
 
 npm config set registry https://npm.pkg.github.com/
