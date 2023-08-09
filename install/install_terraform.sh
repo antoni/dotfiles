@@ -8,7 +8,7 @@ sudo apt install terraform
 
 # Fix ~/.gnupg ownership
 sudo gpgconf --kill dirmngr
-# Run gpg if there is no ./gnupg 
+# Run gpg if there is no ./gnupg
 sudo chown -R "$USER" ~/.gnupg
 
 # TFlint

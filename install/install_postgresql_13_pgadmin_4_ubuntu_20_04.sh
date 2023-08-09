@@ -7,7 +7,7 @@ set -ue
 
 # Update all your packages
 sudo apt update
-sudo apt upgrade -y
+sudo apt upgrade --assume-yes
 
 # Add postgresql repository and key
 sudo sh -c 'echo "deb [arch=$(dpkg --print-architecture)] http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
@@ -36,7 +36,7 @@ function install_pgadmin() {
 install_pgadmin
 
 # Install postgresql-13
-sudo apt-get -y install postgresql-13
+sudo apt-get --assume-yes install postgresql-13
 
 # Check version to see if it's correct
 psql --Version

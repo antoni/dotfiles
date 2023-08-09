@@ -652,7 +652,8 @@ function gitignore() {
 # Helper for watch_dir
 function watch_dir_action() {
 	while read -r path action file; do
-		printf "[${colors[Green]}%s${colors[White]}]\t${colors[Red]}%s${colors[White]}\tin\t%s\n" "$action" "$file" "$path"
+		printf "[${colors[Green]}%s${colors[White]}]\t${colors[Red]}%s${colors[Color_Off]}\tin\t%s\n" \
+			"$action" "$file" "$path"
 	done
 }
 
@@ -785,7 +786,7 @@ function update_packages_ubuntu() {
 	echo "Updating apt packages..."
 	sudo apt-get update &>/dev/null
 	echo "Upgrading apt packages..."
-	sudo apt-get upgrade -y &>/dev/null
+	sudo apt-get upgrade --assume-yes &>/dev/null
 	echo "Autoremoving apt packages..."
 	sudo apt-get autoremove &>/dev/null
 }
@@ -1734,14 +1735,6 @@ alias cut_after_first_space="sed 's/\s.*$//'"
 # string3
 alias cut_before_first_space="cut -d' ' -f 2-"
 
-# TODO: Move to git commands
-function show_commit_from_n_last_days() {
-	local -r n_last_days="$1"
-	local -r author="$2"
-	git --no-pager log --pretty=format:%s --abbrev-commit --since="$n_last_days days ago" --author="$author" |
-		cut_before_first_space
-}
-
 function cal_restart() {
 	sudo service postgresql restart
 	git pull origin
@@ -1773,12 +1766,16 @@ function http_headers() {
 }
 
 function open_debugging_browser() {
-	# TODO: Add OS check
-	open ~/scripts/chrome_symlinks/Chrome\ Canary\ with\ Debugger.app
+	# macOS
+	if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
+		open ~/scripts/chrome_symlinks/Chrome\ Canary\ with\ Debugger.app
+	fi
 
 	# Windows (WSL)
-	# open 'chrome Windows with debugging on port 9999.lnk'
-	# ~/scripts/chrome_symlinks/chrome_linux_inside_wsl.sh
+	if [[ -n "$IS_WSL" ]]; then
+		# open 'chrome Windows with debugging on port 9999.lnk'
+		~/scripts/chrome_symlinks/chrome_linux_inside_wsl.sh
+	fi
 }
 
 function yarn_last() {
@@ -1791,11 +1788,6 @@ function refresh_apt_keys() {
 
 function code_no_extensions() {
 	code --disable-extensions "$@"
-}
-
-function approve_pull_request() {
-	local -r pull_request_id="$1"
-	gh pr review --approve "$pull_request_id"
 }
 
 function git_default_branch() {

@@ -15,4 +15,4 @@ sudo dpkg -i wkhtmltox_0.12.6.1-2.jammy_amd64.deb
 # wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
 # tar xvf wkhtmltox*.tar.xz
 # sudo mv wkhtmltox/bin/wkhtmlto* /usr/bin
-sudo apt-get install -y openssl build-essential libssl-dev libxrender-dev git-core libx11-dev libxext-dev libfontconfig1-dev libfreetype6-dev fontconfig xfonts-75dpi
+sudo apt-get install --assume-yes openssl build-essential libssl-dev libxrender-dev git-core libx11-dev libxext-dev libfontconfig1-dev libfreetype6-dev fontconfig xfonts-75dpi

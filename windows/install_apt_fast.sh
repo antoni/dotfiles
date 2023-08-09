@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 # Install
-sudo add-apt-repository -y ppa:apt-fast/stable
+sudo add-apt-repository --assume-yes ppa:apt-fast/stable
 sudo apt-get update
-sudo DEBIAN_FRONTEND=noninteractive apt-get -y install apt-fast
+sudo DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install apt-fast
 
 # Configure
 
