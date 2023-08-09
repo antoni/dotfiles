@@ -39,7 +39,6 @@ if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
 	function battery_recharge_cycles_count() {
 		system_profiler SPPowerDataType | \grep "Cycle Count" | awk '{print $3}'
 	}
-	alias heic_to_jpg='magick mogrify -monitor -format jpg *.HEIC'
 
 	alias software_version='system_profiler SPSoftwareDataType'
 
@@ -867,26 +866,6 @@ alias sizes='du -sh * | sort -hr'
 
 alias speedtest='curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -'
 
-# Converts SVG to PNG
-# Usage svg_to_png input_image_path [output_image_height]
-function svg_to_png() {
-	local -r filename=$(filename_without_extension "$1")
-	local output_filename=$filename.png
-	local output_image_height=${2:-32}
-	rsvg-convert -h "$output_image_height" "$1" >"$output_filename" && echo "Successfully created $output_filename" || echo "Error converting $1 to $output_filename"
-}
-
-function webptopng() {
-	local -r filename=$(filename_without_extension "$1")
-	local output_filename=$filename.png
-	local output_image_height=${2:-32}
-	dwebp "$1" -o "$output_filename"
-}
-
-function pdftojpg() {
-	pdfimages -j "$1" page
-}
-
 function android_update() {
 	android update sdk --no-ui
 }
@@ -1183,7 +1162,7 @@ function brew_cleanup_package() {
 	# remove possible broken symlinks
 	brew cleanup
 
-	# install httping again
+	# install again
 	brew install "$package_name"
 
 	# check the version
@@ -1690,10 +1669,6 @@ alias wsl2_host_ip='cat /etc/resolv.conf | \grep nameserver | cut -d" " -f2'
 
 # Windows, see: https://stackoverflow.com/a/69011313/963881
 alias pip3='DISPLAY="" pip3'
-#alias pip='pip3'
-
-# TODO: Replace with system wide link, cross-OS
-# alias python='python3'
 
 # Windows
 alias reboot='shutdown -r'
@@ -1795,7 +1770,7 @@ function git_default_branch() {
 	LC_ALL=C git remote show $origin_name | sed -n '/HEAD branch/s/.*: //p'
 }
 
-# TODO: Usage
+# TODO: ChatGPT Usage
 function diff_json() {
 	local file1="${1}"
 	local file2="${2}"
@@ -1860,15 +1835,15 @@ function flatten_directory() {
 	fi
 
 	# Get the directory to flatten
-	dir=$1
+	local -r flattened_directory="$1"
 
 	# Move all files and subdirectories to the given directory
-	for file in ""$dir""/*; do
-		mv ""$file"" ""$dir""
+	for file in "$flattened_directory"/*; do
+		mv "$file" "$flattened_directory"
 	done
 
 	# Delete all subdirectories
-	find ""$dir"" -type d -depth 1 -exec rm -r {} \;
+	find "$flattened_directory" -type d -depth 1 -exec rm -r {} \;
 }
 
 alias gs='git stash'
@@ -1877,18 +1852,6 @@ function record_audio() {
 	# TODO: Make it work on Linux (macOS only for now)
 	OUT=${1-output.aac}
 	ffmpeg -f avfoundation -ac 2 -i :0 -c:a aac -ab 96k $OUT
-}
-
-function jpg_to_png() {
-	mogrify -format png "$1"
-}
-
-# TODO: Move to image utils
-# Resize image, keep aspect ratio and fill blank space
-function jpg_to_png() {
-	local input="$1"
-	local output="$2"
-	convert $input -resize 200x200 -background white -gravity center -extent 200x200 $output
 }
 
 function random_mac_address() {
@@ -1919,14 +1882,26 @@ function show_image_geo_location() {
 	./get_geo_coordinates.sh "$image_path"
 }
 
+# Converts input to human-readable form
+# Assumes the following input:
+# -rw-r--r--  1 antoni  staff  1288818 Dec 30  2022 ./file1.svg
+# -rw-r--r--  1 antoni  staff  1282458 Dec 30  2022 ./file2.svg
+# -rw-r--r--  1 antoni  staff  1281326 Dec 30  2022 ./file3.svg
+function convert_size_to_human_readable_form() {
+	awk '{ split( "B kB MB GB TB PB EB ZB YB" , sizeValue );
+	       sizeIncrement=1;
+				 while( $5 > 1024 && sizeIncrement < 9 ){ $5/=1024; sizeIncrement++ }
+				 printf "%6.2f%s %s\n", $5, sizeValue[sizeIncrement], $9 }'
+}
+
 # Usage:
 # list_files_greater_than 128k
 # list_files_greater_than 16M
-# TODO: Export awk function to sep. func. for converting
-# file sizes to human-readable form
 function list_files_greater_than() {
 	local -r greater_than="+$1"
-	find . -type f -size "$greater_than" -exec ls -l {} \; | sort --stable --numeric-sort --key=5 --reverse | awk '{ split( "B kB MB GB TB PB EB ZB YB" , v ); s=1; while( $5>1024 && s<9 ){ $5/=1024; s++ } printf "%6.2f%s %s\n", $5, v[s], $9 }'
+	find . -type f -size "$greater_than" -exec ls -l {} \; |
+		sort --stable --numeric-sort --key=5 --reverse |
+		convert_size_to_human_readable_form
 }
 
 function transpose() {

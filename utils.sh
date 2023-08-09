@@ -5,6 +5,7 @@ export HOME_DIR=$HOME
 export DOTFILES_DIR=$HOME_DIR/dotfiles
 
 source "$DOTFILES_DIR"/colors.sh
+source "$DOTFILES_DIR"/format_conversion.sh
 
 UNAME_OUTPUT="$(uname)"
 export UNAME_OUTPUT
