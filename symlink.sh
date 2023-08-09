@@ -17,7 +17,8 @@ function setup_int_handler() {
 
 # setup_int_handler
 # shellcheck disable=SC2154
-echo -en "${colors[BoldGreen]}Enter sudo password:${colors[Color_Off]}"
+echo -en "${colors[BoldGreen]}Enter sudo password:${colors[Reset_Color]}"
+
 # read -rs SUDO_PASS
 # clear
 sudo_keep_alive
@@ -44,7 +45,7 @@ JMETER_VERSION=$(echo "$HOME"/apache-jmeter-* | awk -F'-' '{print $3}')
 echo "JMeter             version symlinked:   " "$JMETER_VERSION"
 SWEET_HOME_VERSION=$(echo "$HOME"/SweetHome3D-* | awk -F'-' '{print $2}')
 echo "SweetHome3D        version symlinked:   " "$SWEET_HOME_VERSION"
-echo -e "${colors[White]}"
+echo -e "${colors[Reset_Color]}"
 
 DOTFILES=(profile bashrc zshrc vimrc paths aliases bash_profile common_profile.sh tmux.conf
 	gitconfig gitignore gitattributes ghci gvimrc hgrc lldbinit gdbinit xbindkeysrc
@@ -336,11 +337,11 @@ function main() {
 	# && mv cuda.snippets ~/.vim/bundle/vim-snippets/snippets/
 
 	echo -e "${colors[BoldYellow]}Things to be (possibly) done manually:\n\n\
-    \t* /sys/class/backlight/\t\tto make xbacklight work""${colors[BoldWhite]}"
+    \t* /sys/class/backlight/\t\tto make xbacklight work""${colors[Reset_Color]}"
 
 	function setup_hostname() {
 		hostname_default="automatown"
-		echo -en "${colors[BoldGreen]}Enter hostname for the current machine [$hostname_default]:${colors[White]} "
+		echo -en "${colors[BoldGreen]}Enter hostname for the current machine [$hostname_default]:${colors[Reset_Color]} "
 		read -r hostname
 		hostname=${hostname:-$hostname_default}
 

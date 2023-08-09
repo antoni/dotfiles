@@ -651,7 +651,7 @@ function gitignore() {
 # Helper for watch_dir
 function watch_dir_action() {
 	while read -r path action file; do
-		printf "[${colors[Green]}%s${colors[White]}]\t${colors[Red]}%s${colors[Color_Off]}\tin\t%s\n" \
+		printf "[${colors[Green]}%s${colors[White]}]\t${colors[Red]}%s${colors[Reset_Color]}\tin\t%s\n" \
 			"$action" "$file" "$path"
 	done
 }

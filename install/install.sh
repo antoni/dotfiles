@@ -11,7 +11,7 @@ source "$DOTFILES_DIR"/mac/brew_install.sh
 source "$DOTFILES_DIR"/utils.sh
 source "$DOTFILES_DIR"/colors.sh
 
-# echo -en "${colors[BoldGreen]}Enter sudo password:${colors[White]} "
+# echo -en "${colors[BoldGreen]}Enter sudo password:${colors[Reset_Color]} "
 # read -s SUDO_PASS
 
 # TODO: Fix PACKAGES below (missing on Ubuntu)
