@@ -1,18 +1,25 @@
 #!/usr/bin/env bash
 set -ue
 
+# Aliases and custom functions
+source "$HOME"/dotfiles/colors.sh
+source "$HOME"/dotfiles/utils.sh
+
 function update_pip_packages() {
-	DISPLAY="" pip3 list --outdated | awk '{print $1}' | tail -n +3 | DISPLAY="" xargs -I % sh -c 'pip3 install --upgrade %'
+	DISPLAY="" pip3 list --outdated | awk '{print $1}' | tail -n +3 |
+		DISPLAY="" xargs -I % sh -c 'pip3 install --upgrade %'
 }
 
 function upgrade_apt_packages() {
 	echo "Upgrading apt packages..."
 
-	# TODO: Run this on WSL only
-	sudo hwclock --hctosys
+	if [[ -n "$IS_WSL" ]]; then
+		sudo hwclock --hctosys
+	fi
 
 	# https://askubuntu.com/a/668859/342465
-	sudo apt-get update -qq -o=Dpkg::Use-Pty=0 && sudo apt-get upgrade -qq -o=Dpkg::Use-Pty=0 --assume-yes
+	sudo apt-get update -qq -o=Dpkg::Use-Pty=0 &&
+		sudo apt-get upgrade -qq -o=Dpkg::Use-Pty=0 --assume-yes
 
 	sudo apt autoremove --assume-yes
 }
@@ -20,7 +27,7 @@ function upgrade_apt_packages() {
 function update_all() {
 	pushd ~ &>/dev/null || exit # to correctly update global NPM packages
 
-	if [[ "$unamestr" == 'Darwin' ]]; then
+	if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
 		# This sometimes breaks Homebrew taps upgrade
 		# update_xcode
 
