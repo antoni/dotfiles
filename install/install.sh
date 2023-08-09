@@ -143,10 +143,11 @@ function main() {
 
 		"$DOTFILES_DIR"/mac/post_install.sh
 	fi
-	# TODO: Add guard: Linux only
-	sudo locale-gen en_US.UTF-8
 
-	# TODO: Use color in exit_with_error_message
+	if [[ "$UNAME_OUTPUT" == 'Linux' ]]; then
+		sudo locale-gen en_US.UTF-8
+	fi
+
 	install_oh_my_zsh || exit_with_error_message "Could not install oh-my-zsh"
 	install_zsh_plugins || exit_with_error_message "Could not install zsh plugins"
 
