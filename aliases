@@ -557,7 +557,7 @@ alias dns_list_all='dig +nocmd yourdomain.com any +multiline +noall +answer'
 alias install_ycm='~/.vim/bundle/YouCompleteMe/install.py --clang-completer --gocode-completer'
 alias switchm="xrandr --output VGA1 --left-of DP2" # switches monitors (left-right)
 
-alias di='sudo dnf install -y'
+alias di='sudo dnf install --assumeyes'
 alias ds='dnf search -C'
 alias dr='sudo dnf remove'
 
