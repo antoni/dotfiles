@@ -117,13 +117,13 @@ function mac_symlink() {
 
 # Fedora regular updates
 function fedora_regular_updates() {
-	sudo dnf install dnf-automatic
+	sudo dnf install --assumeyes dnf-automatic
 	sudo systemctl enable dnf-automatic.timer && systemctl start dnf-automatic.timer
 }
 
 # Fedora upgrade
 function fedora_system_upgrade() {
-	sudo dnf install python3-dnf-plugin-system-upgrade
+	sudo dnf install --assumeyes python3-dnf-plugin-system-upgrade
 	sudo dnf system-upgrade download --refresh --releasever=26
 	sudo dnf system-upgrade reboot
 }

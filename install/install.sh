@@ -68,11 +68,11 @@ function install_yarn_debian() {
 
 function install_fedora_sound() {
 	echo "Installing Video and audio codecs on Fedora"
-	su -c "dnf install --nogpgcheck http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
+	su -c "dnf install --assumeyes --nogpgcheck http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
 
 	sudo_exec dnf update
 
-	sudo_exec dnf install -y gstreamer-plugins-bad gstreamer-plugins-bad-free-extras gstreamer-plugins-bad-nonfree gstreamer-plugins-ugly gstreamer-ffmpeg gstreamer1-libav gstreamer1-plugins-bad-free-extras gstreamer1-plugins-bad-freeworld gstreamer1-plugins-base-tools gstreamer1-plugins-good-extras gstreamer1-plugins-ugly gstreamer1-plugins-bad-free gstreamer1-plugins-good gstreamer1-plugins-base gstreamer1 x264 vlc smplayer
+	sudo_exec dnf install --assumeyes gstreamer-plugins-bad gstreamer-plugins-bad-free-extras gstreamer-plugins-bad-nonfree gstreamer-plugins-ugly gstreamer-ffmpeg gstreamer1-libav gstreamer1-plugins-bad-free-extras gstreamer1-plugins-bad-freeworld gstreamer1-plugins-base-tools gstreamer1-plugins-good-extras gstreamer1-plugins-ugly gstreamer1-plugins-bad-free gstreamer1-plugins-good gstreamer1-plugins-base gstreamer1 x264 vlc smplayer
 }
 
 function install_snap_packages() {
@@ -289,7 +289,7 @@ function install_nvidia_driver() {
 }
 
 function install_r_studio() {
-	sudo_exec dnf install "$(curl -s https://www.rstudio.com/products/rstudio/download/ |
+	sudo_exec dnf install --assumeyes "$(curl -s https://www.rstudio.com/products/rstudio/download/ |
 		\grep -o "\"[^ \"]*x86_64.rpm\"" | sed "s/\"//g")"
 }
 
