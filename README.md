@@ -43,6 +43,7 @@
 - Linux/WSL: [write Windows on USB](https://github.com/WoeUSB/WoeUSB-ng)
 - technology badges (a la [dolanmiu](https://github.com/dolanmiu))
 - sysctl.conf: https://stackoverflow.com/a/55763478/963881
+- windows minimize windows at startup
 
 ## ChatGPT prompts
 
