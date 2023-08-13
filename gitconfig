@@ -85,6 +85,7 @@
     slog = "!git log --pretty=format:%s | head -n 1"
     # Show diff with deleted files only
     deleted = diff --diff-filter=D
+    list-untracked = ls-files --others --exclude-standard
     # Rewrite previous commit usernames and emails
     # git change-commits GIT_AUTHOR_NAME "old name" "new name"
     #
