@@ -1927,3 +1927,7 @@ function find_and_replace() {
 	find . -type f -not -path *.git/* -not -path *node_modules/* -not -path *.yarn/* -exec \
 		sed -i "s/""$1""/""$2""/g" {} \;
 }
+
+function strikethrough_text() {
+	awk -F'[^[:alpha:]]+' 'BEGIN{string=sprintf("\xCC\xB6")}{for (letter_index=1;letter_index<=NF;letter_index++)gsub(/./, "&" string, $letter_index); print}'
+}
