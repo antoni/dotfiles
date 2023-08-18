@@ -253,7 +253,7 @@ function main() {
 
 				printf "Replacing Notepad++ settings at: '%s'\n" "$target_path"
 
-				envsubst notepad_plus_plus_settings.template.xml >"$target_path"
+				envsubst <windows/notepad_plus_plus_settings.template.xml >"$target_path"
 			}
 			replace_notepad_plus_plus_settings
 		else
