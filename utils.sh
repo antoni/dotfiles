@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export IS_WSL="$WSL_DISTRO_NAME"
+export IS_WSL="${WSL_DISTRO_NAME:-""}"
 export HOME_DIR=$HOME
 export DOTFILES_DIR=$HOME_DIR/dotfiles
 
