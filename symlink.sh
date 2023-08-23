@@ -226,6 +226,8 @@ function main() {
 	# adb
 	sudo_exec ln -fs "$HOME_DIR"/Android/Sdk/platform-tools/adb /usr/local/bin/adb
 
+	ln -fs "$HOME_DIR"/dotfiles/antoni.zsh-theme "$HOME_DIR"/.oh-my-zsh/themes
+
 	# python
 	sudo_exec ln -fs "$(which python3)" /usr/local/bin/python
 

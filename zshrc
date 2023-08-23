@@ -7,9 +7,7 @@ source $HOME/dotfiles/common_rc.sh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-# ZSH_THEME="random"
-# ZSH_THEME="robbyrussell"
-ZSH_THEME="af-magic"
+ZSH_THEME="antoni"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -190,24 +188,6 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-# bun completions
-[ -s "/Users/antoni/antoni/.bun/_bun" ] && source "/Users/antoni/antoni/.bun/_bun"
-
-
-
-
-# export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-# export PATH=$PATH:$JAVA_HOME/bin
-
-# export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-# export PATH=$PATH:$JAVA_HOME/bin
-
-# export ANDROID_HOME=/home/antoni/Android
-# export PATH=$PATH:$ANDROID_HOME/tools
-# export PATH=$PATH:$ANDROID_HOME/platform-tools
-
-# export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-# export PATH=$PATH:$JAVA_HOME/bin
 
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 export PATH=$PATH:$JAVA_HOME/bin
