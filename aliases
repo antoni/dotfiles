@@ -1126,7 +1126,7 @@ function random_password() {
 function commits_between_dates {
 	local date_from=$1
 	local date_to=$2
-	git log --date=iso --pretty=format:'%ad	%aN	%s' | awk '$0 >= "'"$date_from"'" && $0 <= "'"$date_to"'"'
+	git log --date=iso --pretty=format:'%ad  %aN  %s' | awk '$0 >= "'"$date_from"'" && $0 <= "'"$date_to"'"'
 }
 
 function git_delete_tag() {
@@ -1889,9 +1889,9 @@ function show_image_geo_location() {
 # -rw-r--r-- 1 antoni staff 1281326 Dec 30 2022 ./file3.svg
 function convert_size_to_human_readable_form() {
 	awk '{ split( "B kB MB GB TB PB EB ZB YB" , sizeValue );
-	 sizeIncrement=1;
-				 while( $5 > 1024 && sizeIncrement < 9 ){ $5/=1024; sizeIncrement++ }
-				 printf "%6.2f%s %s\n", $5, sizeValue[sizeIncrement], $9 }'
+    sizeIncrement=1;
+    while( $5 > 1024 && sizeIncrement < 9 ){ $5/=1024; sizeIncrement++ }
+    printf "%6.2f%s %s\n", $5, sizeValue[sizeIncrement], $9 }'
 }
 
 # Usage:
@@ -1907,19 +1907,19 @@ function list_files_greater_than() {
 function transpose() {
 	awk '
 {
- for (i=1; i<=NF; i++) {
- a[NR,i] = $i
- }
+  for (i=1; i<=NF; i++) {
+  a[NR,i] = $i
+  }
 }
 NF>p { p = NF }
 END {
- for(j=1; j<=p; j++) {
- str=a[1,j]
- for(i=2; i<=NR; i++){
- str=str" "a[i,j];
- }
- print str
- }
+  for(j=1; j<=p; j++) {
+    str=a[1,j]
+    for(i=2; i<=NR; i++){
+      str=str" "a[i,j];
+    }
+    print str
+  }
 }' "$@"
 }
 
