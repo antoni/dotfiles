@@ -1931,3 +1931,30 @@ function find_and_replace() {
 function strikethrough_text() {
 	awk -F'[^[:alpha:]]+' 'BEGIN{string=sprintf("\xCC\xB6")}{for (letter_index=1;letter_index<=NF;letter_index++)gsub(/./, "&" string, $letter_index); print}'
 }
+
+function is_url() {
+	regex='(https?|ftp|file)://[-[:alnum:]\+&@#/%?=~_|!:,.;]*[-[:alnum:]\+&@#/%=~_|]'
+	string="$1"
+
+	if [[ $string =~ $regex ]]; then
+		return 0
+	else
+		return 1
+	fi
+}
+
+# TODO: Make it read from stdin
+# https://stackoverflow.com/questions/11454343/pipe-output-to-bash-function/36432966#36432966
+function filter_stream() {
+	# stream="$1"
+	read stream
+	echo $stream
+
+	filter_function_name="$2"
+	for l in $stream; do
+		# for l in $(cat email_agent_environments.ts); do
+		if $(is_url $l); then
+			echo $l
+		fi
+	done
+}
