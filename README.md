@@ -34,6 +34,7 @@
 
 ## Ideas
 
+- MOve from Chrome to Chromium
 - Add Windows install script based on (fly.io)[https://fly.io/]: https://fly.io/install.ps1
 - Use this for Windows machine prov.?: https://github.com/ntdevlabs/tiny11builder
 - Windows: automatic custom keyboard layout
