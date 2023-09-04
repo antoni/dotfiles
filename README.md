@@ -34,7 +34,9 @@
 
 ## Ideas
 
-- MOve from Chrome to Chromium
+- custom winget repository
+- Move from Chrome to Chromium
+- custom Chromium build for Win (like: https://github.com/Hibbiki/chromium-win64)
 - Add Windows install script based on (fly.io)[https://fly.io/]: https://fly.io/install.ps1
 - Use this for Windows machine prov.?: https://github.com/ntdevlabs/tiny11builder
 - Windows: automatic custom keyboard layout
