@@ -17,8 +17,6 @@ WINGET_COMMAND_INSTALL="$WINGET_ALIAS install \
 
 MUST_HAVE=(
 	Google.Chrome
-	chromium
-	putty
 	PuTTY.PuTTY
 	vscode
 	Python
