@@ -1924,7 +1924,10 @@ END {
 }
 
 function find_and_replace() {
-	find . -type f -not -path *.git/* -not -path *node_modules/* -not -path *.yarn/* -exec \
+	find . -type f \
+		-not -path "*.git/*" \
+		-not -path "*node_modules/*" \
+		-not -path "*.yarn/*" -exec \
 		sed -i "s/""$1""/""$2""/g" {} \;
 }
 
@@ -1943,18 +1946,13 @@ function is_url() {
 	fi
 }
 
-# TODO: Make it read from stdin
-# https://stackoverflow.com/questions/11454343/pipe-output-to-bash-function/36432966#36432966
+# Example:
+# cat input_file | filter_stream 'is_url'
 function filter_stream() {
-	# stream="$1"
-	read stream
-	echo $stream
-
-	filter_function_name="$2"
-	for l in $stream; do
-		# for l in $(cat email_agent_environments.ts); do
-		if $(is_url $l); then
-			echo $l
+	function_name="$1"
+	while IFS= read -r line; do
+		if eval "$name" "$line"; then
+			printf '%s\n' "$line"
 		fi
 	done
 }
