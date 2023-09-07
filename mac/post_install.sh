@@ -72,6 +72,7 @@ function post_install() {
 			duti -s "$(app_id 'PYM Player')" .avi all
 			duti -s "$(app_id 'PYM Player')" .mkv all
 			duti -s "$(app_id 'PYM Player')" .mp4 all
+			duti -s "$(app_id 'TextMate')" .json all
 			duti -s "$(app_id 'TextMate')" .txt all
 			duti -s "$(app_id 'TextMate')" .lua all
 			duti -s "$(app_id 'TeXShop')" .tex all
