@@ -56,7 +56,7 @@ function update_all() {
 		# Close VS Code beforehand (winget will request to close it via GUI otherwise)
 		taskkill.exe /IM Code.exe
 
-		winget.exe upgrade --all --include-unknown
+		winget upgrade --all --include-unknown
 
 		# Delete all links on Desktop: current user
 		rm -rf /mnt/c/Users/"${WINDOWS_USERNAME}"/Desktop/*.{lnk,url}
@@ -65,8 +65,6 @@ function update_all() {
 		# [Environment]::GetFolderPath('CommonDesktopDirectory')
 		rm -rf /mnt/c/Users/Public/Desktop/*.{lnk,url}
 	fi
-
-	source "${BASH_SOURCE%/*}/install/update_oh_my_zsh.sh"
 
 	echo "Upgrading Vim plugins..."
 	vim -i NONE -c PlugUpdate -c quitall &>/dev/null
