@@ -65,7 +65,7 @@ function update_all() {
 	fi
 
 	echo "Upgrading oh-my-zsh..."
-	zsh -c "omz update --unattended"
+	source "$HOME"/dotfiles/install/update_oh_my_zsh.sh
 
 	echo "Upgrading Vim plugins..."
 	vim -i NONE -c PlugUpdate -c quitall &>/dev/null
