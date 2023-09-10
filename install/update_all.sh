@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
 set -ue
 
+# Aliases and custom functions
+source "$HOME"/dotfiles/colors.sh
+source "$HOME"/dotfiles/utils.sh
+
 function update_pip_packages() {
-	DISPLAY="" pip3 list --outdated | awk '{print $1}' | tail -n +3 | DISPLAY="" xargs -I % sh -c 'pip3 install --upgrade %'
+	DISPLAY="" pip3 list --outdated | awk '{print $1}' | tail -n +3 |
+		DISPLAY="" xargs -I % sh -c 'pip3 install --upgrade %'
 }
 
 function upgrade_apt_packages() {
