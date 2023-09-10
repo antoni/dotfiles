@@ -74,9 +74,9 @@ function update_all() {
 	# The following command sometimes doesn't work:
 	# npx npm-check --global --update-all
 	# So instead we remove all the packages and do a fresh install:
-	rm -rf .npm-global_packages
+	rm -rf "$HOME"/.npm-global_packages
 
-	source "${BASH_SOURCE%/*}/install/install_global_javascript_npm_packages.sh"
+	source "$HOME"/dotfiles/install/install_global_javascript_npm_packages.sh
 	install_global_javascript_npm_packages
 	npm install --no-fund --no-progress --silent --quiet npm
 
