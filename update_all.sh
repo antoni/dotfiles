@@ -13,6 +13,7 @@ function update_pip_packages() {
 function upgrade_apt_packages() {
 	echo "Upgrading apt packages..."
 
+	# https://askubuntu.com/a/1169203/342465
 	if [[ -n "$IS_WSL" ]]; then
 		sudo hwclock --hctosys
 	fi
@@ -46,9 +47,6 @@ function update_all() {
 		echo "Updating WSL..."
 		wsl.exe --update
 
-		# https://askubuntu.com/a/1169203/342465
-		sudo hwclock --hctosys
-
 		# Run it first as it requires sudo
 		upgrade_apt_packages
 
@@ -65,6 +63,9 @@ function update_all() {
 		# [Environment]::GetFolderPath('CommonDesktopDirectory')
 		rm -rf /mnt/c/Users/Public/Desktop/*.{lnk,url}
 	fi
+
+	echo "Upgrading oh-my-zsh..."
+	zsh -c "omz update --unattended"
 
 	echo "Upgrading Vim plugins..."
 	vim -i NONE -c PlugUpdate -c quitall &>/dev/null
