@@ -51,8 +51,10 @@ function update_all() {
 		upgrade_apt_packages
 
 		echo "Upgrading WSL packages..."
-		# Close VS Code beforehand (winget will request to close it via GUI otherwise)
-		taskkill.exe /F /IM Code.exe
+		# Close Visual Studio Code beforehand (winget will request to close it via GUI otherwise)
+		if tasklist.exe | grep Code.exe; then
+			taskkill.exe /F /IM Code.exe
+		fi
 
 		winget.exe upgrade --all --include-unknown
 
