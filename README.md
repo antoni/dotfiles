@@ -34,6 +34,7 @@
 
 ## Ideas
 
+- macOS: replace sleepwatcher with [custom LaunchAgent](https://github.com/alb12-la/KBOS/tree/master)
 - custom winget repository
 - Move from Chrome to Chromium
 - custom Chromium build for Win (like: https://github.com/Hibbiki/chromium-win64)
