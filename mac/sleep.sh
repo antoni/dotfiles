@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
-# TODO: Add this to services:  /usr/local/sbin/sleepwatcher --verbose --sleep ~/.sleep --wake ~/.wakeup
+# symlinked to "$HOME"/.sleep (name imposed by sleepwatcher)
+
 source "$HOME"/dotfiles/mac/sleep_and_wake.sh && sleep
