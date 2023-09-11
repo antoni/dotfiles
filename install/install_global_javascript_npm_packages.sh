@@ -1,8 +1,8 @@
 # Make global packages install locally (without sudo)
 function create_npm_global_packages_directory() {
-	NPM_DIR="$HOME"/.npm-global_packages
-	mkdir -p "$NPM_DIR"
-	npm config set prefix "$NPM_DIR"
+	source "$HOME"/dotfiles/paths
+	mkdir -p "$NPM_GLOBAL_PACKAGES_DIRECTORY"
+	npm config set prefix "$NPM_GLOBAL_PACKAGES_DIRECTORY"
 }
 
 function install_global_javascript_npm_packages() {
