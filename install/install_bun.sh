@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 set -ue
 
-curl https://bun.sh/install | bash
+curl -fsSL https://bun.sh/install | bash
