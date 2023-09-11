@@ -61,7 +61,6 @@ function mac_change_hostname() {
 	sudo scutil --set ComputerName "$1"
 }
 
-# TODO: Start using it
 function gcc_symlink() {
 	# these are symlinks, so we can delete these safely
 	sudo rm -rf /usr/bin/{gcc,g++}
