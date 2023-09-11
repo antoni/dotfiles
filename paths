@@ -57,5 +57,6 @@ export GEM_HOME
 export PATH="$PATH:$(npm --prefix "$HOME"/tmp get prefix)/bin:$GEM_HOME/bin"
 
 # npm global packages
-# TODO: Move .npm-global_packages to constant
-export PATH=~/.npm-global_packages/bin:$PATH
+export NPM_GLOBAL_PACKAGES_DIRECTORY="$HOME"/.npm-global_packages
+
+export PATH="$NPM_GLOBAL_PACKAGES_DIRECTORY"/bin:$PATH
