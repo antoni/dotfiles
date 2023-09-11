@@ -257,6 +257,11 @@ function main() {
 				envsubst <windows/notepad_plus_plus_settings.template.xml >"$target_path"
 			}
 			replace_notepad_plus_plus_settings
+
+			function symlink_wsl_conf() {
+				sudo ln -sf "${DOTFILES_DIR}"/wsl.conf /etc/wsl.conf
+			}
+			symlink_wsl_conf
 		else
 			function linux_brightness_settings() {
 				sudo cp brightness.sh /root/
@@ -273,11 +278,6 @@ function main() {
 			}
 
 			linux_xrdb
-
-			function symlink_wsl_conf() {
-				sudo ln -sf "${DOTFILES_DIR}"/wsl.conf /etc/wsl.conf
-			}
-			symlink_wsl_conf
 		fi
 		;;
 	CYGWIN* | MINGW32* | MSYS* | MINGW*)
