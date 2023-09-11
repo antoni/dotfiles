@@ -9,8 +9,6 @@ set +x
 source "$HOME"/dotfiles/colors.sh
 source "$HOME"/dotfiles/utils.sh
 
-function command_exists() { type "$1" &>/dev/null; }
-
 if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
 	# macOS-specific
 	alias copy_to_clipboard='pbcopy'
