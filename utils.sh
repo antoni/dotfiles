@@ -10,6 +10,8 @@ source "$DOTFILES_DIR"/format_conversion.sh
 UNAME_OUTPUT="$(uname)"
 export UNAME_OUTPUT
 
+function command_exists() { type "$1" &>/dev/null; }
+
 # Example:
 # array=("one" "two" "three")
 # find_duplicates_in_array "${array[@]}"

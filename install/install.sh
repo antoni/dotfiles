@@ -5,9 +5,7 @@ DOTFILES_DIR="$HOME"/dotfiles
 
 mkdir -p tmp
 
-# TODO: Fixme
-# source "$DOTFILES_DIR"/install/chrome_install.sh
-
+source "$DOTFILES_DIR"/install/install_chrome.sh
 source "$DOTFILES_DIR"/mac/brew_install.sh
 source "$DOTFILES_DIR"/utils.sh
 source "$DOTFILES_DIR"/colors.sh
@@ -155,6 +153,8 @@ function main() {
 
 	install_tmux_plugin_manager || exit_with_error_message ""
 
+	install_golang || exit_with_error_message "Could not install golang"
+
 	crontab "$DOTFILES_DIR"/cron.jobs || exit_with_error_message ""
 }
 
@@ -267,18 +267,6 @@ function install_haskell_packages() {
 function install_r_packages() {
 	R_PACKAGES=() # see r_packages.txt
 	echo "install.packages(\"${R_PACKAGES[*]}\", repos=\"https://cran.rstudio.com\")" | R --no-save
-}
-
-# TODO: Add it to install script
-function install_go_packages() {
-	GO_PACKAGES=(github.com/derekparker/delve/cmd/dlv github.com/Sirupsen/logrus
-		github.com/mvdan/sh/cmd/shfmt github.com/tomnomnom/gron
-		github.com/rverton/webanalyze/cmd/webanalyze mvdan.cc/sh/v3/cmd/shfmt)
-
-	# shellcheck disable=2048
-	for package in ${GO_PACKAGES[*]}; do
-		go install "$package""@latest"
-	done
 }
 
 function install_nvidia_driver() {
