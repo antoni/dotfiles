@@ -63,7 +63,7 @@ function update_all() {
 
 		# Delete all links on Desktop: all users
 		# [Environment]::GetFolderPath('CommonDesktopDirectory')
-		rm -rf /mnt/c/Users/Public/Desktop/*.{lnk,url}
+		rm -rf /mnt/c/Users/Public/{desktop,Desktop}/*.{lnk,url}
 	fi
 
 	echo "Upgrading oh-my-zsh..."
