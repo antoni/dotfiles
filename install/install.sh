@@ -7,15 +7,13 @@ mkdir -p tmp
 
 # TODO: Fixme
 # source "$DOTFILES_DIR"/install/chrome_install.sh
+
 source "$DOTFILES_DIR"/mac/brew_install.sh
 source "$DOTFILES_DIR"/utils.sh
 source "$DOTFILES_DIR"/colors.sh
 
 # echo -en "${colors[BoldGreen]}Enter sudo password:${colors[Reset_Color]} "
 # read -s SUDO_PASS
-
-# TODO: Fix PACKAGES below (missing on Ubuntu)
-# xpdf gnome-do
 
 # Install required packages
 PACKAGES=(suckless-tools xbindkeys clang vim rdesktop make sysstat
@@ -30,7 +28,7 @@ PACKAGES=(suckless-tools xbindkeys clang vim rdesktop make sysstat
 SNAP_PACKAGES=(slack code)
 RUST_PACKAGES=(rust cargo)
 
-OPTIONAL_PACKAGES=(qt-devel transmission-remote-* transmission-daemon)
+OPTIONAL_PACKAGES=(qt-devel transmission-remote-* transmission-daemon xpdf)
 
 NET_TOOLS=(nmap-ncat)
 
