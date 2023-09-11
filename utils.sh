@@ -22,7 +22,9 @@ function shell_check_and_format() {
 	local unrecognized_shell_files=$1
 
 	# shellcheck disable=SC2059
-	ALL_FILES=$(printf "%s\n%s" "$unrecognized_shell_files" "$(shfmt --find .)" | sed 's/ /\\\ /g' | sort -u)
+	ALL_FILES=$(printf "%s\n%s" "$unrecognized_shell_files" "$(shfmt --find .)" |
+		sed 's/ /\\\ /g' |
+		sort -u)
 
 	# echo $ALL_FILES[*]
 	# shfmt --find . | sed 's/ /\\\ /g'

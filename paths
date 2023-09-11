@@ -43,7 +43,7 @@ export PATH=$ANDROID_HOME/platform-tools:$PATH
 export PATH=$ANDROID_HOME/build-tools/19.1.0:$PATH
 
 # LLVM (macOS)
-if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
+if [[ "$UNAME_OUTPUT" == "Darwin" ]]; then
 	export PATH="$(brew --prefix llvm)/bin:$PATH"
 fi
 
@@ -54,7 +54,7 @@ export PATH=~/.local/bin:$PATH
 GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
 export GEM_HOME
 
-export PATH="$PATH:$(npm --prefix $HOME/tmp get prefix)/bin:$GEM_HOME/bin"
+export PATH="$PATH:$(npm --prefix "$HOME"/tmp get prefix)/bin:$GEM_HOME/bin"
 
 # npm global packages
 # TODO: Move .npm-global_packages to constant
