@@ -64,12 +64,20 @@ APT_PACKAGES=(apache2
 	dos2unix
 	libreadline-dev lib32readline8 lib32readline-dev
 	virtualbox
-	# TODO: This packages requires user to accept to licence
-	# figure out how to dot it non-interactively
-	virtualbox-ext-pack
 	virtualbox-dkms
 	dotnet-sdk-6.0
 )
 
+# Install packages that require some custom configuration (like accepting the license etc.)
+function install_custom_install_custom_packages() {
+	# Accept the licence
+	echo virtualbox-ext-pack virtualbox-ext-pack/license select true |
+		sudo debconf-set-selections
+	sudo apt install --assume-yes "${MUST_HAVE[@]}"
+	virtualbox-ext-pack
+}
+
 sudo apt install --assume-yes "${MUST_HAVE[@]}"
 sudo apt install --assume-yes "${APT_PACKAGES[@]}"
+
+install_custom_install_custom_packages
