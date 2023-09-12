@@ -34,6 +34,7 @@
 
 ## Ideas
 
+- config.sh: (1) Make it per machine, (2) Get username dynamically: powershell.exe -NoLogo '$env:UserName', (it takes time, return value should be stored somewhere)
 - macOS: replace sleepwatcher with [custom LaunchAgent](https://github.com/alb12-la/KBOS/tree/master)
 - custom winget repository
 - Move from Chrome to Chromium
@@ -52,11 +53,22 @@
 
 ## ChatGPT prompts
 
+1.
+
 ```text
 Write this Bash command so that it uses only command flags with double hyphen (wherever possible):
 <bash command goes here>
 ```
 
+2.
+
+```text
+Add comment to the top of this Bash function:
+<bash command goes here>
+
+
+
 ## Credits
 
 - [ur0n2/dotfiles-for-windows](https://github.com/ur0n2/dotfiles-for-windows), where I have taken few scripts/aliases/ideas from
+```

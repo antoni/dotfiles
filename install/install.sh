@@ -150,7 +150,7 @@ function main() {
 
 	install_tmux_plugin_manager || exit_with_error_message ""
 
-	install_golang || exit_with_error_message "Could not install golang"
+	source "$DOTFILES_DIR"/install/install_go.sh || exit_with_error_message "Could not install golang"
 
 	crontab "$DOTFILES_DIR"/cron.jobs || exit_with_error_message ""
 }
