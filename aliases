@@ -1579,28 +1579,41 @@ alias show-pg-status='pg_ctl status'
 alias restart-pg='pg_ctl reload'
 
 function identify_website_technologies() {
+	local -r hostname="$1"
 	# https://github.com/rverton/webanalyze
-	webanalyze -apps ~/dotfiles/technologies.json -host "$1" -crawl 1
+	webanalyze -apps ~/dotfiles/technologies.json -host "$hostname" -crawl 1
 }
 
 # DNS server settings
 function dns_server_settings_clear() {
-	# macOS
-	networksetup -setdnsservers Wi-Fi
-	# TODO: Windows (via WSL)
+	if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
+		networksetup -setdnsservers Wi-Fi
+	fi
+
+	if [[ -n "$IS_WSL" ]]; then
+		echo "Flushing DNS cache from WSL"
+		ipconfig.exe /flushdns
+	fi
 }
 
 function dns_server_settings_set() {
-	# macOS
-	networksetup -setdnsservers Wi-Fi 8.8.8.8
-	# TODO: Windows (via WSL)
+	if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
+		networksetup -setdnsservers Wi-Fi 8.8.8.8
+	fi
 
+	if [[ -n "$IS_WSL" ]]; then
+		netsh interface ipv4 set dnsservers "Wi-Fi" static 8.8.4.4 primary
+	fi
 }
 
 function check_dns_server_settings_check() {
-	# macOS
-	networksetup -getdnsservers Wi-Fi
-	# TODO: Windows (via WSL)
+	if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
+		networksetup -getdnsservers Wi-Fi
+	fi
+
+	if [[ -n "$IS_WSL" ]]; then
+		netsh interface ipv4 show dnsservers "Wi-Fi"
+	fi
 }
 
 function flush_dns_cache() {
@@ -1611,7 +1624,7 @@ function flush_dns_cache() {
 	fi
 
 	if [[ -n "$IS_WSL" ]]; then
-		echo "Flushing DNS cache on WSL"
+		echo "Flushing DNS cache from WSL"
 		ipconfig.exe /flushdns
 	fi
 }
@@ -1768,7 +1781,12 @@ function git_default_branch() {
 	LC_ALL=C git remote show "$origin_name" | sed -n '/HEAD branch/s/.*: //p'
 }
 
-# TODO: ChatGPT Usage
+# Compare two JSON files and display the differences in a visually highlighted format
+# Usage: diff_json file1.json file2.json
+#
+# Parameters:
+#   - file1: The path to the first JSON file for comparison.
+#   - file2: The path to the second JSON file for comparison.
 function diff_json() {
 	local file1="${1}"
 	local file2="${2}"
@@ -1810,11 +1828,11 @@ alias fix_crlf='dos2unix_all'
 alias ybw="yarn build:watch"
 
 # pdf_split_pages <filename>
-# Splits a PDF into individual pages and saves them as separate PDF files with names in the format ""page-0001.pdf"".
+# Splits a PDF into individual pages and saves them as separate PDF files
+# with names in the format ""page-0001.pdf"".
 #
 # Arguments:
 # filename: The name of the PDF file to split
-#
 function pdf_split_pages() {
 	local -r filename="$1"
 	convert "$filename" -quality 100 -density 1000x1000 page-%04d.pdf
@@ -1847,9 +1865,22 @@ function flatten_directory() {
 alias gs='git stash'
 
 function record_audio() {
-	# TODO: Make it work on Linux (macOS only for now)
 	OUT=${1-output.aac}
-	ffmpeg -f avfoundation -ac 2 -i :0 -c:a aac -ab 96k $OUT
+
+	if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
+		ffmpeg -hide_banner -loglevel error -f avfoundation -ac 2 -i :0 -c:a aac -ab 96k "$OUT"
+	fi
+
+	if [[ -n "$IS_WSL" ]]; then
+		# Workaround, see: https://github.com/microsoft/winget-pkgs/issues/95349#issuecomment-1678632505
+		ffmpeg='/mnt/c/Users/vivob/AppData/Local/Microsoft/WinGet/Packages/Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe/ffmpeg-6.0-full_build/bin/ffmpeg.exe'
+		# List devices to get device name (full name string)
+		# ${ffmpeg} -list_devices true -f dshow -i null
+		${ffmpeg} -hide_banner -loglevel error -f dshow -t 30 \
+			-i "audio=Microphone Array (Intel® Smart Sound Technology for Digital Microphones)" \
+			"$OUT"
+
+	fi
 }
 
 function random_mac_address() {

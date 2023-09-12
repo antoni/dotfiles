@@ -99,7 +99,24 @@ function date_plus_days() {
 
 function print_success_message() {
 	local message="$1"
-	printf "\033[1;29;42m DONE${colors[Green]} %s${colors[Reset_Color]}\n" \
+	printf "\033[1;29;42m DONE ${colors[Green]} %s${colors[Reset_Color]}\n" \
 		"$message"
+}
 
+function log_info() {
+	local message="$1"
+	printf "${colors[Green]}%s${colors[Reset_Color]}\n" \
+		"$message"
+}
+
+function log_warning() {
+	local message="$1"
+	printf "${colors[Yellow]}%s${colors[Reset_Color]}\n" \
+		"$message"
+}
+
+function log_error() {
+	local message="$1"
+	printf "${colors[Red]}%s${colors[Reset_Color]}\n" \
+		"$message"
 }

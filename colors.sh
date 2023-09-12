@@ -2,8 +2,6 @@
 
 declare -A colors
 
-# TODO: Create log_info, log_warning, log_error functions
-
 colors[Reset_Color]='\033[0m' # Text color reset
 
 # Regular Colors
