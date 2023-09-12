@@ -16,7 +16,7 @@ PATH=$PATH:/usr/local/sbin
 # that contain the source for Go projects and their binaries.
 export GOPATH=$HOME/go
 
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:/usr/local/go/bin
 
 # Android

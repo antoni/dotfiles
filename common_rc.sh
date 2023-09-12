@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 
+source "$HOME"/dotfiles/config.sh
+
 function export_variables() {
-	export DEFAULT_CITY="Warsaw"
-	export DEFAULT_COORDS="52.23:21.012'"
-	export GITHUB_USER="antoni"
-	# TODO: Get username dynamically: powershell.exe -NoLogo '$env:UserName'
-	# (it takes time, return value should be stored somewhere)
-	export MACOS_USERNAME="antoni"
-	export WINDOWS_USERNAME="vivob"
-	export WINDOWS_DESKTOP="/mnt/c/Users/""$WINDOWS_USERNAME""/Desktop/"
-	export HOMEBREW_NO_AUTO_UPDATE=1
-	export BASH=/usr/local/bin/bash
+	export DEFAULT_CITY
+	export DEFAULT_COORDS
+	export GITHUB_USER
+	export MACOS_USERNAME
+	export WINDOWS_USERNAME
+	export WINDOWS_DESKTOP
+	export HOMEBREW_NO_AUTO_UPDATE
+	export BASH
 }
 export_variables
 

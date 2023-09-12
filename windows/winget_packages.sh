@@ -62,6 +62,7 @@ MUST_HAVE=(
 	Microsoft.VisualStudioCode
 	vim.vim
 	VideoLAN.VLC
+	Gyan.FFmpeg
 	Google.CloudSDK
 	Microsoft.WindowsTerminal.Preview
 	Microsoft.dotNetFramework
@@ -190,16 +191,12 @@ ${WINGET_ALIAS} source update
 package_not_installed=$(${WINGET_COMMAND_LIST} Some.NonExistent.PackageName)
 
 function install_if_not_installed() {
-	# TODO: FIXME (currently just tries to install every package without checking)
-	${WINGET_COMMAND_INSTALL} "$package_name"
-
-	return
 	local package_name="$1"
 
 	is_package_installed=$(${WINGET_COMMAND_LIST} "$package_name")
 
 	if [[ "$is_package_installed" == "$package_not_installed" ]]; then
-		echo "NOT Installed: ""$package_name"
+		echo "winget package not installed: ""$package_name"
 
 		${WINGET_COMMAND_INSTALL} "$package_name"
 	fi
