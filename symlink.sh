@@ -21,12 +21,12 @@ function custom_sudo_password_read_prompt() {
 	# shellcheck disable=SC2154
 	echo -en "${colors[BoldGreen]}Enter sudo password:${colors[Reset_Color]}"
 
-	read -rs SUDO_PASS
+	sudo --prompt="" --validate
 	clear
 }
 
 custom_sudo_password_read_prompt
-# TODO: fix 'sudo_keep_alive' (double password prompt)
+
 sudo_keep_alive
 
 # Create temp directory
@@ -34,23 +34,23 @@ mkdir -p "$HOME_DIR"/tmp
 
 # Version of clang-format, should be taken from /usr/bin/clang-format-X.Y,
 # same for clang-modernize
+printf "${colors[Green]}"
 CLANG_VERSION=14.0.0
-echo "Clang    version symlinked:   " $CLANG_VERSION
+echo "Clang             version symlinked:   " $CLANG_VERSION
 CLANG_FORMAT_VERSION=$CLANG_VERSION
 CLANG_MODERNIZE_VERSION=$CLANG_VERSION
-echo -e "${colors[Green]}"
 LLDB_VERSION=3.7
-echo "LLDB               version symlinked:   " $LLDB_VERSION
+echo "LLDB              version symlinked:   " $LLDB_VERSION
 IDEA_VERSION=$(echo "$HOME"/idea-* | awk -F'-' '{print $3}')
-echo "IntelliJ           version symlinked:   " "$IDEA_VERSION"
+echo "IntelliJ          version symlinked:   " "$IDEA_VERSION"
 GOGLAND_VERSION=$(echo "$HOME"/Gogland-* | awk -F'-' '{print $2}')
-echo "Gogland            version symlinked:   " "$GOGLAND_VERSION"
+echo "Gogland           version symlinked:   " "$GOGLAND_VERSION"
 CLION_VERSION=2017.1.1
-echo "CLion              version symlinked:   " $CLION_VERSION
+echo "CLion             version symlinked:   " $CLION_VERSION
 JMETER_VERSION=$(echo "$HOME"/apache-jmeter-* | awk -F'-' '{print $3}')
-echo "JMeter             version symlinked:   " "$JMETER_VERSION"
+echo "JMeter            version symlinked:   " "$JMETER_VERSION"
 SWEET_HOME_VERSION=$(echo "$HOME"/SweetHome3D-* | awk -F'-' '{print $2}')
-echo "SweetHome3D        version symlinked:   " "$SWEET_HOME_VERSION"
+echo "SweetHome3D       version symlinked:   " "$SWEET_HOME_VERSION"
 echo -e "${colors[Reset_Color]}"
 
 DOTFILES=(profile bashrc zshrc vimrc paths aliases bash_profile common_profile.sh tmux.conf
@@ -78,7 +78,6 @@ function mac_symlink() {
 	ln -sf ~/dotfiles/mac/sleep.sh ~/.sleep
 	ln -sf ~/dotfiles/mac/wakeup.sh ~/.wakeup
 
-	# TODO: Delete symlinks before (only if symlinks)
 	function create_symlink_delete_before() {
 		local to="$1"
 		local from="$2"
@@ -91,9 +90,12 @@ function mac_symlink() {
 		ln -s "$to" "$from"
 	}
 
-	create_symlink_delete_before "$(brew --prefix llvm)/bin/clang-format" "/usr/local/bin/clang-format"
-	create_symlink_delete_before "$(brew --prefix llvm)/bin/clang-tidy" "/usr/local/bin/clang-tidy"
-	create_symlink_delete_before "$(brew --prefix llvm)/bin/clang-apply-replacements" "/usr/local/bin/clang-apply-replacements"
+	create_symlink_delete_before \
+		"$(brew --prefix llvm)/bin/clang-format" "/usr/local/bin/clang-format"
+	create_symlink_delete_before \
+		"$(brew --prefix llvm)/bin/clang-tidy" "/usr/local/bin/clang-tidy"
+	create_symlink_delete_before \
+		"$(brew --prefix llvm)/bin/clang-apply-replacements" "/usr/local/bin/clang-apply-replacements"
 
 	# iTerm2 config
 	ln -sf "${DOTFILES_DIR}"/mac/com.googlecode.iterm2.plist \
@@ -245,12 +247,10 @@ function main() {
 	case "$(uname -s)" in
 
 	Darwin)
-		echo 'Mac OS X'
 		mac_symlink
 		;;
 
 	Linux)
-		echo 'Linux'
 		sudo_exec mkdir -p /etc/profile.d
 		sudo_exec ln -fs "${DOTFILES_DIR}"/global_aliases /etc/profile.d/global_aliases.sh
 
@@ -310,6 +310,7 @@ function main() {
 	sudo_exec ln -fs "$HOME_DIR"/robo3t-*/bin/robo3t /usr/local/bin/robo3t
 	# SweetHome3D
 	sudo_exec ln -fs "$HOME_DIR"/SweetHome3D-"$SWEET_HOME_VERSION"/SweetHome3D /usr/local/bin/sweethome
+
 	# Sublime 3
 	if [ -e "$HOME"/sublime_text_3 ]; then
 		sudo_exec ln -fs "$HOME"/sublime_text_3/sublime_text /usr/local/bin/sublime
@@ -338,31 +339,18 @@ function main() {
 	curl -sfLo ~/.vim/autoload/plug.vim --create-dirs \
 		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-	# CUDA snippets for Vim
-	# wget
-	# https://gist.githubusercontent.com/antoni/d8ac9973b2f28765b329/raw/811fa82e6ff738e06c11453bfa93d846d76d2386/cuda.snippets
-	# && mv cuda.snippets ~/.vim/bundle/vim-snippets/snippets/
-
-	echo -e "${colors[BoldYellow]}Things to be (possibly) done manually:\n\n\
-    \t* /sys/class/backlight/\t\tto make xbacklight work""${colors[Reset_Color]}"
-
+	# Hostname
 	function setup_hostname() {
-		hostname_default="automatown"
-		echo -en "${colors[BoldGreen]}Enter hostname for the current machine [$hostname_default]:${colors[Reset_Color]} "
-		read -r hostname
-		hostname=${hostname:-$hostname_default}
-
 		if [ "${OSTYPE//[0-9.]/}" == "darwin" ]; then
-			mac_change_hostname "$hostname"
+			mac_change_hostname "$HOSTNAME"
 		else
-			hostnamectl set-hostname "$hostname"
+			hostnamectl set-hostname "$HOSTNAME"
 		fi
 
-		print_success_message "Hostname changed to: $hostname"
+		print_success_message "Hostname changed to: $HOSTNAME"
 	}
 
-	# TODO: This should come from a config file (hostname per machine)
-	# setup_hostname
+	setup_hostname
 
 	# Midnight Commander
 	ln -fs "$DOTFILES_DIR"/mc ~/.config
@@ -381,10 +369,10 @@ function main() {
 	print_success_message "Successfully symlinked all files"
 
 	function find_broken_symlinks() {
-		printf "Found broken symlinks:\n"
-		find ~ -type l -maxdepth 3 ! -exec test -e {} \; -print
-		find /usr/bin -type l ! -exec test -e {} \; -print
-		find /usr/local/bin -type l ! -exec test -e {} \; -print
+		printf "Looking found broken symlinks\n"
+		sudo find ~ -type l -maxdepth 3 ! -exec test -e {} \; -print
+		sudo find /usr/bin -type l ! -exec test -e {} \; -print
+		sudo find /usr/local/bin -type l ! -exec test -e {} \; -print
 	}
 
 	find_broken_symlinks
