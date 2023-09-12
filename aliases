@@ -1765,7 +1765,7 @@ function code_no_extensions() {
 
 function git_default_branch() {
 	local origin_name="${1:-origin}"
-	LC_ALL=C git remote show $origin_name | sed -n '/HEAD branch/s/.*: //p'
+	LC_ALL=C git remote show "$origin_name" | sed -n '/HEAD branch/s/.*: //p'
 }
 
 # TODO: ChatGPT Usage

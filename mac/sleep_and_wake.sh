@@ -1,11 +1,8 @@
 #!/usr/bin/env bash
 
-# Connect and connect/disconnect Bluetooth headphones on wake/sleep
-# To find out the ID of the device running:
-# blueutil --connected
+source "$HOME"/dotfiles/config.sh
 
-# TODO: Move to some constants
-HEADPHONES_BLUETOOTH_DEVICE_ID="88-c9-e8-10-28-75"
+# Connect and connect/disconnect Bluetooth headphones on wake/sleep
 BLUEUTIL_BIN=/usr/local/bin/blueutil
 
 function sleep() {

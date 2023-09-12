@@ -1,8 +1,21 @@
 #!/usr/bin/env bash
 
-# TODO: Add SIGINT handler
+function int_signal_handler() {
+	printf "\nQuitting winget packages install... You will have to do cleanup manually\n"
+	exit
+}
 
-# winget.exe install --no-upgrade --accept-source-agreements --accept-package-agreements --exact --id chromium
+function setup_int_handler() {
+	stty -echoctl # hide ^C
+
+	trap int_signal_handler INT
+}
+
+setup_int_handler
+
+# winget.exe install --no-upgrade --accept-source-agreements \
+#  --accept-package-agreements \
+#  --exact --id chromium
 
 # WINGET_ALIAS="powershell.exe -NoLogo /c winget.exe"
 WINGET_ALIAS="winget.exe"

@@ -78,9 +78,9 @@ colors[On_HighIntensityWhite]='\033[0;107m'  # White
 
 # Usage:
 # color=${colors[$input_color]}
-# white=${colors[White]}
+# reset_color=${colors[Reset_Color]}
 
-# for i in "${!colors[@]}"
+# for color in "${!colors[@]}"
 # do
-# echo -e "$i = ${colors[$i]}I love you$white"
+# echo -e "$color = ${colors[$color]}I love you$reset_color"
 # done
