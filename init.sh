@@ -33,8 +33,6 @@ cd dotfiles || exit
 
 git clone git@github.com:antoni/scripts.git ~/scripts
 
-# Install xCode (TODO)
-
 # Install everything else we need
 
 ./install/install.sh
