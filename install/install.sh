@@ -10,9 +10,6 @@ source "$DOTFILES_DIR"/mac/brew_install.sh
 source "$DOTFILES_DIR"/utils.sh
 source "$DOTFILES_DIR"/colors.sh
 
-# echo -en "${colors[BoldGreen]}Enter sudo password:${colors[Reset_Color]} "
-# read -s SUDO_PASS
-
 # Install required packages
 PACKAGES=(suckless-tools xbindkeys clang vim rdesktop make sysstat
 	make cmake gitk vlc okular xdotool xbindkeys xautomation mosh mc

@@ -47,7 +47,7 @@ function sudo_exec() {
 
 function sudo_keep_alive() {
 	# Ask for the administrator password upfront
-	sudo -v
+	sudo --prompt="" --validate
 
 	# kill -0 PID exits with an exit code of 0 if the PID is of
 	# a running process, otherwise exits with an exit code of 1.
@@ -98,7 +98,8 @@ function date_plus_days() {
 }
 
 function print_success_message() {
-	local message=$1
-	echo -e "\033[1;29;42m DONE \033[0m \033[1;32m $1 \033[0m"
-	echo -e "${colors[Reset_Color]}"
+	local message="$1"
+	printf "\033[1;29;42m DONE${colors[Green]} %s${colors[Reset_Color]}\n" \
+		"$message"
+
 }
