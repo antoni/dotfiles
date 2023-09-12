@@ -15,12 +15,18 @@ function setup_int_handler() {
 	trap int_signal_handler INT
 }
 
-# setup_int_handler
-# shellcheck disable=SC2154
-echo -en "${colors[BoldGreen]}Enter sudo password:${colors[Reset_Color]}"
+setup_int_handler
 
-# read -rs SUDO_PASS
-# clear
+function custom_sudo_password_read_prompt() {
+	# shellcheck disable=SC2154
+	echo -en "${colors[BoldGreen]}Enter sudo password:${colors[Reset_Color]}"
+
+	read -rs SUDO_PASS
+	clear
+}
+
+custom_sudo_password_read_prompt
+# TODO: fix 'sudo_keep_alive' (double password prompt)
 sudo_keep_alive
 
 # Create temp directory
