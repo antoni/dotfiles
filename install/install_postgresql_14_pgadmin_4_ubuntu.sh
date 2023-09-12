@@ -1,12 +1,6 @@
 #!/usr/bin/env bash
 set -ue
 
-# TODO: Make it work for Postgres v14:
-# https://gist.github.com/mezbahalam/dacde594684dafabeafeebd92a92ae91
-# https://techviewleo.com/how-to-install-postgresql-database-on-ubuntu/
-# https://www.cybertec-postgresql.com/en/postgresql-on-wsl2-for-windows-install-and-setup/
-
-# Update all your packages
 sudo apt update
 sudo apt upgrade --assume-yes
 
@@ -26,7 +20,7 @@ function install_pgadmin() {
 	sudo sh -c 'echo "deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list && apt update'
 
 	# Install for both desktop and web modes:
-	sudo apt install pgadmin4
+	sudo apt install pgadmin4 --assume-yes
 
 	# Install for desktop mode only:
 	# sudo apt install pgadmin4-desktop
@@ -37,19 +31,19 @@ function install_pgadmin() {
 install_pgadmin
 
 # Install postgresql-13
-sudo apt-get --assume-yes install postgresql-13
+sudo apt-get --assume-yes install postgresql
 
 # Check version to see if it's correct
 psql --Version
 
 # Allow remote connections
 # edit line #listen_addresses to listen_addresses = '*'
-sudo vim /etc/postgresql/13/main/postgresql.conf
+sudo vim /etc/postgresql/14/main/postgresql.conf
 # change port to:
 # port = 5450
 
 # edit file
-sudo vim /etc/postgresql/13/main/pg_hba.conf
+sudo vim /etc/postgresql/14/main/pg_hba.conf
 # add line at the end (change 192.168.0.0/24 to your network or 0.0.0.0/0 to all)
 host all all 192.168.0.0/24 md5
 # FOR SSL: add line at the end (change 192.168.0.0/24 to your network or 0.0.0.0/0 to all)
@@ -59,7 +53,7 @@ hostssl all all 192.168.0.0/24 md5 clientcert=1
 sudo systemctl restart postgresql
 
 # Access psql to create users, databases and passwords
-sudo -u postgres psql
+sudo --user postgres psql
 
 # Add a stronger password to default postgres user
 alter user postgres with encrypted password 'test'

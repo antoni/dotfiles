@@ -59,8 +59,10 @@ function install_hping() {
 function post_install() {
 	UNAME_OUTPUT="$(uname)"
 
+	echo "Running post-install tasks"
+
 	# Ask for the administrator password upfront
-	sudo -v
+	sudo --validate
 
 	# Make 'airport' command available
 	sudo ln -fs /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport /usr/local/bin/airport
@@ -108,8 +110,6 @@ function post_install() {
 
 		powershell.exe -NoLogo -File ~/dotfiles/windows/RemoveShortcutsFromDesktop.ps1
 	fi
-
-	echo Succesfully performed all post-install tasks
 }
 
 # Symlink TextMate
