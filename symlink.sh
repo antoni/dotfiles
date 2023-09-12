@@ -320,62 +320,62 @@ function main() {
 		sudo_exec ln -fs "$HOME"/android-studio/bin/studio.sh /usr/local//bin/astudio
 	fi
 
-	case "$(uname -s)" in
-	Darwin)
-		ln -fs "${DOTFILES_DIR}"/vscode.json "$HOME"/Library/Application\ Support/Code/User/settings.json
-		;;
-	Linux)
-		ln -fs "${DOTFILES_DIR}"/vscode.json "$HOME"/.config/Code/User/settings.json
-		;;
-	CYGWIN* | MINGW32* | MSYS*) # MS Windows
-		;;
-	esac
+	# 	case "$(uname -s)" in
+	# 	Darwin)
+	# 		ln -fs "${DOTFILES_DIR}"/vscode.json "$HOME"/Library/Application\ Support/Code/User/settings.json
+	# 		;;
+	# 	Linux)
+	# 		ln -fs "${DOTFILES_DIR}"/vscode.json "$HOME"/.config/Code/User/settings.json
+	# 		;;
+	# 	CYGWIN* | MINGW32* | MSYS*) # MS Windows
+	# 		;;
+	# 	esac
 
-	set +x # disable echo executed commands
+	# 	set +x # disable echo executed commands
 
-	# Vim
+	# 	# Vim
 
-	# (Re)install vim-plug
-	curl -sfLo ~/.vim/autoload/plug.vim --create-dirs \
-		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	# 	# (Re)install vim-plug
+	# 	curl -sfLo ~/.vim/autoload/plug.vim --create-dirs \
+	# 		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-	# Hostname
-	function setup_hostname() {
-		if [ "${OSTYPE//[0-9.]/}" == "darwin" ]; then
-			mac_change_hostname "$HOSTNAME"
-		else
-			hostnamectl set-hostname "$HOSTNAME"
-		fi
+	# 	# Hostname
+	# 	function setup_hostname() {
+	# 		if [ "${OSTYPE//[0-9.]/}" == "darwin" ]; then
+	# 			mac_change_hostname "$HOSTNAME"
+	# 		else
+	# 			hostnamectl set-hostname "$HOSTNAME"
+	# 		fi
 
-		print_success_message "Hostname changed to: $HOSTNAME"
-	}
+	# 		print_success_message "Hostname changed to: $HOSTNAME"
+	# 	}
 
-	setup_hostname
+	# 	setup_hostname
 
-	# Midnight Commander
-	ln -fs "$DOTFILES_DIR"/mc ~/.config
+	# 	# Midnight Commander
+	# 	ln -fs "$DOTFILES_DIR"/mc ~/.config
 
-	# Atom
+	# 	# Atom
 
-	mkdir -p "$HOME"/.atom
-	pushd atom &>/dev/null || exit 1
+	# 	mkdir -p "$HOME"/.atom
+	# 	pushd atom &>/dev/null || exit 1
 
-	for atom in *; do
-		rm -f "$HOME"/.atom/"$atom"
-		ln -fs ~/dotfiles/atom/"$atom" "$HOME"/.atom/"$atom"
-	done
+	# 	for atom in *; do
+	# 		rm -f "$HOME"/.atom/"$atom"
+	# 		ln -fs ~/dotfiles/atom/"$atom" "$HOME"/.atom/"$atom"
+	# 	done
 
-	popd &>/dev/null || exit 1
-	print_success_message "Successfully symlinked all files"
+	# 	popd &>/dev/null || exit 1
+	# 	print_success_message "Successfully symlinked all files"
 
-	function find_broken_symlinks() {
-		printf "Looking found broken symlinks\n"
-		sudo find ~ -type l -maxdepth 3 ! -exec test -e {} \; -print
-		sudo find /usr/bin -type l ! -exec test -e {} \; -print
-		sudo find /usr/local/bin -type l ! -exec test -e {} \; -print
-	}
+	# 	function find_broken_symlinks() {
+	# 		printf "Looking found broken symlinks\n"
+	# 		sudo find ~ -type l -maxdepth 3 ! -exec test -e {} \; -print
+	# 		sudo find /usr/bin -type l ! -exec test -e {} \; -print
+	# 		sudo find /usr/local/bin -type l ! -exec test -e {} \; -print
+	# 	}
 
-	find_broken_symlinks
+	# 	find_broken_symlinks
 }
 
 main
