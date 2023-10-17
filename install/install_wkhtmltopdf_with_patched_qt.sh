@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -ue
+set -e
 
 # There are newer versions of the binary files now. You can alwasy find the latest here:
 # https://wkhtmltopdf.org/downloads.html

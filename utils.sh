@@ -120,3 +120,54 @@ function log_error() {
 	printf "${colors[Red]}%s${colors[Reset_Color]}\n" \
 		"$message"
 }
+
+function brew_relink() {
+	echo "Relinking all packages"
+
+	brew list -1 | while read -r line; do
+		brew unlink "$line" && brew link "$line"
+	done
+}
+
+function update_packages_mac() {
+	# Skip this step for now, downloading >10 GBs of XCode every now and
+	# then takes a lot of time and
+	# doesn't really make an improvement
+	# echo "Updating Mac AppStore packages..."
+	# mas upgrade;
+
+	echo "Upgrading Homebrew packages..."
+	echo "Running 'brew cleanup'"
+	brew cleanup
+
+	# Fix casks with `depends_on` that reference pre-Mavericks
+	/usr/bin/find "$(brew --prefix)/Caskroom/"*'/.metadata' -type f -name '*.rb' -print0 | /usr/bin/xargs -0 /usr/bin/sed -i '' '/depends_on macos:/d'
+
+	# Somtimes needed to run before 'brew update'/'brew upgrade'
+	brew tap --repair
+	brew update
+	brew upgrade
+	brew upgrade --cask --force
+	brew unlink node && brew link --overwrite node
+	# Temporary overwrite for Node 16
+	brew link --force --overwrite node@16
+}
+
+function update_packages_fedora() {
+	sudo dnf --assumeyes update
+	sudo dnf --assumeyes autoremove
+}
+
+function update_packages_ubuntu() {
+	echo "Updating apt packages..."
+	sudo apt-get update &>/dev/null
+	echo "Upgrading apt packages..."
+	sudo apt-get upgrade --assume-yes &>/dev/null
+	echo "Autoremoving apt packages..."
+	sudo apt-get autoremove &>/dev/null
+}
+
+function update_xcode() {
+	sudo rm -rf /Library/Developer/CommandLineTools
+	xcode-select --install
+}
