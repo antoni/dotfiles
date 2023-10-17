@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -ue
+set -e
 
 # Aliases and custom functions
 source "$HOME"/dotfiles/colors.sh
@@ -35,8 +35,7 @@ function update_all() {
 
 		# echo "Updating macOS (if updates available)"
 		# softwareupdate -i -a
-
-		"$DOTFILES_DIR"/mac/post_install.sh
+		update_packages_mac
 
 		# Do the rest without sudo
 		sudo --reset-timestamp
@@ -89,12 +88,17 @@ function update_all() {
 	update_pip_packages
 	update_pip_packages
 
-	# update_packages_mac
-
 	popd &>/dev/null || exit
 
-	printf "Upgrading all applications on %s\n" "$(date)" >>~/update_log.txt
-	# rm -f ~/package.json
+	# macOS
+	if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
+		"$DOTFILES_DIR"/mac/post_install.sh
+
+		# Do the rest without sudo
+		sudo --reset-timestamp
+	fi
+
+	printf "Upgraded all applications on %s\n" "$(date)" >>~/update_log.txt
 }
 
 update_all

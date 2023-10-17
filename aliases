@@ -751,48 +751,6 @@ function pip_list() {
 	pip list --format=columns | awk '!/Package|---/{ print $1}'
 }
 
-function update_packages_mac() {
-	# Skip this step for now, downloading >10 GBs of XCode every now and then takes a lot of time and
-	# doesn't really make an improvement
-	# echo "Updating Mac AppStore packages..."
-	# mas upgrade;
-
-	echo "Updating Homebrew packages..."
-	brew cleanup
-
-	# Fix casks with `depends_on` that reference pre-Mavericks
-	/usr/bin/find "$(brew --prefix)/Caskroom/"*'/.metadata' -type f -name '*.rb' -print0 | /usr/bin/xargs -0 /usr/bin/sed -i '' '/depends_on macos:/d'
-
-	# Somtimes needed to run before 'brew update'
-	git -C "/usr/local/Homebrew/Library/Taps/homebrew/homebrew-core" fetch --unshallow
-	git -C "/usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask" fetch --unshallow
-	brew update
-	brew upgrade
-	brew upgrade --cask --force
-	brew unlink node && brew link --overwrite node
-	# Temporary overwrite for Node 16
-	brew link --force --overwrite node@16
-}
-
-function update_packages_fedora() {
-	sudo dnf -y update
-	sudo dnf -y autoremove
-}
-
-function update_packages_ubuntu() {
-	echo "Updating apt packages..."
-	sudo apt-get update &>/dev/null
-	echo "Upgrading apt packages..."
-	sudo apt-get upgrade --assume-yes &>/dev/null
-	echo "Autoremoving apt packages..."
-	sudo apt-get autoremove &>/dev/null
-}
-
-function update_xcode() {
-	sudo rm -rf /Library/Developer/CommandLineTools
-	xcode-select --install
-}
-
 function reinstall_pip_packages() {
 	DISPLAY="" pip3 list --outdated | awk '{print $1}' | tail -n +3 | DISPLAY="" xargs --I % sh -c 'pip3 install --upgrade --force-reinstall %'
 }

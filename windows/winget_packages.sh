@@ -112,6 +112,8 @@ MAY_HAVE=(
 	Oracle.VirtualBox
 	VMware.WorkstationPlayer
 	TorProject.TorBrowser
+	RaspberryPiFoundation.RaspberryPiImager
+	Insecure.Nmap
 	Loom.Loom
 	OpenVPNTechnologies.OpenVPNConnect
 	MullvadVPN.MullvadVPN

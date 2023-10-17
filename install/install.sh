@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -ue
+set -e
 
 DOTFILES_DIR="$HOME"/dotfiles
 
@@ -268,7 +268,7 @@ function install_r_packages() {
 
 function install_nvidia_driver() {
 	sudo_exec dnf config-manager --add-repo=http://negativo17.org/repos/fedora-nvidia.repo
-	sudo_exec dnf -y install nvidia-driver nvidia-settings kernel-devel
+	sudo_exec dnf --assumeyes install nvidia-driver nvidia-settings kernel-devel
 }
 
 function install_r_studio() {

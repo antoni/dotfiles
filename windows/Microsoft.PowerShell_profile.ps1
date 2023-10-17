@@ -73,3 +73,7 @@ function prompt {
         invoke-expression $str
     }
 }
+
+function ListUsbDevices {
+    Get-PnpDevice -PresentOnly | Where-Object { $_.InstanceId -match '^USB' }
+}

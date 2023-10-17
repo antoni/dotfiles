@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -ue
+set -e
 
 # alias pg_start="launchctl load ~/Library/LaunchAgents"
 # alias pg_stop="launchctl unload ~/Library/LaunchAgents"
