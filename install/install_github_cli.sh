@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -ue
+set -e
 
 type -p curl >/dev/null || sudo apt install curl -y
 curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg &&

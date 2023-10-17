@@ -30,7 +30,6 @@ BREW_PACKAGES_MUST_HAVE=(
 	pandoc
 	jq
 	parallel
-	clang-format
 	llvm
 	nmap
 	gpg

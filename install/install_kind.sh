@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -ue
+set -e
 
 # https://community.datastax.com/questions/5369/how-do-i-setup-kind-on-ubuntu-to-run-the-kubernete.html
 
