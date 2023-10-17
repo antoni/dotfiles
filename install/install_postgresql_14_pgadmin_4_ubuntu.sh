@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -ue
+set -e
 
 sudo apt update
 sudo apt upgrade --assume-yes

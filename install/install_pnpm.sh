@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
-set -ue
+set -e
 
 curl -fsSL https://get.pnpm.io/install.sh | sh -

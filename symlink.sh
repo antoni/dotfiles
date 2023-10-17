@@ -342,7 +342,7 @@ function main() {
 		if [ "${OSTYPE//[0-9.]/}" == "darwin" ]; then
 			mac_change_hostname "$HOSTNAME"
 		else
-			hostnamectl set-hostname "$HOSTNAME"
+			sudo hostnamectl set-hostname "$HOSTNAME"
 		fi
 
 		print_success_message "Hostname changed to: $HOSTNAME"
@@ -367,7 +367,7 @@ function main() {
 	print_success_message "Successfully symlinked all files"
 
 	function find_broken_symlinks() {
-		printf "Looking found broken symlinks\n"
+		printf "Looking for broken symlinks\n"
 		sudo find ~ -type l -maxdepth 3 ! -exec test -e {} \; -print
 		sudo find /usr/bin -type l ! -exec test -e {} \; -print
 		sudo find /usr/local/bin -type l ! -exec test -e {} \; -print
