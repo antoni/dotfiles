@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -ue
+set -e
 
 curl -sSL https://install.python-poetry.org | python3 -
 
