@@ -34,7 +34,7 @@ function disable_first_open_dialog() {
 
 function symlink_vlc_rc() {
 	local VLC_CONFIG_DIR=~/Library/Preferences/org.videolan.vlc/vlcrc
-	rm -rf $VLC_CONFIG_DIR
+	rm --recursive --force $VLC_CONFIG_DIR
 	mkdir -p $VLC_CONFIG_DIR
 	ln -sf ~/dotfiles/vlcrc /Users/"$(whoami)"/Library/Preferences/org.videolan.vlc/vlcrc
 }
