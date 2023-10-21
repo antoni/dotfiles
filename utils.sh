@@ -168,6 +168,6 @@ function update_packages_ubuntu() {
 }
 
 function update_xcode() {
-	sudo rm -rf /Library/Developer/CommandLineTools
+	sudo rm --recursive --force /Library/Developer/CommandLineTools
 	xcode-select --install
 }
