@@ -20,8 +20,8 @@ sudo hwclock --hctosys
 
 # see: https://github.com/docker/for-win/issues/8336
 function fix_zsh_docker_autocompletions() {
-  local -r script_directory=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
-  sudo cp "$script_directory""/_docker" /usr/share/zsh/vendor-completions/_docker
+	local -r script_directory=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
+	sudo cp "$script_directory""/_docker" /usr/share/zsh/vendor-completions/_docker
 }
 
 fix_zsh_docker_autocompletions

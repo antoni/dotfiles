@@ -433,7 +433,7 @@ EOF
 	if [ -n "$SHELL" ]; then
 		echo "$SHELL" >"$zdot/.shell.pre-oh-my-zsh"
 	else
-		grep "^$USER:" /etc/passwd | awk -F: '{print $7}' >"$zdot/.shell.pre-oh-my-zsh"
+		grep "^$USER:" /etc/passwd | awk --field-separator: '{print $7}' >"$zdot/.shell.pre-oh-my-zsh"
 	fi
 
 	echo "Changing your shell to $zsh..."

@@ -41,15 +41,15 @@ CLANG_FORMAT_VERSION=$CLANG_VERSION
 CLANG_MODERNIZE_VERSION=$CLANG_VERSION
 LLDB_VERSION=3.7
 echo "LLDB              version symlinked:   " $LLDB_VERSION
-IDEA_VERSION=$(echo "$HOME"/idea-* | awk -F'-' '{print $3}')
+IDEA_VERSION=$(echo "$HOME"/idea-* | awk --field-separator'-' '{print $3}')
 echo "IntelliJ          version symlinked:   " "$IDEA_VERSION"
-GOGLAND_VERSION=$(echo "$HOME"/Gogland-* | awk -F'-' '{print $2}')
+GOGLAND_VERSION=$(echo "$HOME"/Gogland-* | awk --field-separator'-' '{print $2}')
 echo "Gogland           version symlinked:   " "$GOGLAND_VERSION"
 CLION_VERSION=2017.1.1
 echo "CLion             version symlinked:   " $CLION_VERSION
-JMETER_VERSION=$(echo "$HOME"/apache-jmeter-* | awk -F'-' '{print $3}')
+JMETER_VERSION=$(echo "$HOME"/apache-jmeter-* | awk --field-separator'-' '{print $3}')
 echo "JMeter            version symlinked:   " "$JMETER_VERSION"
-SWEET_HOME_VERSION=$(echo "$HOME"/SweetHome3D-* | awk -F'-' '{print $2}')
+SWEET_HOME_VERSION=$(echo "$HOME"/SweetHome3D-* | awk --field-separator'-' '{print $2}')
 echo "SweetHome3D       version symlinked:   " "$SWEET_HOME_VERSION"
 printf "${colors[Reset_Color]}"
 

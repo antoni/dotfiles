@@ -9,7 +9,7 @@ function get_process_by_name() {
 		powershell.exe -NoLogo -Command Get-Process \| Where \{\$\_.ProcessName -Like \"*"$process_name"*\"\}
 		echo unformatted_output
 	)
-	echo "${process_list%unformatted_output}" | head -n -2 | tail -n +4
+	echo "${process_list%unformatted_output}" | head --lines=-2 | tail -n +4
 }
 
 get_process_by_name winlogon

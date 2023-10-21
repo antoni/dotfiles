@@ -19,7 +19,7 @@ if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
 	alias sc2_hotkeys_edit='vim ~/Library/Application\ Support/Blizzard/StarCraft\ II/Accounts/491096383/Hotkeys/Rapid\ fire\ test.SC2Hotkeys'
 
 	# alias vim='mvim -v'
-	alias ls='ls -h -lFG'
+	alias ls='ls --human-readable -lFG'
 
 	function brew_uninstall_all() {
 		brew remove --force "$(brew list --formula)"
@@ -121,7 +121,7 @@ elif [[ "$UNAME_OUTPUT" == 'Linux' ]]; then
 	# alias i='sudo apt-get install --assume-yes'
 	# Install through apt-get and add installed software to list of used commands
 	# addcmd() { sudo apt-get install --assume-yes $* && echo $* >> ~/install_apt-get.txt; }
-	function addcmd() { sudo dnf install -y "$*" && echo "$*" >>~/install_apt-get.txt; }
+	function addcmd() { sudo dnf install --assume-yes "$*" && echo "$*" >>~/install_apt-get.txt; }
 
 	alias sound='alsamixer'
 	# alias open='xdg-open'
@@ -129,7 +129,7 @@ elif [[ "$UNAME_OUTPUT" == 'Linux' ]]; then
 	alias catquestions='cat ~/Documents/Q.txt'
 	alias mountrw='mount -o remount,rw /'
 	alias vim='vim -o'
-	alias ls='ls -h --color -lFG'
+	alias ls='ls --human-readable --color -lFG'
 fi
 
 # General purpose
@@ -214,7 +214,7 @@ alias grd='git rebase develop'
 
 alias gri='git rebase integration'
 alias gd='git diff'
-alias gcw='git commit -m "WIP $(date)"'
+alias gcw='git commit --message="WIP $(date)"'
 alias gcm='git checkout master'
 alias gg='git add -A && gcw && git squash 2'
 alias gp='git pull'
@@ -297,7 +297,7 @@ function md2pdf() {
 }
 
 function rst2pdf() {
-	pandoc -s -V papersize:a4 -V geometry:margin=1in --from rst -o "$1".pdf "$1"
+	pandoc --standalone -V papersize:a4 -V geometry:margin=1in --from rst -o "$1".pdf "$1"
 	open "$1".pdf
 }
 
@@ -399,7 +399,7 @@ function execute_nth_line_of_file() {
 function countdown() {
 	date1=$(($(date +%s) + $1))
 	while [ "$date1" -ne "$(date +%s)" ]; do
-		echo -ne "$(date -u --date @$((date1 - $(date +%s))) +%H:%M:%S)\r"
+		echo -ne "$(date --universal --date @$((date1 - $(date +%s))) +%H:%M:%S)\r"
 		sleep 0.1
 	done
 }
@@ -409,7 +409,7 @@ function countdown() {
 function stopwatch() {
 	date1=$(date +%s)
 	while true; do
-		echo -ne "$(date -u --date @$(($(date +%s) - date1)) +%H:%M:%S)\r"
+		echo -ne "$(date --universal --date @$(($(date +%s) - date1)) +%H:%M:%S)\r"
 		sleep 0.1
 	done
 }
@@ -485,7 +485,7 @@ alias svim='sudo vim'
 alias gv='gvim'
 
 # endiannes:
-# echo -n I | od -to2 | head -n1 | cut -f2 -d" " | cut -c6
+# echo -n I | od -to2 | head --lines=1 | cut -f2 -d" " | cut -c6
 
 # Show errno errors
 alias showerrors="cpp -dM /usr/include/errno.h | grep 'define E' | sort -n -k 3"
@@ -496,7 +496,7 @@ alias p='python3'
 alias fixandroidstudio='IBUS_ENABLE_SYNC_MODE=1 ibus-daemon -xrd'
 
 function diffcount() {
-	diff -U 0 "$1" "$2" | grep -c ^@
+	diff --unified=0 "$1" "$2" | grep -c ^@
 }
 
 function dark_background() { export BACKGROUND=dark && source "$HOME"/.common_profile.sh; }
@@ -610,7 +610,7 @@ function fix_perms() {
 }
 
 function get_ip() {
-	host "$1" | awk '/has address/ { print $4 }' | head -n 1
+	host "$1" | awk '/has address/ { print $4 }' | head --lines=1
 }
 
 # Query Linux man page for certain flag
@@ -630,7 +630,7 @@ function docker_remove_all() {
 }
 
 function list_installed() {
-	dnf list installed | awk -F. -v ORS="\0" '{print $1" "}' | sort -zu && echo ""
+	dnf list installed | awk --field-separator. -v ORS="\0" '{print $1" "}' | sort -zu && echo ""
 }
 
 # $1 - name of the folder to zip
@@ -674,7 +674,7 @@ function reformat() {
 	case $ext in
 	"md")
 		# Reformat against Github's Markdown styleguide
-		pandoc -f markdown -t markdown_github "$1" >"$tmpf"
+		pandoc --write=markdown --to=markdown_github "$1" >"$tmpf"
 		;;
 	"js")
 		eslint --fix "$1" >"$tmpf"
@@ -713,7 +713,7 @@ function redshift_loc() {
 }
 
 function weather() {
-	curl --silent wttr.in/"${1:-$DEFAULT_CITY}" | head -n 7
+	curl --silent wttr.in/"${1:-$DEFAULT_CITY}" | head --lines=7
 }
 
 # Prints aggregated %MEM for a process ($1)
@@ -828,7 +828,7 @@ function android_update() {
 
 function last_modified_directory() {
 	# shellcheck disable=2012
-	\ls -t | head -n 1
+	\ls -t | head --lines=1
 }
 
 # Does a subsitution in filenames in all files in the current directory
@@ -1018,8 +1018,8 @@ function display_notification() {
 function save_last_n_lines_to_file() {
 	local LINES=$1
 	local -r filename=~/tmp/$(date)last_$LINES.txt
-	fc -ln -"$LINES" | head -n "$LINES" >"$filename"
-	fc -ln -"$LINES" | head -n "$LINES" >copy_to_clipboard
+	fc -ln -"$LINES" | head --lines="$LINES" >"$filename"
+	fc -ln -"$LINES" | head --lines="$LINES" >copy_to_clipboard
 	echo "Saved to $filename"
 }
 
@@ -1106,7 +1106,7 @@ alias github_merge_pr='gh pr merge $(git branch --show-current) --delete-branch 
 function random-string() {
 	# Add special chars:
 	# env LC_ALL=C tr -dc '(\&\_a-zA-Z0-9\^\*\@'
-	env LC_ALL=C tr -dc 'a-zA-Z0-9' </dev/urandom | fold -w "${1:-32}" | head -n 1
+	env LC_ALL=C tr -dc 'a-zA-Z0-9' </dev/urandom | fold -w "${1:-32}" | head --lines=1
 }
 
 function brew_cleanup_package() {
@@ -1141,7 +1141,7 @@ function copy_branch_name() {
 	if [[ -n $(git branch --show-current 2>/dev/null) ]]; then
 		branch=$(git branch --show-current)
 	else
-		branch=$(awk -F '/' '{print $NF}' <.git/HEAD)
+		branch=$(awk --field-separator '/' '{print $NF}' <.git/HEAD)
 	fi
 
 	echo "$branch" | tr -d "\n" | copy_to_clipboard
@@ -1330,7 +1330,7 @@ function extract_field_from_json() {
 	json_field_value=$(
 		grep "$field_name" "$filename" |
 			head -1 |
-			awk -F: '{ print $2 }' |
+			awk --field-separator: '{ print $2 }' |
 			sed 's/[",]//g'
 	)
 
@@ -1499,7 +1499,7 @@ function winenv() {
 alias p3='python3'
 
 function h() {
-	head -n "$@"
+	head --lines="$@"
 }
 
 alias c='code -n . &'
@@ -1919,7 +1919,7 @@ function find_and_replace() {
 }
 
 function strikethrough_text() {
-	awk -F'[^[:alpha:]]+' 'BEGIN{string=sprintf("\xCC\xB6")}{for (letter_index=1;letter_index<=NF;letter_index++)gsub(/./, "&" string, $letter_index); print}'
+	awk --field-separator'[^[:alpha:]]+' 'BEGIN{string=sprintf("\xCC\xB6")}{for (letter_index=1;letter_index<=NF;letter_index++)gsub(/./, "&" string, $letter_index); print}'
 }
 
 function is_url() {
