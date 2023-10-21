@@ -550,6 +550,11 @@ EOF
 	fi
 
 	exec zsh -l
+
+    printf "Run the following PowerShell scripts manually:" \
+        "        InstallPowerShell.ps1" \
+        "        PostinstallPowerShell.ps1"
 }
 
 main "$@"
+
