@@ -77,3 +77,5 @@ function prompt {
 function ListUsbDevices {
     Get-PnpDevice -PresentOnly | Where-Object { $_.InstanceId -match '^USB' }
 }
+
+Set-PSReadLineKeyHandler -Key Tab -Function Complete
