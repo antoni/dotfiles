@@ -2,4 +2,4 @@
 
 # Clears all files that aren't needed in the long term
 
-rm -rf ~/.zcompdump*
+rm --recursive --force ~/.zcompdump*

@@ -69,7 +69,7 @@ function mac_change_hostname() {
 
 function gcc_symlink() {
 	# these are symlinks, so we can delete these safely
-	sudo rm -rf /usr/bin/{gcc,g++}
+	sudo rm --recursive --force /usr/bin/{gcc,g++}
 	sudo ln -s gcc-12 /usr/bin/gcc
 	sudo ln -s g++-12 /usr/bin/g++
 }
@@ -84,7 +84,7 @@ function mac_symlink() {
 
 		if [[ -L "$from" ]]; then
 			printf "symlink '%s' exists, removing\n" "$from"
-			rm -rf "$from"
+			rm --recursive --force "$from"
 		fi
 
 		ln -s "$to" "$from"
@@ -110,13 +110,13 @@ function mac_symlink() {
 	ln -fs "$DOTFILES_MAC_DIR"/karabiner ~/.config/
 
 	# TextMate
-	rm -rf /usr/local/bin/mate
+	rm --recursive --force /usr/local/bin/mate
 	sudo ln -s /Applications/TextMate.app/Contents/MacOS/mate /usr/local/bin/mate
 
 	# VLC
 	mkdir -p ~/Library/Preferences/org.videolan.vlc
-	rm -rf ~/Library/Preferences/org.videolan.vlc/vlcrc
-	cp -rf "$DOTFILES_DIR"/vlcrc ~/Library/Preferences/org.videolan.vlc/vlcrc
+	rm --recursive --force ~/Library/Preferences/org.videolan.vlc/vlcrc
+	cp --recursive --force "$DOTFILES_DIR"/vlcrc ~/Library/Preferences/org.videolan.vlc/vlcrc
 	# echo "NOTE: When updating preferences, VLC doesn't modify the existing vlcrc, instead it deletes the last and creates a new one. Instead of symlinking, the ~/dotfiles/vlcrc has been copied"
 
 	[ -d "$HOME/scripts" ] && ln -fs ~/scripts/Chrome\ Debugger.app /Applications/

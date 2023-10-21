@@ -6,7 +6,7 @@ powershell_profile_directory="/mnt/c/Users/""$WINDOWS_USERNAME""/Documents/Windo
 powershell_profile_location=$(printf "%s/Microsoft.PowerShell_profile.ps1" "$powershell_profile_directory")
 
 mkdir -p "$powershell_profile_directory"
-rm -rf "$powershell_profile_location"
+rm --recursive --force "$powershell_profile_location"
 
 cp Microsoft.PowerShell_profile.ps1 "$powershell_profile_directory"
 
