@@ -20,7 +20,7 @@ wicd-gtk &
 while true; do
 	MEM=$(free -m | grep '^Mem' | awk '{print "total: " $2 "MB used: " $3"MB"}')
 	CPU=$(top -bn 1 | grep 'Cpu' | tr -d 'usy,' | head -1 | awk '{print "user " $2 ", sys " $3}')
-	VOLUME=$(awk -F"[][]" '/dB/ { print $2 }' <(amixer sget Master))
+	VOLUME=$(awk --field-separator"[][]" '/dB/ { print $2 }' <(amixer sget Master))
 	DATE=$(date +"%Y-%m-%d %H:%M")
 	BAT=$(acpi -b | awk '{ print $4 }' | tr -d ',')
 	xsetroot -name "MEM: $MEM CPU: $CPU V: $VOLUME B: $BAT $DATE"
