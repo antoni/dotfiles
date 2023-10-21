@@ -58,11 +58,11 @@ function update_all() {
 		winget.exe upgrade --all --include-unknown
 
 		# Delete all links on Desktop: current user
-		rm -rf /mnt/c/Users/"${WINDOWS_USERNAME}"/Desktop/*.{lnk,url}
+		rm --recursive --force /mnt/c/Users/"${WINDOWS_USERNAME}"/Desktop/*.{lnk,url}
 
 		# Delete all links on Desktop: all users
 		# [Environment]::GetFolderPath('CommonDesktopDirectory')
-		rm -rf /mnt/c/Users/Public/{desktop,Desktop}/*.{lnk,url}
+		rm --recursive --force /mnt/c/Users/Public/{desktop,Desktop}/*.{lnk,url}
 	fi
 
 	echo "Upgrading oh-my-zsh..."
@@ -76,7 +76,7 @@ function update_all() {
 	# npx npm-check --global --update-all
 	# So instead we remove all the packages and do a fresh install:
 	source "$HOME"/dotfiles/paths
-	rm -rf "$NPM_GLOBAL_PACKAGES_DIRECTORY"
+	rm --recursive --force "$NPM_GLOBAL_PACKAGES_DIRECTORY"
 
 	source "$HOME"/dotfiles/install/install_global_javascript_npm_packages.sh
 	install_global_javascript_npm_packages

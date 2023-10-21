@@ -303,7 +303,7 @@ setup_ohmyzsh() {
 		git checkout -b "$BRANCH" "origin/$BRANCH" || {
 		[ ! -d "$ZSH" ] || {
 			cd -
-			rm -rf "$ZSH" 2>/dev/null
+			rm --recursive --force "$ZSH" 2>/dev/null
 		}
 		fmt_error "git clone of oh-my-zsh repo failed"
 		exit 1

@@ -107,13 +107,13 @@ elif test -f /proc/sys/kernel/osrelease && grep -q microsoft /proc/sys/kernel/os
 
 	function copy_folder_to_desktop() {
 		local src_folder="$1"
-		cp -r "$src_folder" "/mnt/c/Users/""$WINDOWS_USERNAME""/Desktop/"
+		cp --recursive "$src_folder" "/mnt/c/Users/""$WINDOWS_USERNAME""/Desktop/"
 	}
 
 elif [[ "$UNAME_OUTPUT" == 'Linux' ]]; then
 	# Debian/Ubuntu
 	function listkernels() {
-		dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d'
+		dpkg --list 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d'
 	}
 	alias gdebi='sudo gdebi'
 
@@ -149,7 +149,7 @@ alias mm='man $(fc -ln -1 | cut -d" " -f 1)'
 alias l='ls'
 alias v='vim'
 alias grep='grep --color -i'
-alias rmf='rm -rf'
+alias rmf='rm --recursive --force'
 alias o='rlwrap ocaml'
 alias rpm='sudo rpm'
 
@@ -893,7 +893,7 @@ alias npmu='npm install -g npm'
 
 alias yarnnoproxy='yarn --no-default-rc'
 
-alias rmrf='rm -rf'
+alias rmrf='rm --recursive --force'
 
 alias tmux2x2='tmux new-session \; split-window -v \; split-window -h \; select-pane -t 0 \; split-window -h\; select-pane -t 0;'
 
@@ -994,7 +994,7 @@ function reinstall_cocoapods() {
 
 function force_remove_brew_cask() {
 	local cask_name=$1
-	rm -rf "$(brew --prefix)/Caskroom/$cask_name"
+	rm --recursive --force "$(brew --prefix)/Caskroom/$cask_name"
 }
 
 alias killfsck='sudo pkill -f fsck'

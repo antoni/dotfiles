@@ -11,4 +11,4 @@ sudo chmod 755 /usr/bin/azcopy
 
 # Clean the kitchen
 rm -f downloadazcopy-v10-linux
-rm -rf ./azcopy_linux_amd64_*/
+rm --recursive --force ./azcopy_linux_amd64_*/

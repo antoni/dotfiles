@@ -13,7 +13,7 @@ cd tmux-${VERSION} || exit
 make
 sudo make install
 cd - || exit
-sudo rm -rf /usr/local/src/tmux-*
+sudo rm --recursive --force /usr/local/src/tmux-*
 sudo mv tmux-${VERSION} /usr/local/src
 
 ## Logout and login to the shell again and run.
