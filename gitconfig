@@ -82,7 +82,7 @@
     amend-author-for-commit = !bash -c 'git rebase --onto $2 --exec \"git commit --amend --author=$1\" $2' --
     reset-to-master = "checkout master --"
     # Show message from last commit
-    slog = "!git log --pretty=format:%s | head -n 1"
+    slog = "!git log --pretty=format:%s | head --lines=1"
     # Show diff with deleted files only
     deleted = diff --diff-filter=D
     list-untracked = ls-files --others --exclude-standard
