@@ -1957,3 +1957,7 @@ function wrap_with() {
         -v right_wrap="$right_wrap" \
         '{ print left_wrap$0right_wrap}'
 }
+
+function remove_duplicates() {
+    awk '!seen[$0]++'
+}
