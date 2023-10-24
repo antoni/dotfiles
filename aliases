@@ -10,126 +10,126 @@ source "$HOME"/dotfiles/colors.sh
 source "$HOME"/dotfiles/utils.sh
 
 if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
-	# macOS-specific
-	alias copy_to_clipboard='pbcopy'
-	alias setmiddlevolume='sudo osascript -e "set Volume 5"'
-	alias eclipseclean='/Applications/eclipse/Eclipse.app/Contents/MacOS/eclipse -clean'
-	alias topcoder='javaws ~/Developer/Topcoder/ContestAppletProd.jnlp'
-	alias mysql_client='open -a TablePlus'
-	alias sc2_hotkeys_edit='vim ~/Library/Application\ Support/Blizzard/StarCraft\ II/Accounts/491096383/Hotkeys/Rapid\ fire\ test.SC2Hotkeys'
+    # macOS-specific
+    alias copy_to_clipboard='pbcopy'
+    alias setmiddlevolume='sudo osascript -e "set Volume 5"'
+    alias eclipseclean='/Applications/eclipse/Eclipse.app/Contents/MacOS/eclipse -clean'
+    alias topcoder='javaws ~/Developer/Topcoder/ContestAppletProd.jnlp'
+    alias mysql_client='open -a TablePlus'
+    alias sc2_hotkeys_edit='vim ~/Library/Application\ Support/Blizzard/StarCraft\ II/Accounts/491096383/Hotkeys/Rapid\ fire\ test.SC2Hotkeys'
 
-	# alias vim='mvim -v'
-	alias ls='ls --human-readable -lFG'
+    # alias vim='mvim -v'
+    alias ls='ls --human-readable -lFG'
 
-	function brew_uninstall_all() {
-		brew remove --force "$(brew list --formula)"
-		brew remove --cask --force "$(brew list)"
-	}
+    function brew_uninstall_all() {
+        brew remove --force "$(brew list --formula)"
+        brew remove --cask --force "$(brew list)"
+    }
 
-	alias analyze_disk_usage='/Applications/OmniDiskSweeper.app/Contents/MacOS/OmniDiskSweeper'
+    alias analyze_disk_usage='/Applications/OmniDiskSweeper.app/Contents/MacOS/OmniDiskSweeper'
 
-	alias lsblk='diskutil list'
+    alias lsblk='diskutil list'
 
-	alias change_main_screen='~/scripts/hmscreens -setMainID `~/scripts/hmscreens -info | \grep "Screen ID:" | head -2 | tail -1 | sed "s/[^0-9]*//g"`'
+    alias change_main_screen='~/scripts/hmscreens -setMainID `~/scripts/hmscreens -info | \grep "Screen ID:" | head -2 | tail -1 | sed "s/[^0-9]*//g"`'
 
-	alias reset_wifi='sudo networksetup -setnetworkserviceenabled Wi-Fi off && sleep 2 && sudo networksetup -setnetworkserviceenabled Wi-Fi on'
+    alias reset_wifi='sudo networksetup -setnetworkserviceenabled Wi-Fi off && sleep 2 && sudo networksetup -setnetworkserviceenabled Wi-Fi on'
 
-	function battery_recharge_cycles_count() {
-		system_profiler SPPowerDataType | \grep "Cycle Count" | awk '{print $3}'
-	}
+    function battery_recharge_cycles_count() {
+        system_profiler SPPowerDataType | \grep "Cycle Count" | awk '{print $3}'
+    }
 
-	alias software_version='system_profiler SPSoftwareDataType'
+    alias software_version='system_profiler SPSoftwareDataType'
 
-	alias dwg2pdf='/Applications/QCAD.app/Contents/Resources/dwg2pdf -no-dock-icon'
+    alias dwg2pdf='/Applications/QCAD.app/Contents/Resources/dwg2pdf -no-dock-icon'
 
-	alias fix_disk="/Applications/Disk\ Drill.app"
+    alias fix_disk="/Applications/Disk\ Drill.app"
 
-	function ios_simulator_screenshot() {
-		xcrun simctl io booted screenshot
-	}
+    function ios_simulator_screenshot() {
+        xcrun simctl io booted screenshot
+    }
 
-	function ios_simulator_screencast() {
-		xcrun simctl io booted recordVideo ios_simluator_recording.mp4
-	}
+    function ios_simulator_screencast() {
+        xcrun simctl io booted recordVideo ios_simluator_recording.mp4
+    }
 
-	alias date='gdate'
+    alias date='gdate'
 
-	# Toggle "Do not disturb" mode on macOS (via: https://github.com/sindresorhus/do-not-disturb-cli)
-	alias dnd-toggle='dnd toggle'
+    # Toggle "Do not disturb" mode on macOS (via: https://github.com/sindresorhus/do-not-disturb-cli)
+    alias dnd-toggle='dnd toggle'
 
 elif test -f /proc/sys/kernel/osrelease && grep -q microsoft /proc/sys/kernel/osrelease; then
-	# Windows (WSL)
-	alias copy_to_clipboard='clip.exe'
+    # Windows (WSL)
+    alias copy_to_clipboard='clip.exe'
 
-	alias powershell='powershell.exe -NoLogo'
+    alias powershell='powershell.exe -NoLogo'
 
-	alias xclip='clip.exe'
+    alias xclip='clip.exe'
 
-	# See: https://github.com/microsoft/winget-cli/issues/688#issuecomment-788391878
-	alias winget='powershell.exe -NoLogo /c winget.exe'
+    # See: https://github.com/microsoft/winget-cli/issues/688#issuecomment-788391878
+    alias winget='powershell.exe -NoLogo /c winget.exe'
 
-	function edit_idea_settings() {
-		vim "/mnt/c/Users/""$WINDOWS_USERNAME""/AppData/Roaming/JetBrains/IntelliJIdea2021.3/idea64.exe.vmoptions"
-	}
+    function edit_idea_settings() {
+        vim "/mnt/c/Users/""$WINDOWS_USERNAME""/AppData/Roaming/JetBrains/IntelliJIdea2021.3/idea64.exe.vmoptions"
+    }
 
-	function open_autostart_folder() {
-		local -r autostart_path=$(printf "C:\Users\%s\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup" "$WINDOWS_USERNAME")
-		cmd.exe /c explorer.exe "$autostart_path"
-		open /mnt/c/ProgramData/Microsoft/Windows/Start\ Menu/Programs/StartUp
-	}
+    function open_autostart_folder() {
+        local -r autostart_path=$(printf "C:\Users\%s\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup" "$WINDOWS_USERNAME")
+        cmd.exe /c explorer.exe "$autostart_path"
+        open /mnt/c/ProgramData/Microsoft/Windows/Start\ Menu/Programs/StartUp
+    }
 
-	function open() {
-		local local_path=$1
-		explorer.exe "$(wslpath -w "$local_path")"
-	}
+    function open() {
+        local local_path=$1
+        explorer.exe "$(wslpath -w "$local_path")"
+    }
 
-	function browse() {
-		sensible-browser "$@"
-	}
+    function browse() {
+        sensible-browser "$@"
+    }
 
-	function github_diff_last_commit() {
-		local -r url=$(gh browse --commit --no-browser | sed --expression 's/tree/commit/g')
-		browse "$url"
-	}
+    function github_diff_last_commit() {
+        local -r url=$(gh browse --commit --no-browser | sed --expression 's/tree/commit/g')
+        browse "$url"
+    }
 
-	alias wmic='WMIC.exe'
+    alias wmic='WMIC.exe'
 
-	# Launches Windows uninstall program (GUI-based)
-	alias uninstall='cmd.exe /c appwiz.cpl'
+    # Launches Windows uninstall program (GUI-based)
+    alias uninstall='cmd.exe /c appwiz.cpl'
 
-	# shellcheck disable=2154
-	alias empty_trash_bin='cmd.exe /c "rd /s /q %systemdrive%\$Recycle.bin" 2&> /dev/null'
+    # shellcheck disable=2154
+    alias empty_trash_bin='cmd.exe /c "rd /s /q %systemdrive%\$Recycle.bin" 2&> /dev/null'
 
-	# Note: assumes 'C' is the main drive
-	alias analyze_disk_usage='/mnt/c/Program\ Files\ (x86)/WinDirStat/windirstat.exe'
-	# Alternative:
-	# alias analyze_disk_usage='/mnt/c/Program\ Files/WizTree/WizTree.exe "c:"'
+    # Note: assumes 'C' is the main drive
+    alias analyze_disk_usage='/mnt/c/Program\ Files\ (x86)/WinDirStat/windirstat.exe'
+    # Alternative:
+    # alias analyze_disk_usage='/mnt/c/Program\ Files/WizTree/WizTree.exe "c:"'
 
-	function copy_folder_to_desktop() {
-		local src_folder="$1"
-		cp --recursive "$src_folder" "/mnt/c/Users/""$WINDOWS_USERNAME""/Desktop/"
-	}
+    function copy_folder_to_desktop() {
+        local src_folder="$1"
+        cp --recursive "$src_folder" "/mnt/c/Users/""$WINDOWS_USERNAME""/Desktop/"
+    }
 
 elif [[ "$UNAME_OUTPUT" == 'Linux' ]]; then
-	# Debian/Ubuntu
-	function listkernels() {
-		dpkg --list 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d'
-	}
-	alias gdebi='sudo gdebi'
+    # Debian/Ubuntu
+    function listkernels() {
+        dpkg --list 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d'
+    }
+    alias gdebi='sudo gdebi'
 
-	# Linux specific
-	# alias i='sudo apt-get install --assume-yes'
-	# Install through apt-get and add installed software to list of used commands
-	# addcmd() { sudo apt-get install --assume-yes $* && echo $* >> ~/install_apt-get.txt; }
-	function addcmd() { sudo dnf install --assume-yes "$*" && echo "$*" >>~/install_apt-get.txt; }
+    # Linux specific
+    # alias i='sudo apt-get install --assume-yes'
+    # Install through apt-get and add installed software to list of used commands
+    # addcmd() { sudo apt-get install --assume-yes $* && echo $* >> ~/install_apt-get.txt; }
+    function addcmd() { sudo dnf install --assume-yes "$*" && echo "$*" >>~/install_apt-get.txt; }
 
-	alias sound='alsamixer'
-	# alias open='xdg-open'
-	alias st='scrot -ub '"'"'%Y:%m:%d:%H:%M:%S.png'"'"' -e '"'"'mv $f ~/Downloads/'"'"
-	alias catquestions='cat ~/Documents/Q.txt'
-	alias mountrw='mount -o remount,rw /'
-	alias vim='vim -o'
-	alias ls='ls --human-readable --color -lFG'
+    alias sound='alsamixer'
+    # alias open='xdg-open'
+    alias st='scrot -ub '"'"'%Y:%m:%d:%H:%M:%S.png'"'"' -e '"'"'mv $f ~/Downloads/'"'"
+    alias catquestions='cat ~/Documents/Q.txt'
+    alias mountrw='mount -o remount,rw /'
+    alias vim='vim -o'
+    alias ls='ls --human-readable --color -lFG'
 fi
 
 # General purpose
@@ -158,15 +158,15 @@ alias free='free -h'
 
 alias wgetdir='wget --recursive --no-parent '
 function wgetdir2() {
-	wget \
-		--recursive \
-		--no-clobber \
-		--page-requisites \
-		--html-extension \
-		--convert-links \
-		--restrict-file-names=windows \
-		--domains website.org \
-		--no-parent "$1"
+    wget \
+        --recursive \
+        --no-clobber \
+        --page-requisites \
+        --html-extension \
+        --convert-links \
+        --restrict-file-names=windows \
+        --domains website.org \
+        --no-parent "$1"
 }
 
 # Programming etc.
@@ -259,14 +259,14 @@ alias gopath="export GOPATH=\$(pwd)"
 alias dbgui='/usr/share/dbeaver/dbeaver'
 
 function singlemonitor() {
-	primary=$(xrandr | \grep "connected primary" | cut -d' ' -f1)
-	secondary=$(xrandr | \grep " connected" | \grep -v "primary" | cut -d' ' -f1)
-	if [[ $secondary ]]; then
-		xrandr --output "$secondary" --off --output "$primary" --auto
-	else
-		xrandr --output "$primary" --off
-		xrandr --output "$primary" --auto
-	fi
+    primary=$(xrandr | \grep "connected primary" | cut -d' ' -f1)
+    secondary=$(xrandr | \grep " connected" | \grep -v "primary" | cut -d' ' -f1)
+    if [[ $secondary ]]; then
+        xrandr --output "$secondary" --off --output "$primary" --auto
+    else
+        xrandr --output "$primary" --off
+        xrandr --output "$primary" --auto
+    fi
 }
 
 # alias dualmonitor='xrandr --output VGA1 --mode 1920x1200 --right-of LVDS1'
@@ -282,23 +282,23 @@ alias fixaudio='pulseaudio -k'
 alias fixaudio2='pavucontrol'
 alias fixaudio3='rm -r ~/.config/pulse; pulseaudio -k'
 function fixpowerctl() {
-	for device in /sys/bus/usb/devices/*/power/control; do
-		echo on >"$device"
-	done
+    for device in /sys/bus/usb/devices/*/power/control; do
+        echo on >"$device"
+    done
 }
 alias fixtouchpad='sudo rmmod psmouse && sudo modprobe psmouse'
 alias ubuntu_fix_apt='sudo apt-get install --fix-broken && sudo apt-get autoremove && sudo apt-get update'
 
 # Markdown to PDF
 function md2pdf() {
-	local -r filename=$(filename_without_extension "$1")
-	pandoc --standalone --variable=papersize:a4 --variable=geometry:margin=1in --from=gfm -o "$filename".pdf "$filename".md
-	open "$filename".pdf
+    local -r filename=$(filename_without_extension "$1")
+    pandoc --standalone --variable=papersize:a4 --variable=geometry:margin=1in --from=gfm -o "$filename".pdf "$filename".md
+    open "$filename".pdf
 }
 
 function rst2pdf() {
-	pandoc --standalone -V papersize:a4 -V geometry:margin=1in --from rst -o "$1".pdf "$1"
-	open "$1".pdf
+    pandoc --standalone -V papersize:a4 -V geometry:margin=1in --from rst -o "$1".pdf "$1"
+    open "$1".pdf
 }
 
 # Serves github-rendered Markdown file (from .) on localhost:6419
@@ -312,36 +312,36 @@ alias gogo='cd ~/go/'
 alias l='ls'
 
 function csview() {
-	local file="$1"
-	sed -e 's/,,/, ,/g' <"$file" | column -s, -t | less -#5 -N -S
+    local file="$1"
+    sed -e 's/,,/, ,/g' <"$file" | column -s, -t | less -#5 -N -S
 }
 # Custom cat: colourised and tabulated for CSV files alias cat='pygmentize -g'
 function xcat() {
-	filename=$(basename "$1")
-	fileext=${filename##*.}
-	if [ "$fileext" = "csv" ]; then
-		csview "$1"
-	else
-		pygmentize -g "$1"
-	fi
+    filename=$(basename "$1")
+    fileext=${filename##*.}
+    if [ "$fileext" = "csv" ]; then
+        csview "$1"
+    else
+        pygmentize -g "$1"
+    fi
 }
 
 # Google search
 function search() {
-	args="$*"
-	searchterm=${args// /%20}
-	open "http://www.google.com/search?q=$searchterm"
+    args="$*"
+    searchterm=${args// /%20}
+    open "http://www.google.com/search?q=$searchterm"
 }
 
 # Launch Vim solarized theme depending on the time of the day
 function vv() {
-	echo "$1"
-	hour=$(date +%H)
-	theme=dark
-	if [[ $hour -ge 6 && $hour -le 17 ]]; then
-		theme=light
-	fi
-	terminator -l vim-solarized-$theme -c "vim -c 'set gb=$theme'"
+    echo "$1"
+    hour=$(date +%H)
+    theme=dark
+    if [[ $hour -ge 6 && $hour -le 17 ]]; then
+        theme=light
+    fi
+    terminator -l vim-solarized-$theme -c "vim -c 'set gb=$theme'"
 }
 # Use less +F instead of tail -f
 # function tail() {
@@ -363,7 +363,7 @@ other_commands=(ruptime rwho)
 networking_commands=(netstat ethtool ping ifconfig arping traceroute iwconfig ifconfig tshark nethogs nmap nbtscan iptables tcpdump iproute2 chargen netcat tc insmod fping nslookup host p0f mtr ipcalc sipcalc iperf)
 
 function whichport() {
-	netstat -tulpn | grep "$@"
+    netstat -tulpn | grep "$@"
 }
 
 # ip a s #List addresses for interfaces
@@ -390,28 +390,28 @@ alias pil='pip list'
 
 # Execute nth line of a file
 function execute_nth_line_of_file() {
-	eval "$(sed "$1"'q;d' "$2")"
+    eval "$(sed "$1"'q;d' "$2")"
 }
 
 # Countdown, usage:
 # countdown 60
 # countdown $((2*60*60))
 function countdown() {
-	date1=$(($(date +%s) + $1))
-	while [ "$date1" -ne "$(date +%s)" ]; do
-		echo -ne "$(date --universal --date @$((date1 - $(date +%s))) +%H:%M:%S)\r"
-		sleep 0.1
-	done
+    date1=$(($(date +%s) + $1))
+    while [ "$date1" -ne "$(date +%s)" ]; do
+        echo -ne "$(date --universal --date @$((date1 - $(date +%s))) +%H:%M:%S)\r"
+        sleep 0.1
+    done
 }
 
 # Stopwach, usage:
 # stopwatch
 function stopwatch() {
-	date1=$(date +%s)
-	while true; do
-		echo -ne "$(date --universal --date @$(($(date +%s) - date1)) +%H:%M:%S)\r"
-		sleep 0.1
-	done
+    date1=$(date +%s)
+    while true; do
+        echo -ne "$(date --universal --date @$(($(date +%s) - date1)) +%H:%M:%S)\r"
+        sleep 0.1
+    done
 }
 
 function mvd() { mv "$1" ~/Downloads/; }
@@ -447,24 +447,24 @@ alias dhcp0='sudo dhcpcd -n eth0'
 alias top10size="find . -type f -printf '%s %p\n'| sort -nr | head -10﻿"
 
 dl_website() {
-	wget \
-		--recursive \
-		--no-clobber \
-		--page-requisites \
-		--html-extension \
-		--convert-links \
-		--restrict-file-names=windows \
-		--no-parent \
-		"$1"
+    wget \
+        --recursive \
+        --no-clobber \
+        --page-requisites \
+        --html-extension \
+        --convert-links \
+        --restrict-file-names=windows \
+        --no-parent \
+        "$1"
 }
 
 # cd ../../../
 function up() {
-	how_many_levels="$1"
-	while [ "$how_many_levels" -gt 0 ]; do
-		cd ..
-		how_many_levels=$((how_many_levels - 1))
-	done
+    how_many_levels="$1"
+    while [ "$how_many_levels" -gt 0 ]; do
+        cd ..
+        how_many_levels=$((how_many_levels - 1))
+    done
 }
 
 # JSON pretty print
@@ -473,12 +473,12 @@ alias jsonpp=json_pretty_print
 
 # Git
 function gc() {
-	git commit -am "$*"
+    git commit -am "$*"
 }
 
 function gcp() {
-	gc "$*"
-	git push
+    gc "$*"
+    git push
 }
 
 alias svim='sudo vim'
@@ -496,7 +496,7 @@ alias p='python3'
 alias fixandroidstudio='IBUS_ENABLE_SYNC_MODE=1 ibus-daemon -xrd'
 
 function diffcount() {
-	diff --unified=0 "$1" "$2" | grep -c ^@
+    diff --unified=0 "$1" "$2" | grep -c ^@
 }
 
 function dark_background() { export BACKGROUND=dark && source "$HOME"/.common_profile.sh; }
@@ -509,20 +509,20 @@ alias autoremove='sudo apt-get autoremove'
 alias redisgui='redis-desktop-manager'
 
 function g++gtest() {
-	g++ -std=c++11 "$1" -lgtest -lpthread && ./a.out
+    g++ -std=c++11 "$1" -lgtest -lpthread && ./a.out
 }
 
 # Links all .o files to make elf_i386 executable
 function link() {
-	# Default value = test
-	BIN=${1:-test}
-	ld -m elf_i386 -s -o "$BIN" ./*.o
+    # Default value = test
+    BIN=${1:-test}
+    ld -m elf_i386 -s -o "$BIN" ./*.o
 }
 # GCC flags:
 # -fverbose-asm -S
 
 function compile() {
-	nasm -f elf "$1"
+    nasm -f elf "$1"
 }
 
 alias burn_iso='wodim'
@@ -530,8 +530,8 @@ alias burn_iso='wodim'
 # Recursive chmod, usage:
 # chmod_rec +rx
 function chmod_rec() {
-	# find . -type d -exec chmod +rx {} \;
-	find . -type d -exec chmod "$1" {} \;
+    # find . -type d -exec chmod +rx {} \;
+    find . -type d -exec chmod "$1" {} \;
 }
 
 alias make='make -j 4'
@@ -567,30 +567,30 @@ alias ydlworst='ydl --format worst'
 alias ydlaudio='youtube-dl --format best --extract-audio --audio-format mp3'
 
 function ydlwl() {
-	pushd ~/Documents/watch || exit
-	ydl --ignore-errors https://www.youtube.com/playlist?list=PLxEBYuU7ONUfj68kBjXfHaAutKqtgAc4s
-	popd || exit
+    pushd ~/Documents/watch || exit
+    ydl --ignore-errors https://www.youtube.com/playlist?list=PLxEBYuU7ONUfj68kBjXfHaAutKqtgAc4s
+    popd || exit
 }
 
 function rdp() { rdesktop "$@" -rsound:remote -5 -K -r clipboard:CLIPBOARD; }
 
 function swap() {
-	local TMPFILE=tmp.$$
-	mv "$1" $TMPFILE
-	mv "$2" "$1"
-	mv $TMPFILE "$2"
+    local TMPFILE=tmp.$$
+    mv "$1" $TMPFILE
+    mv "$2" "$1"
+    mv $TMPFILE "$2"
 }
 
 # Copies SSH RSA key to X clipboard
 alias copy_ssh_public_key_to_clipboard='cat ~/.ssh/id_rsa.pub | copy_to_clipboard'
 
 function dnfs() {
-	arg_count="$#"
-	if [ $arg_count -eq 2 ]; then
-		dnf search "$1" | grep "$2"
-	elif [ $arg_count -eq 1 ]; then
-		dnf search "$1"
-	fi
+    arg_count="$#"
+    if [ $arg_count -eq 2 ]; then
+        dnf search "$1" | grep "$2"
+    elif [ $arg_count -eq 1 ]; then
+        dnf search "$1"
+    fi
 }
 
 alias cups='lpstat' # -p -d
@@ -598,25 +598,25 @@ alias cups='lpstat' # -p -d
 alias zsh_debug='zsh -i -x -c exit'
 
 function fix_zsh_history() {
-	cd "$HOME" >/dev/null || exit
-	mv .zsh_history .zsh_history_bad
-	strings .zsh_history_bad >.zsh_history
-	fc -R .zsh_history
+    cd "$HOME" >/dev/null || exit
+    mv .zsh_history .zsh_history_bad
+    strings .zsh_history_bad >.zsh_history
+    fc -R .zsh_history
 }
 
 function fix_perms() {
-	find . -type d -exec chmod 775 {} \;
-	find . -type f -exec chmod 664 {} \;
+    find . -type d -exec chmod 775 {} \;
+    find . -type f -exec chmod 664 {} \;
 }
 
 function get_ip() {
-	host "$1" | awk '/has address/ { print $4 }' | head --lines=1
+    host "$1" | awk '/has address/ { print $4 }' | head --lines=1
 }
 
 # Query Linux man page for certain flag
 # Example: manf iptables -t
 function manf() {
-	man "$1" | less -p "^ +\-${2}"
+    man "$1" | less -p "^ +\-${2}"
 }
 
 alias dmidecode='sudo dmidecode'
@@ -626,37 +626,37 @@ alias remove_all_docker_images='docker rm -vf $(docker ps -aq)'
 
 # Delete all containers & all images
 function docker_remove_all() {
-	~/scripts/docker_remove_all.sh
+    ~/scripts/docker_remove_all.sh
 }
 
 function list_installed() {
-	dnf list installed | awk --field-separator. -v ORS="\0" '{print $1" "}' | sort -zu && echo ""
+    dnf list installed | awk --field-separator. -v ORS="\0" '{print $1" "}' | sort -zu && echo ""
 }
 
 # $1 - name of the folder to zip
 function zip_and_move() {
-	zip --recurse-paths ~/Downloads/"$1".zip "$1"/* "$1"/.*
+    zip --recurse-paths ~/Downloads/"$1".zip "$1"/* "$1"/.*
 }
 
 # Download .gitignore
 # Usage: gitignore language
 function gitignore() {
-	local -r language_name="$1"
+    local -r language_name="$1"
 
-	curl -L -s "https://www.gitignore.io/api/""$language_name" | awk 'NR>2 {print last} {last=$0}' | tee .gitignore
+    curl -L -s "https://www.gitignore.io/api/""$language_name" | awk 'NR>2 {print last} {last=$0}' | tee .gitignore
 }
 
 # Helper for watch_dir
 function watch_dir_action() {
-	while read -r path action file; do
-		printf "[${colors[Green]}%s${colors[White]}]\t${colors[Red]}%s${colors[Reset_Color]}\tin\t%s\n" \
-			"$action" "$file" "$path"
-	done
+    while read -r path action file; do
+        printf "[${colors[Green]}%s${colors[White]}]\t${colors[Red]}%s${colors[Reset_Color]}\tin\t%s\n" \
+            "$action" "$file" "$path"
+    done
 }
 
 # $1 - dir to be watched for CREATE or MOVED_TO events
 function watch_dir() {
-	inotifywait -m "$1" -e create -e moved_to | watch_dir_action
+    inotifywait -m "$1" -e create -e moved_to | watch_dir_action
 }
 
 HTML_TIDY_TMP_FILE="/tmp/tidy_log.txt"
@@ -665,116 +665,116 @@ HTML_TIDY_TMP_FILE="/tmp/tidy_log.txt"
 # Usage:
 # ./reformat filename
 function reformat() {
-	tmpf=/tmp/in_place_change_tmp
-	filename=$(basename "$1")
-	ext="${filename##*.}"
+    tmpf=/tmp/in_place_change_tmp
+    filename=$(basename "$1")
+    ext="${filename##*.}"
 
-	echo "File extension: ""$ext"
+    echo "File extension: ""$ext"
 
-	case $ext in
-	"md")
-		# Reformat against Github's Markdown styleguide
-		pandoc --write=markdown --to=markdown_github "$1" >"$tmpf"
-		;;
-	"js")
-		eslint --fix "$1" >"$tmpf"
-		;;
-	"jsx")
-		prettier --write "$1"
-		;;
-	"json")
-		jq -M '.' >"$tmpf" <"$1"
-		;;
-	"py")
-		autopep8 --in-place "$1"
-		;;
-	"html")
-		tidy -indent -wrap 80 -utf8 -clean -file $HTML_TIDY_TMP_FILE "$1" >"$tmpf"
-		;;
-	esac
-	mv -f "$tmpf" "$1" 2>/dev/null
+    case $ext in
+    "md")
+        # Reformat against Github's Markdown styleguide
+        pandoc --write=markdown --to=markdown_github "$1" >"$tmpf"
+        ;;
+    "js")
+        eslint --fix "$1" >"$tmpf"
+        ;;
+    "jsx")
+        prettier --write "$1"
+        ;;
+    "json")
+        jq -M '.' >"$tmpf" <"$1"
+        ;;
+    "py")
+        autopep8 --in-place "$1"
+        ;;
+    "html")
+        tidy -indent -wrap 80 -utf8 -clean -file $HTML_TIDY_TMP_FILE "$1" >"$tmpf"
+        ;;
+    esac
+    mv -f "$tmpf" "$1" 2>/dev/null
 }
 
 alias a='cd ~/adnetwork'
 
 # Toggles VPN connection
 function vpn() {
-	vpn_conn="VPN"
-	vpn_cmd="up"
-	if nmcli connection show --active | grep -q VPN; then
-		vpn_cmd="down"
-	fi
+    vpn_conn="VPN"
+    vpn_cmd="up"
+    if nmcli connection show --active | grep -q VPN; then
+        vpn_cmd="down"
+    fi
 
-	nmcli connection $vpn_cmd id $vpn_conn | tr ' ' '\n' | \grep --color activated
+    nmcli connection $vpn_cmd id $vpn_conn | tr ' ' '\n' | \grep --color activated
 }
 
 function redshift_loc() {
-	redshift-gtk -v -l "$DEFAULT_COORDS"
+    redshift-gtk -v -l "$DEFAULT_COORDS"
 }
 
 function weather() {
-	curl --silent wttr.in/"${1:-$DEFAULT_CITY}" | head --lines=7
+    curl --silent wttr.in/"${1:-$DEFAULT_CITY}" | head --lines=7
 }
 
 # Prints aggregated %MEM for a process ($1)
 function total_mem() {
-	top -b -n1 | \grep "$1" | awk '{ SUM += $10} END { print SUM }'
+    top -b -n1 | \grep "$1" | awk '{ SUM += $10} END { print SUM }'
 }
 
 # Edit last gnome-screenshot taken
 function nomacslast() {
-	files=(~/Pictures/*)
-	nomacs "${files[-1]}"
+    files=(~/Pictures/*)
+    nomacs "${files[-1]}"
 }
 
 # encrypt (filename -> filename.enc)
 # $1 - input file
 # $2 - password
 function encrypt() {
-	openssl enc -aes-256-cbc -in "$1" -out "$1".enc -k "$2"
+    openssl enc -aes-256-cbc -in "$1" -out "$1".enc -k "$2"
 }
 
 # decrypt (filename.enc -> filename)
 # $1 - input file
 # $2 - password
 function decrypt() {
-	openssl enc -aes-256-cbc -d -in "$1".enc -out "$1" -k "$2"
+    openssl enc -aes-256-cbc -d -in "$1".enc -out "$1" -k "$2"
 }
 
 # SSH and attach to tmux
 function sshtmux() {
-	ssh "$1" -t tmux a
+    ssh "$1" -t tmux a
 }
 
 function pip_list() {
-	pip3 list --format=columns | awk '!/Package|---/{ print $1}'
-	pip list --format=columns | awk '!/Package|---/{ print $1}'
+    pip3 list --format=columns | awk '!/Package|---/{ print $1}'
+    pip list --format=columns | awk '!/Package|---/{ print $1}'
 }
 
 function reinstall_pip_packages() {
-	DISPLAY="" pip3 list --outdated | awk '{print $1}' | tail -n +3 | DISPLAY="" xargs --I % sh -c 'pip3 install --upgrade --force-reinstall %'
+    DISPLAY="" pip3 list --outdated | awk '{print $1}' | tail -n +3 | DISPLAY="" xargs --I % sh -c 'pip3 install --upgrade --force-reinstall %'
 }
 
 function reinstall_python() {
-	sudo apt-get remove --assume-yes python python3 python3-pip
-	sudo apt-get install --assume-yes python python3 python3-pip
+    sudo apt-get remove --assume-yes python python3 python3-pip
+    sudo apt-get install --assume-yes python python3 python3-pip
 }
 
 function merge_and_push_branch() {
-	"$HOME"/scripts/merge_and_push_branch.sh "$1"
+    "$HOME"/scripts/merge_and_push_branch.sh "$1"
 }
 
 function response_time() {
-	FORMAT_PATH=$(realpath ~/scripts/curl-format.txt)
-	curl -w "@""$FORMAT_PATH" -o /dev/null -s "$1"
+    FORMAT_PATH=$(realpath ~/scripts/curl-format.txt)
+    curl -w "@""$FORMAT_PATH" -o /dev/null -s "$1"
 }
 
 # Example
 # how_in bash get length of array
 function how_in() {
-	where="$1"
-	shift
-	IFS=+ curl "https://cht.sh/$where/ $*"
+    where="$1"
+    shift
+    IFS=+ curl "https://cht.sh/$where/ $*"
 }
 
 # TESTIT
@@ -784,17 +784,17 @@ function how_in() {
 # * modify file
 # * git-amend-to $old_sha
 git-amend-to() (
-	# Stash, apply to past commit, and rebase the current branch on to of the result.
-	current_branch="$(git rev-parse --abbrev-ref HEAD)"
-	apply_to="$1"
-	git stash
-	git checkout "$apply_to"
-	git stash apply
-	git add -u
-	git commit --amend --no-edit
-	new_sha="$(git log --format="%H" -n 1)"
-	git checkout "$current_branch"
-	git rebase --onto "$new_sha" "$apply_to"
+    # Stash, apply to past commit, and rebase the current branch on to of the result.
+    current_branch="$(git rev-parse --abbrev-ref HEAD)"
+    apply_to="$1"
+    git stash
+    git checkout "$apply_to"
+    git stash apply
+    git add -u
+    git commit --amend --no-edit
+    new_sha="$(git log --format="%H" -n 1)"
+    git checkout "$current_branch"
+    git rebase --onto "$new_sha" "$apply_to"
 )
 
 alias pr='~/scripts/pull_request.sh'
@@ -805,13 +805,13 @@ alias bci='brew cask install'
 alias openssl_website='openssl s_client -connect -crlf'
 
 function json_compare() {
-	diff <(jq -S . "$2") <(jq -S . "$2")
+    diff <(jq -S . "$2") <(jq -S . "$2")
 }
 
 function pdf_compress() {
-	local input_file=$1
-	local output_file=${2:-$1_output.pdf}
-	gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile="$output_file" "$input_file"
+    local input_file=$1
+    local output_file=${2:-$1_output.pdf}
+    gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile="$output_file" "$input_file"
 }
 
 # function diff {
@@ -823,46 +823,46 @@ alias sizes='du -sh * | sort -hr'
 alias speedtest='curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -'
 
 function android_update() {
-	android update sdk --no-ui
+    android update sdk --no-ui
 }
 
 function last_modified_directory() {
-	# shellcheck disable=2012
-	\ls -t | head --lines=1
+    # shellcheck disable=2012
+    \ls -t | head --lines=1
 }
 
 # Does a subsitution in filenames in all files in the current directory
 # See lowercase_first_letter for example use case
 function convert_all_files() {
-	local substitution="$1"
+    local substitution="$1"
 
-	# shellcheck disable=SC2016
-	$BASH -c 'for filename in *;do mv "$filename" ${filename'"$substitution"'};done'
+    # shellcheck disable=SC2016
+    $BASH -c 'for filename in *;do mv "$filename" ${filename'"$substitution"'};done'
 }
 
 # Spaces to underscores
 function spaces_to_underscores() {
-	convert_all_files "// /_"
+    convert_all_files "// /_"
 }
 
 # Lowercase the first letter
 function lowercase_first_letter() {
-	convert_all_files ","
+    convert_all_files ","
 }
 
 # Uppercase first letter
 function uppercase_first_letter() {
-	convert_all_files "^"
+    convert_all_files "^"
 }
 
 # Lowercase all letters
 function lowercase_all_letters() {
-	convert_all_files "m,"
+    convert_all_files "m,"
 }
 
 # Uppercase all letters
 function uppercase_all_letters() {
-	convert_all_files "^^"
+    convert_all_files "^^"
 }
 
 alias buildlib='cd ~/components-library ; npm run build && firebase deploy && npm run clean'
@@ -871,11 +871,11 @@ alias mac_serial_number="system_profiler SPHardwareDataType | \grep ' Serial Num
 # Updates scripts repo with current date in the message
 # of the (possibly empty) commit
 function update_scripts_repo() {
-	pushd ~/scripts || exit
-	git add .
-	git commit --allow-empty --message "Update ""$(date +%d-%m-%Y)"
-	git push origin
-	popd || exit
+    pushd ~/scripts || exit
+    git add .
+    git commit --allow-empty --message "Update ""$(date +%d-%m-%Y)"
+    git push origin
+    popd || exit
 }
 
 alias nrs='npm run start'
@@ -886,7 +886,7 @@ alias yc='yarn run clean'
 alias yrc='yarn run clean'
 
 function mcd() {
-	mkdir "$1" && cd "$1" || exit
+    mkdir "$1" && cd "$1" || exit
 }
 
 alias npmu='npm install -g npm'
@@ -903,42 +903,42 @@ alias nvm_default='nvm alias default node'
 alias nvm_current='nvm install node --reinstall-packages-from=$(nvm current)'
 
 function mov2mp4() {
-	local -r filename=$(filename_without_extension "$1")
-	ffmpeg -i "$filename".mov -vcodec h264 -acodec mp2 "$filename".mp4
+    local -r filename=$(filename_without_extension "$1")
+    ffmpeg -i "$filename".mov -vcodec h264 -acodec mp2 "$filename".mp4
 }
 
 # Rename part of filename in each file in a directory
 function rename_filename_part() {
-	for filename in *; do
-		[ -f "$filename" ] || continue
-		mv "$filename" "${filename/$1/$2}"
-	done
+    for filename in *; do
+        [ -f "$filename" ] || continue
+        mv "$filename" "${filename/$1/$2}"
+    done
 }
 
 # Remove part of filename in each file in a directory
 function remove_filename_part() {
-	for filename in *; do
-		[ -f "$filename" ] || continue
-		mv "$filename" "${filename//$1/}"
-	done
+    for filename in *; do
+        [ -f "$filename" ] || continue
+        mv "$filename" "${filename//$1/}"
+    done
 }
 
 function add_prefix_to_filename() {
-	local prefix=$1
-	for filename in *; do
-		[ -f "$filename" ] || continue
-		mv "$filename" "$prefix$filename"
-	done
+    local prefix=$1
+    for filename in *; do
+        [ -f "$filename" ] || continue
+        mv "$filename" "$prefix$filename"
+    done
 }
 
 function add_suffix_to_filename() {
-	local suffix=$1
-	for filename in *; do
-		[ -f "$filename" ] || continue
-		name=$(filename_without_extension "$filename")
-		extension=$(filename_extension "$filename")
-		mv "$filename" "$name$suffix.$extension"
-	done
+    local suffix=$1
+    for filename in *; do
+        [ -f "$filename" ] || continue
+        name=$(filename_without_extension "$filename")
+        extension=$(filename_extension "$filename")
+        mv "$filename" "$name$suffix.$extension"
+    done
 }
 
 # Prints the lsof entry of the process that listens on a given port
@@ -946,55 +946,55 @@ function add_suffix_to_filename() {
 # listening firefox
 # listening 8080
 function listening() {
-	if [ $# -eq 0 ]; then
-		sudo lsof -iTCP -sTCP:LISTEN -n -P
-	elif [ $# -eq 1 ]; then
-		sudo lsof -iTCP -sTCP:LISTEN -n -P | grep -i --color "$1"
-	else
-		echo "Usage: listening [pattern]"
-	fi
+    if [ $# -eq 0 ]; then
+        sudo lsof -iTCP -sTCP:LISTEN -n -P
+    elif [ $# -eq 1 ]; then
+        sudo lsof -iTCP -sTCP:LISTEN -n -P | grep -i --color "$1"
+    else
+        echo "Usage: listening [pattern]"
+    fi
 }
 
 function get_cookies() {
-	local url=$1
-	cgurl --silent --output /dev/null --cookie-jar - "$url"
+    local url=$1
+    cgurl --silent --output /dev/null --cookie-jar - "$url"
 }
 
 alias instagram_dl='instalooter user'
 
 # Ubuntu
 function toggle_wifi() {
-	wifi="$(nmcli r wifi | awk 'FNR = 2 {print $1}')"
-	if [ "$wifi" == "enabled" ]; then
-		nmcli r wifi off
-	else
-		nmcli r wifi on
-	fi
+    wifi="$(nmcli r wifi | awk 'FNR = 2 {print $1}')"
+    if [ "$wifi" == "enabled" ]; then
+        nmcli r wifi off
+    else
+        nmcli r wifi on
+    fi
 }
 
 # One-liner to generate Self-Signed SSL Certificate+Key without any annoying prompts or CSRs
 function generate_self_signed_certificate() {
-	openssl req -new -newkey rsa:4096 -days $((5 * 3650)) -nodes -x509 -subj "/C=<Country Code>/ST=<State>/L=<City>/O=<Organization>/CN=<Common Name>" -keyout certificate.key -out certificate.crt
+    openssl req -new -newkey rsa:4096 -days $((5 * 3650)) -nodes -x509 -subj "/C=<Country Code>/ST=<State>/L=<City>/O=<Organization>/CN=<Common Name>" -keyout certificate.key -out certificate.crt
 }
 
 function sync_branch_with_master() {
-	git reset --hard origin/master && git fp
+    git reset --hard origin/master && git fp
 }
 
 function resize_to_icon() {
-	local input_file=$1
-	local output_file=$2
-	convert "$input_file" -thumbnail '1024x1024>' -gravity center -background transparent -extent 1024x1024 "$output_file"
+    local input_file=$1
+    local output_file=$2
+    convert "$input_file" -thumbnail '1024x1024>' -gravity center -background transparent -extent 1024x1024 "$output_file"
 }
 
 function reinstall_cocoapods() {
-	sudo gem uninstall cocoapods
-	sudo gem install -n /usr/local/bin cocoapods
+    sudo gem uninstall cocoapods
+    sudo gem install -n /usr/local/bin cocoapods
 }
 
 function force_remove_brew_cask() {
-	local cask_name=$1
-	rm --recursive --force "$(brew --prefix)/Caskroom/$cask_name"
+    local cask_name=$1
+    rm --recursive --force "$(brew --prefix)/Caskroom/$cask_name"
 }
 
 alias killfsck='sudo pkill -f fsck'
@@ -1002,99 +1002,99 @@ alias killfsck='sudo pkill -f fsck'
 alias prettify="yarn prettier:fix && gc \"chore: Run Prettier on the entire project\""
 
 function copy_as_base64() {
-	local file_path=$1
-	openssl base64 <"$file_path" | tr -d '\n' | copy_to_clipboard
+    local file_path=$1
+    openssl base64 <"$file_path" | tr -d '\n' | copy_to_clipboard
 }
 
 function display_notification() {
-	local title=$1
-	local message=$2
-	osascript -e "display notification \"$message\" with title \"$title\""
+    local title=$1
+    local message=$2
+    osascript -e "display notification \"$message\" with title \"$title\""
 
-	# Growl alternative
-	# growlnotify -n "$title" -m "$message"
+    # Growl alternative
+    # growlnotify -n "$title" -m "$message"
 }
 
 function save_last_n_lines_to_file() {
-	local LINES=$1
-	local -r filename=~/tmp/$(date)last_$LINES.txt
-	fc -ln -"$LINES" | head --lines="$LINES" >"$filename"
-	fc -ln -"$LINES" | head --lines="$LINES" >copy_to_clipboard
-	echo "Saved to $filename"
+    local LINES=$1
+    local -r filename=~/tmp/$(date)last_$LINES.txt
+    fc -ln -"$LINES" | head --lines="$LINES" >"$filename"
+    fc -ln -"$LINES" | head --lines="$LINES" >copy_to_clipboard
+    echo "Saved to $filename"
 }
 
 function get_repo_name() {
-	basename -s .git "$(git config --get remote.origin.url)"
+    basename -s .git "$(git config --get remote.origin.url)"
 }
 
 alias mk_iphone_dir='mkdir ~/Desktop/$(date +%Y%m%d)_iphone_photos'
 
 # Example: apply_to_all_files 'resize_image 50%'
 function apply_to_all_files() {
-	local command="$*"
-	for filename in *; do
-		eval "${command} ${filename}"
-	done
+    local command="$*"
+    for filename in *; do
+        eval "${command} ${filename}"
+    done
 }
 
 # Resizes image in-place
 function resize_image() {
-	local resize_arg=$1
-	local input=$2
-	mogrify -resize "$resize_arg" "$input"
+    local resize_arg=$1
+    local input=$2
+    mogrify -resize "$resize_arg" "$input"
 }
 
 function shellcheck_autofix() {
-	local filename=$1
-	shellcheck --format diff "$filename" | git apply
+    local filename=$1
+    shellcheck --format diff "$filename" | git apply
 }
 
 function copy_last_command() {
-	fc -ln -1 | awk '{$1=$1}1' | copy_to_clipboard
+    fc -ln -1 | awk '{$1=$1}1' | copy_to_clipboard
 }
 
 # Usage: add_diagonal_watermak filename quoted_watermark_text
 function add_diagonal_watermak() {
-	local filename=$1
-	local watermark_text=$2
+    local filename=$1
+    local watermark_text=$2
 
-	convert "$filename" \
-		\( -size 1500x -background none -fill blue -gravity center \
-		label:"$watermark_text" -trim -rotate -30 \
-		-bordercolor none -border 10 \
-		-write mpr:wm +delete \
-		+clone -fill mpr:wm -draw 'color 0,0 reset' \) \
-		-compose over -composite \
-		"$filename"
+    convert "$filename" \
+        \( -size 1500x -background none -fill blue -gravity center \
+        label:"$watermark_text" -trim -rotate -30 \
+        -bordercolor none -border 10 \
+        -write mpr:wm +delete \
+        +clone -fill mpr:wm -draw 'color 0,0 reset' \) \
+        -compose over -composite \
+        "$filename"
 }
 
 # Usage:
 # random_password [password_length]
 function random_password() {
-	local password_length=${1:-16}
-	# local PWGEN_REMOVE_CHARACTERS=\'\"\@\?\^\&\*\(\)\`\:\~\?\;\:\[\]\{\}\.\,\\\/\|
-	local PWGEN_REMOVE_CHARACTERS=\&\\
-	pwgen --secure --symbols "$password_length" 1 --remove-chars $PWGEN_REMOVE_CHARACTERS
+    local password_length=${1:-16}
+    # local PWGEN_REMOVE_CHARACTERS=\'\"\@\?\^\&\*\(\)\`\:\~\?\;\:\[\]\{\}\.\,\\\/\|
+    local PWGEN_REMOVE_CHARACTERS=\&\\
+    pwgen --secure --symbols "$password_length" 1 --remove-chars $PWGEN_REMOVE_CHARACTERS
 }
 
 # returns commit date, author name and commit subject for a date range given
 # Example: commits_between_dates 2020-12-01 2020-12-31
 function commits_between_dates {
-	local date_from=$1
-	local date_to=$2
-	git log --date=iso --pretty=format:'%ad  %aN  %s' | awk '$0 >= "'"$date_from"'" && $0 <= "'"$date_to"'"'
+    local date_from=$1
+    local date_to=$2
+    git log --date=iso --pretty=format:'%ad  %aN  %s' | awk '$0 >= "'"$date_from"'" && $0 <= "'"$date_to"'"'
 }
 
 function git_delete_tag() {
-	local tagname=$1
-	git tag --delete "$tagname"
-	git push --delete origin "$tagname"
+    local tagname=$1
+    git tag --delete "$tagname"
+    git push --delete origin "$tagname"
 }
 
 function git_delete_all_tags() {
-	# (more dirty) equivalent of bash's export -f + xargs, for zsh:
-	FUNCS=$(functions git_delete_tag)
-	git tag | xargs -I{} zsh -c "eval $FUNCS; git_delete_tag {}"
+    # (more dirty) equivalent of bash's export -f + xargs, for zsh:
+    FUNCS=$(functions git_delete_tag)
+    git tag | xargs -I{} zsh -c "eval $FUNCS; git_delete_tag {}"
 }
 
 alias github_merge_pr='gh pr merge $(git branch --show-current) --delete-branch --rebase'
@@ -1104,57 +1104,57 @@ alias github_merge_pr='gh pr merge $(git branch --show-current) --delete-branch 
 # Alternative
 # tr -dc '[:alnum:]' < /dev/urandom | dd bs=4 count=8 2>/dev/null
 function random-string() {
-	# Add special chars:
-	# env LC_ALL=C tr -dc '(\&\_a-zA-Z0-9\^\*\@'
-	env LC_ALL=C tr -dc 'a-zA-Z0-9' </dev/urandom | fold -w "${1:-32}" | head --lines=1
+    # Add special chars:
+    # env LC_ALL=C tr -dc '(\&\_a-zA-Z0-9\^\*\@'
+    env LC_ALL=C tr -dc 'a-zA-Z0-9' </dev/urandom | fold -w "${1:-32}" | head --lines=1
 }
 
 function brew_cleanup_package() {
-	local package_name=$1
+    local package_name=$1
 
-	# don't use reinstall
-	brew uninstall -f "$package_name"
+    # don't use reinstall
+    brew uninstall -f "$package_name"
 
-	# remove possible broken symlinks
-	brew cleanup
+    # remove possible broken symlinks
+    brew cleanup
 
-	# install again
-	brew install "$package_name"
+    # install again
+    brew install "$package_name"
 
-	# check the version
-	brew info "$package_name"
+    # check the version
+    brew info "$package_name"
 }
 
 function reinstall_pip() {
-	python3 -m pip install --upgrade --force-reinstall pip
+    python3 -m pip install --upgrade --force-reinstall pip
 }
 
 function convert_to_grayscale() {
-	local input_filename="$1"
-	local -r filename=$(filename_without_extension "$1")
-	local output_filename="$filename"_grayscale.png
-	convert "$input_filename" -grayscale Rec709Luminance "$output_filename"
+    local input_filename="$1"
+    local -r filename=$(filename_without_extension "$1")
+    local output_filename="$filename"_grayscale.png
+    convert "$input_filename" -grayscale Rec709Luminance "$output_filename"
 }
 
 alias gl='git log'
 function copy_branch_name() {
-	if [[ -n $(git branch --show-current 2>/dev/null) ]]; then
-		branch=$(git branch --show-current)
-	else
-		branch=$(awk --field-separator '/' '{print $NF}' <.git/HEAD)
-	fi
+    if [[ -n $(git branch --show-current 2>/dev/null) ]]; then
+        branch=$(git branch --show-current)
+    else
+        branch=$(awk --field-separator '/' '{print $NF}' <.git/HEAD)
+    fi
 
-	echo "$branch" | tr -d "\n" | copy_to_clipboard
+    echo "$branch" | tr -d "\n" | copy_to_clipboard
 }
 alias copy_last_commit_message='git log -1 --pretty=%B | tr -d "\n" | copy_to_clipboard'
 alias copy_current_directory='pwd | copy_to_clipboard'
 
 function webm_to_mp4() {
-	local -r filename=$(filename_without_extension "$1")
-	local output_filename=$filename.mp4
-	local output_image_height=${2:-32}
-	local fps=24
-	ffmpeg -hide_banner -loglevel error -fflags +genpts -i "$1" -r $fps "$output_filename" && echo "Successfully created $output_filename" || echo "Error converting $1 to $output_filename"
+    local -r filename=$(filename_without_extension "$1")
+    local output_filename=$filename.mp4
+    local output_image_height=${2:-32}
+    local fps=24
+    ffmpeg -hide_banner -loglevel error -fflags +genpts -i "$1" -r $fps "$output_filename" && echo "Successfully created $output_filename" || echo "Error converting $1 to $output_filename"
 }
 
 # Copy command output to clipboard
@@ -1162,26 +1162,26 @@ function webm_to_mp4() {
 alias t='tee >(copy_to_clipboard)'
 
 function remove_password_from_pdf() {
-	local -r filename=$(filename_without_extension "$1")
-	local -r password=$2
-	qpdf -password="$password" -decrypt "$filename".pdf "$filename""_no_password.pdf"
+    local -r filename=$(filename_without_extension "$1")
+    local -r password=$2
+    qpdf -password="$password" -decrypt "$filename".pdf "$filename""_no_password.pdf"
 }
 
 function sync_dotfiles() {
-	pushd ~/scripts && gacw && git push origin master && popd || exit
-	pushd ~/dotfiles && gacw && git push origin master && popd || exit
+    pushd ~/scripts && gacw && git push origin master && popd || exit
+    pushd ~/dotfiles && gacw && git push origin master && popd || exit
 }
 
 # .ts do .mp4:
 # ffmpeg -i in.ts -acodec copy -vcodec copy out.mp4
 function download_youtube_stream() {
-	local youtube_video_url=$1
-	youtube-dl --list-formats "$youtube_video_url"
+    local youtube_video_url=$1
+    youtube-dl --list-formats "$youtube_video_url"
 
-	printf "Enter stream format (e.g. 94) "
-	read -r stream_format
+    printf "Enter stream format (e.g. 94) "
+    read -r stream_format
 
-	ffmpeg -i "$(youtube-dl --format "$stream_format" --get-url "$youtube_video_url") -c copy $(date +'%Y%m%d')"_recording.ts
+    ffmpeg -i "$(youtube-dl --format "$stream_format" --get-url "$youtube_video_url") -c copy $(date +'%Y%m%d')"_recording.ts
 }
 
 # password protect (encrypt) PDF with 256-bit AES encryption
@@ -1189,20 +1189,20 @@ function download_youtube_stream() {
 # encrypt_pdf filename.pdf
 # filename_encrypted.pdf will be created
 function encrypt_pdf() {
-	local -r input_file="$1"
-	printf "Enter password:"
-	read -rs pdf_password
-	printf "\n"
-	local -r user_password="$pdf_password"
-	local -r owner_password="$user_password"
-	qpdf --encrypt "$user_password" "$owner_password" 256 -- "$input_file" "$(filename_without_extension "$1")""_encrypted.pdf"
+    local -r input_file="$1"
+    printf "Enter password:"
+    read -rs pdf_password
+    printf "\n"
+    local -r user_password="$pdf_password"
+    local -r owner_password="$user_password"
+    qpdf --encrypt "$user_password" "$owner_password" 256 -- "$input_file" "$(filename_without_extension "$1")""_encrypted.pdf"
 }
 
 function download_npm_tarball() {
-	local -r package_name="$1"
-	local -r package_url=$(curl --silent --show-error https://registry.npmjs.org/"$package_name"/ | jq --raw-output '.versions[."dist-tags".latest].dist.tarball')
+    local -r package_name="$1"
+    local -r package_url=$(curl --silent --show-error https://registry.npmjs.org/"$package_name"/ | jq --raw-output '.versions[."dist-tags".latest].dist.tarball')
 
-	wget "$package_url"
+    wget "$package_url"
 }
 
 alias grhom='git reset --hard origin/master'
@@ -1210,184 +1210,184 @@ alias grhh='git reset --hard HEAD~'
 alias gs2='git squash 2'
 
 function rebase_all() {
-	local repos=(orval svgo)
+    local repos=(orval svgo)
 
-	for repo in "${repos[@]}"; do
-		pushd "$HOME/$repo" || exit
-		bash rebase.sh
-		popd || exit
-	done
+    for repo in "${repos[@]}"; do
+        pushd "$HOME/$repo" || exit
+        bash rebase.sh
+        popd || exit
+    done
 }
 
 function first_day_of_month() {
-	local -r date=$(gdate --date="$(gdate +'%Y-%m-01')" "+%F")
+    local -r date=$(gdate --date="$(gdate +'%Y-%m-01')" "+%F")
 
-	echo "$date"
+    echo "$date"
 }
 
 function last_day_of_month() {
-	local -r date=$(gdate --date="$(gdate +'%Y-%m-01') - 1 second" "+%F")
+    local -r date=$(gdate --date="$(gdate +'%Y-%m-01') - 1 second" "+%F")
 
-	echo "$date"
+    echo "$date"
 }
 
 function yarn_reinstall_dev() {
-	local package_name=$1
-	yarn remove "$package_name"
-	yarn add --dev "$package_name"
+    local package_name=$1
+    yarn remove "$package_name"
+    yarn add --dev "$package_name"
 }
 
 function show_ip_address() {
-	ip address | grep "scope global" | grep -Po '(?<=inet )[\d.]+'
+    ip address | grep "scope global" | grep -Po '(?<=inet )[\d.]+'
 }
 
 function run_after_seconds() {
-	local seconds=$1
-	shift
-	sleep "$seconds" && "$@" &
+    local seconds=$1
+    shift
+    sleep "$seconds" && "$@" &
 }
 
 alias merge_pdfs_1='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=merged.pdf ' # here go the PDF to be merged
 
 function merge_pdfs_2 {
-	pdfunite "$@" merged.pdf
-	printf 'Files merged into merged.pdf file'
+    pdfunite "$@" merged.pdf
+    printf 'Files merged into merged.pdf file'
 }
 
 alias restart_tmux='tmux kill-server && tmux'
 
 function mov_to_mp4() {
-	local input_filename="$1"
-	local -r filename=$(filename_without_extension "$1")
-	local output_filename=$filename.mp4
-	local fps=60
+    local input_filename="$1"
+    local -r filename=$(filename_without_extension "$1")
+    local output_filename=$filename.mp4
+    local fps=60
 
-	ffmpeg -i "$input_filename" -loglevel error -fflags +genpts -r $fps "$output_filename" && echo "Successfully created $output_filename" || echo "Error converting $1 to $output_filename"
+    ffmpeg -i "$input_filename" -loglevel error -fflags +genpts -r $fps "$output_filename" && echo "Successfully created $output_filename" || echo "Error converting $1 to $output_filename"
 }
 
 function find_process_on_port() {
-	local port="$1"
-	lsof -i tcp:"$port"
+    local port="$1"
+    lsof -i tcp:"$port"
 }
 
 function kill_process_on_port() {
-	local port="$1"
+    local port="$1"
 
-	if lsof -t -i tcp:"$port"; then
-		lsof -t -i tcp:"$port" | xargs kill -9
-	else
-		printf "No process listening on port %s\n" "$port"
-	fi
+    if lsof -t -i tcp:"$port"; then
+        lsof -t -i tcp:"$port" | xargs kill -9
+    else
+        printf "No process listening on port %s\n" "$port"
+    fi
 }
 
 function move_files_created_at_to_directory() {
-	local creation_date="$1"
+    local creation_date="$1"
 
-	local directory="$2"
+    local directory="$2"
 
-	set -x
-	find . -type f -newermt "$(date_plus_days "$creation_date" 1)" ! -newermt "$creation_date_plus_1_day" -exec mv "{}" "$directory" \;
-	set +x
+    set -x
+    find . -type f -newermt "$(date_plus_days "$creation_date" 1)" ! -newermt "$creation_date_plus_1_day" -exec mv "{}" "$directory" \;
+    set +x
 }
 
 function count_files_in_directory() {
-	local -r directory="$1"
-	find "$directory" -type f | wc -l
+    local -r directory="$1"
+    find "$directory" -type f | wc -l
 }
 
 # Windows
 # Opens Notepad++
 function np() {
-	# To follow symlinks inside WSL
-	local -r file_path=$(wslpath -w "$1")
+    # To follow symlinks inside WSL
+    local -r file_path=$(wslpath -w "$1")
 
-	/mnt/c/Program\ Files/Notepad++/notepad++.exe "$file_path" &
+    /mnt/c/Program\ Files/Notepad++/notepad++.exe "$file_path" &
 }
 
 # Opens Typora
 function typora() {
-	# To follow symlinks inside WSL
-	local -r file_path=$(wslpath -w "$1")
+    # To follow symlinks inside WSL
+    local -r file_path=$(wslpath -w "$1")
 
-	/mnt/c/Program\ Files/Typora/Typora.exe "$file_path" &
+    /mnt/c/Program\ Files/Typora/Typora.exe "$file_path" &
 }
 
 # Windows
 function kill_executable() {
-	local executable="$1"
-	taskkill.exe /F /IM "$executable.exe" /T &
+    local executable="$1"
+    taskkill.exe /F /IM "$executable.exe" /T &
 }
 
 function git_repository_name() {
-	basename "$(git rev-parse --show-toplevel)"
+    basename "$(git rev-parse --show-toplevel)"
 }
 
 # Usage:
 # extract_field_from_json package.json version
 function extract_field_from_json() {
-	local filename=$1
-	local field_name=$2
-	json_field_value=$(
-		grep "$field_name" "$filename" |
-			head -1 |
-			awk --field-separator: '{ print $2 }' |
-			sed 's/[",]//g'
-	)
+    local filename=$1
+    local field_name=$2
+    json_field_value=$(
+        grep "$field_name" "$filename" |
+            head -1 |
+            awk --field-separator: '{ print $2 }' |
+            sed 's/[",]//g'
+    )
 
-	printf "%s" "$json_field_value" |
-		xargs # trim
+    printf "%s" "$json_field_value" |
+        xargs # trim
 }
 
 function show_function_code() {
-	local function_name="$1"
-	declare -f "$function_name"
+    local function_name="$1"
+    declare -f "$function_name"
 }
 
 function is_linux_inside_wsl() {
-	if grep -q Microsoft /proc/version; then
-		#"Ubuntu on Windows"
-		echo 1
-	fi
+    if grep -q Microsoft /proc/version; then
+        #"Ubuntu on Windows"
+        echo 1
+    fi
 }
 
 function sync_dotfiles() {
-	pushd ~/dotfiles || exit
-	git pull
-	git push origin master
-	popd || exit
-	pushd ~/scripts || exit
-	git pull
-	git push origin master
-	popd || exit
+    pushd ~/dotfiles || exit
+    git pull
+    git push origin master
+    popd || exit
+    pushd ~/scripts || exit
+    git pull
+    git push origin master
+    popd || exit
 }
 
 # Fixes a corrupt .zsh_history file
 function fix_zsh_history_file() {
-	mv ~/.zsh_history ~/.zsh_history_bad
-	strings -eS ~/.zsh_history_bad >~/.zsh_history
-	fc -R ~/.zsh_history
-	rm ~/.zsh_history_bad
+    mv ~/.zsh_history ~/.zsh_history_bad
+    strings -eS ~/.zsh_history_bad >~/.zsh_history
+    fc -R ~/.zsh_history
+    rm ~/.zsh_history_bad
 }
 
 function clear_sensitive_data_in_shell_history() {
-	# macOS
-	# LC_ALL=C sed -i '' '/TOKEN/d' $HISTFILE;
-	LC_ALL=C sed -i '/TOKEN/d' "$HISTFILE"
+    # macOS
+    # LC_ALL=C sed -i '' '/TOKEN/d' $HISTFILE;
+    LC_ALL=C sed -i '/TOKEN/d' "$HISTFILE"
 }
 
 function set_sensitive_variable() {
-	local variable_name=$1
-	local variable_value=$2
+    local variable_name=$1
+    local variable_value=$2
 
-	current_histfile=$HISTFILE
-	unset HISTFILE
-	export "$variable_name"="$variable_value"
-	HISTFILE=$current_histfile
+    current_histfile=$HISTFILE
+    unset HISTFILE
+    export "$variable_name"="$variable_value"
+    HISTFILE=$current_histfile
 }
 
 # sudo will prompt for a password (if one is required by the security policy) and will not update the user's cached credentials.
 function sudo_forget() {
-	sudo -k "$@"
+    sudo -k "$@"
 }
 
 # Usage:
@@ -1403,22 +1403,22 @@ function sudo_forget() {
 # "email": "jack@domain.example"
 # }]
 function json_to_table() {
-	local filename="$1"
-	local table_fields="$2"
+    local filename="$1"
+    local table_fields="$2"
 
-	JSON_FIELDS='[.'${table_fields//,/, .}']'
-	TABLE_FIELDS='"'${table_fields//,/\",\"}'"'
-	jq --raw-output \
-		"([$TABLE_FIELDS] | (., map(length*\"-\"))), (.[] | $JSON_FIELDS) | @tsv" "$filename"
+    JSON_FIELDS='[.'${table_fields//,/, .}']'
+    TABLE_FIELDS='"'${table_fields//,/\",\"}'"'
+    jq --raw-output \
+        "([$TABLE_FIELDS] | (., map(length*\"-\"))), (.[] | $JSON_FIELDS) | @tsv" "$filename"
 }
 
 function grep33() {
-	grep -A 3 -B 3 "$@"
+    grep -A 3 -B 3 "$@"
 }
 
 function ls_n_random_files() {
-	local -r files_count="$1"
-	find . | shuf --head-count "$files_count"
+    local -r files_count="$1"
+    find . | shuf --head-count "$files_count"
 }
 
 ### Windows-only
@@ -1434,13 +1434,13 @@ alias wsl='wsl.exe'
 
 # Windows only for now
 function idea() {
-	cmd.exe /c "C:\Program Files (x86)\JetBrains\IntelliJ IDEA 2022.1\bin\idea64.exe" dontReopenProjects nosplash
+    cmd.exe /c "C:\Program Files (x86)\JetBrains\IntelliJ IDEA 2022.1\bin\idea64.exe" dontReopenProjects nosplash
 }
 
 # Windows
 function terminate_docker() {
-	wsl --terminate docker-desktop
-	wsl --terminate docker-desktop-data
+    wsl --terminate docker-desktop
+    wsl --terminate docker-desktop-data
 }
 
 # Windows
@@ -1451,7 +1451,7 @@ alias systeminfo2='msinfo32.exe'
 # Usage:
 # desktop_shortcut_to_wsl_folder folder_path
 function desktop_shortcut_to_wsl_folder() {
-	~/scripts/windows/desktop_shortcut_to_wsl_folder.sh "$@"
+    ~/scripts/windows/desktop_shortcut_to_wsl_folder.sh "$@"
 }
 
 # Windows
@@ -1462,8 +1462,8 @@ alias device_management='cmd.exe /c devmgmt.msc'
 # Usage:
 # print_windows_environmnent_variable APPDATA
 function print_windows_environmnent_variable() {
-	local variable_name="$1"
-	powershell.exe -NoLogo "\$env:$variable_name"
+    local variable_name="$1"
+    powershell.exe -NoLogo "\$env:$variable_name"
 }
 
 # Windows only
@@ -1473,25 +1473,25 @@ function print_windows_environmnent_variable() {
 # winenv PROGRAMFILES
 # winenv APPDATA
 function winenv() {
-	if [ "$#" == "0" ] || [ "$1" == "--help" ]; then
-		echo $'\n'Usage:
-		echo $'\t'winenv [-d] WINDOWS_ENVIRONEMENT_VARIABLE_NAME
-		echo $'\t'-d: Defines environment variable in current shell
-		echo $'\t Note that paths will be translated into un*x-like paths\n'
-		return
-	fi
+    if [ "$#" == "0" ] || [ "$1" == "--help" ]; then
+        echo $'\n'Usage:
+        echo $'\t'winenv [-d] WINDOWS_ENVIRONEMENT_VARIABLE_NAME
+        echo $'\t'-d: Defines environment variable in current shell
+        echo $'\t Note that paths will be translated into un*x-like paths\n'
+        return
+    fi
 
-	local -r IFS=$'\n'
-	local PATH_TO_TRANSLATE=$1
+    local -r IFS=$'\n'
+    local PATH_TO_TRANSLATE=$1
 
-	[ "$1" == "-d" ] && PATH_TO_TRANSLATE=$2
+    [ "$1" == "-d" ] && PATH_TO_TRANSLATE=$2
 
-	local -r VAR=$(cmd.exe /c echo %"${PATH_TO_TRANSLATE}"% | tr -d '\r')
-	local -r NEW=$(wslpath -u "${VAR}" 2>/dev/null || echo "${VAR}")
+    local -r VAR=$(cmd.exe /c echo %"${PATH_TO_TRANSLATE}"% | tr -d '\r')
+    local -r NEW=$(wslpath -u "${VAR}" 2>/dev/null || echo "${VAR}")
 
-	echo "${PATH_TO_TRANSLATE} = ${VAR} -> ${NEW}"
+    echo "${PATH_TO_TRANSLATE} = ${VAR} -> ${NEW}"
 
-	[ "$1" == "-d" ] && export "${PATH_TO_TRANSLATE}=${NEW}"
+    [ "$1" == "-d" ] && export "${PATH_TO_TRANSLATE}=${NEW}"
 }
 
 # Shorthand aliases
@@ -1499,7 +1499,7 @@ function winenv() {
 alias p3='python3'
 
 function h() {
-	head --lines="$@"
+    head --lines="$@"
 }
 
 alias c='code -n . &'
@@ -1507,28 +1507,28 @@ alias c='code -n . &'
 # Git aliases
 
 function git_reset_to_branch() {
-	local branch_name="$1"
-	git checkout "$branch_name" --
+    local branch_name="$1"
+    git checkout "$branch_name" --
 }
 
 alias gdh='git diff HEAD~'
 
 function logout_from_all() {
-	# Google Cloud
-	gcloud auth revoke
+    # Google Cloud
+    gcloud auth revoke
 
-	# Azure
-	az logout
+    # Azure
+    az logout
 }
 
 # Usage: ocr filepath [language: eng,pol]
 function ocr() {
-	local -r filepath="$1"
-	local -r language="${2:-eng}"
+    local -r filepath="$1"
+    local -r language="${2:-eng}"
 
-	printf "Performing OCR using language: %s\n" "$language"
+    printf "Performing OCR using language: %s\n" "$language"
 
-	tesseract "$filepath" stdout --oem 1 -l "$language"
+    tesseract "$filepath" stdout --oem 1 -l "$language"
 }
 
 alias start-pg='pg_ctl -l $PGDATA/server.log start'
@@ -1537,61 +1537,61 @@ alias show-pg-status='pg_ctl status'
 alias restart-pg='pg_ctl reload'
 
 function identify_website_technologies() {
-	local -r hostname="$1"
-	# https://github.com/rverton/webanalyze
-	webanalyze -apps ~/dotfiles/technologies.json -host "$hostname" -crawl 1
+    local -r hostname="$1"
+    # https://github.com/rverton/webanalyze
+    webanalyze -apps ~/dotfiles/technologies.json -host "$hostname" -crawl 1
 }
 
 # DNS server settings
 function dns_server_settings_clear() {
-	if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
-		networksetup -setdnsservers Wi-Fi
-	fi
+    if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
+        networksetup -setdnsservers Wi-Fi
+    fi
 
-	if [[ -n "$IS_WSL" ]]; then
-		echo "Flushing DNS cache from WSL"
-		ipconfig.exe /flushdns
-	fi
+    if [[ -n "$IS_WSL" ]]; then
+        echo "Flushing DNS cache from WSL"
+        ipconfig.exe /flushdns
+    fi
 }
 
 function dns_server_settings_set() {
-	if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
-		networksetup -setdnsservers Wi-Fi 8.8.8.8
-	fi
+    if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
+        networksetup -setdnsservers Wi-Fi 8.8.8.8
+    fi
 
-	if [[ -n "$IS_WSL" ]]; then
-		netsh interface ipv4 set dnsservers "Wi-Fi" static 8.8.4.4 primary
-	fi
+    if [[ -n "$IS_WSL" ]]; then
+        netsh interface ipv4 set dnsservers "Wi-Fi" static 8.8.4.4 primary
+    fi
 }
 
 function check_dns_server_settings_check() {
-	if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
-		networksetup -getdnsservers Wi-Fi
-	fi
+    if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
+        networksetup -getdnsservers Wi-Fi
+    fi
 
-	if [[ -n "$IS_WSL" ]]; then
-		netsh interface ipv4 show dnsservers "Wi-Fi"
-	fi
+    if [[ -n "$IS_WSL" ]]; then
+        netsh interface ipv4 show dnsservers "Wi-Fi"
+    fi
 }
 
 function flush_dns_cache() {
-	# macOS
-	if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
-		sudo dscacheutil -flushcache
-		sudo killall -HUP mDNSResponder
-	fi
+    # macOS
+    if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
+        sudo dscacheutil -flushcache
+        sudo killall -HUP mDNSResponder
+    fi
 
-	if [[ -n "$IS_WSL" ]]; then
-		echo "Flushing DNS cache from WSL"
-		ipconfig.exe /flushdns
-	fi
+    if [[ -n "$IS_WSL" ]]; then
+        echo "Flushing DNS cache from WSL"
+        ipconfig.exe /flushdns
+    fi
 }
 
 # Windows
 function exec_powershell_script() {
-	local script_path="$1"
+    local script_path="$1"
 
-	powershell.exe -NoLogo -ExecutionPolicy Bypass -File "$script_path"
+    powershell.exe -NoLogo -ExecutionPolicy Bypass -File "$script_path"
 }
 
 # Windows
@@ -1600,34 +1600,34 @@ function exec_powershell_script() {
 # powershell.exe -NoLogo -ExecutionPolicy Bypass -command
 # "$(wslpath -w ~/scripts/SomeScript.ps1) -param \"val\""
 function exec_powershell_command() {
-	local script_path="$1"
+    local script_path="$1"
 
-	# powershell.exe -NoLogo -ExecutionPolicy Bypass -File "$script_path"
-	powershell.exe -NoLogo -ExecutionPolicy Bypass -Command "$script_path"
+    # powershell.exe -NoLogo -ExecutionPolicy Bypass -File "$script_path"
+    powershell.exe -NoLogo -ExecutionPolicy Bypass -Command "$script_path"
 }
 
 function is_inside_virtual_env() {
-	if [[ "$VIRTUAL_ENV" != "" ]]; then
-		echo 1
-	else
-		echo 0
-	fi
+    if [[ "$VIRTUAL_ENV" != "" ]]; then
+        echo 1
+    else
+        echo 0
+    fi
 }
 
 # Windows
 function safely_remove_hardware() {
-	rundll32.exe shell32.dll,Control_RunDLL hotplug.dll
+    rundll32.exe shell32.dll,Control_RunDLL hotplug.dll
 }
 
 function clone_website() {
-	httrack "$1"
+    httrack "$1"
 }
 
 alias start_all_projects='c ~/dotfiles ~/scripts ~/design-system ~/static-pages'
 
 function mkdircd() {
-	mkdir "$1"
-	cd "$1" || exit
+    mkdir "$1"
+    cd "$1" || exit
 }
 
 alias whiptail='dialog'
@@ -1645,14 +1645,14 @@ alias reboot='shutdown -r'
 alias test_internet_speed='speedtest --secure'
 
 function change_extension() {
-	local filename="$1"
-	local -r filename_no_extension=$(filename_without_extension "$1")
-	local -r extension_to="$2"
+    local filename="$1"
+    local -r filename_no_extension=$(filename_without_extension "$1")
+    local -r extension_to="$2"
 
-	# local -r new_filename=$(printf "%s.%s" $filename_no_extension $extension_to)
+    # local -r new_filename=$(printf "%s.%s" $filename_no_extension $extension_to)
 
-	new_filename=$(printf "%s.%s" "$filename_no_extension" "$extension_to")
-	mv "$filename" "$new_filename"
+    new_filename=$(printf "%s.%s" "$filename_no_extension" "$extension_to")
+    mv "$filename" "$new_filename"
 }
 
 # Windows
@@ -1680,10 +1680,10 @@ alias cut_after_first_space="sed 's/\s.*$//'"
 alias cut_before_first_space="cut -d' ' -f 2-"
 
 function cal_restart() {
-	sudo service postgresql restart
-	git pull origin
-	yarn
-	yarn workspace @calcom/prisma db-deploy
+    sudo service postgresql restart
+    git pull origin
+    yarn
+    yarn workspace @calcom/prisma db-deploy
 }
 
 # Usage
@@ -1698,45 +1698,45 @@ alias geolocate_ip='geoiplookup'
 alias updatecal='git stash && git pull origin main && yarn workspace @calcom/prisma db-deploy'
 
 function get_node_lts_version() {
-	curl -L resolve-node.now.sh/lts
+    curl -L resolve-node.now.sh/lts
 }
 
 function help() {
-	bash -c "help $1"
+    bash -c "help $1"
 }
 
 function http_headers() {
-	curl -sSL -D - $1 -o /dev/null
+    curl -sSL -D - $1 -o /dev/null
 }
 
 function open_debugging_browser() {
-	# macOS
-	if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
-		open ~/scripts/chrome_symlinks/Chrome\ Canary\ with\ Debugger.app
-	fi
+    # macOS
+    if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
+        open ~/scripts/chrome_symlinks/Chrome\ Canary\ with\ Debugger.app
+    fi
 
-	# Windows (WSL)
-	if [[ -n "$IS_WSL" ]]; then
-		# open 'chrome Windows with debugging on port 9999.lnk'
-		~/scripts/chrome_symlinks/chrome_linux_inside_wsl.sh
-	fi
+    # Windows (WSL)
+    if [[ -n "$IS_WSL" ]]; then
+        # open 'chrome Windows with debugging on port 9999.lnk'
+        ~/scripts/chrome_symlinks/chrome_linux_inside_wsl.sh
+    fi
 }
 
 function yarn_last() {
-	yarn && fc -e : -1
+    yarn && fc -e : -1
 }
 
 function refresh_apt_keys() {
-	alias sudo apt-key adv --refresh-keys --keyserver keyserver.ubuntu.com
+    alias sudo apt-key adv --refresh-keys --keyserver keyserver.ubuntu.com
 }
 
 function code_no_extensions() {
-	code --disable-extensions "$@"
+    code --disable-extensions "$@"
 }
 
 function git_default_branch() {
-	local origin_name="${1:-origin}"
-	LC_ALL=C git remote show "$origin_name" | sed -n '/HEAD branch/s/.*: //p'
+    local origin_name="${1:-origin}"
+    LC_ALL=C git remote show "$origin_name" | sed -n '/HEAD branch/s/.*: //p'
 }
 
 # Compare two JSON files and display the differences in a visually highlighted format
@@ -1746,39 +1746,39 @@ function git_default_branch() {
 #   - file1: The path to the first JSON file for comparison.
 #   - file2: The path to the second JSON file for comparison.
 function diff_json() {
-	local file1="${1}"
-	local file2="${2}"
+    local file1="${1}"
+    local file2="${2}"
 
-	diff --color <(jq --sort-keys . "$file1") <(jq --sort-keys . "$file2")
+    diff --color <(jq --sort-keys . "$file1") <(jq --sort-keys . "$file2")
 }
 
 # Usage (quotes!):
 # hex_to_rgb "#d60093"
 function hex_to_rgb() {
-	local -r hex="$(echo $1 | sed 's/\#//')"
-	printf "%d;%d;%d\n" 0x${hex:0:2} 0x${hex:2:2} 0x${hex:4:2}
+    local -r hex="$(echo $1 | sed 's/\#//')"
+    printf "%d;%d;%d\n" 0x${hex:0:2} 0x${hex:2:2} 0x${hex:4:2}
 }
 
 # Usage:
 # print_color_bar "#d60093"
 function print_color_bar() {
-	local hex_color="$1"
-	local length=${2:-24}
-	local bar_string=$(printf '%*s' "$length")
-	printf '\e[48;2;%sm%s\e[0m\n' "$(hex_to_rgb $hex_color)" "$bar_string"
+    local hex_color="$1"
+    local length=${2:-24}
+    local bar_string=$(printf '%*s' "$length")
+    printf '\e[48;2;%sm%s\e[0m\n' "$(hex_to_rgb $hex_color)" "$bar_string"
 }
 
 function update_all() {
-	~/dotfiles/update_all.sh
+    ~/dotfiles/update_all.sh
 }
 
 # Opens all files with given name in Visual Studio Code
 function code_files_named() {
-	find . -iname "$1" | xargs code
+    find . -iname "$1" | xargs code
 }
 
 function dos2unix_all() {
-	find . -type f -print0 | xargs -0 dos2unix
+    find . -type f -print0 | xargs -0 dos2unix
 }
 
 alias fix_crlf='dos2unix_all'
@@ -1792,8 +1792,8 @@ alias ybw="yarn build:watch"
 # Arguments:
 # filename: The name of the PDF file to split
 function pdf_split_pages() {
-	local -r filename="$1"
-	convert "$filename" -quality 100 -density 1000x1000 page-%04d.pdf
+    local -r filename="$1"
+    convert "$filename" -quality 100 -density 1000x1000 page-%04d.pdf
 }
 
 alias fix_wsl='~/dotfiles/windows/apply_wsl_fixes.sh'
@@ -1802,71 +1802,71 @@ alias fix_wsl='~/dotfiles/windows/apply_wsl_fixes.sh'
 # It will move all files and subdirectories in the given directory to the given directory
 # and delete all subdirectories.
 function flatten_directory() {
-	# Check for valid input
-	if [ $# -ne 1 ]; then
-		echo ""Error: invalid number of arguments, 1 argument required.""
-		return 1
-	fi
+    # Check for valid input
+    if [ $# -ne 1 ]; then
+        echo ""Error: invalid number of arguments, 1 argument required.""
+        return 1
+    fi
 
-	# Get the directory to flatten
-	local -r flattened_directory="$1"
+    # Get the directory to flatten
+    local -r flattened_directory="$1"
 
-	# Move all files and subdirectories to the given directory
-	for file in "$flattened_directory"/*; do
-		mv "$file" "$flattened_directory"
-	done
+    # Move all files and subdirectories to the given directory
+    for file in "$flattened_directory"/*; do
+        mv "$file" "$flattened_directory"
+    done
 
-	# Delete all subdirectories
-	find "$flattened_directory" -type d -depth 1 -exec rm -r {} \;
+    # Delete all subdirectories
+    find "$flattened_directory" -type d -depth 1 -exec rm -r {} \;
 }
 
 alias gs='git stash'
 
 function record_audio() {
-	OUT=${1-output.aac}
+    OUT=${1-output.aac}
 
-	if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
-		ffmpeg -hide_banner -loglevel error -f avfoundation -ac 2 -i :0 -c:a aac -ab 96k "$OUT"
-	fi
+    if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
+        ffmpeg -hide_banner -loglevel error -f avfoundation -ac 2 -i :0 -c:a aac -ab 96k "$OUT"
+    fi
 
-	if [[ -n "$IS_WSL" ]]; then
-		# Workaround, see: https://github.com/microsoft/winget-pkgs/issues/95349#issuecomment-1678632505
-		ffmpeg='/mnt/c/Users/vivob/AppData/Local/Microsoft/WinGet/Packages/Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe/ffmpeg-6.0-full_build/bin/ffmpeg.exe'
-		# List devices to get device name (full name string)
-		# ${ffmpeg} -list_devices true -f dshow -i null
-		${ffmpeg} -hide_banner -loglevel error -f dshow -t 30 \
-			-i "audio=Microphone Array (Intel® Smart Sound Technology for Digital Microphones)" \
-			"$OUT"
+    if [[ -n "$IS_WSL" ]]; then
+        # Workaround, see: https://github.com/microsoft/winget-pkgs/issues/95349#issuecomment-1678632505
+        ffmpeg='/mnt/c/Users/vivob/AppData/Local/Microsoft/WinGet/Packages/Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe/ffmpeg-6.0-full_build/bin/ffmpeg.exe'
+        # List devices to get device name (full name string)
+        # ${ffmpeg} -list_devices true -f dshow -i null
+        ${ffmpeg} -hide_banner -loglevel error -f dshow -t 30 \
+            -i "audio=Microphone Array (Intel® Smart Sound Technology for Digital Microphones)" \
+            "$OUT"
 
-	fi
+    fi
 }
 
 function random_mac_address() {
-	openssl rand -hex 6 | sed 's/../&:/g;s/:$//'
+    openssl rand -hex 6 | sed 's/../&:/g;s/:$//'
 }
 
 # Note: you need to disconnect from network first
 # on macOS:
 # sudo /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -z
 function set_random_mac_address() {
-	sudo ifconfig en0 ether "$(random_mac_address)"
+    sudo ifconfig en0 ether "$(random_mac_address)"
 }
 
 function check_connection_on_port() {
-	ip="$1"
-	port="$2"
+    ip="$1"
+    port="$2"
 
-	nc -v -w5 -z $hostip $port
+    nc -v -w5 -z $hostip $port
 }
 
 function cd_windows_desktop() {
-	cd "/mnt/c/Users/""$WINDOWS_USERNAME""/Desktop/"
+    cd "/mnt/c/Users/""$WINDOWS_USERNAME""/Desktop/"
 }
 
 function show_image_geo_location() {
-	local -r image_path="$1"
+    local -r image_path="$1"
 
-	./get_geo_coordinates.sh "$image_path"
+    ./get_geo_coordinates.sh "$image_path"
 }
 
 # Converts input to human-readable form
@@ -1875,71 +1875,85 @@ function show_image_geo_location() {
 # -rw-r--r-- 1 antoni staff 1282458 Dec 30 2022 ./file2.svg
 # -rw-r--r-- 1 antoni staff 1281326 Dec 30 2022 ./file3.svg
 function convert_size_to_human_readable_form() {
-	awk '{ split( "B kB MB GB TB PB EB ZB YB" , sizeValue );
+    awk '{ split( "B kB MB GB TB PB EB ZB YB" , sizeValue );
     sizeIncrement=1;
     while( $5 > 1024 && sizeIncrement < 9 ){ $5/=1024; sizeIncrement++ }
-    printf "%6.2f%s %s\n", $5, sizeValue[sizeIncrement], $9 }'
+        printf "%6.2f%s %s\n", $5, sizeValue[sizeIncrement], $9 }'
 }
 
 # Usage:
 # list_files_greater_than 128k
 # list_files_greater_than 16M
 function list_files_greater_than() {
-	local -r greater_than="+$1"
-	find . -type f -size "$greater_than" -exec ls -l {} \; |
-		sort --stable --numeric-sort --key=5 --reverse |
-		convert_size_to_human_readable_form
+    local -r greater_than="+$1"
+    find . -type f -size "$greater_than" -exec ls -l {} \; |
+        sort --stable --numeric-sort --key=5 --reverse |
+        convert_size_to_human_readable_form
 }
 
 function transpose() {
-	awk '
-{
-  for (i=1; i<=NF; i++) {
-  a[NR,i] = $i
-  }
-}
-NF>p { p = NF }
-END {
-  for(j=1; j<=p; j++) {
-    str=a[1,j]
-    for(i=2; i<=NR; i++){
-      str=str" "a[i,j];
+    awk '
+        {
+            for (i=1; i<=NF; i++) {
+                a[NR,i] = $i
+            }
+        }
+        NF>p { p = NF }
+    END {
+    for(j=1; j<=p; j++) {
+        str=a[1,j]
+        for(i=2; i<=NR; i++){
+            str=str" "a[i,j];
+        }
+        print str
     }
-    print str
-  }
 }' "$@"
 }
 
 function find_and_replace() {
-	find . -type f \
-		-not -path "*.git/*" \
-		-not -path "*node_modules/*" \
-		-not -path "*.yarn/*" -exec \
-		sed -i "s/""$1""/""$2""/g" {} \;
+    find . -type f \
+        -not -path "*.git/*" \
+        -not -path "*node_modules/*" \
+        -not -path "*.yarn/*" -exec \
+        sed -i "s/""$1""/""$2""/g" {} \;
 }
 
 function strikethrough_text() {
-	awk --field-separator'[^[:alpha:]]+' 'BEGIN{string=sprintf("\xCC\xB6")}{for (letter_index=1;letter_index<=NF;letter_index++)gsub(/./, "&" string, $letter_index); print}'
+    awk --field-separator'[^[:alpha:]]+' 'BEGIN{string=sprintf("\xCC\xB6")}{for (letter_index=1;letter_index<=NF;letter_index++)gsub(/./, "&" string, $letter_index); print}'
 }
 
 function is_url() {
-	regex='(https?|ftp|file)://[-[:alnum:]\+&@#/%?=~_|!:,.;]*[-[:alnum:]\+&@#/%=~_|]'
-	string="$1"
+    regex='(https?|ftp|file)://[-[:alnum:]\+&@#/%?=~_|!:,.;]*[-[:alnum:]\+&@#/%=~_|]'
+    string="$1"
 
-	if [[ $string =~ $regex ]]; then
-		return 0
-	else
-		return 1
-	fi
+    if [[ $string =~ $regex ]]; then
+        return 0
+    else
+        return 1
+    fi
 }
 
 # Example:
 # cat input_file | filter_stream 'is_url'
 function filter_stream() {
-	function_name="$1"
-	while IFS= read -r line; do
-		if eval "$name" "$line"; then
-			printf '%s\n' "$line"
-		fi
-	done
+    function_name="$1"
+    while IFS= read -r line; do
+        if eval "$name" "$line"; then
+            printf '%s\n' "$line"
+        fi
+    done
+}
+
+# Usage:
+# cat file.txt | wrap_with "\"" "\""
+function wrap_with() {
+    left_wrap="$1"
+    shift
+
+    right_wrap="$1"
+    shift
+
+    awk -v left_wrap="$left_wrap" \
+        -v right_wrap="$right_wrap" \
+        '{ print left_wrap$0right_wrap}'
 }
