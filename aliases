@@ -1958,6 +1958,6 @@ function wrap_with() {
         '{ print left_wrap$0right_wrap}'
 }
 
-function remove_duplicates() {
+function remove_duplicated_lines() {
     awk '!seen[$0]++'
 }
