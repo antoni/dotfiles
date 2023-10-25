@@ -78,4 +78,17 @@ function ListUsbDevices {
     Get-PnpDevice -PresentOnly | Where-Object { $_.InstanceId -match '^USB' }
 }
 
-Set-PSReadLineKeyHandler -Key Tab -Function Complete
+if (($host.Name -eq 'ConsoleHost')) {
+    Import-Module PSReadLine
+    Set-PSReadLineOption -PredictionSource History
+    Set-PSReadlineKeyHandler -Key UpArrow   -Function HistorySearchBackward
+    Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
+    # Set-PSReadLineKeyHandler -Key Tab -Function Complete
+    Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
+    Set-PSReadLineOption -HistorySearchCursorMovesToEnd
+    Set-PSReadLineOption -Colors @{ InlinePrediction = '#F6546A' }
+    if (($host.Version.Major -eq 7)) {
+        Set-PSReadLineOption -PredictionViewStyle ListView
+        Set-PSReadLineOption -EditMode Windows
+    }
+}

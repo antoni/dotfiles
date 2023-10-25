@@ -11,5 +11,7 @@ Set-FTA  VLC.mp3.Document .mp3
 Set-FTA  VLC.mp4.Document .mp4
 Set-FTA  VLC.avi.Document .avi
 Set-FTA  Applications\notepad++.exe .txt
+Set-FTA  Applications\notepad++.exe .xml
+Register-FTA "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" .ps1 -Icon "shell32.dll,100"
 Set-FTA  ChromeHTML .svg
 Set-FTA  VSCode.ts .ts
