@@ -1,3 +1,5 @@
+# TODO: Add some functions from here:
+# https://github.com/OzakIOne/win10setup/blob/8e8d9974f202d0c84d3d53e9224ab88baac03f3b/config/Microsoft.PowerShell_profile.ps1
 # Current user – Current host profile
 # On Windows, should be stored in location defined
 # in $profile global PowerShell variable (for Current user – Current host)
