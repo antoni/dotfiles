@@ -93,6 +93,7 @@ MAY_HAVE=(
 	Ghisler.TotalCommander
 	Microsoft.WindowsTerminal
 	OpenJS.NodeJS.LTS
+	ByteDance.CapCut
 	Amazon.AWSCLI
 	Zeit.Hyper
 	Rufus.Rufus
