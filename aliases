@@ -1961,3 +1961,8 @@ function wrap_with() {
 function remove_duplicated_lines() {
     awk '!seen[$0]++'
 }
+
+function brew_remove_cache() {
+    printf "Removing Homebrew cache. This may take a while\n"
+    rm -rf "$(brew --cache)"
+}
