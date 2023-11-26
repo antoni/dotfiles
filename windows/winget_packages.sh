@@ -150,7 +150,6 @@ MAY_HAVE=(
 	msys2.msys2
 	scottlerch.hosts-file-editor
 	Streamlink.Streamlink
-	RStudio.quarto
 	Google.EarthPro
 	TIDALMusicAS.TIDAL
 	Amazon.Kindle
