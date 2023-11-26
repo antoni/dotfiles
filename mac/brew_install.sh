@@ -338,6 +338,7 @@ BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	dogecoin
 	sketchup
 	league-of-legends
+	quarto
 	colour-contrast-analyser
 	namebench
 	little-snitch
