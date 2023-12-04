@@ -20,6 +20,7 @@ APT_PACKAGES=(apache2
 	maven
 	flatpak
 	gitk
+	qpdf
 	poppler-utils
 	mc
 	pv
