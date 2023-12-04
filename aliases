@@ -1167,6 +1167,15 @@ function remove_password_from_pdf() {
     qpdf -password="$password" -decrypt "$filename".pdf "$filename""_no_password.pdf"
 }
 
+function password_protect_pdf_file() {
+    local -r filename=$(filename_without_extension "$1")
+
+printf "Enter password:\n"
+read -s password
+
+    qpdf --encrypt "$password" password 256 --modify=none -- "$filename".pdf "$filename""_password_protected.pdf"
+}
+
 function sync_dotfiles() {
     pushd ~/scripts && gacw && git push origin master && popd || exit
     pushd ~/dotfiles && gacw && git push origin master && popd || exit
@@ -1866,7 +1875,7 @@ function cd_windows_desktop() {
 function show_image_geo_location() {
     local -r image_path="$1"
 
-    ./get_geo_coordinates.sh "$image_path"
+    "$HOME"/scripts/images/get_geo_coordinates.sh "$image_path"
 }
 
 # Converts input to human-readable form
