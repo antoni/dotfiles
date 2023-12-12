@@ -22,6 +22,7 @@ APT_PACKAGES=(apache2
 	gitk
 	qpdf
 	poppler-utils
+	speedtest-cli
 	mc
 	pv
 	exiftool
