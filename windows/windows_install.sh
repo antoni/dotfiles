@@ -6,8 +6,8 @@ source "$HOME"/dotfiles/config.sh
 curl -o- -L https://yarnpkg.com/install.sh | bash
 
 # Install nvm
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-
+# https://github.com/nvm-sh/nvm/releases
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 
 nvm install "$NODE_VERSION"
 nvm alias default "$NODE_VERSION"
