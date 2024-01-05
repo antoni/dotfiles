@@ -17,6 +17,7 @@ BREW_PACKAGES_MUST_HAVE=(
 	shfmt
 	node@16
 	ngrok
+	zrok
 	yarn
 	zoom
 	kotlin
