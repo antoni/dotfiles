@@ -1975,3 +1975,20 @@ function brew_remove_cache() {
     printf "Removing Homebrew cache. This may take a while\n"
     rm -rf "$(brew --cache)"
 }
+
+function show_wifi_network_qr_code() {
+printf "Enter network name:\n"
+read -rs network_name
+echo "$network_name"
+
+printf "Enter password:\n"
+read -rs password
+echo "$password"
+
+escaped_password=$(printf "%q" $password)
+echo "$escaped_password"
+qrencode "WIFI:T:WPA;S:$network_name;P:$escaped_password;;" --type=ansiutf8
+
+# To save file
+# qrencode "WIFI:T:WPA;S:$network_name;P:$escaped_password;;" --output=wifi_login_qr_code.png
+}
