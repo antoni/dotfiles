@@ -1979,14 +1979,11 @@ function brew_remove_cache() {
 function show_wifi_network_qr_code() {
 printf "Enter network name:\n"
 read -rs network_name
-echo "$network_name"
 
 printf "Enter password:\n"
 read -rs password
-echo "$password"
 
-escaped_password=$(printf "%q" $password)
-echo "$escaped_password"
+escaped_password=$(printf "%q" "$password")
 qrencode "WIFI:T:WPA;S:$network_name;P:$escaped_password;;" --type=ansiutf8
 
 # To save file
