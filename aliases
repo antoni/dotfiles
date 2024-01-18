@@ -167,7 +167,7 @@ function wgetdir2() {
         --restrict-file-names=windows \
         --domains website.org \
         --no-parent "$1"
-}
+    }
 
 # Programming etc.
 alias m='make'
@@ -456,7 +456,7 @@ dl_website() {
         --restrict-file-names=windows \
         --no-parent \
         "$1"
-}
+    }
 
 # cd ../../../
 function up() {
@@ -509,7 +509,7 @@ alias autoremove='sudo apt-get autoremove'
 alias redisgui='redis-desktop-manager'
 
 function g++gtest() {
-    g++ -std=c++11 "$1" -lgtest -lpthread && ./a.out
+g++ -std=c++11 "$1" -lgtest -lpthread && ./a.out
 }
 
 # Links all .o files to make elf_i386 executable
@@ -651,8 +651,8 @@ function watch_dir_action() {
     while read -r path action file; do
         printf "[${colors[Green]}%s${colors[White]}]\t${colors[Red]}%s${colors[Reset_Color]}\tin\t%s\n" \
             "$action" "$file" "$path"
-    done
-}
+        done
+    }
 
 # $1 - dir to be watched for CREATE or MOVED_TO events
 function watch_dir() {
@@ -672,25 +672,25 @@ function reformat() {
     echo "File extension: ""$ext"
 
     case $ext in
-    "md")
-        # Reformat against Github's Markdown styleguide
-        pandoc --write=markdown --to=markdown_github "$1" >"$tmpf"
-        ;;
-    "js")
-        eslint --fix "$1" >"$tmpf"
-        ;;
-    "jsx")
-        prettier --write "$1"
-        ;;
-    "json")
-        jq -M '.' >"$tmpf" <"$1"
-        ;;
-    "py")
-        autopep8 --in-place "$1"
-        ;;
-    "html")
-        tidy -indent -wrap 80 -utf8 -clean -file $HTML_TIDY_TMP_FILE "$1" >"$tmpf"
-        ;;
+        "md")
+            # Reformat against Github's Markdown styleguide
+            pandoc --write=markdown --to=markdown_github "$1" >"$tmpf"
+            ;;
+        "js")
+            eslint --fix "$1" >"$tmpf"
+            ;;
+        "jsx")
+            prettier --write "$1"
+            ;;
+        "json")
+            jq -M '.' >"$tmpf" <"$1"
+            ;;
+        "py")
+            autopep8 --in-place "$1"
+            ;;
+        "html")
+            tidy -indent -wrap 80 -utf8 -clean -file $HTML_TIDY_TMP_FILE "$1" >"$tmpf"
+            ;;
     esac
     mv -f "$tmpf" "$1" 2>/dev/null
 }
@@ -784,17 +784,17 @@ function how_in() {
 # * modify file
 # * git-amend-to $old_sha
 git-amend-to() (
-    # Stash, apply to past commit, and rebase the current branch on to of the result.
-    current_branch="$(git rev-parse --abbrev-ref HEAD)"
-    apply_to="$1"
-    git stash
-    git checkout "$apply_to"
-    git stash apply
-    git add -u
-    git commit --amend --no-edit
-    new_sha="$(git log --format="%H" -n 1)"
-    git checkout "$current_branch"
-    git rebase --onto "$new_sha" "$apply_to"
+# Stash, apply to past commit, and rebase the current branch on to of the result.
+current_branch="$(git rev-parse --abbrev-ref HEAD)"
+apply_to="$1"
+git stash
+git checkout "$apply_to"
+git stash apply
+git add -u
+git commit --amend --no-edit
+new_sha="$(git log --format="%H" -n 1)"
+git checkout "$current_branch"
+git rebase --onto "$new_sha" "$apply_to"
 )
 
 alias pr='~/scripts/pull_request.sh'
@@ -1066,7 +1066,7 @@ function add_diagonal_watermak() {
         +clone -fill mpr:wm -draw 'color 0,0 reset' \) \
         -compose over -composite \
         "$filename"
-}
+    }
 
 # Usage:
 # random_password [password_length]
@@ -1104,9 +1104,9 @@ alias github_merge_pr='gh pr merge $(git branch --show-current) --delete-branch 
 # Alternative
 # tr -dc '[:alnum:]' < /dev/urandom | dd bs=4 count=8 2>/dev/null
 function random-string() {
-    # Add special chars:
-    # env LC_ALL=C tr -dc '(\&\_a-zA-Z0-9\^\*\@'
-    env LC_ALL=C tr -dc 'a-zA-Z0-9' </dev/urandom | fold -w "${1:-32}" | head --lines=1
+# Add special chars:
+# env LC_ALL=C tr -dc '(\&\_a-zA-Z0-9\^\*\@'
+env LC_ALL=C tr -dc 'a-zA-Z0-9' </dev/urandom | fold -w "${1:-32}" | head --lines=1
 }
 
 function brew_cleanup_package() {
@@ -1170,8 +1170,8 @@ function remove_password_from_pdf() {
 function password_protect_pdf_file() {
     local -r filename=$(filename_without_extension "$1")
 
-printf "Enter password:\n"
-read -s password
+    printf "Enter password:\n"
+    read -s password
 
     qpdf --encrypt "$password" password 256 --modify=none -- "$filename".pdf "$filename""_password_protected.pdf"
 }
@@ -1337,38 +1337,38 @@ function extract_field_from_json() {
     local filename=$1
     local field_name=$2
     json_field_value=$(
-        grep "$field_name" "$filename" |
-            head -1 |
-            awk --field-separator: '{ print $2 }' |
-            sed 's/[",]//g'
+    grep "$field_name" "$filename" |
+        head -1 |
+        awk --field-separator: '{ print $2 }' |
+        sed 's/[",]//g'
     )
 
     printf "%s" "$json_field_value" |
         xargs # trim
-}
+    }
 
-function show_function_code() {
-    local function_name="$1"
-    declare -f "$function_name"
-}
+    function show_function_code() {
+        local function_name="$1"
+        declare -f "$function_name"
+    }
 
-function is_linux_inside_wsl() {
-    if grep -q Microsoft /proc/version; then
-        #"Ubuntu on Windows"
-        echo 1
-    fi
-}
+    function is_linux_inside_wsl() {
+        if grep -q Microsoft /proc/version; then
+            #"Ubuntu on Windows"
+            echo 1
+        fi
+    }
 
-function sync_dotfiles() {
-    pushd ~/dotfiles || exit
-    git pull
-    git push origin master
-    popd || exit
-    pushd ~/scripts || exit
-    git pull
-    git push origin master
-    popd || exit
-}
+    function sync_dotfiles() {
+        pushd ~/dotfiles || exit
+        git pull
+        git push origin master
+        popd || exit
+        pushd ~/scripts || exit
+        git pull
+        git push origin master
+        popd || exit
+    }
 
 # Fixes a corrupt .zsh_history file
 function fix_zsh_history_file() {
@@ -1419,16 +1419,16 @@ function json_to_table() {
     TABLE_FIELDS='"'${table_fields//,/\",\"}'"'
     jq --raw-output \
         "([$TABLE_FIELDS] | (., map(length*\"-\"))), (.[] | $JSON_FIELDS) | @tsv" "$filename"
-}
+    }
 
-function grep33() {
-    grep -A 3 -B 3 "$@"
-}
+    function grep33() {
+        grep -A 3 -B 3 "$@"
+    }
 
-function ls_n_random_files() {
-    local -r files_count="$1"
-    find . | shuf --head-count "$files_count"
-}
+    function ls_n_random_files() {
+        local -r files_count="$1"
+        find . | shuf --head-count "$files_count"
+    }
 
 ### Windows-only
 
@@ -1765,8 +1765,8 @@ function diff_json() {
 # hex_to_rgb "#d60093"
 function hex_to_rgb() {
     local -r hex="$(echo $1 | sed 's/\#//')"
-    printf "%d;%d;%d\n" 0x${hex:0:2} 0x${hex:2:2} 0x${hex:4:2}
-}
+        printf "%d;%d;%d\n" 0x${hex:0:2} 0x${hex:2:2} 0x${hex:4:2}
+    }
 
 # Usage:
 # print_color_bar "#d60093"
@@ -1888,7 +1888,7 @@ function convert_size_to_human_readable_form() {
     sizeIncrement=1;
     while( $5 > 1024 && sizeIncrement < 9 ){ $5/=1024; sizeIncrement++ }
         printf "%6.2f%s %s\n", $5, sizeValue[sizeIncrement], $9 }'
-}
+    }
 
 # Usage:
 # list_files_greater_than 128k
@@ -1898,10 +1898,10 @@ function list_files_greater_than() {
     find . -type f -size "$greater_than" -exec ls -l {} \; |
         sort --stable --numeric-sort --key=5 --reverse |
         convert_size_to_human_readable_form
-}
+    }
 
-function transpose() {
-    awk '
+    function transpose() {
+        awk '
         {
             for (i=1; i<=NF; i++) {
                 a[NR,i] = $i
@@ -1925,22 +1925,22 @@ function find_and_replace() {
         -not -path "*node_modules/*" \
         -not -path "*.yarn/*" -exec \
         sed -i "s/""$1""/""$2""/g" {} \;
-}
+    }
 
-function strikethrough_text() {
-    awk --field-separator'[^[:alpha:]]+' 'BEGIN{string=sprintf("\xCC\xB6")}{for (letter_index=1;letter_index<=NF;letter_index++)gsub(/./, "&" string, $letter_index); print}'
-}
+    function strikethrough_text() {
+        awk --field-separator'[^[:alpha:]]+' 'BEGIN{string=sprintf("\xCC\xB6")}{for (letter_index=1;letter_index<=NF;letter_index++)gsub(/./, "&" string, $letter_index); print}'
+    }
 
-function is_url() {
-    regex='(https?|ftp|file)://[-[:alnum:]\+&@#/%?=~_|!:,.;]*[-[:alnum:]\+&@#/%=~_|]'
-    string="$1"
+    function is_url() {
+        regex='(https?|ftp|file)://[-[:alnum:]\+&@#/%?=~_|!:,.;]*[-[:alnum:]\+&@#/%=~_|]'
+        string="$1"
 
-    if [[ $string =~ $regex ]]; then
-        return 0
-    else
-        return 1
-    fi
-}
+        if [[ $string =~ $regex ]]; then
+            return 0
+        else
+            return 1
+        fi
+    }
 
 # Example:
 # cat input_file | filter_stream 'is_url'
@@ -1965,27 +1965,33 @@ function wrap_with() {
     awk -v left_wrap="$left_wrap" \
         -v right_wrap="$right_wrap" \
         '{ print left_wrap$0right_wrap}'
-}
+    }
 
-function remove_duplicated_lines() {
-    awk '!seen[$0]++'
-}
+    function remove_duplicated_lines() {
+        awk '!seen[$0]++'
+    }
 
-function brew_remove_cache() {
-    printf "Removing Homebrew cache. This may take a while\n"
-    rm -rf "$(brew --cache)"
-}
+    function brew_remove_cache() {
+        printf "Removing Homebrew cache. This may take a while\n"
+        rm -rf "$(brew --cache)"
+    }
 
-function show_wifi_network_qr_code() {
-printf "Enter network name:\n"
-read -rs network_name
+    function show_wifi_network_qr_code() {
+        printf "Enter network name:\n"
+        read -rs network_name
 
-printf "Enter password:\n"
-read -rs password
+        printf "Enter password:\n"
+        read -rs password
 
-escaped_password=$(printf "%q" "$password")
-qrencode "WIFI:T:WPA;S:$network_name;P:$escaped_password;;" --type=ansiutf8
+        escaped_password=$(printf "%q" "$password")
+        qrencode "WIFI:T:WPA;S:$network_name;P:$escaped_password;;" --type=ansiutf8
 
 # To save file
 # qrencode "WIFI:T:WPA;S:$network_name;P:$escaped_password;;" --output=wifi_login_qr_code.png
 }
+
+function print_ascii_art_text() {
+    local -r text="$1"
+    figlet -f ~/dotfiles/ANSI_Shadow_figlet_font.flf "$text"
+}
+
