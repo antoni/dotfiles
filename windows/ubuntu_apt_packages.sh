@@ -12,6 +12,7 @@ APT_PACKAGES=(apache2
 	docker
 	htop
 	nginx
+	figlet
 	parallel
 	graphviz
 	jq
