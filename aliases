@@ -1994,3 +1994,16 @@ function print_ascii_art_text() {
 	local -r text="$1"
 	figlet -f ~/dotfiles/ANSI_Shadow_figlet_font.flf "$text"
 }
+
+function date_iso_8601() {
+date +"%Y-%m-%dT%H:%M:%S%z"
+}
+
+# Example:
+# record_rtsp_stream rtsp://192.168.1.19:8554/ch0_0.h264 "$(date +\"%Y-%m-%d_%H:%M:%S\")_recording.mp4"
+function record_rtsp_stream() {
+local -r url="$1"
+local -r outfile="$2"
+local -r time_seconds="${3:-5}"
+ffmpeg -use_wallclock_as_timestamps 1 -i "$url" -t "$time_seconds" -c copy -y "$outfile"
+}
