@@ -194,6 +194,7 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	rlwrap
 	tig
 	nmap
+	rustscan
 	nnn
 	git-crypt
 	speedtest_cli
