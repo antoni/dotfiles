@@ -2007,3 +2007,7 @@ local -r outfile="$2"
 local -r time_seconds="${3:-5}"
 ffmpeg -use_wallclock_as_timestamps 1 -i "$url" -t "$time_seconds" -c copy -y "$outfile"
 }
+
+function ls_files() {
+    find . -type f -printf '%TY-%Tm-%Td\t%s\t%f\n' | numfmt --field=2 --to=si --padding=8
+}
