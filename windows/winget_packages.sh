@@ -157,7 +157,6 @@ MAY_HAVE=(
 	Autodesk.sketchbook
 	Files-Community.Files
 	TranslucentTB.TranslucentTB
-	Lexikos.AutoHotkey
 	GIMP.GIMP
 	SublimeHQ.SublimeText.3
 	Alacritty.Alacritty
@@ -181,6 +180,8 @@ MAY_HAVE=(
 	Microsoft.AzureCLI
 	Microsoft.AzureDataCLI
 	Microsoft.AzureStorageEmulator
+	KiCad.KiCad
+	Autodesk.EAGLE
 )
 
 # In case there is a need to accept some new Terms of Transaction

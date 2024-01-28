@@ -433,6 +433,7 @@ BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	homebrew/cask-versions/firefox-developer-edition
 	pharo-project/pharo/pharo-launcher
 	vagrant
+	kicad
 )
 
 function sdk_man_install() {
