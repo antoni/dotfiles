@@ -1807,7 +1807,7 @@ function pdf_split_pages() {
 
 alias fix_wsl='~/dotfiles/windows/apply_wsl_fixes.sh'
 
-# flatten the contents of a given directory.
+# flatten the contents of a given directory
 # It will move all files and subdirectories in the given directory to the given directory
 # and delete all subdirectories.
 function flatten_directory() {
@@ -1817,16 +1817,11 @@ function flatten_directory() {
 		return 1
 	fi
 
-	# Get the directory to flatten
 	local -r flattened_directory="$1"
 
-	# Move all files and subdirectories to the given directory
-	for file in "$flattened_directory"/*; do
-		mv "$file" "$flattened_directory"
-	done
+	find "$flattened_directory" -mindepth 2 -type f -exec mv -t "$flattened_directory" -i '{}' +
 
-	# Delete all subdirectories
-	find "$flattened_directory" -type d -depth 1 -exec rm -r {} \;
+	find "$flattened_directory" -mindepth 1 -maxdepth 1 -type d -delete
 }
 
 alias gs='git stash'
