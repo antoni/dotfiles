@@ -519,6 +519,12 @@ function mac_install_misc() {
 	brew tap dart-lang/dart
 	brew install dart
 
+	# macFUSE
+	brew install --cask macfuse
+
+	brew tap gromgit/homebrew-fuse
+	brew install ntfs-3g-mac
+
 	# sdk_man_install
 }
 
