@@ -16,4 +16,6 @@ shell_format_and_check.sh" # files found automatically using shfmt
 
 shell_check_and_format "$unrecognized_shell_files"
 
-gitleaks --no-banner detect --source . --verbose
+# TODO: install Docker container if not installed:
+# docker pull ghcr.io/gitleaks/gitleaks:latest
+docker run -v ~/dotfiles:/path zricethezav/gitleaks:latest detect --source="/path" --no-banner --verbose
