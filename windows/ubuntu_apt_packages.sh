@@ -61,7 +61,7 @@ APT_PACKAGES=(apache2
 	httrack
 	clang-tidy
 	webhttrack
-	g++ automake autoconf libtool cmake libicu-dev
+	g++ automake autoconf libtool cmake
 	libboost-dev libboost-system-dev libboost-filesystem-dev libboost-regex-dev libboost-program-options-dev libboost-iostreams-dev libboost-serialization-dev
 	yamllint
 	tree
@@ -81,7 +81,7 @@ function install_custom_packages() {
 	virtualbox-ext-pack
 }
 
-DEBIAN_FRONTEND=noninteractive sudo apt install --assume-yes "${MUST_HAVE[@]}"
-DEBIAN_FRONTEND=noninteractive sudo apt install --assume-yes "${APT_PACKAGES[@]}"
+DEBIAN_FRONTEND=noninteractive sudo apt -qq -o=Dpkg::Use-Pty=0 install --assume-yes "${MUST_HAVE[@]}"
+DEBIAN_FRONTEND=noninteractive sudo apt -qq -o=Dpkg::Use-Pty=0 install --assume-yes "${APT_PACKAGES[@]}"
 
 install_custom_packages
