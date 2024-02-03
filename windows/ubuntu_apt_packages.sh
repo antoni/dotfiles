@@ -81,7 +81,9 @@ function install_custom_packages() {
 	virtualbox-ext-pack
 }
 
-DEBIAN_FRONTEND=noninteractive sudo apt -qq -o=Dpkg::Use-Pty=0 install --assume-yes "${MUST_HAVE[@]}"
-DEBIAN_FRONTEND=noninteractive sudo apt -qq -o=Dpkg::Use-Pty=0 install --assume-yes "${APT_PACKAGES[@]}"
+DEBIAN_FRONTEND=noninteractive sudo apt \
+	-qq -o=Dpkg::Use-Pty=0 install --assume-yes "${MUST_HAVE[@]}"
+DEBIAN_FRONTEND=noninteractive sudo apt \
+	-qq -o=Dpkg::Use-Pty=0 install --assume-yes "${APT_PACKAGES[@]}"
 
 install_custom_packages
