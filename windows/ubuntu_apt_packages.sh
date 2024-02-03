@@ -6,6 +6,7 @@ MUST_HAVE=(software-properties-common
 )
 
 APT_PACKAGES=(apache2
+	apt-cacher-ng
 	ubuntu-release-upgrader-core
 	vim
 	tmux
@@ -72,7 +73,7 @@ APT_PACKAGES=(apache2
 )
 
 # Install packages that require some custom configuration (like accepting the license etc.)
-function install_custom_install_custom_packages() {
+function install_custom_packages() {
 	# Accept the licence
 	echo virtualbox-ext-pack virtualbox-ext-pack/license select true |
 		sudo debconf-set-selections
@@ -80,7 +81,7 @@ function install_custom_install_custom_packages() {
 	virtualbox-ext-pack
 }
 
-sudo apt install --assume-yes "${MUST_HAVE[@]}"
-sudo apt install --assume-yes "${APT_PACKAGES[@]}"
+DEBIAN_FRONTEND=noninteractive sudo apt install --assume-yes "${MUST_HAVE[@]}"
+DEBIAN_FRONTEND=noninteractive sudo apt install --assume-yes "${APT_PACKAGES[@]}"
 
-install_custom_install_custom_packages
+install_custom_packages
