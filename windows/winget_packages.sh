@@ -32,14 +32,13 @@ MUST_HAVE=(
 	Google.Chrome
 	PuTTY.PuTTY
 	vscode
-	Python
 	vim.vim
 	Neovim.Neovim
 	Greenshot.Greenshot
 	Git.Git
 	GitHub.cli
 	GitHub.GitLFS
-	Python.Python.3.11
+	Python.Python.3.12
 	# reinstalling this doesn't work unattended (brings focus always).
 	# also, I'm only using it inside WSL
 	# ImageMagick.ImageMagick
@@ -79,7 +78,6 @@ CONFERENCE_SOFTWARE=(
 )
 
 GAMES=(
-	RiotGames.LeagueOfLegends.EUNE
 	Valve.Steam
 	ElectronicArts.EADesktop
 	EpicGames.EpicGamesLauncher
@@ -97,10 +95,10 @@ MAY_HAVE=(
 	Amazon.AWSCLI
 	Zeit.Hyper
 	Rufus.Rufus
-	winget install -e --id Hex-Rays.IDA.Free
+	Hex-Rays.IDA.Free
 	AnyDeskSoftwareGmbH.AnyDesk
 	marha.VcXsrv
-	winget install -e --id Yarn.Yarn
+	Yarn.Yarn
 	RaspberryPiFoundation.RaspberryPiImager
 	BraveSoftware.BraveBrowser
 	Rustlang.Rustup

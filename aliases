@@ -2006,3 +2006,5 @@ function record_rtsp_stream() {
 function ls_files() {
 	find . -type f -printf '%TY-%Tm-%Td\t%s\t%f\n' | numfmt --field=2 --to=si --padding=8
 }
+
+alias mc="mc --nosubshell"

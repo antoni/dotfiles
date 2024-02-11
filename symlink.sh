@@ -212,8 +212,6 @@ function main() {
 	# .ghci access
 	chmod g-w ~/.ghci
 
-	# set -x # echo executed commands
-
 	# /usr/local/bin symlinks
 	# Chrome
 	sudo_exec ln -fs /usr/bin/google-chrome-stable /usr/local/bin/g
@@ -318,19 +316,6 @@ function main() {
 		sudo_exec ln -fs "$HOME"/android-studio/bin/studio.sh /usr/local//bin/astudio
 	fi
 
-	case "$(uname -s)" in
-	Darwin)
-		ln -fs "${DOTFILES_DIR}"/vscode.json "$HOME"/Library/Application\ Support/Code/User/settings.json
-		;;
-	Linux)
-		ln -fs "${DOTFILES_DIR}"/vscode.json "$HOME"/.config/Code/User/settings.json
-		;;
-	CYGWIN* | MINGW32* | MSYS*) # MS Windows
-		;;
-	esac
-
-	set +x # disable echo executed commands
-
 	# Vim
 
 	# (Re)install vim-plug
@@ -351,10 +336,10 @@ function main() {
 	setup_hostname
 
 	# Midnight Commander
-	ln -fs "$DOTFILES_DIR"/mc ~/.config
+	rm -f ~/.config/mc/* && mkdir -p ~/.config/mc/
+	ln -fs "$DOTFILES_DIR"/mc/ini ~/.config/mc/
 
 	# Atom
-
 	mkdir -p "$HOME"/.atom
 	pushd atom &>/dev/null || exit 1
 
@@ -368,7 +353,7 @@ function main() {
 
 	function find_broken_symlinks() {
 		printf "Looking for broken symlinks\n"
-		sudo find ~ -type l -maxdepth 3 ! -exec test -e {} \; -print
+		sudo find ~ -maxdepth 3 -type l ! -exec test -e {} \; -print
 		sudo find /usr/bin -type l ! -exec test -e {} \; -print
 		sudo find /usr/local/bin -type l ! -exec test -e {} \; -print
 	}
