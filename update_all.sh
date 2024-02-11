@@ -42,7 +42,27 @@ function update_all() {
 	fi
 
 	# WSL 2
-	if test -f /proc/sys/kernel/osrelease && grep -q microsoft /proc/sys/kernel/osrelease; then
+	if test -f /proc/sys/kernel/osrelease &&
+		grep -q microsoft /proc/sys/kernel/osrelease; then
+
+		set -Ee
+
+		trap delete_desktop_symlinks ERR
+		trap delete_desktop_symlinks EXIT
+
+		function delete_desktop_symlinks() {
+			printf "Removing desktop symlinks/shortcuts\n"
+
+			# Delete all links on Desktop: current user
+			rm --recursive --force /mnt/c/Users/"${WINDOWS_USERNAME}"/Desktop/*.{lnk,url}
+
+			# Delete all links on Desktop: all users
+			# [Environment]::GetFolderPath('CommonDesktopDirectory')
+			rm --recursive --force /mnt/c/Users/Public/{desktop,Desktop}/*.{lnk,url}
+
+			set +Ee
+		}
+
 		echo "Updating WSL..."
 		wsl.exe --update
 
@@ -56,13 +76,6 @@ function update_all() {
 		fi
 
 		winget.exe upgrade --all --include-unknown
-
-		# Delete all links on Desktop: current user
-		rm --recursive --force /mnt/c/Users/"${WINDOWS_USERNAME}"/Desktop/*.{lnk,url}
-
-		# Delete all links on Desktop: all users
-		# [Environment]::GetFolderPath('CommonDesktopDirectory')
-		rm --recursive --force /mnt/c/Users/Public/{desktop,Desktop}/*.{lnk,url}
 	fi
 
 	echo "Upgrading oh-my-zsh..."
@@ -83,7 +96,6 @@ function update_all() {
 	npm install --no-fund --no-progress --silent --quiet npm
 
 	echo "Upgrading PIP packages..."
-	# pip3 install --upgrade pip --user;
 	# Running it twice seems to resolve some dependency issues which PIP reports when running it just one time
 	update_pip_packages
 	update_pip_packages
