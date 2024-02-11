@@ -171,3 +171,7 @@ function update_xcode() {
 	sudo rm --recursive --force /Library/Developer/CommandLineTools
 	xcode-select --install
 }
+
+function clear_bash_history() {
+	cat /dev/null >~/.bash_history && history -c && exit
+}
