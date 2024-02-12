@@ -2008,3 +2008,11 @@ function ls_files() {
 }
 
 alias mc="mc --nosubshell"
+
+# Example
+# get_npm_package_tarball_url @prisma/client
+function get_npm_package_tarball_url() {
+	local -r package_name="$1"
+	curl --silent https://registry.npmjs.org/$package_name |
+		jq --raw-output '.versions[."dist-tags".latest].dist.tarball'
+}
