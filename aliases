@@ -100,7 +100,7 @@ elif test -f /proc/sys/kernel/osrelease && grep -q microsoft /proc/sys/kernel/os
 	# shellcheck disable=2154
 	alias empty_trash_bin='cmd.exe /c "rd /s /q %systemdrive%\$Recycle.bin" 2&> /dev/null'
 
-	alias analyze_disk_usage='ncdu'
+	alias analyze_disk_usage='ncdu --color'
 	# Alternatives:
 	# Note: assumes 'C' is the main drive
 	# alias analyze_disk_usage='/mnt/c/Program\ Files\ (x86)/WinDirStat/windirstat.exe'
