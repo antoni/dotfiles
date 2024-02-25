@@ -22,8 +22,14 @@ APT_PACKAGES=(apache2
 	maven
 	flatpak
 	gitk
+	# BEGIN Python depdendencies
 	libpython3-dev
 	libdbus-1-dev
+	glib-2.0
+	libcairo2-dev
+	libgirepository1.0-dev
+	libsystemd-dev
+	# END Python depdendencies
 	qpdf
 	poppler-utils
 	speedtest-cli
