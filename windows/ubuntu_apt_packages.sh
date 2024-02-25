@@ -22,6 +22,8 @@ APT_PACKAGES=(apache2
 	maven
 	flatpak
 	gitk
+	libpython3-dev
+	libdbus-1-dev
 	qpdf
 	poppler-utils
 	speedtest-cli
