@@ -2017,3 +2017,13 @@ function get_npm_package_tarball_url() {
 	curl --silent https://registry.npmjs.org/$package_name |
 		jq --raw-output '.versions[."dist-tags".latest].dist.tarball'
 }
+
+function remove_interactive_fields_from_pdf() {
+	local -r filename=$(filename_without_extension "$1")
+
+	qpdf --decrypt "$filename".pdf "$filename""_no_interactive_fields.pdf"
+}
+
+function remove_password_from_pdf() {
+	qpdf -password="$password" -decrypt "$filename".pdf "$filename""_no_password.pdf"
+}
