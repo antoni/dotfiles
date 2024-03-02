@@ -9,6 +9,7 @@ APT_PACKAGES=(apache2
 	apt-cacher-ng
 	ubuntu-release-upgrader-core
 	vim
+	neovim
 	tmux
 	docker
 	htop
