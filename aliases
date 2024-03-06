@@ -2027,3 +2027,7 @@ function remove_interactive_fields_from_pdf() {
 function remove_password_from_pdf() {
 	qpdf -password="$password" -decrypt "$filename".pdf "$filename""_no_password.pdf"
 }
+
+function grep_emails() {
+	grep -Eiorh '([[:alnum:]_.-]+@[[:alnum:]_.-]+?\.[[:alpha:].]{2,6})' "$@" * | sort | uniq
+}
