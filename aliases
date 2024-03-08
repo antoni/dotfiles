@@ -696,8 +696,6 @@ function reformat() {
 	mv -f "$tmpf" "$1" 2>/dev/null
 }
 
-alias a='cd ~/adnetwork'
-
 # Toggles VPN connection
 function vpn() {
 	vpn_conn="VPN"
