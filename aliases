@@ -2029,3 +2029,9 @@ function remove_password_from_pdf() {
 function grep_emails() {
 	grep -Eiorh '([[:alnum:]_.-]+@[[:alnum:]_.-]+?\.[[:alpha:].]{2,6})' "$@" * | sort | uniq
 }
+
+function random_commit() {
+	touch $(rand)_$(rand).txt
+	git add .
+	gc "feat: Add "$(rand)
+}
