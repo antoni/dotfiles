@@ -187,7 +187,7 @@ Function Copy-CurrentDirectory () {
     Get-Location | Select -ExpandProperty Path | copy_to_clipboard
 }
 
-Set-Alias copy_current_directory Copy-CurrentDirectory
+Set-Alias copy_current_path Copy-CurrentDirectory
 
 function Copy-BranchName() {
     git branch --show-current | copy_to_clipboard

@@ -1146,7 +1146,7 @@ function copy_branch_name() {
 	echo "$branch" | tr -d "\n" | copy_to_clipboard
 }
 alias copy_last_commit_message='git log -1 --pretty=%B | tr -d "\n" | copy_to_clipboard'
-alias copy_current_directory='pwd | copy_to_clipboard'
+alias copy_current_path='pwd | copy_to_clipboard'
 
 function webm_to_mp4() {
 	local -r filename=$(filename_without_extension "$1")
