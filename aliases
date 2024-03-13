@@ -1203,12 +1203,16 @@ function encrypt_pdf() {
 	printf "\n"
 	local -r user_password="$pdf_password"
 	local -r owner_password="$user_password"
-	qpdf --encrypt "$user_password" "$owner_password" 256 -- "$input_file" "$(filename_without_extension "$1")""_encrypted.pdf"
+	qpdf --encrypt "$user_password" "$owner_password" 256 -- \
+		"$input_file" \
+		"$(filename_without_extension "$1")""_encrypted.pdf"
 }
 
 function download_npm_tarball() {
 	local -r package_name="$1"
-	local -r package_url=$(curl --silent --show-error https://registry.npmjs.org/"$package_name"/ | jq --raw-output '.versions[."dist-tags".latest].dist.tarball')
+	local -r package_url=$(curl --silent --show-error \
+		https://registry.npmjs.org/"$package_name"/ |
+		jq --raw-output '.versions[."dist-tags".latest].dist.tarball')
 
 	wget "$package_url"
 }
@@ -1273,7 +1277,10 @@ function mov_to_mp4() {
 	local output_filename=$filename.mp4
 	local fps=60
 
-	ffmpeg -i "$input_filename" -loglevel error -fflags +genpts -r $fps "$output_filename" && echo "Successfully created $output_filename" || echo "Error converting $1 to $output_filename"
+	ffmpeg -i "$input_filename" -loglevel error \
+		-fflags +genpts -r $fps "$output_filename" &&
+		echo "Successfully created $output_filename" ||
+		echo "Error converting $1 to $output_filename"
 }
 
 function find_process_on_port() {
@@ -1297,7 +1304,8 @@ function move_files_created_at_to_directory() {
 	local directory="$2"
 
 	set -x
-	find . -type f -newermt "$(date_plus_days "$creation_date" 1)" ! -newermt "$creation_date_plus_1_day" -exec mv "{}" "$directory" \;
+	find . -type f -newermt "$(date_plus_days "$creation_date" 1)" ! \
+		-newermt "$creation_date_plus_1_day" -exec mv "{}" "$directory" \;
 	set +x
 }
 
@@ -1396,7 +1404,8 @@ function set_sensitive_variable() {
 	HISTFILE=$current_histfile
 }
 
-# sudo will prompt for a password (if one is required by the security policy) and will not update the user's cached credentials.
+# sudo will prompt for a password (if one is required by the security policy)
+# and will not update the user's cached credentials
 function sudo_forget() {
 	sudo -k "$@"
 }
@@ -1697,16 +1706,10 @@ function cal_restart() {
 	yarn workspace @calcom/prisma db-deploy
 }
 
-# Usage
-# clone Tuhinshubhra/ExtAnalysis
-alias clone='gh repo clone'
-
 # Windows
 alias gz='gzip'
 
 alias geolocate_ip='geoiplookup'
-
-alias updatecal='git stash && git pull origin main && yarn workspace @calcom/prisma db-deploy'
 
 function get_node_lts_version() {
 	curl -L resolve-node.now.sh/lts
