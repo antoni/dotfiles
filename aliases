@@ -1220,9 +1220,9 @@ function download_npm_tarball() {
 alias grhom='git reset --hard origin/master'
 alias grhh='git reset --hard HEAD~'
 alias gs2='git squash 2'
-alias gs3='git squash 2'
-alias gs4='git squash 2'
-alias gs5='git squash 2'
+alias gs3='git squash 3'
+alias gs4='git squash 4'
+alias gs5='git squash 5'
 
 function rebase_all() {
 	local repos=(orval svgo)
