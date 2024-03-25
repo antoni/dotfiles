@@ -129,6 +129,28 @@
     # Shows all commits for given author, with full diff
     author-commits-full = "!git --no-pager log --author=\"$1\" --oneline | awk '{print $1}' | xargs git show #"
     remove-ignored-files = "!git ls-files -c --ignored --exclude-standard | sed 's/.*/"&"/' | xargs git rm -r --cached"
+    # Takes the range of the commits it needs to push and then goes and pushes then one by one
+    # It can take quite some time, but on the end it will do the job - automatically
+    #
+    # Note: it *uses force push*
+    # Example:
+    # git partial-push origin branchname
+    partial-push = "!sh -c \
+        'REMOTE=$0;BRANCH=$1;BATCH_SIZE=100; \
+        if git show-ref --quiet --verify refs/remotes/$REMOTE/$BRANCH; then \
+            range=$REMOTE/$BRANCH..HEAD; \
+        else \
+            range=HEAD; \
+        fi; \
+        n=$(git log --first-parent --format=format:x $range | wc -l); \
+        echo "Have to push $n packages in range of $range"; \
+        for i in $(seq $n -$BATCH_SIZE 1); do \
+            h=$(git log --first-parent --reverse --format=format:%H --skip $i -n1); \
+            echo "Pushing $h..."; \
+            git push --force $REMOTE ${h}:refs/heads/$BRANCH; \
+        done; \
+        git push --force $REMOTE HEAD:refs/heads/$BRANCH' \
+    "
 [push]
     default = matching
     followTags = true
