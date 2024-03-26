@@ -98,6 +98,7 @@ MAY_HAVE=(
 	Hex-Rays.IDA.Free
 	AnyDeskSoftwareGmbH.AnyDesk
 	marha.VcXsrv
+	CHIRPSoftware.CHIRP-next
 	Yarn.Yarn
 	RaspberryPiFoundation.RaspberryPiImager
 	BraveSoftware.BraveBrowser
