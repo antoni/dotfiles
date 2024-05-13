@@ -50,7 +50,12 @@
 - sysctl.conf: https://stackoverflow.com/a/55763478/963881
 - windows minimize windows at startup
 - [jq in place](https://stackoverflow.com/questions/36565295/jq-to-replace-text-directly-on-file-like-sed-i?noredirect=1&lq=1)
-- add to Windows install scripts: `cp -r wallpapers /mnt/c/Users/vivob`
+- add to Windows install scripts:
+
+```
+rm -r /mnt/c/Users/vivob/wallpapers
+cp -r ~/dotfiles/wallpapers /mnt/c/Users/vivob/wallpapers
+```
 
 ## ChatGPT prompts
 

@@ -8,6 +8,7 @@ set +x
 # Aliases and custom functions
 source "$HOME"/dotfiles/colors.sh
 source "$HOME"/dotfiles/utils.sh
+source "$HOME"/dotfiles/image_utils.sh
 
 if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
 	# macOS-specific
@@ -100,7 +101,7 @@ elif test -f /proc/sys/kernel/osrelease && grep -q microsoft /proc/sys/kernel/os
 	# shellcheck disable=2154
 	alias empty_trash_bin='cmd.exe /c "rd /s /q %systemdrive%\$Recycle.bin" 2&> /dev/null'
 
-	alias analyze_disk_usage='ncdu --color'
+	alias analyze_disk_usage='ncdu --color=dark'
 	# Alternatives:
 	# Note: assumes 'C' is the main drive
 	# alias analyze_disk_usage='/mnt/c/Program\ Files\ (x86)/WinDirStat/windirstat.exe'
@@ -543,8 +544,6 @@ alias i3wmreset='i3-msg "reload"'
 # Check if port is open:
 alias checkopenports='netstat -ano|grep 443|grep LISTEN'
 
-pythontools=(2to3 pylint pyflakes autopep8)
-
 alias classdiagram='staruml'
 
 alias tmuxhelp='cat ~/dotfiles/tmux.cheat | less'
@@ -559,19 +558,6 @@ alias switchm="xrandr --output VGA1 --left-of DP2" # switches monitors (left-rig
 alias di='sudo dnf install --assumeyes'
 alias ds='dnf search -C'
 alias dr='sudo dnf remove'
-
-alias youtube-dl='yt-dlp'
-alias ydl='youtube-dl --no-playlist --no-mtime'
-
-alias ydlbest='ydl --format best'
-alias ydlworst='ydl --format worst'
-alias ydlaudio='youtube-dl --format best --extract-audio --audio-format mp3'
-
-function ydlwl() {
-	pushd ~/Documents/watch || exit
-	ydl --ignore-errors https://www.youtube.com/playlist?list=PLxEBYuU7ONUfj68kBjXfHaAutKqtgAc4s
-	popd || exit
-}
 
 function rdp() { rdesktop "$@" -rsound:remote -5 -K -r clipboard:CLIPBOARD; }
 
@@ -696,8 +682,6 @@ function reformat() {
 	mv -f "$tmpf" "$1" 2>/dev/null
 }
 
-alias a='cd ~/adnetwork'
-
 # Toggles VPN connection
 function vpn() {
 	vpn_conn="VPN"
@@ -753,7 +737,8 @@ function pip_list() {
 }
 
 function reinstall_pip_packages() {
-	DISPLAY="" pip3 list --outdated | awk '{print $1}' | tail -n +3 | DISPLAY="" xargs --I % sh -c 'pip3 install --upgrade --force-reinstall %'
+	DISPLAY="" pip3 list --outdated | awk '{print $1}' | tail -n +3 |
+		DISPLAY="" xargs --I % sh -c 'pip3 install --upgrade --force-reinstall %'
 }
 
 function reinstall_python() {
@@ -961,8 +946,6 @@ function get_cookies() {
 	cgurl --silent --output /dev/null --cookie-jar - "$url"
 }
 
-alias instagram_dl='instalooter user'
-
 # Ubuntu
 function toggle_wifi() {
 	wifi="$(nmcli r wifi | awk 'FNR = 2 {print $1}')"
@@ -1036,13 +1019,6 @@ function apply_to_all_files() {
 	for filename in *; do
 		eval "${command} ${filename}"
 	done
-}
-
-# Resizes image in-place
-function resize_image() {
-	local resize_arg=$1
-	local input=$2
-	mogrify -resize "$resize_arg" "$input"
 }
 
 function shellcheck_autofix() {
@@ -1148,7 +1124,7 @@ function copy_branch_name() {
 	echo "$branch" | tr -d "\n" | copy_to_clipboard
 }
 alias copy_last_commit_message='git log -1 --pretty=%B | tr -d "\n" | copy_to_clipboard'
-alias copy_current_directory='pwd | copy_to_clipboard'
+alias copy_current_path='pwd | copy_to_clipboard'
 
 function webm_to_mp4() {
 	local -r filename=$(filename_without_extension "$1")
@@ -1205,12 +1181,16 @@ function encrypt_pdf() {
 	printf "\n"
 	local -r user_password="$pdf_password"
 	local -r owner_password="$user_password"
-	qpdf --encrypt "$user_password" "$owner_password" 256 -- "$input_file" "$(filename_without_extension "$1")""_encrypted.pdf"
+	qpdf --encrypt "$user_password" "$owner_password" 256 -- \
+		"$input_file" \
+		"$(filename_without_extension "$1")""_encrypted.pdf"
 }
 
 function download_npm_tarball() {
 	local -r package_name="$1"
-	local -r package_url=$(curl --silent --show-error https://registry.npmjs.org/"$package_name"/ | jq --raw-output '.versions[."dist-tags".latest].dist.tarball')
+	local -r package_url=$(curl --silent --show-error \
+		https://registry.npmjs.org/"$package_name"/ |
+		jq --raw-output '.versions[."dist-tags".latest].dist.tarball')
 
 	wget "$package_url"
 }
@@ -1218,6 +1198,9 @@ function download_npm_tarball() {
 alias grhom='git reset --hard origin/master'
 alias grhh='git reset --hard HEAD~'
 alias gs2='git squash 2'
+alias gs3='git squash 3'
+alias gs4='git squash 4'
+alias gs5='git squash 5'
 
 function rebase_all() {
 	local repos=(orval svgo)
@@ -1266,25 +1249,16 @@ function merge_pdfs_2 {
 
 alias restart_tmux='tmux kill-server && tmux'
 
-function mov_to_mp4() {
-	local input_filename="$1"
-	local -r filename=$(filename_without_extension "$1")
-	local output_filename=$filename.mp4
-	local fps=60
-
-	ffmpeg -i "$input_filename" -loglevel error -fflags +genpts -r $fps "$output_filename" && echo "Successfully created $output_filename" || echo "Error converting $1 to $output_filename"
-}
-
 function find_process_on_port() {
 	local port="$1"
-	lsof -i tcp:"$port"
+	sudo lsof -i tcp:"$port"
 }
 
 function kill_process_on_port() {
 	local port="$1"
 
-	if lsof -t -i tcp:"$port"; then
-		lsof -t -i tcp:"$port" | xargs kill -9
+	if sudo lsof -t -i tcp:"$port"; then
+		sudo lsof -t -i tcp:"$port" | sudo xargs kill -9
 	else
 		printf "No process listening on port %s\n" "$port"
 	fi
@@ -1296,7 +1270,8 @@ function move_files_created_at_to_directory() {
 	local directory="$2"
 
 	set -x
-	find . -type f -newermt "$(date_plus_days "$creation_date" 1)" ! -newermt "$creation_date_plus_1_day" -exec mv "{}" "$directory" \;
+	find . -type f -newermt "$(date_plus_days "$creation_date" 1)" ! \
+		-newermt "$creation_date_plus_1_day" -exec mv "{}" "$directory" \;
 	set +x
 }
 
@@ -1395,7 +1370,8 @@ function set_sensitive_variable() {
 	HISTFILE=$current_histfile
 }
 
-# sudo will prompt for a password (if one is required by the security policy) and will not update the user's cached credentials.
+# sudo will prompt for a password (if one is required by the security policy)
+# and will not update the user's cached credentials
 function sudo_forget() {
 	sudo -k "$@"
 }
@@ -1441,6 +1417,7 @@ alias ftype='cmd.exe /c ftype'
 
 # Windows
 alias wsl='wsl.exe'
+alias adb='adb.exe'
 
 # Windows only for now
 function idea() {
@@ -1633,7 +1610,7 @@ function clone_website() {
 	httrack "$1"
 }
 
-alias start_all_projects='c ~/dotfiles ~/scripts ~/design-system ~/static-pages'
+alias start_all_projects='c ~/dotfiles ~/scripts ~/core ~/static-pages'
 
 function mkdircd() {
 	mkdir "$1"
@@ -1696,16 +1673,10 @@ function cal_restart() {
 	yarn workspace @calcom/prisma db-deploy
 }
 
-# Usage
-# clone Tuhinshubhra/ExtAnalysis
-alias clone='gh repo clone'
-
 # Windows
 alias gz='gzip'
 
 alias geolocate_ip='geoiplookup'
-
-alias updatecal='git stash && git pull origin main && yarn workspace @calcom/prisma db-deploy'
 
 function get_node_lts_version() {
 	curl -L resolve-node.now.sh/lts
@@ -1868,12 +1839,6 @@ function cd_windows_desktop() {
 	cd "/mnt/c/Users/""$WINDOWS_USERNAME""/Desktop/"
 }
 
-function show_image_geo_location() {
-	local -r image_path="$1"
-
-	"$HOME"/scripts/images/get_geo_coordinates.sh "$image_path"
-}
-
 # Converts input to human-readable form
 # Assumes the following input:
 # -rw-r--r-- 1 antoni staff 1288818 Dec 30 2022 ./file1.svg
@@ -1972,14 +1937,31 @@ function brew_remove_cache() {
 	rm -rf "$(brew --cache)"
 }
 
-function show_wifi_network_qr_code() {
-	printf "Enter network name:\n"
+function get_wifi_network_credentials() {
+	printf "Enter network name:\n" 1>&2
 	read -rs network_name
 
-	printf "Enter password:\n"
-	read -rs password
+	printf "Enter password:\n" 1>&2
+	read -rs network_password
+}
 
-	escaped_password=$(printf "%q" "$password")
+function generate_wpa_supplicant_conf() {
+	get_wifi_network_credentials
+
+	local -r wpa_supplicant_conf_template="# /etc/wpa_supplicant/wpa_supplicant.conf
+network={
+ssid=\"%s\"
+psk=\"%s\"
+}
+"
+
+	printf "$wpa_supplicant_conf_template" "$network_name" "$network_password"
+}
+
+function show_wifi_network_qr_code() {
+	get_wifi_network_credentials
+
+	escaped_password=$(printf "%q" "$network_password")
 	qrencode "WIFI:T:WPA;S:$network_name;P:$escaped_password;;" --type=ansiutf8
 
 	# To save file
@@ -2016,4 +1998,70 @@ function get_npm_package_tarball_url() {
 	local -r package_name="$1"
 	curl --silent https://registry.npmjs.org/$package_name |
 		jq --raw-output '.versions[."dist-tags".latest].dist.tarball'
+}
+
+function remove_interactive_fields_from_pdf() {
+	local -r filename=$(filename_without_extension "$1")
+
+	qpdf --decrypt "$filename".pdf "$filename""_no_interactive_fields.pdf"
+}
+
+function remove_password_from_pdf() {
+	qpdf -password="$password" -decrypt "$filename".pdf "$filename""_no_password.pdf"
+}
+
+function grep_emails() {
+	grep -Eiorh '([[:alnum:]_.-]+@[[:alnum:]_.-]+?\.[[:alpha:].]{2,6})' "$@" * | sort | uniq
+}
+
+function random_commit() {
+	touch $(rand)_$(rand).txt
+	git add .
+	gc "feat: Add "$(rand)
+}
+
+# Add an "alert" alias for long running commands. Use like so:
+# sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# Image and video download from social media
+alias youtube-dl='yt-dlp'
+alias ydl='youtube-dl --no-playlist --no-mtime'
+
+alias ydlbest='ydl --format best'
+alias ydlworst='ydl --format worst'
+alias ydlaudio='youtube-dl --format best --extract-audio --audio-format mp3'
+
+# Usage:
+# instagram_post_download "C4towJrvfSt"
+function instagram_post_download() {
+	local -r post_id="$1"
+	# Alternative: https://github.com/mikf/gallery-dl
+	instaloader \
+		--dirname-pattern "{date_utc:%Y}{date_utc:%M}{date_utc:%d}_post_{profile}" \
+		--filename-pattern="{date_utc:%Y}/{shortcode}" \
+		-- "-$post_id"
+}
+
+function ydlwl() {
+	pushd ~/Documents/watch || exit
+	ydl --ignore-errors https://www.youtube.com/playlist?list=PLxEBYuU7ONUfj68kBjXfHaAutKqtgAc4s
+	popd || exit
+}
+
+function download_static_video() {
+	local -r url="$1"
+	local -r filename=$(ydl "$url" --quiet --print filename --no-warnings --output '%(title)s.%(ext)s')
+
+	ydl "$url" --quiet --no-warnings \
+		--output '%(title)s.%(ext)s'
+
+	ffmpeg -hide_banner -loglevel error \
+		-y -i "$filename" \
+		-vf "scale=iw*sar:ih,setsar=1" -vframes 1 "$filename.png"
+	rm "$filename"
+}
+
+function clean_history() {
+	history | tr --squeeze-repeats ' ' | cut --delimiter=' ' --fields=2-
 }

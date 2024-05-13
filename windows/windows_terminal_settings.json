@@ -14,20 +14,18 @@
       "keys": "ctrl+c"
     },
     {
+      "command": "find",
+      "keys": "ctrl+shift+f"
+    },
+    {
       "command": {
         "action": "splitPane",
         "split": "auto",
         "splitMode": "duplicate"
       },
       "keys": "alt+shift+d"
-    },
-    {
-      "command": "find",
-      "keys": "ctrl+shift+f"
     }
   ],
-  "launchMode": "maximized",
-  "startupActions": "new-tab --tabColor #000000 -p \"PowerShell\" -d C:\\Users\\vivob;",
   "alwaysOnTop": false,
   "alwaysShowTabs": true,
   "confirmCloseAllTabs": false,
@@ -38,6 +36,7 @@
   "initialCols": 145,
   "initialPosition": "10,10",
   "initialRows": 40,
+  "launchMode": "maximized",
   "multiLinePasteWarning": false,
   "newTabMenu": [
     {
@@ -63,6 +62,20 @@
         "source": "CanonicalGroupLimited.Ubuntu22.04LTS_79rhkp1fndgsc"
       },
       {
+        "colorScheme": "Tango Dark",
+        "commandline": "wsl.exe",
+        "cursorShape": "filledBox",
+        "font": {
+          "face": "Cascadia Mono",
+          "size": 13.0
+        },
+        "guid": "{917467e3-9187-40b3-9a22-0b4ab5d6ce68}",
+        "hidden": false,
+        "icon": "https://assets.ubuntu.com/v1/49a1a858-favicon-32x32.png",
+        "name": "Ubuntu 22.04.3 LTS (no tmux)",
+        "tabTitle": "Ubuntu 22.04.3 LTS"
+      },
+      {
         "commandline": "%SystemRoot%\\System32\\cmd.exe",
         "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
         "hidden": false,
@@ -79,6 +92,18 @@
         "guid": "{2c80c433-9ea4-4608-bab3-68d0efe94e35}",
         "hidden": false,
         "name": "CentOS 7.9"
+      },
+      {
+        "guid": "{978cbc39-e980-5041-adb0-80583b12c78d}",
+        "hidden": false,
+        "name": "Developer Command Prompt for VS 2022 [Preview]",
+        "source": "Windows.Terminal.VisualStudio"
+      },
+      {
+        "guid": "{3af2262b-bc99-593c-9e59-8222fe532a30}",
+        "hidden": false,
+        "name": "Developer PowerShell for VS 2022 [Preview]",
+        "source": "Windows.Terminal.VisualStudio"
       }
     ]
   },
@@ -362,6 +387,7 @@
   ],
   "showTabsInTitlebar": true,
   "startOnUserLogin": true,
+  "startupActions": "new-tab --tabColor #000000 -p \"PowerShell\" -d C:\\Users\\vivob;",
   "theme": "dark",
   "themes": []
 }

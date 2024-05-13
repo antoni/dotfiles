@@ -22,11 +22,6 @@ export PATH=$PATH:/usr/local/go/bin
 # Android
 export PATH=$PATH:~/android-sdks/tools/:~/android-sdks/platform-tools/
 
-# CUDA
-# export PATH=$PATH:/usr/local/cuda/bin
-# export CUDA_HOME=/usr/local/cuda
-# export LD_LIBRARY_PATH=${CUDA_HOME}/lib64
-
 # CLion
 export PATH=$PATH:$HOME/clion/bin
 
@@ -60,3 +55,4 @@ export PATH="$PATH:$(npm --prefix "$HOME"/tmp get prefix)/bin:$GEM_HOME/bin"
 export NPM_GLOBAL_PACKAGES_DIRECTORY="$HOME"/.npm-global_packages
 
 export PATH="$NPM_GLOBAL_PACKAGES_DIRECTORY"/bin:$PATH
+export PATH=$HOME/.cargo/bin:$PATH

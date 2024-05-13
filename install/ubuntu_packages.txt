@@ -1,4 +1,0 @@
-exfat-fuse
-exfat-utils
-ubuntu-restricted-extras
-ffmpeg
