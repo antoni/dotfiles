@@ -130,6 +130,22 @@ bindkey '^M' my-accept-line
 # autojump
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
+# Collect executed commands statistics
+preexec () {
+  local -r last_command_full="$history[$HISTCMD]"
+
+ if echo $last_command_full | grep --quiet --ignore-case TOKEN; then
+   return
+ fi
+
+  local -r last_command_binary="${last_command_full%% *}"
+  printf '"%s","%s","%s"\n' \
+      "$last_command_binary" \
+      "$last_command_full" \
+      "$(date_iso_8601)" >> \
+      ~/usage_statistics.txt
+}
+
 # https://docs.brew.sh/Shell-Completion
 if type brew &>/dev/null; then
     FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
@@ -168,10 +184,6 @@ bindkey "^[e" end-of-line
 
 # GNU utils (GNU grep, etc.)
 PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 

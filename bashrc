@@ -94,14 +94,27 @@ if [ -x /usr/bin/dircolors ]; then
 	alias egrep='egrep --color=auto'
 fi
 
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
+preexec() { :; }
+preexec_invoke_exec() {
+	[ -n "$COMP_LINE" ] && return                     # do nothing if completing
+	[ "$BASH_COMMAND" = "$PROMPT_COMMAND" ] && return # don't cause a preexec for $PROMPT_COMMAND
+	local last_command_full=$(HISTTIMEFORMAT= history 1 | sed -e "s/^[ ]*[0-9]*[ ]*//")
+	if [ "$last_command_full" != "" ]; then
+		preexec "$this_command"
 
-# Add an "alert" alias for long running commands. Use like so:
-# sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+		if echo $last_command_full | grep --quiet --ignore-case TOKEN; then
+			return
+		fi
+
+		local -r last_command_binary="${last_command_full%% *}"
+		printf '"%s","%s","%s"\n' \
+			"$last_command_binary" \
+			"$last_command_full" \
+			"$(date_iso_8601)" >> \
+			~/usage_statistics.txt
+	fi
+}
+trap 'preexec_invoke_exec' DEBUG
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -135,11 +148,6 @@ shopt -s nocaseglob
 source "$HOME"/dotfiles/common_rc.sh
 
 [ -f "$HOME"/.fzf.bash ] && source "$HOME"/.fzf.bash
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
-. "$HOME/.cargo/env"
 
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 export PATH=$PATH:$JAVA_HOME/bin
