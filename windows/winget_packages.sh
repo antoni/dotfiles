@@ -96,8 +96,10 @@ MAY_HAVE=(
 	Zeit.Hyper
 	Rufus.Rufus
 	Hex-Rays.IDA.Free
+	Figma.Figma
 	AnyDeskSoftwareGmbH.AnyDesk
 	marha.VcXsrv
+	CHIRPSoftware.CHIRP-next
 	Yarn.Yarn
 	RaspberryPiFoundation.RaspberryPiImager
 	BraveSoftware.BraveBrowser

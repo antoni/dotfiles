@@ -1,0 +1,28 @@
+Windows Registry Editor Version 5.00
+
+; BlackViolet preset by AveYo, AccentPalette tip by /u/Egg-Tricky
+; amoled black with no transparency or active highlight for Taskbar, Start Menu, Action Center, Title Bar (10 & 11)
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Accent]
+"AccentColorMenu"=dword:1f000000      ; Window borders and titlebar
+"StartColorMenu"=dword:1f202020       ; Modals in UWP ex. Apply new refresh rate in 10
+"AccentPalette"=hex:\
+    bb,ee,ff,1f,\                     ; Links in action center and apps
+    6c,3a,98,1f,\                     ; Taskbar icons underline
+    8a,2c,dd,ff,\                     ; Start button hover
+    9d,5c,d6,1f,\                     ; Settings icons and links 
+    00,00,00,00,\                     ; Startmenu background / Active taskbar button - IF "EnableTransparency"=dword:00000000
+    00,00,00,00,\                     ; Taskbar front and Folders on start list background
+    00,00,00,00,\                     ; Taskbar background - IF "EnableTransparency"=dword:00000001
+    00,00,00,00                       ; Unused
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\DWM]
+"ColorPrevalence"=dword:00000001      ; Show accent color on Title bars and window borders [x]
+"AccentColor"=dword:1f000000          ; Active title bars - black unsupported in the UI but works with AccentPalette
+"AccentColorInactive"=dword:1f202020  ; Inactive title bars
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize]
+"ColorPrevalence"=dword:00000001      ; Show accent color on Start, taskab and action center [x]
+"AppsUseLightTheme"=dword:00000000    ; Apps mode [Dark]
+"SystemUsesLightTheme"=dword:00000000 ; Windows mode [Dark]
+"EnableTransparency"=dword:00000000   ; Transparency []
