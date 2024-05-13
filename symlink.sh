@@ -207,8 +207,6 @@ function main() {
 		sudo_exec ln -fs "$HOME"/scripts/st.sh /bin/st
 	}
 
-	# setup_scripts
-
 	# .ghci access
 	chmod g-w ~/.ghci
 

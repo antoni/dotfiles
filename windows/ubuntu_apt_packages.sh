@@ -9,6 +9,7 @@ APT_PACKAGES=(apache2
 	apt-cacher-ng
 	ubuntu-release-upgrader-core
 	vim
+	neovim
 	tmux
 	docker
 	htop
@@ -17,6 +18,7 @@ APT_PACKAGES=(apache2
 	parallel
 	graphviz
 	jq
+	ascii
 	qemu-utils
 	ffmpeg
 	maven
@@ -38,6 +40,7 @@ APT_PACKAGES=(apache2
 	exiftool
 	rand
 	wkhtmltopdf
+	cargo
 	librsvg2-bin
 	inkscape
 	advancecomp
@@ -61,7 +64,8 @@ APT_PACKAGES=(apache2
 	default-jdk scala
 	cmake
 	shellcheck
-	build-essential cmake pkg-config libicu-dev zlib1g-dev libcurl4-openssl-dev libssl-dev ruby-dev
+	build-essential cmake pkg-config libicu-dev zlib1g-dev libcurl4-openssl-dev
+	libssl-dev ruby-dev
 	ruby-full build-essential zlib1g-dev
 	libtool
 	haveged
@@ -70,7 +74,8 @@ APT_PACKAGES=(apache2
 	clang-tidy
 	webhttrack
 	g++ automake autoconf libtool cmake
-	libboost-dev libboost-system-dev libboost-filesystem-dev libboost-regex-dev libboost-program-options-dev libboost-iostreams-dev libboost-serialization-dev
+	libboost-dev libboost-system-dev libboost-filesystem-dev libboost-regex-dev
+	libboost-program-options-dev libboost-iostreams-dev libboost-serialization-dev
 	yamllint
 	tree
 	dos2unix
@@ -78,6 +83,10 @@ APT_PACKAGES=(apache2
 	virtualbox
 	virtualbox-dkms
 	dotnet-sdk-6.0
+	exfat-fuse
+	exfat-utils
+	ubuntu-restricted-extras
+	ffmpeg
 )
 
 # Install packages that require some custom configuration (like accepting the license etc.)
