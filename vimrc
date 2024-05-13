@@ -102,6 +102,9 @@ filetype indent on
 " Auto read when a file is changed from the outside
 set autoread
 
+" Markdown folding
+let g:markdown_folding = 1
+
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
 "Searching"{{{

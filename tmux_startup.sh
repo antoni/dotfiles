@@ -2,7 +2,7 @@
 
 source "$HOME"/dotfiles/utils.sh
 
-STARTUP_DIRECTORY="$HOME/design-system"
+STARTUP_DIRECTORY="$HOME/core"
 
 # Tasks that need to be done once, after Tmux starts.
 # Should be executed from a single pane

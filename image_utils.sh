@@ -19,3 +19,16 @@ function remove_exif_data() {
 	local filename=$1
 	exiftool -Adobe:All= -all:all= -EXIF= "$filename"
 }
+
+function show_image_geo_location() {
+	local -r image_path="$1"
+
+	"$HOME"/scripts/images/get_geo_coordinates.sh "$image_path"
+}
+
+# Resizes image in-place
+function resize_image() {
+	local resize_arg=$1
+	local input=$2
+	mogrify -resize "$resize_arg" "$input"
+}

@@ -9,6 +9,7 @@ source "$DOTFILES_DIR"/install/install_chrome.sh
 source "$DOTFILES_DIR"/mac/brew_install.sh
 source "$DOTFILES_DIR"/utils.sh
 source "$DOTFILES_DIR"/colors.sh
+source "$(dirname "$0")/pip_packages.sh" || exit 1
 
 # Install required packages
 PACKAGES=(suckless-tools xbindkeys clang vim rdesktop make sysstat
@@ -170,7 +171,7 @@ function install_oh_my_zsh() {
 }
 
 function install_zsh_plugins() {
-	echo "Installing zsh plugins"
+	printf "Installing zsh plugins\n"
 	# ZSH_CUSTOM=$HOME/zsh_customizations
 	# mkdir -p $ZSH_CUSTOM;
 	rm --recursive --force "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-yarn-completions && git clone https://github.com/chrisands/zsh-yarn-completions "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-yarn-completions
@@ -188,15 +189,6 @@ function setup_docker() {
 }
 
 function install_pip_packages() {
-	# PIP packages
-	PIP_PACKAGES=(pgcli mycli pyyaml awscli speedtest-cli pika autopep8 pep8
-		jupyter jupyterlab dl_coursera z3-solver matplotlib tensorflow numpy agda-kernel
-		instalooter pirate-get tensorflow opencv-python virtualenv numpy
-		matplotlib protobuf conda haruhi-dl google-api-python-client oauth2client progressbar2
-		tdmgr PyQt5 paho-mqtt PyQtWebEngine mvt xmldiff yq poetry beautysh
-		yt-dlp speedtest-cli pipupgrade shodan linode-cli mvt jupyter truffleHog
-	)
-
 	# Use xargs, so that PIP doesn't fail on a single error
 	# xargs -n 1 pip3 install --user <requirements.txt
 	# xargs -n 1 pip3 install --user <requirements.txt

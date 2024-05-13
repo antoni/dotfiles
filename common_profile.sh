@@ -6,8 +6,9 @@ export MANPAGER="less --ignore-case"
 WALLPAPER=~/Documents/wallpaper8.jpg
 
 # Needed by Python 3 and others
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
+# Use en_GB to force 24-hour time
+export LC_ALL=en_GB.UTF-8
+export LANG=en_GB.UTF-8
 
 export EDITOR="vim"
 # Overcome the madness: http://www.economyofeffort.com/2014/07/04/zsh/

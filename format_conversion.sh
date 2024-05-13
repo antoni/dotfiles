@@ -28,3 +28,15 @@ function webp_to_png() {
 function pdf_to_jpg() {
 	pdfimages -j "$1" page
 }
+
+function mov_to_mp4() {
+	local input_filename="$1"
+	local -r filename=$(filename_without_extension "$1")
+	local output_filename=$filename.mp4
+	local fps=60
+
+	ffmpeg -i "$input_filename" -loglevel error \
+		-fflags +genpts -r $fps "$output_filename" &&
+		echo "Successfully created $output_filename" ||
+		echo "Error converting $1 to $output_filename"
+}

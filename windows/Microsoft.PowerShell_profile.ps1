@@ -56,7 +56,7 @@ Set-Alias grep       findstr
 function phelp() {
     Get-Content $PROFILE | Select-String -Pattern "New-Alias|###" | Select-String -Pattern "Get-Content" -NotMatch
 }
-### eee // open explorer.exe in current directory
+### open // open explorer.exe in current directory
 function open {
     param(
         [string]$dir = (Get-Location).Path
@@ -187,7 +187,7 @@ Function Copy-CurrentDirectory () {
     Get-Location | Select -ExpandProperty Path | copy_to_clipboard
 }
 
-Set-Alias copy_current_directory Copy-CurrentDirectory
+Set-Alias copy_current_path Copy-CurrentDirectory
 
 function Copy-BranchName() {
     git branch --show-current | copy_to_clipboard
