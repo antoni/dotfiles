@@ -894,10 +894,11 @@ function mov2mp4() {
 }
 
 # Rename part of filename in each file in a directory
+# Usage:
+# rename_filename_part " " "_"
 function rename_filename_part() {
 	for filename in *; do
-		[ -f "$filename" ] || continue
-		mv "$filename" "${filename/$1/$2}"
+		mv "$filename" "${filename/$1/$2}" || return
 	done
 }
 
