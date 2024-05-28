@@ -2067,3 +2067,8 @@ function download_static_video() {
 function clean_history() {
 	history | tr --squeeze-repeats ' ' | cut --delimiter=' ' --fields=2-
 }
+
+function random_string {
+    local -r length="$1"
+    openssl rand -base64 "$length"
+}
