@@ -2,6 +2,8 @@
 " 1.  General settings {{{
 let os = substitute(system('uname'), "\n", "", "")
 
+let g:coc_disable_startup_warning = 1
+
 " Suppress 'No write since last change'
 set hidden
 set confirm
@@ -1044,3 +1046,4 @@ let g:tagbar_type_go = {
                         \ 'ctagsargs' : '-sort -silent'
                         \ }
 "}}}
+
