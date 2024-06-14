@@ -2,10 +2,12 @@
 
 source "$HOME"/dotfiles/utils.sh
 
-function command_exists() { type "$1" &>/dev/null; }
+function print_list_of_manual_tasks() {
+	printf "Remember to:\n☐ Import uBlock origin custom filters from ~/scripts/ublock_origin_custom_filters/"
+}
 
 # Returns internal application ID for given application name
-function app_id {
+function macos_application_id {
 	osascript -e "id of app \"$1\""
 }
 
@@ -71,23 +73,23 @@ function post_install() {
 	if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
 		# Change default application for given file type
 		if command_exists duti; then
-			duti -s "$(app_id 'PYM Player')" .avi all
-			duti -s "$(app_id 'PYM Player')" .mkv all
-			duti -s "$(app_id 'PYM Player')" .mp4 all
-			duti -s "$(app_id 'TextMate')" .json all
-			duti -s "$(app_id 'TextMate')" .txt all
-			duti -s "$(app_id 'TextMate')" .lua all
-			duti -s "$(app_id 'TeXShop')" .tex all
-			duti -s "$(app_id 'MacDown')" .md all
-			duti -s "$(app_id 'VLC')" .webm all
-			# duti -s "$(app_id 'LibreOffice')" .xls all
-			# duti -s "$(app_id 'LibreOffice')" .xlsx all
+			duti -s "$(macos_application_id 'PYM Player')" .avi all
+			duti -s "$(macos_application_id 'PYM Player')" .mkv all
+			duti -s "$(macos_application_id 'PYM Player')" .mp4 all
+			duti -s "$(macos_application_id 'TextMate')" .json all
+			duti -s "$(macos_application_id 'TextMate')" .txt all
+			duti -s "$(macos_application_id 'TextMate')" .lua all
+			duti -s "$(macos_application_id 'TeXShop')" .tex all
+			duti -s "$(macos_application_id 'MacDown')" .md all
+			duti -s "$(macos_application_id 'VLC')" .webm all
+			# duti -s "$(macos_application_id 'LibreOffice')" .xls all
+			# duti -s "$(macos_application_id 'LibreOffice')" .xlsx all
 			# Won't work (for any application), see ~/scripts/default_browser_chrome.sh
-			# duti -s `app_id "*"`      .html all;
-			duti -s "$(app_id 'TextMate')" .lat all
-			duti -s "$(app_id 'TextMate')" .input all
-			duti -s "$(app_id 'TextMate')" .ts all
-			duti -s "$(app_id 'Google Chrome')" .webp all
+			# duti -s `macos_application_id "*"`      .html all;
+			duti -s "$(macos_application_id 'TextMate')" .lat all
+			duti -s "$(macos_application_id 'TextMate')" .input all
+			duti -s "$(macos_application_id 'TextMate')" .ts all
+			duti -s "$(macos_application_id 'Google Chrome')" .webp all
 		else
 			printf "Error: you have to install 'duti' first\n"
 		fi
@@ -105,16 +107,23 @@ function post_install() {
 		symlink_vlc_rc
 	fi
 
+	# TODO: Move to Windows post_install script
 	if [[ -n "$IS_WSL" ]]; then
 		winget upgrade --all
 
+		# TODO: Use dotfiles dir env variable
 		powershell.exe -NoLogo -File ~/dotfiles/windows/RemoveShortcutsFromDesktop.ps1
 	fi
+
+	# TODO: Make it cross-OS
+	print_list_of_manual_tasks
 }
 
+# TODO: FIXME
 # Symlink TextMate
 # sudo ln -fs /Applications/TextMate.app/Contents/Resources/mate /usr/local/bin/mate
 
+# TODO: FIXME
 # Clear the Dock
 # dockutil --remove all
 

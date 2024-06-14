@@ -25,7 +25,7 @@ function upgrade_apt_packages() {
 	sudo apt autoremove --assume-yes
 }
 
-function update_all() {
+function upgrade_all() {
 	pushd ~ &>/dev/null || exit # to correctly update global NPM packages
 
 	# macOS
@@ -75,7 +75,10 @@ function update_all() {
 			taskkill.exe /F /IM Code.exe
 		fi
 
-		winget.exe upgrade --all --include-unknown
+		winget.exe upgrade --all \
+			--include-unknown \
+			--accept-package-agreements \
+			--accept-source-agreements
 	fi
 
 	echo "Upgrading oh-my-zsh..."
@@ -113,4 +116,4 @@ function update_all() {
 	printf "Upgraded all applications on %s\n" "$(date)" >>~/update_log.txt
 }
 
-update_all
+upgrade_all
