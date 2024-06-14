@@ -1751,8 +1751,8 @@ function print_color_bar() {
 	printf '\e[48;2;%sm%s\e[0m\n' "$(hex_to_rgb $hex_color)" "$bar_string"
 }
 
-function update_all() {
-	~/dotfiles/update_all.sh
+function upgrade_all() {
+	~/dotfiles/upgrade_all.sh
 }
 
 # Opens all files with given name in Visual Studio Code
@@ -2037,7 +2037,15 @@ alias ydlaudio='youtube-dl --format best --extract-audio --audio-format mp3'
 # Usage:
 # instagram_post_download "C4towJrvfSt"
 function instagram_post_download() {
-	local -r post_id="$1"
+	local post_id="$1"
+
+	if [[ $post_id == https* ]]; then
+		# Extract post ID from URL of form:
+		# https://www.instagram.com/p/XXXXXXX/
+		post_id="${post_id##https://www.instagram.com/p/}"
+		post_id="${post_id%/}"
+	fi
+
 	# Alternative: https://github.com/mikf/gallery-dl
 	instaloader \
 		--dirname-pattern "{date_utc:%Y}{date_utc:%M}{date_utc:%d}_post_{profile}" \
@@ -2069,6 +2077,10 @@ function clean_history() {
 }
 
 function random_string {
-    local -r length="$1"
-    openssl rand -base64 "$length"
+	local -r length="$1"
+	openssl rand -base64 "$length"
+}
+
+function remove_yarn_berry_cache() {
+	rm -rf ~/.yarn/berry/metadata/npm
 }
