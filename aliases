@@ -2084,3 +2084,5 @@ function random_string {
 function remove_yarn_berry_cache() {
 	rm -rf ~/.yarn/berry/metadata/npm
 }
+
+alias ybw='yarn build:watch'
