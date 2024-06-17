@@ -2089,6 +2089,5 @@ alias ybw='yarn build:watch'
 
 function winget_reinstall() {
 	local -r package_name="$1"
-	winget uninstall -e --id "$package_name"
-	winget install -e --id "$package_name"
+	~/dotfiles/windows/winget_reinstall.sh "$package_name"
 }
