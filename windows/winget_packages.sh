@@ -180,7 +180,6 @@ MAY_HAVE=(
 	Microsoft.AzureDataCLI
 	Microsoft.AzureStorageEmulator
 	Microsoft.PowerShell
-	KiCad.KiCad
 	Autodesk.EAGLE
 )
 
