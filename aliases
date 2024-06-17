@@ -2086,3 +2086,9 @@ function remove_yarn_berry_cache() {
 }
 
 alias ybw='yarn build:watch'
+
+function winget_reinstall() {
+	local -r package_name="$1"
+	winget uninstall -e --id "$package_name"
+	winget install -e --id "$package_name"
+}

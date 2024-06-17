@@ -17,7 +17,6 @@ setup_int_handler
 #  --accept-package-agreements \
 #  --exact --id chromium
 
-# WINGET_ALIAS="powershell.exe -NoLogo /c winget.exe"
 WINGET_ALIAS="winget.exe"
 WINGET_COMMAND_LIST="$WINGET_ALIAS list"
 # don't install an already installed package
