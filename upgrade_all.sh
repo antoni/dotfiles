@@ -5,7 +5,7 @@ set -e
 source "$HOME"/dotfiles/colors.sh
 source "$HOME"/dotfiles/utils.sh
 
-function update_pip_packages() {
+function upgrade_pip_packages() {
 	DISPLAY="" pip3 list --outdated | awk '{print $1}' | tail -n +3 |
 		DISPLAY="" xargs -I % sh -c 'pip3 install --upgrade %'
 }
@@ -26,6 +26,8 @@ function upgrade_apt_packages() {
 }
 
 function upgrade_all() {
+	export DEBIAN_FRONTEND=noninteractive
+
 	pushd ~ &>/dev/null || exit # to correctly update global NPM packages
 
 	# macOS
@@ -100,8 +102,8 @@ function upgrade_all() {
 
 	echo "Upgrading PIP packages..."
 	# Running it twice seems to resolve some dependency issues which PIP reports when running it just one time
-	update_pip_packages
-	update_pip_packages
+	upgrade_pip_packages
+	upgrade_pip_packages
 
 	popd &>/dev/null || exit
 
