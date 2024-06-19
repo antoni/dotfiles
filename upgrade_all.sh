@@ -6,7 +6,7 @@ source "$HOME"/dotfiles/colors.sh
 source "$HOME"/dotfiles/utils.sh
 
 function upgrade_pip_packages() {
-	DISPLAY="" pip3 list --outdated | awk '{print $1}' | tail -n +3 |
+	DISPLAY="" pip3 list --outdated | awk '{print $1}' | tail --lines=+3 |
 		DISPLAY="" xargs -I % sh -c 'pip3 install --upgrade %'
 }
 
@@ -65,8 +65,9 @@ function upgrade_all() {
 			set +Ee
 		}
 
-		echo "Updating WSL..."
-		wsl.exe --update
+		# TODO: Check if WSL need to be upgraded, show mesage if it needs to (requires elevation)
+		#echo "Updating WSL..."
+		#wsl.exe --update
 
 		# Run it first as it requires sudo
 		upgrade_apt_packages
@@ -77,10 +78,7 @@ function upgrade_all() {
 			taskkill.exe /F /IM Code.exe
 		fi
 
-		winget.exe upgrade --all \
-			--include-unknown \
-			--accept-package-agreements \
-			--accept-source-agreements
+		exec_powershell_script ~/dotfiles/windows/UpgradeWingetPackages.ps1
 	fi
 
 	echo "Upgrading oh-my-zsh..."
