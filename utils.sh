@@ -175,3 +175,22 @@ function update_xcode() {
 function clear_bash_history() {
 	cat /dev/null >~/.bash_history && history -c && exit
 }
+
+# Windows
+function exec_powershell_script() {
+	local script_path="$1"
+
+	powershell.exe -NoLogo -ExecutionPolicy Bypass -File "$script_path"
+}
+
+# Windows
+# Note: run it with 'wslpath -w'
+# Ex.:
+# powershell.exe -NoLogo -ExecutionPolicy Bypass -command
+# "$(wslpath -w ~/scripts/SomeScript.ps1) -param \"val\""
+function exec_powershell_command() {
+	local script_path="$1"
+
+	# powershell.exe -NoLogo -ExecutionPolicy Bypass -File "$script_path"
+	powershell.exe -NoLogo -ExecutionPolicy Bypass -Command "$script_path"
+}
