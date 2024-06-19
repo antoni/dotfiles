@@ -47,8 +47,6 @@ function upgrade_all() {
 	if test -f /proc/sys/kernel/osrelease &&
 		grep -q microsoft /proc/sys/kernel/osrelease; then
 
-		set -Ee
-
 		trap delete_desktop_symlinks ERR
 		trap delete_desktop_symlinks EXIT
 
@@ -61,8 +59,6 @@ function upgrade_all() {
 			# Delete all links on Desktop: all users
 			# [Environment]::GetFolderPath('CommonDesktopDirectory')
 			rm --recursive --force /mnt/c/Users/Public/{desktop,Desktop}/*.{lnk,url}
-
-			set +Ee
 		}
 
 		# TODO: Check if WSL need to be upgraded, show mesage if it needs to (requires elevation)
