@@ -52,7 +52,8 @@ $upgradeResult | ForEach-Object -Process {
 # view the list
 $upgrades | Format-Table
 
-# run through the list, compare with the skip list and execute the upgrade (could be done in the upper foreach as well)
+# run through the list, compare with the skip list and execute the upgrade
+# (could be done in the upper foreach as well)
 $upgrades | ForEach-Object -Process {
 
   if ($skipUpdate -contains $_.Id) {
@@ -64,9 +65,9 @@ $upgrades | ForEach-Object -Process {
   winget upgrade --include-unknown --accept-package-agreements --accept-source-agreements $_.Id
 
   # Run this because of this issue: https://github.com/microsoft/winget-cli/issues/2686
-  winget.exe upgrade --all `
-    --include-unknown `
-    --accept-package-agreements `
-    --accept-source-agreements
+  # winget.exe upgrade --all `
+  #   --include-unknown `
+  #   --accept-package-agreements `
+  #   --accept-source-agreements
 }
 
