@@ -71,7 +71,7 @@ MUST_HAVE=(
 
 CONFERENCE_SOFTWARE=(
 	SlackTechnologies.Slack
-	Microsoft.TeamsExploration
+	Microsoft.Teams
 	Zoom.Zoom
 	Cisco.WebexTeams
 )
