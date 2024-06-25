@@ -2072,3 +2072,7 @@ function winget_reinstall() {
 	local -r package_name="$1"
 	~/dotfiles/windows/winget_reinstall.sh "$package_name"
 }
+
+alias gcpc='git cherry-pick --continue'
+alias gcpa='git cherry-pick --abort'
+
