@@ -78,7 +78,7 @@ CONFERENCE_SOFTWARE=(
 
 GAMES=(
 	Valve.Steam
-	ElectronicArts.EADesktop
+	# ElectronicArts.EADesktop
 	EpicGames.EpicGamesLauncher
 	RiotGames.Valorant.EU
 )
