@@ -5,26 +5,6 @@ set -e
 source "$HOME"/dotfiles/colors.sh
 source "$HOME"/dotfiles/utils.sh
 
-function upgrade_pip_packages() {
-	DISPLAY="" pip3 list --outdated | awk '{print $1}' | tail --lines=+3 |
-		DISPLAY="" xargs -I % sh -c 'pip3 install --upgrade %'
-}
-
-function upgrade_apt_packages() {
-	echo "Upgrading apt packages..."
-
-	# https://askubuntu.com/a/1169203/342465
-	if [[ -n "$IS_WSL" ]]; then
-		sudo hwclock --hctosys
-	fi
-
-	# https://askubuntu.com/a/668859/342465
-	sudo apt-get update -qq -o=Dpkg::Use-Pty=0 &&
-		sudo apt-get upgrade -qq -o=Dpkg::Use-Pty=0 --assume-yes
-
-	sudo apt autoremove --assume-yes
-}
-
 function upgrade_all() {
 	export DEBIAN_FRONTEND=noninteractive
 
@@ -33,11 +13,11 @@ function upgrade_all() {
 	# macOS
 	if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
 		# This sometimes breaks Homebrew taps upgrade
-		# update_xcode
+		# upgrade_xcode
 
 		# echo "Updating macOS (if updates available)"
 		# softwareupdate -i -a
-		update_packages_mac
+		upgrade_packages_mac
 
 		# Do the rest without sudo
 		sudo --reset-timestamp
@@ -90,9 +70,7 @@ function upgrade_all() {
 	source "$HOME"/dotfiles/paths
 	rm --recursive --force "$NPM_GLOBAL_PACKAGES_DIRECTORY"
 
-	source "$HOME"/dotfiles/install/install_global_javascript_npm_packages.sh
-	install_global_javascript_npm_packages
-	npm install --no-fund --no-progress --silent --quiet npm
+	upgrade_npm_packages
 
 	echo "Upgrading PIP packages..."
 	# Running it twice seems to resolve some dependency issues which PIP reports when running it just one time
