@@ -1012,7 +1012,13 @@ function get_repo_name() {
 	basename -s .git "$(git config --get remote.origin.url)"
 }
 
-alias mk_iphone_dir='mkdir ~/Desktop/$(date +%Y%m%d)_iphone_photos'
+function mk_iphone_dir() {
+	if [[ -n "$IS_WSL" ]]; then
+		mkdir "/mnt/c/Users/$WINDOWS_USERNAME/Desktop/$(date +%Y%m%d)_iphone_photos"
+	else
+		mkdir "~/Desktop/$(date +%Y%m%d)_iphone_photos"
+	fi
+}
 
 # Example: apply_to_all_files 'resize_image 50%'
 function apply_to_all_files() {
@@ -2075,4 +2081,3 @@ function winget_reinstall() {
 
 alias gcpc='git cherry-pick --continue'
 alias gcpa='git cherry-pick --abort'
-
