@@ -60,8 +60,8 @@ APT_PACKAGES=(apache2
 	librecad
 	p7zip
 	libasound2
-	docker-compose
-	default-jdk scala
+	default-jdk
+	scala
 	cmake
 	shellcheck
 	build-essential cmake pkg-config libicu-dev zlib1g-dev libcurl4-openssl-dev
