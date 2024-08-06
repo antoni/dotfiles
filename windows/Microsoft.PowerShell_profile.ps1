@@ -261,3 +261,7 @@ function prompt {
     "$([char]27)[37m[PowerShell " + $( $PSVersionTable.PSVersion.ToString()) + '] ' + $(Get-Location) +
     $(if ($NestedPromptLevel -ge 1) { '>>' }) + '> '
 }
+
+function vihosts {
+    vim %SystemRoot%\system32\drivers\etc\hosts
+}

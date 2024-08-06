@@ -229,6 +229,9 @@ alias gca='git commit --amend'
 alias gacw='git add . && gcw'
 alias gcb='git checkout -b'
 
+alias gcpc='git cherry-pick --continue'
+alias gcpa='git cherry-pick --abort'
+
 # Set `indent` parameters according to Linux kernel Coding Style
 #alias indent='indent -kr -i8'
 alias indent='indent -i8 -nbad -bap -nbc -br -brs -c33 -cd33 -ncdb -ce -ci4 -cli0 -d0 -di1 -nfc1 -i4 -ip0 -l75 -lp -npcs -npsl -nsc -nsob'
@@ -2079,5 +2082,4 @@ function winget_reinstall() {
 	~/dotfiles/windows/winget_reinstall.sh "$package_name"
 }
 
-alias gcpc='git cherry-pick --continue'
-alias gcpa='git cherry-pick --abort'
+alias vihosts='sudo vim /etc/hosts'
