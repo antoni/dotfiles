@@ -2083,3 +2083,8 @@ function winget_reinstall() {
 }
 
 alias vihosts='sudo vim /etc/hosts'
+
+function git_remove_directory() {
+	local -r directory_name="$1"
+	git-filter-repo --path "$directory_name" --invert-paths
+}
