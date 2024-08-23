@@ -5,7 +5,7 @@ function install_swyh_rs() {
 	local -r install_directory="/mnt/c/Users/$WINDOWS_USERNAME"
 	local -r release_zip_file=swyh-rs-release.zip
 
-	printf "Downloading swyh-rs version %s\n" "$version_latest"
+	printf "Downloading swyh-rs version %s into %s\n" "$version_latest" "$install_directory"
 
 	pushd "$install_directory" &>/dev/null || return 1
 
@@ -16,4 +16,5 @@ function install_swyh_rs() {
 
 	popd &>/dev/null || return 1
 }
+
 install_swyh_rs
