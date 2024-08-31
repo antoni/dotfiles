@@ -32,3 +32,23 @@ function resize_image() {
 	local input=$2
 	mogrify -resize "$resize_arg" "$input"
 }
+
+function make_thumbnails() {
+	local -r thumbnails_folder_name="thumbnails"
+	rm -rf "$thumbnails_folder_name"
+	mkdir "$thumbnails_folder_name"
+
+	local -r file_extensions_in_directory=$(find . -type f |
+		awk -F. '!a[$NF]++{print $NF}' |
+		awk '{for(i=1;i<=NF;i++) printf "\047*.%s\047 ",$i}')
+
+	printf "File extensions found in the directory: %s\n" \
+		"$file_extensions_in_directory"
+
+	eval "mogrify -format jpg \
+		-path "$thumbnails_folder_name" \
+		-thumbnail 250x250 \
+		-format jpg "$file_extensions_in_directory""
+
+	printf "Thumbnails created in the %s directory\n" "$thumbnails_folder_name"
+}
