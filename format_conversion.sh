@@ -7,7 +7,9 @@ function jpg_to_png() {
 	convert "$input" -resize 200x200 -background white -gravity center -extent 200x200 $output
 }
 
-alias heic_to_jpg='magick mogrify -monitor -format jpg *.HEIC'
+# TODO: Move to 'magick' command (ImageMagick )
+# alias heic_to_jpg='magick mogrify -monitor -format jpg *.HEIC'
+alias heic_to_jpg='mogrify -monitor -format jpg *.HEIC'
 
 # Converts SVG to PNG
 # Usage svg_to_png input_image_path [output_image_height]
