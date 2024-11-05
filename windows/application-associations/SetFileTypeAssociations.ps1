@@ -1,9 +1,13 @@
+# Run:
+# powershell.exe -NoLogo -ExecutionPolicy Bypass -File .\SetFileTypeAssociations.ps1
+# Source SFTA
 . .\SFTA.ps1
 
 Write-Output "Setting default file associations"
 
 Set-FTA ChromeHTML .html
-Set-FTA ChromeHTML .pdf
+# Set-FTA for PDF won't work, see: https://github.com/DanysysTeam/PS-SFTA/issues/36#issuecomment-2295308671
+# Set-FTA ChromeHTML .pdf
 Set-FTA  IrfanView.png .png
 Set-FTA  IrfanView.jpg .jpg
 Set-FTA  IrfanView.gif .gif
