@@ -6,6 +6,7 @@
 set +x
 
 # Aliases and custom functions
+source "$HOME"/dotfiles/config.sh
 source "$HOME"/dotfiles/colors.sh
 source "$HOME"/dotfiles/utils.sh
 source "$HOME"/dotfiles/image_utils.sh
@@ -2087,4 +2088,10 @@ alias vihosts='sudo vim /etc/hosts'
 function git_remove_directory() {
 	local -r directory_name="$1"
 	git-filter-repo --path "$directory_name" --invert-paths
+}
+
+function reboot_volumio() {
+	# Enable SSH here:
+  # http://$IP_VOLUMIO/dev/
+  ssh volumio@"$IP_VOLUMIO" "sudo reboot now"
 }
