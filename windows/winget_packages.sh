@@ -64,7 +64,7 @@ CONFERENCE_SOFTWARE=(
 	SlackTechnologies.Slack
 	Microsoft.Teams
 	Zoom.Zoom
-	Cisco.WebexTeams
+	# Cisco.WebexTeams
 )
 
 GAMES=(
