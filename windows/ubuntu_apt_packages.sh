@@ -42,6 +42,7 @@ APT_PACKAGES=(apache2
 	wkhtmltopdf
 	cargo
 	librsvg2-bin
+	mysql-client
 	inkscape
 	advancecomp
 	geoip-bin
