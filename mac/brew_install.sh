@@ -232,6 +232,7 @@ BREW_CASK_PACKAGES_MUST_HAVE=(
 	microsoft-teams
 	iterm2-nightly
 	atom
+	chatgpt
 	google-cloud-sdk
 	spotify
 	alfred
