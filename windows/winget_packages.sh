@@ -126,7 +126,6 @@ MAY_HAVE=(
 	Microsoft.OfficeDeploymentTool
 	Grammarly.ForOffice
 	Inkscape.Inkscape
-	BinaryFortress.DisplayFusion
 	TorProject.TorBrowser
 	flux.flux
 	Postman.Postman
