@@ -2095,3 +2095,14 @@ function reboot_volumio() {
   # http://$IP_VOLUMIO/dev/
   ssh volumio@"$IP_VOLUMIO" "sudo reboot now"
 }
+
+function csv_to_json() {
+    local -r csv_filename="$1"
+    jq --raw-output --raw-input --slurp --null-input '
+      {"occurrences":
+              [inputs
+                   | . / "\n"
+                        | (.[] | select(length > 0) | . / ";") as $input
+                             | {"position": [$input[0], $input[1]], "taxo": {"espece": $input[2]}}]}
+                             ' <"$csv_filename"
+                         }
