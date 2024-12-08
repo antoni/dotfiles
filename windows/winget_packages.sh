@@ -81,6 +81,7 @@ MAY_HAVE=(
 	Ghisler.TotalCommander
 	Microsoft.WindowsTerminal
 	OpenJS.NodeJS.LTS
+	geeksoftwareGmbH.PDF24Creator
 	ByteDance.CapCut
 	Amazon.AWSCLI
 	Zeit.Hyper
