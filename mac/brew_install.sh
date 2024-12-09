@@ -553,6 +553,7 @@ function is_package_installed() {
 
 BREW_PACKAGES_KINGA=(
 	docker
+	tailscale
 )
 
 BREW_CASK_PACKAGES_KINGA=(
