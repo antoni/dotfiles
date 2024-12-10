@@ -49,7 +49,8 @@ APT_PACKAGES=(apache2
 	webp
 	subversion
 	tig
-	python3-pip
+	python3-
+	pipx
 	python-setuptools
 	python3-setuptools
 	python3-dev

@@ -81,6 +81,7 @@ MAY_HAVE=(
 	Ghisler.TotalCommander
 	Microsoft.WindowsTerminal
 	OpenJS.NodeJS.LTS
+	geeksoftwareGmbH.PDF24Creator
 	ByteDance.CapCut
 	Amazon.AWSCLI
 	Zeit.Hyper
@@ -126,7 +127,6 @@ MAY_HAVE=(
 	Microsoft.OfficeDeploymentTool
 	Grammarly.ForOffice
 	Inkscape.Inkscape
-	BinaryFortress.DisplayFusion
 	TorProject.TorBrowser
 	flux.flux
 	Postman.Postman

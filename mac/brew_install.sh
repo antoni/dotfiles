@@ -550,3 +550,15 @@ function is_package_installed() {
 	local package_name="$1"
 	brew list "$package_name"
 }
+
+BREW_PACKAGES_KINGA=(
+	docker
+	tailscale
+)
+
+BREW_CASK_PACKAGES_KINGA=(
+	bitwarden
+	caffeine
+	google-drive
+	firefox
+)
