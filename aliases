@@ -742,7 +742,7 @@ function pip_list() {
 
 function reinstall_pip_packages() {
 	DISPLAY="" pip3 list --outdated | awk '{print $1}' | tail -n +3 |
-		DISPLAY="" xargs --I % sh -c 'pip3 install --upgrade --force-reinstall %'
+		DISPLAY="" xargs -I % bash -c 'pip3 install --upgrade --force-reinstall "%"'
 }
 
 function reinstall_python() {
@@ -2092,6 +2092,17 @@ function git_remove_directory() {
 
 function reboot_volumio() {
 	# Enable SSH here:
-  # http://$IP_VOLUMIO/dev/
-  ssh volumio@"$IP_VOLUMIO" "sudo reboot now"
+	# http://$IP_VOLUMIO/dev/
+	ssh volumio@"$IP_VOLUMIO" "sudo reboot now"
+}
+
+function csv_to_json() {
+	local -r csv_filename="$1"
+	jq --raw-output --raw-input --slurp --null-input '
+      {"occurrences":
+              [inputs
+                   | . / "\n"
+                        | (.[] | select(length > 0) | . / ";") as $input
+                             | {"position": [$input[0], $input[1]], "taxo": {"espece": $input[2]}}]}
+                             ' <"$csv_filename"
 }
