@@ -561,4 +561,7 @@ BREW_CASK_PACKAGES_KINGA=(
 	caffeine
 	google-drive
 	firefox
+	iterm2
+	vlc
+	visual-studio-code
 )
