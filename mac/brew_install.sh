@@ -229,6 +229,7 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 BREW_CASK_PACKAGES_MUST_HAVE=(
 	google-chrome
 	chromium
+	duckduckgo
 	microsoft-teams
 	iterm2-nightly
 	atom
@@ -564,4 +565,5 @@ BREW_CASK_PACKAGES_KINGA=(
 	iterm2
 	vlc
 	visual-studio-code
+	duckduckgo
 )
