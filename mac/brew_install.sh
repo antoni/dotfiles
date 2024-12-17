@@ -455,11 +455,6 @@ function scala_post_install() {
 	echo '-J-Xmx2G' >>/usr/local/etc/sbtopts
 }
 
-function vim_you_complete_me_install() {
-	cd ~/.vim/bundle/YouCompleteMe || exit 1
-	./install.py --clang-completer
-}
-
 function install_cargo() {
 	brew install rust
 	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" </dev/null 2>/dev/null
@@ -496,8 +491,6 @@ function mac_install_misc() {
 
 	# Packages needed to install other packages later
 	brew install svn node
-
-	vim_you_complete_me_install
 
 	# brew install jmeter --with-plugins
 	brew install jmeter
