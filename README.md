@@ -9,6 +9,20 @@
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
+3. Install newer version of Bash
+
+```console
+echo >> /Users/a/.zprofile
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/a/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+brew install bash
+
+sudo sh -c 'echo /opt/homebrew/bin/bash >> /etc/shells'
+chsh -s /opt/homebrew/bin/bash
+bash
+```
+
 3. Get the dotfiles:
 
 ```console
