@@ -552,6 +552,9 @@ function is_package_installed() {
 	brew list "$package_name"
 }
 
+# Installation:
+# HOMEBREW_NO_AUTO_UPDATE=1 brew install "${BREW_PACKAGES_MUST_HAVE[*]}"
+# HOMEBREW_NO_AUTO_UPDATE=1 brew install --cask "${BREW_CASK_PACKAGES_MAY_HAVE[*]}"
 BREW_PACKAGES_KINGA=(
 	docker
 	tailscale
@@ -566,4 +569,5 @@ BREW_CASK_PACKAGES_KINGA=(
 	vlc
 	visual-studio-code
 	duckduckgo
+	alfred
 )
