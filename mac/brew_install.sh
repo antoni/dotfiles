@@ -490,7 +490,7 @@ function mac_install_misc() {
 	chsh -s /usr/local/bin/bash
 
 	brew install bash-completion
-	brew tap homebrew/homebrew-core
+	#brew tap homebrew/homebrew-core
 
 	# Brew service (launchd)
 	brew tap homebrew/services
