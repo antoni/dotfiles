@@ -553,8 +553,8 @@ function is_package_installed() {
 }
 
 # Installation:
-# HOMEBREW_NO_AUTO_UPDATE=1 brew install "${BREW_PACKAGES_MUST_HAVE[*]}"
-# HOMEBREW_NO_AUTO_UPDATE=1 brew install --cask "${BREW_CASK_PACKAGES_MAY_HAVE[*]}"
+# HOMEBREW_NO_AUTO_UPDATE=1 brew install "${BREW_PACKAGES_KINGA[*]}"
+# HOMEBREW_NO_AUTO_UPDATE=1 brew install --cask "${BREW_CASK_PACKAGES_KINGA[*]}"
 BREW_PACKAGES_KINGA=(
 	docker
 	tailscale
