@@ -18,9 +18,9 @@ ssh-keyscan github.com >> ~/.ssh/known_hosts; git clone git@github.com:antoni/do
 3.  Install:
 
 ```console
-    ~/dotfiles/mac/install.sh
-    ~/dotfiles/symlink.sh
-    ~/dotfiles/mac/defaults.sh # Configure the system
+~/dotfiles/mac/install.sh
+~/dotfiles/symlink.sh
+~/dotfiles/mac/defaults.sh # Configure the system
 ```
 
 ## Useful links
