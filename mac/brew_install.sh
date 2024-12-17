@@ -15,7 +15,6 @@ BREW_PACKAGES_MUST_HAVE=(
 	gpg
 	exiftool
 	shfmt
-	node@16
 	ngrok
 	zrok
 	yarn
