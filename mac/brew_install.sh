@@ -495,7 +495,7 @@ function mac_install_misc() {
 	brew tap homebrew/services
 
 	# Packages needed to install other packages later
-	brew install svn node@16
+	brew install svn node
 
 	vim_you_complete_me_install
 
