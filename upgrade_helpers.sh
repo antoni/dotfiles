@@ -47,8 +47,6 @@ function upgrade_packages_mac() {
 	brew upgrade
 	brew upgrade --cask --force
 	brew unlink node && brew link --overwrite node
-	# Temporary overwrite for Node 16
-	brew link --force --overwrite node@16
 }
 
 function upgrade_packages_fedora() {
