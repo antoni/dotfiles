@@ -2,20 +2,20 @@
 
 ## macOS
 
-1.  Make sure "Allow user to administer this computer" in System Preferences → Users & Groups is checked for the current user
-    Get Homebrew (it will install macOS Command Line Tools, like git, as well):
+1. Make sure "Allow user to administer this computer" in System Preferences → Users & Groups is checked for the current user
+2. Get Homebrew (it will install macOS Command Line Tools, like git, as well):
 
 ```console
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-2.  Get the dotfiles:
+3. Get the dotfiles:
 
 ```console
 ssh-keyscan github.com >> ~/.ssh/known_hosts; git clone git@github.com:antoni/dotfiles.git ~/dotfiles
 ```
 
-3.  Install:
+4. Install:
 
 ```console
 ~/dotfiles/mac/install.sh
@@ -52,7 +52,7 @@ ssh-keyscan github.com >> ~/.ssh/known_hosts; git clone git@github.com:antoni/do
 - [jq in place](https://stackoverflow.com/questions/36565295/jq-to-replace-text-directly-on-file-like-sed-i?noredirect=1&lq=1)
 - add to Windows install scripts:
 
-```
+```console
 rm -r /mnt/c/Users/vivob/wallpapers
 cp -r ~/dotfiles/wallpapers /mnt/c/Users/vivob/wallpapers
 ```
