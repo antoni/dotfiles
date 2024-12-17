@@ -12,7 +12,7 @@
 3. Get the dotfiles:
 
 ```console
-ssh-keyscan github.com >> ~/.ssh/known_hosts; git clone git@github.com:antoni/dotfiles.git ~/dotfiles
+git clone https://github.com/antoni/dotfiles.git ~/dotfiles
 ```
 
 4. Install:
