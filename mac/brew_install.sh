@@ -395,7 +395,7 @@ BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	owasp-zap
 	evernote
 	the-unarchiver
-	google-chrome-canary
+	google-chrome@canary
 	google-drive-file-stream
 	postman
 	keybase
