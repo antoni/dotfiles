@@ -273,7 +273,6 @@ BREW_CASK_PACKAGES_MAY_HAVE=(wine-stable
 	docker
 	iconjar
 	iina
-	growlnotify
 	electrum
 	http-toolkit
 	veracrypt
