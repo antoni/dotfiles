@@ -473,7 +473,7 @@ function mac_install_misc() {
 	# Bash
 	brew install bash
 	brew link bash
-	chsh -s /usr/local/bin/bash
+	chsh -s "$(which bash)"
 
 	brew install bash-completion
 	#brew tap homebrew/homebrew-core
