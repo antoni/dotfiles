@@ -294,11 +294,8 @@ BREW_CASK_PACKAGES_MAY_HAVE=(wine-stable
 	qlvideo
 	zulip
 	powershell
-	fugu
-	workplace-chat
 	rstudio
 	angry-ip-scanner
-	turbo-boost-switcher
 	paragon-ntfs
 	librecad
 	gog-galaxy
@@ -308,8 +305,6 @@ BREW_CASK_PACKAGES_MAY_HAVE=(wine-stable
 	cyberduck
 	mountain-duck
 	transmit
-	keyboard-maestro
-	moom
 	proxyman
 	raycast
 	jubler
