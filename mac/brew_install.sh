@@ -401,7 +401,6 @@ BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	keybase
 	spotifree
 	macs-fan-control
-	jwbargsten/misc/defbro
 	cleanmymac
 	flux
 	robo-3t
