@@ -57,6 +57,7 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	gron
 	mas
 	certbot
+	docker-compose
 	dialog
 	haskell-stack
 	ykman
@@ -269,7 +270,6 @@ BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	duckduckgo
 	xournal-plus-plus
 	docker
-	docker-compose
 	terraform
 	iconjar
 	iina
