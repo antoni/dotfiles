@@ -7,7 +7,6 @@ BREW_PACKAGES_MUST_HAVE=(
 	coreutils
 	findutils
 	openjdk
-	temurin
 	gnutls
 	grep
 	jd
@@ -236,6 +235,7 @@ BREW_CASK_PACKAGES_MUST_HAVE=(
 	chatgpt
 	google-cloud-sdk
 	spotify
+	temurin
 	alfred
 	mpv
 	whatsapp
@@ -324,31 +324,27 @@ BREW_CASK_PACKAGES_MAY_HAVE=(wine-stable
 	stretchly
 	emacs
 	dogecoin
-	sketchup
-	league-of-legends
+# TODO: Enable later
+	#sketchup
 	quarto
-	colour-contrast-analyser
-	namebench
 	little-snitch
 	imazing
 	discord
 	github
 	aquamacs
 	WebPQuickLook
-	robo-3t
 	studio-3t
-	grammarly
 	obs
 	qlstephen
 	starcraft
-	karabiner-elements
 	steam
 	macsvg
 	epic-games
 	imageoptim
 	balenaetcher
 	squeak
-	inkscape
+# TODO: Enable later
+	# inkscape
 	thunderbird
 	snagit
 	dropbox
@@ -357,41 +353,31 @@ BREW_CASK_PACKAGES_MAY_HAVE=(wine-stable
 	eclipse-jee
 	android-file-transfer
 	viber
-	gimp
-	visual-studio
+# TODO: Enable later
+	#gimp
 	koa11y
 	mysides
 	jetbrains-toolbox
-	private-eye
 	fontforge
-	opera-developer
 	macpass
 	transmission
 	transmission-remote-gui
-	kitematic
 	gpg-suite
 	db-browser-for-sqlite
 	tunnelblick
-	rowanj-gitx
-	xquartz
 	mounty
 	wireshark-chmodbpf
 	transmission
 	nordvpn
-	sequel-pro
-	safari-technology-preview
 	owasp-zap
-	evernote
 	the-unarchiver
 	google-chrome@canary
 	google-drive
 	postman
 	keybase
-	spotifree
 	macs-fan-control
 	cleanmymac
 	flux
-	robo-3t
 	gimp
 	kindle
 	google-earth-pro
