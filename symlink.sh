@@ -59,12 +59,30 @@ DOTFILES=(profile bashrc zshrc vimrc paths aliases bash_profile common_profile.s
 	jupyter newsboat)
 
 function mac_change_hostname() {
-	# Fully qualified hostname, for example myMac.domain.com
-	sudo scutil --set HostName "$1"
-	# Name usable on the local network, for example myMac.local.
-	sudo scutil --set LocalHostName "$1"
-	# User-friendly computer name you see in Finder, for example myMac.
-	sudo scutil --set ComputerName "$1"
+    if [ -z "$1" ]; then
+        echo "Error: Please provide a new hostname."
+        return 1
+    fi
+    
+    # Sanitize input to create a valid LocalHostName.
+    local sanitized_local_hostname=$(echo "$1" | tr -cd '[:alnum:]-')
+
+    # Ensure sanitized LocalHostName is not empty after cleaning
+    if [ -z "$sanitized_local_hostname" ]; then
+        echo "Error: The provided hostname contains invalid characters."
+        return 1
+    fi
+    
+    # Fully qualified hostname (e.g., myMac.domain.com)
+    sudo scutil --set HostName "$1"
+    
+    # Valid LocalHostName (e.g., myMac.local), sanitize to ensure it's valid.
+    sudo scutil --set LocalHostName "$sanitized_local_hostname"
+    
+    # User-friendly computer name (e.g., myMac)
+    sudo scutil --set ComputerName "$1"
+    
+	print_success_message "Hostname changed to: $1"
 }
 
 function gcc_symlink() {
@@ -90,12 +108,12 @@ function mac_symlink() {
 		ln -s "$to" "$from"
 	}
 
-	create_symlink_delete_before \
-		"$(brew --prefix llvm)/bin/clang-format" "/usr/local/bin/clang-format"
-	create_symlink_delete_before \
-		"$(brew --prefix llvm)/bin/clang-tidy" "/usr/local/bin/clang-tidy"
-	create_symlink_delete_before \
-		"$(brew --prefix llvm)/bin/clang-apply-replacements" "/usr/local/bin/clang-apply-replacements"
+	# create_symlink_delete_before \
+	# 	"$(brew --prefix llvm)/bin/clang-format" "/usr/local/bin/clang-format"
+	# create_symlink_delete_before \
+	# 	"$(brew --prefix llvm)/bin/clang-tidy" "/usr/local/bin/clang-tidy"
+	# create_symlink_delete_before \
+	# 	"$(brew --prefix llvm)/bin/clang-apply-replacements" "/usr/local/bin/clang-apply-replacements"
 
 	# iTerm2 config
 	ln -sf "${DOTFILES_DIR}"/mac/com.googlecode.iterm2.plist \
@@ -110,8 +128,8 @@ function mac_symlink() {
 	ln -fs "$DOTFILES_MAC_DIR"/karabiner ~/.config/
 
 	# TextMate
-	rm --recursive --force /usr/local/bin/mate
-	sudo ln -s /Applications/TextMate.app/Contents/MacOS/mate /usr/local/bin/mate
+	sudo rm --recursive --force /usr/local/bin/mate
+	sudo ln -fs /Applications/TextMate.app/Contents/MacOS/mate /usr/local/bin/mate
 
 	# VLC
 	mkdir -p ~/Library/Preferences/org.videolan.vlc
@@ -219,8 +237,8 @@ function main() {
 	# Eclipse
 	sudo_exec ln -fs ~"$HOME_DIR"/eclipse/eclipse /usr/local/bin/eclipse
 	# clang
-	sudo_exec ln -fs /usr/bin/clang-$CLANG_VERSION /usr/local/bin/clang
-	sudo_exec ln -fs /usr/bin/clang++-$CLANG_VERSION /usr/local/bin/clang++
+	# sudo_exec ln -fs /usr/bin/clang-$CLANG_VERSION /usr/local/bin/clang
+	# sudo_exec ln -fs /usr/bin/clang++-$CLANG_VERSION /usr/local/bin/clang++
 	# clang-format
 	# sudo_exec ln -fs /usr/bin/clang-format-$CLANG_FORMAT_VERSION /usr/local/bin/clang-format
 	# clang-modernize
@@ -326,9 +344,8 @@ function main() {
 			mac_change_hostname "$HOSTNAME"
 		else
 			sudo hostnamectl set-hostname "$HOSTNAME"
-		fi
-
 		print_success_message "Hostname changed to: $HOSTNAME"
+		fi
 	}
 
 	setup_hostname
