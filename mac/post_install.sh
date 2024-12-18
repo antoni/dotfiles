@@ -97,7 +97,7 @@ function post_install() {
 		disable_first_open_dialog "/Applications/PYM Player.app"
 
 		# Create link for 'jsc'
-		ln -fs /System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc /usr/local/bin
+		sudo ln -fs /System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc /usr/local/bin
 
 		# Create link for 'package.json' to avoid some errors and warnings
 		# when updating globally installed NPM packages
