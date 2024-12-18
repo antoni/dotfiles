@@ -321,7 +321,6 @@ BREW_CASK_PACKAGES_MAY_HAVE=(wine-stable
 	altair-graphql-client
 	bitwarden
 	adobe-creative-cloud
-	beaker-browser
 	stretchly
 	emacs
 	dogecoin
