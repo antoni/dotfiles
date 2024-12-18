@@ -383,7 +383,6 @@ BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	kitematic
 	gpg-suite
 	db-browser-for-sqlite
-	soda-player
 	tunnelblick
 	rowanj-gitx
 	xquartz
