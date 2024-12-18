@@ -48,7 +48,7 @@ function sudo_exec() {
 
 function sudo_keep_alive() {
 	# Ask for the administrator password upfront
-	sudo --prompt="" --validate
+	sudo --prompt="Enter sudo password: " --validate
 
 	# kill -0 PID exits with an exit code of 0 if the PID is of
 	# a running process, otherwise exits with an exit code of 1.
