@@ -102,7 +102,6 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	rtmpdump
 	blender
 	fop
-	sourcekitten
 	fontforge
 	xz
 	dnsmasq
@@ -119,7 +118,6 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	brightness
 	otx
 	sleepwatcher
-	youtube-dl
 	cocoapods
 	entr
 	ansible
@@ -167,7 +165,6 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	calc
 	groovy
 	dos2unix
-	geoip
 	sox
 	git-flow
 	iproute2mac
@@ -436,16 +433,12 @@ function mac_install_misc() {
 	chsh -s "$(which bash)"
 
 	brew install bash-completion
-	#brew tap homebrew/homebrew-core
-
+	
 	# Brew service (launchd)
 	brew tap homebrew/services
 
 	# Packages needed to install other packages later
-	brew install svn node
-
-	# brew install jmeter --with-plugins
-	brew install jmeter
+	brew install svn node npm
 
 	# Install Quick Look plugins https://github.com/sindresorhus/quick-look-plugins
 	brew install --cask qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv webpquicklook qlvideo
