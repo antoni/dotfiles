@@ -370,7 +370,6 @@ BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	android-file-transfer
 	viber
 	gimp
-	hopper-debugger-server
 	visual-studio
 	koa11y
 	mysides
