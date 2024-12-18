@@ -396,7 +396,7 @@ BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	evernote
 	the-unarchiver
 	google-chrome@canary
-	google-drive-file-stream
+	google-drive
 	postman
 	keybase
 	spotifree
