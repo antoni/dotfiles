@@ -315,15 +315,12 @@ BREW_CASK_PACKAGES_MAY_HAVE=(wine-stable
 	binance
 	image2icon
 	miro
-	abstract
 	figma
-	zeplin
 	clion
 	qcad
 	altair-graphql-client
 	bitwarden
 	adobe-creative-cloud
-	idafree
 	beaker-browser
 	stretchly
 	emacs
