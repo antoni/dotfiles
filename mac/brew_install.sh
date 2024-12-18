@@ -298,7 +298,6 @@ BREW_CASK_PACKAGES_MAY_HAVE=(wine-stable
 	angry-ip-scanner
 	paragon-ntfs
 	librecad
-	gog-galaxy
 	freecad
 	intel-haxm
 	hammerspoon
