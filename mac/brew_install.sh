@@ -258,7 +258,6 @@ BREW_CASK_PACKAGES_MUST_HAVE=(
 )
 
 BREW_CASK_PACKAGES_MAY_HAVE=(wine-stable
-	# TODO: Enable later
 	texshop
 	# VPNs
 	surfshark
@@ -322,8 +321,6 @@ BREW_CASK_PACKAGES_MAY_HAVE=(wine-stable
 	stretchly
 	emacs
 	dogecoin
-# TODO: Enable later
-	#sketchup
 	quarto
 	little-snitch
 	imazing
@@ -341,8 +338,7 @@ BREW_CASK_PACKAGES_MAY_HAVE=(wine-stable
 	imageoptim
 	balenaetcher
 	squeak
-# TODO: Enable later
-	# inkscape
+	inkscape
 	thunderbird
 	snagit
 	dropbox
@@ -351,8 +347,7 @@ BREW_CASK_PACKAGES_MAY_HAVE=(wine-stable
 	eclipse-jee
 	android-file-transfer
 	viber
-# TODO: Enable later
-	#gimp
+	gimp
 	koa11y
 	mysides
 	jetbrains-toolbox
