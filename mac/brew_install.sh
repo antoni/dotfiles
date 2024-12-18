@@ -93,7 +93,6 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	pipenv
 	starship
 	woff2
-	xhyve
 	act
 	hashcat
 	eth-p/software/bat-extras
@@ -126,7 +125,6 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	ansible
 	lastpass-cli
 	scala
-	libav
 	rlwrap
 	rdiff-backup
 	proxychains-ng
@@ -226,11 +224,13 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 )
 
 BREW_CASK_PACKAGES_MUST_HAVE=(
-	google-chrome
+        # TODO: Enable in the future?
+	# google-chrome
 	chromium
 	duckduckgo
+	iterm2
+	textmate
 	microsoft-teams
-	iterm2-nightly
 	atom
 	chatgpt
 	google-cloud-sdk
@@ -242,7 +242,6 @@ BREW_CASK_PACKAGES_MUST_HAVE=(
 	telegram
 	atext
 	visual-studio-code
-	visual-studio-code-insiders
 	signal
 	pym-player
 	mactex
@@ -256,7 +255,6 @@ BREW_CASK_PACKAGES_MUST_HAVE=(
 	tor-browser
 	openvpn-connect
 	tailscale
-	skitch
 )
 
 BREW_CASK_PACKAGES_MAY_HAVE=(wine-stable
@@ -378,26 +376,19 @@ BREW_CASK_PACKAGES_MAY_HAVE=(wine-stable
 	macs-fan-control
 	cleanmymac
 	flux
-	gimp
-	kindle
 	google-earth-pro
 	omnigraffle
 	skype
-	wkhtmltopdf
-	spectacle
 	mysqlworkbench
 	sublime-text
 	the-unarchiver
-	robo-3t
 	hyper
 	gitkraken
 	opera
 	webstorm
 	quip
 	karabiner-elements
-	spectacle
 	android-studio
-	android-sdk
 	pharo-project/pharo/pharo-launcher
 	vagrant
 	kicad
