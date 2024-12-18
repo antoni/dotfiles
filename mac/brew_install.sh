@@ -270,7 +270,6 @@ BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	duckduckgo
 	xournal-plus-plus
 	docker
-	terraform
 	iconjar
 	iina
 	growlnotify
