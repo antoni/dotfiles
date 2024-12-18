@@ -294,7 +294,6 @@ BREW_CASK_PACKAGES_MAY_HAVE=(wine-stable
 	qlvideo
 	zulip
 	powershell
-	recordit
 	fugu
 	workplace-chat
 	rstudio
