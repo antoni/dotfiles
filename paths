@@ -56,3 +56,9 @@ export NPM_GLOBAL_PACKAGES_DIRECTORY="$HOME"/.npm-global_packages
 
 export PATH="$NPM_GLOBAL_PACKAGES_DIRECTORY"/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
+
+# GNU coreutils
+# TODO: Add macOS guard
+export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+
