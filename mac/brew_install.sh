@@ -259,8 +259,9 @@ BREW_CASK_PACKAGES_MUST_HAVE=(
 	skitch
 )
 
-BREW_CASK_PACKAGES_MAY_HAVE=(texshop
-	wine-stable
+BREW_CASK_PACKAGES_MAY_HAVE=(wine-stable
+	# TODO: Enable later
+	texshop
 	# VPNs
 	surfshark
 	nordvpn
