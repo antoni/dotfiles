@@ -299,7 +299,6 @@ BREW_CASK_PACKAGES_MAY_HAVE=(wine-stable
 	paragon-ntfs
 	librecad
 	freecad
-	intel-haxm
 	hammerspoon
 	cyberduck
 	mountain-duck
