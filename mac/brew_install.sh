@@ -286,7 +286,6 @@ BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	azure-data-studio
 	ledger-live
 	caffeine
-	dashlane
 	lens
 	bitwarden
 	wickrme
