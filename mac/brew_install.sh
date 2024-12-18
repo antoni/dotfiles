@@ -373,7 +373,6 @@ BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	visual-studio
 	koa11y
 	mysides
-	xmind-zen
 	jetbrains-toolbox
 	private-eye
 	fontforge
