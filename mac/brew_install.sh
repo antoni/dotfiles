@@ -288,7 +288,6 @@ BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	caffeine
 	lens
 	bitwarden
-	wickrme
 	roblox
 	messenger
 	tableplus
