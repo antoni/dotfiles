@@ -431,7 +431,6 @@ BREW_CASK_PACKAGES_MAY_HAVE=(texshop
 	spectacle
 	android-studio
 	android-sdk
-	homebrew/cask-versions/firefox-developer-edition
 	pharo-project/pharo/pharo-launcher
 	vagrant
 	kicad
