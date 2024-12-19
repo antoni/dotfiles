@@ -46,31 +46,6 @@ git clone https://github.com/antoni/dotfiles.git ~/dotfiles
 - [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles)
 - https://github.com/CMCDragonkai/.dotfiles-windows
 
-## Ideas
-
-- config.sh: (1) Make it per machine, (2) Get username dynamically: powershell.exe -NoLogo '$env:UserName', (it takes time, return value should be stored somewhere)
-- macOS: replace sleepwatcher with [custom LaunchAgent](https://github.com/alb12-la/KBOS/tree/master)
-- custom winget repository
-- Move from Chrome to Chromium
-- custom Chromium build for Win (like: https://github.com/Hibbiki/chromium-win64)
-- Add Windows install script based on (fly.io)[https://fly.io/]: https://fly.io/install.ps1
-- Use this for Windows machine prov.?: https://github.com/ntdevlabs/tiny11builder
-- Windows: automatic custom keyboard layout
-- macOS: toggle Bluetooth on lid open/close
-- [save PowerToys config (Windows)](https://github.com/microsoft/PowerToys/issues/3004#issuecnt-638686691)
-- [copy some patterns from this repo?](https://github.com/ur0n2/dotfiles-for-windows)
-- Linux/WSL: [write Windows on USB](https://github.com/WoeUSB/WoeUSB-ng)
-- technology badges (a la [dolanmiu](https://github.com/dolanmiu))
-- sysctl.conf: https://stackoverflow.com/a/55763478/963881
-- windows minimize windows at startup
-- [jq in place](https://stackoverflow.com/questions/36565295/jq-to-replace-text-directly-on-file-like-sed-i?noredirect=1&lq=1)
-- add to Windows install scripts:
-
-```console
-rm -r /mnt/c/Users/vivob/wallpapers
-cp -r ~/dotfiles/wallpapers /mnt/c/Users/vivob/wallpapers
-```
-
 ## TODO
 
 * macOS: add Rosetta 2 instalation step:
