@@ -14,10 +14,8 @@ BREW_PACKAGES_MUST_HAVE=(
 	gpg
 	exiftool
 	shfmt
-	ngrok
 	zrok
 	yarn
-	zoom
 	kotlin
 	azure-cli
 	gh
@@ -45,7 +43,6 @@ BREW_PACKAGES_MUST_HAVE=(
 	ffmpeg
 	cmake
 	mc
-	rar
 )
 
 BREW_PACKAGES_MAY_HAVE=(apache-httpd
@@ -78,12 +75,10 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	php
 	mplayer
 	gitleaks
-	origin
 	pillow
 	emscripten
 	deno
 	graphviz
-	charles
 	gifski
 	binaryen
 	gifsicle
@@ -100,7 +95,6 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	wireguard-tools
 	esptool
 	rtmpdump
-	blender
 	fop
 	fontforge
 	xz
@@ -116,7 +110,6 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	rtorrent
 	newsboat
 	brightness
-	otx
 	sleepwatcher
 	cocoapods
 	entr
@@ -209,7 +202,6 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	erlang
 	vitorgalvao/tiny-scripts/cask-repair
 	amiaopensource/amiaos/decklinksdk
-	mitmproxy
 	ant
 	optipng
 	pngcrush
@@ -224,6 +216,9 @@ BREW_CASK_PACKAGES_MUST_HAVE=(
 	# TODO: Enable in the future?
 	# google-chrome
 	chromium
+	ngrok
+	zoom
+	rar
 	duckduckgo
 	iterm2
 	textmate
@@ -304,6 +299,10 @@ BREW_CASK_PACKAGES_MAY_HAVE=(wine-stable
 	obsidian
 	bettertouchtool
 	asana
+	origin
+	charles
+	blender
+	mitmproxy
 	elmedia-player
 	daisydisk
 	binance
@@ -510,16 +509,41 @@ BREW_CASK_PACKAGES_KINGA=(
 )
 
 function check_missing_brew_packages() {
+local package_set="$1"
+shift
 	local packages=("$@")
 	local missing_packages=()
+
+		printf "Checking %s\n" "$package_set"
 
 	for package in "${packages[@]}"; do
 		# Check if the package exists as a formula
 		if ! brew info --formula "$package" &>/dev/null; then
-			# Check if the package exists as a cask
+				missing_packages+=("$package")
+		fi
+	done
+
+	if [ ${#missing_packages[@]} -eq 0 ]; then
+		echo "All packages are available in Homebrew."
+	else
+		echo "The following packages are missing from Homebrew:"
+		for missing in "${missing_packages[@]}"; do
+			echo "- $missing"
+		done
+	fi
+}
+
+function check_missing_brew_cask_packages() {
+local package_set="$1"
+shift
+	local packages=("$@")
+	local missing_packages=()
+
+		printf "Checking %s\n" "$package_set"
+
+	for package in "${packages[@]}"; do
 			if ! brew info --cask "$package" &>/dev/null; then
 				missing_packages+=("$package")
-			fi
 		fi
 	done
 
@@ -534,8 +558,8 @@ function check_missing_brew_packages() {
 }
 
 function check_missing_packages() {
-	check_missing_brew_packages "${BREW_PACKAGES_MUST_HAVE[@]}"
-	check_missing_brew_packages "${BREW_CASK_PACKAGES_MUST_HAVE[@]}"
-	check_missing_brew_packages "${BREW_PACKAGES_MAY_HAVE[@]}"
-	check_missing_brew_packages "${BREW_CASK_PACKAGES_MAY_HAVE[@]}"
+	check_missing_brew_packages "BREW_PACKAGES_MUST_HAVE" "${BREW_PACKAGES_MUST_HAVE[@]}"
+	check_missing_brew_cask_packages "BREW_CASK_PACKAGES_MUST_HAVE" "${BREW_CASK_PACKAGES_MUST_HAVE[@]}"
+	check_missing_brew_packages "BREW_PACKAGES_MAY_HAVE" "${BREW_PACKAGES_MAY_HAVE[@]}"
+	check_missing_brew_cask_packages "BREW_CASK_PACKAGES_MAY_HAVE" "${BREW_CASK_PACKAGES_MAY_HAVE[@]}"
 }
