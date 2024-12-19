@@ -258,6 +258,7 @@ BREW_CASK_PACKAGES_MAY_HAVE=(wine-stable
 	microsoft-remote-desktop
 	duckduckgo
 	xournal-plus-plus
+	rustdesk
 	docker
 	iconjar
 	iina
