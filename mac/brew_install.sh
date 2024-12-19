@@ -213,8 +213,7 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 )
 
 BREW_CASK_PACKAGES_MUST_HAVE=(
-	# TODO: Enable in the future?
-	# google-chrome
+	google-chrome
 	chromium
 	ngrok
 	zoom
