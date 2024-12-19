@@ -221,7 +221,7 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 )
 
 BREW_CASK_PACKAGES_MUST_HAVE=(
-        # TODO: Enable in the future?
+	# TODO: Enable in the future?
 	# google-chrome
 	chromium
 	duckduckgo
@@ -433,7 +433,7 @@ function mac_install_misc() {
 	chsh -s "$(which bash)"
 
 	brew install bash-completion
-	
+
 	# Brew service (launchd)
 	brew tap homebrew/services
 
@@ -508,3 +508,34 @@ BREW_CASK_PACKAGES_KINGA=(
 	duckduckgo
 	alfred
 )
+
+function check_missing_brew_packages() {
+	local packages=("$@")
+	local missing_packages=()
+
+	for package in "${packages[@]}"; do
+		# Check if the package exists as a formula
+		if ! brew info --formula "$package" &>/dev/null; then
+			# Check if the package exists as a cask
+			if ! brew info --cask "$package" &>/dev/null; then
+				missing_packages+=("$package")
+			fi
+		fi
+	done
+
+	if [ ${#missing_packages[@]} -eq 0 ]; then
+		echo "All packages are available in Homebrew."
+	else
+		echo "The following packages are missing from Homebrew:"
+		for missing in "${missing_packages[@]}"; do
+			echo "- $missing"
+		done
+	fi
+}
+
+function check_missing_packages() {
+	check_missing_brew_packages "${BREW_PACKAGES_MUST_HAVE[@]}"
+	check_missing_brew_packages "${BREW_CASK_PACKAGES_MUST_HAVE[@]}"
+	check_missing_brew_packages "${BREW_PACKAGES_MAY_HAVE[@]}"
+	check_missing_brew_packages "${BREW_CASK_PACKAGES_MAY_HAVE[@]}"
+}
