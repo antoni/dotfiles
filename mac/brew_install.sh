@@ -254,10 +254,10 @@ BREW_CASK_PACKAGES_MAY_HAVE=(wine-stable
 	surfshark
 	nordvpn
 	mullvadvpn
-	anydesk
 	microsoft-remote-desktop
 	duckduckgo
 	xournal-plus-plus
+	teamviewer
 	rustdesk
 	docker
 	iconjar
@@ -506,20 +506,22 @@ BREW_CASK_PACKAGES_KINGA=(
 	visual-studio-code
 	duckduckgo
 	alfred
+	teamviewer
+	rustdesk
 )
 
 function check_missing_brew_packages() {
-local package_set="$1"
-shift
+	local package_set="$1"
+	shift
 	local packages=("$@")
 	local missing_packages=()
 
-		printf "Checking %s\n" "$package_set"
+	printf "Checking %s\n" "$package_set"
 
 	for package in "${packages[@]}"; do
 		# Check if the package exists as a formula
 		if ! brew info --formula "$package" &>/dev/null; then
-				missing_packages+=("$package")
+			missing_packages+=("$package")
 		fi
 	done
 
@@ -534,16 +536,16 @@ shift
 }
 
 function check_missing_brew_cask_packages() {
-local package_set="$1"
-shift
+	local package_set="$1"
+	shift
 	local packages=("$@")
 	local missing_packages=()
 
-		printf "Checking %s\n" "$package_set"
+	printf "Checking %s\n" "$package_set"
 
 	for package in "${packages[@]}"; do
-			if ! brew info --cask "$package" &>/dev/null; then
-				missing_packages+=("$package")
+		if ! brew info --cask "$package" &>/dev/null; then
+			missing_packages+=("$package")
 		fi
 	done
 
