@@ -71,6 +71,14 @@ rm -r /mnt/c/Users/vivob/wallpapers
 cp -r ~/dotfiles/wallpapers /mnt/c/Users/vivob/wallpapers
 ```
 
+## TODO
+
+* macOS: add Rosetta 2 instalation step:
+
+```console
+sudo softwareupdate --install-rosetta --agree-to-license
+```
+
 ## ChatGPT prompts
 
 1.
