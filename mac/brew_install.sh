@@ -3,11 +3,12 @@
 BREW_PACKAGES_MUST_HAVE=(
 	gawk
 	gnu-sed
+	gnu-indent
 	gnu-tar
 	coreutils
 	findutils
-	openjdk
 	gnutls
+	openjdk
 	grep
 	jd
 	ascii
