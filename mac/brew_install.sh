@@ -83,7 +83,6 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	gifski
 	binaryen
 	gifsicle
-	corsixth
 	git-gui
 	carthage
 	pipenv

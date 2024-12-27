@@ -2,7 +2,7 @@
 
 source "$HOME"/dotfiles/utils.sh
 
-DOTFILES_MAC_DIR=$DOTFILES_DIR/mac
+DOTFILES_MAC_DIR=$HOME/dotfiles/mac
 
 function int_signal_handler() {
 	printf "\nQuitting... You will have to do cleanup manually\n"
@@ -120,7 +120,7 @@ function mac_symlink() {
 		~/Library/Preferences/com.googlecode.iterm2.plist
 
 	# Transmission
-	"$DOTFILES_MAC_DIR"/transmission.sh
+	"$HOME/dotfiles/mac/transmission.sh"
 
 	# ln -sf org.m0k.transmission.plist ~/Library/Preferences/
 
@@ -134,7 +134,7 @@ function mac_symlink() {
 	# VLC
 	mkdir -p ~/Library/Preferences/org.videolan.vlc
 	rm --recursive --force ~/Library/Preferences/org.videolan.vlc/vlcrc
-	cp --recursive --force "$DOTFILES_DIR"/vlcrc ~/Library/Preferences/org.videolan.vlc/vlcrc
+	cp --recursive --force "$HOME/dotfiles/vlcrc" ~/Library/Preferences/org.videolan.vlc/vlcrc
 	# echo "NOTE: When updating preferences, VLC doesn't modify the existing vlcrc, instead it deletes the last and creates a new one. Instead of symlinking, the ~/dotfiles/vlcrc has been copied"
 
 	[ -d "$HOME/scripts" ] && ln -fs ~/scripts/Chrome\ Debugger.app /Applications/

@@ -5,10 +5,10 @@ export HOME_DIR=$HOME
 # TODO: Rename
 export DOTFILES_DIR=$HOME_DIR/dotfiles
 
-source "$DOTFILES_DIR"/paths
-source "$DOTFILES_DIR"/colors.sh
-source "$DOTFILES_DIR"/format_conversion.sh
-source "$DOTFILES_DIR"/upgrade_helpers.sh
+source "$HOME/dotfiles/paths"
+source "$HOME/dotfiles/colors.sh"
+source "$HOME/dotfiles/format_conversion.sh"
+source "$HOME/dotfiles/upgrade_helpers.sh"
 
 UNAME_OUTPUT="$(uname)"
 export UNAME_OUTPUT

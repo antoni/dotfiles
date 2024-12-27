@@ -20,15 +20,15 @@ brew install automake fdk-aac git lame libass libtool libvorbis libvpx opus \
 # if you ever want to update or customize FFmpeg at any point
 # just delete the binary (/usr/local/bin/ffmpeg in this case)
 # and start again from this step.
-git clone https://git.ffmpeg.org/ffmpeg.git ffmpeg
-cd ffmpeg || exit
+git clone https://git.ffmpeg.org/ffmpeg.git $HOME/tmp/ffmpeg
+cd $HOME/tmp/ffmpeg || exit
 
 # at this point, ChromaPrint has to be installed, else this step will fail.
 # sample compilation command. Customize this to your needs
 # the flags are different from the brew version LDO. RTFM.
 ./configure --prefix=/usr/local --enable-gpl --enable-nonfree --enable-libass \
 	--enable-libfdk-aac --enable-libfreetype --enable-libmp3lame \
-	-enable-libtheora --enable-libvorbis --enable-libvpx --enable-libx264 --enable-libx265 \
+	--enable-libvorbis --enable-libvpx --enable-libx264 --enable-libx265 \
 	--enable-libopus --enable-libxvid --enable-chromaprint --enable-decklink --samples=fate-suite/
 
 # the actual install once you're done configuring
