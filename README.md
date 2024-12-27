@@ -50,14 +50,6 @@ tmux attach -t base || tmux new -s base
 - [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles)
 - https://github.com/CMCDragonkai/.dotfiles-windows
 
-## TODO
-
-* macOS: add Rosetta 2 instalation step:
-
-```console
-sudo softwareupdate --install-rosetta --agree-to-license
-```
-
 ## ChatGPT prompts
 
 1.
