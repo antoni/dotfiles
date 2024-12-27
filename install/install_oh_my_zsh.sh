@@ -1,18 +1,6 @@
 #!/usr/bin/env bash
 
-# set -e
-
 source "$HOME/dotfiles/utils.sh"
-
-function install_oh_my_zsh() {
-    printf "Installing oh-my-zsh\n"
-	rm --recursive --force ~/.oh-my-zsh
-
-	# sudo sed s/required/sufficient/g -i /etc/pam.d/chsh
-	chsh -s "$(which zsh)" "$(whoami)"
-
-   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" ""  --unattended
-}
 
 function install_zsh_plugins() {
 	printf "Installing zsh plugins\n"
@@ -30,6 +18,15 @@ ln -sf ~/dotfiles/zprofile ~/.zprofile
 	ln -fs "$HOME_DIR"/dotfiles/antoni.zsh-theme "$HOME_DIR"/.oh-my-zsh/themes
 }
 
-install_oh_my_zsh
+function install_oh_my_zsh() {
+    printf "Installing oh-my-zsh\n"
+	rm --recursive --force ~/.oh-my-zsh
+
+	# sudo sed s/required/sufficient/g -i /etc/pam.d/chsh
+	chsh -s "$(which zsh)" "$(whoami)"
+
+   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" ""  --unattended
+
 install_zsh_plugins
 symlink_zsh_files
+}
