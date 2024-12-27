@@ -24,12 +24,12 @@ function install_zsh_plugins() {
 	rm --recursive --force "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting
 }
 
-install_oh_my_zsh
-install_zsh_plugins
 function symlink_zsh_files() {
 ln -sf ~/dotfiles/zshrc ~/.zshrc
 ln -sf ~/dotfiles/zprofile ~/.zprofile
 	ln -fs "$HOME_DIR"/dotfiles/antoni.zsh-theme "$HOME_DIR"/.oh-my-zsh/themes
 }
 
+install_oh_my_zsh
+install_zsh_plugins
 symlink_zsh_files
