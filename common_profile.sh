@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# Aliases and custom functions
+source "$HOME"/dotfiles/config.sh
+source "$HOME"/dotfiles/colors.sh
+source "$HOME"/dotfiles/utils.sh
+source "$HOME"/.aliases
+
 export MANPAGER="less --ignore-case"
 
 # Wallpaper
@@ -120,3 +126,7 @@ PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
 PATH=$PATH:$ANDROID_HOME/bin
 
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+
+if [ -e "$HOME/.cargo/env" ]; then
+  . "$HOME/.cargo/env"
+fi

@@ -53,7 +53,7 @@ SWEET_HOME_VERSION=$(echo "$HOME"/SweetHome3D-* | awk --field-separator'-' '{pri
 echo "SweetHome3D       version symlinked:   " "$SWEET_HOME_VERSION"
 printf "${colors[Reset_Color]}"
 
-DOTFILES=(profile bashrc zshrc vimrc paths aliases bash_profile common_profile.sh tmux.conf
+DOTFILES=(profile bashrc zshrc vimrc paths aliases zprofile bash_profile common_profile.sh tmux.conf
 	gitconfig gitignore gitattributes ghci gvimrc hgrc lldbinit gdbinit xbindkeysrc
 	fzf.sh psqlrc colordiffrc emacs inputrc agda sudo_as_admin_successful LESS_TERMCAP
 	jupyter newsboat)
