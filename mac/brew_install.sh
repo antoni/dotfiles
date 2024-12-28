@@ -47,6 +47,7 @@ BREW_PACKAGES_MUST_HAVE=(
 )
 
 BREW_PACKAGES_MAY_HAVE=(apache-httpd
+	colima
 	certbot
 	i2p
 	i2pd
@@ -278,6 +279,7 @@ BREW_CASK_PACKAGES_MAY_HAVE=(wine-stable
 	lens
 	bitwarden
 	roblox
+	mullvad-browser
 	messenger
 	tableplus
 	qlvideo
