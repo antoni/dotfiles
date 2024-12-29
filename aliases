@@ -2101,9 +2101,42 @@ function csv_to_json() {
 	jq --raw-output --raw-input --slurp --null-input '
       {"occurrences":
               [inputs
-                   | . / "\n"
-                        | (.[] | select(length > 0) | . / ";") as $input
-                             | {"position": [$input[0], $input[1]], "taxo": {"espece": $input[2]}}]}
-                             ' <"$csv_filename"
+                | . / "\n"
+                | (.[] | select(length > 0) | . / ";") as $input
+                | {"position": [$input[0], $input[1]], "taxo": {"espece": $input[2]}}]}
+                ' <"$csv_filename"
 }
 
+function edit_pdf() {
+	CONTAINER_NAME="stirling-pdf"
+
+	# Check if the container exists
+	if docker ps -a --filter "name=$CONTAINER_NAME" --format '{{.Names}}' | grep -q "^$CONTAINER_NAME$"; then
+		# Check if the container is running
+		if docker ps --filter "name=$CONTAINER_NAME" --format '{{.Names}}' | grep -q "^$CONTAINER_NAME$"; then
+			echo "Container $CONTAINER_NAME is already running, stopping"
+			docker stop "$CONTAINER_NAME" >/dev/null
+		fi
+		echo "Starting existing container: $CONTAINER_NAME"
+		docker start "$CONTAINER_NAME" >/dev/null
+	else
+		echo "Container $CONTAINER_NAME does not exist, running for the first time"
+
+		docker run --detach \
+			--publish 8080:8080 \
+			--volume ~/tmp/stirling-pdf-web-editor/trainingData:/usr/share/tessdata \
+			--volume ~/dotfiles/stirling-pdf-configs:/configs \
+			--volume ~/tmp/stirling-pdf-web-editor/logs:/logs \
+			--env DOCKER_ENABLE_SECURITY=false \
+			--env INSTALL_BOOK_AND_ADVANCED_HTML_OPS=false \
+			--env LANGS=en_US,pl_PL \
+			--name "$CONTAINER_NAME" \
+			stirlingtools/stirling-pdf:latest
+	fi
+
+	echo "Waiting for Stirling PDF startup"
+
+	bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:8080)" != "200" ]]; do sleep 5; done'
+
+	echo "Open http://localhost:8080"
+}
