@@ -12,6 +12,7 @@ APT_PACKAGES=(apache2
 	neovim
 	tmux
 	docker
+	btop
 	htop
 	nginx
 	figlet
