@@ -37,7 +37,7 @@ MUST_HAVE=(
 	Notepad++.Notepad++
 	Oracle.JavaRuntimeEnvironment
 	IrfanSkiljan.IrfanView
-	gsass1.NTop
+	Espanso.Espanso
 	7zip.7zip
 	mcmilk.7zip-zstd
 	Telegram.TelegramDesktop
@@ -90,6 +90,7 @@ MAY_HAVE=(
 	Figma.Figma
 	AnyDeskSoftwareGmbH.AnyDesk
 	marha.VcXsrv
+	gsass1.NTop
 	CHIRPSoftware.CHIRP-next
 	Yarn.Yarn
 	RaspberryPiFoundation.RaspberryPiImager
@@ -150,7 +151,6 @@ MAY_HAVE=(
 	GIMP.GIMP
 	SublimeHQ.SublimeText.3
 	Alacritty.Alacritty
-	FedericoTerzi.espanso
 	Mirantis.Lens
 	Telerik.Fiddler.Everywhere
 	Hashicorp.Vagrant

@@ -52,6 +52,7 @@ Set-Alias set        set-variable
 Set-Alias type       get-content
 Set-Alias grep       findstr
 Set-Alias mc 'C:\Program Files (x86)\Midnight Commander\mc.exe'
+Set-Alias which       get-command
 
 ### phelp // outputs your profiles aliases and functions
 function phelp() {

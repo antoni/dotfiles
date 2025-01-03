@@ -220,6 +220,7 @@ BREW_CASK_PACKAGES_MUST_HAVE=(
 	zoom
 	rar
 	duckduckgo
+	espanso
 	iterm2
 	textmate
 	microsoft-teams
@@ -271,7 +272,6 @@ BREW_CASK_PACKAGES_MAY_HAVE=(wine-stable
 	brave-browser
 	anaconda
 	opera-gx
-	espanso
 	disk-drill
 	azure-data-studio
 	ledger-live
@@ -510,6 +510,7 @@ BREW_CASK_PACKAGES_KINGA=(
 	alfred
 	teamviewer
 	rustdesk
+	espanso
 )
 
 function check_missing_brew_packages() {
