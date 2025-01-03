@@ -54,6 +54,12 @@ Set-Alias grep       findstr
 Set-Alias mc 'C:\Program Files (x86)\Midnight Commander\mc.exe'
 Set-Alias which       get-command
 
+function RefreshPath {
+    $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") +
+    ";" +
+    [System.Environment]::GetEnvironmentVariable("Path", "User")
+}
+
 ### phelp // outputs your profiles aliases and functions
 function phelp() {
     Get-Content $PROFILE | Select-String -Pattern "New-Alias|###" | Select-String -Pattern "Get-Content" -NotMatch

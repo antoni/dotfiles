@@ -2140,3 +2140,8 @@ function edit_pdf() {
 
 	echo "Open http://localhost:8080"
 }
+
+function edit_espanso_config() {
+	cd "/mnt/c/Users/vivob/AppData/Roaming/espanso"
+	code .
+}
