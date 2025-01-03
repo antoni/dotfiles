@@ -233,7 +233,6 @@ BREW_CASK_PACKAGES_MUST_HAVE=(
 	mpv
 	whatsapp
 	telegram
-	atext
 	visual-studio-code
 	signal
 	pym-player
