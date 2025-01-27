@@ -2019,11 +2019,15 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 # Image and video download from social media
 alias youtube-dl='yt-dlp'
-alias ydl='youtube-dl --no-playlist --no-mtime'
+# Note: WARNING: "-f best" selects the best pre-merged format which is often not the best option.
+#  To let yt-dlp download and merge the best available formats, simply do not pass any format selection.
+#  If you know what you are doing and want only the best pre-merged format, use "-f b" instead to suppress this warning
+#  [debug] Loaded 1837 extractors
+#
+#  Max filename length = 64
+alias ydl='youtube-dl --trim-filenames 64 --verbose --no-playlist --no-mtime'
 
-alias ydlbest='ydl --format best'
-alias ydlworst='ydl --format worst'
-alias ydlaudio='youtube-dl --format best --extract-audio --audio-format mp3'
+alias ydlaudio='youtube-dl --extract-audio --audio-format mp3'
 
 # Usage:
 # instagram_post_download "C4towJrvfSt"
@@ -2101,9 +2105,71 @@ function csv_to_json() {
 	jq --raw-output --raw-input --slurp --null-input '
       {"occurrences":
               [inputs
-                   | . / "\n"
-                        | (.[] | select(length > 0) | . / ";") as $input
-                             | {"position": [$input[0], $input[1]], "taxo": {"espece": $input[2]}}]}
-                             ' <"$csv_filename"
+                | . / "\n"
+                | (.[] | select(length > 0) | . / ";") as $input
+                | {"position": [$input[0], $input[1]], "taxo": {"espece": $input[2]}}]}
+                ' <"$csv_filename"
 }
 
+function edit_pdf() {
+	CONTAINER_NAME="stirling-pdf"
+
+	# Check if the container exists
+	if docker ps -a --filter "name=$CONTAINER_NAME" --format '{{.Names}}' | grep -q "^$CONTAINER_NAME$"; then
+		# Check if the container is running
+		if docker ps --filter "name=$CONTAINER_NAME" --format '{{.Names}}' | grep -q "^$CONTAINER_NAME$"; then
+			echo "Container $CONTAINER_NAME is already running, stopping"
+			docker stop "$CONTAINER_NAME" >/dev/null
+		fi
+		echo "Starting existing container: $CONTAINER_NAME"
+		docker start "$CONTAINER_NAME" >/dev/null
+	else
+		echo "Container $CONTAINER_NAME does not exist, running for the first time"
+
+		docker run --detach \
+			--publish 8080:8080 \
+			--volume ~/tmp/stirling-pdf-web-editor/trainingData:/usr/share/tessdata \
+			--volume ~/dotfiles/stirling-pdf-configs:/configs \
+			--volume ~/tmp/stirling-pdf-web-editor/logs:/logs \
+			--env DOCKER_ENABLE_SECURITY=false \
+			--env INSTALL_BOOK_AND_ADVANCED_HTML_OPS=false \
+			--env LANGS=en_US,pl_PL \
+			--name "$CONTAINER_NAME" \
+			stirlingtools/stirling-pdf:latest
+	fi
+
+	echo "Waiting for Stirling PDF startup"
+
+	bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:8080)" != "200" ]]; do sleep 5; done'
+
+	echo "Open http://localhost:8080"
+}
+
+function edit_espanso_config() {
+	cd "/mnt/c/Users/vivob/AppData/Roaming/espanso"
+	code .
+}
+
+function line_diff() {
+	local -r file1="$1"
+	local -r file2="$2"
+	git diff --word-diff --word-diff-regex=. "$file1" "$file2"
+}
+
+function execute_in_subdirectories() {
+    local command_to_execute="$1"
+
+    # Ensure a command is provided
+    if [[ -z "$command_to_execute" ]]; then
+        echo "Usage: execute_in_subdirectories <command>"
+        return 1
+    fi
+
+    # Loop through all subdirectories
+    for directory in */; do
+        if [[ -d "$directory" ]]; then
+            echo "Executing in $directory"
+            (cd "$directory" && eval "$command_to_execute")
+        fi
+    done
+}

@@ -39,20 +39,16 @@ git clone https://github.com/antoni/dotfiles.git ~/dotfiles
 
 ## Useful links
 
-- [Automatically reattach tmux session using iTerm2](https://coderwall.com/p/-mumdg/automatically-reattach-tmux-session-using-iterm2): `tmux attach -t base || tmux new -s base`
+- [Automatically reattach tmux session using iTerm2](https://coderwall.com/p/-mumdg/automatically-reattach-tmux-session-using-iterm2): Open iTerm2's preferences, then select the 'Profiles' tab, and finally the 'General' pane. In the 'Command' section locate the 'Send text at start:' option and put in this command, substituting your session name for base.
+
+```console
+tmux attach -t base || tmux new -s base
+```
 
 ## Other dotfiles repositories
 
 - [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles)
 - https://github.com/CMCDragonkai/.dotfiles-windows
-
-## TODO
-
-* macOS: add Rosetta 2 instalation step:
-
-```console
-sudo softwareupdate --install-rosetta --agree-to-license
-```
 
 ## ChatGPT prompts
 
