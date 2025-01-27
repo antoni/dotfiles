@@ -1,3 +1,7 @@
+Host *
+    ServerAliveInterval 60
+    ServerAliveCountMax 30
+
 Host localhost
     KexAlgorithms +diffie-hellman-group1-sha1
 

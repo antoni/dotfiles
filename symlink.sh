@@ -2,7 +2,7 @@
 
 source "$HOME"/dotfiles/utils.sh
 
-DOTFILES_MAC_DIR=$DOTFILES_DIR/mac
+DOTFILES_MAC_DIR=$HOME/dotfiles/mac
 
 function int_signal_handler() {
 	printf "\nQuitting... You will have to do cleanup manually\n"
@@ -53,7 +53,7 @@ SWEET_HOME_VERSION=$(echo "$HOME"/SweetHome3D-* | awk --field-separator'-' '{pri
 echo "SweetHome3D       version symlinked:   " "$SWEET_HOME_VERSION"
 printf "${colors[Reset_Color]}"
 
-DOTFILES=(profile bashrc zshrc vimrc paths aliases bash_profile common_profile.sh tmux.conf
+DOTFILES=(profile bashrc zshrc vimrc paths aliases zprofile bash_profile common_profile.sh tmux.conf
 	gitconfig gitignore gitattributes ghci gvimrc hgrc lldbinit gdbinit xbindkeysrc
 	fzf.sh psqlrc colordiffrc emacs inputrc agda sudo_as_admin_successful LESS_TERMCAP
 	jupyter newsboat)
@@ -120,7 +120,7 @@ function mac_symlink() {
 		~/Library/Preferences/com.googlecode.iterm2.plist
 
 	# Transmission
-	"$DOTFILES_MAC_DIR"/transmission.sh
+	"$HOME/dotfiles/mac/transmission.sh"
 
 	# ln -sf org.m0k.transmission.plist ~/Library/Preferences/
 
@@ -134,7 +134,7 @@ function mac_symlink() {
 	# VLC
 	mkdir -p ~/Library/Preferences/org.videolan.vlc
 	rm --recursive --force ~/Library/Preferences/org.videolan.vlc/vlcrc
-	cp --recursive --force "$DOTFILES_DIR"/vlcrc ~/Library/Preferences/org.videolan.vlc/vlcrc
+	cp --recursive --force "$HOME/dotfiles/vlcrc" ~/Library/Preferences/org.videolan.vlc/vlcrc
 	# echo "NOTE: When updating preferences, VLC doesn't modify the existing vlcrc, instead it deletes the last and creates a new one. Instead of symlinking, the ~/dotfiles/vlcrc has been copied"
 
 	[ -d "$HOME/scripts" ] && ln -fs ~/scripts/Chrome\ Debugger.app /Applications/
@@ -246,8 +246,6 @@ function main() {
 
 	# adb
 	sudo_exec ln -fs "$HOME_DIR"/Android/Sdk/platform-tools/adb /usr/local/bin/adb
-
-	ln -fs "$HOME_DIR"/dotfiles/antoni.zsh-theme "$HOME_DIR"/.oh-my-zsh/themes
 
 	# python
 	sudo_exec ln -fs "$(which python3)" /usr/local/bin/python

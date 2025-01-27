@@ -81,7 +81,7 @@ function upgrade_all() {
 
 	# macOS
 	if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
-		"$DOTFILES_DIR"/mac/post_install.sh
+		$HOME/dotfiles/mac/post_install.sh
 
 		# Do the rest without sudo
 		sudo --reset-timestamp

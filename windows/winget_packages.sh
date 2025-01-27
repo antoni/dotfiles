@@ -37,13 +37,14 @@ MUST_HAVE=(
 	Notepad++.Notepad++
 	Oracle.JavaRuntimeEnvironment
 	IrfanSkiljan.IrfanView
-	gsass1.NTop
+	Espanso.Espanso
 	7zip.7zip
 	mcmilk.7zip-zstd
 	Telegram.TelegramDesktop
 	OpenWhisperSystems.Signal
 	Yarn.Yarn
 	Mozilla.Firefox
+	Mozilla.Firefox.DeveloperEdition
 	WhatsApp.WhatsApp
 	Microsoft.PowerToys
 	JetBrains.IntelliJIDEA.Ultimate
@@ -58,6 +59,9 @@ MUST_HAVE=(
 	Microsoft.dotnet
 	Piriform.Recuva
 	Discord.Discord
+	RProject.R
+	Bitwarden.CLI
+	IDRIX.VeraCrypt
 )
 
 CONFERENCE_SOFTWARE=(
@@ -84,12 +88,14 @@ MAY_HAVE=(
 	geeksoftwareGmbH.PDF24Creator
 	ByteDance.CapCut
 	Amazon.AWSCLI
+	Rclone.Rclone
 	Zeit.Hyper
 	Rufus.Rufus
 	Hex-Rays.IDA.Free
 	Figma.Figma
 	AnyDeskSoftwareGmbH.AnyDesk
 	marha.VcXsrv
+	gsass1.NTop
 	CHIRPSoftware.CHIRP-next
 	Yarn.Yarn
 	RaspberryPiFoundation.RaspberryPiImager
@@ -99,7 +105,6 @@ MAY_HAVE=(
 	DeepL.DeepL
 	alcpu.CoreTemp
 	Yubico.YubikeyManager
-	IDRIX.VeraCrypt
 	Mega.MEGASync
 	Oracle.VirtualBox
 	VMware.WorkstationPlayer
@@ -150,7 +155,6 @@ MAY_HAVE=(
 	GIMP.GIMP
 	SublimeHQ.SublimeText.3
 	Alacritty.Alacritty
-	FedericoTerzi.espanso
 	Mirantis.Lens
 	Telerik.Fiddler.Everywhere
 	Hashicorp.Vagrant

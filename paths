@@ -37,13 +37,19 @@ export PATH=$ANDROID_HOME/tools:$PATH
 export PATH=$ANDROID_HOME/platform-tools:$PATH
 export PATH=$ANDROID_HOME/build-tools/19.1.0:$PATH
 
-# LLVM (macOS)
-if [[ "$UNAME_OUTPUT" == "Darwin" ]]; then
-	export PATH="$(brew --prefix llvm)/bin:$PATH"
+# GNU coreutils
+if [[ "$(uname)" == "Darwin" ]]; then
+  export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+  export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 fi
 
 # Haskell Stack global executables
 export PATH=~/.local/bin:$PATH
+
+# LLVM (macOS only)
+if [[ "$(uname)" == "Darwin" ]]; then
+	export PATH="$(brew --prefix llvm)/bin:$PATH"
+fi
 
 # Ruby GEMs
 GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
@@ -56,9 +62,4 @@ export NPM_GLOBAL_PACKAGES_DIRECTORY="$HOME"/.npm-global_packages
 
 export PATH="$NPM_GLOBAL_PACKAGES_DIRECTORY"/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
-
-# GNU coreutils
-# TODO: Add macOS guard
-export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
-export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 
