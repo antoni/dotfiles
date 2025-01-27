@@ -3,12 +3,14 @@
 BREW_PACKAGES_MUST_HAVE=(
 	gawk
 	gnu-sed
+	gnu-indent
 	gnu-tar
 	coreutils
 	findutils
-	openjdk
 	gnutls
+	openjdk
 	grep
+	bitwarden-cli
 	jd
 	ascii
 	gpg
@@ -46,6 +48,7 @@ BREW_PACKAGES_MUST_HAVE=(
 )
 
 BREW_PACKAGES_MAY_HAVE=(apache-httpd
+	colima
 	certbot
 	i2p
 	i2pd
@@ -82,7 +85,6 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	gifski
 	binaryen
 	gifsicle
-	corsixth
 	git-gui
 	carthage
 	pipenv
@@ -219,6 +221,7 @@ BREW_CASK_PACKAGES_MUST_HAVE=(
 	zoom
 	rar
 	duckduckgo
+	espanso
 	iterm2
 	textmate
 	microsoft-teams
@@ -231,13 +234,13 @@ BREW_CASK_PACKAGES_MUST_HAVE=(
 	mpv
 	whatsapp
 	telegram
-	atext
 	visual-studio-code
 	signal
 	pym-player
 	mactex
 	omnidisksweeper
 	firefox
+	firefox@developer-edition
 	vlc
 	macdown
 	slack
@@ -254,10 +257,11 @@ BREW_CASK_PACKAGES_MAY_HAVE=(wine-stable
 	surfshark
 	nordvpn
 	mullvadvpn
-	anydesk
 	microsoft-remote-desktop
 	duckduckgo
 	xournal-plus-plus
+	teamviewer
+	rustdesk
 	docker
 	iconjar
 	iina
@@ -269,7 +273,6 @@ BREW_CASK_PACKAGES_MAY_HAVE=(wine-stable
 	brave-browser
 	anaconda
 	opera-gx
-	espanso
 	disk-drill
 	azure-data-studio
 	ledger-live
@@ -277,6 +280,7 @@ BREW_CASK_PACKAGES_MAY_HAVE=(wine-stable
 	lens
 	bitwarden
 	roblox
+	mullvad-browser
 	messenger
 	tableplus
 	qlvideo
@@ -493,6 +497,7 @@ function is_package_installed() {
 BREW_PACKAGES_KINGA=(
 	docker
 	tailscale
+	bitwarden-cli
 )
 
 BREW_CASK_PACKAGES_KINGA=(
@@ -500,25 +505,30 @@ BREW_CASK_PACKAGES_KINGA=(
 	caffeine
 	google-drive
 	firefox
+	firefox@developer-edition
 	iterm2
 	vlc
 	visual-studio-code
 	duckduckgo
 	alfred
+	teamviewer
+	rustdesk
+	espanso
+	pym-player
 )
 
 function check_missing_brew_packages() {
-local package_set="$1"
-shift
+	local package_set="$1"
+	shift
 	local packages=("$@")
 	local missing_packages=()
 
-		printf "Checking %s\n" "$package_set"
+	printf "Checking %s\n" "$package_set"
 
 	for package in "${packages[@]}"; do
 		# Check if the package exists as a formula
 		if ! brew info --formula "$package" &>/dev/null; then
-				missing_packages+=("$package")
+			missing_packages+=("$package")
 		fi
 	done
 
@@ -533,16 +543,16 @@ shift
 }
 
 function check_missing_brew_cask_packages() {
-local package_set="$1"
-shift
+	local package_set="$1"
+	shift
 	local packages=("$@")
 	local missing_packages=()
 
-		printf "Checking %s\n" "$package_set"
+	printf "Checking %s\n" "$package_set"
 
 	for package in "${packages[@]}"; do
-			if ! brew info --cask "$package" &>/dev/null; then
-				missing_packages+=("$package")
+		if ! brew info --cask "$package" &>/dev/null; then
+			missing_packages+=("$package")
 		fi
 	done
 

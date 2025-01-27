@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
-brew cask install battle-net && open /usr/local/Caskroom/battle-net/latest/
+brew install --cask battle-net && \
+open /opt/homebrew/Caskroom/battle-net/*/Battle.net-Setup.app
