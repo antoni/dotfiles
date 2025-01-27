@@ -2,11 +2,13 @@
 
 export IS_WSL="${WSL_DISTRO_NAME:-""}"
 export HOME_DIR=$HOME
+# TODO: Rename
 export DOTFILES_DIR=$HOME_DIR/dotfiles
 
-source "$DOTFILES_DIR"/colors.sh
-source "$DOTFILES_DIR"/format_conversion.sh
-source "$DOTFILES_DIR"/upgrade_helpers.sh
+source "$HOME/dotfiles/paths"
+source "$HOME/dotfiles/colors.sh"
+source "$HOME/dotfiles/format_conversion.sh"
+source "$HOME/dotfiles/upgrade_helpers.sh"
 
 UNAME_OUTPUT="$(uname)"
 export UNAME_OUTPUT
@@ -151,4 +153,16 @@ function exec_powershell_command() {
 
 	# powershell.exe -NoLogo -ExecutionPolicy Bypass -File "$script_path"
 	powershell.exe -NoLogo -ExecutionPolicy Bypass -Command "$script_path"
+}
+
+function return_with_error_message() {
+	local -r error_message="$1"
+	printf "${colors[Red]}Error: %s${colors[Reset_Color]}\n" "$error_message"
+}
+
+function exit_with_error_message() {
+	local -r error_message="$1"
+	printf "${colors[Red]}Error: %s${colors[Reset_Color]}\n" "$error_message"
+
+	return
 }
