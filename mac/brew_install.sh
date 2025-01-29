@@ -249,6 +249,7 @@ BREW_CASK_PACKAGES_MUST_HAVE=(
 	tor-browser
 	openvpn-connect
 	tailscale
+	cursor
 )
 
 BREW_CASK_PACKAGES_MAY_HAVE=(wine-stable
