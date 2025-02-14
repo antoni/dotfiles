@@ -387,6 +387,7 @@ BREW_CASK_PACKAGES_MAY_HAVE=(wine-stable
 	pharo-project/pharo/pharo-launcher
 	vagrant
 	kicad
+	audacity
 )
 
 function sdk_man_install() {
