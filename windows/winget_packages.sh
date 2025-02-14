@@ -176,6 +176,7 @@ MAY_HAVE=(
 	Microsoft.AzureStorageEmulator
 	Microsoft.PowerShell
 	Autodesk.EAGLE
+	Audacity.Audacity
 )
 
 # In case there is a need to accept some new Terms of Transaction
