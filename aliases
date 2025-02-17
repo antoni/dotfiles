@@ -2017,43 +2017,6 @@ function random_commit() {
 # sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-# Image and video download from social media
-alias youtube-dl='yt-dlp'
-# Note: WARNING: "-f best" selects the best pre-merged format which is often not the best option.
-#  To let yt-dlp download and merge the best available formats, simply do not pass any format selection.
-#  If you know what you are doing and want only the best pre-merged format, use "-f b" instead to suppress this warning
-#  [debug] Loaded 1837 extractors
-#
-#  Max filename length = 64
-alias ydl='youtube-dl --trim-filenames 64 --verbose --no-playlist --no-mtime'
-
-alias ydlaudio='youtube-dl --extract-audio --audio-format mp3'
-
-# Usage:
-# instagram_post_download "C4towJrvfSt"
-function instagram_post_download() {
-	local post_id="$1"
-
-	if [[ $post_id == https* ]]; then
-		# Extract post ID from URL of form:
-		# https://www.instagram.com/p/XXXXXXX/
-		post_id="${post_id##https://www.instagram.com/p/}"
-		post_id="${post_id%/}"
-	fi
-
-	# Alternative: https://github.com/mikf/gallery-dl
-	instaloader \
-		--dirname-pattern "{date_utc:%Y}{date_utc:%M}{date_utc:%d}_post_{profile}" \
-		--filename-pattern="{date_utc:%Y}/{shortcode}" \
-		-- "-$post_id"
-}
-
-function ydlwl() {
-	pushd ~/Documents/watch || exit
-	ydl --ignore-errors https://www.youtube.com/playlist?list=PLxEBYuU7ONUfj68kBjXfHaAutKqtgAc4s
-	popd || exit
-}
-
 function download_static_video() {
 	local -r url="$1"
 	local -r filename=$(ydl "$url" --quiet --print filename --no-warnings --output '%(title)s.%(ext)s')
@@ -2157,19 +2120,52 @@ function line_diff() {
 }
 
 function execute_in_subdirectories() {
-    local command_to_execute="$1"
+	local command_to_execute="$1"
 
-    # Ensure a command is provided
-    if [[ -z "$command_to_execute" ]]; then
-        echo "Usage: execute_in_subdirectories <command>"
-        return 1
-    fi
+	# Ensure a command is provided
+	if [[ -z "$command_to_execute" ]]; then
+		echo "Usage: execute_in_subdirectories <command>"
+		return 1
+	fi
 
-    # Loop through all subdirectories
-    for directory in */; do
-        if [[ -d "$directory" ]]; then
-            echo "Executing in $directory"
-            (cd "$directory" && eval "$command_to_execute")
-        fi
-    done
+	# Loop through all subdirectories
+	for directory in */; do
+		if [[ -d "$directory" ]]; then
+			echo "Executing in $directory"
+			(cd "$directory" && eval "$command_to_execute")
+		fi
+	done
+}
+
+alias download_youtube_audio='yt-dlp --extract-audio --audio-format mp3'
+
+function download_media() {
+	local url="$1"
+
+	if [[ -z "$url" ]]; then
+		echo "Usage: download_media <URL>"
+		return 1
+	fi
+
+	if [[ "$url" == *"instagram.com/p/"* ]]; then
+		# Extract post ID from Instagram post URL
+		local post_id="${url##https://www.instagram.com/p/}"
+		post_id="${post_id%/}"
+
+		instaloader \
+			--dirname-pattern "{date_utc:%Y}{date_utc:%M}{date_utc:%d}_post_{profile}" \
+			--filename-pattern="{date_utc:%Y}/{shortcode}" \
+			-- "-$post_id"
+
+	else
+		# Note: WARNING: "-f best" selects the best pre-merged format which is often not the best option.
+		#  To let yt-dlp download and merge the best available formats, simply do not pass any format selection.
+		#  If you know what you are doing and want only the best pre-merged format, use "-f b" instead to suppress this warning
+		#  [debug] Loaded 1837 extractors
+		#
+		#  Max filename length = 64
+		#
+		# Use yt-dlp for Instagram reels/videos, YouTube, Facebook, Reddit, etc.
+		yt-dlp --trim-filenames 64 --verbose --no-playlist --no-mtime "$url"
+	fi
 }
