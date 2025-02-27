@@ -2161,7 +2161,7 @@ function download_media() {
 	else
 		# Check if the cookies file exists
 		if [[ ! -f "$cookies_path" ]]; then
-			echo "Error: Cookies file not found at $cookies_path. Aborting."
+			echo "Error: Cookies file not found at $cookies_path. Save it from a browser using browser extension"
 			return 1
 		fi
 
