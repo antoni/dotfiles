@@ -373,7 +373,6 @@ BREW_CASK_PACKAGES_MAY_HAVE=(wine-stable
 	flux
 	google-earth-pro
 	omnigraffle
-	skype
 	mysqlworkbench
 	sublime-text
 	the-unarchiver
