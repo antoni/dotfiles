@@ -230,7 +230,7 @@ BREW_CASK_PACKAGES_MUST_HAVE=(
 	google-cloud-sdk
 	spotify
 	temurin
-	alfred
+	raycast
 	mpv
 	whatsapp
 	telegram
@@ -511,7 +511,7 @@ BREW_CASK_PACKAGES_KINGA=(
 	vlc
 	visual-studio-code
 	duckduckgo
-	alfred
+	raycast
 	teamviewer
 	rustdesk
 	espanso
