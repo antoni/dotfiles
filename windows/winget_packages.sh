@@ -19,7 +19,10 @@ setup_int_handler
 #  --exact --id chromium
 
 MUST_HAVE=(
+	Mozilla.Firefox
+	Mozilla.Firefox.DeveloperEdition
 	Google.Chrome
+	Brave.Brave
 	PuTTY.PuTTY
 	vscode
 	vim.vim
@@ -43,8 +46,6 @@ MUST_HAVE=(
 	Telegram.TelegramDesktop
 	OpenWhisperSystems.Signal
 	Yarn.Yarn
-	Mozilla.Firefox
-	Mozilla.Firefox.DeveloperEdition
 	WhatsApp.WhatsApp
 	Microsoft.PowerToys
 	JetBrains.IntelliJIDEA.Ultimate
