@@ -241,6 +241,7 @@ BREW_CASK_PACKAGES_MUST_HAVE=(
 	omnidisksweeper
 	firefox
 	firefox@developer-edition
+	brave-browser
 	vlc
 	macdown
 	slack
@@ -271,7 +272,6 @@ BREW_CASK_PACKAGES_MAY_HAVE=(wine-stable
 	veracrypt
 	streamlabs-obs
 	cloudflare-warp
-	brave-browser
 	anaconda
 	opera-gx
 	disk-drill
@@ -507,6 +507,7 @@ BREW_CASK_PACKAGES_KINGA=(
 	google-drive
 	firefox
 	firefox@developer-edition
+	brave-browser
 	iterm2
 	vlc
 	visual-studio-code
