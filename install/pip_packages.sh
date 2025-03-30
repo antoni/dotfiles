@@ -6,6 +6,6 @@ PIP_PACKAGES=(pylint 2to3 pyflakes autopep8
 	pirate-get tensorflow opencv-python virtualenv numpy
 	matplotlib protobuf conda haruhi-dl google-api-python-client oauth2client progressbar2
 	tdmgr PyQt5 paho-mqtt PyQtWebEngine mvt xmldiff yq poetry beautysh
-	yt-dlp speedtest-cli pipupgrade shodan linode-cli mvt jupyter truffleHog
+	speedtest-cli pipupgrade shodan linode-cli mvt jupyter truffleHog
 	gallery-dl instaloader git-filter-repo
 )
