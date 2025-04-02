@@ -165,3 +165,8 @@ export PATH=$PATH:$JAVA_HOME/bin
 export ANDROID_HOME=/home/antoni/Android
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+export PATH="$PATH:/home/antoni/kotlin/kotlinc/bin"
