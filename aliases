@@ -2186,3 +2186,13 @@ function download_media() {
 			--no-mtime "$url"
 	fi
 }
+
+function transpose_and_join() {
+  local line value output=""
+  while IFS= read -r line || [[ -n "$line" ]]; do
+    # Prompt the user for a value (can be changed to read from another source)
+    read -rp "$line=" value
+    output+="$line=\"${value//\"/\\\"}\" "  # escape any quotes in the value
+  done
+  echo "$output"
+}
