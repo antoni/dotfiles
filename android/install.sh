@@ -73,9 +73,8 @@ function authorize_using_oauth_token() {
 	printf "Open this URL to get oauth_token cookie value:\n%s\n" "https://accounts.google.com/embedded/setup/v2/android"
 	echo -n Oauth token:
 	read -rs oauth_token
-	# local -r oauth_token="$1"
 
-	# This directory is hardcoded in 'google-play-apk-downloader'
+	# Note: this directory is hardcoded in 'google-play-apk-downloader'
 	mkdir -p ~/google-play
 	./google-play-apk-downloader -o "$oauth_token"
 	# Note: -b 2 sets correct ABI interface
