@@ -2146,7 +2146,9 @@ function execute_in_subdirectories() {
 alias download_youtube_audio='yt-dlp --extract-audio --audio-format mp3'
 
 function download_media() {
-	local -r cookies_path="/mnt/c/Users/$WINDOWS_USERNAME/Downloads/cookies.txt"
+	local -r cookies_path="/mnt/c/Users/$WINDOWS_USERNAME/Downloads/yt_dlp_cookies.txt"
+	local -r instagram_cookies_path="/mnt/c/Users/$WINDOWS_USERNAME/Downloads/cookies_instagram.txt"
+
 	local url="$1"
 
 	if [[ -z "$url" ]]; then
@@ -2157,15 +2159,13 @@ function download_media() {
 	if [[ "$url" == *"instagram.com/p/"* ]]; then
 		# Extract post ID from Instagram post URL
 		local post_id
-		post_id=$(echo "$url" | sed -E 's|.*/p/([^/?]+).*|\1|')
+		post_id=$(echo "$url" | sed -E 's|.*/p/([^/?#]+).*|\1|')
 
-		instaloader \
-			--dirname-pattern "{date_utc:%Y}{date_utc:%m}{date_utc:%d}_post_{profile}" \
-			--filename-pattern "{date_utc:%Y}/{shortcode}_{profile}" \
-			--no-metadata-json \
-			--no-compress-json \
-			"$post_id"
-
+		# Use gallery-dl with custom output directory named after the post ID
+		gallery-dl \
+			--cookies "$instagram_cookies_path" \
+			--directory "./instagram_post_$post_id" \
+			"$url"
 	else
 		# Check if the cookies file exists
 		if [[ ! -f "$cookies_path" ]]; then
@@ -2184,6 +2184,7 @@ function download_media() {
 			"$url"
 	fi
 }
+
 
 function fasten_video_to_15s() {
 	input="$1"
