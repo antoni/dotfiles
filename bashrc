@@ -170,3 +170,4 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 export PATH="$PATH:/home/antoni/kotlin/kotlinc/bin"
+. "$HOME/.cargo/env"
