@@ -212,6 +212,7 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	terraform
 	terragrunt
 	tflint
+	ollama
 )
 
 BREW_CASK_PACKAGES_MUST_HAVE=(
@@ -251,6 +252,8 @@ BREW_CASK_PACKAGES_MUST_HAVE=(
 	openvpn-connect
 	tailscale
 	cursor
+	claude
+	lm-studio
 )
 
 BREW_CASK_PACKAGES_MAY_HAVE=(wine-stable
@@ -510,6 +513,7 @@ BREW_CASK_PACKAGES_KINGA=(
 	brave-browser
 	iterm2
 	vlc
+	textmate
 	visual-studio-code
 	duckduckgo
 	raycast

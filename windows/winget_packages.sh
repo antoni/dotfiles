@@ -86,6 +86,7 @@ MAY_HAVE=(
 	Ghisler.TotalCommander
 	Microsoft.WindowsTerminal
 	OpenJS.NodeJS.LTS
+	DigitalScholar.Zotero
 	geeksoftwareGmbH.PDF24Creator
 	ByteDance.CapCut
 	Amazon.AWSCLI
@@ -121,6 +122,7 @@ MAY_HAVE=(
 	ExpressVPN.ExpressVPN
 	Jigsaw.OutlineManager
 	tailscale.tailscale
+	ZeroTier.ZeroTierOne
 	mRemoteNG.mRemoteNG
 	Xming.Xming
 	Mikrotik.TheDude
