@@ -2146,7 +2146,9 @@ function execute_in_subdirectories() {
 alias download_youtube_audio='yt-dlp --extract-audio --audio-format mp3'
 
 function download_media() {
-	local -r cookies_path="/mnt/c/Users/$WINDOWS_USERNAME/Downloads/cookies.txt"
+	local -r cookies_path="/mnt/c/Users/$WINDOWS_USERNAME/Downloads/yt_dlp_cookies.txt"
+	local -r instagram_cookies_path="/mnt/c/Users/$WINDOWS_USERNAME/Downloads/cookies_instagram.txt"
+
 	local url="$1"
 
 	if [[ -z "$url" ]]; then
@@ -2156,33 +2158,86 @@ function download_media() {
 
 	if [[ "$url" == *"instagram.com/p/"* ]]; then
 		# Extract post ID from Instagram post URL
-		local post_id="${url##https://www.instagram.com/p/}"
-		post_id="${post_id%/}"
+		local post_id
+		post_id=$(echo "$url" | sed -E 's|.*/p/([^/?#]+).*|\1|')
 
-		instaloader \
-			--dirname-pattern "{date_utc:%Y}{date_utc:%M}{date_utc:%d}_post_{profile}" \
-			--filename-pattern="{date_utc:%Y}/{shortcode}" \
-			-- "-$post_id"
-
+		# Use gallery-dl with custom output directory named after the post ID
+		gallery-dl \
+			--cookies "$instagram_cookies_path" \
+			--directory "./instagram_post_$post_id" \
+			"$url"
 	else
 		# Check if the cookies file exists
 		if [[ ! -f "$cookies_path" ]]; then
-			echo "Error: Cookies file not found at $cookies_path. Save it from a browser using browser extension"
+			echo "Error: Cookies file not found at $cookies_path. Save it from a browser using a browser extension."
 			return 1
 		fi
 
-		# Note: WARNING: "-f best" selects the best pre-merged format which is often not the best option.
-		#  To let yt-dlp download and merge the best available formats, simply do not pass any format selection.
-		#  If you know what you are doing and want only the best pre-merged format, use "-f b" instead to suppress this warning
-		#  [debug] Loaded 1837 extractors
-		#
-		#  Max filename length = 64
-		#
-		# Use yt-dlp for Instagram reels/videos, YouTube, Facebook, Reddit, etc.
+		# Use yt-dlp for other platforms, forcing safe filenames (no spaces or special chars)
 		yt-dlp \
 			--cookies "$cookies_path" \
 			--trim-filenames 64 \
-			--verbose --no-playlist \
-			--no-mtime "$url"
+			--restrict-filenames \
+			--no-playlist \
+			--no-mtime \
+			--verbose \
+			"$url"
 	fi
 }
+
+
+function fasten_video_to_15s() {
+	input="$1"
+	output="${2:-fastened_${input}}"
+
+	# Check input file
+	if [[ ! -f "$input" ]]; then
+		echo "Error: Input file not found: $input" >&2
+		return 1
+	fi
+
+	# Check output file does not already exist
+	if [[ -e "$output" ]]; then
+		echo "Error: Output file already exists: $output" >&2
+		return 1
+	fi
+
+	# Get duration
+	duration=$(ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "$input")
+	if [[ -z "$duration" ]]; then
+		echo "Error: Could not determine video duration." >&2
+		return 1
+	fi
+
+	speed=$(echo "$duration / 15" | bc -l)
+	speed_rounded=$(printf "%.2f" "$speed")
+
+	# Construct audio atempo filters
+	tempo_filters=""
+	remaining_speed=$speed
+	while (($(echo "$remaining_speed > 2.0" | bc -l))); do
+		tempo_filters+="atempo=2.0,"
+		remaining_speed=$(echo "$remaining_speed / 2.0" | bc -l)
+	done
+	tempo_filters+="atempo=$(printf "%.2f" "$remaining_speed")"
+
+	echo "Speeding up '$input' to 15s → '$output'..."
+	echo "Speed factor: $speed_rounded"
+
+	ffmpeg -hide_banner -loglevel error -progress - \
+		-i "$input" \
+		-filter_complex "[0:v]setpts=PTS/${speed_rounded}[v];[0:a]${tempo_filters}[a]" \
+		-map "[v]" -map "[a]" "$output"
+}
+
+function transpose_and_join() {
+	local line value output=""
+	while IFS= read -r line || [[ -n "$line" ]]; do
+		# Prompt the user for a value (can be changed to read from another source)
+		read -rp "$line=" value
+		output+="$line=\"${value//\"/\\\"}\" " # escape any quotes in the value
+	done
+	echo "$output"
+}
+
+alias bat='batcat'
