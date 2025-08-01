@@ -1,0 +1,184 @@
+[user]
+    name = Antoni
+    email = antoni@antoni.systems
+[branch]
+    autosetupmerge = true
+[color]
+    branch = always
+    diff = auto
+    status = always
+    ui = always
+    interactive = always
+    grep = always
+    pager = true
+    decorate = always
+    showbranch = always
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+[color "diff"]
+    meta = green ; yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+[core]
+    whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
+    excludesfile = ~/.gitignore
+    editor = vi
+    ; pager = delta
+    ignorecase = false
+	attributesfile = ~/.gitattributes
+	autocrlf = input
+[delta]
+    features = decorations
+    whitespace-error-style = 22 reverse
+[delta]
+    features = line-numbers decorations
+    ; features = line-numbers decorations side-by-side
+    ; More themes, see: delta --show-syntax-themes
+    syntax-theme = Dracula
+    plus-style = syntax "#003800"
+    minus-style = syntax "#3f0001"
+[delta "line-numbers"]
+    line-numbers-left-style = cyan
+    line-numbers-right-style = cyan
+    line-numbers-minus-style = 124
+    line-numbers-plus-style = 28
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold yellow ul
+    file-decoration-style = none
+    hunk-header-decoration-style = cyan box ul
+[interactive]
+    diffFilter = delta --color-only
+[alias]
+    st = status --short --branch
+    ct = commit
+    br = branch
+    co = checkout
+    rb = rebase
+    br = branch
+    pl = pull
+    pu = push
+    di = diff
+    cp = cherry-pick
+    ad = add
+    mt = mergetool
+    lg = log --graph --name-status --pretty=oneline
+    cl = clone
+    cld = clone --depth 1
+    # Amends author of last commit
+    # Usage:
+    # git amend-author 4025621 Eugen
+    amend-author = !bash -c 'git commit --amend --author=$1' --
+    # Amends author of any commit
+    # Usage:
+    # git amend-author-for-commit 4025621 Eugen
+    amend-author-for-commit = !bash -c 'git rebase --onto $2 --exec \"git commit --amend --author=$1\" $2' --
+    reset-to-master = "checkout master --"
+    # Show message from last commit
+    slog = "!git log --pretty=format:%s | head --lines=1"
+    # Show diff with deleted files only
+    deleted = diff --diff-filter=D
+    list-untracked = ls-files --others --exclude-standard
+    # Rewrite previous commit usernames and emails
+    # git change-commits GIT_AUTHOR_NAME "old name" "new name"
+    #
+    # For the last 10 commits:
+    # git change-commits GIT_AUTHOR_EMAIL "old@email.com" "new@email.com" HEAD~10..HEAD
+    change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch -f --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f "
+    rebase-to-root = "rebase --interactive --root"
+    # Usage: git squash [n], n - number of last commits to be squashed
+    squash = "!f(){ git reset --soft HEAD~${1} && git commit --no-verify --edit -m\"$(git log --format=%B --reverse HEAD..HEAD@{1})\"; };f"
+    squash-previous = "!f(){ local commit_message=\"$(git log --format=%B | head -1)\"; local commits_back=2; git reset --soft HEAD~${commits_back} && git commit --no-verify -m\"$commit_message\"; };f"
+    # Commit, then squash current changes with previous commmit
+    squash-two = "!export MSG=`git log -1 --pretty=%B | cat` ; git add . ; git reset --soft 'HEAD^' ; git commit --message $MSG"
+    # Usage:
+        # $ git prevision <N> <filename>
+        # will checkout the <N>th revision (counting backwards from HEAD) into the history of the file <filename>.
+        #
+        # For example to checkout the immediate previous version of a file x/y/z.c use
+        # $ git prevision -1 x/y/z.c
+    prevision = "!f() { git checkout `git log --oneline $2 |  awk -v commit="$1" 'FNR == -commit+1 {print $1}'` $2;};f"
+    # Reset single file to HEAD
+    reset-file = "git checkout HEAD -- "
+    # Force push current branch
+    fp = "!git push -f origin \"$(git rev-parse --abbrev-ref HEAD)\""
+    # Force push current branch
+    remove-untracked = "!git clean --force"
+    # Show changes from a particular commit
+    changes = "!git diff $1^ $1"
+    dontcommit = "!git checkout ."
+    diffclear = "!f() { git diff $1 --color | sed -r 's/^([^-+ ]*)[-+ ]/\\1/' | less -r;};f"
+    diffclear2 = "!git diff --color-words"
+    grog = log --graph --abbrev-commit --decorate --all --format=format:\"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(dim white) - %an%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)\"
+    create = "!hub create --private"
+    rebase-to-master = "rebase --interactive --root master"
+    commit-diff-against-master = "!git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative master..$(git rev-parse --abbrev-ref HEAD)"
+    pretty-log-1 = "!pretty_log_1() { COMMITS_COUNT=${1:-10}; git --no-pager log --max-count $COMMITS_COUNT --pretty=format:'%s' --abbrev-commit;};pretty_log_1"
+    pretty-log-2 = "!pretty_log_2() { COMMITS_COUNT=${1:-10}; git --no-pager log --max-count $COMMITS_COUNT --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit;}; pretty_log_2"
+	diff-image = "!f() { cd -- \"${GIT_PREFIX:-.}\"; GIT_DIFF_IMAGE_ENABLED=1 git diff \"$@\"; }; f"
+    squash-all = "!f(){ git reset $(git commit-tree HEAD^{tree} -m \"${1:-A new start}\");};f"
+    # Shows all commits for given author (subject only)
+    author-commits = "!git --no-pager log --pretty=format:\"%s\" --author=\"$1\" #"
+    # Shows all commits for given author, with full diff
+    author-commits-full = "!git --no-pager log --author=\"$1\" --oneline | awk '{print $1}' | xargs git show #"
+    remove-ignored-files = "!git ls-files -c --ignored --exclude-standard | sed 's/.*/"&"/' | xargs git rm -r --cached"
+    # Takes the range of the commits it needs to push and then goes and pushes then one by one
+    # It can take quite some time, but on the end it will do the job - automatically
+    #
+    # Note: it *uses force push*
+    # Example:
+    # git partial-push origin branchname
+    partial-push = "!sh -c \
+        'REMOTE=$0;BRANCH=$1;BATCH_SIZE=100; \
+        if git show-ref --quiet --verify refs/remotes/$REMOTE/$BRANCH; then \
+            range=$REMOTE/$BRANCH..HEAD; \
+        else \
+            range=HEAD; \
+        fi; \
+        n=$(git log --first-parent --format=format:x $range | wc -l); \
+        echo "Have to push $n packages in range of $range"; \
+        for i in $(seq $n -$BATCH_SIZE 1); do \
+            h=$(git log --first-parent --reverse --format=format:%H --skip $i -n1); \
+            echo "Pushing $h..."; \
+            git push --force $REMOTE ${h}:refs/heads/$BRANCH; \
+        done; \
+        git push --force $REMOTE HEAD:refs/heads/$BRANCH' \
+    "
+[push]
+    default = matching
+    followTags = true
+[pull]
+    rebase = true
+[merge]
+    ff = only
+[http]
+    proxy =
+    sslVerify = false
+[https]
+    proxy =
+[commit]
+    gpgsign = false
+[diff "image"]
+	command = ~/git-diff-image/git_diff_image
+;[diff "xml_diff"]
+    ; command = xmldiff
+    ; command = ~/scripts/git/git_xml_diff.sh
+[diff "jd"]
+    command = 'jd --git-diff-driver'
+[pager]
+	status = true
+	stash = false
+[init]
+	defaultBranch = master
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
