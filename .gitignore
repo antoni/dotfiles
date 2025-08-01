@@ -20,4 +20,4 @@ jupyter
 
 .DS_Store
 
-android/*.apk
+*.apk
