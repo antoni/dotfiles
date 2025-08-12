@@ -2241,3 +2241,16 @@ function transpose_and_join() {
 }
 
 alias bat='batcat'
+
+function json_structure_minimize() {
+  jq 'walk(
+    if type == "array" then
+      if length > 0 then [.[0] | walk(
+        if type == "array" and length > 0 then [.[0]]
+        else .
+        end
+      )] else [] end
+    else .
+    end
+  )'
+}
