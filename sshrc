@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+# TODO: Source aliases here
+# TODO: Add vimrc to .sshrc.d
+
+# Wrap tmux to always use sshrc files in a temp tmux dir
+function tmux() {
+    # Prevent infinite recursion if tmux calls tmux
+    if [ -n "$TMUX_WRAPPED" ]; then
+        command tmux "$@"
+        return
+    fi
+
+    local TMUXDIR="/tmp/russelltmuxserver"
+    : "${SSHHOME:=$HOME}"
+
+    if [ ! -d "$TMUXDIR" ]; then
+        rm -rf "$TMUXDIR"
+        mkdir -p "$TMUXDIR"
+    fi
+
+    rm -rf "$TMUXDIR/.sshrc.d"
+    cp -r "$SSHHOME/.sshrc" "$SSHHOME/bashsshrc" "$SSHHOME/sshrc" "$SSHHOME/.sshrc.d" "$TMUXDIR"
+
+    # Mark that we've wrapped to avoid recursion; use the real tmux binary
+    TMUX_WRAPPED=1 SSHHOME="$TMUXDIR" SHELL="$TMUXDIR/bashsshrc" \
+        command /usr/bin/tmux -S "$TMUXDIR/tmuxserver" "$@"
+}
