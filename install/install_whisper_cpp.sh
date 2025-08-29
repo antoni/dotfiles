@@ -2,14 +2,14 @@
 
 # Check for required arguments
 if [[ $# -lt 1 ]]; then
-  echo "Usage: $0 <audio_file> [model_size]"
-  echo "Example: $0 audio.mp3 medium"
-  exit 1
+	echo "Usage: $0 <audio_file> [model_size]"
+	echo "Example: $0 audio.mp3 medium"
+	exit 1
 fi
 
 # Input audio file and model
 AUDIO_INPUT="$1"
-MODEL_SIZE="${2:-medium}"  # default to "medium" if not specified
+MODEL_SIZE="${2:-medium}" # default to "medium" if not specified
 
 # Ensure required packages are installed
 # echo "🔧 Installing dependencies..."
@@ -46,6 +46,6 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/antoni/tmp/whisper.cpp/build/src/
 
 # Transcribe audio
 echo "📝 Transcribing audio to Polish..."
-./bin/whisper-cli -m "$MODEL_FILE" -f "$WAV_FILE" -l pl > ../transcription.txt
+./bin/whisper-cli -m "$MODEL_FILE" -f "$WAV_FILE" -l pl >../transcription.txt
 
 echo "✅ Transcription saved to transcription.txt"

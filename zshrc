@@ -86,7 +86,7 @@ unsetopt nomatch
 # xmodmap .speedswapper
 
 # Execute ls after cd
-chpwd() ls
+# chpwd() ls
 
 # Ignore case when 'ls'
 unsetopt CASE_GLOB
@@ -227,3 +227,6 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# https://github.com/cdown/sshrc
+compdef sshrc=ssh

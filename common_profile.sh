@@ -128,5 +128,5 @@ PATH=$PATH:$ANDROID_HOME/bin
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 
 if [ -e "$HOME/.cargo/env" ]; then
-  . "$HOME/.cargo/env"
+	. "$HOME/.cargo/env"
 fi

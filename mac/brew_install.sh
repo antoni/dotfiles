@@ -44,6 +44,7 @@ BREW_PACKAGES_MUST_HAVE=(
 	watch
 	ffmpeg
 	cmake
+	sshrc
 	mc
 )
 

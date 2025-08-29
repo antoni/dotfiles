@@ -142,7 +142,7 @@ MAY_HAVE=(
 	Opera.OperaGX
 	AntibodySoftware.WizTree
 	WinDirStat.WinDirStat
-	Transmission.Transmission
+	qBittorrent.qBittorrent
 	ArtifexSoftware.GhostScript
 	wsltty
 	msys2.msys2
