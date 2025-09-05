@@ -19,7 +19,7 @@ source "$HOME"/.paths
 source "$HOME"/.common_profile.sh
 source "$HOME"/.fzf.sh
 
-export BUN_INSTALL="/home/antoni/.bun"
+export BUN_INSTALL="/home/$USER/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 export GO111MODULE=on

@@ -6,8 +6,8 @@
 
 # Function to display a message and exit on error
 function error_exit {
-    echo "Error: $1"
-    exit 1
+	echo "Error: $1"
+	exit 1
 }
 
 # Set temporary working directory
@@ -36,17 +36,17 @@ rm -f bw.zip || error_exit "Failed to remove temporary files."
 
 # Add ~/.local/bin to PATH if not already present
 if ! echo "$PATH" | grep -q "$HOME/.local/bin"; then
-    echo "Adding ~/.local/bin to PATH..."
-    echo 'export PATH="$PATH:$HOME/.local/bin"' >> ~/.bashrc || error_exit "Failed to update .bashrc."
-    source ~/.bashrc || error_exit "Failed to reload .bashrc."
+	echo "Adding ~/.local/bin to PATH..."
+	echo 'export PATH="$PATH:$HOME/.local/bin"' >>~/.bashrc || error_exit "Failed to update .bashrc."
+	source ~/.bashrc || error_exit "Failed to reload .bashrc."
 fi
 
 echo "Verifying Bitwarden CLI installation..."
-if command -v bw &> /dev/null; then
-    echo "Bitwarden CLI installed successfully!"
-    bw --version
+if command -v bw &>/dev/null; then
+	echo "Bitwarden CLI installed successfully!"
+	bw --version
 else
-    error_exit "Bitwarden CLI installation failed."
+	error_exit "Bitwarden CLI installation failed."
 fi
 
 # Cleanup temporary directory (optional, remove this block if you want to keep tmp dir)

@@ -461,9 +461,6 @@ Plug 'eagletmt/neco-ghc'
 " Prolog {{{
 Plug 'adimit/prolog.vim'
 " }}}
-" Promela {{{
-Plug 'vim-scripts/promela.vim'
-" }}}
 " Go {{{
 Plug 'fatih/vim-go'
 " }}}

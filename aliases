@@ -6,17 +6,13 @@
 set +x
 
 # Aliases and custom functions
-source "$HOME"/dotfiles/config.sh
-source "$HOME"/dotfiles/colors.sh
 source "$HOME"/dotfiles/utils.sh
-source "$HOME"/dotfiles/image_utils.sh
 
 if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
 	# macOS-specific
 	alias copy_to_clipboard='pbcopy'
 	alias setmiddlevolume='sudo osascript -e "set Volume 5"'
 	alias eclipseclean='/Applications/eclipse/Eclipse.app/Contents/MacOS/eclipse -clean'
-	alias topcoder='javaws ~/Developer/Topcoder/ContestAppletProd.jnlp'
 	alias mysql_client='open -a TablePlus'
 	alias sc2_hotkeys_edit='vim ~/Library/Application\ Support/Blizzard/StarCraft\ II/Accounts/491096383/Hotkeys/Rapid\ fire\ test.SC2Hotkeys'
 
@@ -27,8 +23,6 @@ if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
 		brew remove --force "$(brew list --formula)"
 		brew remove --cask --force "$(brew list)"
 	}
-
-	alias analyze_disk_usage='/Applications/OmniDiskSweeper.app/Contents/MacOS/OmniDiskSweeper'
 
 	alias lsblk='diskutil list'
 
@@ -58,9 +52,30 @@ if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
 
 	# Toggle "Do not disturb" mode on macOS (via: https://github.com/sindresorhus/do-not-disturb-cli)
 	alias dnd-toggle='dnd toggle'
+elif [[ "$UNAME_OUTPUT" == "Linux" ]]; then
+	# Debian/Ubuntu
+	function listkernels() {
+		dpkg --list 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d'
+	}
+	alias gdebi='sudo gdebi'
 
-elif test -f /proc/sys/kernel/osrelease && grep -q microsoft /proc/sys/kernel/osrelease; then
-	# Windows (WSL)
+	# Linux specific
+	# alias i='sudo apt-get install --assume-yes'
+	# Install through apt-get and add installed software to list of used commands
+	# addcmd() { sudo apt-get install --assume-yes $* && echo $* >> ~/install_apt-get.txt; }
+	function addcmd() { sudo dnf install --assume-yes "$*" && echo "$*" >>~/install_apt-get.txt; }
+
+	alias sound='alsamixer'
+	# alias open='xdg-open'
+	alias st='scrot -ub '"'"'%Y:%m:%d:%H:%M:%S.png'"'"' -e '"'"'mv $f ~/Downloads/'"'"
+	alias catquestions='cat ~/Documents/Q.txt'
+	alias mountrw='mount -o remount,rw /'
+	alias vim='vim -o'
+	alias ls='ls --human-readable --color -lFG'
+fi
+
+# Windows (WSL)
+if test -f /proc/sys/kernel/osrelease && grep -q microsoft /proc/sys/kernel/osrelease; then
 	alias copy_to_clipboard='clip.exe'
 
 	alias powershell='powershell.exe -NoLogo'
@@ -102,42 +117,15 @@ elif test -f /proc/sys/kernel/osrelease && grep -q microsoft /proc/sys/kernel/os
 	# shellcheck disable=2154
 	alias empty_trash_bin='cmd.exe /c "rd /s /q %systemdrive%\$Recycle.bin" 2&> /dev/null'
 
-	alias analyze_disk_usage='ncdu --color=dark'
-	# Alternatives:
-	# Note: assumes 'C' is the main drive
-	# alias analyze_disk_usage='/mnt/c/Program\ Files\ (x86)/WinDirStat/windirstat.exe'
-	# alias analyze_disk_usage='/mnt/c/Program\ Files/WizTree/WizTree.exe "c:"'
-
 	function copy_folder_to_desktop() {
 		local src_folder="$1"
 		cp --recursive "$src_folder" "/mnt/c/Users/""$WINDOWS_USERNAME""/Desktop/"
 	}
-
-elif [[ "$UNAME_OUTPUT" == 'Linux' ]]; then
-	# Debian/Ubuntu
-	function listkernels() {
-		dpkg --list 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d'
-	}
-	alias gdebi='sudo gdebi'
-
-	# Linux specific
-	# alias i='sudo apt-get install --assume-yes'
-	# Install through apt-get and add installed software to list of used commands
-	# addcmd() { sudo apt-get install --assume-yes $* && echo $* >> ~/install_apt-get.txt; }
-	function addcmd() { sudo dnf install --assume-yes "$*" && echo "$*" >>~/install_apt-get.txt; }
-
-	alias sound='alsamixer'
-	# alias open='xdg-open'
-	alias st='scrot -ub '"'"'%Y:%m:%d:%H:%M:%S.png'"'"' -e '"'"'mv $f ~/Downloads/'"'"
-	alias catquestions='cat ~/Documents/Q.txt'
-	alias mountrw='mount -o remount,rw /'
-	alias vim='vim -o'
-	alias ls='ls --human-readable --color -lFG'
 fi
 
 # General purpose
 alias vimb='vim ~/.bashrc'
-alias vima='vim ~/.aliases'
+alias vima='vim ~/dotfiles/aliases'
 alias vimr='vim ~/.remember'
 alias vimexecdwm='sudo vim /usr/local/bin/dwm-personalized'
 alias vimv='vim ~/.vimrc'
@@ -442,8 +430,7 @@ alias pdfmerge='pdfunite'
 alias desk='cd ~/Desktop'
 alias mountstudents='sudo sshfs -o allow_other ar267209@students.mimuw.edu.pl:/home/students/bioinf/a/ar267209 ~/mount/students/'
 alias euler='cd ~/Developer/ProjectEuler/'
-alias wallpaperchange='gsettings set org.gnome.desktop.background picture-uri "file:///home/antoni/Documents/wallpaper4.jpg"'
-alias showtunnels="sudo lsof -i -n | egrep '\\<ssh\\>'" # Show all open SSH tunnels
+alias show_open_ssh_tunnels="sudo lsof -i -n | egrep '\\<ssh\\>'" # Show all open SSH tunnels
 alias rsync='rsync --progress'
 alias wificonn='sudo wifi-menu wlp2s0'
 alias install_ycm='~/.vim/bundle/YouCompleteMe/install.sh --clang-completer'
@@ -1806,7 +1793,7 @@ function record_audio() {
 
 	if [[ -n "$IS_WSL" ]]; then
 		# Workaround, see: https://github.com/microsoft/winget-pkgs/issues/95349#issuecomment-1678632505
-		ffmpeg='/mnt/c/Users/vivob/AppData/Local/Microsoft/WinGet/Packages/Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe/ffmpeg-6.0-full_build/bin/ffmpeg.exe'
+		ffmpeg="/mnt/c/Users/$WINDOWS_USERNAME/AppData/Local/Microsoft/WinGet/Packages/Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe/ffmpeg-6.0-full_build/bin/ffmpeg.exe"
 		# List devices to get device name (full name string)
 		# ${ffmpeg} -list_devices true -f dshow -i null
 		${ffmpeg} -hide_banner -loglevel error -f dshow -t 30 \
@@ -2115,7 +2102,7 @@ function edit_pdf() {
 }
 
 function edit_espanso_config() {
-	cd "/mnt/c/Users/vivob/AppData/Roaming/espanso"
+	cd "/mnt/c/Users/$WINDOWS_USERNAME/AppData/Roaming/espanso"
 	code .
 }
 
@@ -2146,8 +2133,8 @@ function execute_in_subdirectories() {
 alias download_youtube_audio='yt-dlp --extract-audio --audio-format mp3'
 
 function download_media() {
-	local -r cookies_path="/mnt/c/Users/$WINDOWS_USERNAME/Downloads/yt_dlp_cookies.txt"
-	local -r instagram_cookies_path="/mnt/c/Users/$WINDOWS_USERNAME/Downloads/cookies_instagram.txt"
+	local -r cookies_path="/mnt/c/Users/$WINDOWS_USERNAME/download_media_cookies.txt"
+	local -r instagram_cookies_path="/mnt/c/Users/$WINDOWS_USERNAME/download_media_cookies.txt"
 
 	local url="$1"
 
@@ -2157,23 +2144,32 @@ function download_media() {
 	fi
 
 	if [[ "$url" == *"instagram.com/p/"* ]]; then
-		# Extract post ID from Instagram post URL
+		# Instagram single post
 		local post_id
 		post_id=$(echo "$url" | sed -E 's|.*/p/([^/?#]+).*|\1|')
 
-		# Use gallery-dl with custom output directory named after the post ID
 		gallery-dl \
 			--cookies "$instagram_cookies_path" \
 			--directory "./instagram_post_$post_id" \
 			"$url"
+
+	elif [[ "$url" == *"instagram.com/"* ]]; then
+		# Instagram profile (or story/highlight/reel links)
+		local profile
+		profile=$(echo "$url" | sed -E 's|https?://(www\.)?instagram\.com/([^/?#]+).*|\2|')
+
+		gallery-dl \
+			--cookies "$instagram_cookies_path" \
+			--directory "./instagram_profile_$profile" \
+			"$url"
+
 	else
-		# Check if the cookies file exists
+		# Other platforms -> yt-dlp
 		if [[ ! -f "$cookies_path" ]]; then
 			echo "Error: Cookies file not found at $cookies_path. Save it from a browser using a browser extension."
 			return 1
 		fi
 
-		# Use yt-dlp for other platforms, forcing safe filenames (no spaces or special chars)
 		yt-dlp \
 			--cookies "$cookies_path" \
 			--trim-filenames 64 \
@@ -2184,7 +2180,6 @@ function download_media() {
 			"$url"
 	fi
 }
-
 
 function fasten_video_to_15s() {
 	input="$1"
@@ -2241,3 +2236,114 @@ function transpose_and_join() {
 }
 
 alias bat='batcat'
+
+function json_structure_minimize() {
+	jq 'walk(
+    if type == "array" then
+      if length > 0 then [.[0] | walk(
+        if type == "array" and length > 0 then [.[0]]
+        else .
+        end
+      )] else [] end
+    else .
+    end
+  )'
+}
+
+alias cmatrix='cmatrix -oba'
+
+function analyze_disk_usage() {
+	show_help() {
+		cat <<EOF
+Usage: analyze_disk_usage [OPTIONS]
+
+Launch a disk usage tool depending on your OS:
+  - macOS:    /Applications/OmniDiskSweeper.app/Contents/MacOS/OmniDiskSweeper
+  - Linux:    ncdu --color=dark
+  - Windows:  /mnt/c/Program Files (x86)/WinDirStat/windirstat.exe C:\\
+
+Options:
+  --windows    (WSL only) Run the Windows version instead of Linux ncdu
+  --help       Show this help message
+EOF
+	}
+
+	# Parse arguments
+	case "$1" in
+	-h | --help)
+		show_help
+		return 0
+		;;
+	--windows)
+		run_windows=1
+		;;
+	*)
+		run_windows=0
+		;;
+	esac
+
+	# Detect OS
+	unameOut="$(uname -s)"
+	case "${unameOut}" in
+	Darwin*)
+		echo "Detected macOS. Launching OmniDiskSweeper..."
+		/Applications/OmniDiskSweeper.app/Contents/MacOS/OmniDiskSweeper
+		;;
+	Linux*)
+		if grep -qi microsoft /proc/version 2>/dev/null; then
+			# WSL environment
+			if [ "$run_windows" -eq 1 ]; then
+				# Alternatives:
+				# alias analyze_disk_usage='/mnt/c/Program\ Files/WizTree/WizTree.exe "c:"'
+				echo "Detected WSL. Launching Windows WinDirStat..."
+				"/mnt/c/Program Files (x86)/WinDirStat/windirstat.exe" \
+					C:\\ `# Target drive to scan (C:)` \
+					/O `# Open immediately after scan` \
+					/P `# Show progress window during scan` \
+					/S `# Save settings (so future runs reuse config)` \
+					/N `# Skip 'Select Drives' dialog, go straight to scan`
+			else
+				# Alternative (dua-cli):
+				# dua interactive
+				echo "Detected WSL. Launching Linux ncdu..."
+				# stay within a single filesystem (don’t cross into /proc, /sys, /mnt, etc.)
+				# speed up scan by minimizing screen updates
+				# use dark color theme for better readability
+				# skip cache directories (~/.cache, etc.)
+				# skip kernel pseudo-filesystems (e.g. /proc, /sys)
+				# scan from the root directory (change this if you only want /home, etc.)
+				ncdu -x -q --color=dark --exclude-caches --exclude-kernfs /
+			fi
+		else
+			echo "Detected Linux. Launching ncdu..."
+			# Alternative (dua-cli):
+			# dua interactive
+			# stay within a single filesystem (don’t cross into /proc, /sys, /mnt, etc.)
+			# speed up scan by minimizing screen updates
+			# use dark color theme for better readability
+			# skip cache directories (~/.cache, etc.)
+			# skip kernel pseudo-filesystems (e.g. /proc, /sys)
+			# scan from the root directory (change this if you only want /home, etc.)
+			ncdu -x -q --color=dark --exclude-caches --exclude-kernfs /
+		fi
+		;;
+	*)
+		echo "Unsupported OS: ${unameOut}"
+		return 1
+		;;
+	esac
+}
+
+function nmap_full_scan() {
+    local network="${1:-192.168.1.0/24}"
+
+sudo nmap -T5 --script broadcast-dhcp-discover --max-retries 1500 "$network"
+}
+
+function nmap_fast_scan() {
+    local network="${1:-192.168.1.0/24}"
+
+    nmap -sn -n "$network"
+}
+
+

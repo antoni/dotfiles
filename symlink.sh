@@ -53,35 +53,35 @@ SWEET_HOME_VERSION=$(echo "$HOME"/SweetHome3D-* | awk --field-separator'-' '{pri
 echo "SweetHome3D       version symlinked:   " "$SWEET_HOME_VERSION"
 printf "${colors[Reset_Color]}"
 
-DOTFILES=(profile bashrc zshrc vimrc paths aliases zprofile bash_profile common_profile.sh tmux.conf
-	gitconfig gitignore gitattributes ghci gvimrc hgrc lldbinit gdbinit xbindkeysrc
-	fzf.sh psqlrc colordiffrc emacs inputrc agda sudo_as_admin_successful LESS_TERMCAP
-	jupyter newsboat)
+DOTFILES=(profile bashrc zshrc sshrc sshrc.d vimrc paths zprofile bash_profile
+	common_profile.sh tmux.conf gitignore gitattributes ghci gvimrc hgrc lldbinit
+	gdbinit xbindkeysrc fzf.sh psqlrc colordiffrc emacs inputrc agda
+	sudo_as_admin_successful LESS_TERMCAP jupyter newsboat)
 
 function mac_change_hostname() {
-    if [ -z "$1" ]; then
-        echo "Error: Please provide a new hostname."
-        return 1
-    fi
-    
-    # Sanitize input to create a valid LocalHostName.
-    local sanitized_local_hostname=$(echo "$1" | tr -cd '[:alnum:]-')
+	if [ -z "$1" ]; then
+		echo "Error: Please provide a new hostname."
+		return 1
+	fi
 
-    # Ensure sanitized LocalHostName is not empty after cleaning
-    if [ -z "$sanitized_local_hostname" ]; then
-        echo "Error: The provided hostname contains invalid characters."
-        return 1
-    fi
-    
-    # Fully qualified hostname (e.g., myMac.domain.com)
-    sudo scutil --set HostName "$1"
-    
-    # Valid LocalHostName (e.g., myMac.local), sanitize to ensure it's valid.
-    sudo scutil --set LocalHostName "$sanitized_local_hostname"
-    
-    # User-friendly computer name (e.g., myMac)
-    sudo scutil --set ComputerName "$1"
-    
+	# Sanitize input to create a valid LocalHostName.
+	local sanitized_local_hostname=$(echo "$1" | tr -cd '[:alnum:]-')
+
+	# Ensure sanitized LocalHostName is not empty after cleaning
+	if [ -z "$sanitized_local_hostname" ]; then
+		echo "Error: The provided hostname contains invalid characters."
+		return 1
+	fi
+
+	# Fully qualified hostname (e.g., myMac.domain.com)
+	sudo scutil --set HostName "$1"
+
+	# Valid LocalHostName (e.g., myMac.local), sanitize to ensure it's valid.
+	sudo scutil --set LocalHostName "$sanitized_local_hostname"
+
+	# User-friendly computer name (e.g., myMac)
+	sudo scutil --set ComputerName "$1"
+
 	print_success_message "Hostname changed to: $1"
 }
 
@@ -140,6 +140,41 @@ function mac_symlink() {
 	[ -d "$HOME/scripts" ] && ln -fs ~/scripts/Chrome\ Debugger.app /Applications/
 }
 
+function setup_gitconfig() {
+	local name email
+
+	# Prompt user for input
+	printf "Enter your full name for Git: "
+	IFS= read -r name
+	printf "Enter your email for Git: "
+	IFS= read -r email
+
+	# Validate input
+	if [[ -z "$name" || -z "$email" ]]; then
+		echo "Name and email must not be empty."
+		return 1
+	fi
+
+	local gitconfig_base="$HOME/dotfiles/gitconfig.base"
+	local gitconfig_target="$HOME/.gitconfig"
+
+	# Check base config exists
+	if [[ ! -f "$gitconfig_base" ]]; then
+		echo "Base config file not found at $gitconfig_base"
+		return 1
+	fi
+
+	# Write the new config
+	{
+		echo "[user]"
+		echo "    name = $name"
+		echo "    email = $email"
+		cat "$gitconfig_base"
+	} >"$gitconfig_target"
+
+	echo "Git config has been created at $gitconfig_target"
+}
+
 # Fedora regular updates
 function fedora_regular_updates() {
 	sudo dnf install --assumeyes dnf-automatic
@@ -154,6 +189,7 @@ function fedora_system_upgrade() {
 }
 
 function main() {
+	setup_gitconfig
 	# Symlink the files in the current directory with corresponding dotfiles in
 	# the home directory
 	for f in "${DOTFILES[@]}"; do
@@ -342,7 +378,7 @@ function main() {
 			mac_change_hostname "$HOSTNAME"
 		else
 			sudo hostnamectl set-hostname "$HOSTNAME"
-		print_success_message "Hostname changed to: $HOSTNAME"
+			print_success_message "Hostname changed to: $HOSTNAME"
 		fi
 	}
 

@@ -135,8 +135,8 @@ function main() {
 		sudo locale-gen en_US.UTF-8
 	fi
 
-    source "$HOME/dotfiles/install_oh_my_zsh.sh" && install_oh_my_zsh || exit_with_error_message "Could not install oh-my-zsh"
-	
+	source "$HOME/dotfiles/install_oh_my_zsh.sh" && install_oh_my_zsh || exit_with_error_message "Could not install oh-my-zsh"
+
 	source "${BASH_SOURCE%/*}/install_global_javascript_npm_packages.sh"
 	install_global_javascript_npm_packages || exit_with_error_message ""
 	install_vim_plugins || exit_with_error_message ""

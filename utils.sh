@@ -5,6 +5,7 @@ export HOME_DIR=$HOME
 # TODO: Rename
 export DOTFILES_DIR=$HOME_DIR/dotfiles
 
+source "$HOME/dotfiles/config.sh"
 source "$HOME/dotfiles/paths"
 source "$HOME/dotfiles/colors.sh"
 source "$HOME/dotfiles/format_conversion.sh"

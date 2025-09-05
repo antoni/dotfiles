@@ -20,7 +20,11 @@ if [ -z "$(docker images -q zricethezav/gitleaks:latest 2>/dev/null)" ]; then
 	docker pull ghcr.io/gitleaks/gitleaks:latest
 fi
 
-docker run -v ~/dotfiles:/path zricethezav/gitleaks:latest detect \
-	--source="/path" \
-	--no-banner \
-	--verbose
+docker run --rm --interactive \
+	--volume="$(pwd):/current_repo" \
+	--workdir="/current_repo" \
+	zricethezav/gitleaks:latest detect \
+	--source="/current_repo" \
+	--report-path="/dev/stdout" \
+	--redact="0" \
+	--no-banner
