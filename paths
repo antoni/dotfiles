@@ -39,8 +39,8 @@ export PATH=$ANDROID_HOME/build-tools/19.1.0:$PATH
 
 # GNU coreutils
 if [[ "$(uname)" == "Darwin" ]]; then
-  export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
-  export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+	export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+	export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 fi
 
 # Haskell Stack global executables
@@ -62,6 +62,3 @@ export NPM_GLOBAL_PACKAGES_DIRECTORY="$HOME"/.npm-global_packages
 
 export PATH="$NPM_GLOBAL_PACKAGES_DIRECTORY"/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
-
-# Kotlin
-export PATH="$PATH:/home/antoni/kotlin/kotlinc/bin"

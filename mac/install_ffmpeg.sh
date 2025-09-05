@@ -32,7 +32,7 @@
 # 	--enable-libmp3lame \
 # 	--enable-libvorbis --enable-libvpx --enable-libx264 --enable-libx265 \
 # 	--enable-libopus --enable-libxvid --enable-chromaprint --samples=fate-suite/
-# # TODO: Add --enable-decklink --enable-libass --enable-libfdk-aac --enable-libfreetype 
+# # TODO: Add --enable-decklink --enable-libass --enable-libfdk-aac --enable-libfreetype
 
 # # the actual install once you're done configuring
 # make && make install

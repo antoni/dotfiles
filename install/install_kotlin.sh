@@ -21,10 +21,10 @@ rm "$KOTLIN_ZIP"
 echo "🛠️  Adding Kotlin to PATH..."
 KOTLINC_PATH="$INSTALL_DIR/kotlinc/bin"
 if ! grep -q "$KOTLINC_PATH" "$HOME/.bashrc"; then
-  echo "export PATH=\"\$PATH:$KOTLINC_PATH\"" >> "$HOME/.bashrc"
-  echo "✅ Kotlin path added to .bashrc"
+	echo "export PATH=\"\$PATH:$KOTLINC_PATH\"" >>"$HOME/.bashrc"
+	echo "✅ Kotlin path added to .bashrc"
 else
-  echo "ℹ️ Kotlin path already exists in .bashrc"
+	echo "ℹ️ Kotlin path already exists in .bashrc"
 fi
 
 echo "✅ Installation complete. Restart your shell or run:"

@@ -1,10 +1,7 @@
 #!/usr/bin/env bash
 
 # Aliases and custom functions
-source "$HOME"/dotfiles/config.sh
-source "$HOME"/dotfiles/colors.sh
-source "$HOME"/dotfiles/utils.sh
-source "$HOME"/.aliases
+source "$HOME"/dotfiles/aliases
 
 export MANPAGER="less --ignore-case"
 
@@ -94,10 +91,6 @@ export HOMEBREW_AUTO_UPDATE_SECS="$((60 * 60 * 3))"
 # export ANDROID_HOME=/usr/local/opt/android-sdk
 # export ANDROID_NDK_HOME=/usr/local/opt/android-ndk
 
-# SDK Man replaced GVM. Using for Groovy, Gradle, and Maven Version Management
-# export SDKMAN_DIR="$HOME/.sdkman"
-# [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
 # macOS only (delete symlink created after system update)
 rm -f ~/Desktop/Relocated\ Items
 
@@ -128,5 +121,5 @@ PATH=$PATH:$ANDROID_HOME/bin
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 
 if [ -e "$HOME/.cargo/env" ]; then
-  . "$HOME/.cargo/env"
+	. "$HOME/.cargo/env"
 fi
