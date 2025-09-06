@@ -247,9 +247,6 @@ function main() {
 	fi
 	ln -fs "${DOTFILES_DIR}"/config/mimeapps.list "$MIME_FILE"
 
-	# SSH config
-	ln -fs "${DOTFILES_DIR}"/sshconfig ~/.ssh/config
-
 	# ~/scripts directory
 	function setup_scripts() {
 		if [ ! -d "scripts" ]; then

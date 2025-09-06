@@ -41,4 +41,5 @@ ln -fs "$HOME/dotfiles/paths" "$HOME/.sshrc.d/dotfiles/paths"
 ln -fs "$HOME/dotfiles/colors.sh" "$HOME/.sshrc.d/dotfiles/colors.sh"
 ln -fs "$HOME/dotfiles/format_conversion.sh" "$HOME/.sshrc.d/dotfiles/format_conversion.sh"
 ln -fs "$HOME/dotfiles/upgrade_helpers.sh" "$HOME/.sshrc.d/dotfiles/upgrade_helpers.sh"
+ln -fs "$HOME/dotfiles/LESS_TERMCAP" "$HOME/.sshrc.d/dotfiles/LESS_TERMCAP"
 }
