@@ -2,7 +2,6 @@
 
 export IS_WSL="${WSL_DISTRO_NAME:-""}"
 export HOME_DIR=$HOME
-# TODO: Rename
 export DOTFILES_DIR=$HOME_DIR/dotfiles
 
 source "$HOME/dotfiles/config.sh"

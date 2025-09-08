@@ -2,8 +2,6 @@
 
 source "$HOME"/dotfiles/utils.sh
 
-DOTFILES_MAC_DIR=$HOME/dotfiles/mac
-
 function int_signal_handler() {
 	printf "\nQuitting... You will have to do cleanup manually\n"
 	exit
@@ -125,7 +123,7 @@ function mac_symlink() {
 	# ln -sf org.m0k.transmission.plist ~/Library/Preferences/
 
 	# Karabiner config
-	ln -fs "$DOTFILES_MAC_DIR"/karabiner ~/.config/
+	ln -fs "$DOTFILES_DIR/mac/karabiner ~/.config/"
 
 	# TextMate
 	sudo rm --recursive --force /usr/local/bin/mate

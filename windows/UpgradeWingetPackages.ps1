@@ -1,4 +1,5 @@
-# TODO: Check if this is solved: https://github.com/microsoft/winget-cli/issues/2686
+# Note: we skip these because of the error described here:
+# https://github.com/microsoft/winget-cli/issues/2686
 # add id to skip the update
 $skipUpdate = @(
   # Requires elevation, should be updated via wsl.exe --update
