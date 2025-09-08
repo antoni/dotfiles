@@ -39,6 +39,7 @@ APT_PACKAGES=(apache2
 	poppler-utils
 	speedtest-cli
 	traceroute
+	mdns-scan
 	mc
 	pv
 	exiftool
