@@ -2,7 +2,8 @@
 
 # Source: https://gist.github.com/Piasy/b5dfd5c048eb69d1b91719988c0325d8#gistcomment-3314991
 
-# TODO: Replace with this?: https://github.com/markus-perl/ffmpeg-build-script?tab=readme-ov-file#common-install-and-build-macos-linux
+# Note:
+#    - Alternative: https://github.com/markus-perl/ffmpeg-build-script?tab=readme-ov-file#common-install-and-build-macos-linux
 
 # # start clean. make sure you have xcode installed and all the other basics such as brew.
 # brew uninstall --force ffmpeg chromaprint amiaopensource/amiaos/decklinksdk
@@ -31,8 +32,8 @@
 # ./configure --prefix=/usr/local --enable-gpl --enable-nonfree \
 # 	--enable-libmp3lame \
 # 	--enable-libvorbis --enable-libvpx --enable-libx264 --enable-libx265 \
-# 	--enable-libopus --enable-libxvid --enable-chromaprint --samples=fate-suite/
-# # TODO: Add --enable-decklink --enable-libass --enable-libfdk-aac --enable-libfreetype
+# 	--enable-libopus --enable-libxvid --enable-chromaprint --samples=fate-suite/ \
+#    --enable-decklink --enable-libass --enable-libfdk-aac --enable-libfreetype
 
 # # the actual install once you're done configuring
 # make && make install
