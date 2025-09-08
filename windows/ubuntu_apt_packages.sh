@@ -38,6 +38,7 @@ APT_PACKAGES=(apache2
 	qpdf
 	poppler-utils
 	speedtest-cli
+	traceroute
 	mc
 	pv
 	exiftool
