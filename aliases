@@ -2335,15 +2335,13 @@ EOF
 }
 
 function nmap_full_scan() {
-    local network="${1:-192.168.1.0/24}"
+	local network="${1:-192.168.1.0/24}"
 
-sudo nmap -T5 --script broadcast-dhcp-discover --max-retries 1500 "$network"
+	sudo nmap -T5 --script broadcast-dhcp-discover --max-retries 1500 "$network"
 }
 
 function nmap_fast_scan() {
-    local network="${1:-192.168.1.0/24}"
+	local network="${1:-192.168.1.0/24}"
 
-    nmap -sn -n "$network"
+	nmap -sn -n "$network"
 }
-
-

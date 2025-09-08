@@ -34,12 +34,12 @@ fi
 echo "✅ sshrc installed successfully to /usr/local/bin"
 
 function symlink_sshrc_dotfiles() {
-mkdir -p "$HOME/.sshrc.d/dotfiles"
-ln -fs "$HOME/dotfiles/utils.sh" "$HOME/.sshrc.d/dotfiles/utils.sh"
-ln -fs "$HOME/dotfiles/config.sh" "$HOME/.sshrc.d/dotfiles/config.sh"
-ln -fs "$HOME/dotfiles/paths" "$HOME/.sshrc.d/dotfiles/paths"
-ln -fs "$HOME/dotfiles/colors.sh" "$HOME/.sshrc.d/dotfiles/colors.sh"
-ln -fs "$HOME/dotfiles/format_conversion.sh" "$HOME/.sshrc.d/dotfiles/format_conversion.sh"
-ln -fs "$HOME/dotfiles/upgrade_helpers.sh" "$HOME/.sshrc.d/dotfiles/upgrade_helpers.sh"
-ln -fs "$HOME/dotfiles/LESS_TERMCAP" "$HOME/.sshrc.d/dotfiles/LESS_TERMCAP"
+	mkdir -p "$HOME/.sshrc.d/dotfiles"
+	ln -fs "$HOME/dotfiles/utils.sh" "$HOME/.sshrc.d/dotfiles/utils.sh"
+	ln -fs "$HOME/dotfiles/config.sh" "$HOME/.sshrc.d/dotfiles/config.sh"
+	ln -fs "$HOME/dotfiles/paths" "$HOME/.sshrc.d/dotfiles/paths"
+	ln -fs "$HOME/dotfiles/colors.sh" "$HOME/.sshrc.d/dotfiles/colors.sh"
+	ln -fs "$HOME/dotfiles/format_conversion.sh" "$HOME/.sshrc.d/dotfiles/format_conversion.sh"
+	ln -fs "$HOME/dotfiles/upgrade_helpers.sh" "$HOME/.sshrc.d/dotfiles/upgrade_helpers.sh"
+	ln -fs "$HOME/dotfiles/LESS_TERMCAP" "$HOME/.sshrc.d/dotfiles/LESS_TERMCAP"
 }
