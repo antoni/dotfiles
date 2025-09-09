@@ -44,6 +44,8 @@ APT_PACKAGES=(apache2
 	pv
 	exiftool
 	rand
+	ethtool
+	wakeonlan
 	wkhtmltopdf
 	cargo
 	librsvg2-bin
