@@ -37,7 +37,8 @@ set pastetoggle=<F12>         " pastetoggle (sane indentation on pastes)
 set ruler                     " Show ruler on the bottom
 set virtualedit=onemore
 " See: https://unix.stackexchange.com/a/333659/20334
-set wrap formatoptions<
+set formatoptions-=cro
+" set wrap formatoptions<
 " set textwidth=0
 " set formatoptions+=w          " gggqG - format to break after 80 characters
 " set wrapmargin=2
