@@ -2330,7 +2330,9 @@ EOF
 				# skip cache directories (~/.cache, etc.)
 				# skip kernel pseudo-filesystems (e.g. /proc, /sys)
 				# scan from the root directory (change this if you only want /home, etc.)
-				ncdu -x -q --color=dark --exclude-caches --exclude-kernfs /
+				ncdu -x -q --color=dark \
+					--exclude /proc --exclude /sys --exclude /tmp \
+					--exclude-caches --exclude-kernfs
 			fi
 		else
 			echo "Detected Linux. Launching ncdu..."
