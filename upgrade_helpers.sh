@@ -7,9 +7,9 @@ function upgrade_npm_packages() {
 	npm install --no-fund --no-progress --silent --quiet npm
 }
 
-function upgrade_pip_packages() {
-	DISPLAY="" pip3 list --outdated | awk '{print $1}' | tail --lines=+3 |
-		DISPLAY="" xargs -I % sh -c 'pip3 install --upgrade %'
+function upgrade_pipx_packages() {
+	DISPLAY="" pipx list --short | awk '{print $1}' |
+		DISPLAY="" xargs -I % sh -c 'pipx upgrade "%"'
 }
 
 function upgrade_apt_packages() {
