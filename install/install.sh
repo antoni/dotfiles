@@ -9,7 +9,7 @@ source "$DOTFILES_DIR"/install/install_chrome.sh
 source "$DOTFILES_DIR"/mac/brew_install.sh
 source "$DOTFILES_DIR"/utils.sh
 source "$DOTFILES_DIR"/colors.sh
-source "$(dirname "$0")/pip_packages.sh" || exit 1
+source "$(dirname "$0")/pipx_packages.sh" || exit 1
 
 # Install required packages
 PACKAGES=(suckless-tools xbindkeys clang vim rdesktop make sysstat
@@ -17,7 +17,7 @@ PACKAGES=(suckless-tools xbindkeys clang vim rdesktop make sysstat
 	libreoffice cscope universal-ctags pavucontrol jq dmidecode xsel i3 zsh lsb ntp feh help2man rpl
 	thunar acpi tmux gitg nomacs docker vpnc
 	hexchat rlwrap xautolock yamllint
-	eom eog inotify-tools xbacklight arandr pulseaudio gnome-bluetooth
+	eom eog inotify-tools xbacklight pulseaudio gnome-bluetooth
 	tidy pandoc tig ncdu redshift rustc
 	dunst httpie udev autofs pinta ruby nodejs)
 
@@ -161,13 +161,10 @@ function setup_docker() {
 	sudo_exec chown "$USER" /var/run/docker.sock
 }
 
-function install_pip_packages() {
-	# Use xargs, so that PIP doesn't fail on a single error
-	# xargs -n 1 pip3 install --user <requirements.txt
-	# xargs -n 1 pip3 install --user <requirements.txt
-	pip3 install --user "${PIP_PACKAGES[@]}" --upgrade
-
-	pip3 install "qiskit[visualization]" --user --upgrade
+function install_pipx_packages() {
+	for pkg in "${PIPX_PACKAGES[@]}"; do
+		pipx install --include-deps --force "$pkg"
+	done
 }
 
 # Git kraken (Linux)

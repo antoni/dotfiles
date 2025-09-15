@@ -91,8 +91,8 @@ function upgrade_all() {
 
 	echo "Upgrading PIP packages..."
 	# Running it twice seems to resolve some dependency issues which PIP reports when running it just one time
-	upgrade_pip_packages
-	upgrade_pip_packages
+	upgrade_pipx_packages
+	upgrade_pipx_packages
 
 	popd &>/dev/null || exit
 
