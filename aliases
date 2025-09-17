@@ -2423,3 +2423,45 @@ function get_header_from_curl() {
         }
     '
 }
+
+function exec_last_line_output() {
+  # Run the command with all output (stdout + stderr)
+  local output
+  output="$("$@" 2>&1)" || true
+
+  # Extract the last non-empty line, trim leading whitespace
+  local last_line
+  last_line=$(printf '%s\n' "$output" \
+    | sed '/^[[:space:]]*$/d' \
+    | tail -n 1 \
+    | sed 's/^[[:space:]]*//')
+
+  # Execute the extracted line
+  if [[ -n "$last_line" ]]; then
+    eval "$last_line"
+  else
+    echo "No non-empty line found in output." >&2
+    return 1
+  fi
+}
+
+alias ctc='copy_to_clipboard'
+
+function pdf_to_md_polish() {
+    local infile="$1"
+
+    if [[ -z "$infile" ]]; then
+        echo "Usage: convert_pdf <file.pdf>"
+        return 1
+    fi
+
+    # Strip extension and path to get base name
+    local base="$(basename "$infile" .pdf)"
+    local outfile="${base}_converted"
+
+    docling "$infile" \
+        --pdf-backend pypdfium2 \
+        --ocr-engine tesseract \
+        --ocr-lang pl \
+        --output "$outfile"
+}

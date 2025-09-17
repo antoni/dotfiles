@@ -23,6 +23,8 @@ APT_PACKAGES=(apache2
 	jq
 	ascii
 	qemu-utils
+	tesseract-ocr
+	libsecret-tools
 	ffmpeg
 	maven
 	flatpak
