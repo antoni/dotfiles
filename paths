@@ -64,5 +64,4 @@ fi
 # npm global packages
 export NPM_GLOBAL_PACKAGES_DIRECTORY="$HOME"/.npm-global_packages
 
-export PATH="$NPM_GLOBAL_PACKAGES_DIRECTORY"/bin:$PATH
-export PATH=$HOME/.cargo/bin:$PATH
+export PATH="$NPM_GLOBAL_PACKAGES_DIRECTORY"/bin:/snap/bin:$HOME/.cargo/bin:$PATH
