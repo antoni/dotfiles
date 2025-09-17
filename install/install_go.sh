@@ -26,6 +26,7 @@ function install_go_packages() {
 	log_info "Installing go packages"
 	if command_exists go; then
 		GO_PACKAGES=(
+			github.com/ycd/dstp/cmd/dstp
 			github.com/tomnomnom/gron
 			github.com/rverton/webanalyze/cmd/webanalyze
 			mvdan.cc/sh/v3/cmd/shfmt)

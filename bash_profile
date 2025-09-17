@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 source "$HOME"/.common_profile.sh
 . "$HOME/.cargo/env"
