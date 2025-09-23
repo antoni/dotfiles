@@ -69,3 +69,50 @@ function mov_to_mp4() {
 		echo "Successfully created $output_filename" ||
 		echo "Error converting $1 to $output_filename"
 }
+
+#!/usr/bin/env bash
+
+# flac2mp3: Convert FLAC files to MP3 while preserving ID3 tags
+#
+# Usage:
+#   flac2mp3 file1.flac file2.flac ...
+#   find . -name '*.flac' -print0 | xargs -0 flac2mp3
+#
+# Requires: metaflac, flac, lame
+
+function flac2mp3() {
+	local deps=(metaflac flac lame)
+	for cmd in "${deps[@]}"; do
+		if ! command -v "$cmd" >/dev/null 2>&1; then
+			echo "Error: missing dependency: $cmd" >&2
+			return 1
+		fi
+	done
+
+	for f in "$@"; do
+		[[ "$f" != *.flac ]] && continue
+		[[ ! -f "$f" ]] && {
+			echo "Skipping: $f (not found)"
+			continue
+		}
+
+		album=$(metaflac --show-tag=album "$f" | sed 's/[^=]*=//')
+		artist=$(metaflac --show-tag=artist "$f" | sed 's/[^=]*=//')
+		year=$(metaflac --show-tag=date "$f" | sed 's/[^=]*=//')
+		title=$(metaflac --show-tag=title "$f" | sed 's/[^=]*=//')
+		genre=$(metaflac --show-tag=genre "$f" | sed 's/[^=]*=//')
+		tracknumber=$(metaflac --show-tag=tracknumber "$f" | sed 's/[^=]*=//')
+
+		out="${f%.flac}.mp3"
+		echo "Converting: $f → $out"
+
+		flac --decode --stdout "$f" | lame --preset extreme --add-id3v2 \
+			--tt "$title" \
+			--ta "$artist" \
+			--tl "$album" \
+			--ty "$year" \
+			--tn "$tracknumber" \
+			--tg "$genre" \
+			- "$out"
+	done
+}

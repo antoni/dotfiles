@@ -100,8 +100,8 @@ command_prompt=false
 menubar_visible=true
 free_space=false
 horizontal_split=false
-vertical_equal=false
-left_panel_size=56
+vertical_equal=true
+left_panel_size=64
 horizontal_equal=false
 top_panel_size=13
 
