@@ -72,6 +72,8 @@ elif [[ "$UNAME_OUTPUT" == "Linux" ]]; then
 	alias mountrw='mount -o remount,rw /'
 	alias vim='vim -o'
 	alias ls='ls --human-readable --color -lFG'
+
+	alias copy_to_clipboard='xsel --clipboard'
 fi
 
 # Windows (WSL)
@@ -2425,43 +2427,62 @@ function get_header_from_curl() {
 }
 
 function exec_last_line_output() {
-  # Run the command with all output (stdout + stderr)
-  local output
-  output="$("$@" 2>&1)" || true
+	# Run the command with all output (stdout + stderr)
+	local output
+	output="$("$@" 2>&1)" || true
 
-  # Extract the last non-empty line, trim leading whitespace
-  local last_line
-  last_line=$(printf '%s\n' "$output" \
-    | sed '/^[[:space:]]*$/d' \
-    | tail -n 1 \
-    | sed 's/^[[:space:]]*//')
+	# Extract the last non-empty line, trim leading whitespace
+	local last_line
+	last_line=$(printf '%s\n' "$output" |
+		sed '/^[[:space:]]*$/d' |
+		tail -n 1 |
+		sed 's/^[[:space:]]*//')
 
-  # Execute the extracted line
-  if [[ -n "$last_line" ]]; then
-    eval "$last_line"
-  else
-    echo "No non-empty line found in output." >&2
-    return 1
-  fi
+	# Execute the extracted line
+	if [[ -n "$last_line" ]]; then
+		eval "$last_line"
+	else
+		echo "No non-empty line found in output." >&2
+		return 1
+	fi
 }
 
 alias ctc='copy_to_clipboard'
 
 function pdf_to_md_polish() {
-    local infile="$1"
+	local infile="$1"
 
-    if [[ -z "$infile" ]]; then
-        echo "Usage: convert_pdf <file.pdf>"
-        return 1
-    fi
+	if [[ -z "$infile" ]]; then
+		echo "Usage: convert_pdf <file.pdf>"
+		return 1
+	fi
 
-    # Strip extension and path to get base name
-    local base="$(basename "$infile" .pdf)"
-    local outfile="${base}_converted"
+	# Strip extension and path to get base name
+	local base="$(basename "$infile" .pdf)"
+	local outfile="${base}_converted"
 
-    docling "$infile" \
-        --pdf-backend pypdfium2 \
-        --ocr-engine tesseract \
-        --ocr-lang pl \
-        --output "$outfile"
+	docling "$infile" \
+		--pdf-backend pypdfium2 \
+		--ocr-engine tesseract \
+		--ocr-lang pl \
+		--output "$outfile"
 }
+
+alias ip='ip -color=auto'
+
+function curltime() {
+	local out
+	out=$(curl -sS -o /dev/null -w "%{time_namelookup} %{time_connect} %{time_appconnect} %{time_pretransfer} %{time_redirect} %{time_starttransfer} %{time_total}" "$@")
+
+	printf "\n%-18s %-12s %s\n" "Phase" "Seconds" "Description"
+	printf "%-18s %-12s %s\n" "------------------" "------------" "----------------"
+	printf "%-18s %-12s %s\n" "time_namelookup" "$namelookup" "DNS lookup time"
+	printf "%-18s %-12s %s\n" "time_connect" "$connect" "TCP connect time"
+	printf "%-18s %-12s %s\n" "time_appconnect" "$appconnect" "SSL/TLS handshake time"
+	printf "%-18s %-12s %s\n" "time_pretransfer" "$pretransfer" "From start until file transfer is about to begin"
+	printf "%-18s %-12s %s\n" "time_redirect" "$redirect" "Time for all redirections (if any)"
+	printf "%-18s %-12s %s\n" "time_starttransfer" "$starttransfer" "Time to first byte (TTFB) from the server"
+	printf "%-18s %-12s %s\n" "time_total" "$total" "Total time for complete request\n"
+}
+
+alias psh='~/scripts/linux/psh.sh'

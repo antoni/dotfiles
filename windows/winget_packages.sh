@@ -89,6 +89,7 @@ MAY_HAVE=(
 	DigitalScholar.Zotero
 	geeksoftwareGmbH.PDF24Creator
 	ByteDance.CapCut
+	WiresharkFoundation.Wireshark
 	Amazon.AWSCLI
 	Rclone.Rclone
 	Zeit.Hyper

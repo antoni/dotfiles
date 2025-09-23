@@ -22,6 +22,7 @@ APT_PACKAGES=(apache2
 	graphviz
 	jq
 	ascii
+	watchman
 	qemu-utils
 	tesseract-ocr
 	libsecret-tools
@@ -44,6 +45,7 @@ APT_PACKAGES=(apache2
 	mdns-scan
 	mc
 	pv
+	xsel
 	exiftool
 	rand
 	ethtool
