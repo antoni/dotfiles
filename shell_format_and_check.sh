@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-source "$HOME"/dotfiles/utils.sh
-
 # Files that are not recognized as shell by shfmt
 unrecognized_shell_files="paths
 aliases
