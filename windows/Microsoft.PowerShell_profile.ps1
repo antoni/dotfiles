@@ -107,10 +107,10 @@ function show_local_ip {
         }).IPv4Address.IPAddress | clip
     }
     (Get-NetIPConfiguration |
-    Where-Object {
-        $null -ne $_.IPv4DefaultGateway -and
-        $_.NetAdapter.Status -ne "Disconnected"
-    }).IPv4Address.IPAddress
+        Where-Object {
+            $null -ne $_.IPv4DefaultGateway -and
+            $_.NetAdapter.Status -ne "Disconnected"
+        }).IPv4Address.IPAddress
 }
 function show_public_ip {
     param([string]$copy)
@@ -133,7 +133,7 @@ function upfile {
 function ffaudio {
     $c = -1
     [System.Collections.ArrayList]$micList = @()
-    Get-PnpDevice | foreach-object {
+    Get-PnpDevice | ForEach-Object {
         if ($_.Class -eq "AudioEndpoint" -and $_.Status -eq "OK") {
             ++$c
             Write-Host $c $_.FriendlyName
@@ -164,35 +164,35 @@ function sxsc() {
 }
 
 function help {
-    get-help $args[0] | out-host -paging
+    Get-Help $args[0] | Out-Host -Paging
 }
 
 function man {
-    get-help $args[0] | out-host -paging
+    Get-Help $args[0] | Out-Host -Paging
 }
 
 function mkdir {
-    new-item -type directory -path $args
+    New-Item -type directory -Path $args
 }
 
 function md {
-    new-item -type directory -path $args
+    New-Item -type directory -Path $args
 }
 
 function prompt {
-    "PS " + $(get-location) + "> "
+    "PS " + $(Get-Location) + "> "
 }
 
 & {
     for ($i = 0; $i -lt 26; $i++) {
         $funcname = ([System.Char]($i + 65)) + ':'
         $str = "function global:$funcname { set-location $funcname } "
-        invoke-expression $str
+        Invoke-Expression $str
     }
 }
 
-Function Copy-CurrentDirectory () {
-    Get-Location | Select -ExpandProperty Path | copy_to_clipboard
+function Copy-CurrentDirectory () {
+    Get-Location | select -ExpandProperty Path | copy_to_clipboard
 }
 
 Set-Alias copy_current_path Copy-CurrentDirectory
@@ -230,16 +230,16 @@ function wslpath(
     wsl 'wslpath' $conversion $path.Replace('\', '\\');
 }
 
-Function Copy-LastCommand {
-    If (Get-History) {
-        If ($PSVersionTable.PSVersion.ToString() -match '5.1') {
+function Copy-LastCommand {
+    if (Get-History) {
+        if ($PSVersionTable.PSVersion.ToString() -match '5.1') {
             Set-Clipboard -Value (Get-History (Get-History | Select-Object -Last 1).Id -ErrorAction SilentlyContinue).CommandLine
         }
-        Else {
+        else {
             (Get-History (Get-History | Select-Object -Last 1).Id).CommandLine | clip
         }
     }
-    Else {
+    else {
         Write-Warning -Message 'No command history to copy.'
     }
 }
@@ -253,8 +253,8 @@ function ListUsbDevices {
 if (($host.Name -eq 'ConsoleHost')) {
     Import-Module PSReadLine
     Set-PSReadLineOption -PredictionSource History
-    Set-PSReadlineKeyHandler -Key UpArrow   -Function HistorySearchBackward
-    Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
+    Set-PSReadLineKeyHandler -Key UpArrow   -Function HistorySearchBackward
+    Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
     # Set-PSReadLineKeyHandler -Key Tab -Function Complete
     Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
     Set-PSReadLineOption -HistorySearchCursorMovesToEnd
@@ -273,3 +273,4 @@ function prompt {
 function vihosts {
     vim %SystemRoot%\system32\drivers\etc\hosts
 }
+

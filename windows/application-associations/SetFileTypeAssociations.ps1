@@ -22,3 +22,4 @@ Set-FTA  Applications\notepad++.exe .xml
 Register-FTA "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" .ps1 -Icon "shell32.dll,100"
 Set-FTA  ChromeHTML .svg
 Set-FTA  VSCode.ts .ts
+

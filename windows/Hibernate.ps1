@@ -5,7 +5,7 @@ Add-Type -AssemblyName System.Windows.Forms
 function Set-PowerState {
     [CmdletBinding()]
     param (
-          [System.Windows.Forms.PowerState] $PowerState = [System.Windows.Forms.PowerState]::Suspend
+        [System.Windows.Forms.PowerState] $PowerState = [System.Windows.Forms.PowerState]::Suspend
         , [switch] $DisableWake
         , [switch] $Force
     )
@@ -37,3 +37,5 @@ function Set-PowerState {
 
 # Call the function
 Set-PowerState -PowerState Hibernate -DisableWake -Force;
+
+
