@@ -131,4 +131,3 @@ function rst2pdf() {
 
 # Serves github-rendered Markdown file (from .) on localhost:6419
 alias md2html='grip'
-
