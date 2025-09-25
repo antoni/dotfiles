@@ -23,6 +23,8 @@ if (Test-Path $appInstallerPath) {
 
     Write-Output "DuckDuckGo browser installation process launched. Follow any prompts to complete installation."
 
-} else {
+}
+else {
     Write-Output "Failed to download the DuckDuckGo browser appinstaller. Please check your internet connection or URL."
 }
+

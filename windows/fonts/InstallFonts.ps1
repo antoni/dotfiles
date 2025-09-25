@@ -1,3 +1,6 @@
 $fonts = (New-Object -ComObject Shell.Application).Namespace(0x14)
 
-Get-ChildItem -Recurse -include *.ttf | % { $fonts.CopyHere($_.fullname) }
+Get-ChildItem -Recurse -Include *.ttf | % { $fonts.CopyHere($_.fullname) }
+
+
+
