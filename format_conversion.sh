@@ -116,3 +116,19 @@ function flac2mp3() {
 			- "$out"
 	done
 }
+
+# Markdown to PDF
+function md2pdf() {
+	local -r filename=$(filename_without_extension "$1")
+	pandoc --standalone --variable=papersize:a4 --variable=geometry:margin=1in --from=gfm -o "$filename".pdf "$filename".md
+	open "$filename".pdf
+}
+
+function rst2pdf() {
+	pandoc --standalone -V papersize:a4 -V geometry:margin=1in --from rst -o "$1".pdf "$1"
+	open "$1".pdf
+}
+
+# Serves github-rendered Markdown file (from .) on localhost:6419
+alias md2html='grip'
+
