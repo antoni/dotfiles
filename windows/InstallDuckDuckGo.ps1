@@ -28,3 +28,4 @@ else {
     Write-Output "Failed to download the DuckDuckGo browser appinstaller. Please check your internet connection or URL."
 }
 
+

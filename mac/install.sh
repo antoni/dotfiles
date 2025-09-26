@@ -48,9 +48,9 @@ USER=${USER:-$(id -u -n)}
 # $HOME is defined at the time of login, but it could be unset. If it is unset,
 # a tilde by itself (~) will not be expanded to the current user's home directory.
 # POSIX: https://pubs.opengroup.org/onlinepubs/009696899/basedefs/xbd_chap08.html#tag_08_03
-HOME="${HOME:-$(getent passwd $USER 2>/dev/null | cut -d: -f6)}"
+HOME="${HOME:-$(getent passwd "$USER" 2>/dev/null | cut -d: -f6)}"
 # macOS does not have getent, but this works even if $HOME is unset
-HOME="${HOME:-$(eval echo ~$USER)}"
+HOME="${HOME:-$(eval echo ~"$USER")}"
 
 # Track if $ZSH was provided
 custom_zsh=${ZSH:+yes}
@@ -158,7 +158,7 @@ supports_hyperlinks() {
 
 	# VTE-based terminals above v0.50 (Gnome Terminal, Guake, ROXTerm, etc)
 	if [ -n "$VTE_VERSION" ]; then
-		[ $VTE_VERSION -ge 5000 ]
+		[ "$VTE_VERSION" -ge 5000 ]
 		return $?
 	fi
 
@@ -477,12 +477,12 @@ EOF
 
 # shellcheck disable=SC2183  # printf string has more %s than arguments ($FMT_RAINBOW expands to multiple arguments)
 print_success() {
-	printf '%s         %s__      %s           %s        %s       %s     %s__   %s\n' $FMT_RAINBOW $FMT_RESET
-	printf '%s  ____  %s/ /_    %s ____ ___  %s__  __  %s ____  %s_____%s/ /_  %s\n' $FMT_RAINBOW $FMT_RESET
-	printf '%s / __ \\%s/ __ \\  %s / __ `__ \\%s/ / / / %s /_  / %s/ ___/%s __ \\ %s\n' $FMT_RAINBOW $FMT_RESET
-	printf '%s/ /_/ /%s / / / %s / / / / / /%s /_/ / %s   / /_%s(__  )%s / / / %s\n' $FMT_RAINBOW $FMT_RESET
-	printf '%s\\____/%s_/ /_/ %s /_/ /_/ /_/%s\\__, / %s   /___/%s____/%s_/ /_/  %s\n' $FMT_RAINBOW $FMT_RESET
-	printf '%s    %s        %s           %s /____/ %s       %s     %s          %s....is now installed!%s\n' $FMT_RAINBOW $FMT_GREEN $FMT_RESET
+	printf '%s         %s__      %s           %s        %s       %s     %s__   %s\n' "$FMT_RAINBOW" "$FMT_RESET"
+	printf '%s  ____  %s/ /_    %s ____ ___  %s__  __  %s ____  %s_____%s/ /_  %s\n' "$FMT_RAINBOW" "$FMT_RESET"
+	printf '%s / __ \\%s/ __ \\  %s / __ `__ \\%s/ / / / %s /_  / %s/ ___/%s __ \\ %s\n' "$FMT_RAINBOW" "$FMT_RESET"
+	printf '%s/ /_/ /%s / / / %s / / / / / /%s /_/ / %s   / /_%s(__  )%s / / / %s\n' "$FMT_RAINBOW" "$FMT_RESET"
+	printf '%s\\____/%s_/ /_/ %s /_/ /_/ /_/%s\\__, / %s   /___/%s____/%s_/ /_/  %s\n' "$FMT_RAINBOW" "$FMT_RESET"
+	printf '%s    %s        %s           %s /____/ %s       %s     %s          %s....is now installed!%s\n' "$FMT_RAINBOW" "$FMT_GREEN" "$FMT_RESET"
 	printf '\n'
 	printf '\n'
 	printf "%s %s %s\n" "Before you scream ${FMT_BOLD}${FMT_YELLOW}Oh My Zsh!${FMT_RESET} look over the" \
@@ -492,7 +492,7 @@ print_success() {
 	printf '%s\n' "• Follow us on X: $(fmt_link @ohmyzsh https://x.com/ohmyzsh)"
 	printf '%s\n' "• Join our Discord community: $(fmt_link "Discord server" https://discord.gg/ohmyzsh)"
 	printf '%s\n' "• Get stickers, t-shirts, coffee mugs and more: $(fmt_link "Planet Argon Shop" https://shop.planetargon.com/collections/oh-my-zsh)"
-	printf '%s\n' $FMT_RESET
+	printf '%s\n' "$FMT_RESET"
 }
 
 main() {

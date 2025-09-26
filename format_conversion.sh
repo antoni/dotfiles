@@ -4,7 +4,7 @@
 function jpg_to_png() {
 	local input="$1"
 	local output="$2"
-	convert "$input" -resize 200x200 -background white -gravity center -extent 200x200 $output
+	convert "$input" -resize 200x200 -background white -gravity center -extent 200x200 "$output"
 }
 
 function heic_to_jpg() {
@@ -117,11 +117,14 @@ function flac2mp3() {
 	done
 }
 
-# Markdown to PDF
 function md2pdf() {
 	local -r filename=$(filename_without_extension "$1")
 	pandoc --standalone --variable=papersize:a4 --variable=geometry:margin=1in --from=gfm -o "$filename".pdf "$filename".md
-	open "$filename".pdf
+}
+
+function pdf2md() {
+	local -r filename=$(filename_without_extension "$1")
+	docling "$filename.pdf" --ocr-lang pl --output $filename
 }
 
 function rst2pdf() {

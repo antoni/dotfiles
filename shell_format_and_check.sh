@@ -12,4 +12,4 @@ common_profile.sh
 fzf.sh
 shell_format_and_check.sh"
 
-~/scripts/shell_format_and_check/shell_format_and_check.sh --unrecognized-files "${unrecognized_shell_files//$'\n'/ }" $HOME/dotfiles
+~/scripts/shell_format_and_check/shell_format_and_check.sh --unrecognized-files "${unrecognized_shell_files//$'\n'/ }" "$HOME"/dotfiles

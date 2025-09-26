@@ -768,3 +768,4 @@ function Set-PTA {
     Set-FTA -ProgId $ProgId -Protocol $Protocol -Icon $Icon
 }
 
+

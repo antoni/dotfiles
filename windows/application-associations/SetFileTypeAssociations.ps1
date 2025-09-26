@@ -23,3 +23,4 @@ Register-FTA "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" .ps1 -I
 Set-FTA  ChromeHTML .svg
 Set-FTA  VSCode.ts .ts
 
+
