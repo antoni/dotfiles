@@ -48,7 +48,7 @@ function make_thumbnails() {
 	eval "mogrify -format jpg \
 		-path "$thumbnails_folder_name" \
 		-thumbnail 250x250 \
-		-format jpg "$file_extensions_in_directory""
+		-format jpg ""$file_extensions_in_directory"""
 
 	printf "Thumbnails created in the %s directory\n" "$thumbnails_folder_name"
 }

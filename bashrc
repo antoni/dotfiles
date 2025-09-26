@@ -102,7 +102,7 @@ preexec_invoke_exec() {
 	if [ "$last_command_full" != "" ]; then
 		preexec "$this_command"
 
-		if echo $last_command_full | grep --quiet --ignore-case TOKEN; then
+		if echo "$last_command_full" | grep --quiet --ignore-case TOKEN; then
 			return
 		fi
 

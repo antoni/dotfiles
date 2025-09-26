@@ -39,3 +39,4 @@ function Set-PowerState {
 Set-PowerState -PowerState Hibernate -DisableWake -Force;
 
 
+

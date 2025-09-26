@@ -111,7 +111,7 @@ function post_install() {
 	if [[ -n "$IS_WSL" ]]; then
 		winget upgrade --all
 
-		powershell.exe -NoLogo -File $DOTFILES_DIR/windows/RemoveShortcutsFromDesktop.ps1
+		powershell.exe -NoLogo -File "$DOTFILES_DIR"/windows/RemoveShortcutsFromDesktop.ps1
 	fi
 
 	# TODO: Make it cross-OS

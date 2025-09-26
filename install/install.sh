@@ -112,7 +112,7 @@ function main() {
 		dnf install --assumeyes "${PACKAGES[*]}" || exit_with_error_message ""
 		dnf install --assumeyes "${FEDORA[*]}" || exit_with_error_message ""
 	else # macOS
-		source $DOTFILES_DIR/mac/brew_install.sh
+		source "$DOTFILES_DIR"/mac/brew_install.sh
 
 		mac_install_misc
 		HOMEBREW_NO_AUTO_UPDATE=1 brew install "${BREW_PACKAGES_MUST_HAVE[@]}"

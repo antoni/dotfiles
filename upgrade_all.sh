@@ -5,7 +5,7 @@ set -e
 source "$HOME"/dotfiles/colors.sh
 source "$HOME"/dotfiles/utils.sh
 
-function update_wslcheck_and_update_windows_subsystem_for_linux() {
+function check_and_update_windows_subsystem_for_linux() {
 	echo "Checking Windows Subsystem for Linux status..."
 	local update_command_output
 	update_command_output=$(wsl.exe --update 2>&1)
@@ -98,7 +98,7 @@ function upgrade_all() {
 
 	# macOS
 	if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
-		$HOME/dotfiles/mac/post_install.sh
+		"$HOME"/dotfiles/mac/post_install.sh
 
 		# Do the rest without sudo
 		sudo --reset-timestamp
