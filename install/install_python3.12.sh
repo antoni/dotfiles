@@ -17,7 +17,9 @@ main() {
 	curl -sS https://bootstrap.pypa.io/get-pip.py | sudo python3.12
 
 	# Install pipx (system default 3.10), then ensure PATH
-	sudo apt install -y pipx
+	python3 -m pip uninstall -y pipx
+  python3 -m pip install --user pipx
+
 	pipx ensurepath
 
 	# Install Poetry with pipx
