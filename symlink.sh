@@ -307,10 +307,11 @@ function main() {
 			}
 			replace_notepad_plus_plus_settings
 
-			function symlink_wsl_conf() {
+			function symlink_wsl_configuration() {
 				sudo ln -sf "${DOTFILES_DIR}"/wsl.conf /etc/wsl.conf
+				sudo ln -sf "${DOTFILES_DIR}"/wslconfig /mnt/c/Users/vivob/.wslconfig
 			}
-			symlink_wsl_conf
+			symlink_wsl_configuration
 		else
 			function linux_brightness_settings() {
 				sudo cp brightness.sh /root/

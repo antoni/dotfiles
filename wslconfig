@@ -1,0 +1,79 @@
+[wsl2]
+
+# An absolute Windows path to a custom Linux kernel.
+# kernel=The Microsoft built kernel provided inbox (default)
+
+# How much memory to assign to the WSL 2 VM, this can be set as whole numbers using GB or MB. Default is 50% of total memory on Windows or 8GB, whichever is less; formerly 80% of total memory on Windows.
+memory=5700MB
+
+# How many logical processors to assign to the WSL 2 VM.
+# processors=The same number of logical processors on Windows (default)
+
+# Specifies if ports bound to wildcard or localhost in the WSL 2 VM should be connectable from the host via localhost:port
+# localhostForwarding=true (default)
+
+# Additional kernel command line arguments.
+kernelCommandLine="ipv6.disable=1"
+
+# Runs WSL in "Safe Mode" to attempt recovery on a distro in a bad state.***
+# safeMode=false (default)
+
+# How much swap space to add to the WSL 2 VM, 0 for no swap file, this can be set as whole numbers using GB or MB. Default is 25% of memory size on Windows rounded up to the nearest GB.
+swap=1GB
+
+# Sets swapfile path location.
+# swapfile=%USERPROFILE%\AppData\Local\Temp\swap.vhdx (default)
+
+# Enables Windows to reclaim unused memory allocated to WSL 2 virtual machine.
+# pageReporting=true (default)
+
+# Turns on support for GUI applications (WSLg) in WSL.*
+# guiApplications=true (default)
+
+# Turns on an output console Window that shows the contents of dmesg upon start of a WSL 2 distro instance.*
+# debugConsole=false (default)
+
+# Turns on nested virtualization, enabling other nested VMs to run inside WSL 2.*
+# nestedVirtualization=true (default)
+
+# The number of milliseconds that a VM is idle, before it is shut down.*
+# vmIdleTimeout=60000 (default)
+
+[experimental]
+
+# Automatically releases cached memory after detecting idle CPU usage. Set to gradual for slow release, and dropcache for instant release of cached memory. Defaults to disabled.
+autoMemoryReclaim=gradual
+
+# When set to true, any newly created VHD will be set to sparse automatically. Defaults to false.
+sparseVhd=true
+
+# If the value is mirrored then this turns on mirrored networking mode. Default or unrecognized strings result in NAT networking. Default value is NAT.**
+networkingMode=mirrored
+
+# Setting this to true allows the Windows Firewall rules, as well as rules specific to Hyper-V traffic, to filter WSL network traffic. Defaults to false.**
+firewall=true
+
+# Changes how DNS requests are proxied from WSL to Windows. Defaults to false.**
+dnsTunneling=true
+
+# Enforces WSL to use Windows HTTP proxy information. Defaults to false.**
+autoProxy=true
+
+# Only applicable when experimental.dnsTunneling is set to true. When this option is set to True, DNS requests tunneled from Linux will bypass cached names within Windows to always put the requests on the wire.
+# useWindowsDnsCache=false (default)
+
+# Only applicable when experimental.dnsTunneling is set to true. When set to true, Windows will extract the question from the DNS request and attempt to resolve it, ignoring the unknown records.
+# bestEffortDnsParsing=false (default)
+
+# Only applicable when experimental.autoProxy is set to true. Configures how long WSL will wait for retrieving HTTP proxy information when starting a WSL container. If proxy settings are resolved after this time, the WSL instance must be restarted to use the retrieved proxy settings.
+# initialAutoProxyTimeout=1000 (default)
+
+# Only applicable when experimental.networkingMode is set to mirrored. Specifies which ports Linux applications can bind to, even if that port is used in Windows. This enables applications to listen on a port for traffic purely within Linux, so those application are not blocked even when that port is used for other purposes on Windows. For example, WSL will allow bind to port 53 in Linux for Docker Desktop, as it is listening only to requests from within the Linux container. Should be formatted in a comma seperated list, e.g: 3000,9000,9090
+# ignoredPorts=null (default)
+
+# Only applicable when experimental.networkingMode is set to mirrored. When set to true, will allow the Container to connect to the Host, or the Host to connect to the Container, by an IP address that's assigned to the Host. Note that the 127.0.0.1 loopback address can always be used - this option allows for all additionally assigned local IP addresses to be used as well.
+# hostAddressLoopback=false (default)
+
+# Entries with an *  are only available on Windows 11.
+# Entries with an **  are only available on the Windows Insider Program
+# Entries with an ***  are only available on Windows 11 and WSL version 0.66.2+

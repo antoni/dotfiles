@@ -61,11 +61,11 @@ APT_PACKAGES=(apache2
 	subversion
 	tig
 	python3-
-	pipx
 	python-setuptools
 	python3-setuptools
 	python3-dev
 	libhivex-bin
+	wordnet
 	libcups2-dev
 	libimage-exiftool-perl
 	zip

@@ -10,14 +10,5 @@ PIPX_PACKAGES=(
 	truffleHog gallery-dl instaloader
 	git-filter-repo oci-cli
 	markitdown docling marker-pdf langflow
+	xmldiff yq 2to3
 )
-
-# TODO: Decide what to do with these
-# PIPX_PACKAGES_2=(
-#   2to3 pyyaml pika
-#   z3-solver matplotlib tensorflow numpy
-#   agda-kernel protobuf conda
-#   google-api-python-client oauth2client progressbar2
-#   PyQt5 paho-mqtt PyQtWebEngine
-#   xmldiff yq
-# )
