@@ -66,6 +66,7 @@ APT_PACKAGES=(apache2
 	python3-dev
 	libhivex-bin
 	wordnet
+	trufflehog
 	libcups2-dev
 	libimage-exiftool-perl
 	zip

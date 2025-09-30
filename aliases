@@ -2471,3 +2471,49 @@ function curltime() {
 }
 
 alias psh='~/scripts/linux/psh.sh'
+
+function scan_file_for_secrets() {
+  local target="$1"
+
+  if [[ -z "$target" ]]; then
+    echo "Usage: scan_file_for_secrets <file-to-scan>" >&2
+    return 1
+  fi
+  if [[ ! -r "$target" ]]; then
+    echo "ERROR: cannot read file: $target" >&2
+    return 2
+  fi
+
+  # ensure Docker is installed
+  if ! command -v docker >/dev/null 2>&1; then
+    echo "ERROR: docker not found in PATH." >&2
+    return 127
+  fi
+
+  # pull TruffleHog image if missing
+  docker image inspect trufflesecurity/trufflehog:latest >/dev/null 2>&1 || {
+    echo "Pulling trufflesecurity/trufflehog:latest ..." >&2
+    docker pull trufflesecurity/trufflehog:latest || return 3
+  }
+
+  # run scan (JSONL), convert to array, count length
+  local results
+  results="$(docker run --rm \
+    -v "$(realpath "$target"):/scan_target:ro" \
+    trufflesecurity/trufflehog:latest \
+    filesystem --json --no-verification /scan_target \
+    | jq -s .)"
+
+  local count
+  count="$(jq 'length' <<<"$results")"
+
+  # always print results (array form)
+  echo "$results"
+
+  # exit code depends on findings
+  if [[ "$count" -eq 0 ]]; then
+    return 0
+  else
+    return 1
+  fi
+}
