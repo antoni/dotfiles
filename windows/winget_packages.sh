@@ -92,6 +92,7 @@ MAY_HAVE=(
 	WiresharkFoundation.Wireshark
 	Amazon.AWSCLI
 	Rclone.Rclone
+	Audacity.Audacity
 	Zeit.Hyper
 	Rufus.Rufus
 	Hex-Rays.IDA.Free

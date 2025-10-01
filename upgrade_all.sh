@@ -5,7 +5,7 @@ set -e
 source "$HOME"/dotfiles/colors.sh
 source "$HOME"/dotfiles/utils.sh
 
-function check_and_update_windows_subsystem_for_linux() {
+function check_if_wsl_needs_upgrade() {
 	echo "Checking Windows Subsystem for Linux status..."
 	local update_command_output
 	update_command_output=$(wsl.exe --update 2>&1)
@@ -13,14 +13,9 @@ function check_and_update_windows_subsystem_for_linux() {
 	if echo "$update_command_output" | grep -qi "up to date"; then
 		echo "✅ Windows Subsystem for Linux is already up to date."
 	else
-		echo "⚡ Updating Windows Subsystem for Linux..."
-		echo "$update_command_output"
-		if wsl.exe --update; then
-			echo "🎉 Windows Subsystem for Linux update completed successfully."
-		else
-			echo "❌ Windows Subsystem for Linux update failed." >&2
-			return 1
-		fi
+		echo "⚡ Windows Subsystem for Linux has an available update."
+		echo "Run the following command to upgrade:"
+		echo "wsl.exe --update"
 	fi
 }
 
@@ -60,7 +55,7 @@ function upgrade_all() {
 			rm --recursive --force /mnt/c/Users/Public/{desktop,Desktop}/*.{lnk,url}
 		}
 
-		check_and_update_windows_subsystem_for_linux
+		check_if_wsl_needs_upgrade
 
 		# Run it first as it requires sudo
 		upgrade_apt_packages
