@@ -4,10 +4,11 @@
 # kernel=The Microsoft built kernel provided inbox (default)
 
 # How much memory to assign to the WSL 2 VM, this can be set as whole numbers using GB or MB. Default is 50% of total memory on Windows or 8GB, whichever is less; formerly 80% of total memory on Windows.
-memory=5700MB
+memory=32GB
 
 # How many logical processors to assign to the WSL 2 VM.
-# processors=The same number of logical processors on Windows (default)
+# Default: The same number of logical processors on Windows
+processors=10
 
 # Specifies if ports bound to wildcard or localhost in the WSL 2 VM should be connectable from the host via localhost:port
 # localhostForwarding=true (default)
@@ -19,7 +20,7 @@ kernelCommandLine="ipv6.disable=1"
 # safeMode=false (default)
 
 # How much swap space to add to the WSL 2 VM, 0 for no swap file, this can be set as whole numbers using GB or MB. Default is 25% of memory size on Windows rounded up to the nearest GB.
-swap=1GB
+swap=16GB
 
 # Sets swapfile path location.
 # swapfile=%USERPROFILE%\AppData\Local\Temp\swap.vhdx (default)

@@ -70,8 +70,6 @@ function mov_to_mp4() {
 		echo "Error converting $1 to $output_filename"
 }
 
-#!/usr/bin/env bash
-
 # flac2mp3: Convert FLAC files to MP3 while preserving ID3 tags
 #
 # Usage:
@@ -133,4 +131,5 @@ function rst2pdf() {
 }
 
 # Serves github-rendered Markdown file (from .) on localhost:6419
+# TODO: Replace with actual conversion
 alias md2html='grip'

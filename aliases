@@ -1079,7 +1079,7 @@ alias github_merge_pr='gh pr merge $(git branch --show-current) --delete-branch 
 # and lowercase) and numbers in Bash
 # Alternative
 # tr -dc '[:alnum:]' < /dev/urandom | dd bs=4 count=8 2>/dev/null
-function random-string() {
+function random_string() {
 	# Add special chars:
 	# env LC_ALL=C tr -dc '(\&\_a-zA-Z0-9\^\*\@'
 	env LC_ALL=C tr -dc 'a-zA-Z0-9' </dev/urandom | fold -w "${1:-32}" | head --lines=1
@@ -2516,4 +2516,42 @@ function scan_file_for_secrets() {
   else
     return 1
   fi
+}
+
+# Usage:
+# exec_n_times 10 ./script.sh
+function exec_n_times() {
+  local N=$1
+  shift
+  set +m  # disable job control messages
+  for ((i=1; i<=N; i++)); do
+    "$@" &
+  done
+  wait
+  set -m  # restore job control messages
+}
+
+function exec_n_times_sequential() {
+  local N=$1
+  shift
+  for ((i=1; i<=N; i++)); do
+    "$@"
+  done
+}
+
+function decode_qr_code() {
+  local img_file="$1"
+
+  if [[ -z "$img_file" ]]; then
+    echo "Usage: decode_qr_code <image_file>"
+    return 1
+  fi
+
+  if ! command -v zbarimg >/dev/null 2>&1; then
+    echo "Error: zbarimg is not installed. Install with: sudo apt-get install zbar-tools"
+    return 1
+  fi
+
+  # Decode and strip prefix (e.g., "QR-Code:")
+  zbarimg --quiet --raw "$img_file"
 }
