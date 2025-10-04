@@ -2129,10 +2129,11 @@ alias download_youtube_audio='yt-dlp --extract-audio --audio-format mp3'
 
 function download_media() {
 	# Ensure yt-dlp is injected into gallery-dl
-	if ! pipx list | grep -q "package gallery-dl"; then
+	if ! pipx list | grep "package gallery-dl" >/dev/null; then
 		echo "gallery-dl not found in pipx. Please install it first with: pipx install gallery-dl"
 		return 1
 	fi
+
 	if ! pipx runpip gallery-dl show yt-dlp >/dev/null 2>&1; then
 		echo "Injecting yt-dlp into gallery-dl..."
 		pipx inject gallery-dl yt-dlp --force
@@ -2473,85 +2474,89 @@ function curltime() {
 alias psh='~/scripts/linux/psh.sh'
 
 function scan_file_for_secrets() {
-  local target="$1"
+	local target="$1"
 
-  if [[ -z "$target" ]]; then
-    echo "Usage: scan_file_for_secrets <file-to-scan>" >&2
-    return 1
-  fi
-  if [[ ! -r "$target" ]]; then
-    echo "ERROR: cannot read file: $target" >&2
-    return 2
-  fi
+	if [[ -z "$target" ]]; then
+		echo "Usage: scan_file_for_secrets <file-to-scan>" >&2
+		return 1
+	fi
+	if [[ ! -r "$target" ]]; then
+		echo "ERROR: cannot read file: $target" >&2
+		return 2
+	fi
 
-  # ensure Docker is installed
-  if ! command -v docker >/dev/null 2>&1; then
-    echo "ERROR: docker not found in PATH." >&2
-    return 127
-  fi
+	# ensure Docker is installed
+	if ! command -v docker >/dev/null 2>&1; then
+		echo "ERROR: docker not found in PATH." >&2
+		return 127
+	fi
 
-  # pull TruffleHog image if missing
-  docker image inspect trufflesecurity/trufflehog:latest >/dev/null 2>&1 || {
-    echo "Pulling trufflesecurity/trufflehog:latest ..." >&2
-    docker pull trufflesecurity/trufflehog:latest || return 3
-  }
+	# pull TruffleHog image if missing
+	docker image inspect trufflesecurity/trufflehog:latest >/dev/null 2>&1 || {
+		echo "Pulling trufflesecurity/trufflehog:latest ..." >&2
+		docker pull trufflesecurity/trufflehog:latest || return 3
+	}
 
-  # run scan (JSONL), convert to array, count length
-  local results
-  results="$(docker run --rm \
-    -v "$(realpath "$target"):/scan_target:ro" \
-    trufflesecurity/trufflehog:latest \
-    filesystem --json --no-verification /scan_target \
-    | jq -s .)"
+	# run scan (JSONL), convert to array, count length
+	local results
+	results="$(docker run --rm \
+		-v "$(realpath "$target"):/scan_target:ro" \
+		trufflesecurity/trufflehog:latest \
+		filesystem --json --no-verification /scan_target |
+		jq -s .)"
 
-  local count
-  count="$(jq 'length' <<<"$results")"
+	local count
+	count="$(jq 'length' <<<"$results")"
 
-  # always print results (array form)
-  echo "$results"
+	# always print results (array form)
+	echo "$results"
 
-  # exit code depends on findings
-  if [[ "$count" -eq 0 ]]; then
-    return 0
-  else
-    return 1
-  fi
+	# exit code depends on findings
+	if [[ "$count" -eq 0 ]]; then
+		return 0
+	else
+		return 1
+	fi
 }
 
 # Usage:
 # exec_n_times 10 ./script.sh
 function exec_n_times() {
-  local N=$1
-  shift
-  set +m  # disable job control messages
-  for ((i=1; i<=N; i++)); do
-    "$@" &
-  done
-  wait
-  set -m  # restore job control messages
+	local N=$1
+	shift
+	set +m # disable job control messages
+	for ((i = 1; i <= N; i++)); do
+		"$@" &
+	done
+	wait
+	set -m # restore job control messages
 }
 
 function exec_n_times_sequential() {
-  local N=$1
-  shift
-  for ((i=1; i<=N; i++)); do
-    "$@"
-  done
+	local N=$1
+	shift
+	for ((i = 1; i <= N; i++)); do
+		"$@"
+	done
 }
 
 function decode_qr_code() {
-  local img_file="$1"
+	local img_file="$1"
 
-  if [[ -z "$img_file" ]]; then
-    echo "Usage: decode_qr_code <image_file>"
-    return 1
-  fi
+	if [[ -z "$img_file" ]]; then
+		echo "Usage: decode_qr_code <image_file>"
+		return 1
+	fi
 
-  if ! command -v zbarimg >/dev/null 2>&1; then
-    echo "Error: zbarimg is not installed. Install with: sudo apt-get install zbar-tools"
-    return 1
-  fi
+	if ! command -v zbarimg >/dev/null 2>&1; then
+		echo "Error: zbarimg is not installed. Install with: sudo apt-get install zbar-tools"
+		return 1
+	fi
 
-  # Decode and strip prefix (e.g., "QR-Code:")
-  zbarimg --quiet --raw "$img_file"
+	# Decode and strip prefix (e.g., "QR-Code:")
+	zbarimg --quiet --raw "$img_file"
 }
+
+alias yb='yarn build'
+alias ybw='yarn build:watch'
+

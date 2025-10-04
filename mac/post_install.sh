@@ -107,23 +107,13 @@ function post_install() {
 		symlink_vlc_rc
 	fi
 
-	# TODO: Move to Windows post_install script
-	if [[ -n "$IS_WSL" ]]; then
-		winget upgrade --all
-
-		powershell.exe -NoLogo -File "$DOTFILES_DIR"/windows/RemoveShortcutsFromDesktop.ps1
-	fi
-
-	# TODO: Make it cross-OS
 	print_list_of_manual_tasks
 }
 
-# TODO: FIXME
 # Symlink TextMate
-# sudo ln -fs /Applications/TextMate.app/Contents/Resources/mate /usr/local/bin/mate
+sudo ln -s "/Applications/TextMate.app/Contents/Resources/mate" /usr/local/bin/mate
 
-# TODO: FIXME
 # Clear the Dock
-# dockutil --remove all
+dockutil --remove all --no-restart && killall Dock
 
 post_install

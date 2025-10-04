@@ -130,6 +130,8 @@ function rst2pdf() {
 	open "$1".pdf
 }
 
-# Serves github-rendered Markdown file (from .) on localhost:6419
-# TODO: Replace with actual conversion
-alias md2html='grip'
+function md2html() {
+  local infile="${1:--}"
+  local outfile="${2:--}"
+  pandoc -f markdown -t html "$infile" -o "$outfile"
+}
