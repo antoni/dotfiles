@@ -13,6 +13,7 @@ APT_PACKAGES=(apache2
 	tmux
 	docker
 	btop
+	hexyl
 	htop
 	rclone
 	fuse
@@ -21,6 +22,7 @@ APT_PACKAGES=(apache2
 	parallel
 	graphviz
 	jq
+	ipsvd
 	ascii
 	watchman
 	qemu-utils

@@ -10,5 +10,5 @@ PIPX_PACKAGES=(
 	truffleHog gallery-dl instaloader
 	git-filter-repo oci-cli
 	markitdown docling marker-pdf langflow
-	xmldiff yq 2to3
+	xmldiff yq 2to3 "pg_activity[psycopg]"
 )

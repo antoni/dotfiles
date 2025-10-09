@@ -2560,3 +2560,125 @@ function decode_qr_code() {
 alias yb='yarn build'
 alias ybw='yarn build:watch'
 
+# --- Secure OpenSSL helpers (.enc naming + safe failure handling) ---
+
+# Encrypt: simple_encrypt [infile]
+# Example: simple_encrypt secret.txt -> secret.txt.enc
+simple_encrypt() {
+  local in="$1"
+  command -v openssl >/dev/null 2>&1 || { echo "openssl not found"; return 127; }
+  [ -r "$in" ] || { echo "Input not readable: $in"; return 1; }
+
+  # Derive output filename (adds .enc)
+  local out="${in}.enc"
+  if [ -e "$out" ]; then
+    echo "Refusing to overwrite existing file: $out"
+    return 1
+  fi
+
+  local iter="${SIMPLE_ENC_ITER:-600000}"
+  local digest="${SIMPLE_ENC_DIGEST:-sha512}"
+  local old_umask; old_umask=$(umask)
+  umask 077
+
+  echo "Encrypting $in → $out"
+  openssl enc -aes-256-cbc -pbkdf2 -iter "$iter" -md "$digest" -salt \
+    -in "$in" -out "$out"
+  local rc=$?
+
+  umask "$old_umask"
+  if [ $rc -eq 0 ]; then
+    chmod 600 "$out" 2>/dev/null || true
+    echo "✅ Encrypted to $out"
+  else
+    echo "❌ Encryption failed."
+    [ -f "$out" ] && shred -u "$out"
+  fi
+  return $rc
+}
+
+# --- Secure OpenSSL helpers (Base64 encoded, explicit input required, safe decryption) ---
+
+# Encrypt: simple_encrypt <inputfile>
+# Produces: <inputfile>.enc (Base64 text safe for copy/paste)
+simple_encrypt() {
+  local in="$1"
+  if [ -z "$in" ]; then
+    echo "Usage: simple_encrypt <inputfile>"
+    return 1
+  fi
+  command -v openssl >/dev/null 2>&1 || { echo "openssl not found"; return 127; }
+  [ -r "$in" ] || { echo "Input not readable: $in"; return 1; }
+
+  local out="${in}.enc"
+  if [ -e "$out" ]; then
+    echo "Refusing to overwrite existing file: $out"
+    return 1
+  fi
+
+  local iter="${SIMPLE_ENC_ITER:-600000}"
+  local digest="${SIMPLE_ENC_DIGEST:-sha512}"
+  local old_umask; old_umask=$(umask)
+  umask 077
+
+  echo "Encrypting $in → $out"
+  openssl enc -aes-256-cbc -pbkdf2 -iter "$iter" -md "$digest" -salt -base64 \
+    -in "$in" -out "$out"
+  local rc=$?
+
+  umask "$old_umask"
+  if [ $rc -eq 0 ]; then
+    chmod 600 "$out" 2>/dev/null || true
+    echo "✅ Encrypted to $out (Base64-encoded, safe to copy/paste)"
+  else
+    echo "❌ Encryption failed."
+    [ -f "$out" ] && shred -u "$out"
+  fi
+  return $rc
+}
+
+
+# Decrypt: simple_decrypt <inputfile.enc>
+# Produces: <inputfile> (only if password correct)
+simple_decrypt() {
+  local in="$1"
+  if [ -z "$in" ]; then
+    echo "Usage: simple_decrypt <inputfile.enc>"
+    return 1
+  fi
+  command -v openssl >/dev/null 2>&1 || { echo "openssl not found"; return 127; }
+  [ -r "$in" ] || { echo "Input not readable: $in"; return 1; }
+
+  local out="${in%.enc}"
+  if [ "$out" = "$in" ]; then
+    echo "Invalid input filename (must end with .enc)"
+    return 1
+  fi
+  if [ -e "$out" ]; then
+    echo "Refusing to overwrite existing file: $out"
+    return 1
+  fi
+
+  local iter="${SIMPLE_ENC_ITER:-600000}"
+  local digest="${SIMPLE_ENC_DIGEST:-sha512}"
+  local tmp_out
+  tmp_out="$(mktemp "${out}.XXXXXX")" || { echo "Temp file creation failed"; return 1; }
+
+  local old_umask; old_umask=$(umask)
+  umask 077
+
+  echo "Decrypting $in → $out"
+  if openssl enc -d -aes-256-cbc -pbkdf2 -iter "$iter" -md "$digest" -base64 \
+       -in "$in" -out "$tmp_out"; then
+    mv "$tmp_out" "$out"
+    chmod 600 "$out" 2>/dev/null || true
+    echo "✅ Decrypted to $out"
+  else
+    echo "❌ Wrong password or corrupt file — no output generated."
+    shred -u "$tmp_out"
+    umask "$old_umask"
+    return 1
+  fi
+
+  umask "$old_umask"
+}
