@@ -94,6 +94,8 @@ MAY_HAVE=(
 	Rclone.Rclone
 	Audacity.Audacity
 	Zeit.Hyper
+	GnuPG.Gpg4win
+	GnuPG.GnuPG
 	Rufus.Rufus
 	Hex-Rays.IDA.Free
 	Figma.Figma
