@@ -1745,8 +1745,6 @@ function dos2unix_all() {
 
 alias fix_crlf='dos2unix_all'
 
-alias ybw="yarn build:watch"
-
 # pdf_split_pages <filename>
 # Splits a PDF into individual pages and saves them as separate PDF files
 # with names in the format ""page-0001.pdf"".
@@ -2030,8 +2028,6 @@ function random_string {
 function remove_yarn_berry_cache() {
 	rm -rf ~/.yarn/berry/metadata/npm
 }
-
-alias ybw='yarn build:watch'
 
 function winget_reinstall() {
 	local -r package_name="$1"
@@ -2682,3 +2678,6 @@ simple_decrypt() {
 
   umask "$old_umask"
 }
+
+alias ca='conda activate'
+alias cda='conda deactivate'
