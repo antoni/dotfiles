@@ -10,7 +10,7 @@ function check_if_wsl_needs_upgrade() {
 	local update_command_output
 	update_command_output=$(wsl.exe --update 2>&1 | tr -d '\000')
 
-	if echo "$update_command_output" | grep -qi "up to date"; then
+	if echo "$update_command_output" | grep -qi "is already installed"; then
 		echo "✅ Windows Subsystem for Linux is already up to date."
 	else
 		echo "⚡ Windows Subsystem for Linux has an available update."
