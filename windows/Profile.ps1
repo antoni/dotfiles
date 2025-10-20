@@ -3,8 +3,6 @@ $env:Path += ';C:\Program Files\Vim\vim91'
 [System.Environment]::SetEnvironmentVariable('Path', $env:Path)
 [System.Environment]::SetEnvironmentVariable('WINDOWS_USERNAME', 'vivob', 'User')
 
-New-Alias copy_to_clipboard Set-Clipboard
-
 function Get-ProcessPathByNamePart {
 
     param (
