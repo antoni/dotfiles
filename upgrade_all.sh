@@ -8,7 +8,7 @@ source "$HOME"/dotfiles/utils.sh
 function check_if_wsl_needs_upgrade() {
 	echo "Checking Windows Subsystem for Linux status..."
 	local update_command_output
-	update_command_output=$(wsl.exe --update 2>&1)
+	update_command_output=$(wsl.exe --update 2>&1 | tr -d '\000')
 
 	if echo "$update_command_output" | grep -qi "up to date"; then
 		echo "✅ Windows Subsystem for Linux is already up to date."
