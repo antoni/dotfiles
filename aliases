@@ -2707,3 +2707,5 @@ simple_decrypt() {
 
 alias ca='conda activate'
 alias cda='conda deactivate'
+
+source "$DOTFILES_DIR/upgrade_helpers.sh"
