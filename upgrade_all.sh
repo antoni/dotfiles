@@ -84,9 +84,8 @@ function upgrade_all() {
 
 	upgrade_npm_packages
 
-	echo "Upgrading PIP packages..."
+	echo "Upgrading pipx packages..."
 	# Running it twice seems to resolve some dependency issues which PIP reports when running it just one time
-	upgrade_pipx_packages
 	upgrade_pipx_packages
 
 	popd &>/dev/null || exit
