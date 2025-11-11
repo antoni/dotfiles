@@ -2123,68 +2123,7 @@ function execute_in_subdirectories() {
 
 alias download_youtube_audio='yt-dlp --extract-audio --audio-format mp3'
 
-function download_media() {
-	# Ensure yt-dlp is injected into gallery-dl
-	if ! pipx list | grep "package gallery-dl" >/dev/null; then
-		echo "gallery-dl not found in pipx. Please install it first with: pipx install gallery-dl"
-		return 1
-	fi
-
-	if ! pipx runpip gallery-dl show yt-dlp >/dev/null 2>&1; then
-		echo "Injecting yt-dlp into gallery-dl..."
-		pipx inject gallery-dl yt-dlp --force
-	fi
-
-	local -r cookies_path="/mnt/c/Users/$WINDOWS_USERNAME/download_media_cookies.txt"
-	local -r instagram_cookies_path="/mnt/c/Users/$WINDOWS_USERNAME/download_media_cookies.txt"
-
-	local url="$1"
-
-	if [[ -z "$url" ]]; then
-		echo "Usage: download_media <URL>"
-		return 1
-	fi
-
-	if [[ "$url" == *"instagram.com/p/"* ]]; then
-		# Instagram single post
-		local post_id
-		post_id=$(echo "$url" | sed -E 's|.*/p/([^/?#]+).*|\1|')
-
-		gallery-dl \
-			--cookies "$instagram_cookies_path" \
-			--directory "./instagram_post_$post_id" \
-			"$url"
-
-	elif [[ "$url" == *"instagram.com/"* ]]; then
-		# Instagram profile (or story/highlight/reel links)
-		local profile
-		profile=$(echo "$url" | sed -E 's|https?://(www\.)?instagram\.com/([^/?#]+).*|\2|')
-
-		gallery-dl \
-			--cookies "$instagram_cookies_path" \
-			--directory "./instagram_profile_$profile" \
-			"$url"
-
-	else
-		# Other platforms -> yt-dlp
-		if [[ ! -f "$cookies_path" ]]; then
-			echo "Error: Cookies file not found at $cookies_path. Save it from a browser using a browser extension."
-			return 1
-		fi
-
-		yt-dlp \
-			--cookies "$cookies_path" \
-			--paths temp:"/tmp/yt-dlp" \
-			--output "%(title).64s-%(id)s.%(ext)s" \
-			--restrict-filenames \
-			--no-playlist \
-			--no-mtime \
-			--no-warnings \
-			--trim-filenames 64 \
-			--verbose \
-			"$url"
-	fi
-}
+alias download_media="$HOME/scripts/download_media/download_media.sh"
 
 function fasten_video_to_15s() {
 	input="$1"
