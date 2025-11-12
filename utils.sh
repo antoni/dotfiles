@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
 export IS_WSL="${WSL_DISTRO_NAME:-""}"
-export HOME_DIR=$HOME
-export DOTFILES_DIR=$HOME_DIR/dotfiles
+export DOTFILES_DIR=$HOME/dotfiles
 
 source "$HOME/dotfiles/config.sh"
 source "$HOME/dotfiles/paths"
