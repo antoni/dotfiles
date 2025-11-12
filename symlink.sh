@@ -28,7 +28,7 @@ custom_sudo_password_read_prompt
 sudo_keep_alive
 
 # Create temp directory
-mkdir -p "$HOME_DIR"/tmp
+mkdir -p "$HOME"/tmp
 
 # Version of clang-format, should be taken from /usr/bin/clang-format-X.Y,
 # same for clang-modernize
@@ -266,7 +266,7 @@ function main() {
 	# sudo_exec ln -fs /usr/bin/firefox /usr/local/bin/f
 	sudo_exec ln -fs "$HOME"/firefox/firefox /usr/local/bin/f
 	# Eclipse
-	sudo_exec ln -fs ~"$HOME_DIR"/eclipse/eclipse /usr/local/bin/eclipse
+	sudo_exec ln -fs ~"$HOME"/eclipse/eclipse /usr/local/bin/eclipse
 	# clang
 	# sudo_exec ln -fs /usr/bin/clang-$CLANG_VERSION /usr/local/bin/clang
 	# sudo_exec ln -fs /usr/bin/clang++-$CLANG_VERSION /usr/local/bin/clang++
@@ -276,7 +276,7 @@ function main() {
 	# sudo_exec ln -fs /usr/bin/clang-modernize-$CLANG_MODERNIZE_VERSION /usr/local/bin/clang-modernize
 
 	# adb
-	sudo_exec ln -fs "$HOME_DIR"/Android/Sdk/platform-tools/adb /usr/local/bin/adb
+	sudo_exec ln -fs "$HOME"/Android/Sdk/platform-tools/adb /usr/local/bin/adb
 
 	# python
 	sudo_exec ln -fs "$(which python3)" /usr/local/bin/python
@@ -341,17 +341,17 @@ function main() {
 	# lldb
 	sudo_exec ln -fs /usr/bin/lldb-$LLDB_VERSION /usr/local/bin/lldb
 	# IDEA
-	sudo_exec ln -fs "$HOME_DIR"/idea-I?-"$IDEA_VERSION"/bin/idea.sh /usr/local/bin/idea
+	sudo_exec ln -fs "$HOME"/idea-I?-"$IDEA_VERSION"/bin/idea.sh /usr/local/bin/idea
 	# Clion
-	sudo_exec ln -fs "$HOME_DIR"/clion-$CLION_VERSION/bin/clion.sh /usr/local/bin/clion
+	sudo_exec ln -fs "$HOME"/clion-$CLION_VERSION/bin/clion.sh /usr/local/bin/clion
 	# Gogland
-	sudo_exec ln -fs "$HOME_DIR"/Gogland-"$GOGLAND_VERSION"/bin/gogland.sh /usr/local/bin/gogland
+	sudo_exec ln -fs "$HOME"/Gogland-"$GOGLAND_VERSION"/bin/gogland.sh /usr/local/bin/gogland
 	# JMeter
-	sudo_exec ln -fs "$HOME_DIR"/apache-jmeter-"$JMETER_VERSION"/bin/jmeter /usr/local/bin/jmeter
+	sudo_exec ln -fs "$HOME"/apache-jmeter-"$JMETER_VERSION"/bin/jmeter /usr/local/bin/jmeter
 	# Robo 3T
-	sudo_exec ln -fs "$HOME_DIR"/robo3t-*/bin/robo3t /usr/local/bin/robo3t
+	sudo_exec ln -fs "$HOME"/robo3t-*/bin/robo3t /usr/local/bin/robo3t
 	# SweetHome3D
-	sudo_exec ln -fs "$HOME_DIR"/SweetHome3D-"$SWEET_HOME_VERSION"/SweetHome3D /usr/local/bin/sweethome
+	sudo_exec ln -fs "$HOME"/SweetHome3D-"$SWEET_HOME_VERSION"/SweetHome3D /usr/local/bin/sweethome
 
 	# Sublime 3
 	if [ -e "$HOME"/sublime_text_3 ]; then

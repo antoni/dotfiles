@@ -15,7 +15,7 @@ function install_zsh_plugins() {
 function symlink_zsh_files() {
 	ln -sf ~/dotfiles/zshrc ~/.zshrc
 	ln -sf ~/dotfiles/zprofile ~/.zprofile
-	ln -fs "$HOME_DIR"/dotfiles/antoni.zsh-theme "$HOME_DIR"/.oh-my-zsh/themes
+	ln -fs "$HOME"/dotfiles/antoni.zsh-theme "$HOME"/.oh-my-zsh/themes
 }
 
 function install_oh_my_zsh() {
