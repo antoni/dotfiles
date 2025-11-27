@@ -8,7 +8,7 @@ PIPX_PACKAGES=(
 	tdmgr poetry beautysh
 	pipupgrade shodan linode-cli mvt
 	truffleHog gallery-dl instaloader
-	git-filter-repo oci-cli
+	git-filter-repo oci-cli csvkit
 	markitdown docling marker-pdf langflow
 	xmldiff yq 2to3 "pg_activity[psycopg]"
 )
