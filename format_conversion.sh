@@ -8,35 +8,31 @@ function jpg_to_png() {
 }
 
 function heic_to_jpg() {
-	# Enable case-insensitive globbing and prevent errors on empty matches
-	if [[ -n $ZSH_VERSION ]]; then
-		setopt LOCAL_OPTIONS nocaseglob nullglob
-	elif [[ -n $BASH_VERSION ]]; then
-		shopt -s nocaseglob nullglob
-	fi
+  # Enable case-insensitive globbing and prevent errors on empty matches
+  if [[ -n $ZSH_VERSION ]]; then
+    setopt LOCAL_OPTIONS nocaseglob nullglob
+  elif [[ -n $BASH_VERSION ]]; then
+    shopt -s nocaseglob nullglob
+  fi
 
-	local files=(*.heic)
+  local files=(*.heic)
 
-	if [[ ${#files[@]} -eq 0 ]]; then
-		echo "No HEIC files found in the current directory."
-		return 1
-	fi
+  if [[ ${#files[@]} -eq 0 ]]; then
+    echo "No HEIC files found in the current directory."
+    return 1
+  fi
 
-	echo "Converting ${#files[@]} HEIC files to JPG using ImageMagick..."
+  echo "Converting ${#files[@]} HEIC files to JPG using GNU parallel..."
 
-	for file in "${files[@]}"; do
-		local base="${file%.*}"
-		echo "  ➤ $file → ${base}.jpg"
-		magick "$file" "${base}.jpg"
-	done
+  parallel 'magick {} {.}.jpg' ::: "${files[@]}"
 
-	echo "✅ All conversions complete."
+  echo "✅ All conversions complete."
 
-	# Restore glob settings is unnecessary due to LOCAL_OPTIONS in Zsh
-	if [[ -n $BASH_VERSION ]]; then
-		shopt -u nocaseglob nullglob
-	fi
+  if [[ -n $BASH_VERSION ]]; then
+    shopt -u nocaseglob nullglob
+  fi
 }
+
 
 # Converts SVG to PNG
 # Usage svg_to_png input_image_path [output_image_height]
