@@ -1937,14 +1937,14 @@ function generate_wpa_supplicant_conf() {
 	printf "$wpa_supplicant_conf_template" "$network_name" "$network_password"
 }
 
-function show_wifi_network_qr_code() {
+function generate_wifi_network_qr_code() {
 	get_wifi_network_credentials
 
 	escaped_password=$(printf "%q" "$network_password")
-	qrencode "WIFI:T:WPA;S:$network_name;P:$escaped_password;;" --type=ansiutf8
-
-	# To save file
-	# qrencode "WIFI:T:WPA;S:$network_name;P:$escaped_password;;" --output=wifi_login_qr_code.png
+	qrencode "WIFI:T:WPA;S:$network_name;P:$escaped_password;;" \
+    --margin=0 \
+		--size=20 \
+    --output="wifi_login_qr_code_$network_name.png"
 }
 
 function print_ascii_art_text() {
