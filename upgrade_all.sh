@@ -99,7 +99,7 @@ function upgrade_all() {
 	fi
 
   # TODO: Upgrade other dotfiles/install packages the same way
-	"./$HOME"/dotfiles/install/install_yt-dlp.sh
+	"$HOME"/dotfiles/install/install_yt-dlp.sh
 
 	printf "Upgraded all applications on %s\n" "$(date)" >>~/update_log.txt
 }
