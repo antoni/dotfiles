@@ -1489,8 +1489,6 @@ function h() {
 	head --lines="$@"
 }
 
-alias c='code -n . &'
-
 # Git aliases
 
 function git_reset_to_branch() {
@@ -1942,9 +1940,9 @@ function generate_wifi_network_qr_code() {
 
 	escaped_password=$(printf "%q" "$network_password")
 	qrencode "WIFI:T:WPA;S:$network_name;P:$escaped_password;;" \
-    --margin=0 \
+		--margin=0 \
 		--size=20 \
-    --output="wifi_login_qr_code_$network_name.png"
+		--output="wifi_login_qr_code_$network_name.png"
 }
 
 function print_ascii_art_text() {
@@ -2648,3 +2646,11 @@ alias ca='conda activate'
 alias cda='conda deactivate'
 
 source "$DOTFILES_DIR/upgrade_helpers.sh"
+
+# TODO: Make it Win-only
+function code() {
+	visual_studio_code="/mnt/c/Users/$WINDOWS_USERNAME/AppData/Local/Programs/Microsoft VS Code/bin/code"
+	${visual_studio_code} "$@"
+}
+
+alias c='code -n . &'
