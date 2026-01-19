@@ -2654,3 +2654,5 @@ function code() {
 }
 
 alias c='code -n . &'
+
+alias 7z='7zz'

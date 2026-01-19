@@ -131,7 +131,7 @@ BREW_PACKAGES_MAY_HAVE=(apache-httpd
 	swi-prolog
 	gnu-smalltalk
 	pwgen
-	p7zip
+	sevenzip
 	nginx
 	tmate
 	qemu

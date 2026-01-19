@@ -76,7 +76,7 @@ APT_PACKAGES=(apache2
 	zip
 	git-lfs
 	librecad
-	p7zip
+	7zip
 	libasound2
 	default-jdk
 	scala
