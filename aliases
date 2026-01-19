@@ -591,7 +591,7 @@ alias remove_all_docker_images='docker rm -vf $(docker ps -aq)'
 
 # Delete all containers & all images
 function docker_remove_all() {
-	~/scripts/docker_remove_all.sh
+	~/scripts/docker_remove_all/docker_remove_all.sh
 }
 
 function list_installed() {
