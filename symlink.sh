@@ -53,7 +53,7 @@ printf "${colors[Reset_Color]}"
 
 DOTFILES=(profile bashrc zshrc sshrc sshrc.d vimrc paths zprofile bash_profile
 	common_profile.sh tmux.conf gitignore gitattributes ghci gvimrc hgrc lldbinit
-	gdbinit xbindkeysrc fzf.sh psqlrc colordiffrc emacs inputrc agda
+	gdbinit xbindkeysrc fzf.sh psqlrc colordiffrc inputrc agda
 	sudo_as_admin_successful LESS_TERMCAP jupyter newsboat)
 
 function mac_change_hostname() {
