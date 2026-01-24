@@ -11,15 +11,15 @@ echo "▶ Installing nvm..."
 export NVM_DIR="$HOME/.nvm"
 
 if [ ! -d "$NVM_DIR" ]; then
-  curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+	curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 fi
 
 # Load nvm into current shell
 if [ -s "$NVM_DIR/nvm.sh" ]; then
-  . "$NVM_DIR/nvm.sh"
+	. "$NVM_DIR/nvm.sh"
 else
-  echo "❌ nvm not found after installation"
-  exit 1
+	echo "❌ nvm not found after installation"
+	exit 1
 fi
 
 echo "▶ Installing latest Node.js LTS..."

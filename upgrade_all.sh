@@ -98,7 +98,7 @@ function upgrade_all() {
 		sudo --reset-timestamp
 	fi
 
-  # TODO: Upgrade other dotfiles/install packages the same way
+	# TODO: Upgrade other dotfiles/install packages the same way
 	"$HOME"/dotfiles/install/install_yt-dlp.sh
 
 	printf "Upgraded all applications on %s\n" "$(date)" >>~/update_log.txt

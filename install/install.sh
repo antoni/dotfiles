@@ -56,16 +56,16 @@ function install_prolog_debian() {
 }
 
 function install_yarn_debian() {
-  sudo mkdir -p /usr/share/keyrings
+	sudo mkdir -p /usr/share/keyrings
 
-  curl -fsSL https://dl.yarnpkg.com/debian/pubkey.gpg \
-    | sudo gpg --dearmor -o /usr/share/keyrings/yarnkey.gpg
+	curl -fsSL https://dl.yarnpkg.com/debian/pubkey.gpg |
+		sudo gpg --dearmor -o /usr/share/keyrings/yarnkey.gpg
 
-  echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" \
-    | sudo tee /etc/apt/sources.list.d/yarn.list > /dev/null
+	echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" |
+		sudo tee /etc/apt/sources.list.d/yarn.list >/dev/null
 
-  sudo apt-get update -q
-  sudo apt-get install -y -qq yarn -o Dpkg::Use-Pty=0
+	sudo apt-get update -q
+	sudo apt-get install -y -qq yarn -o Dpkg::Use-Pty=0
 }
 
 function install_fedora_sound() {
@@ -104,20 +104,20 @@ function main() {
 	if [ -f /etc/debian_version ]; then
 		printf "Installing required packages on Debian/Ubuntu\n"
 
-sudo apt-get update -qq
-sudo apt-get install -y -qq curl \
-  -o Dpkg::Use-Pty=0
+		sudo apt-get update -qq
+		sudo apt-get install -y -qq curl \
+			-o Dpkg::Use-Pty=0
 
-sudo apt-get install -y -qq "${PACKAGES[@]}" \
-  -o Dpkg::Use-Pty=0
+		sudo apt-get install -y -qq "${PACKAGES[@]}" \
+			-o Dpkg::Use-Pty=0
 
-sudo apt-get install -y -qq "${DEBIAN_PACKAGES[@]}" \
-  -o Dpkg::Use-Pty=0
+		sudo apt-get install -y -qq "${DEBIAN_PACKAGES[@]}" \
+			-o Dpkg::Use-Pty=0
 
-sudo apt-get install -y -qq zsh \
-  -o Dpkg::Use-Pty=0
+		sudo apt-get install -y -qq zsh \
+			-o Dpkg::Use-Pty=0
 
-# return
+		# return
 		install_snap_packages
 
 		~/dotfiles/install/install_node_lts.sh
@@ -276,8 +276,6 @@ function install_global_haskell_stack_packages() {
 function sync_transmission_settings() {
 	cp "$HOME"/Library/Preferences/org.m0k.transmission.plist "$HOME"/dotfiles/
 }
-
-# Upgrade functions
 
 function ubuntu_upgrade() {
 	sudo -s -- <<EOF

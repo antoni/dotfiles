@@ -55,8 +55,8 @@ MUST_HAVE=(
 	Google.CloudSDK
 	Microsoft.WindowsTerminal.Preview
 	Microsoft.DotNet.SDK.10
-  Microsoft.DotNet.DesktopRuntime.10
-  Microsoft.DotNet.Runtime.10
+	Microsoft.DotNet.DesktopRuntime.10
+	Microsoft.DotNet.Runtime.10
 	Piriform.Recuva
 	Discord.Discord
 	RProject.R
@@ -209,7 +209,7 @@ function install_if_not_installed() {
 }
 
 for package in "${MUST_HAVE[@]}"; do
-printf "Installing: %s\n"  "$package"
+	printf "Installing: %s\n" "$package"
 	install_if_not_installed "$package"
 done
 # for package in "${MAY_HAVE[@]}"; do

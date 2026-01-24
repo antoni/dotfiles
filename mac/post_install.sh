@@ -98,8 +98,8 @@ function post_install() {
 
 		# Create link for 'jsc'
 		sudo ln -fs \
-		  /System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc \
-		  /usr/local/bin
+			/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc \
+			/usr/local/bin
 
 		# Create link for 'package.json' to avoid some errors and warnings
 		# when updating globally installed NPM packages

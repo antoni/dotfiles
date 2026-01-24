@@ -18,7 +18,7 @@ main() {
 
 	# Install pipx (system default 3.10), then ensure PATH
 	python3 -m pip uninstall -y pipx
-  python3 -m pip install --user pipx
+	python3 -m pip install --user pipx
 
 	pipx ensurepath
 

@@ -4,3 +4,4 @@ Install-Module PSReadLine -AllowPrerelease -Force
 winget.exe upgrade --all
 
 ./RemoveShortcutsFromDesktop.ps1
+

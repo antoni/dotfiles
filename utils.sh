@@ -28,13 +28,12 @@ function sudo_exec() {
 
 function sudo_keep_alive() {
 	# Ask for the administrator password upfront
-if ! sudo -n true 2>/dev/null; then
-printf '%b' "${colors[BoldGreen]}Enter sudo password:${colors[Reset_Color]}"
-	sudo --prompt="" --validate
+	if ! sudo -n true 2>/dev/null; then
+		printf '%b' "${colors[BoldGreen]}Enter sudo password:${colors[Reset_Color]}"
+		sudo --prompt="" --validate
 	fi
 
 	clear
-
 
 	# kill -0 PID exits with an exit code of 0 if the PID is of
 	# a running process, otherwise exits with an exit code of 1.

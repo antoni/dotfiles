@@ -10,9 +10,9 @@ sudo systemctl restart systemd-binfmt
 sudo systemctl mask systemd-binfmt.service
 
 if ! command -v update-binfmts >/dev/null 2>&1; then
-  echo "update-binfmts not found, installing binfmt-support..."
-  sudo apt update
-  sudo apt install -y binfmt-support
+	echo "update-binfmts not found, installing binfmt-support..."
+	sudo apt update
+	sudo apt install -y binfmt-support
 fi
 
 # Fixes:
