@@ -1686,10 +1686,6 @@ function yarn_last() {
 	yarn && fc -e : -1
 }
 
-function refresh_apt_keys() {
-	alias sudo apt-key adv --refresh-keys --keyserver keyserver.ubuntu.com
-}
-
 function code_no_extensions() {
 	code --disable-extensions "$@"
 }

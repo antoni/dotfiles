@@ -5,3 +5,4 @@ winget.exe upgrade --all
 
 ./RemoveShortcutsFromDesktop.ps1
 
+
