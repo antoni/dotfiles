@@ -24,6 +24,7 @@ APT_PACKAGES=(apache2
 	jq
 	ipsvd
 	ascii
+	iperf3
 	watchman
 	qemu-utils
 	tesseract-ocr
