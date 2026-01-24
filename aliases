@@ -1754,7 +1754,7 @@ function pdf_split_pages() {
 	convert "$filename" -quality 100 -density 1000x1000 page-%04d.pdf
 }
 
-alias fix_wsl='~/dotfiles/windows/apply_wsl_fixes.sh'
+alias fix_wsl='~/dotfiles/windows/wsl-fixes/apply_wsl_fixes.sh'
 
 # flatten the contents of a given directory
 # It will move all files and subdirectories in the given directory to the given directory

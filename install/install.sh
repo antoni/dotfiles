@@ -5,7 +5,8 @@ DOTFILES_DIR="$HOME"/dotfiles
 
 mkdir -p tmp
 
-source "$DOTFILES_DIR"/install/install_chrome.sh
+# TODO: Move somewhere else, install everything from dotfiles/install directory?
+# source "$DOTFILES_DIR"/install/install_chrome.sh
 source "$DOTFILES_DIR"/mac/brew_install.sh
 source "$DOTFILES_DIR"/utils.sh
 source "$DOTFILES_DIR"/colors.sh
@@ -19,7 +20,7 @@ PACKAGES=(suckless-tools xbindkeys clang vim rdesktop make sysstat
 	hexchat rlwrap xautolock yamllint
 	eom eog inotify-tools xbacklight pulseaudio gnome-bluetooth
 	tidy pandoc tig ncdu redshift rustc
-	dunst httpie udev autofs pinta ruby nodejs)
+	dunst httpie udev autofs pinta ruby)
 
 SNAP_PACKAGES=(slack code)
 RUST_PACKAGES=(rust cargo)
@@ -55,9 +56,16 @@ function install_prolog_debian() {
 }
 
 function install_yarn_debian() {
-	curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-	echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-	sudo apt update && sudo apt --assume-yes install yarn
+  sudo mkdir -p /usr/share/keyrings
+
+  curl -fsSL https://dl.yarnpkg.com/debian/pubkey.gpg \
+    | sudo gpg --dearmor -o /usr/share/keyrings/yarnkey.gpg
+
+  echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" \
+    | sudo tee /etc/apt/sources.list.d/yarn.list > /dev/null
+
+  sudo apt-get update -q
+  sudo apt-get install -y -qq yarn -o Dpkg::Use-Pty=0
 }
 
 function install_fedora_sound() {
@@ -87,25 +95,34 @@ function main() {
 	sudo_keep_alive
 
 	if [[ -n "$IS_WSL" ]]; then
-		source "$HOME"/dotfiles/windows/apply_wsl_fixes.sh
+		source "$HOME"/dotfiles/windows/wsl-fixes/apply_wsl_fixes.sh
 	fi
 
 	# Remove "Last login" message in new Terminal window open (some UNIX systems)
 	touch ~/.hushlogin
 
 	if [ -f /etc/debian_version ]; then
-		echo "Installing required packages on Debian/Ubuntu"
+		printf "Installing required packages on Debian/Ubuntu\n"
 
-		sudo apt-get --assume-yes install curl
+sudo apt-get update -qq
+sudo apt-get install -y -qq curl \
+  -o Dpkg::Use-Pty=0
 
-		sudo apt-get update
-		sudo apt-get --assume-yes install "${PACKAGES[@]}"
-		sudo apt-get --assume-yes install "${DEBIAN_PACKAGES[@]}"
-		sudo apt-get --assume-yes install zsh
+sudo apt-get install -y -qq "${PACKAGES[@]}" \
+  -o Dpkg::Use-Pty=0
 
+sudo apt-get install -y -qq "${DEBIAN_PACKAGES[@]}" \
+  -o Dpkg::Use-Pty=0
+
+sudo apt-get install -y -qq zsh \
+  -o Dpkg::Use-Pty=0
+
+# return
 		install_snap_packages
-		install_yarn_debian
-		#install_debian_chrome
+
+		~/dotfiles/install/install_node_lts.sh
+		# TODO: Remove this func
+		# install_yarn_debian
 	elif [ -f /etc/redhat-release ]; then
 		echo "Installing required packages on Fedora/CentOS"
 
@@ -133,9 +150,10 @@ function main() {
 
 	if [[ "$UNAME_OUTPUT" == 'Linux' ]]; then
 		sudo locale-gen en_US.UTF-8
+		sudo locale-gen en_GB.UTF-8
 	fi
 
-	source "$HOME/dotfiles/install_oh_my_zsh.sh" && install_oh_my_zsh || exit_with_error_message "Could not install oh-my-zsh"
+	source "$HOME/dotfiles/install/install_oh_my_zsh.sh" && install_oh_my_zsh || exit_with_error_message "Could not install oh-my-zsh"
 
 	source "${BASH_SOURCE%/*}/install_global_javascript_npm_packages.sh"
 	install_global_javascript_npm_packages || exit_with_error_message ""
@@ -146,6 +164,9 @@ function main() {
 	source "$DOTFILES_DIR"/install/install_go.sh || exit_with_error_message "Could not install golang"
 
 	crontab "$DOTFILES_DIR"/cron.jobs || exit_with_error_message ""
+
+	# TODO: Symlink here, check if all works
+	~/dotfiles/symlink.sh
 }
 
 function install_vim_plugins() {

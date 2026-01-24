@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 source "$HOME"/dotfiles/utils.sh
 
 function int_signal_handler() {
@@ -17,7 +19,7 @@ setup_int_handler
 
 function custom_sudo_password_read_prompt() {
 	# shellcheck disable=SC2154
-	echo -en "${colors[BoldGreen]}Enter sudo password:${colors[Reset_Color]}"
+	printf '%b' "${colors[BoldGreen]}Enter sudo password:${colors[Reset_Color]}"
 
 	sudo --prompt="" --validate
 	clear
@@ -39,15 +41,15 @@ CLANG_FORMAT_VERSION=$CLANG_VERSION
 CLANG_MODERNIZE_VERSION=$CLANG_VERSION
 LLDB_VERSION=3.7
 echo "LLDB              version symlinked:   " $LLDB_VERSION
-IDEA_VERSION=$(echo "$HOME"/idea-* | awk --field-separator'-' '{print $3}')
+IDEA_VERSION=$(echo "$HOME"/idea-* | awk --field-separator='-' '{print $3}')
 echo "IntelliJ          version symlinked:   " "$IDEA_VERSION"
-GOGLAND_VERSION=$(echo "$HOME"/Gogland-* | awk --field-separator'-' '{print $2}')
+GOGLAND_VERSION=$(echo "$HOME"/Gogland-* | awk --field-separator='-' '{print $2}')
 echo "Gogland           version symlinked:   " "$GOGLAND_VERSION"
 CLION_VERSION=2017.1.1
 echo "CLion             version symlinked:   " $CLION_VERSION
-JMETER_VERSION=$(echo "$HOME"/apache-jmeter-* | awk --field-separator'-' '{print $3}')
+JMETER_VERSION=$(echo "$HOME"/apache-jmeter-* | awk --field-separator='-' '{print $3}')
 echo "JMeter            version symlinked:   " "$JMETER_VERSION"
-SWEET_HOME_VERSION=$(echo "$HOME"/SweetHome3D-* | awk --field-separator'-' '{print $2}')
+SWEET_HOME_VERSION=$(echo "$HOME"/SweetHome3D-* | awk --field-separator='-' '{print $2}')
 echo "SweetHome3D       version symlinked:   " "$SWEET_HOME_VERSION"
 printf "${colors[Reset_Color]}"
 
@@ -303,13 +305,22 @@ function main() {
 
 				printf "Replacing Notepad++ settings at: '%s'\n" "$target_path"
 
-				envsubst <windows/notepad_plus_plus_settings.template.xml >"$target_path"
+				envsubst <$HOME/dotfiles/windows/notepad_plus_plus_settings.template.xml >"$target_path"
 			}
 			replace_notepad_plus_plus_settings
 
+			function replace_qbittorrent_settings() {
+				local -r target_path="/mnt/c/Users/""${WINDOWS_USERNAME}""/AppData/Roaming/qBittorrent/qBittorrent.xml"
+
+				printf "Replacing qBittorrent settings at: '%s'\n" "$target_path"
+
+				envsubst <$HOME/dotfiles/config/qBittorrent.ini >"$target_path"
+			}
+			replace_qbittorrent_settings
+
 			function symlink_wsl_configuration() {
 				sudo ln -sf "${DOTFILES_DIR}"/wsl.conf /etc/wsl.conf
-				sudo ln -sf "${DOTFILES_DIR}"/wslconfig /mnt/c/Users/vivob/.wslconfig
+				sudo ln -sf "${DOTFILES_DIR}"/wslconfig /mnt/c/Users/$WINDOWS_USERNAME/.wslconfig
 			}
 			symlink_wsl_configuration
 		else
@@ -373,7 +384,13 @@ function main() {
 		if [ "${OSTYPE//[0-9.]/}" == "darwin" ]; then
 			mac_change_hostname "$HOSTNAME"
 		else
-			sudo hostnamectl set-hostname "$HOSTNAME"
+			# TODO: Make it work on WSL?
+			# echo "$HOSTNAME" | sudo tee /etc/hostname > /dev/null
+			# sudo hostname "$HOSTNAME"
+
+			# sudo sed -i "/127.0.0.1/d" /etc/hosts
+			# echo "127.0.0.1 $HOSTNAME" | sudo tee -a /etc/hosts > /dev/null
+
 			print_success_message "Hostname changed to: $HOSTNAME"
 		fi
 	}

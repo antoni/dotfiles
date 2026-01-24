@@ -8,10 +8,9 @@ export MANPAGER="less --ignore-case"
 # Wallpaper
 WALLPAPER=~/Documents/wallpaper8.jpg
 
-# Needed by Python 3 and others
-# Use en_GB to force 24-hour time
-export LC_ALL=en_GB.UTF-8
+# Locale (24-hour time, UK formats)
 export LANG=en_GB.UTF-8
+# LC_ALL intentionally unset
 
 export EDITOR="vim"
 # Overcome the madness: http://www.economyofeffort.com/2014/07/04/zsh/
@@ -82,14 +81,6 @@ if command_exists xbindkeys && [[ -z $IS_WSL ]]; then
 fi
 
 export HOMEBREW_AUTO_UPDATE_SECS="$((60 * 60 * 3))"
-
-# Android development
-# export ANDROID_SDK_ROOT="/usr/local/share/android-sdk"
-# export ANT_HOME=/usr/local/opt/ant
-# export MAVEN_HOME=/usr/local/opt/maven
-# export GRADLE_HOME=/usr/local/opt/gradle
-# export ANDROID_HOME=/usr/local/opt/android-sdk
-# export ANDROID_NDK_HOME=/usr/local/opt/android-ndk
 
 # macOS only (delete symlink created after system update)
 rm -f ~/Desktop/Relocated\ Items

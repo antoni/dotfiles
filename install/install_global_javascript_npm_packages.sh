@@ -1,8 +1,10 @@
 # Make global packages install locally (without sudo)
 function create_npm_global_packages_directory() {
-	source "$HOME"/dotfiles/paths
-	mkdir -p "$NPM_GLOBAL_PACKAGES_DIRECTORY"
-	npm config set prefix "$NPM_GLOBAL_PACKAGES_DIRECTORY"
+	echo TODO: FIXME
+	# TODO: This is incompatible with nvm but under nvm, we don't need it
+	# source "$HOME"/dotfiles/paths
+	# mkdir -p "$NPM_GLOBAL_PACKAGES_DIRECTORY"
+	# npm config set prefix "$NPM_GLOBAL_PACKAGES_DIRECTORY"
 }
 
 function install_global_javascript_npm_packages() {
@@ -17,11 +19,10 @@ function install_global_javascript_npm_packages() {
 		@angular/cli n json5 cordova gltf-pipeline depcheck @microsoft/rush wrangler \
 		do-not-disturb-cli katex servor degit verdaccio tables gatsby-cli browser-sync \
 		@apidevtools/swagger-cli kill-port-process ngrok @google/clasp js-beautify doctoc \
-		ts_dependency_graph syncpack @openai/codex @anthropic-ai/claude-code @immich/cli
+		ts_dependency_graph syncpack @openai/codex @anthropic-ai/claude-code @immich/cli \
 
 	# Disable 'npm fund' messages
 	npm config set fund false
-
 }
 
 function install_airbnb_eslint() {

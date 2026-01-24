@@ -105,6 +105,7 @@ APT_PACKAGES=(apache2
 	exfat-utils
 	ubuntu-restricted-extras
 	ffmpeg
+	libsecret-tools
 )
 
 # Install packages that require some custom configuration (like accepting the license etc.)

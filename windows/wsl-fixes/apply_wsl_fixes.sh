@@ -9,6 +9,12 @@ sudo systemctl unmask systemd-binfmt.service
 sudo systemctl restart systemd-binfmt
 sudo systemctl mask systemd-binfmt.service
 
+if ! command -v update-binfmts >/dev/null 2>&1; then
+  echo "update-binfmts not found, installing binfmt-support..."
+  sudo apt update
+  sudo apt install -y binfmt-support
+fi
+
 # Fixes:
 # run-detectors: unable to find an interpreter for
 # /mnt/c/Users/username/AppData/Local/Programs/Microsoft VS Code/Code.exe

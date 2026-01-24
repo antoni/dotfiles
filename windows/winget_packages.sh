@@ -22,7 +22,6 @@ MUST_HAVE=(
 	Mozilla.Firefox
 	Mozilla.Firefox.DeveloperEdition
 	Google.Chrome
-	Brave.Brave
 	PuTTY.PuTTY
 	vscode
 	vim.vim
@@ -42,7 +41,6 @@ MUST_HAVE=(
 	IrfanSkiljan.IrfanView
 	Espanso.Espanso
 	7zip.7zip
-	mcmilk.7zip-zstd
 	Telegram.TelegramDesktop
 	OpenWhisperSystems.Signal
 	Yarn.Yarn
@@ -56,13 +54,15 @@ MUST_HAVE=(
 	Gyan.FFmpeg
 	Google.CloudSDK
 	Microsoft.WindowsTerminal.Preview
-	Microsoft.dotNetFramework
-	Microsoft.dotnet
+	Microsoft.DotNet.SDK.10
+  Microsoft.DotNet.DesktopRuntime.10
+  Microsoft.DotNet.Runtime.10
 	Piriform.Recuva
 	Discord.Discord
 	RProject.R
 	Bitwarden.CLI
 	IDRIX.VeraCrypt
+	qBittorrent.qBittorrent
 )
 
 CONFERENCE_SOFTWARE=(
@@ -88,6 +88,7 @@ MAY_HAVE=(
 	OpenJS.NodeJS.LTS
 	DigitalScholar.Zotero
 	geeksoftwareGmbH.PDF24Creator
+	Brave.Brave
 	ByteDance.CapCut
 	WiresharkFoundation.Wireshark
 	Amazon.AWSCLI
@@ -146,7 +147,6 @@ MAY_HAVE=(
 	Opera.OperaGX
 	AntibodySoftware.WizTree
 	WinDirStat.WinDirStat
-	qBittorrent.qBittorrent
 	ArtifexSoftware.GhostScript
 	wsltty
 	msys2.msys2
@@ -208,12 +208,13 @@ function install_if_not_installed() {
 	fi
 }
 
-# for package in "${MUST_HAVE[@]}"; do
-# 	install_if_not_installed "$package"
-# done
-for package in "${MAY_HAVE[@]}"; do
+for package in "${MUST_HAVE[@]}"; do
+printf "Installing: %s\n"  "$package"
 	install_if_not_installed "$package"
 done
+# for package in "${MAY_HAVE[@]}"; do
+# 	install_if_not_installed "$package"
+# done
 # for package in "${CONFERENCE_SOFTWARE[@]}"; do
 # 	install_if_not_installed "$package"
 # done

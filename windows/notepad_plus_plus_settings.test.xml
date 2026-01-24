@@ -48,7 +48,7 @@
         <GUIConfig name="ScintillaGlobalSettings" enableMultiSelection="no" />
         <GUIConfig name="openSaveDir" value="2" defaultDirPath="%userprofile%\Desktop" />
         <GUIConfig name="titleBar" short="no" />
-        <GUIConfig name="stylerTheme" path="C:\Users\vivob\AppData\Roaming\Notepad++\themes\DarkModeDefault.xml" />
+        <GUIConfig name="stylerTheme" path="C:\Users\subzero\AppData\Roaming\Notepad++\themes\DarkModeDefault.xml" />
         <GUIConfig name="insertDateTime" customizedFormat="yyyy-MM-dd HH:mm:ss" reverseDefaultOrder="no" />
         <GUIConfig name="wordCharList" useDefault="yes" charsAdded="" />
         <GUIConfig name="delimiterSelection" leftmostDelimiter="40" rightmostDelimiter="41" delimiterSelectionOnEntireDocument="no" />

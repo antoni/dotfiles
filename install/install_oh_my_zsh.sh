@@ -3,9 +3,12 @@
 source "$HOME/dotfiles/utils.sh"
 
 function install_zsh_plugins() {
+
 	printf "Installing zsh plugins\n"
-	# ZSH_CUSTOM=$HOME/zsh_customizations
-	# mkdir -p $ZSH_CUSTOM;
+
+	# For ZSH_CUSTOM
+	source ~/dotfiles/zshrc
+	mkdir -p $ZSH_CUSTOM;
 	rm --recursive --force "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"/plugins/zsh-yarn-completions && git clone https://github.com/chrisands/zsh-yarn-completions "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-yarn-completions
 	rm --recursive --force "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions && git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions
 	rm --recursive --force "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"/plugins/fzf-zsh-plugin && git clone https://github.com/unixorn/fzf-zsh-plugin.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/fzf-zsh-plugin

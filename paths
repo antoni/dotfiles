@@ -29,14 +29,6 @@ export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$HOME/yasara
 export PATH=$PATH:$HOME/.cabal/bin:$HOME/.ghcup/bin
 
-# Android development
-export PATH=$ANT_HOME/bin:$PATH
-export PATH=$MAVEN_HOME/bin:$PATH
-export PATH=$GRADLE_HOME/bin:$PATH
-export PATH=$ANDROID_HOME/tools:$PATH
-export PATH=$ANDROID_HOME/platform-tools:$PATH
-export PATH=$ANDROID_HOME/build-tools/19.1.0:$PATH
-
 # GNU coreutils
 if [[ "$(uname)" == "Darwin" ]]; then
 	export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
@@ -57,9 +49,10 @@ if command -v ruby >/dev/null 2>&1; then
 	export GEM_HOME
 fi
 
-if command -v ruby >/dev/null 2>&1; then
-	export PATH="$PATH:$(npm --prefix "$HOME"/tmp get prefix)/bin:$GEM_HOME/bin"
-fi
+# TODO: Is it still needed?
+# if command -v ruby >/dev/null 2>&1; then
+# 	export PATH="$PATH:$(npm --prefix "$HOME"/tmp get prefix)/bin:$GEM_HOME/bin"
+# fi
 
 # npm global packages
 export NPM_GLOBAL_PACKAGES_DIRECTORY="$HOME"/.npm-global_packages

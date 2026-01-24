@@ -1,31 +1,6 @@
 {
   "$help": "https://aka.ms/terminal-documentation",
   "$schema": "https://aka.ms/terminal-profiles-schema-preview",
-  "actions": [
-    {
-      "command": "paste",
-      "keys": "ctrl+v"
-    },
-    {
-      "command": {
-        "action": "copy",
-        "singleLine": false
-      },
-      "keys": "ctrl+c"
-    },
-    {
-      "command": "find",
-      "keys": "ctrl+shift+f"
-    },
-    {
-      "command": {
-        "action": "splitPane",
-        "split": "auto",
-        "splitMode": "duplicate"
-      },
-      "keys": "alt+shift+d"
-    }
-  ],
   "alwaysOnTop": false,
   "alwaysShowTabs": true,
   "confirmCloseAllTabs": false,
@@ -92,18 +67,6 @@
         "guid": "{2c80c433-9ea4-4608-bab3-68d0efe94e35}",
         "hidden": false,
         "name": "CentOS 7.9"
-      },
-      {
-        "guid": "{978cbc39-e980-5041-adb0-80583b12c78d}",
-        "hidden": false,
-        "name": "Developer Command Prompt for VS 2022 [Preview]",
-        "source": "Windows.Terminal.VisualStudio"
-      },
-      {
-        "guid": "{3af2262b-bc99-593c-9e59-8222fe532a30}",
-        "hidden": false,
-        "name": "Developer PowerShell for VS 2022 [Preview]",
-        "source": "Windows.Terminal.VisualStudio"
       }
     ]
   },
@@ -387,7 +350,7 @@
   ],
   "showTabsInTitlebar": true,
   "startOnUserLogin": true,
-  "startupActions": "new-tab --tabColor #000000 -p \"PowerShell\" -d C:\\Users\\vivob;",
+  "startupActions": "new-tab --tabColor #000000 -p \"PowerShell\" -d C:\\Users\\subzero;",
   "theme": "dark",
   "themes": []
 }
