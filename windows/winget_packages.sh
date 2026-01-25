@@ -62,6 +62,8 @@ MUST_HAVE=(
 	RProject.R
 	Bitwarden.CLI
 	IDRIX.VeraCrypt
+	Rclone.Rclone
+	WinFsp.WinFsp
 	qBittorrent.qBittorrent
 )
 
@@ -92,7 +94,6 @@ MAY_HAVE=(
 	ByteDance.CapCut
 	WiresharkFoundation.Wireshark
 	Amazon.AWSCLI
-	Rclone.Rclone
 	Audacity.Audacity
 	Zeit.Hyper
 	GnuPG.Gpg4win
