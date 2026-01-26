@@ -182,12 +182,6 @@ function setup_docker() {
 	sudo_exec chown "$USER" /var/run/docker.sock
 }
 
-function install_pipx_packages() {
-	for pkg in "${PIPX_PACKAGES[@]}"; do
-		pipx install --include-deps --force "$pkg"
-	done
-}
-
 # Git kraken (Linux)
 function install_gitkraken() {
 	GITKRAKEN_TAR=gitkraken-amd64.tar.gz

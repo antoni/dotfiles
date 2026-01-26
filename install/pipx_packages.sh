@@ -12,3 +12,11 @@ PIPX_PACKAGES=(
 	markitdown docling marker-pdf langflow
 	xmldiff yq 2to3 "pg_activity[psycopg]"
 )
+
+# TODO: Use this in the install.sh
+function install_pipx_packages() {
+	for pkg in "${PIPX_PACKAGES[@]}"; do
+		pipx install --include-deps --force "$pkg"
+	done
+}
+

@@ -715,6 +715,13 @@ function pip_list() {
 }
 
 function reinstall_pipx_packages() {
+	if ! command -v pipx >/dev/null 2>&1; then
+		echo "pipx not found, installing..."
+		sudo apt update
+		sudo apt install -y pipx
+		pipx ensurepath
+	fi
+
 	DISPLAY="" pipx list --json | jq -r '.venvs | keys[]' |
 		xargs -I % bash -c 'pipx upgrade --force "%"'
 }
