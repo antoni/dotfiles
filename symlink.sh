@@ -391,7 +391,7 @@ function main() {
 			# sudo sed -i "/127.0.0.1/d" /etc/hosts
 			# echo "127.0.0.1 $HOSTNAME" | sudo tee -a /etc/hosts > /dev/null
 
-			print_success_message "Hostname changed to: $HOSTNAME"
+			# print_success_message "Hostname changed to: $HOSTNAME"
 		fi
 	}
 
