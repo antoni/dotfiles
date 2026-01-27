@@ -156,10 +156,10 @@ function main() {
 	source "$HOME/dotfiles/install/install_oh_my_zsh.sh" && install_oh_my_zsh || exit_with_error_message "Could not install oh-my-zsh"
 
 	source "${BASH_SOURCE%/*}/install_global_javascript_npm_packages.sh"
-	install_global_javascript_npm_packages || exit_with_error_message ""
-	install_vim_plugins || exit_with_error_message ""
+	install_global_javascript_npm_packages || exit_with_error_message "Could not install global npm packages"
+	install_vim_plugins || exit_with_error_message "Could not install vim plugins"
 
-	install_tmux_plugin_manager || exit_with_error_message ""
+	install_tmux_plugin_manager || exit_with_error_message "Could not install tmux"
 
 	source "$DOTFILES_DIR"/install/install_go.sh || exit_with_error_message "Could not install golang"
 
