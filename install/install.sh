@@ -165,6 +165,7 @@ function main() {
 
 	"$HOME"/dotfiles/install/install_rust.sh
 	"$HOME"/dotfiles/install/install_cargo_crates.sh
+	"$HOME"dotfiles/install/install_chrome.sh
 
 	crontab "$DOTFILES_DIR"/cron.jobs || exit_with_error_message ""
 
