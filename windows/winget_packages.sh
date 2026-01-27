@@ -65,6 +65,7 @@ MUST_HAVE=(
 	Rclone.Rclone
 	WinFsp.WinFsp
 	qBittorrent.qBittorrent
+	Microsoft.PowerShell
 )
 
 CONFERENCE_SOFTWARE=(
@@ -182,7 +183,6 @@ MAY_HAVE=(
 	Microsoft.AzureCLI
 	Microsoft.AzureDataCLI
 	Microsoft.AzureStorageEmulator
-	Microsoft.PowerShell
 	Autodesk.EAGLE
 	Audacity.Audacity
 )

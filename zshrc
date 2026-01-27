@@ -242,3 +242,5 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+
+source /home/antoni/.config/broot/launcher/bash/br

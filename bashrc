@@ -167,7 +167,6 @@ export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 export PATH="$PATH:/home/antoni/kotlin/kotlinc/bin"
-. "$HOME/.cargo/env"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -183,3 +182,6 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+. "$HOME/.cargo/env"
+
+source /home/antoni/.config/broot/launcher/bash/br

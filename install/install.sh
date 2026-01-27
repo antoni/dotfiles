@@ -163,6 +163,9 @@ function main() {
 
 	source "$DOTFILES_DIR"/install/install_go.sh || exit_with_error_message "Could not install golang"
 
+	"$HOME"/dotfiles/install/install_rust.sh
+	"$HOME"/dotfiles/install/install_cargo_crates.sh
+
 	crontab "$DOTFILES_DIR"/cron.jobs || exit_with_error_message ""
 
 	# TODO: Symlink here, check if all works
