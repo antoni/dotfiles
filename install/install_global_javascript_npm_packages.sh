@@ -12,7 +12,7 @@ function install_global_javascript_npm_packages() {
 
 	npm install --no-fund --location=global eslint lodash jshint typescript ts-node prettier \
 		http-server http-server-spa json-server depcheck npm-check-updates prettier sort-package-json \
-		babel-cli pm2 firebase-tools \
+		babel-cli pm2 firebase-tools deno \
 		@aws-amplify/cli pa11y netlify-cli hygen react-native-cli serve \
 		@zeplin/cli @zeplin/cli-connect-react-plugin @zeplin/cli-connect-swift-plugin \
 		yo generator-office dts-gen yargs rollup pnpm source-map-explorer \

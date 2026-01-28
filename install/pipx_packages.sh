@@ -10,7 +10,7 @@ PIPX_PACKAGES=(
 	truffleHog gallery-dl instaloader
 	git-filter-repo oci-cli csvkit
 	markitdown docling marker-pdf langflow
-	xmldiff yq 2to3 "pg_activity[psycopg]"
+	xmldiff yq 2to3 "pg_activity[psycopg]" csvkit
 )
 
 # TODO: Use this in the install.sh

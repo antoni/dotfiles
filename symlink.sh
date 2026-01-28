@@ -300,6 +300,15 @@ function main() {
 		sudo_exec ln -fs "${DOTFILES_DIR}"/global_aliases /etc/profile.d/global_aliases.sh
 
 		if [[ -n "$IS_WSL" ]]; then
+			function replace_greenshot_plus_plus_settings() {
+				local -r target_path="/mnt/c/Users/""${WINDOWS_USERNAME}""/AppData/Roaming/Greenshot/Greenshot.ini"
+
+				printf "Replacing greenshot settings at: '%s'\n" "$target_path"
+
+				envsubst <$HOME/dotfiles/windows/greenshot_plus_plus_settings.template.xml >"$target_path"
+			}
+			replace_greenshot_plus_plus_settings
+
 			function replace_notepad_plus_plus_settings() {
 				local -r target_path="/mnt/c/Users/""${WINDOWS_USERNAME}""/AppData/Roaming/Notepad++/config.xml"
 

@@ -167,6 +167,8 @@ function main() {
 	"$HOME"/dotfiles/install/install_cargo_crates.sh
 	"$HOME"dotfiles/install/install_chrome.sh
 
+	source "$DOTFILES_DIR"/install/pipx_packages.sh && install_pipx_packages || exit_with_error_message "Could not install pipx packages"
+
 	crontab "$DOTFILES_DIR"/cron.jobs || exit_with_error_message ""
 
 	# TODO: Symlink here, check if all works
