@@ -8,7 +8,16 @@ function jpg_to_png() {
 }
 
 function heic_to_jpg() {
-	# Enable case-insensitive globbing and prevent errors on empty matches
+	# ---- dependency checks ----
+	local deps=(parallel magick)
+	for dep in "${deps[@]}"; do
+		if ! command -v "$dep" >/dev/null 2>&1; then
+			echo "❌ Error: required dependency '$dep' not found in PATH." >&2
+			return 127
+		fi
+	done
+
+	# ---- shell options ----
 	if [[ -n $ZSH_VERSION ]]; then
 		setopt LOCAL_OPTIONS nocaseglob nullglob
 	elif [[ -n $BASH_VERSION ]]; then
@@ -18,16 +27,17 @@ function heic_to_jpg() {
 	local files=(*.heic)
 
 	if [[ ${#files[@]} -eq 0 ]]; then
-		echo "No HEIC files found in the current directory."
+		echo "⚠️  No HEIC files found in the current directory." >&2
 		return 1
 	fi
 
-	echo "Converting ${#files[@]} HEIC files to JPG using GNU parallel..."
+	echo "Converting ${#files[@]} HEIC files to JPG using GNU parallel…"
 
 	parallel 'magick {} {.}.jpg' ::: "${files[@]}"
 
 	echo "✅ All conversions complete."
 
+	# ---- cleanup ----
 	if [[ -n $BASH_VERSION ]]; then
 		shopt -u nocaseglob nullglob
 	fi

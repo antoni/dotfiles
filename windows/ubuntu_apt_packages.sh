@@ -30,6 +30,7 @@ APT_PACKAGES=(apache2
 	qemu-utils
 	tesseract-ocr
 	libsecret-tools
+	exiftool
 	ffmpeg
 	maven
 	flatpak
@@ -80,6 +81,7 @@ APT_PACKAGES=(apache2
 	librecad
 	7zip
 	libasound2
+	jpegoptim
 	default-jdk
 	scala
 	cmake
