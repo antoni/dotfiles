@@ -13,14 +13,20 @@ source "$DOTFILES_DIR"/colors.sh
 source "$(dirname "$0")/pipx_packages.sh" || exit 1
 
 # Install required packages
-PACKAGES=(suckless-tools xbindkeys clang vim rdesktop make sysstat
-	make cmake gitk vlc okular xdotool xbindkeys xautomation mosh mc
-	libreoffice cscope universal-ctags pavucontrol jq dmidecode xsel i3 zsh lsb ntp feh help2man rpl
-	thunar acpi tmux gitg nomacs docker vpnc
-	hexchat rlwrap xautolock yamllint
-	eom eog inotify-tools xbacklight pulseaudio gnome-bluetooth
+PACKAGES=(coreutils gawk sed grep findutils diffutils envsubst
+	jq dmidecode xsel zsh ruby udev
+  make cmake  clang vim gitk vlc
+	suckless-tools rdesktop make sysstat
+	okular xdotool xbindkeys xautomation mosh mc
+	libreoffice cscope universal-ctags pavucontrol i3 feh help2man rpl
+	thunar acpi tmux gitg nomacs vpnc
+	hexchat rlwrap yamllint
+	eom eog inotify-tools xbacklight pulseaudio
 	tidy pandoc tig ncdu redshift rustc
-	dunst httpie udev autofs pinta ruby)
+	dunst httpie autofs)
+
+# TODO: Decide what to do with these packages (wrong names when installing on Debian GNU/Linux 13 (trixie))
+# xautolock pinta lsb ntp docker gnome-bluetooth
 
 SNAP_PACKAGES=(slack code)
 RUST_PACKAGES=(rust cargo)
@@ -78,6 +84,48 @@ function install_fedora_sound() {
 }
 
 function install_snap_packages() {
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "==> Ensuring snapd is installed"
+
+if ! dpkg -s snapd >/dev/null 2>&1; then
+  sudo apt update
+  sudo apt install -y snapd
+else
+  echo "snapd already installed"
+fi
+
+echo "==> Ensuring snapd service is enabled and running"
+
+if ! systemctl is-enabled snapd >/dev/null 2>&1; then
+  sudo systemctl enable snapd
+else
+  echo "snapd service already enabled"
+fi
+
+if ! systemctl is-active snapd >/dev/null 2>&1; then
+  sudo systemctl start snapd
+else
+  echo "snapd service already running"
+fi
+
+echo "==> Ensuring /snap symlink exists"
+
+if [ ! -e /snap ]; then
+  sudo ln -s /var/lib/snapd/snap /snap
+  echo "Created /snap symlink"
+else
+  echo "/snap already exists"
+fi
+
+echo "==> Verifying snap installation"
+snap version || {
+  echo "Snap installed, but a logout/login or reboot may be required."
+}
+
+echo "==> Done"
+
 	sudo snap install slack --classic
 }
 
@@ -117,7 +165,6 @@ function main() {
 		sudo apt-get install -y -qq zsh \
 			-o Dpkg::Use-Pty=0
 
-		# return
 		install_snap_packages
 
 		~/dotfiles/install/install_node_lts.sh
@@ -152,6 +199,8 @@ function main() {
 		sudo locale-gen en_US.UTF-8
 		sudo locale-gen en_GB.UTF-8
 	fi
+
+	~/dotfiles/symlink.sh
 
 	source "$HOME/dotfiles/install/install_oh_my_zsh.sh" && install_oh_my_zsh || exit_with_error_message "Could not install oh-my-zsh"
 	source "$HOME/dotfiles/install/install_oh_my_zsh.sh" && install_oh_my_zsh || exit_with_error_message "Could not install oh-my-zsh"
@@ -188,9 +237,6 @@ fi
 	source "$DOTFILES_DIR"/install/pipx_packages.sh && install_pipx_packages || exit_with_error_message "Could not install pipx packages"
 
 	crontab "$DOTFILES_DIR"/cron.jobs || exit_with_error_message ""
-
-	# TODO: Symlink here, check if all works
-	~/dotfiles/symlink.sh
 }
 
 function install_vim_plugins() {

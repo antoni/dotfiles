@@ -144,8 +144,10 @@ function setup_gitconfig() {
 	local name email
 
 	# Prompt user for input
+	# TODO: Move to env vars set in the beggining of install.sh
 	printf "Enter your full name for Git: "
 	IFS= read -r name
+	# TODO: Move to env vars set in the beggining of install.sh
 	printf "Enter your email for Git: "
 	IFS= read -r email
 
@@ -402,7 +404,7 @@ function main() {
 		if [ "${OSTYPE//[0-9.]/}" == "darwin" ]; then
 			mac_change_hostname "$HOSTNAME"
 		else
-			# TODO: Make it work on WSL?
+			echo TODO: Make it work on WSL?
 			# echo "$HOSTNAME" | sudo tee /etc/hostname > /dev/null
 			# sudo hostname "$HOSTNAME"
 

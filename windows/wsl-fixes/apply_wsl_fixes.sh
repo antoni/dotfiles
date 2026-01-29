@@ -4,6 +4,8 @@
 
 # Fixes: systemd
 # https://github.com/microsoft/WSL/issues/8952#issuecomment-1572193568
+if [ -f /etc/os-release ] && grep -qi ubuntu /etc/os-release; then
+
 sudo sh -c 'echo :WSLInterop:M::MZ::/init:PF > /usr/lib/binfmt.d/WSLInterop.conf'
 sudo systemctl unmask systemd-binfmt.service
 sudo systemctl restart systemd-binfmt
@@ -23,6 +25,7 @@ sudo update-binfmts --disable cli
 # Fixes: time inside WSL
 # Get the latest time from your Windows machine’s RTC and set the system time to that
 sudo hwclock --hctosys
+fi
 
 # see: https://github.com/docker/for-win/issues/8336
 function fix_zsh_docker_autocompletions() {
