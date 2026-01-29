@@ -13,8 +13,8 @@ source "$DOTFILES_DIR"/colors.sh
 source "$(dirname "$0")/pipx_packages.sh" || exit 1
 
 # Install required packages
-PACKAGES=(coreutils gawk sed grep findutils diffutils envsubst
-	jq dmidecode xsel zsh ruby udev
+PACKAGES=(coreutils gawk sed grep findutils diffutils
+	gettext jq dmidecode xsel zsh ruby udev
   make cmake  clang vim gitk vlc
 	suckless-tools rdesktop make sysstat
 	okular xdotool xbindkeys xautomation mosh mc
@@ -202,11 +202,12 @@ function main() {
 
 	~/dotfiles/symlink.sh
 
-	source "$HOME/dotfiles/install/install_oh_my_zsh.sh" && install_oh_my_zsh || exit_with_error_message "Could not install oh-my-zsh"
-	source "$HOME/dotfiles/install/install_oh_my_zsh.sh" && install_oh_my_zsh || exit_with_error_message "Could not install oh-my-zsh"
+# Needs to be installed using zsh, not bash
+	"$HOME/dotfiles/install/install_oh_my_zsh.sh"|| exit_with_error_message "Could not install oh-my-zsh"
 
+# TODO: Put this inside install_imagemagick_v7
 if command -v magick >/dev/null 2>&1 || command -v convert >/dev/null 2>&1; then
-    echo "ImageMagick detected. Proceeding with removal..."
+    echo "ImageMagick (preinstalled on the system) detected. Proceeding with removal..."
 
     sudo apt purge -y imagemagick imagemagick-6-common || true
     sudo apt purge -y 'libmagick*6*' || true
@@ -216,7 +217,7 @@ if command -v magick >/dev/null 2>&1 || command -v convert >/dev/null 2>&1; then
         sudo rm -rf /etc/ImageMagick-6
     fi
 
-    echo "ImageMagick (installed with the system) cleanup complete."
+    echo "ImageMagick (preinstalled with the system) cleanup complete."
 else
     echo "ImageMagick not installed with the system. No need to remove it"
 fi

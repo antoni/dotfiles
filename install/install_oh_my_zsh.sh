@@ -1,4 +1,10 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
+
+set -euo pipefail
+
+export LANG=${LANG:-C.UTF-8}
+export LC_ALL=$LANG
+export ZSH_CACHE_DIR="${ZSH_CACHE_DIR:-$HOME/.oh-my-zsh/cache}"
 
 source "$HOME/dotfiles/utils.sh"
 
@@ -33,3 +39,5 @@ function install_oh_my_zsh() {
 	install_zsh_plugins
 	symlink_zsh_files
 }
+
+install_oh_my_zsh

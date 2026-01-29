@@ -16,7 +16,7 @@ export EDITOR="vim"
 # Overcome the madness: http://www.economyofeffort.com/2014/07/04/zsh/
 export TERM=xterm-256color
 
-[ -n "$TMUX" ] && export TERM=screen-256color
+[ -n "${TMUX-}" ] && export TERM=screen-256color
 
 # Fixes different things on Ubuntu. May not be up-to-date, since Ubuntu gets
 # better every year

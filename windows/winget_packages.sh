@@ -67,6 +67,7 @@ MUST_HAVE=(
 	qBittorrent.qBittorrent
 	Microsoft.PowerShell
 	Spotify.Spotify
+	tailscale.tailscale
 )
 
 CONFERENCE_SOFTWARE=(
@@ -129,7 +130,6 @@ MAY_HAVE=(
 	ProtonTechnologies.ProtonVPN
 	ExpressVPN.ExpressVPN
 	Jigsaw.OutlineManager
-	tailscale.tailscale
 	ZeroTier.ZeroTierOne
 	mRemoteNG.mRemoteNG
 	Xming.Xming

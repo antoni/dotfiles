@@ -145,15 +145,17 @@ function setup_gitconfig() {
 
 	# Prompt user for input
 	# TODO: Move to env vars set in the beggining of install.sh
-	printf "Enter your full name for Git: "
-	IFS= read -r name
-	# TODO: Move to env vars set in the beggining of install.sh
-	printf "Enter your email for Git: "
-	IFS= read -r email
+	# printf "Enter your full name for Git: "
+	# IFS= read -r name
+	# # TODO: Move to env vars set in the beggining of install.sh
+	# printf "Enter your email for Git: "
+	# IFS= read -r email
+	export GITHUB_NAME="Thomas Anderson"
+	export GITHUB_EMAIL="contact@antoni.systems"
 
 	# Validate input
-	if [[ -z "$name" || -z "$email" ]]; then
-		echo "Name and email must not be empty."
+	if [[ -z "$GITHUB_NAME" || -z "$GITHUB_EMAIL" ]]; then
+		echo "Git name and email must not be empty."
 		return 1
 	fi
 
@@ -169,8 +171,8 @@ function setup_gitconfig() {
 	# Write the new config
 	{
 		echo "[user]"
-		echo "    name = $name"
-		echo "    email = $email"
+		echo "    name = $GITHUB_NAME"
+		echo "    email = $GITHUB_EMAIL"
 		cat "$gitconfig_base"
 	} >"$gitconfig_target"
 
@@ -414,23 +416,12 @@ function main() {
 			# print_success_message "Hostname changed to: $HOSTNAME"
 		fi
 	}
-
 	setup_hostname
 
 	# Midnight Commander
 	rm -f ~/.config/mc/* && mkdir -p ~/.config/mc/
 	ln -fs "$DOTFILES_DIR"/mc/ini ~/.config/mc/
 
-	# Atom
-	mkdir -p "$HOME"/.atom
-	pushd atom &>/dev/null || exit 1
-
-	for atom in *; do
-		rm -f "$HOME"/.atom/"$atom"
-		ln -fs ~/dotfiles/atom/"$atom" "$HOME"/.atom/"$atom"
-	done
-
-	popd &>/dev/null || exit 1
 	print_success_message "Successfully symlinked all files"
 
 	function find_broken_symlinks() {

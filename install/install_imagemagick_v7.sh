@@ -1,45 +1,50 @@
 #!/usr/bin/env bash
 
-# Exit immediately if a command exits with a non-zero status
+# Exit immediately on error
 set -e
 
-# Change to the user's tmp directory
+# Go to tmp dir
 cd "$HOME/tmp"
 
-# Update and upgrade the system
-sudo apt-get --quiet update && sudo apt-get --quiet upgrade --yes
+echo "Updating system..."
+sudo apt-get -qq update
+sudo apt-get -qq upgrade -y
 
-# Install required dependencies
-sudo apt-get --yes install build-essential libtool libjpeg-dev libpng-dev libtiff-dev libgif-dev libx11-dev libxext-dev libxml2-dev libbz2-dev libz-dev libfontconfig1-dev libfreetype6-dev
+echo "Installing dependencies..."
+sudo apt-get -qq install -y \
+  build-essential libtool libjpeg-dev libpng-dev libtiff-dev libgif-dev \
+  libx11-dev libxext-dev libxml2-dev libbz2-dev libz-dev \
+  libfontconfig1-dev libfreetype6-dev \
+  ghostscript libwebp-dev liblqr-1-0-dev libopenexr-dev \
+  libheif-dev libraw-dev
 
-# Install optional dependencies (adjust as needed)
-sudo apt-get --yes install ghostscript libwebp-dev liblqr-1-0-dev libopenexr-dev libheif-dev libraw-dev
-
-# Define the ImageMagick version
 IMAGEMAGICK_VERSION="7.1.1-14"
+ARCHIVE="ImageMagick-$IMAGEMAGICK_VERSION.tar.xz"
+DIR="ImageMagick-$IMAGEMAGICK_VERSION"
 
-# Download the ImageMagick source code
-wget --quiet "https://download.imagemagick.org/ImageMagick/download/releases/ImageMagick-$IMAGEMAGICK_VERSION.tar.xz"
+echo "Downloading ImageMagick $IMAGEMAGICK_VERSION..."
+wget -q "https://download.imagemagick.org/ImageMagick/download/releases/$ARCHIVE"
 
-# Extract the downloaded archive
-tar --extract --file="ImageMagick-$IMAGEMAGICK_VERSION.tar.xz"
+echo "Extracting..."
+tar -xf "$ARCHIVE"
 
-# Change directory to the extracted folder
-cd "ImageMagick-$IMAGEMAGICK_VERSION"
+cd "$DIR"
 
-# Configure, compile, and install
-./configure
-make
-sudo make install
+echo "Configuring..."
+./configure > configure.log 2>&1
 
-# Update shared libraries cache
+echo "Compiling (this may take a bit)..."
+make -j"$(nproc)" > build.log 2>&1
+
+echo "Installing..."
+sudo make install > install.log 2>&1
+
 sudo ldconfig
 
-# Verify installation
-magick --version
+echo "Verifying installation..."
+magick --version | head -n 1
 
-# Clean up
 cd ..
-rm --recursive --force "ImageMagick-$IMAGEMAGICK_VERSION" "ImageMagick-$IMAGEMAGICK_VERSION.tar.xz"
+rm -rf "$DIR" "$ARCHIVE"
 
-echo "ImageMagick $IMAGEMAGICK_VERSION installed successfully!"
+echo "✅ ImageMagick $IMAGEMAGICK_VERSION installed successfully"
