@@ -300,6 +300,24 @@ function main() {
 		sudo_exec ln -fs "${DOTFILES_DIR}"/global_aliases /etc/profile.d/global_aliases.sh
 
 		if [[ -n "$IS_WSL" ]]; then
+			function replace_powertoys_settings() {
+				local -r target_path="/mnt/c/Users/""${WINDOWS_USERNAME}""/AppData/Local/Microsoft/PowerToys/settings.json"
+
+				printf "Replacing PowerToys settings at: '%s'\n" "$target_path"
+
+				envsubst <$HOME/dotfiles/windows/PowerToys_settings.json >"$target_path"
+			}
+			replace_powertoys_settings
+
+			function replace_greenshot_settings() {
+				local -r target_path="/mnt/c/Users/""${WINDOWS_USERNAME}""/AppData/Roaming/Greenshot/Greenshot.ini"
+
+				printf "Replacing greenshot settings at: '%s'\n" "$target_path"
+
+				envsubst <$HOME/dotfiles/windows/Greenshot.ini >"$target_path"
+			}
+			replace_greenshot_settings
+
 			function replace_notepad_plus_plus_settings() {
 				local -r target_path="/mnt/c/Users/""${WINDOWS_USERNAME}""/AppData/Roaming/Notepad++/config.xml"
 

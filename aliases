@@ -2659,3 +2659,10 @@ function code() {
 alias c='code -n . &'
 
 alias 7z='7zz'
+
+alias remove_exif_tags="$HOME/scripts/images/remove_exif_tags.sh"
+alias compress_images="$HOME/scripts/images/compress_images.sh"
+alias rescale_images="$HOME/scripts/images/rescale_images.sh"
+
+alias apt='apt -y'
+

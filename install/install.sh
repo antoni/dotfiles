@@ -154,17 +154,38 @@ function main() {
 	fi
 
 	source "$HOME/dotfiles/install/install_oh_my_zsh.sh" && install_oh_my_zsh || exit_with_error_message "Could not install oh-my-zsh"
+	source "$HOME/dotfiles/install/install_oh_my_zsh.sh" && install_oh_my_zsh || exit_with_error_message "Could not install oh-my-zsh"
+
+if command -v magick >/dev/null 2>&1 || command -v convert >/dev/null 2>&1; then
+    echo "ImageMagick detected. Proceeding with removal..."
+
+    sudo apt purge -y imagemagick imagemagick-6-common || true
+    sudo apt purge -y 'libmagick*6*' || true
+    sudo apt autoremove --purge -y
+
+    if [ -d /etc/ImageMagick-6 ]; then
+        sudo rm -rf /etc/ImageMagick-6
+    fi
+
+    echo "ImageMagick (installed with the system) cleanup complete."
+else
+    echo "ImageMagick not installed with the system. No need to remove it"
+fi
+	"$HOME/dotfiles/install/install_imagemagick_v7.sh"  || exit_with_error_message "Could not install ImageMagick"
 
 	source "${BASH_SOURCE%/*}/install_global_javascript_npm_packages.sh"
-	install_global_javascript_npm_packages || exit_with_error_message ""
-	install_vim_plugins || exit_with_error_message ""
+	install_global_javascript_npm_packages || exit_with_error_message "Could not install global npm packages"
+	install_vim_plugins || exit_with_error_message "Could not install vim plugins"
 
-	install_tmux_plugin_manager || exit_with_error_message ""
+	install_tmux_plugin_manager || exit_with_error_message "Could not install tmux"
 
 	source "$DOTFILES_DIR"/install/install_go.sh || exit_with_error_message "Could not install golang"
 
 	"$HOME"/dotfiles/install/install_rust.sh
 	"$HOME"/dotfiles/install/install_cargo_crates.sh
+	"$HOME"dotfiles/install/install_chrome.sh
+
+	source "$DOTFILES_DIR"/install/pipx_packages.sh && install_pipx_packages || exit_with_error_message "Could not install pipx packages"
 
 	crontab "$DOTFILES_DIR"/cron.jobs || exit_with_error_message ""
 

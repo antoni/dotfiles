@@ -114,3 +114,6 @@ export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 if [ -e "$HOME/.cargo/env" ]; then
 	. "$HOME/.cargo/env"
 fi
+
+# Don't ever ask to install corepack, just do it
+export COREPACK_ENABLE_DOWNLOAD_PROMPT=0

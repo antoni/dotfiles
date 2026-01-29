@@ -66,6 +66,7 @@ MUST_HAVE=(
 	WinFsp.WinFsp
 	qBittorrent.qBittorrent
 	Microsoft.PowerShell
+	Spotify.Spotify
 )
 
 CONFERENCE_SOFTWARE=(
