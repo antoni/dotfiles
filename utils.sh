@@ -147,5 +147,5 @@ function exit_with_error_message() {
 	local -r error_message="$1"
 	printf "${colors[Red]}Error: %s${colors[Reset_Color]}\n" "$error_message"
 
-	return
+	exit 1
 }
