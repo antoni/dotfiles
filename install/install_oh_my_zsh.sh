@@ -31,8 +31,7 @@ function install_oh_my_zsh() {
 	printf "Installing oh-my-zsh\n"
 	rm --recursive --force ~/.oh-my-zsh
 
-	# sudo sed s/required/sufficient/g -i /etc/pam.d/chsh
-	chsh -s "$(which zsh)" "$(whoami)"
+	sudo chsh -s "$(which zsh)" "$(whoami)"
 
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
