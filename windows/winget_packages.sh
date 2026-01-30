@@ -187,14 +187,12 @@ MAY_HAVE=(
 )
 
 # In case there is a need to accept some new Terms of Transaction
-${WINGET_ALIAS} list
+# ${WINGET_ALIAS} list
 
 # Needs to be executed before every install/update
-${WINGET_ALIAS} source update
 # if this doesn't help, try:
 # winget source reset --force
-
-package_not_installed=$(${WINGET_COMMAND_LIST} Some.NonExistent.PackageName)
+${WINGET_ALIAS} source update
 
 function resolve_winget_id() {
 	local query="$1"

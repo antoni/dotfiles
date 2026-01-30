@@ -17,3 +17,4 @@ WINGET_COMMAND_INSTALL_NONEX="$WINGET_ALIAS install --id "
 WINGET_COMMAND_UNINSTALL="$WINGET_ALIAS uninstall \
 --exact \
 --id "
+
