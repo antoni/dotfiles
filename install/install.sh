@@ -231,6 +231,7 @@ fi
 
 	source "$DOTFILES_DIR"/install/install_go.sh || exit_with_error_message "Could not install golang"
 
+
 	"$HOME"/dotfiles/install/install_rust.sh
 	"$HOME"/dotfiles/install/install_cargo_crates.sh
 	"$HOME"dotfiles/install/install_chrome.sh
@@ -238,6 +239,9 @@ fi
 	source "$DOTFILES_DIR"/install/pipx_packages.sh && install_pipx_packages || exit_with_error_message "Could not install pipx packages"
 
 	crontab "$DOTFILES_DIR"/cron.jobs || exit_with_error_message ""
+
+	# TODO: Show info about interactive steps:
+	# "$HOME"/dotfiles/install/install_gh_cli.sh
 }
 
 function install_vim_plugins() {

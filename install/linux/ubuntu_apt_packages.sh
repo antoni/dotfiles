@@ -31,7 +31,6 @@ APT_PACKAGES=(apache2
 	qemu-utils
 	tesseract-ocr
 	libsecret-tools
-	exiftool
 	ffmpeg
 	maven
 	flatpak
@@ -52,7 +51,6 @@ APT_PACKAGES=(apache2
 	mc
 	pv
 	xsel
-	exiftool
 	rand
 	ethtool
 	wakeonlan
@@ -76,7 +74,6 @@ APT_PACKAGES=(apache2
 	audacity
 	trufflehog
 	libcups2-dev
-	libimage-exiftool-perl
 	zip
 	git-lfs
 	librecad

@@ -64,6 +64,7 @@ MUST_HAVE=(
 	Microsoft.PowerShell
 	Spotify.Spotify
 	tailscale.tailscale
+	Microsoft.Sysinternals.ProcessExplorer
 )
 
 CONFERENCE_SOFTWARE=(
