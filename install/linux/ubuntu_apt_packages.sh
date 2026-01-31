@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# TODO: Start using it again
 MUST_HAVE=(software-properties-common
 	build-essential flex bison libssl-dev libelf-dev git dwarves
 	nmap

@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# TODO: Start using it in install.sh/symlink.sh
 source "$(dirname "$0")/../aliases" || exit 1
 
 # 'Current User, All Hosts' location (PowerShell Core)
@@ -11,4 +12,4 @@ mkdir -p "$powershell_profile_directory"
 
 rm --recursive --force "$powershell_profile_location"
 
-cp "$(dirname "$0")"/Microsoft.PowerShell_profile.ps1 "$powershell_profile_location"
+cp "$(dirname "$0")"/Profile.ps1 "$powershell_profile_location"
