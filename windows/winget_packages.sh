@@ -65,6 +65,8 @@ MUST_HAVE=(
 	Spotify.Spotify
 	tailscale.tailscale
 	Microsoft.Sysinternals.ProcessExplorer
+	uutils.coreutils
+	Microsoft.Sysinternals.TCPView
 )
 
 CONFERENCE_SOFTWARE=(

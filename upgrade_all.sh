@@ -52,7 +52,8 @@ function upgrade_all() {
 
 			# Delete all links on Desktop: all users
 			# [Environment]::GetFolderPath('CommonDesktopDirectory')
-			rm --recursive --force /mnt/c/Users/Public/{desktop,Desktop}/*.{lnk,url}
+			# TODO: This one throws 'Permission denied'
+			# rm --recursive --force /mnt/c/Users/Public/{desktop,Desktop}/*.{lnk,url}
 		}
 
 		check_if_wsl_needs_upgrade

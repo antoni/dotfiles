@@ -1144,10 +1144,65 @@ function webm_to_mp4() {
 # Usage: echo 'Hello world' | t
 alias t='tee >(copy_to_clipboard)'
 
+# TODO: → scripts
 function remove_password_from_pdf() {
-	local -r filename=$(filename_without_extension "$1")
-	local -r password=$2
-	qpdf -password="$password" -decrypt "$filename".pdf "$filename""_no_password.pdf"
+  local input=""
+  local output=""
+  local password=""
+
+  show_help() {
+    cat <<'EOF'
+Usage: remove_password_from_pdf [OPTIONS]
+
+Remove password protection from a PDF using qpdf.
+
+Options:
+  -i, --input FILE        Input PDF file (required)
+  -o, --output FILE       Output PDF file (optional)
+  -p, --password PASS    PDF password (optional)
+  -h, --help             Show this help message
+EOF
+  }
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      -i|--input)
+        input="$2"
+        shift 2
+        ;;
+      -o|--output)
+        output="$2"
+        shift 2
+        ;;
+      -p|--password)
+        password="$2"
+        shift 2
+        ;;
+      -h|--help)
+        show_help
+        return 0
+        ;;
+      *)
+        echo "Unknown option: $1" >&2
+        show_help
+        return 1
+        ;;
+    esac
+  done
+
+  if [[ -z "$input" ]]; then
+    echo "Error: input file is required." >&2
+    show_help
+    return 1
+  fi
+
+  if [[ -z "$output" ]]; then
+    local base
+    base="$(filename_without_extension "$input")"
+    output="${base}_no_password.pdf"
+  fi
+
+  qpdf --password="$password" --decrypt "$input" "$output"
 }
 
 function password_protect_pdf_file() {
@@ -1984,10 +2039,6 @@ function remove_interactive_fields_from_pdf() {
 	local -r filename=$(filename_without_extension "$1")
 
 	qpdf --decrypt "$filename".pdf "$filename""_no_interactive_fields.pdf"
-}
-
-function remove_password_from_pdf() {
-	qpdf -password="$password" -decrypt "$filename".pdf "$filename""_no_password.pdf"
 }
 
 function grep_emails() {
