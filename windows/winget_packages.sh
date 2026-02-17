@@ -55,7 +55,6 @@ MUST_HAVE=(
 	Microsoft.DotNet.SDK.10
 	Microsoft.DotNet.DesktopRuntime.10
 	Microsoft.DotNet.Runtime.10
-	Discord.Discord
 	RProject.R
 	IDRIX.VeraCrypt
 	Rclone.Rclone
@@ -96,6 +95,7 @@ MAY_HAVE=(
 	ByteDance.CapCut
 	WiresharkFoundation.Wireshark
 	Amazon.AWSCLI
+	Discord.Discord
 	Audacity.Audacity
 	Piriform.Recuva
 	Zeit.Hyper

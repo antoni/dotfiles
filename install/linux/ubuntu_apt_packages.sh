@@ -6,6 +6,7 @@ MUST_HAVE=(software-properties-common
 	nmap
 )
 
+# TODO: Make sure all these are installed
 APT_PACKAGES=(apache2
 	apt-cacher-ng
 	ubuntu-release-upgrader-core
