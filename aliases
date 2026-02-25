@@ -2717,3 +2717,5 @@ alias rescale_images="$HOME/scripts/images/rescale_images.sh"
 
 alias apt='apt -y'
 
+alias get_subtitles='~/scripts/temporary/get_subtitles.sh -r .'
+alias mdtt='mdtt -i'

@@ -26,11 +26,14 @@ function install_go_packages() {
 	log_info "Installing go packages"
 	if command_exists go; then
 		GO_PACKAGES=(
+			github.com/szktkfm/mdtt/cmd/mdtt
 			github.com/ycd/dstp/cmd/dstp
 			github.com/charmbracelet/glow
 			github.com/tomnomnom/gron
 			github.com/rverton/webanalyze/cmd/webanalyze
-			mvdan.cc/sh/v3/cmd/shfmt)
+			mvdan.cc/sh/v3/cmd/shfmt
+			github.com/Kethsar/ytarchive
+			)
 
 		# shellcheck disable=2048
 		for package in ${GO_PACKAGES[*]}; do

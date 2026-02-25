@@ -32,7 +32,6 @@ APT_PACKAGES=(apache2
 	qemu-utils
 	tesseract-ocr
 	libsecret-tools
-	ffmpeg
 	maven
 	flatpak
 	gitk
@@ -107,7 +106,6 @@ APT_PACKAGES=(apache2
 	exfat-fuse
 	exfat-utils
 	ubuntu-restricted-extras
-	ffmpeg
 	libsecret-tools
 )
 

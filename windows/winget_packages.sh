@@ -65,6 +65,7 @@ MUST_HAVE=(
 	tailscale.tailscale
 	Microsoft.Sysinternals.ProcessExplorer
 	uutils.coreutils
+	RaspberryPiFoundation.RaspberryPiImager
 	Microsoft.Sysinternals.TCPView
 )
 
@@ -111,7 +112,6 @@ MAY_HAVE=(
 	gsass1.NTop
 	CHIRPSoftware.CHIRP-next
 	Yarn.Yarn
-	RaspberryPiFoundation.RaspberryPiImager
 	BraveSoftware.BraveBrowser
 	Rustlang.Rustup
 	Google.Chrome.Canary
@@ -122,7 +122,6 @@ MAY_HAVE=(
 	Oracle.VirtualBox
 	VMware.WorkstationPlayer
 	TorProject.TorBrowser
-	RaspberryPiFoundation.RaspberryPiImager
 	Insecure.Nmap
 	Loom.Loom
 	OpenVPNTechnologies.OpenVPNConnect

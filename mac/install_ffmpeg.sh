@@ -4,6 +4,7 @@
 
 # Note:
 #    - Alternative: https://github.com/markus-perl/ffmpeg-build-script?tab=readme-ov-file#common-install-and-build-macos-linux
+curl -s "https://raw.githubusercontent.com/markus-perl/ffmpeg-build-script/master/web-install-gpl-and-non-free.sh?v1"
 
 # # start clean. make sure you have xcode installed and all the other basics such as brew.
 # brew uninstall --force ffmpeg chromaprint amiaopensource/amiaos/decklinksdk

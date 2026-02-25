@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
+# TODO: Install ffmpeg using install_ffmpeg.sh
+
 DOTFILES_DIR="$HOME"/dotfiles
 
 mkdir -p tmp

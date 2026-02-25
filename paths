@@ -49,11 +49,6 @@ if command -v ruby >/dev/null 2>&1; then
 	export GEM_HOME
 fi
 
-# TODO: Is it still needed?
-# if command -v ruby >/dev/null 2>&1; then
-# 	export PATH="$PATH:$(npm --prefix "$HOME"/tmp get prefix)/bin:$GEM_HOME/bin"
-# fi
-
 # npm global packages
 export NPM_GLOBAL_PACKAGES_DIRECTORY="$HOME"/.npm-global_packages
 
