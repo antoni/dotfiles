@@ -7,6 +7,7 @@ set +x
 
 # Aliases and custom functions
 source "$HOME"/dotfiles/utils.sh
+source "$HOME"/dotfiles/upgrade_helpers.sh
 
 if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
 	# macOS-specific
