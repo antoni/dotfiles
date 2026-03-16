@@ -2720,3 +2720,12 @@ alias apt='apt -y'
 
 alias get_subtitles='~/scripts/temporary/get_subtitles.sh -r .'
 alias mdtt='mdtt -i'
+
+function diff_qbittorrent_settings() {
+  local -r target_path="/mnt/c/Users/${WINDOWS_USERNAME}/AppData/Roaming/qBittorrent/qBittorrent.xml"
+  local -r source_template="$HOME/dotfiles/config/qBittorrent.ini"
+
+  printf "Diffing qBittorrent settings against: '%s'\n" "$target_path"
+
+  diff -u "$target_path" <(envsubst < "$source_template") || true
+}
