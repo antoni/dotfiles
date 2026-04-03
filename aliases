@@ -2729,3 +2729,18 @@ function diff_qbittorrent_settings() {
 
   diff -u "$target_path" <(envsubst < "$source_template") || true
 }
+
+function lint_markdown() {
+  if [ "$#" -eq 0 ]; then
+    echo "Usage: lint_markdown <file1.md> [file2.md ...]"
+    return 1
+  fi
+
+  if ! command -v markdownlint-cli2 >/dev/null 2>&1; then
+    echo "Error: markdownlint-cli2 is not installed."
+    echo "Install with: npm install -g markdownlint-cli2"
+    return 1
+  fi
+
+  markdownlint-cli2 "$@"
+}
