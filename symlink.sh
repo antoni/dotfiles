@@ -304,6 +304,15 @@ function main() {
 		sudo_exec ln -fs "${DOTFILES_DIR}"/global_aliases /etc/profile.d/global_aliases.sh
 
 		if [[ -n "$IS_WSL" ]]; then
+			function replace_vlc_settings() {
+				local -r target_path="/mnt/c/Users/""${WINDOWS_USERNAME}""/AppData/Roaming/vlc/vlcrc"
+
+				printf "Replacing VLC settings at: '%s'\n" "$target_path"
+
+				envsubst <$HOME/dotfiles/vlcrc >"$target_path"
+			}
+			replace_vlc_settings
+
 			function replace_powertoys_settings() {
 				local -r target_path="/mnt/c/Users/""${WINDOWS_USERNAME}""/AppData/Local/Microsoft/PowerToys/settings.json"
 
