@@ -18,6 +18,8 @@ APT_PACKAGES=(apache2
 	hexyl
 	htop
 	rclone
+	borgbackup
+	borgmatic
 	fuse
 	nginx
 	figlet
