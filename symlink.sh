@@ -141,8 +141,6 @@ function mac_symlink() {
 }
 
 function setup_gitconfig() {
-	local name email
-
 	# Prompt user for input
 	# TODO: Move to env vars set in the beggining of install.sh
 	# printf "Enter your full name for Git: "

@@ -11,6 +11,7 @@ PIPX_PACKAGES=(
 	git-filter-repo oci-cli csvkit
 	markitdown docling marker-pdf langflow
 	xmldiff yq 2to3 "pg_activity[psycopg]" csvkit
+	openai-whisper
 )
 
 # TODO: Use this in the install.sh

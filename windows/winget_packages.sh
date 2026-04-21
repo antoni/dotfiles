@@ -25,7 +25,6 @@ MUST_HAVE=(
 	Mozilla.Firefox.DeveloperEdition
 	Google.Chrome
 	PuTTY.PuTTY
-	vim.vim
 	Neovim.Neovim
 	Greenshot.Greenshot
 	Git.Git

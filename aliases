@@ -88,9 +88,82 @@ if test -f /proc/sys/kernel/osrelease && grep -q microsoft /proc/sys/kernel/osre
 	# See: https://github.com/microsoft/winget-cli/issues/688#issuecomment-788391878
 	alias winget='powershell.exe -NoLogo /c winget.exe'
 
+function safely_remove_hardware() {
+	rundll32.exe shell32.dll,Control_RunDLL hotplug.dll
+}
+
+alias wsl2_host_ip='cat /etc/resolv.conf | \grep nameserver | cut -d" " -f2'
+
+alias pip3='DISPLAY="" pip3'
+alias explorer='explorer.exe'
+
+
 	function edit_idea_settings() {
 		vim "/mnt/c/Users/""$WINDOWS_USERNAME""/AppData/Roaming/JetBrains/IntelliJIdea2021.3/idea64.exe.vmoptions"
 	}
+
+	# Show file app association
+alias assoc='cmd.exe /c assoc'
+
+alias ftype='cmd.exe /c ftype'
+
+alias wsl='wsl.exe'
+alias adb='adb.exe'
+
+function idea() {
+	cmd.exe /c "C:\Program Files (x86)\JetBrains\IntelliJ IDEA 2022.1\bin\idea64.exe" dontReopenProjects nosplash
+}
+
+function terminate_docker() {
+	wsl --terminate docker-desktop
+	wsl --terminate docker-desktop-data
+}
+
+alias systeminfo='systeminfo.exe'
+alias systeminfo2='msinfo32.exe'
+
+# Usage:
+# desktop_shortcut_to_wsl_folder folder_path
+function desktop_shortcut_to_wsl_folder() {
+	~/scripts/windows/desktop_shortcut_to_wsl_folder.sh "$@"
+}
+
+alias disk_management='cmd.exe /c diskmgmt.msc'
+alias device_management='cmd.exe /c devmgmt.msc'
+
+# Usage:
+# print_windows_environmnent_variable APPDATA
+function print_windows_environmnent_variable() {
+	local variable_name="$1"
+	powershell.exe -NoLogo "\$env:$variable_name"
+}
+
+# easily retrieve (and define, if asked to) any Windows Environment variable.
+# It also takes care of paths so they get converted from Win32 to Un*x-line.
+# Examples:
+# winenv PROGRAMFILES
+# winenv APPDATA
+function winenv() {
+	if [ "$#" == "0" ] || [ "$1" == "--help" ]; then
+		echo $'\n'Usage:
+		echo $'\t'winenv [-d] WINDOWS_ENVIRONEMENT_VARIABLE_NAME
+		echo $'\t'-d: Defines environment variable in current shell
+		echo $'\t Note that paths will be translated into un*x-like paths\n'
+		return
+	fi
+
+	local -r IFS=$'\n'
+	local PATH_TO_TRANSLATE=$1
+
+	[ "$1" == "-d" ] && PATH_TO_TRANSLATE=$2
+
+	local -r VAR=$(cmd.exe /c echo %"${PATH_TO_TRANSLATE}"% | tr -d '\r')
+	local -r NEW=$(wslpath -u "${VAR}" 2>/dev/null || echo "${VAR}")
+
+	echo "${PATH_TO_TRANSLATE} = ${VAR} -> ${NEW}"
+
+	[ "$1" == "-d" ] && export "${PATH_TO_TRANSLATE}=${NEW}"
+}
 
 	function open_autostart_folder() {
 		local -r autostart_path=$(printf "C:\Users\%s\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup" "$WINDOWS_USERNAME")
@@ -175,8 +248,8 @@ alias icmgw='ssh antoni@gw.icm.edu.pl'
 alias xcode="open *.xcodeproj"
 
 function tarfolder() { tar -czf "$1".tar.gz "$1"/*; }
-function zipfolder() { zip --recurse-paths "$1".zip "$1"/*; }
-function zipfolder_with_password() { zip --encrypt --recurse-paths "$1".zip "$1"/*; }
+function zipfolder() {   7z a -t7z "$1".7z "$1" }
+function zipfolder_with_password() { 7z a -t7z -p -mhe=on "$1".7z "$1"; }
 
 # SSH
 alias sendstud='~/scripts/sendstud.sh'
@@ -1286,29 +1359,6 @@ function count_files_in_directory() {
 	find "$directory" -type f | wc -l
 }
 
-# Windows
-# Opens Notepad++
-function np() {
-	# To follow symlinks inside WSL
-	local -r file_path=$(wslpath -w "$1")
-
-	/mnt/c/Program\ Files/Notepad++/notepad++.exe "$file_path" &
-}
-
-# Opens Typora
-function typora() {
-	# To follow symlinks inside WSL
-	local -r file_path=$(wslpath -w "$1")
-
-	/mnt/c/Program\ Files/Typora/Typora.exe "$file_path" &
-}
-
-# Windows
-function kill_executable() {
-	local executable="$1"
-	taskkill.exe /F /IM "$executable.exe" /T &
-}
-
 function git_repository_name() {
 	basename "$(git rev-parse --show-toplevel)"
 }
@@ -1413,80 +1463,6 @@ function ls_n_random_files() {
 	find . | shuf --head-count "$files_count"
 }
 
-### Windows-only
-
-# Windows only
-# Show file app association
-alias assoc='cmd.exe /c assoc'
-
-alias ftype='cmd.exe /c ftype'
-
-# Windows
-alias wsl='wsl.exe'
-alias adb='adb.exe'
-
-# Windows only for now
-function idea() {
-	cmd.exe /c "C:\Program Files (x86)\JetBrains\IntelliJ IDEA 2022.1\bin\idea64.exe" dontReopenProjects nosplash
-}
-
-# Windows
-function terminate_docker() {
-	wsl --terminate docker-desktop
-	wsl --terminate docker-desktop-data
-}
-
-# Windows
-alias systeminfo='systeminfo.exe'
-# Windows
-alias systeminfo2='msinfo32.exe'
-
-# Usage:
-# desktop_shortcut_to_wsl_folder folder_path
-function desktop_shortcut_to_wsl_folder() {
-	~/scripts/windows/desktop_shortcut_to_wsl_folder.sh "$@"
-}
-
-# Windows
-alias disk_management='cmd.exe /c diskmgmt.msc'
-alias device_management='cmd.exe /c devmgmt.msc'
-
-# Windows
-# Usage:
-# print_windows_environmnent_variable APPDATA
-function print_windows_environmnent_variable() {
-	local variable_name="$1"
-	powershell.exe -NoLogo "\$env:$variable_name"
-}
-
-# Windows only
-# easily retrieve (and define, if asked to) any Windows Environment variable.
-# It also takes care of paths so they get converted from Win32 to Un*x-line.
-# Examples:
-# winenv PROGRAMFILES
-# winenv APPDATA
-function winenv() {
-	if [ "$#" == "0" ] || [ "$1" == "--help" ]; then
-		echo $'\n'Usage:
-		echo $'\t'winenv [-d] WINDOWS_ENVIRONEMENT_VARIABLE_NAME
-		echo $'\t'-d: Defines environment variable in current shell
-		echo $'\t Note that paths will be translated into un*x-like paths\n'
-		return
-	fi
-
-	local -r IFS=$'\n'
-	local PATH_TO_TRANSLATE=$1
-
-	[ "$1" == "-d" ] && PATH_TO_TRANSLATE=$2
-
-	local -r VAR=$(cmd.exe /c echo %"${PATH_TO_TRANSLATE}"% | tr -d '\r')
-	local -r NEW=$(wslpath -u "${VAR}" 2>/dev/null || echo "${VAR}")
-
-	echo "${PATH_TO_TRANSLATE} = ${VAR} -> ${NEW}"
-
-	[ "$1" == "-d" ] && export "${PATH_TO_TRANSLATE}=${NEW}"
-}
-
 # Shorthand aliases
 
 alias p3='python3'
@@ -1586,11 +1562,6 @@ function is_inside_virtual_env() {
 	fi
 }
 
-# Windows
-function safely_remove_hardware() {
-	rundll32.exe shell32.dll,Control_RunDLL hotplug.dll
-}
-
 function clone_website() {
 	httrack "$1"
 }
@@ -1605,13 +1576,6 @@ function mkdircd() {
 alias whiptail='dialog'
 alias gsa='git stash apply'
 
-# Windows
-alias wsl2_host_ip='cat /etc/resolv.conf | \grep nameserver | cut -d" " -f2'
-
-# Windows, see: https://stackoverflow.com/a/69011313/963881
-alias pip3='DISPLAY="" pip3'
-
-# Windows
 alias reboot='shutdown -r'
 
 alias test_internet_speed='speedtest --secure'
@@ -1627,10 +1591,7 @@ function change_extension() {
 	mv "$filename" "$new_filename"
 }
 
-# Windows
-alias explorer='explorer.exe'
-
-# Linus
+# Linux
 alias explorer='nautilus --no-desktop'
 
 # string1 99 12313
@@ -1658,7 +1619,6 @@ function cal_restart() {
 	yarn workspace @calcom/prisma db-deploy
 }
 
-# Windows
 alias gz='gzip'
 
 alias geolocate_ip='geoiplookup'
@@ -2645,15 +2605,7 @@ alias cda='conda deactivate'
 
 source "$DOTFILES_DIR/upgrade_helpers.sh"
 
-# TODO: Make it Win-only
-function code() {
-	visual_studio_code="/mnt/c/Users/$WINDOWS_USERNAME/AppData/Local/Programs/Microsoft VS Code/bin/code"
-	${visual_studio_code} "$@"
-}
-
 alias c='code -n . &'
-
-alias 7z='7zz'
 
 alias remove_exif_tags="$HOME/scripts/images/remove_exif_tags.sh"
 alias compress_images="$HOME/scripts/images/compress_images.sh"
@@ -2687,3 +2639,32 @@ function lint_markdown() {
 
   markdownlint-cli2 "$@"
 }
+
+# Windows-only (from WSL)
+	if [[ -n "$IS_WSL" ]]; then
+function code() {
+	visual_studio_code="/mnt/c/Users/$WINDOWS_USERNAME/AppData/Local/Programs/Microsoft VS Code/bin/code"
+	${visual_studio_code} "$@"
+}
+
+# Opens Notepad++
+function np() {
+	# To follow symlinks inside WSL
+	local -r file_path=$(wslpath -w "$1")
+
+	/mnt/c/Program\ Files/Notepad++/notepad++.exe "$file_path" &
+}
+
+# Opens Typora
+function typora() {
+	# To follow symlinks inside WSL
+	local -r file_path=$(wslpath -w "$1")
+
+	/mnt/c/Program\ Files/Typora/Typora.exe "$file_path" &
+}
+
+function kill_executable() {
+	local executable="$1"
+	taskkill.exe /F /IM "$executable.exe" /T &
+}
+	fi
