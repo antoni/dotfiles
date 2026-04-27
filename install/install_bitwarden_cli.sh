@@ -1,54 +1,41 @@
 #!/usr/bin/env bash
 
-#!/bin/bash
+set -e
 
-# Script to install Bitwarden CLI on Ubuntu, working from $HOME/tmp
-
-# Function to display a message and exit on error
-function error_exit {
-	echo "Error: $1"
-	exit 1
+error_exit() {
+  echo "Error: $1" >&2
+  exit 1
 }
 
-# Set temporary working directory
 TMP_DIR="$HOME/tmp"
-mkdir -p "$TMP_DIR" || error_exit "Failed to create temporary directory."
+BIN_DIR="$HOME/.local/bin"
 
-# Navigate to the temporary directory
-cd "$TMP_DIR" || error_exit "Failed to change to temporary directory."
+mkdir -p "$TMP_DIR" "$BIN_DIR" || error_exit "Failed to create directories"
+cd "$TMP_DIR" || error_exit "Failed to enter temp directory"
 
 echo "Updating system..."
-sudo apt update && sudo apt upgrade -y || error_exit "Failed to update system."
+sudo apt update && sudo apt upgrade -y
 
-echo "Installing prerequisites..."
-sudo apt install curl unzip -y || error_exit "Failed to install prerequisites."
+echo "Installing dependencies..."
+sudo apt install -y curl unzip
 
 echo "Downloading Bitwarden CLI..."
-curl -Lso bw.zip "https://vault.bitwarden.com/download/?app=cli&platform=linux" || error_exit "Failed to download Bitwarden CLI."
+curl -Lso bw.zip "https://vault.bitwarden.com/download/?app=cli&platform=linux"
 
-echo "Extracting Bitwarden CLI..."
-mkdir -p ~/.local/bin || error_exit "Failed to create bin directory."
-unzip -o bw.zip -d ~/.local/bin || error_exit "Failed to extract Bitwarden CLI."
-chmod +x ~/.local/bin/bw || error_exit "Failed to make Bitwarden CLI executable."
+echo "Installing Bitwarden CLI..."
+unzip -o bw.zip -d "$BIN_DIR"
+chmod +x "$BIN_DIR/bw"
 
-echo "Cleaning up..."
-rm -f bw.zip || error_exit "Failed to remove temporary files."
+rm -f bw.zip
 
-# Add ~/.local/bin to PATH if not already present
-if ! echo "$PATH" | grep -q "$HOME/.local/bin"; then
-	echo "Adding ~/.local/bin to PATH..."
-	echo 'export PATH="$PATH:$HOME/.local/bin"' >>~/.bashrc || error_exit "Failed to update .bashrc."
-	source ~/.bashrc || error_exit "Failed to reload .bashrc."
+if ! grep -q "$BIN_DIR" <<< "$PATH"; then
+  echo 'export PATH="$PATH:$HOME/.local/bin"' >> ~/.bashrc
 fi
 
-echo "Verifying Bitwarden CLI installation..."
-if command -v bw &>/dev/null; then
-	echo "Bitwarden CLI installed successfully!"
-	bw --version
+if command -v bw >/dev/null 2>&1; then
+  echo "Installed: $(bw --version)"
 else
-	error_exit "Bitwarden CLI installation failed."
+  error_exit "Bitwarden CLI installation failed"
 fi
 
-# Cleanup temporary directory (optional, remove this block if you want to keep tmp dir)
-echo "Cleaning up temporary directory..."
-rm -rf "$TMP_DIR" || error_exit "Failed to clean up temporary directory."
+rm -rf "$TMP_DIR"

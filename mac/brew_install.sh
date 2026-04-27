@@ -10,7 +10,6 @@ BREW_PACKAGES_MUST_HAVE=(
 	gnutls
 	openjdk
 	grep
-	bitwarden-cli
 	jd
 	ascii
 	gpg
@@ -284,7 +283,6 @@ BREW_CASK_PACKAGES_MAY_HAVE=(wine-stable
 	ledger-live
 	caffeine
 	lens
-	bitwarden
 	roblox
 	mullvad-browser
 	messenger
@@ -321,7 +319,6 @@ BREW_CASK_PACKAGES_MAY_HAVE=(wine-stable
 	clion
 	qcad
 	altair-graphql-client
-	bitwarden
 	adobe-creative-cloud
 	stretchly
 	emacs
@@ -503,11 +500,9 @@ function is_package_installed() {
 BREW_PACKAGES_KINGA=(
 	docker
 	tailscale
-	bitwarden-cli
 )
 
 BREW_CASK_PACKAGES_KINGA=(
-	bitwarden
 	caffeine
 	google-drive
 	firefox
