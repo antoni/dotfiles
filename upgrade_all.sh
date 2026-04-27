@@ -41,19 +41,6 @@ function upgrade_all() {
 	if test -f /proc/sys/kernel/osrelease &&
 		grep -q microsoft /proc/sys/kernel/osrelease; then
 
-		trap delete_desktop_symlinks ERR
-		trap delete_desktop_symlinks EXIT
-
-		function delete_desktop_symlinks() {
-			printf "Removing desktop symlinks/shortcuts\n"
-
-			# Delete all links on Desktop: current user
-			rm --recursive --force /mnt/c/Users/"${WINDOWS_USERNAME}"/Desktop/*.{lnk,url}
-
-			# Delete all links on Desktop: all users
-			rm --recursive --force /mnt/c/Users/Public/{desktop,Desktop}/*.{lnk,url}
-		}
-
 		check_if_wsl_needs_upgrade
 
 		# Run it first as it requires sudo
