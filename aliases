@@ -2668,3 +2668,7 @@ function kill_executable() {
 	taskkill.exe /F /IM "$executable.exe" /T &
 }
 	fi
+
+function remove_useless_files() {
+	find . -type f -name '*:Zone.Identifier' -exec rm -f {} +
+}
