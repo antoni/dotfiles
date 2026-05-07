@@ -171,10 +171,10 @@ function winenv() {
 		open /mnt/c/ProgramData/Microsoft/Windows/Start\ Menu/Programs/StartUp
 	}
 
-	function open() {
-		local local_path=$1
-		explorer.exe "$(wslpath -w "$local_path")"
-	}
+function open() {
+  local local_path="$*"
+  explorer.exe "$(wslpath -w "$local_path")"
+}
 
 	function browse() {
 		sensible-browser "$@"
