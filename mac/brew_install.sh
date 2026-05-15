@@ -494,32 +494,6 @@ function is_package_installed() {
 	brew list "$package_name"
 }
 
-# Installation:
-# HOMEBREW_NO_AUTO_UPDATE=1 brew install "${BREW_PACKAGES_KINGA[*]}"
-# HOMEBREW_NO_AUTO_UPDATE=1 brew install --cask "${BREW_CASK_PACKAGES_KINGA[*]}"
-BREW_PACKAGES_KINGA=(
-	docker
-	tailscale
-)
-
-BREW_CASK_PACKAGES_KINGA=(
-	caffeine
-	google-drive
-	firefox
-	firefox@developer-edition
-	brave-browser
-	iterm2
-	vlc
-	textmate
-	visual-studio-code
-	duckduckgo
-	raycast
-	teamviewer
-	rustdesk
-	espanso
-	pym-player
-)
-
 function check_missing_brew_packages() {
 	local package_set="$1"
 	shift
