@@ -18,7 +18,7 @@ PIPX_PACKAGES=(
 # Run install_python3.12.sh before
 function install_pipx_packages() {
 	for pkg in "${PIPX_PACKAGES[@]}"; do
-		pipx install --include-deps --force "$pkg"
+		pipx install --quiet "$pkg"
 	done
 }
 

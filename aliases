@@ -668,6 +668,10 @@ function docker_remove_all() {
     ~/scripts/docker_remove_all/docker_remove_all.sh
 }
 
+function dump_directory_contents() {
+    ~/scripts/dump_directory_contents/dump_directory_contents.sh
+}
+
 function list_installed() {
     dnf list installed | awk --field-separator. -v ORS="\0" '{print $1" "}' | sort -zu && echo ""
 }
