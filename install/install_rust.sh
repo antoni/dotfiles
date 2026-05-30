@@ -1,78 +1,125 @@
 #!/usr/bin/env bash
+
 set -euo pipefail
 
-echo "🔍 Checking for system-installed Rust..."
+readonly RUSTUP_HOME="${HOME}/.rustup"
+readonly CARGO_HOME="${HOME}/.cargo"
+readonly CARGO_ENV="${CARGO_HOME}/env"
 
-# Try to detect and remove Rust installed via APT or Snap
-if command -v rustc >/dev/null 2>&1; then
-	rustc_path=$(command -v rustc)
+# TODO: Confirm we use it in installation process
+log_info() {
+    printf '[INFO] %s\n' "$*"
+}
 
-	# Detect APT-installed rustc
-	if dpkg -S "$rustc_path" 2>/dev/null | grep -q "^rust"; then
-		echo "🧹 Removing Rust installed via APT..."
-		sudo apt remove --purge -y rustc cargo
-	fi
+log_warn() {
+    printf '[WARN] %s\n' "$*" >&2
+}
 
-	# Detect Snap-installed rustc
-	if snap list 2>/dev/null | grep -q "^rust"; then
-		echo "🧹 Removing Rust installed via Snap..."
-		sudo snap remove rustup rustc cargo || true
-	fi
+log_error() {
+    printf '[ERROR] %s\n' "$*" >&2
+}
 
-	# If still exists in a system path, forcibly remove
-	if [[ "$rustc_path" != "$HOME/.cargo/bin/rustc" ]]; then
-		echo "⚠️ Removing stray system rustc at: $rustc_path"
-		sudo rm -f "$rustc_path"
-	fi
-fi
+require_command() {
+    local cmd="$1"
 
-# Check again if rustc is still in system path (not via rustup)
-if command -v rustc >/dev/null 2>&1 && [[ "$(command -v rustc)" != "$HOME/.cargo/bin/rustc" ]]; then
-	echo "❌ System-wide rustc still present at $(command -v rustc). Please remove it manually."
-	exit 1
-fi
+    if ! command -v "$cmd" >/dev/null 2>&1; then
+        log_error "Required command not found: ${cmd}"
+        exit 1
+    fi
+}
 
-echo "✅ No conflicting system Rust found."
+remove_system_rust() {
+    local rustc_path
 
-# Install rustup if missing
-if ! command -v rustup >/dev/null 2>&1; then
-	echo "⬇️ Installing rustup..."
-	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-	source "$HOME/.cargo/env"
-fi
+    if ! command -v rustc >/dev/null 2>&1; then
+        return
+    fi
 
-# Ensure environment is sourced
-source "$HOME/.cargo/env"
+    rustc_path="$(command -v rustc)"
 
-# Set default toolchain if none configured
-if ! rustup show active-toolchain >/dev/null 2>&1; then
-	echo "🔧 Setting default toolchain to stable..."
-	rustup default stable
-fi
+    # Rust installed via APT
+    if command -v dpkg >/dev/null 2>&1 &&
+       dpkg -S "$rustc_path" 2>/dev/null | grep -q '^rust'; then
+        log_info "Removing Rust packages installed via APT"
+        sudo apt-get remove --purge -y rustc cargo
+    fi
 
-# Get installed version via rustup
-installed_version=$(rustup show active-toolchain | awk '{print $1}' | cut -d'-' -f1)
+    # Rust installed via Snap
+    if command -v snap >/dev/null 2>&1 &&
+       snap list 2>/dev/null | grep -q '^rust'; then
+        log_info "Removing Rust packages installed via Snap"
+        sudo snap remove rustup rustc cargo || true
+    fi
 
-# Get latest stable version from rust's channel metadata
-latest_version=$(curl -s https://static.rust-lang.org/dist/channel-rust-stable.toml |
-	grep '^version =' | head -n1 | cut -d'"' -f2)
+    # Verify no system rustc remains
+    if command -v rustc >/dev/null 2>&1; then
+        rustc_path="$(command -v rustc)"
 
-echo "🧾 Installed Rust version: $installed_version"
-echo "📦 Latest stable version: $latest_version"
+        if [[ "$rustc_path" != "$CARGO_HOME/bin/rustc" ]]; then
+            log_error "Conflicting system Rust installation detected: ${rustc_path}"
+            log_error "Remove the installation manually and rerun this script."
+            exit 1
+        fi
+    fi
+}
 
-# Reinstall if outdated
-if [ "$installed_version" != "$latest_version" ]; then
-	echo "🔁 Rust is outdated. Reinstalling clean..."
-	rustup self uninstall -y
-	rm -rf "$HOME/.cargo" "$HOME/.rustup"
-	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-	source "$HOME/.cargo/env"
-	rustup default stable
-else
-	echo "✅ Rust is up to date."
-fi
+install_rustup() {
+    if command -v rustup >/dev/null 2>&1; then
+        return
+    fi
 
-echo ""
-echo "🎉 Rust setup complete!"
-rustc --version
-cargo --version
+    require_command curl
+
+    log_info "Installing rustup"
+
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs \
+        | sh -s -- -y
+
+    # shellcheck disable=SC1090
+    source "$CARGO_ENV"
+}
+
+load_rust_environment() {
+    if [[ ! -f "$CARGO_ENV" ]]; then
+        log_error "Rust environment file not found: $CARGO_ENV"
+        exit 1
+    fi
+
+    # shellcheck disable=SC1090
+    source "$CARGO_ENV"
+}
+
+ensure_toolchain() {
+    if ! rustup show active-toolchain >/dev/null 2>&1; then
+        log_info "Configuring default Rust toolchain: stable"
+        rustup default stable
+    fi
+}
+
+update_rust() {
+    log_info "Updating Rust stable toolchain"
+    rustup update stable
+}
+
+show_versions() {
+    log_info "Installed toolchain versions"
+
+    rustc --version
+    cargo --version
+    rustup --version
+}
+
+main() {
+    log_info "Checking for conflicting system Rust installations"
+
+    remove_system_rust
+    install_rustup
+    load_rust_environment
+    ensure_toolchain
+    update_rust
+
+    log_info "Rust setup completed successfully"
+    show_versions
+}
+
+main "$@"

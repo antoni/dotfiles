@@ -19,6 +19,8 @@ APT_PACKAGES=(apache2
 	htop
 	rclone
 	tree
+	pkg-config
+	libssl-dev
 	borgbackup
 	borgmatic
 	fuse
