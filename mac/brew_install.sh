@@ -10,7 +10,6 @@ BREW_PACKAGES_MUST_HAVE=(
 	gnutls
 	openjdk
 	grep
-	bitwarden-cli
 	jd
 	ascii
 	gpg
@@ -284,7 +283,6 @@ BREW_CASK_PACKAGES_MAY_HAVE=(wine-stable
 	ledger-live
 	caffeine
 	lens
-	bitwarden
 	roblox
 	mullvad-browser
 	messenger
@@ -321,7 +319,6 @@ BREW_CASK_PACKAGES_MAY_HAVE=(wine-stable
 	clion
 	qcad
 	altair-graphql-client
-	bitwarden
 	adobe-creative-cloud
 	stretchly
 	emacs
@@ -496,34 +493,6 @@ function is_package_installed() {
 	local package_name="$1"
 	brew list "$package_name"
 }
-
-# Installation:
-# HOMEBREW_NO_AUTO_UPDATE=1 brew install "${BREW_PACKAGES_KINGA[*]}"
-# HOMEBREW_NO_AUTO_UPDATE=1 brew install --cask "${BREW_CASK_PACKAGES_KINGA[*]}"
-BREW_PACKAGES_KINGA=(
-	docker
-	tailscale
-	bitwarden-cli
-)
-
-BREW_CASK_PACKAGES_KINGA=(
-	bitwarden
-	caffeine
-	google-drive
-	firefox
-	firefox@developer-edition
-	brave-browser
-	iterm2
-	vlc
-	textmate
-	visual-studio-code
-	duckduckgo
-	raycast
-	teamviewer
-	rustdesk
-	espanso
-	pym-player
-)
 
 function check_missing_brew_packages() {
 	local package_set="$1"

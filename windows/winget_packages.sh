@@ -25,6 +25,7 @@ MUST_HAVE=(
 	Mozilla.Firefox.DeveloperEdition
 	Google.Chrome
 	PuTTY.PuTTY
+	Microsoft.RemoteDesktopClient
 	Neovim.Neovim
 	Greenshot.Greenshot
 	Git.Git
@@ -58,6 +59,7 @@ MUST_HAVE=(
 	IDRIX.VeraCrypt
 	Rclone.Rclone
 	WinFsp.WinFsp
+	SSHFS-Win.SSHFS-Win
 	qBittorrent.qBittorrent
 	Microsoft.PowerShell
 	Spotify.Spotify

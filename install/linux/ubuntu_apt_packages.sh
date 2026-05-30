@@ -18,6 +18,7 @@ APT_PACKAGES=(apache2
 	hexyl
 	htop
 	rclone
+	tree
 	borgbackup
 	borgmatic
 	fuse
