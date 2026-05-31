@@ -20,6 +20,7 @@ APT_PACKAGES=(apache2
 	rclone
 	tree
 	pkg-config
+	expect
 	libssl-dev
 	borgbackup
 	borgmatic

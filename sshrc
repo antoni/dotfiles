@@ -5,10 +5,13 @@ export VIMINIT="let \$MYVIMRC='$SSHHOME/.sshrc.d/.vimrc' | silent! source \$MYVI
 
 ln -fs "$SSHHOME/.sshrc.d/dotfiles" "$HOME/dotfiles"
 
-ln -fs "$SSHHOME/.sshrc.d/dotfiles/LESS_TERMCAP" "$HOME/.LESS_TERMCAP"
-. "$HOME/.LESS_TERMCAP"
+if [ -r "$SSHHOME/.sshrc.d/LESS_TERMCAP" ]; then
+    . "$SSHHOME/.sshrc.d/LESS_TERMCAP"
+fi
 
-source "$SSHHOME/.sshrc.d/.aliases"
+if [ -r "$SSHHOME/.sshrc.d/aliases" ]; then
+    . "$SSHHOME/.sshrc.d/aliases"
+fi
 
 # Wrap tmux to always use sshrc files in a temp tmux dir
 function tmuxrc() {

@@ -85,13 +85,6 @@ function mac_change_hostname() {
 	print_success_message "Hostname changed to: $1"
 }
 
-function gcc_symlink() {
-	# these are symlinks, so we can delete these safely
-	sudo rm --recursive --force /usr/bin/{gcc,g++}
-	sudo ln -s gcc-12 /usr/bin/gcc
-	sudo ln -s g++-12 /usr/bin/g++
-}
-
 function mac_symlink() {
 	ln -sf ~/dotfiles/mac/sleep.sh ~/.sleep
 	ln -sf ~/dotfiles/mac/wakeup.sh ~/.wakeup
@@ -190,7 +183,17 @@ function fedora_system_upgrade() {
 	sudo dnf system-upgrade reboot
 }
 
+function symlink_sshrc_copied_files() {
+  SSHRC_FILES=(LESS_TERMCAP aliases utils.sh config.sh paths colors.sh format_conversion.sh upgrade_helpers.sh)
+
+	for f in "${SSHRC_FILES[@]}"; do
+		rm -f "$HOME/dotfiles/sshrc.d/$f"
+		ln -sf "$HOME/dotfiles/$f" "$HOME/dotfiles/sshrc.d/$f" >/dev/null
+	done
+}
+
 function main() {
+	symlink_sshrc_copied_files
 	setup_gitconfig
 	# Symlink the files in the current directory with corresponding dotfiles in
 	# the home directory

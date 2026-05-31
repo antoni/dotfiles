@@ -1,13 +1,18 @@
 #!/usr/bin/env bash
 
 export IS_WSL="${WSL_DISTRO_NAME:-""}"
-export DOTFILES_DIR=$HOME/dotfiles
+export DOTFILES_DIR="$HOME/dotfiles"
 
-source "$HOME/dotfiles/config.sh"
-source "$HOME/dotfiles/paths"
-source "$HOME/dotfiles/colors.sh"
-source "$HOME/dotfiles/format_conversion.sh"
-source "$HOME/dotfiles/upgrade_helpers.sh"
+if [ -n "${SSHHOME:-}" ] &&
+   [ -d "$SSHHOME/.sshrc.d" ]; then
+    export DOTFILES_DIR="$SSHHOME/.sshrc.d"
+fi
+
+source "$DOTFILES_DIR/config.sh"
+source "$DOTFILES_DIR/paths"
+source "$DOTFILES_DIR/colors.sh"
+source "$DOTFILES_DIR/format_conversion.sh"
+source "$DOTFILES_DIR/upgrade_helpers.sh"
 
 UNAME_OUTPUT="$(uname)"
 export UNAME_OUTPUT

@@ -5,9 +5,16 @@
 # vim:set ft=sh textwidth=0 wrapmargin=0:
 set +x
 
+export DOTFILES_DIR="$HOME/dotfiles"
+
+if [ -n "${SSHHOME:-}" ] &&
+   [ -d "$SSHHOME/.sshrc.d" ]; then
+    export DOTFILES_DIR="$SSHHOME/.sshrc.d"
+fi
+
 # Aliases and custom functions
-source "$HOME"/dotfiles/utils.sh
-source "$HOME"/dotfiles/upgrade_helpers.sh
+source "$DOTFILES_DIR/utils.sh"
+source "$DOTFILES_DIR/upgrade_helpers.sh"
 
 if [[ "$UNAME_OUTPUT" == 'Darwin' ]]; then
     # macOS-specific
@@ -74,7 +81,28 @@ elif [[ "$UNAME_OUTPUT" == "Linux" ]]; then
     alias vim='vim -o'
     alias ls='ls --human-readable --color -lFG'
 
-    alias copy_to_clipboard='xsel --clipboard'
+
+if [ -n "${SSHHOME:-}" ] &&
+   [ -d "$SSHHOME/.sshrc.d" ]; then
+function copy_to_clipboard() {
+    local data b64
+
+    if [ -t 0 ]; then
+        data="$*"
+    else
+        data="$(cat)"
+    fi
+
+    # GNU coreutils base64
+    b64="$(printf '%s' "$data" | base64 -w0)"
+
+    # OSC 52: copy to clipboard
+    printf '\033]52;c;%s\a' "$b64"
+}
+else
+  alias copy_to_clipboard='xsel --clipboard'
+fi
+
 fi
 
 # Windows (WSL)
@@ -263,7 +291,7 @@ alias icmgw='ssh antoni@gw.icm.edu.pl'
 alias xcode="open *.xcodeproj"
 
 function tarfolder() { tar -czf "$1".tar.gz "$1"/*; }
-function zipfolder() {   7z a -t7z "$1".7z "$1" }
+function zipfolder() {   7z a -t7z "$1".7z "$1"; }
 function zipfolder_with_password() { 7z a -t7z -p -mhe=on "$1".7z "$1"; }
 
 # SSH

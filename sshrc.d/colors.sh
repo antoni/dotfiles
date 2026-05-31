@@ -1,0 +1,1 @@
+/home/antoni/dotfiles/colors.sh

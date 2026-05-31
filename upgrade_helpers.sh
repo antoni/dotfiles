@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-source "$HOME"/dotfiles/colors.sh
+source "$DOTFILES_DIR/colors.sh"
 
 function upgrade_npm_packages() {
 	source "$HOME"/dotfiles/install/install_global_javascript_npm_packages.sh
