@@ -25,6 +25,8 @@ main() {
     # Install pipx from Ubuntu packages
     sudo apt install -y pipx
 
+    python3 -m pip install --user --upgrade pipx
+
     # Ensure ~/.local/bin is on PATH
     pipx ensurepath
 
