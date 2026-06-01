@@ -15,7 +15,7 @@ function install_global_javascript_npm_packages() {
 		babel-cli pm2 firebase-tools deno \
 		@aws-amplify/cli pa11y netlify-cli hygen react-native-cli serve \
 		@zeplin/cli @zeplin/cli-connect-react-plugin @zeplin/cli-connect-swift-plugin \
-		yo generator-office dts-gen yargs rollup  source-map-explorer \
+		yo generator-office dts-gen yargs rollup source-map-explorer \
 		@angular/cli n json5 cordova gltf-pipeline depcheck @microsoft/rush wrangler \
 		do-not-disturb-cli katex servor degit verdaccio tables gatsby-cli browser-sync \
 		@apidevtools/swagger-cli kill-port-process ngrok @google/clasp js-beautify doctoc \

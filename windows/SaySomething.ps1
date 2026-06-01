@@ -14,3 +14,4 @@ $voice.rate = 0
 $voice.speak($text)
 
 
+

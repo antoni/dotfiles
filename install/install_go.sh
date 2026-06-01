@@ -33,7 +33,7 @@ function install_go_packages() {
 			github.com/rverton/webanalyze/cmd/webanalyze
 			mvdan.cc/sh/v3/cmd/shfmt
 			github.com/Kethsar/ytarchive
-			)
+		)
 
 		# shellcheck disable=2048
 		for package in ${GO_PACKAGES[*]}; do

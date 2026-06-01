@@ -12,11 +12,11 @@ sudo apt-get -qq upgrade -y
 
 echo "Installing dependencies..."
 sudo apt-get -qq install -y \
-  build-essential libtool libjpeg-dev libpng-dev libtiff-dev libgif-dev \
-  libx11-dev libxext-dev libxml2-dev libbz2-dev libz-dev \
-  libfontconfig1-dev libfreetype6-dev \
-  ghostscript libwebp-dev liblqr-1-0-dev libopenexr-dev \
-  libheif-dev libraw-dev
+	build-essential libtool libjpeg-dev libpng-dev libtiff-dev libgif-dev \
+	libx11-dev libxext-dev libxml2-dev libbz2-dev libz-dev \
+	libfontconfig1-dev libfreetype6-dev \
+	ghostscript libwebp-dev liblqr-1-0-dev libopenexr-dev \
+	libheif-dev libraw-dev
 
 IMAGEMAGICK_VERSION="7.1.1-14"
 ARCHIVE="ImageMagick-$IMAGEMAGICK_VERSION.tar.xz"
@@ -31,13 +31,13 @@ tar -xf "$ARCHIVE"
 cd "$DIR"
 
 echo "Configuring..."
-./configure > configure.log 2>&1
+./configure >configure.log 2>&1
 
 echo "Compiling (this may take a bit)..."
-make -j"$(nproc)" > build.log 2>&1
+make -j"$(nproc)" >build.log 2>&1
 
 echo "Installing..."
-sudo make install > install.log 2>&1
+sudo make install >install.log 2>&1
 
 sudo ldconfig
 

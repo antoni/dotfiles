@@ -17,7 +17,7 @@ source "$(dirname "$0")/pipx_packages.sh" || exit 1
 # Install required packages
 PACKAGES=(coreutils gawk sed grep findutils diffutils
 	gettext jq dmidecode xsel zsh ruby udev
-  make cmake  clang vim gitk vlc
+	make cmake clang vim gitk vlc
 	suckless-tools rdesktop make sysstat
 	okular xdotool xbindkeys xautomation mosh mc
 	libreoffice cscope universal-ctags pavucontrol i3 feh help2man rpl
@@ -86,47 +86,47 @@ function install_fedora_sound() {
 }
 
 function install_snap_packages() {
-#!/usr/bin/env bash
-set -euo pipefail
+	#!/usr/bin/env bash
+	set -euo pipefail
 
-echo "==> Ensuring snapd is installed"
+	echo "==> Ensuring snapd is installed"
 
-if ! dpkg -s snapd >/dev/null 2>&1; then
-  sudo apt update
-  sudo apt install -y snapd
-else
-  echo "snapd already installed"
-fi
+	if ! dpkg -s snapd >/dev/null 2>&1; then
+		sudo apt update
+		sudo apt install -y snapd
+	else
+		echo "snapd already installed"
+	fi
 
-echo "==> Ensuring snapd service is enabled and running"
+	echo "==> Ensuring snapd service is enabled and running"
 
-if ! systemctl is-enabled snapd >/dev/null 2>&1; then
-  sudo systemctl enable snapd
-else
-  echo "snapd service already enabled"
-fi
+	if ! systemctl is-enabled snapd >/dev/null 2>&1; then
+		sudo systemctl enable snapd
+	else
+		echo "snapd service already enabled"
+	fi
 
-if ! systemctl is-active snapd >/dev/null 2>&1; then
-  sudo systemctl start snapd
-else
-  echo "snapd service already running"
-fi
+	if ! systemctl is-active snapd >/dev/null 2>&1; then
+		sudo systemctl start snapd
+	else
+		echo "snapd service already running"
+	fi
 
-echo "==> Ensuring /snap symlink exists"
+	echo "==> Ensuring /snap symlink exists"
 
-if [ ! -e /snap ]; then
-  sudo ln -s /var/lib/snapd/snap /snap
-  echo "Created /snap symlink"
-else
-  echo "/snap already exists"
-fi
+	if [ ! -e /snap ]; then
+		sudo ln -s /var/lib/snapd/snap /snap
+		echo "Created /snap symlink"
+	else
+		echo "/snap already exists"
+	fi
 
-echo "==> Verifying snap installation"
-snap version || {
-  echo "Snap installed, but a logout/login or reboot may be required."
-}
+	echo "==> Verifying snap installation"
+	snap version || {
+		echo "Snap installed, but a logout/login or reboot may be required."
+	}
 
-echo "==> Done"
+	echo "==> Done"
 
 	sudo snap install slack --classic
 }
@@ -204,26 +204,26 @@ function main() {
 
 	~/dotfiles/symlink.sh
 
-# Needs to be installed using zsh, not bash
-	"$HOME/dotfiles/install/install_oh_my_zsh.sh"|| exit_with_error_message "Could not install oh-my-zsh"
+	# Needs to be installed using zsh, not bash
+	"$HOME/dotfiles/install/install_oh_my_zsh.sh" || exit_with_error_message "Could not install oh-my-zsh"
 
-# TODO: Put this inside install_imagemagick_v7
-if command -v magick >/dev/null 2>&1 || command -v convert >/dev/null 2>&1; then
-    echo "ImageMagick (preinstalled on the system) detected. Proceeding with removal..."
+	# TODO: Put this inside install_imagemagick_v7
+	if command -v magick >/dev/null 2>&1 || command -v convert >/dev/null 2>&1; then
+		echo "ImageMagick (preinstalled on the system) detected. Proceeding with removal..."
 
-    sudo apt purge -y imagemagick imagemagick-6-common || true
-    sudo apt purge -y 'libmagick*6*' || true
-    sudo apt autoremove --purge -y
+		sudo apt purge -y imagemagick imagemagick-6-common || true
+		sudo apt purge -y 'libmagick*6*' || true
+		sudo apt autoremove --purge -y
 
-    if [ -d /etc/ImageMagick-6 ]; then
-        sudo rm -rf /etc/ImageMagick-6
-    fi
+		if [ -d /etc/ImageMagick-6 ]; then
+			sudo rm -rf /etc/ImageMagick-6
+		fi
 
-    echo "ImageMagick (preinstalled with the system) cleanup complete."
-else
-    echo "ImageMagick not installed with the system. No need to remove it"
-fi
-	"$HOME/dotfiles/install/install_imagemagick_v7.sh"  || exit_with_error_message "Could not install ImageMagick"
+		echo "ImageMagick (preinstalled with the system) cleanup complete."
+	else
+		echo "ImageMagick not installed with the system. No need to remove it"
+	fi
+	"$HOME/dotfiles/install/install_imagemagick_v7.sh" || exit_with_error_message "Could not install ImageMagick"
 
 	source "${BASH_SOURCE%/*}/install_global_javascript_npm_packages.sh"
 	install_global_javascript_npm_packages || exit_with_error_message "Could not install global npm packages"
@@ -232,7 +232,6 @@ fi
 	install_tmux_plugin_manager || exit_with_error_message "Could not install tmux"
 
 	source "$DOTFILES_DIR"/install/install_go.sh || exit_with_error_message "Could not install golang"
-
 
 	"$HOME"/dotfiles/install/install_rust.sh
 	"$HOME"/dotfiles/install/install_cargo_crates.sh

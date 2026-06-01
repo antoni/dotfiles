@@ -4,8 +4,8 @@ export IS_WSL="${WSL_DISTRO_NAME:-""}"
 export DOTFILES_DIR="$HOME/dotfiles"
 
 if [ -n "${SSHHOME:-}" ] &&
-   [ -d "$SSHHOME/.sshrc.d" ]; then
-    export DOTFILES_DIR="$SSHHOME/.sshrc.d"
+	[ -d "$SSHHOME/.sshrc.d" ]; then
+	export DOTFILES_DIR="$SSHHOME/.sshrc.d"
 fi
 
 source "$DOTFILES_DIR/config.sh"

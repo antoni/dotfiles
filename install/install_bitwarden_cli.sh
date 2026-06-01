@@ -3,8 +3,8 @@
 set -e
 
 error_exit() {
-  echo "Error: $1" >&2
-  exit 1
+	echo "Error: $1" >&2
+	exit 1
 }
 
 TMP_DIR="$HOME/tmp"
@@ -28,14 +28,14 @@ chmod +x "$BIN_DIR/bw"
 
 rm -f bw.zip
 
-if ! grep -q "$BIN_DIR" <<< "$PATH"; then
-  echo 'export PATH="$PATH:$HOME/.local/bin"' >> ~/.bashrc
+if ! grep -q "$BIN_DIR" <<<"$PATH"; then
+	echo 'export PATH="$PATH:$HOME/.local/bin"' >>~/.bashrc
 fi
 
 if command -v bw >/dev/null 2>&1; then
-  echo "Installed: $(bw --version)"
+	echo "Installed: $(bw --version)"
 else
-  error_exit "Bitwarden CLI installation failed"
+	error_exit "Bitwarden CLI installation failed"
 fi
 
 rm -rf "$TMP_DIR"

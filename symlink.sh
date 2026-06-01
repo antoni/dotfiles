@@ -184,7 +184,7 @@ function fedora_system_upgrade() {
 }
 
 function symlink_sshrc_copied_files() {
-  SSHRC_FILES=(LESS_TERMCAP aliases utils.sh config.sh paths colors.sh format_conversion.sh upgrade_helpers.sh)
+	SSHRC_FILES=(LESS_TERMCAP aliases utils.sh config.sh paths colors.sh format_conversion.sh upgrade_helpers.sh)
 
 	for f in "${SSHRC_FILES[@]}"; do
 		rm -f "$HOME/dotfiles/sshrc.d/$f"

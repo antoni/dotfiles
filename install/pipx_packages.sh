@@ -21,4 +21,3 @@ function install_pipx_packages() {
 		pipx install --quiet "$pkg"
 	done
 }
-

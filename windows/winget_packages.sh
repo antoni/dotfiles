@@ -296,24 +296,23 @@ function install_if_not_installed() {
 
 	echo "Resolved ID: $resolved_id"
 
-install_output=$(${WINGET_COMMAND_INSTALL} "$resolved_id" 2>&1)
+	install_output=$(${WINGET_COMMAND_INSTALL} "$resolved_id" 2>&1)
 
-status=$?
+	status=$?
 
-if [[ $status -eq 0 ]]; then
-	return 0
-fi
+	if [[ $status -eq 0 ]]; then
+		return 0
+	fi
 
-if echo "$install_output" | grep -qi "already installed"; then
-	echo "Already installed (winget reported): $resolved_id"
-	return 0
-fi
+	if echo "$install_output" | grep -qi "already installed"; then
+		echo "Already installed (winget reported): $resolved_id"
+		return 0
+	fi
 
-echo "$install_output" >&2
-echo "ERROR: Failed to install resolved package: $resolved_id" >&2
-exit 1
+	echo "$install_output" >&2
+	echo "ERROR: Failed to install resolved package: $resolved_id" >&2
+	exit 1
 }
-
 
 for package in "${MUST_HAVE[@]}"; do
 	printf "Installing: %s\n" "$package"

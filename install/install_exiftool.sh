@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e  # exit on first error
+set -e # exit on first error
 
 # Variables
 URL="https://sourceforge.net/projects/exiftool/files/Image-ExifTool-13.47.tar.gz/download"
