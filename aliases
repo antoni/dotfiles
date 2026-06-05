@@ -2732,3 +2732,6 @@ function fix_vlc_subtitles() {
 		return 1
 	fi
 }
+
+alias dcd='docker compose down'
+alias dcu='docker compose up --detach'

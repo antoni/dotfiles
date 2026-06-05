@@ -55,6 +55,7 @@ MUST_HAVE=(
 	Microsoft.DotNet.SDK.10
 	Microsoft.DotNet.DesktopRuntime.10
 	Microsoft.DotNet.Runtime.10
+	Microsoft.Coreutils
 	RProject.R
 	IDRIX.VeraCrypt
 	Rclone.Rclone
