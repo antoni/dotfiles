@@ -23,6 +23,8 @@ MUST_HAVE=(
 	Microsoft.VisualStudioCode
 	Mozilla.Firefox
 	Mozilla.Firefox.DeveloperEdition
+	Google.Chrome.Canary
+	eloston.ungoogled-chromium
 	Google.Chrome
 	PuTTY.PuTTY
 	Microsoft.RemoteDesktopClient
@@ -116,7 +118,6 @@ MAY_HAVE=(
 	Yarn.Yarn
 	BraveSoftware.BraveBrowser
 	Rustlang.Rustup
-	Google.Chrome.Canary
 	DeepL.DeepL
 	alcpu.CoreTemp
 	Yubico.YubikeyManager
@@ -140,7 +141,6 @@ MAY_HAVE=(
 	Elgato.ControlCenter            # control of Elgato Key Light Mini
 	CrystalDewWorld.CrystalDiskMark # disk benchmark
 	NVAccess.NVDA
-	Mozilla.Firefox.DeveloperEdition
 	Nextcloud.NextcloudDesktop
 	Balena.Etcher
 	Microsoft.OfficeDeploymentTool
