@@ -23,9 +23,9 @@ MUST_HAVE=(
 	Microsoft.VisualStudioCode
 	Mozilla.Firefox
 	Mozilla.Firefox.DeveloperEdition
+	Google.Chrome
 	Google.Chrome.Canary
 	eloston.ungoogled-chromium
-	Google.Chrome
 	PuTTY.PuTTY
 	Microsoft.RemoteDesktopClient
 	Neovim.Neovim
@@ -88,6 +88,7 @@ GAMES=(
 )
 
 MAY_HAVE=(
+	Brave.Brave
 	GNU.Emacs
 	WireGuard.WireGuard
 	CPUID.HWMonitor
@@ -96,7 +97,6 @@ MAY_HAVE=(
 	OpenJS.NodeJS.LTS
 	DigitalScholar.Zotero
 	geeksoftwareGmbH.PDF24Creator
-	Brave.Brave
 	ByteDance.CapCut
 	WiresharkFoundation.Wireshark
 	Amazon.AWSCLI
