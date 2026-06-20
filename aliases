@@ -1150,11 +1150,11 @@ function copy_last_command() {
 }
 
 function copy_public_key() {
-  if [ ! -f "$HOME/.ssh/id_rsa.pub" ]; then
-    ssh-keygen -t rsa -b 4096 -f "$HOME/.ssh/id_rsa" -N ""
-  fi
+	if [ ! -f "$HOME/.ssh/id_rsa.pub" ]; then
+		ssh-keygen -t rsa -b 4096 -f "$HOME/.ssh/id_rsa" -N ""
+	fi
 
-  copy_to_clipboard < "$HOME/.ssh/id_rsa.pub"
+	copy_to_clipboard <"$HOME/.ssh/id_rsa.pub"
 }
 
 # Usage: add_diagonal_watermak filename quoted_watermark_text
