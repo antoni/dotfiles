@@ -2212,6 +2212,7 @@ Usage: analyze_disk_usage [OPTIONS]
 
 Launch a disk usage tool depending on your OS:
   - macOS:    /Applications/OmniDiskSweeper.app/Contents/MacOS/OmniDiskSweeper
+	  # TODO: Replace with $(dua interactive)
   - Linux:    ncdu --color=dark
   - Windows:  /mnt/c/Program Files (x86)/WinDirStat/windirstat.exe C:\\
 

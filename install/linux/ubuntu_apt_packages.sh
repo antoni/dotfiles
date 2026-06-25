@@ -89,7 +89,8 @@ APT_PACKAGES=(apache2
 	default-jdk
 	scala
 	cmake
-	shellcheck
+	cryptsetup
+	libxml2-utils
 	build-essential cmake pkg-config libicu-dev zlib1g-dev libcurl4-openssl-dev
 	libssl-dev ruby-dev
 	ruby-full build-essential zlib1g-dev

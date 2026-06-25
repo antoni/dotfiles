@@ -27,7 +27,6 @@ MUST_HAVE=(
 	Google.Chrome.Canary
 	eloston.ungoogled-chromium
 	PuTTY.PuTTY
-	Microsoft.RemoteDesktopClient
 	Neovim.Neovim
 	Greenshot.Greenshot
 	Git.Git
@@ -111,6 +110,8 @@ MAY_HAVE=(
 	Rufus.Rufus
 	Hex-Rays.IDA.Free
 	Figma.Figma
+	Microsoft.RemoteDesktopClient
+	RustDesk.RustDesk
 	AnyDeskSoftwareGmbH.AnyDesk
 	marha.VcXsrv
 	gsass1.NTop
