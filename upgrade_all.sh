@@ -9,14 +9,11 @@ function check_if_wsl_needs_upgrade() {
 	echo "Checking Windows Subsystem for Linux status..."
 
 	function wsl_update_available() {
-			winget list --upgrade-available --id Microsoft.WSL 2>/dev/null |
-					grep -q 'Microsoft\.WSL'
-	}
+    winget upgrade --id Microsoft.WSL --accept-source-agreements 2>/dev/null |
+        grep -q '^Microsoft\.WSL'
+}
 
-	local update_command_output
-	update_command_output=$(wsl_update_available)
-
-	if echo "$update_command_output"; then
+	if wsl_update_available; then
 		echo "⚡ Windows Subsystem for Linux has an available update."
 		echo "Run the following command to upgrade:"
 		echo "wsl.exe --update"
