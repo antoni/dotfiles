@@ -2744,3 +2744,5 @@ function fix_vlc_subtitles() {
 
 alias dcd='docker compose down'
 alias dcu='docker compose up --detach'
+
+alias upgrade='sudo apt update && sudo apt upgrade --assume-yes'
