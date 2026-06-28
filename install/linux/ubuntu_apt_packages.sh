@@ -12,6 +12,7 @@ APT_PACKAGES=(apache2
 	ubuntu-release-upgrader-core
 	vim
 	neovim
+	neovim
 	tmux
 	docker
 	btop

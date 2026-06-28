@@ -7,6 +7,7 @@ WINGET_COMMAND_SEARCH="$WINGET_ALIAS search"
 # don't install an already installed package
 WINGET_COMMAND_INSTALL="$WINGET_ALIAS install \
 --no-upgrade \
+--disable-interactivity \
 --accept-source-agreements \
 --accept-package-agreements \
 --exact \
