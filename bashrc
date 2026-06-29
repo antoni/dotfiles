@@ -185,3 +185,4 @@ unset __conda_setup
 . "$HOME/.cargo/env"
 
 source /home/antoni/.config/broot/launcher/bash/br
+

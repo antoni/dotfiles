@@ -41,3 +41,15 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
 export PIPX_HOME="$HOME/.local/share/pipx"
+
+# NVM (added by Qwen Code installer)
+export NVM_DIR="${HOME}/.nvm"
+[ -s "${NVM_DIR}/nvm.sh" ] && \. "${NVM_DIR}/nvm.sh"
+[ -s "${NVM_DIR}/bash_completion" ] && \. "${NVM_DIR}/bash_completion"
+# Remove npm prefix conflict before activating node version
+sed -i '/^prefix/d; /^globalconfig/d' "${HOME}/.npmrc" 2>/dev/null || true
+unset npm_config_prefix npm_config_globalconfig 2>/dev/null || true
+nvm use 20 >/dev/null 2>&1
+# Restore npm prefix after NVM
+export PATH="${HOME}/.npm-global/bin:${PATH}"
+
