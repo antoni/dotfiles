@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-# TODO: Start using it in install.sh/symlink.sh
 source "$(dirname "$0")/../aliases" || exit 1
 
 # 'Current User, All Hosts' location (PowerShell Core)

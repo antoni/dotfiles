@@ -11,13 +11,12 @@ PIPX_PACKAGES=(
 	git-filter-repo oci-cli csvkit
 	markitdown docling marker-pdf langflow
 	xmldiff yq "pg_activity[psycopg]"
-	openai-whisper
+	openai-whisper "huggingface_hub[cli]" rembg
+	visidata
 )
 
-# TODO: Use this in the install.sh
-# Run install_python3.12.sh before
 function install_pipx_packages() {
-	for pkg in "${PIPX_PACKAGES[@]}"; do
-		pipx install --quiet "$pkg"
+	for package in "${PIPX_PACKAGES[@]}"; do
+		pipx install --quiet "$package"
 	done
 }

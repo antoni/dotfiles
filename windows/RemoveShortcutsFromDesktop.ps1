@@ -6,3 +6,5 @@ Get-ChildItem $env:Public\Desktop\*.lnk | ForEach-Object { Remove-Item $_ }
 
 
 
+
+

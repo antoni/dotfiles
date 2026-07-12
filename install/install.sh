@@ -1,14 +1,10 @@
 #!/usr/bin/env bash
 set -e
 
-# TODO: Install ffmpeg using install_ffmpeg.sh
-
 DOTFILES_DIR="$HOME"/dotfiles
 
 mkdir -p tmp
 
-# TODO: Move somewhere else, install everything from dotfiles/install directory?
-# source "$DOTFILES_DIR"/install/install_chrome.sh
 source "$DOTFILES_DIR"/mac/brew_install.sh
 source "$DOTFILES_DIR"/utils.sh
 source "$DOTFILES_DIR"/colors.sh
@@ -24,11 +20,8 @@ PACKAGES=(coreutils gawk sed grep findutils diffutils
 	thunar acpi tmux gitg nomacs vpnc
 	hexchat rlwrap yamllint
 	eom eog inotify-tools xbacklight pulseaudio
-	tidy pandoc tig ncdu redshift rustc
-	dunst httpie autofs)
-
-# TODO: Decide what to do with these packages (wrong names when installing on Debian GNU/Linux 13 (trixie))
-# xautolock pinta lsb ntp docker gnome-bluetooth
+	tidy pandoc tig ncdu redshift
+	dunst httpie autofs lsb-release xss-lock)
 
 SNAP_PACKAGES=(slack code)
 RUST_PACKAGES=(rust cargo)
@@ -61,19 +54,6 @@ function install_prolog_debian() {
 	sudo apt-add-repository ppa:swi-prolog/stable
 	sudo apt-get update
 	sudo apt-get install swi-prolog
-}
-
-function install_yarn_debian() {
-	sudo mkdir -p /usr/share/keyrings
-
-	curl -fsSL https://dl.yarnpkg.com/debian/pubkey.gpg |
-		sudo gpg --dearmor -o /usr/share/keyrings/yarnkey.gpg
-
-	echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" |
-		sudo tee /etc/apt/sources.list.d/yarn.list >/dev/null
-
-	sudo apt-get update -q
-	sudo apt-get install -y -qq yarn -o Dpkg::Use-Pty=0
 }
 
 function install_fedora_sound() {
@@ -170,8 +150,6 @@ function main() {
 		install_snap_packages
 
 		~/dotfiles/install/install_node_lts.sh
-		# TODO: Remove this func
-		# install_yarn_debian
 	elif [ -f /etc/redhat-release ]; then
 		echo "Installing required packages on Fedora/CentOS"
 
@@ -204,28 +182,15 @@ function main() {
 
 	~/dotfiles/symlink.sh
 
+	"$HOME"/dotfiles/install/install_docker.sh
+
 	# Needs to be installed using zsh, not bash
 	"$HOME/dotfiles/install/install_oh_my_zsh.sh" || exit_with_error_message "Could not install oh-my-zsh"
 
-	# TODO: Put this inside install_imagemagick_v7
-	if command -v magick >/dev/null 2>&1 || command -v convert >/dev/null 2>&1; then
-		echo "ImageMagick (preinstalled on the system) detected. Proceeding with removal..."
-
-		sudo apt purge -y imagemagick imagemagick-6-common || true
-		sudo apt purge -y 'libmagick*6*' || true
-		sudo apt autoremove --purge -y
-
-		if [ -d /etc/ImageMagick-6 ]; then
-			sudo rm -rf /etc/ImageMagick-6
-		fi
-
-		echo "ImageMagick (preinstalled with the system) cleanup complete."
-	else
-		echo "ImageMagick not installed with the system. No need to remove it"
-	fi
 	"$HOME/dotfiles/install/install_imagemagick_v7.sh" || exit_with_error_message "Could not install ImageMagick"
 
 	source "${BASH_SOURCE%/*}/install_global_javascript_npm_packages.sh"
+	source ~/.bashrc
 	install_global_javascript_npm_packages || exit_with_error_message "Could not install global npm packages"
 	install_vim_plugins || exit_with_error_message "Could not install vim plugins"
 
@@ -235,14 +200,26 @@ function main() {
 
 	"$HOME"/dotfiles/install/install_rust.sh
 	"$HOME"/dotfiles/install/install_cargo_crates.sh
-	"$HOME"dotfiles/install/install_chrome.sh
+	"$HOME"/dotfiles/install/install_chrome.sh
+
+	"$HOME"/dotfiles/install/install_visual_studio_code_extensions.sh
+	"$HOME"/dotfiles/install/install_ffmpeg.sh
+
+	if grep -qi ubuntu /etc/os-release; then
+		"$HOME"/dotfiles/install/linux/install_ubuntu_apt_packages.sh
+	fi
+
+	# Python
+	"$HOME"/dotfiles/install/install_python.sh
+	source "$DOTFILES_DIR"/install/pipx_packages.sh
+	install_pipx_packages || exit_with_error_message "Could not install pipx packages"
 
 	source "$DOTFILES_DIR"/install/pipx_packages.sh && install_pipx_packages || exit_with_error_message "Could not install pipx packages"
 
 	crontab "$DOTFILES_DIR"/cron.jobs || exit_with_error_message ""
 
-	# TODO: Show info about interactive steps:
-	# "$HOME"/dotfiles/install/install_gh_cli.sh
+	printf "Steps to be done interactively by the user:\n"
+	printf '"$HOME"/dotfiles/install/install_gh_cli.sh'
 }
 
 function install_vim_plugins() {
@@ -269,7 +246,7 @@ function install_gitkraken() {
 }
 
 function install_intellij_toolbox() {
-	wget -q --show-progress https://download.jetbrains.com/toolbox/jetbrains-toolbox-1.4.2492.tar.gz -P tmp
+	wget -q --show-progress https://download.jetbrains.com/toolbox/jetbrains-toolbox-3.6.1.85592.tar.gz -P tmp
 	tar xvf tmp/jetbrains-toolbox-* tmp/
 	sudo_exec mv tmp/jetbrains_toolbox /usr/bin
 }
@@ -283,13 +260,8 @@ function install_k8s() {
 	KUBE_BUILD_PLATFORMS=linux/amd64 ./hack/build-go.sh
 }
 
-function install_rust() {
-	# Install rustup.rs.
-	curl https://sh.rustup.rs -sSf | sh
-}
-
 function install_alacritty() {
-	install_rust
+	"$HOME"/dotfiles/install/install_rust.sh
 
 	# Clone the source code:
 	git clone https://github.com/jwilm/alacritty.git ~/alacritty
@@ -317,11 +289,6 @@ function install_haskell_packages() {
 function install_r_packages() {
 	R_PACKAGES=() # see r_packages.txt
 	echo "install.packages(\"${R_PACKAGES[*]}\", repos=\"https://cran.rstudio.com\")" | R --no-save
-}
-
-function install_nvidia_driver() {
-	sudo_exec dnf config-manager --add-repo=http://negativo17.org/repos/fedora-nvidia.repo
-	sudo_exec dnf --assumeyes install nvidia-driver nvidia-settings kernel-devel
 }
 
 function install_r_studio() {

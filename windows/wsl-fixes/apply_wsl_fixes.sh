@@ -5,7 +5,6 @@
 # Fixes: systemd
 # https://github.com/microsoft/WSL/issues/8952#issuecomment-1572193568
 if [ -f /etc/os-release ] && grep -qi ubuntu /etc/os-release; then
-
 	sudo sh -c 'echo :WSLInterop:M::MZ::/init:PF > /usr/lib/binfmt.d/WSLInterop.conf'
 	sudo systemctl unmask systemd-binfmt.service
 	sudo systemctl restart systemd-binfmt

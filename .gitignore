@@ -21,3 +21,6 @@ jupyter
 .DS_Store
 
 *.apk
+
+
+config.sh

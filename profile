@@ -23,3 +23,6 @@ export PATH="$VOLTA_HOME/bin:$PATH"
 
 export HOMEBREW_NO_ENV_HINTS=TRUE
 . "$HOME/.cargo/env"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"

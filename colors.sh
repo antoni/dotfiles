@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-# TODO: Enabling colors here causes indentation issues in some scripts output (like install.sh)
-
 declare -A colors
 
 colors[Reset_Color]='\033[0m' # Text color reset

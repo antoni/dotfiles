@@ -1,29 +1,53 @@
 #!/usr/bin/env bash
 
-# Exit immediately on error
 set -e
 
-# Go to tmp dir
+export DEBIAN_FRONTEND=noninteractive
+
 cd "$HOME/tmp"
 
 echo "Updating system..."
 sudo apt-get -qq update
 sudo apt-get -qq upgrade -y
 
+echo "Checking for distro-installed ImageMagick..."
+
+if command -v magick >/dev/null 2>&1 || command -v convert >/dev/null 2>&1; then
+    echo "ImageMagick detected. Removing distro packages..."
+
+    sudo apt-get -qq purge -y \
+        imagemagick \
+        imagemagick-6-common \
+        imagemagick-6.q16 \
+        imagemagick-7* \
+        'libmagick*6*' \
+        'libmagick*7*' || true
+
+    sudo apt-get -qq autoremove --purge -y
+
+    sudo rm -rf /etc/ImageMagick-6 /etc/ImageMagick-7
+
+    echo "Existing ImageMagick packages removed."
+else
+    echo "No distro-installed ImageMagick found."
+fi
+
 echo "Installing dependencies..."
 sudo apt-get -qq install -y \
-	build-essential libtool libjpeg-dev libpng-dev libtiff-dev libgif-dev \
-	libx11-dev libxext-dev libxml2-dev libbz2-dev libz-dev \
-	libfontconfig1-dev libfreetype6-dev \
-	ghostscript libwebp-dev liblqr-1-0-dev libopenexr-dev \
-	libheif-dev libraw-dev
+  build-essential libtool libjpeg-dev libpng-dev libtiff-dev libgif-dev \
+  libx11-dev libxext-dev libxml2-dev libbz2-dev libz-dev \
+  libfontconfig1-dev libfreetype6-dev \
+  ghostscript libwebp-dev liblqr-1-0-dev libopenexr-dev \
+  libheif-dev libraw-dev
 
-IMAGEMAGICK_VERSION="7.1.1-14"
+IMAGEMAGICK_VERSION="7.1.2-27"
 ARCHIVE="ImageMagick-$IMAGEMAGICK_VERSION.tar.xz"
 DIR="ImageMagick-$IMAGEMAGICK_VERSION"
 
 echo "Downloading ImageMagick $IMAGEMAGICK_VERSION..."
-wget -q "https://download.imagemagick.org/ImageMagick/download/releases/$ARCHIVE"
+echo "https://download.imagemagick.org/archive/$ARCHIVE"
+wget --https-only -O "$ARCHIVE" \
+    "https://download.imagemagick.org/archive/$ARCHIVE"
 
 echo "Extracting..."
 tar -xf "$ARCHIVE"

@@ -26,6 +26,7 @@ function install_go_packages() {
 	log_info "Installing go packages"
 	if command_exists go; then
 		GO_PACKAGES=(
+			github.com/nats-io/natscli/nats
 			github.com/szktkfm/mdtt/cmd/mdtt
 			github.com/ycd/dstp/cmd/dstp
 			github.com/charmbracelet/glow

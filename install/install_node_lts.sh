@@ -1,45 +1,111 @@
 #!/usr/bin/env bash
-set -eo pipefail
+set -euo pipefail
+
+trap 'echo "❌ Error on line $LINENO: $BASH_COMMAND"' ERR
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "$SCRIPT_DIR/install_global_javascript_npm_packages.sh"
 
-# Remove system Node leftovers we don't want
-sudo apt --assume-yes remove libnode72 nodejs npm || true
+echo "▶ Installing prerequisites..."
+sudo apt-get update
+sudo apt-get install -y \
+    curl \
+    git \
+    ca-certificates \
+    build-essential
 
-echo "▶ Installing nvm..."
+echo "▶ Removing Ubuntu-packaged Node.js..."
+sudo apt-get remove -y nodejs npm libnode72 libnode-dev || true
+sudo apt-get autoremove -y || true
+
 export NVM_DIR="$HOME/.nvm"
 
-if [ ! -d "$NVM_DIR" ]; then
-	curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+echo "▶ Removing any previous nvm installation..."
+rm -rf "$NVM_DIR"
+
+echo "▶ Installing nvm..."
+
+curl -4 -fsSL \
+    https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh \
+    -o /tmp/install-nvm.sh
+
+chmod +x /tmp/install-nvm.sh
+bash /tmp/install-nvm.sh
+
+echo "▶ Loading nvm..."
+
+if [[ ! -s "$NVM_DIR/nvm.sh" ]]; then
+    echo "❌ nvm installation failed."
+    exit 1
 fi
 
-# Load nvm into current shell
-if [ -s "$NVM_DIR/nvm.sh" ]; then
-	. "$NVM_DIR/nvm.sh"
-else
-	echo "❌ nvm not found after installation"
-	exit 1
-fi
+# nvm is not compatible with `set -u`, so temporarily disable nounset if enabled.
+set +u
+
+# shellcheck source=/dev/null
+source "$NVM_DIR/nvm.sh"
 
 echo "▶ Installing latest Node.js LTS..."
 nvm install --lts
 nvm use --lts
 nvm alias default 'lts/*'
 
-NODE_VERSION="$(node --version)"
-NODE_MAJOR_VERSION="${NODE_VERSION#v}"
-NODE_MAJOR_VERSION="${NODE_MAJOR_VERSION%%.*}"
+set -u 2>/dev/null || true
 
-echo "Detected Node.js LTS: ${NODE_VERSION} (major: ${NODE_MAJOR_VERSION})"
+hash -r
+
+echo "▶ Verifying Node installation..."
+
+command -v node
+command -v npm
+
+NODE_VERSION="$(node --version)"
+NPM_VERSION="$(npm --version)"
+
+echo "Node: $NODE_VERSION"
+echo "npm : $NPM_VERSION"
 
 echo "▶ Enabling Corepack..."
 corepack enable
-
-echo "▶ Installing latest Yarn (Berry)..."
 corepack prepare yarn@stable --activate
 
-echo "✅ Installation complete"
-echo "Node: $(node --version)"
-echo "npm:  $(npm --version)"
-echo "Yarn: $(yarn --version)"
+hash -r
+
+command -v yarn
+YARN_VERSION="$(yarn --version)"
+
+echo "Yarn: $YARN_VERSION"
+
+echo "▶ Installing global JavaScript packages..."
+
+if [[ -f "$SCRIPT_DIR/install_global_javascript_npm_packages.sh" ]]; then
+    # shellcheck source=/dev/null
+    source "$SCRIPT_DIR/install_global_javascript_npm_packages.sh"
+fi
+
+echo "▶ Persisting nvm configuration..."
+
+grep -q 'NVM_DIR="$HOME/.nvm"' "$HOME/.bashrc" 2>/dev/null || cat >> "$HOME/.bashrc" <<'EOF'
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+EOF
+
+if [[ -f "$HOME/.profile" ]]; then
+    grep -q 'NVM_DIR="$HOME/.nvm"' "$HOME/.profile" 2>/dev/null || cat >> "$HOME/.profile" <<'EOF'
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+EOF
+fi
+
+echo
+echo "======================================"
+echo "✅ Node.js installation completed"
+echo "======================================"
+echo "Node : $(node --version)"
+echo "npm  : $(npm --version)"
+echo "Yarn : $(yarn --version)"
+echo "nvm  : $(nvm --version)"
+echo
+echo "Open a new terminal (or run 'source ~/.bashrc') to use nvm in future shells."

@@ -22,7 +22,6 @@ function custom_sudo_password_read_prompt() {
 	printf '%b' "${colors[BoldGreen]}Enter sudo password:${colors[Reset_Color]}"
 
 	sudo --prompt="" --validate
-	clear
 }
 
 custom_sudo_password_read_prompt
@@ -134,15 +133,6 @@ function mac_symlink() {
 }
 
 function setup_gitconfig() {
-	# Prompt user for input
-	# TODO: Move to env vars set in the beggining of install.sh
-	# printf "Enter your full name for Git: "
-	# IFS= read -r name
-	# # TODO: Move to env vars set in the beggining of install.sh
-	# printf "Enter your email for Git: "
-	# IFS= read -r email
-	export GITHUB_NAME="Thomas Anderson"
-	export GITHUB_EMAIL="contact@antoni.systems"
 
 	# Validate input
 	if [[ -z "$GITHUB_NAME" || -z "$GITHUB_EMAIL" ]]; then
@@ -247,7 +237,7 @@ function main() {
 
 	# MIME types
 	MIME_FILE=$HOME/.config/mimeapps.list
-	if [ -e ~/.ssh/id_rsa ]; then
+	if [ -e ~/.ssh/id_ed25519 ]; then
 		rm -f "$MIME_FILE"
 	fi
 	ln -fs "${DOTFILES_DIR}"/config/mimeapps.list "$MIME_FILE"
@@ -305,6 +295,8 @@ function main() {
 		sudo_exec ln -fs "${DOTFILES_DIR}"/global_aliases /etc/profile.d/global_aliases.sh
 
 		if [[ -n "$IS_WSL" ]]; then
+			"$DOTFILES_DIR"/windows/windows_symlink.sh
+
 			function replace_vlc_settings() {
 				local -r target_path="/mnt/c/Users/""${WINDOWS_USERNAME}""/AppData/Roaming/vlc/vlcrc"
 
@@ -350,11 +342,13 @@ function main() {
 			}
 			replace_qbittorrent_settings
 
-			function symlink_wsl_configuration() {
-				sudo ln -sf "${DOTFILES_DIR}"/wsl.conf /etc/wsl.conf
+			function setup_wsl_configuration() {
+				export HOSTNAME=$(hostname)
+
+				envsubst < "${DOTFILES_DIR}"/wsl.conf.template | sudo tee /etc/wsl.conf >/dev/null
 				sudo ln -sf "${DOTFILES_DIR}"/wslconfig /mnt/c/Users/$WINDOWS_USERNAME/.wslconfig
 			}
-			symlink_wsl_configuration
+			setup_wsl_configuration
 		else
 			function linux_brightness_settings() {
 				sudo cp brightness.sh /root/
@@ -415,15 +409,12 @@ function main() {
 	function setup_hostname() {
 		if [ "${OSTYPE//[0-9.]/}" == "darwin" ]; then
 			mac_change_hostname "$HOSTNAME"
-		else
-			echo TODO: Make it work on WSL?
-			# echo "$HOSTNAME" | sudo tee /etc/hostname > /dev/null
-			# sudo hostname "$HOSTNAME"
+		elif [[ -n "$IS_WSL" ]]; then
+		  sudo hostname "$HOSTNAME"
 
-			# sudo sed -i "/127.0.0.1/d" /etc/hosts
-			# echo "127.0.0.1 $HOSTNAME" | sudo tee -a /etc/hosts > /dev/null
+			setup_wsl_configuration
 
-			# print_success_message "Hostname changed to: $HOSTNAME"
+			print_success_message "Hostname changed to: $HOSTNAME"
 		fi
 	}
 	setup_hostname

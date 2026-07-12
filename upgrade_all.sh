@@ -7,15 +7,18 @@ source "$HOME"/dotfiles/utils.sh
 
 function check_if_wsl_needs_upgrade() {
 	echo "Checking Windows Subsystem for Linux status..."
-	local update_command_output
-	update_command_output=$(wsl.exe --update 2>&1 | tr -d '\000')
 
-	if echo "$update_command_output" | grep -qi "is already installed"; then
-		echo "✅ Windows Subsystem for Linux is already up to date."
-	else
+	function wsl_update_available() {
+    winget upgrade --id Microsoft.WSL --accept-source-agreements 2>/dev/null |
+        grep -q '^Microsoft\.WSL'
+}
+
+	if wsl_update_available; then
 		echo "⚡ Windows Subsystem for Linux has an available update."
 		echo "Run the following command to upgrade:"
 		echo "wsl.exe --update"
+	else
+		echo "✅ Windows Subsystem for Linux is already up to date."
 	fi
 }
 
@@ -84,7 +87,6 @@ function upgrade_all() {
 		sudo --reset-timestamp
 	fi
 
-	# TODO: Upgrade other dotfiles/install packages the same way
 	"$HOME"/dotfiles/install/install_yt-dlp.sh
 
 	printf "Upgraded all applications on %s\n" "$(date)" >>~/update_log.txt

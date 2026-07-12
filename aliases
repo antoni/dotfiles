@@ -277,7 +277,6 @@ function wgetdir2() {
 		--no-parent "$1"
 }
 
-# Programming etc.
 alias m='make'
 alias c99='gcc -std=c99'
 alias g++='g++ -g -Wall -O3'
@@ -285,7 +284,6 @@ alias mountstudents='sshfs ar267209@students.mimuw.edu.pl: /Users/antoni/student
 alias students='export TERM=vt100 ; ssh students.mimuw.edu.pl -l ar267209 -t tmux a'
 alias icm='ssh antoni@hpc.icm.edu.pl'
 alias icmgw='ssh antoni@gw.icm.edu.pl'
-#alias wget='curl -0'
 alias xcode="open *.xcodeproj"
 
 function tarfolder() { tar -czf "$1".tar.gz "$1"/*; }
@@ -354,10 +352,6 @@ alias tmxl='tmux list-window'
 alias ..="cd .."
 alias ....="cd ../.."
 alias ......="cd ../../.."
-
-# Helper functions
-# function gg() { pwd > /tmp/last_path; }
-# function hh() { cd $(cat /tmp/last_path); }
 
 alias webserver='python3 -m http.server --bind localhost 8080'
 alias s='webserver'
@@ -518,14 +512,12 @@ alias typesizes='perl -V | grep size='
 alias interrupts1='cat /proc/interrupts' # Get processor interrupts
 alias memory1='cat /proc/meminfo'
 alias disktest='sudo smartctl -a /dev/sda | less'
-alias dmesg='dmesg -T'
 alias dmesgerrors="dmesg | egrep 'error|fail|bug|rtl8|r8|wlan'"
 
 alias irc='hexchat'
 alias showdirsizes='du -Pshx * 2>/dev/null'
 alias resetsound='pulseaudio -k && sudo alsa force-reload'
 alias ns='nvidia-smi'
-alias idrsa='cat ~/.ssh/id_rsa.pub'
 alias iphone='~/scripts/setup_iphone.sh'
 alias i='iphone'
 alias pdfmerge='pdfunite'
@@ -662,7 +654,7 @@ function swap() {
 }
 
 # Copies SSH RSA key to X clipboard
-alias copy_ssh_public_key_to_clipboard='cat ~/.ssh/id_rsa.pub | copy_to_clipboard'
+alias copy_ssh_public_key_to_clipboard='cat ~/.ssh/id_ed25519.pub | copy_to_clipboard'
 
 function dnfs() {
 	arg_count="$#"
@@ -1150,11 +1142,11 @@ function copy_last_command() {
 }
 
 function copy_public_key() {
-  if [ ! -f "$HOME/.ssh/id_rsa.pub" ]; then
-    ssh-keygen -t rsa -b 4096 -f "$HOME/.ssh/id_rsa" -N ""
-  fi
+	if [ ! -f "$HOME/.ssh/id_ed25519.pub" ]; then
+		ssh-keygen -t ed25519 -a 100 -f "$HOME/.ssh/id_ed25519" -N ""
+	fi
 
-  copy_to_clipboard < "$HOME/.ssh/id_rsa.pub"
+	copy_to_clipboard <"$HOME/.ssh/id_ed25519.pub"
 }
 
 # Usage: add_diagonal_watermak filename quoted_watermark_text
@@ -1629,8 +1621,6 @@ function mkdircd() {
 alias whiptail='dialog'
 alias gsa='git stash apply'
 
-alias reboot='shutdown -r'
-
 alias test_internet_speed='speedtest --secure'
 
 function change_extension() {
@@ -1832,10 +1822,6 @@ function cd_windows_desktop() {
 }
 
 # Converts input to human-readable form
-# Assumes the following input:
-# -rw-r--r-- 1 antoni staff 1288818 Dec 30 2022 ./file1.svg
-# -rw-r--r-- 1 antoni staff 1282458 Dec 30 2022 ./file2.svg
-# -rw-r--r-- 1 antoni staff 1281326 Dec 30 2022 ./file3.svg
 function convert_size_to_human_readable_form() {
 	awk '{ split( "B kB MB GB TB PB EB ZB YB" , sizeValue );
     sizeIncrement=1;
@@ -2205,90 +2191,6 @@ function json_structure_minimize() {
 
 alias cmatrix='cmatrix -oba'
 
-function analyze_disk_usage() {
-	show_help() {
-		cat <<EOF
-Usage: analyze_disk_usage [OPTIONS]
-
-Launch a disk usage tool depending on your OS:
-  - macOS:    /Applications/OmniDiskSweeper.app/Contents/MacOS/OmniDiskSweeper
-  - Linux:    ncdu --color=dark
-  - Windows:  /mnt/c/Program Files (x86)/WinDirStat/windirstat.exe C:\\
-
-Options:
-  --windows    (WSL only) Run the Windows version instead of Linux ncdu
-  --help       Show this help message
-EOF
-	}
-
-	# Parse arguments
-	case "$1" in
-	-h | --help)
-		show_help
-		return 0
-		;;
-	--windows)
-		run_windows=1
-		;;
-	*)
-		run_windows=0
-		;;
-	esac
-
-	# Detect OS
-	unameOut="$(uname -s)"
-	case "${unameOut}" in
-	Darwin*)
-		echo "Detected macOS. Launching OmniDiskSweeper..."
-		/Applications/OmniDiskSweeper.app/Contents/MacOS/OmniDiskSweeper
-		;;
-	Linux*)
-		if grep -qi microsoft /proc/version 2>/dev/null; then
-			# WSL environment
-			if [ "$run_windows" -eq 1 ]; then
-				# Alternatives:
-				# alias analyze_disk_usage='/mnt/c/Program\ Files/WizTree/WizTree.exe "c:"'
-				echo "Detected WSL. Launching Windows WinDirStat..."
-				"/mnt/c/Program Files (x86)/WinDirStat/windirstat.exe" \
-					C:\\ `# Target drive to scan (C:)` \
-					/O `# Open immediately after scan` \
-					/P `# Show progress window during scan` \
-					/S `# Save settings (so future runs reuse config)` \
-					/N `# Skip 'Select Drives' dialog, go straight to scan`
-			else
-				# Alternative (dua-cli):
-				# dua interactive
-				echo "Detected WSL. Launching Linux ncdu..."
-				# stay within a single filesystem (don’t cross into /proc, /sys, /mnt, etc.)
-				# speed up scan by minimizing screen updates
-				# use dark color theme for better readability
-				# skip cache directories (~/.cache, etc.)
-				# skip kernel pseudo-filesystems (e.g. /proc, /sys)
-				# scan from the root directory (change this if you only want /home, etc.)
-				ncdu -x -q --color=dark \
-					--exclude /proc --exclude /sys --exclude /tmp \
-					--exclude-caches --exclude-kernfs
-			fi
-		else
-			echo "Detected Linux. Launching ncdu..."
-			# Alternative (dua-cli):
-			# dua interactive
-			# stay within a single filesystem (don’t cross into /proc, /sys, /mnt, etc.)
-			# speed up scan by minimizing screen updates
-			# use dark color theme for better readability
-			# skip cache directories (~/.cache, etc.)
-			# skip kernel pseudo-filesystems (e.g. /proc, /sys)
-			# scan from the root directory (change this if you only want /home, etc.)
-			ncdu -x -q --color=dark --exclude-caches --exclude-kernfs /
-		fi
-		;;
-	*)
-		echo "Unsupported OS: ${unameOut}"
-		return 1
-		;;
-	esac
-}
-
 function nmap_full_scan() {
 	local network="${1:-192.168.1.0/24}"
 
@@ -2418,8 +2320,6 @@ function curltime() {
 	printf "%-18s %-12s %s\n" "time_total" "$total" "Total time for complete request\n"
 }
 
-alias psh='~/scripts/linux/psh.sh'
-
 function scan_file_for_secrets() {
 	local target="$1"
 
@@ -2464,6 +2364,100 @@ function scan_file_for_secrets() {
 	else
 		return 1
 	fi
+}
+
+function analyze_disk_usage() {
+    show_help() {
+        cat <<EOF
+Usage: analyze_disk_usage [OPTIONS]
+
+Launch a disk usage tool depending on your OS:
+  - macOS:    /Applications/OmniDiskSweeper.app/Contents/MacOS/OmniDiskSweeper
+  - Linux:    dua interactive, falling back to ncdu --color=dark
+  - Windows:  /mnt/c/Program Files (x86)/WinDirStat/windirstat.exe C:\\
+
+Options:
+  --windows    (WSL only) Run the Windows version instead of Linux dua/ncdu
+  --help       Show this help message
+EOF
+}
+
+    # Parse arguments
+    case "$1" in
+        -h | --help)
+            show_help
+            return 0
+            ;;
+        --windows)
+            run_windows=1
+            ;;
+        *)
+            run_windows=0
+            ;;
+    esac
+
+    # Detect OS
+    uname_result="$(uname -s)"
+    case "${uname_result}" in
+        Darwin*)
+            echo "Detected macOS. Launching OmniDiskSweeper..."
+            /Applications/OmniDiskSweeper.app/Contents/MacOS/OmniDiskSweeper
+            ;;
+        Linux*)
+            if [[ -n "$IS_WSL" ]]; then
+                # WSL environment
+                if [ "$run_windows" -eq 1 ]; then
+                    # Alternatives:
+                    # alias analyze_disk_usage='/mnt/c/Program\ Files/WizTree/WizTree.exe "c:"'
+                    echo "Detected WSL. Launching Windows WinDirStat..."
+                    "/mnt/c/Program Files (x86)/WinDirStat/windirstat.exe" \
+                        C:\\ `# Target drive to scan (C:)` \
+                        /O `# Open immediately after scan` \
+                        /P `# Show progress window during scan` \
+                        /S `# Save settings (so future runs reuse config)` \
+                        /N `# Skip 'Select Drives' dialog, go straight to scan`
+                else
+                    # Alternative (dua-cli):
+                    # dua interactive
+                    if command -v dua >/dev/null 2>&1; then
+                        echo "Detected WSL. Launching Linux dua..."
+                        dua interactive
+                    else
+                        echo "Detected WSL. dua is unavailable. Launching Linux ncdu..."
+                        # stay within a single filesystem (don’t cross into /proc, /sys, /mnt, etc.)
+                        # speed up scan by minimizing screen updates
+                        # use dark color theme for better readability
+                        # skip cache directories (~/.cache, etc.)
+                        # skip kernel pseudo-filesystems (e.g. /proc, /sys)
+                        # scan from the root directory (change this if you only want /home, etc.)
+                        ncdu -x -q --color=dark \
+                            --exclude /proc --exclude /sys --exclude /tmp \
+                            --exclude-caches --exclude-kernfs
+                    fi
+                fi
+            else
+                # Alternative (dua-cli):
+                # dua interactive
+                if command -v dua >/dev/null 2>&1; then
+                    echo "Detected Linux. Launching dua..."
+                    dua interactive
+                else
+                    echo "Detected Linux. dua is unavailable. Launching ncdu..."
+                    # stay within a single filesystem (don’t cross into /proc, /sys, /mnt, etc.)
+                    # speed up scan by minimizing screen updates
+                    # use dark color theme for better readability
+                    # skip cache directories (~/.cache, etc.)
+                    # skip kernel pseudo-filesystems (e.g. /proc, /sys)
+                    # scan from the root directory (change this if you only want /home, etc.)
+                    ncdu -x -q --color=dark --exclude-caches --exclude-kernfs /
+                fi
+            fi
+            ;;
+        *)
+            echo "Unsupported OS: ${uname_result}"
+            return 1
+            ;;
+    esac
 }
 
 # Usage:
@@ -2743,3 +2737,15 @@ function fix_vlc_subtitles() {
 
 alias dcd='docker compose down'
 alias dcu='docker compose up --detach'
+
+alias upgrade='sudo apt update && sudo apt upgrade --assume-yes && sudo apt autoremove --assume-yes'
+
+function upgrade_rpi() {
+	set -euo pipefail
+
+	sudo apt update
+	sudo apt full-upgrade --yes
+	sudo rpi-eeprom-update --apply
+
+	sudo reboot
+}

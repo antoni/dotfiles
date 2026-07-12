@@ -1,0 +1,25 @@
+# Configuration per machine
+
+# Source it in other files:
+# source "$HOME"/dotfiles/config.sh
+
+export ZSH_CUSTOM="$HOME/zsh_customizations"
+
+# To find out the ID of the device running:
+# blueutil --connected
+HEADPHONES_BLUETOOTH_DEVICE_ID="88-88-88-88-88-88"
+HOSTNAME="automatown"
+DEFAULT_CITY="Warsaw"
+DEFAULT_COORDS="40.713:-74.006"
+GITHUB_USER="username"
+GITHUB_NAME="Adam Smith"
+GITHUB_EMAIL="adam.smith@example.com"
+MACOS_USERNAME="username"
+WINDOWS_USERNAME="username"
+WINDOWS_DESKTOP="/mnt/c/Users/""$WINDOWS_USERNAME""/Desktop/"
+HOMEBREW_NO_AUTO_UPDATE=1
+BASH=/usr/local/bin/bash
+GO_VERSION="1.21.1"
+NODE_VERSION="v18.19.0"
+
+IP_VOLUMIO=192.168.1.100

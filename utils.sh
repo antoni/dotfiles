@@ -32,33 +32,36 @@ function sudo_exec() {
 }
 
 function sudo_keep_alive() {
+	cursor_col() {
+    local row col
+    IFS=';' read -rsdR -p $'\e[6n' row col
+    printf 'Cursor: row=%s col=%s\n' "${row#*[}" "$col" >&2
+}
 	# Ask for the administrator password upfront
 	if ! sudo -n true 2>/dev/null; then
-		printf '%b' "${colors[BoldGreen]}Enter sudo password:${colors[Reset_Color]}"
+		# printf '%b' "${colors[BoldGreen]}Enter sudo password:${colors[Reset_Color]}"
+		printf "Enter sudo password: "
 		sudo --prompt="" --validate
 	fi
-
-	clear
-
 	# kill -0 PID exits with an exit code of 0 if the PID is of
 	# a running process, otherwise exits with an exit code of 1.
 	# So, basically, kill -0 "$$" || exit aborts the while loop child process
 	# as soon as the parent process is no longer running
 
 	# Keep-alive: update existing `sudo` time stamp until process has finished
-	while true; do
-		sudo --non-interactive true
-		sleep 60
-		kill -0 "$$" || exit
-	done 2>/dev/null &
+# 	while true; do
+# 		sudo --non-interactive true
+# 		sleep 60
+# 		kill -0 "$$" || exit
+# done >/dev/null 2>&1 &
 }
 
 function generate_ssh_key() {
-	if [ ! -e ~/.ssh/id_rsa ]; then
-		ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
-	else
-		printf "SSH key already at ~/.ssh/id_rsa. Not creating one\n"
-	fi
+  if [ ! -e ~/.ssh/id_ed25519 ]; then
+    ssh-keygen -t ed25519 -a 100 -N "" -f ~/.ssh/id_ed25519
+  else
+    printf "SSH key already at ~/.ssh/id_ed25519. Not creating one\n"
+  fi
 }
 
 function filename_without_extension() {

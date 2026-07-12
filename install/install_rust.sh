@@ -6,7 +6,6 @@ readonly RUSTUP_HOME="${HOME}/.rustup"
 readonly CARGO_HOME="${HOME}/.cargo"
 readonly CARGO_ENV="${CARGO_HOME}/env"
 
-# TODO: Confirm we use it in installation process
 log_info() {
 	printf '[INFO] %s\n' "$*"
 }

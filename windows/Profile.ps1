@@ -1,4 +1,4 @@
-# TODO: Copy/symlink to C:\Users\<you>\Documents\WindowsPowerShell\Profile.ps1
+# Should be symlinked to to C:\Users\$WINDOWS_USERNAME\Documents\WindowsPowerShell\Profile.ps1
 $env:Path += ';C:\Program Files\Vim\vim91'
 [System.Environment]::SetEnvironmentVariable('Path', $env:Path)
 [System.Environment]::SetEnvironmentVariable('WINDOWS_USERNAME', 'subzero', 'User')
@@ -273,6 +273,8 @@ function prompt {
 function vihosts {
     vim %SystemRoot%\system32\drivers\etc\hosts
 }
+
+
 
 
 

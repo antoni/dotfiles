@@ -1,19 +1,16 @@
 #!/usr/bin/env zsh
 
-set -euo pipefail
 
 export LANG=${LANG:-C.UTF-8}
 export LC_ALL=$LANG
 export ZSH_CACHE_DIR="${ZSH_CACHE_DIR:-$HOME/.oh-my-zsh/cache}"
 
 source "$HOME/dotfiles/utils.sh"
+setopt XTRACE
 
 function install_zsh_plugins() {
+	printf "Installing zsh plugins in %s\n" "$ZSH_CUSTOM"
 
-	printf "Installing zsh plugins\n"
-
-	# For ZSH_CUSTOM
-	source ~/dotfiles/zshrc
 	mkdir -p $ZSH_CUSTOM
 	rm --recursive --force "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"/plugins/zsh-yarn-completions && git clone https://github.com/chrisands/zsh-yarn-completions "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-yarn-completions
 	rm --recursive --force "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions && git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions
@@ -22,6 +19,7 @@ function install_zsh_plugins() {
 }
 
 function symlink_zsh_files() {
+	printf "Symlinking zsh files\n"
 	ln -sf ~/dotfiles/zshrc ~/.zshrc
 	ln -sf ~/dotfiles/zprofile ~/.zprofile
 	ln -fs "$HOME"/dotfiles/antoni.zsh-theme "$HOME"/.oh-my-zsh/themes
@@ -35,8 +33,8 @@ function install_oh_my_zsh() {
 
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
-	install_zsh_plugins
 	symlink_zsh_files
+	install_zsh_plugins
 }
 
 install_oh_my_zsh

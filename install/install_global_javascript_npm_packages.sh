@@ -1,10 +1,19 @@
+#!/usr/bin/env bash
+
 # Make global packages install locally (without sudo)
 function create_npm_global_packages_directory() {
-	# TODO: This is incompatible with nvm but under nvm, we don't need it
-	# source "$HOME"/dotfiles/paths
-	# mkdir -p "$NPM_GLOBAL_PACKAGES_DIRECTORY"
-	# npm config set prefix "$NPM_GLOBAL_PACKAGES_DIRECTORY"
-	echo NOOP
+  local prefix
+  prefix="$(npm config get prefix)"
+
+  # nvm prefixes live under ~/.nvm
+  if [[ "$prefix" == "$HOME/.nvm/"* ]]; then
+    return
+  fi
+
+  source "$HOME"/dotfiles/paths
+
+  mkdir -p "$NPM_GLOBAL_PACKAGES_DIRECTORY"
+  npm config set prefix "$NPM_GLOBAL_PACKAGES_DIRECTORY"
 }
 
 function install_global_javascript_npm_packages() {

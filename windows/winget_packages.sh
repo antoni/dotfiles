@@ -24,8 +24,9 @@ MUST_HAVE=(
 	Mozilla.Firefox
 	Mozilla.Firefox.DeveloperEdition
 	Google.Chrome
+	Google.Chrome.Canary
+	eloston.ungoogled-chromium
 	PuTTY.PuTTY
-	Microsoft.RemoteDesktopClient
 	Neovim.Neovim
 	Greenshot.Greenshot
 	Git.Git
@@ -86,6 +87,7 @@ GAMES=(
 )
 
 MAY_HAVE=(
+	Brave.Brave
 	GNU.Emacs
 	WireGuard.WireGuard
 	CPUID.HWMonitor
@@ -94,7 +96,6 @@ MAY_HAVE=(
 	OpenJS.NodeJS.LTS
 	DigitalScholar.Zotero
 	geeksoftwareGmbH.PDF24Creator
-	Brave.Brave
 	ByteDance.CapCut
 	WiresharkFoundation.Wireshark
 	Amazon.AWSCLI
@@ -109,6 +110,8 @@ MAY_HAVE=(
 	Rufus.Rufus
 	Hex-Rays.IDA.Free
 	Figma.Figma
+	Microsoft.RemoteDesktopClient
+	RustDesk.RustDesk
 	AnyDeskSoftwareGmbH.AnyDesk
 	marha.VcXsrv
 	gsass1.NTop
@@ -116,17 +119,17 @@ MAY_HAVE=(
 	Yarn.Yarn
 	BraveSoftware.BraveBrowser
 	Rustlang.Rustup
-	Google.Chrome.Canary
 	DeepL.DeepL
 	alcpu.CoreTemp
 	Yubico.YubikeyManager
-	Mega.MEGASync
+	Yubico.YubiKeyManagerCLI
 	Oracle.VirtualBox
 	VMware.WorkstationPlayer
 	TorProject.TorBrowser
 	Insecure.Nmap
 	Loom.Loom
 	OpenVPNTechnologies.OpenVPNConnect
+	AmneziaVPN.AmneziaVPN
 	MullvadVPN.MullvadVPN
 	Surfshark.SurfsharkVPN
 	NordVPN.NordVPN
@@ -140,7 +143,6 @@ MAY_HAVE=(
 	Elgato.ControlCenter            # control of Elgato Key Light Mini
 	CrystalDewWorld.CrystalDiskMark # disk benchmark
 	NVAccess.NVDA
-	Mozilla.Firefox.DeveloperEdition
 	Nextcloud.NextcloudDesktop
 	Balena.Etcher
 	Microsoft.OfficeDeploymentTool

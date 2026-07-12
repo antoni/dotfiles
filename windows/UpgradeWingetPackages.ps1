@@ -63,7 +63,7 @@ $upgrades | ForEach-Object -Process {
     }
 
     Write-Host "Going to upgrade $($_.Id)"
-    winget upgrade --include-unknown --accept-package-agreements --accept-source-agreements $_.Id
+    winget upgrade --include-unknown --disable-interactivity --accept-package-agreements --accept-source-agreements $_.Id
 
     # Run this because of this issue: https://github.com/microsoft/winget-cli/issues/2686
     # winget.exe upgrade --all `
@@ -71,6 +71,8 @@ $upgrades | ForEach-Object -Process {
     #   --accept-package-agreements `
     #   --accept-source-agreements
 }
+
+
 
 
 

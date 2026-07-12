@@ -13,6 +13,9 @@ extensions=(
 	JeffJorczak.auto-translate-json
 )
 
-for extension in "${extensions[@]}"; do
-	code --install-extension "$extension"
+args=()
+for ext in "${extensions[@]}"; do
+  args+=(--install-extension "$ext")
 done
+
+NODE_NO_WARNINGS=1 code --force "${args[@]}"

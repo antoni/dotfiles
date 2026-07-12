@@ -38,3 +38,7 @@ function tmuxrc() {
 }
 
 export SHELL=$(which bash)
+
+# if [ -n "$SSH_CONNECTION" ] && [ -z "$TMUX" ]; then
+#     exec tmux new-session -A -s main
+# fi

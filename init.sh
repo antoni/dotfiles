@@ -17,12 +17,12 @@ brew install git grep
 
 # ssh-keygen
 
-ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa <<<y >/dev/null 2>&1
+ssh-keygen -q -t ed25519 -a 100 -N '' -f ~/.ssh/id_ed25519 <<<y >/dev/null 2>&1
 
 # copy generated SSH key
 
 printf "Copied SSH key to clipboard"
-pbcopy <~/.ssh/id_rsa.pub
+pbcopy <~/.ssh/id_ed25519.pub
 
 printf "Login to Github and paste the SSH key:\n\nhttps://github.com/settings/ssh/new\n\n"
 
