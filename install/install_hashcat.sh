@@ -23,7 +23,7 @@ function detect_gpu_vendor() {
 
 function install_base_packages() {
 	log_info "Updating package lists..."
-	sudo apt-get update -y
+	sudo apt-get update --quiet=2
 
 	log_info "Installing base packages..."
 	sudo apt-get install -y hashcat ocl-icd-libopencl1 clinfo

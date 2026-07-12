@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # System update
-sudo apt update
+sudo apt update --quiet=2
 sudo apt upgrade -y
 
 # Prerequisites
@@ -31,7 +31,7 @@ echo \
 	sudo tee /etc/apt/sources.list.d/pgadmin4.list >/dev/null
 
 # Update after adding repositories
-sudo apt update
+sudo apt update --quiet=2
 
 # Install PostgreSQL 16 and pgAdmin
 sudo apt install -y postgresql-16 pgadmin4

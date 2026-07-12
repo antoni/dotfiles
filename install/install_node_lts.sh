@@ -6,7 +6,7 @@ trap 'echo "❌ Error on line $LINENO: $BASH_COMMAND"' ERR
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 echo "▶ Installing prerequisites..."
-sudo apt-get update
+sudo apt-get update --quiet=2
 sudo apt-get install -y \
     curl \
     git \

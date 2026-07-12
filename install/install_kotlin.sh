@@ -8,7 +8,7 @@ KOTLIN_ZIP="kotlin-compiler-$KOTLIN_VERSION.zip"
 KOTLIN_URL="https://github.com/JetBrains/kotlin/releases/download/v$KOTLIN_VERSION/$KOTLIN_ZIP"
 
 echo "👉 Installing dependencies..."
-sudo apt-get update -y && sudo apt-get install -y unzip curl
+sudo apt-get update --quiet=2 && sudo apt-get install -y unzip curl
 
 echo "📦 Downloading Kotlin $KOTLIN_VERSION..."
 curl -# -L -o "$KOTLIN_ZIP" "$KOTLIN_URL"

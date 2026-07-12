@@ -14,7 +14,7 @@ PREFIX="/usr/local" # installation prefix
 JOBS="$(nproc)"     # parallel make jobs
 
 # Install build dependencies
-sudo apt update
+sudo apt update --quiet=2
 sudo apt install -y \
 	build-essential \
 	autoconf \

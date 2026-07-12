@@ -21,7 +21,7 @@ function upgrade_apt_packages() {
 	fi
 
 	# https://askubuntu.com/a/668859/342465
-	sudo apt-get update -qq -o=Dpkg::Use-Pty=0 &&
+	sudo apt-get update --quiet=2 -o=Dpkg::Use-Pty=0 &&
 		sudo apt-get upgrade -qq -o=Dpkg::Use-Pty=0 --assume-yes
 
 	sudo apt autoremove --assume-yes
@@ -56,7 +56,7 @@ function upgrade_packages_fedora() {
 
 function upgrade_packages_ubuntu() {
 	echo "Updating apt packages..."
-	sudo apt-get update &>/dev/null
+	sudo apt-get update --quiet=2 &>/dev/null
 	echo "Upgrading apt packages..."
 	sudo apt-get upgrade --assume-yes &>/dev/null
 	echo "Autoremoving apt packages..."

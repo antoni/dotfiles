@@ -4,11 +4,24 @@ set -e
 
 export DEBIAN_FRONTEND=noninteractive
 
+IMAGEMAGICK_VERSION="7.1.2-27"
+ARCHIVE="ImageMagick-$IMAGEMAGICK_VERSION.tar.xz"
+DIR="ImageMagick-$IMAGEMAGICK_VERSION"
+
 cd "$HOME/tmp"
 
 echo "Updating system..."
 sudo apt-get -qq update
 sudo apt-get -qq upgrade -y
+
+# Exit early if the requested version is already installed.
+if command -v magick >/dev/null 2>&1; then
+    INSTALLED_VERSION="$(magick --version | awk 'NR==1 {print $3}')"
+    if [[ "$INSTALLED_VERSION" == "$IMAGEMAGICK_VERSION" ]]; then
+        echo "ImageMagick $IMAGEMAGICK_VERSION is already installed."
+        exit 0
+    fi
+fi
 
 echo "Checking for distro-installed ImageMagick..."
 
@@ -40,9 +53,8 @@ sudo apt-get -qq install -y \
   ghostscript libwebp-dev liblqr-1-0-dev libopenexr-dev \
   libheif-dev libraw-dev
 
-IMAGEMAGICK_VERSION="7.1.2-27"
-ARCHIVE="ImageMagick-$IMAGEMAGICK_VERSION.tar.xz"
-DIR="ImageMagick-$IMAGEMAGICK_VERSION"
+echo "Cleaning previous build artifacts..."
+rm -rf "$DIR" "$ARCHIVE"
 
 echo "Downloading ImageMagick $IMAGEMAGICK_VERSION..."
 echo "https://download.imagemagick.org/archive/$ARCHIVE"

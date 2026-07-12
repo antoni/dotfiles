@@ -2,7 +2,7 @@
 set -e
 
 # Dependencies
-sudo apt-get update
+sudo apt-get update --quiet=2
 sudo apt-get install -y curl gnupg lsb-release ca-certificates
 
 # Create keyrings directory if it doesn't exist
@@ -18,5 +18,5 @@ https://apt.releases.hashicorp.com $(lsb_release -cs) main" |
 	sudo tee /etc/apt/sources.list.d/hashicorp.list >/dev/null
 
 # Install Packer
-sudo apt-get update
+sudo apt-get update --quiet=2
 sudo apt-get install -y packer

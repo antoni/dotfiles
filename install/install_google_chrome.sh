@@ -10,7 +10,7 @@ function main() {
 	fi
 
 	# Ensure required tools exist
-	sudo apt-get update
+	sudo apt-get update --quiet=2
 	sudo apt-get install --assume-yes wget gpg
 
 	# Create keyring directory if needed
@@ -26,7 +26,7 @@ function main() {
 		sudo tee /etc/apt/sources.list.d/google-chrome.list >/dev/null
 
 	# Install Chrome
-	sudo apt-get update
+	sudo apt-get update --quiet=2
 	sudo apt-get install --assume-yes google-chrome-stable
 }
 

@@ -2743,7 +2743,7 @@ alias upgrade='sudo apt update && sudo apt upgrade --assume-yes && sudo apt auto
 function upgrade_rpi() {
 	set -euo pipefail
 
-	sudo apt update
+	sudo apt update --quiet=2
 	sudo apt full-upgrade --yes
 	sudo rpi-eeprom-update --apply
 

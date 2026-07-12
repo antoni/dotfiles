@@ -83,7 +83,7 @@ remove_conflicting_packages() {
 install_prerequisites() {
   log_info "Installing prerequisites"
 
-  sudo apt-get update
+  sudo apt update --quiet=2
 
   sudo apt-get install -y \
     ca-certificates \
@@ -118,7 +118,7 @@ EOF
 install_docker() {
   log_info "Installing Docker Engine"
 
-  sudo apt-get update
+  sudo apt-get update --quiet=2
 
   sudo apt-get install -y \
     docker-ce \

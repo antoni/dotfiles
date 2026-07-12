@@ -52,7 +52,7 @@ JAVA=(java-1.8.0-openjdk-src java-1.8.0-openjdk)
 
 function install_prolog_debian() {
 	sudo apt-add-repository ppa:swi-prolog/stable
-	sudo apt-get update
+	sudo apt-get update --quiet=2
 	sudo apt-get install swi-prolog
 }
 
@@ -72,7 +72,7 @@ function install_snap_packages() {
 	echo "==> Ensuring snapd is installed"
 
 	if ! dpkg -s snapd >/dev/null 2>&1; then
-		sudo apt update
+		sudo apt update --quiet=2
 		sudo apt install -y snapd
 	else
 		echo "snapd already installed"
@@ -114,7 +114,7 @@ function install_snap_packages() {
 function install_nord_vpn_debian() {
 	wget https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb
 	sudo apt-get install ./nordvpn*.deb
-	sudo apt update
+	sudo apt update --quiet=2
 	sudo apt --assume-yes install nordvpn
 	rm ./nordvpn*.deb
 }
@@ -134,7 +134,7 @@ function main() {
 	if [ -f /etc/debian_version ]; then
 		printf "Installing required packages on Debian/Ubuntu\n"
 
-		sudo apt-get update -qq
+		sudo apt-get update --quiet=2
 		sudo apt-get install -y -qq curl \
 			-o Dpkg::Use-Pty=0
 
@@ -200,10 +200,9 @@ function main() {
 
 	"$HOME"/dotfiles/install/install_rust.sh
 	"$HOME"/dotfiles/install/install_cargo_crates.sh
-	"$HOME"/dotfiles/install/install_chrome.sh
+	"$HOME"/dotfiles/install/install_google_chrome.sh
 
 	"$HOME"/dotfiles/install/install_visual_studio_code_extensions.sh
-	"$HOME"/dotfiles/install/install_ffmpeg.sh
 
 	if grep -qi ubuntu /etc/os-release; then
 		"$HOME"/dotfiles/install/linux/install_ubuntu_apt_packages.sh

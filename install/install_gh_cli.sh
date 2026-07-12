@@ -20,7 +20,7 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubc
 	sudo tee /etc/apt/sources.list.d/github-cli.list >/dev/null
 
 # Install GitHub CLI
-sudo apt update
+sudo apt update --quiet=2
 sudo apt install --assume-yes gh
 
 # Authenticate (interactive browser flow)

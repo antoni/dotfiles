@@ -14,7 +14,7 @@ mkdir -p "$TMP_DIR" "$BIN_DIR" || error_exit "Failed to create directories"
 cd "$TMP_DIR" || error_exit "Failed to enter temp directory"
 
 echo "Updating system..."
-sudo apt update && sudo apt upgrade -y
+sudo apt update --quiet=2 && sudo apt upgrade -y
 
 echo "Installing dependencies..."
 sudo apt install -y curl unzip
