@@ -2367,8 +2367,8 @@ function scan_file_for_secrets() {
 }
 
 function analyze_disk_usage() {
-    show_help() {
-        cat <<EOF
+	show_help() {
+		cat <<EOF
 Usage: analyze_disk_usage [OPTIONS]
 
 Launch a disk usage tool depending on your OS:
@@ -2380,84 +2380,84 @@ Options:
   --windows    (WSL only) Run the Windows version instead of Linux dua/ncdu
   --help       Show this help message
 EOF
-}
+	}
 
-    # Parse arguments
-    case "$1" in
-        -h | --help)
-            show_help
-            return 0
-            ;;
-        --windows)
-            run_windows=1
-            ;;
-        *)
-            run_windows=0
-            ;;
-    esac
+	# Parse arguments
+	case "$1" in
+	-h | --help)
+		show_help
+		return 0
+		;;
+	--windows)
+		run_windows=1
+		;;
+	*)
+		run_windows=0
+		;;
+	esac
 
-    # Detect OS
-    uname_result="$(uname -s)"
-    case "${uname_result}" in
-        Darwin*)
-            echo "Detected macOS. Launching OmniDiskSweeper..."
-            /Applications/OmniDiskSweeper.app/Contents/MacOS/OmniDiskSweeper
-            ;;
-        Linux*)
-            if [[ -n "$IS_WSL" ]]; then
-                # WSL environment
-                if [ "$run_windows" -eq 1 ]; then
-                    # Alternatives:
-                    # alias analyze_disk_usage='/mnt/c/Program\ Files/WizTree/WizTree.exe "c:"'
-                    echo "Detected WSL. Launching Windows WinDirStat..."
-                    "/mnt/c/Program Files (x86)/WinDirStat/windirstat.exe" \
-                        C:\\ `# Target drive to scan (C:)` \
-                        /O `# Open immediately after scan` \
-                        /P `# Show progress window during scan` \
-                        /S `# Save settings (so future runs reuse config)` \
-                        /N `# Skip 'Select Drives' dialog, go straight to scan`
-                else
-                    # Alternative (dua-cli):
-                    # dua interactive
-                    if command -v dua >/dev/null 2>&1; then
-                        echo "Detected WSL. Launching Linux dua..."
-                        dua interactive
-                    else
-                        echo "Detected WSL. dua is unavailable. Launching Linux ncdu..."
-                        # stay within a single filesystem (don’t cross into /proc, /sys, /mnt, etc.)
-                        # speed up scan by minimizing screen updates
-                        # use dark color theme for better readability
-                        # skip cache directories (~/.cache, etc.)
-                        # skip kernel pseudo-filesystems (e.g. /proc, /sys)
-                        # scan from the root directory (change this if you only want /home, etc.)
-                        ncdu -x -q --color=dark \
-                            --exclude /proc --exclude /sys --exclude /tmp \
-                            --exclude-caches --exclude-kernfs
-                    fi
-                fi
-            else
-                # Alternative (dua-cli):
-                # dua interactive
-                if command -v dua >/dev/null 2>&1; then
-                    echo "Detected Linux. Launching dua..."
-                    dua interactive
-                else
-                    echo "Detected Linux. dua is unavailable. Launching ncdu..."
-                    # stay within a single filesystem (don’t cross into /proc, /sys, /mnt, etc.)
-                    # speed up scan by minimizing screen updates
-                    # use dark color theme for better readability
-                    # skip cache directories (~/.cache, etc.)
-                    # skip kernel pseudo-filesystems (e.g. /proc, /sys)
-                    # scan from the root directory (change this if you only want /home, etc.)
-                    ncdu -x -q --color=dark --exclude-caches --exclude-kernfs /
-                fi
-            fi
-            ;;
-        *)
-            echo "Unsupported OS: ${uname_result}"
-            return 1
-            ;;
-    esac
+	# Detect OS
+	uname_result="$(uname -s)"
+	case "${uname_result}" in
+	Darwin*)
+		echo "Detected macOS. Launching OmniDiskSweeper..."
+		/Applications/OmniDiskSweeper.app/Contents/MacOS/OmniDiskSweeper
+		;;
+	Linux*)
+		if [[ -n "$IS_WSL" ]]; then
+			# WSL environment
+			if [ "$run_windows" -eq 1 ]; then
+				# Alternatives:
+				# alias analyze_disk_usage='/mnt/c/Program\ Files/WizTree/WizTree.exe "c:"'
+				echo "Detected WSL. Launching Windows WinDirStat..."
+				"/mnt/c/Program Files (x86)/WinDirStat/windirstat.exe" \
+					C:\\ `# Target drive to scan (C:)` \
+					/O `# Open immediately after scan` \
+					/P `# Show progress window during scan` \
+					/S `# Save settings (so future runs reuse config)` \
+					/N `# Skip 'Select Drives' dialog, go straight to scan`
+			else
+				# Alternative (dua-cli):
+				# dua interactive
+				if command -v dua >/dev/null 2>&1; then
+					echo "Detected WSL. Launching Linux dua..."
+					dua interactive
+				else
+					echo "Detected WSL. dua is unavailable. Launching Linux ncdu..."
+					# stay within a single filesystem (don’t cross into /proc, /sys, /mnt, etc.)
+					# speed up scan by minimizing screen updates
+					# use dark color theme for better readability
+					# skip cache directories (~/.cache, etc.)
+					# skip kernel pseudo-filesystems (e.g. /proc, /sys)
+					# scan from the root directory (change this if you only want /home, etc.)
+					ncdu -x -q --color=dark \
+						--exclude /proc --exclude /sys --exclude /tmp \
+						--exclude-caches --exclude-kernfs
+				fi
+			fi
+		else
+			# Alternative (dua-cli):
+			# dua interactive
+			if command -v dua >/dev/null 2>&1; then
+				echo "Detected Linux. Launching dua..."
+				dua interactive
+			else
+				echo "Detected Linux. dua is unavailable. Launching ncdu..."
+				# stay within a single filesystem (don’t cross into /proc, /sys, /mnt, etc.)
+				# speed up scan by minimizing screen updates
+				# use dark color theme for better readability
+				# skip cache directories (~/.cache, etc.)
+				# skip kernel pseudo-filesystems (e.g. /proc, /sys)
+				# scan from the root directory (change this if you only want /home, etc.)
+				ncdu -x -q --color=dark --exclude-caches --exclude-kernfs /
+			fi
+		fi
+		;;
+	*)
+		echo "Unsupported OS: ${uname_result}"
+		return 1
+		;;
+	esac
 }
 
 # Usage:
