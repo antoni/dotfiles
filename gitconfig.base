@@ -157,7 +157,7 @@
     ff = only
 [http]
     proxy =
-    sslVerify = false
+    sslVerify = true
 [https]
     proxy =
 [commit]

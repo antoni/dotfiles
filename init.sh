@@ -26,12 +26,12 @@ pbcopy <~/.ssh/id_ed25519.pub
 
 printf "Login to Github and paste the SSH key:\n\nhttps://github.com/settings/ssh/new\n\n"
 
-git clone git@github.com:antoni/dotfiles.git
+git clone "git@github.com:$GITHUB_DOTFILES_USERNAME/dotfiles.git"
 cd dotfiles || exit
 
 # Clone scripts repository
 
-git clone git@github.com:antoni/scripts.git ~/scripts
+git "clone git@github.com:$GITHUB_DOTFILES_USERNAME/scripts.git" ~/scripts
 
 # Install everything else we need
 

@@ -6,7 +6,6 @@ export LC_ALL=$LANG
 export ZSH_CACHE_DIR="${ZSH_CACHE_DIR:-$HOME/.oh-my-zsh/cache}"
 
 source "$HOME/dotfiles/utils.sh"
-setopt XTRACE
 
 function install_zsh_plugins() {
 	printf "Installing zsh plugins in %s\n" "$ZSH_CUSTOM"
@@ -22,7 +21,7 @@ function symlink_zsh_files() {
 	printf "Symlinking zsh files\n"
 	ln -sf ~/dotfiles/zshrc ~/.zshrc
 	ln -sf ~/dotfiles/zprofile ~/.zprofile
-	ln -fs "$HOME"/dotfiles/antoni.zsh-theme "$HOME"/.oh-my-zsh/themes
+	ln -fs "$HOME"/dotfiles/custom.zsh-theme "$HOME"/.oh-my-zsh/themes
 }
 
 function install_oh_my_zsh() {

@@ -155,36 +155,32 @@ export PATH=$PATH:$JAVA_HOME/bin
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 export PATH=$PATH:$JAVA_HOME/bin
 
-export ANDROID_HOME=/home/antoni/Android
+export ANDROID_HOME="/home/$SYSTEM_USERNAME/Android"
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 export PATH=$PATH:$JAVA_HOME/bin
 
-export ANDROID_HOME=/home/antoni/Android
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-
-export PATH="$PATH:/home/antoni/kotlin/kotlinc/bin"
+export PATH="$PATH:/home/$SYSTEM_USERNAME/kotlin/kotlinc/bin"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/antoni/anaconda3/bin/conda' 'shell.bash' 'hook' 2>/dev/null)"
+__conda_setup="$("/home/$SYSTEM_USERNAME/anaconda3/bin/conda" shell.zsh hook 2>/dev/null)"
 if [ $? -eq 0 ]; then
-	eval "$__conda_setup"
+    eval "$__conda_setup"
 else
-	if [ -f "/home/antoni/anaconda3/etc/profile.d/conda.sh" ]; then
-		. "/home/antoni/anaconda3/etc/profile.d/conda.sh"
-	else
-		export PATH="/home/antoni/anaconda3/bin:$PATH"
-	fi
+    if [ -f "/home/$SYSTEM_USERNAME/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/$SYSTEM_USERNAME/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/$SYSTEM_USERNAME/anaconda3/bin:$PATH"
+    fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
 . "$HOME/.cargo/env"
 
-source /home/antoni/.config/broot/launcher/bash/br
+source "/home/$SYSTEM_USERNAME/.config/broot/launcher/bash/br"
 
 
 export NVM_DIR="$HOME/.nvm"

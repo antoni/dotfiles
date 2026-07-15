@@ -103,8 +103,8 @@ if grep -qEi "(Microsoft|WSL)" /proc/version &>/dev/null; then
 	export LIBGL_ALWAYS_INDIRECT=1
 fi
 
-export ANDROID_HOME=/home/antoni/Android/cmdline-tools/latest
-export ANDROID_SDK_ROOT=/home/antoni/Android
+export ANDROID_HOME="/home/$SYSTEM_USERNAME/cmdline-tools/latest"
+export ANDROID_SDK_ROOT="/home/$SYSTEM_USERNAME/Android"
 
 PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
 PATH=$PATH:$ANDROID_HOME/bin

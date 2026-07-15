@@ -280,10 +280,6 @@ function wgetdir2() {
 alias m='make'
 alias c99='gcc -std=c99'
 alias g++='g++ -g -Wall -O3'
-alias mountstudents='sshfs ar267209@students.mimuw.edu.pl: /Users/antoni/students'
-alias students='export TERM=vt100 ; ssh students.mimuw.edu.pl -l ar267209 -t tmux a'
-alias icm='ssh antoni@hpc.icm.edu.pl'
-alias icmgw='ssh antoni@gw.icm.edu.pl'
 alias xcode="open *.xcodeproj"
 
 function tarfolder() { tar -czf "$1".tar.gz "$1"/*; }

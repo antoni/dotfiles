@@ -133,8 +133,6 @@ function mac_symlink() {
 }
 
 function setup_gitconfig() {
-
-	# Validate input
 	if [[ -z "$GITHUB_NAME" || -z "$GITHUB_EMAIL" ]]; then
 		echo "Git name and email must not be empty."
 		return 1
@@ -245,7 +243,7 @@ function main() {
 	# ~/scripts directory
 	function setup_scripts() {
 		if [ ! -d "scripts" ]; then
-			git clone git@github.com:antoni/scripts.git
+			git clone "git@github.com:$GITHUB_DOTFILES_USERNAME/scripts.git"
 		fi
 		ln -fs "${DOTFILES_DIR}"/scripts ~/scripts
 

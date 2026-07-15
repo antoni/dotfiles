@@ -6,7 +6,7 @@ function export_variables() {
 	export DEFAULT_CITY
 	export DEFAULT_COORDS
 	export GITHUB_USER
-	export MACOS_USERNAME
+	export SYSTEM_USERNAME
 	export WINDOWS_USERNAME
 	export WINDOWS_DESKTOP
 	export HOMEBREW_NO_AUTO_UPDATE

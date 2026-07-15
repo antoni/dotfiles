@@ -7,7 +7,7 @@ source $HOME/dotfiles/common_rc.sh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="antoni"
+ZSH_THEME="custom"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -190,11 +190,11 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 # bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
-export BUN_INSTALL="$HOME/antoni/.bun"
+export BUN_INSTALL="$HOME/$SYSTEM_USERNAME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 # pnpm
-export PNPM_HOME="/home/antoni/.local/share/pnpm"
+export PNPM_HOME="/home/$SYSTEM_USERNAME/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -221,28 +221,25 @@ export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
-# bun completions
-[ -s "/home/antoni/antoni/.bun/_bun" ] && source "/home/antoni/antoni/.bun/_bun"
-
 # https://github.com/cdown/sshrc
 compdef sshrc=ssh
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/antoni/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$("/home/$SYSTEM_USERNAME/anaconda3/bin/conda" shell.zsh hook 2>/dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/antoni/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/antoni/anaconda3/etc/profile.d/conda.sh"
+    if [ -f "/home/$SYSTEM_USERNAME/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/$SYSTEM_USERNAME/anaconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/home/antoni/anaconda3/bin:$PATH"
+        export PATH="/home/$SYSTEM_USERNAME/anaconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-source /home/antoni/.config/broot/launcher/bash/br
+source "/home/$SYSTEM_USERNAME/.config/broot/launcher/bash/br"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
