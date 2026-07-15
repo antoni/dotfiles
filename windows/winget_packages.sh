@@ -132,7 +132,6 @@ MAY_HAVE=(
 	AmneziaVPN.AmneziaVPN
 	MullvadVPN.MullvadVPN
 	Surfshark.SurfsharkVPN
-	NordVPN.NordVPN
 	ProtonTechnologies.ProtonVPN
 	ExpressVPN.ExpressVPN
 	Jigsaw.OutlineManager

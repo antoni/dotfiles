@@ -518,7 +518,6 @@ alias iphone='~/scripts/setup_iphone.sh'
 alias i='iphone'
 alias pdfmerge='pdfunite'
 alias desk='cd ~/Desktop'
-alias mountstudents='sudo sshfs -o allow_other ar267209@students.mimuw.edu.pl:/home/students/bioinf/a/ar267209 ~/mount/students/'
 alias euler='cd ~/Developer/ProjectEuler/'
 alias show_open_ssh_tunnels="sudo lsof -i -n | egrep '\\<ssh\\>'" # Show all open SSH tunnels
 alias rsync='rsync --progress'
