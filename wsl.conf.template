@@ -2,7 +2,6 @@
 # works together with this fix:
 # https://github.com/microsoft/WSL/issues/8952#issuecomment-1572193568
 systemd=true
-kernelCommandLine=ipv6.disable=1
 [automount]
 enabled = true
 [network]

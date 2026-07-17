@@ -68,7 +68,9 @@ APT_PACKAGES=(apache2
 	cargo
 	librsvg2-bin
 	mysql-client
+	sqlite3
 	inkscape
+	gdal-bin
 	advancecomp
 	geoip-bin
 	webp
