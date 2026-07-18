@@ -344,7 +344,7 @@ function main() {
 				export HOSTNAME=$(hostname)
 
 				envsubst < "${DOTFILES_DIR}"/wsl.conf.template | sudo tee /etc/wsl.conf >/dev/null
-				sudo ln -sf "${DOTFILES_DIR}"/wslconfig /mnt/c/Users/$WINDOWS_USERNAME/.wslconfig
+				sudo cp "${DOTFILES_DIR}"/wslconfig /mnt/c/Users/$WINDOWS_USERNAME/.wslconfig
 			}
 			setup_wsl_configuration
 		else
