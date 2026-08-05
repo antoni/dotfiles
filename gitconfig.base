@@ -162,11 +162,8 @@
     proxy =
 [commit]
     gpgsign = false
-[diff "image"]
-	command = ~/git-diff-image/git_diff_image
-;[diff "xml_diff"]
-    ; command = xmldiff
-    ; command = ~/scripts/git/git_xml_diff.sh
+[diff "xml_diff"]
+    command = ~/scripts/git/git_xml_diff.sh
 [diff "jd"]
     command = 'jd --git-diff-driver'
 [pager]

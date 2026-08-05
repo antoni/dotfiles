@@ -12,11 +12,13 @@ PIPX_PACKAGES=(
 	markitdown docling marker-pdf langflow
 	xmldiff yq "pg_activity[psycopg]"
 	openai-whisper "huggingface_hub[cli]" rembg
-	visidata
+	visidata mdformat
 )
 
 function install_pipx_packages() {
 	for package in "${PIPX_PACKAGES[@]}"; do
 		pipx install --quiet "$package"
 	done
+
+	pipx inject mdformat mdformat-gfm
 }

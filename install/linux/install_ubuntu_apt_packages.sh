@@ -80,7 +80,6 @@ APT_PACKAGES=(apache2
 	wordnet
 	zbar-tools
 	audacity
-	libcups2-dev
 	zip
 	git-lfs
 	librecad

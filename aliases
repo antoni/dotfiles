@@ -351,6 +351,24 @@ alias ......="cd ../../.."
 
 alias webserver='python3 -m http.server --bind localhost 8080'
 alias s='webserver'
+
+function webserver_tunneled() {
+    local port="${1:-8080}"
+
+    if ! grep -q "authtoken" "${HOME}/.config/ngrok/ngrok.yml" 2>/dev/null; then
+        echo "ngrok is not authenticated."
+        echo "Run: ngrok config add-authtoken <YOUR_TOKEN>"
+        return 1
+    fi
+
+    python3 -m http.server --bind localhost "$port" &
+    local server_pid=$!
+
+    trap 'kill $server_pid' EXIT
+
+    ngrok http "$port"
+}
+
 alias gprer='grep --recursive'
 
 alias hgrep='history | grep -i'
@@ -2746,3 +2764,5 @@ function upgrade_rpi() {
 }
 
 alias em="$HOME/scripts/every_morning/every_morning.sh"
+
+alias mdtable='code ~/tmp/Table.md'
